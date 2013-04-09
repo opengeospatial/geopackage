@@ -156,8 +156,10 @@ A GeoPackage SHALL support storage and use of MIME type image/tiff [30] for GeoT
 
 ### 10.3	Tile Table Metadata
 A GeoPackage SHALL contain a tile_table_metadata table or view as defined in this clause. The tile_table_metadata table or view SHALL contain one row record describing each tile table in a GeoPackage.  The t_table_name column value SHALL be a row value of r_table_name in the raster_columns table, enforced by a trigger.  The is_times_two_zoom column value SHALL be 1 if zoom level pixel sizes vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
-NOTE1:  A row record for a tile table must be inserted into this table before row records can be inserted into the tile_matrix_metadata table described in clause 10.4 due to the presence of foreign key and other integrity constraints on that table.  
-NOTE 2:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_table_metadata table.  
+
+> NOTE 1:  A row record for a tile table must be inserted into this table before row records can be inserted into the tile_matrix_metadata table described in clause 10.4 due to the presence of foreign key and other integrity constraints on that table.  
+
+> NOTE 2:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_table_metadata table.  
 
 Table 25 -- tile_table_metadata
 Table or View Name:   tile_table_metadata
@@ -233,14 +235,23 @@ A GeoPackage tile_table_metadata table SHALL contain a row record for each tile 
 
 ### 10.4	Tile Matrix Metadata
 A GeoPackage SHALL contain a tile_matrix_metadata table or view as defined in this clause.  The tile_matrix_metadata table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tiles table.  It may contain row records for zoom levels in a tiles table that do not contain tiles.  A tile_matrix_metadata row record SHALL be inserted for a zoom level for t_table_name before any tiles are inserted into the corresponding tiles table, so that triggers on that table specified in clause 10.5 below may reference tile_matrix_metadata column values for that zoom level to reject invalid data. 
+
 The tile_matrix_metadata table documents the structure of the tile matrix at each zoom level in each tiles table.  It allows GeoPackages to contain rectangular as well as square tiles (e.g. for better representation of polar regions).  It allows tile pyramids with zoom levels that differ in resolution by powers of 2, irregular intervals, or regular intervals other than powers of 2.  When the value of the is_times_two_zoom column in the tile_table_metadata record for a tiles table is 1 (true) then the pixel sizes for adjacent zoom levels in the tile_matrix_metadata table for that table SHALL only vary by powers of 2.
-NOTE 1:  Most tile pyramids have an origin at the upper left, a convention adopted by the OGC Web Map Tile Service (WMTS) [25], but some such as TMS [B11] used by MB-Tiles [B12] have an origin at the lower left.  Most tile pyramids, such as Open Street Map [B14], OSMDroidAtlas [B15], and FalconView [B16] use a zoom_out_level of 0 for the smallest map scale “whole world” zoom level view, another convention adopted by WMTS, but some such as Big Planet Tracks [B17] invert this convention and use 0 or 1 for the largest map scale “local detail” zoom level view.   
+
+> NOTE 1:  Most tile pyramids have an origin at the upper left, a convention adopted by the OGC Web Map Tile Service (WMTS) [25], but some such as TMS [B11] used by MB-Tiles [B12] have an origin at the lower left.  Most tile pyramids, such as Open Street Map [B14], OSMDroidAtlas [B15], and FalconView [B16] use a zoom_out_level of 0 for the smallest map scale “whole world” zoom level view, another convention adopted by WMTS, but some such as Big Planet Tracks [B17] invert this convention and use 0 or 1 for the largest map scale “local detail” zoom level view.   
+
 GeoPackages SHALL follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view, as specified by WMTS [25].  The tile coordinate (0,0) SHALL always refer to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.  Pixel sizes for zoom levels sorted in ascending order SHALL be sorted in descending order.  
+
 GeoPackages SHALL not require that tiles be provided for level 0 or any other particular zoom level.  This means that a tile matrix set can be sparse, i.e. not contain a tile for any particular position at a certain tile zoom level. This does not affect the spatial extent stated by the min/max x/y columns values in the geopackage_contents record for the same t_table_name, or the tile matrix width and height at that level.
-NOTE 2:  GeoPackage applications may query the tile_matrix_metadata table or the tiles (matrix set) table specified in clause 10.7 below to determine the minimum and maximum zoom levels for a given tile matrix table.  
-NOTE 3:  GeoPackage applications may query the tiles (matrix set) table to determine which tiles are available at each zoom level.
-NOTE 4:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_matrix_metadata table.  
-NOTE 5:  The geopackage_contents table (see clause 8.2 above) contains coordinates that define a bounding box as the stated spatial extent for all tiles in a tile (matrix set) table.  If the geographic extent of the image data contained in these tiles is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.
+
+> NOTE 2:  GeoPackage applications may query the tile_matrix_metadata table or the tiles (matrix set) table specified in clause 10.7 below to determine the minimum and maximum zoom levels for a given tile matrix table.  
+
+> NOTE 3:  GeoPackage applications may query the tiles (matrix set) table to determine which tiles are available at each zoom level.
+
+> NOTE 4:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_matrix_metadata table.  
+
+> NOTE 5:  The geopackage_contents table (see clause 8.2 above) contains coordinates that define a bounding box as the stated spatial extent for all tiles in a tile (matrix set) table.  If the geographic extent of the image data contained in these tiles is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.
+
 Table 29 -- tile_matrix_metadata
 Table or View Name:  tile_matrix_metadata
 Column Name	Column Type	Column Description	Null	Default	Key
@@ -386,12 +397,19 @@ A GeoPackage SHALL support tile matrix set zoom levels for pixel sizes that diff
 
 ### 10.5	Tiles Table
 Tiles in a tile matrix set with one or more zoom levels SHALL be stored in a GeoPackage in a tiles table or view with a unique name for every different tile matrix set in the GeoPackage.  Each tiles table or view SHALL be defined with the columns described in table 35 below.  Each tiles table or view SHALL contain tile matrices at one or more zoom levels of different spatial resolution (map scale).  All tiles at a particular zoom level must have the same pixel_x_size and pixel_y_size values specified in the tile_matrix_metadata row record for that tiles table and zoom level.  
+
 When the value of the is_times_two_zoom column in the tile_table_metadata record for a tiles table row is 1 (true) then the pixel sizes for adjacent zoom levels in the tiles table SHALL only vary by powers of 2.
-NOTE 1:  The id primary key allows tiles table views to be created on RasterLite [B13] version 1 raster table implementations, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.  
-NOTE 2:  The zoom_level / tile_column / tile_row unique key allows tiles to be selected and accessed by “z, x, y”, a common convention used by MB-Tiles [B12], Big Planet [B17], and other implementations.  In a SQLite implementation this unique key is automatically indexed.  This table / view definition may also follow RasterLite [B13] version 1 conventions, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.
+
+> NOTE 1:  The id primary key allows tiles table views to be created on RasterLite [B13] version 1 raster table implementations, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.  
+
+> NOTE 2:  The zoom_level / tile_column / tile_row unique key allows tiles to be selected and accessed by “z, x, y”, a common convention used by MB-Tiles [B12], Big Planet [B17], and other implementations.  In a SQLite implementation this unique key is automatically indexed.  This table / view definition may also follow RasterLite [B13] version 1 conventions, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.
+
 GeoPackages SHALL implement appropriate SQL triggers on each tiles table by executing the add_tile_triggers() routine specified in clause 10.8 below with the tiles table as a parameter value to ensure that 
+
 1.	The zoom_level value is specified for the tiles table in the tile_matrix_metadata table
+
 2.	The tile column value is between 0 and the matrix_height specified for the zoom_level in the tile_matrix_metadata table
+
 3.	The tile _row value is between 0 and the matrix_width specified for the zoom_level in the tile_matrix_metadata table
 
 Table 33 – tiles table 
@@ -417,7 +435,7 @@ UNIQUE (zoom_level, tile_column, tile_row))
 ```
 
 
-NOTE 3:  zeroblob(n) is an SQLite function.
+> NOTE 3:  zeroblob(n) is an SQLite function.
 
 
 Table 35 – EXAMPLE: tiles table Trigger Definition SQL
