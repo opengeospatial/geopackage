@@ -154,7 +154,7 @@ http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/ geo
 REQ 42.
 A GeoPackage SHALL support storage and use of MIME type image/tiff [30] for GeoTIFF images [32][33] as defined in clause 10.2 
 
-10.3	Tile Table Metadata
+### 10.3	Tile Table Metadata
 A GeoPackage SHALL contain a tile_table_metadata table or view as defined in this clause. The tile_table_metadata table or view SHALL contain one row record describing each tile table in a GeoPackage.  The t_table_name column value SHALL be a row value of r_table_name in the raster_columns table, enforced by a trigger.  The is_times_two_zoom column value SHALL be 1 if zoom level pixel sizes vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
 NOTE1:  A row record for a tile table must be inserted into this table before row records can be inserted into the tile_matrix_metadata table described in clause 10.4 due to the presence of foreign key and other integrity constraints on that table.  
 NOTE 2:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_table_metadata table.  
@@ -231,7 +231,7 @@ http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/data
 REQ 45.
 A GeoPackage tile_table_metadata table SHALL contain a row record for each tile table in the GPKG as specified in clause 10.3.
 
-10.4	Tile Matrix Metadata
+### 10.4	Tile Matrix Metadata
 A GeoPackage SHALL contain a tile_matrix_metadata table or view as defined in this clause.  The tile_matrix_metadata table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tiles table.  It may contain row records for zoom levels in a tiles table that do not contain tiles.  A tile_matrix_metadata row record SHALL be inserted for a zoom level for t_table_name before any tiles are inserted into the corresponding tiles table, so that triggers on that table specified in clause 10.5 below may reference tile_matrix_metadata column values for that zoom level to reject invalid data. 
 The tile_matrix_metadata table documents the structure of the tile matrix at each zoom level in each tiles table.  It allows GeoPackages to contain rectangular as well as square tiles (e.g. for better representation of polar regions).  It allows tile pyramids with zoom levels that differ in resolution by powers of 2, irregular intervals, or regular intervals other than powers of 2.  When the value of the is_times_two_zoom column in the tile_table_metadata record for a tiles table is 1 (true) then the pixel sizes for adjacent zoom levels in the tile_matrix_metadata table for that table SHALL only vary by powers of 2.
 NOTE 1:  Most tile pyramids have an origin at the upper left, a convention adopted by the OGC Web Map Tile Service (WMTS) [25], but some such as TMS [B11] used by MB-Tiles [B12] have an origin at the lower left.  Most tile pyramids, such as Open Street Map [B14], OSMDroidAtlas [B15], and FalconView [B16] use a zoom_out_level of 0 for the smallest map scale “whole world” zoom level view, another convention adopted by WMTS, but some such as Big Planet Tracks [B17] invert this convention and use 0 or 1 for the largest map scale “local detail” zoom level view.   
@@ -384,7 +384,7 @@ http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_zoom_levels/o
 REQ 50.
 A GeoPackage SHALL support tile matrix set zoom levels for pixel sizes that differ by irregular intervals or by regular intervals other than powers of two between adjacent zoom levels.
 
-10.5	Tiles Table
+### 10.5	Tiles Table
 Tiles in a tile matrix set with one or more zoom levels SHALL be stored in a GeoPackage in a tiles table or view with a unique name for every different tile matrix set in the GeoPackage.  Each tiles table or view SHALL be defined with the columns described in table 35 below.  Each tiles table or view SHALL contain tile matrices at one or more zoom levels of different spatial resolution (map scale).  All tiles at a particular zoom level must have the same pixel_x_size and pixel_y_size values specified in the tile_matrix_metadata row record for that tiles table and zoom level.  
 When the value of the is_times_two_zoom column in the tile_table_metadata record for a tiles table row is 1 (true) then the pixel sizes for adjacent zoom levels in the tiles table SHALL only vary by powers of 2.
 NOTE 1:  The id primary key allows tiles table views to be created on RasterLite [B13] version 1 raster table implementations, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.  
