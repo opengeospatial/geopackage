@@ -1,34 +1,43 @@
 # GeoPackage Tiles Specification
 
-10  Raster Tile Store
-10.1	Raster Tile Introduction
+## 10  Raster Tile Store
+### 10.1	Raster Tile Introduction
 There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing individual rasters and tiles in tile matrix pyramids.   Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain.  In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata.  
-The Raster / Tile Store data / metadata model, conventions and SQL functions described below support direct use of rasters and tiles in a GeoPackage in two ways.  First, they specify how existing applications may create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions.  Second, they include and expose enough metadata information at both the dataset and record levels to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images.  Applications that store GeoPackage raster and tile data, which are presumed to have this information available, SHALL store sufficient metadata to enable its intended use. 
-Following a convention used by MBTiles [B12], the Raster / Tile Store data model may be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite Raster / Tile store for maximum adaptability and loose coupling to enable widespread implementation.  A GeoPackage can store multiple raster and tile pyramid data sets in different tables or views in the same container.  Following a convention used by RasterLite [B13], tables or views containing record-level metadata are named with a raster or tile table name prefix and a “_rt_metadata” suffix, e.g. {RasterTableName}{_rt_metadata.  
-The tables or views that implement the GeoPackage Raster / Tile Store data / metadata model are described and discussed individually in the following subsections.
-NOTE: Images of multiple MIME types may be stored in given table.  For example, in a tiles table, image/png format tiles without compression could be used for transparency where there is no data on the tile edges, and image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all pixels.  Images of multiple bit depths of the same MIME type may also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
 
-10.2	Raster Columns
+The Raster / Tile Store data / metadata model, conventions and SQL functions described below support direct use of rasters and tiles in a GeoPackage in two ways.  First, they specify how existing applications may create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions.  Second, they include and expose enough metadata information at both the dataset and record levels to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images.  Applications that store GeoPackage raster and tile data, which are presumed to have this information available, SHALL store sufficient metadata to enable its intended use. 
+
+Following a convention used by MBTiles [B12], the Raster / Tile Store data model may be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite Raster / Tile store for maximum adaptability and loose coupling to enable widespread implementation.  A GeoPackage can store multiple raster and tile pyramid data sets in different tables or views in the same container.  Following a convention used by RasterLite [B13], tables or views containing record-level metadata are named with a raster or tile table name prefix and a “_rt_metadata” suffix, e.g. {RasterTableName}{_rt_metadata.  
+
+The tables or views that implement the GeoPackage Raster / Tile Store data / metadata model are described and discussed individually in the following subsections.
+
+> NOTE: Images of multiple MIME types may be stored in given table.  For example, in a tiles table, image/png format tiles without compression could be used for transparency where there is no data on the tile edges, and image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all pixels.  Images of multiple bit depths of the same MIME type may also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
+
+### 10.2	Raster Columns
 A GeoPackage SHALL contain a raster_columns table or view as defined in this clause.  The raster_columns table or view SHALL contain one row record describing each raster or tile column in any table in a GeoPackage.  The r_raster_column in r_table_name SHALL be defined as a BLOB data type.  
+
 The compr_qual_ factor column value indicates the lowest image quality of any raster or tile in the associated column on a scale from 1 (lowest) to 100 (highest) for rasters compressed with a lossy compression algorithm.  It is always 100 if all rasters or tiles are compressed with a lossless compression algorithm, or are not compressed.  The value -1 indicates "unknown" and is specified as the default value.
+
 The georectification column value indicates the minimum level of georectification to areas on the earth for all rasters or tiles in the associated column are georectified.  A value of -1 indicates "unknown" as is specified as the default value.  A value of 0 indicates that no rasters or tiles are georectified. A value of 1 indicates that all rasters or tiles are georectified (but not necessarily orthorectified). A value of 2 indicates that all rasters or tiles are orthorectified (which implies georectified) to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
+
 The srid SHALL have a value contained in the spatial_ref_sys table defined in clause 9.2 above.
+
 All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles. GeoPackages may support image/x-webp and image/tiff formats for rasters and tiles. GeoPackage support for the image/tiff format [31] is limted to GeoTIFF [32] images that meet the requirements of the NGA Implementation Profile [33] for coordinate transformation case 3 where the position and scale of thedata is known exactly, and no rotation of the image is required.
-NOTE 1:  A feature type may be defined to have 0..n raster attributes, so the corresponding feature table may contain from 0..n raster columns.
-NOTE 2:  A raster tile layer table has only one raster column named “tile_data”.
+
+> NOTE 1:  A feature type may be defined to have 0..n raster attributes, so the corresponding feature table may contain from 0..n raster columns.
+
+> NOTE 2:  A raster tile layer table has only one raster column named “tile_data”.
 
 Table 21 -- raster_columns 
+
 Table or View Name:   raster_columns
-Column Name	ColumnType	Column Description	Null	Default	Key
-r_table_name	 text	Name of the table containing the raster column, e.g. {FeatureTableName} | {RasterLayerName}_tiles	no		PK
-FK
-r_raster_column	text	Name of a column in a table that is a raster column with a BLOB data type 	no		PK
-compr_qual_factor	integer	Compression quality factor: 1 (lowest) to 100 (highest) for lossy compression; always 100 for lossless or no compression, -1 if unknown.
-no	-1
 
-georectification	integer	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified	no	-1
-
-srid	integer	Spatial Reference System ID: spatial_ref_sys.srid	no		FK
+| Column Name | ColumnType | Column Description | Null | Default | Key |
+| ----------- | ---------- | ------------------ | ---- | ------- | --- | 
+| r_table_name | text |	Name of the table containing the raster column, e.g. {FeatureTableName} OR {RasterLayerName}_tiles | no	|	| PK FK |
+| r_raster_column | text | Name of a column in a table that is a raster column with a BLOB data type | no | |	PK |
+| compr_qual_factor |	integer |	Compression quality factor: 1 (lowest) to 100 (highest) for lossy compression; always 100 for lossless or no compression, -1 if unknown. | no |	-1 | |
+| georectification |	integer |	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified |	no | -1 | |
+| srid |	integer |	Spatial Reference System ID: spatial_ref_sys.srid |	no | | FK |
 
 Table 22 -- raster_columns Table Definition SQL
 
