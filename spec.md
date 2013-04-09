@@ -41,6 +41,7 @@ Table or View Name:   raster_columns
 
 Table 22 -- raster_columns Table Definition SQL
 
+```SQL
 CREATE TABLE raster_columns (
 r_table_name TEXT NOT NULL,
 r_raster_column TEXT NOT NULL,
@@ -52,11 +53,13 @@ ON CONFLICT ROLLBACK,
 CONSTRAINT fk_rc_r_srid FOREIGN KEY (srid)
 REFERENCES spatial_ref_sys(srid),
 CONSTRAINT fk_rc_r_gc FOREIGN KEY (r_table_name) REFERENCES geopackage_contents(table_name))
-
+```
 
 The raster_columns table or view in a GeoPackage SHALL have the triggers defined in Table 23 below.
+
 Table 23 -- raster_columns Trigger Definition SQL
 
+```SQL
 CREATE TRIGGER 'raster_columns_r_raster_column_insert' 
 BEFORE INSERT ON 'raster_columns'
 FOR EACH ROW BEGIN
@@ -114,7 +117,7 @@ WHERE NEW.compr_qual_factor = 0;
 SELECT RAISE(ROLLBACK, 'update on table ''raster_columns'' violates constraint: compr_qual_factor > 100, must be -1 or between 1 and 100')
 WHERE NEW.compr_qual_factor > 100;
 END
-
+```
 
 Table 24 -  EXAMPLE: raster_columns INSERT Statement
 
