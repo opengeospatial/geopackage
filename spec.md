@@ -167,14 +167,16 @@ is_times_two_zoom	integer	Zoom level pixel sizes vary by powers of 2 (0=false,1=
 
 Table 26 -- tile_table_metadata Table Definition SQL
 
+```SQL
 CREATE TABLE tile_table_metadata (
   t_table_name TEXT NOT NULL PRIMARY KEY,
   is_times_two_zoom INTEGER NOT NULL DEFAULT 1
 )
-
+```
 
 Table 27 -- tile_table_metadata Trigger Definition SQL
 
+```SQL
 CREATE TRIGGER 'tile_table_metadata_t_table_name_insert' 
 BEFORE INSERT ON 'tile_table_metadata'
 FOR EACH ROW BEGIN
@@ -204,13 +206,15 @@ FOR EACH ROW BEGIN
 SELECT RAISE(ROLLBACK, 'update of tile_table_metadata violates constraint: is_time_two_zoom must be one of 0|1')
 WHERE NOT(NEW.is_times_two_zoom IN (0,1));
 END
-
+```
 
 Table 28 -- EXAMPLE: tile_table_metadata Insert Statement
 
+```SQL
 INSERT INTO tile_table_metadata VALUES (
 "sample_matrix_tiles",
 1);
+```
 
 Requirement: Core
 http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/table 
@@ -251,6 +255,7 @@ pixel_y_size	double	In t_table_name srid units or default meters for srid 0 (>0)
 
 Table 30 -- tile_matrix_metadata Table Creation SQL
 
+```SQL
 CREATE TABLE tile_matrix_metadata (
 t_table_name TEXT NOT NULL,
 zoom_level INTEGER NOT NULL,
@@ -262,10 +267,11 @@ pixel_x_size DOUBLE NOT NULL,
 pixel_y_size DOUBLE NOT NULL,
 CONSTRAINT pk_ttm PRIMARY KEY (t_table_name, zoom_level) ON CONFLICT ROLLBACK,
 CONSTRAINT fk_ttm_t_table_name FOREIGN KEY (t_table_name) REFERENCES tile_table_metadata(t_table_name))
-
+```
 
 Table 31 -- tile_matrix_metadata Trigger Definition SQL
 
+```SQL
 CREATE TRIGGER 'tile_matrix_metadata_zoom_level_insert'
 BEFORE INSERT ON 'tile_matrix_metadata'
 FOR EACH ROW BEGIN
@@ -335,11 +341,12 @@ FOR EACH ROW BEGIN
 SELECT RAISE(ROLLBACK, 'update on table ''tile_matrix_metadata'' violates constraint: pixel_y_size must be greater than 0')
 WHERE NOT (NEW.pixel_y_size > 0);
 END
-
+```
 
 
 Table 32 -- EXAMPLE: tile_matrix_metadata Insert Statement
 
+```SQL
 INSERT INTO tile_matrix_metadata VALUES (
 "sample_matrix_tiles",
 0,
@@ -349,7 +356,7 @@ INSERT INTO tile_matrix_metadata VALUES (
 512,
 2.0,
 2.0)
-
+```
 
 
 Requirement: Core
@@ -399,6 +406,7 @@ no
 
 Table 34 -- EXAMPLE: tiles table Create Table SQL
 
+```SQL
 CREATE TABLE sample_matrix_tiles (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 zoom_level INTEGER NOT NULL DEFAULT 0,
@@ -406,7 +414,7 @@ tile_column INTEGER NOT NULL DEFAULT 0,
 tile_row INTEGER NOT NULL DEFAULT 0,
 tile_data BLOB NOT NULL DEFAULT (zeroblob(4)),
 UNIQUE (zoom_level, tile_column, tile_row))
-
+```
 
 
 NOTE 3:  zeroblob(n) is an SQLite function.
@@ -414,6 +422,7 @@ NOTE 3:  zeroblob(n) is an SQLite function.
 
 Table 35 – EXAMPLE: tiles table Trigger Definition SQL
 
+```SQL
 SELECT add_tile_triggers(‘sample_matrix_tiles’)
 /* creates the following triggers */
 
@@ -466,18 +475,18 @@ WHERE (NEW.tile_row < 0) ;
 SELECT RAISE(ROLLBACK, 'update on table ''sample_matrix_tiles'' violates constraint: tile_row must by < matrix_height specified for table and zoom level in tile_matrix_metadata')
 WHERE NOT (NEW.tile_row < (SELECT matrix_height FROM tile_matrix_metadata WHERE t_table_name = 'sample_matrix_tiles' AND zoom_level = NEW.zoom_level));
 END
-
+```
  
 
 Table 36 -- EXAMPLE:  tiles table Insert Statement
-
+```SQL
 INSERT INTO sample_matrix_tiles VALUES (
 1,
 1,
 1,
 1,
 "BLOB VALUE")
-
+```
 
 Requirement: Core
 http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/table 
