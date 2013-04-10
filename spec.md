@@ -27,9 +27,9 @@ All GeoPackages SHALL support image/png and image/jpeg formats for rasters and t
 
 > NOTE 2:  A raster tile layer table has only one raster column named “tile_data”.
 
-Table 21 -- raster_columns 
+**Table 21 -- raster_columns**
 
-Table or View Name:   raster_columns
+ + Table or View Name:   raster_columns
 
 | Column Name | ColumnType | Column Description | Null | Default | Key |
 | ----------- | ---------- | ------------------ | ---- | ------- | --- | 
@@ -39,7 +39,7 @@ Table or View Name:   raster_columns
 | georectification |	integer |	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified |	no | -1 | |
 | srid |	integer |	Spatial Reference System ID: spatial_ref_sys.srid |	no | | FK |
 
-Table 22 -- raster_columns Table Definition SQL
+**Table 22 -- raster_columns Table Definition SQL**
 
 ```SQL
 CREATE TABLE raster_columns (
@@ -57,7 +57,7 @@ CONSTRAINT fk_rc_r_gc FOREIGN KEY (r_table_name) REFERENCES geopackage_contents(
 
 The raster_columns table or view in a GeoPackage SHALL have the triggers defined in Table 23 below.
 
-Table 23 -- raster_columns Trigger Definition SQL
+**Table 23 -- raster_columns Trigger Definition SQL**
 
 ```SQL
 CREATE TRIGGER 'raster_columns_r_raster_column_insert' 
@@ -119,40 +119,41 @@ WHERE NEW.compr_qual_factor > 100;
 END
 ```
 
-Table 24 -  EXAMPLE: raster_columns INSERT Statement
+**Table 24 -  EXAMPLE: raster_columns INSERT Statement**
 
+```SQL
 INSERT INTO raster_columns VALUES (
 "sample_matrix_tiles",
 "tile_data",
 90,
 2,
 4326)
+```
 
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table |
+|REQ 38 | A GeoPackage SHALL include a raster_columns table or updateable view that includes the columns and foreign key constraint defined in Table 22 and clause 10.2, and containing data described in clause 10.2.|
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table  
-REQ 38.
-A GeoPackage SHALL include a raster_columns table or updateable view that includes the columns and foreign key constraint defined in Table 22 and clause 10.2, and containing data described in clause 10.2.
+| **Requirement: Extension** | |  
+|-------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table/triggers |
+|REQ 39 | A GeoPackage SHALL include SQL triggers on the raster_columns table or updateable view as defined in Table 23 and clause 10.2.|
 
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table/triggers   
-REQ 39.
-A GeoPackage SHALL include SQL triggers on the raster_columns table or updateable view as defined in Table 23 and clause 10.2.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/core  |
+| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24][25][26]and image/png [27][28] as defined in clause 10.2. |
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/core   
-REQ 40.
-A GeoPackage SHALL support storage and use of MIME types image/jpeg [24][25][26]and image/png [27][28] as defined in clause 10.2. 
+| **Requirement: Extension** | |  
+|-------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/webp |
+| REQ 41 | A GeoPackage SHALL support storage and use of MIME type image/x-webp [29] as defined in clause 10.2 |
 
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/ webp
-REQ 41.
-A GeoPackage SHALL support storage and use of MIME type image/x-webp [29] as defined in clause 10.2 
-
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/ geotiff
-REQ 42.
-A GeoPackage SHALL support storage and use of MIME type image/tiff [30] for GeoTIFF images [32][33] as defined in clause 10.2 
+| **Requirement: Extension** | |  
+|-------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/ geotiff |
+| REQ 42 | A GeoPackage SHALL support storage and use of MIME type image/tiff [30] for GeoTIFF images [32][33] as defined in clause 10.2 |
 
 ### 10.3	Tile Table Metadata
 A GeoPackage SHALL contain a tile_table_metadata table or view as defined in this clause. The tile_table_metadata table or view SHALL contain one row record describing each tile table in a GeoPackage.  The t_table_name column value SHALL be a row value of r_table_name in the raster_columns table, enforced by a trigger.  The is_times_two_zoom column value SHALL be 1 if zoom level pixel sizes vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
@@ -161,13 +162,15 @@ A GeoPackage SHALL contain a tile_table_metadata table or view as defined in thi
 
 > NOTE 2:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_table_metadata table.  
 
-Table 25 -- tile_table_metadata
-Table or View Name:   tile_table_metadata
-Column Name	Column Type	Column Description	Null	Default	Key
-t_table_name	text	{RasterLayerName}{_tiles}	no		PK
-is_times_two_zoom	integer	Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	no	1	
+**Table 25 -- tile_table_metadata**
++ Table or View Name:   tile_table_metadata
 
-Table 26 -- tile_table_metadata Table Definition SQL
+| Column Name |	Column Type |	Column Description |	Null |	Default |	Key |
+|-------------|-------------|--------------------|-------|----------|-----|
+|t_table_name |	text    |	{RasterLayerName}{_tiles} |	no | |	PK |
+| is_times_two_zoom	| integer |	Zoom level pixel sizes vary by powers of 2 (0=false,1=true) |	no |	1 |	 |
+
+**Table 26 -- tile_table_metadata Table Definition SQL**
 
 ```SQL
 CREATE TABLE tile_table_metadata (
@@ -176,7 +179,7 @@ CREATE TABLE tile_table_metadata (
 )
 ```
 
-Table 27 -- tile_table_metadata Trigger Definition SQL
+**Table 27 -- tile_table_metadata Trigger Definition SQL**
 
 ```SQL
 CREATE TRIGGER 'tile_table_metadata_t_table_name_insert' 
@@ -210,7 +213,7 @@ WHERE NOT(NEW.is_times_two_zoom IN (0,1));
 END
 ```
 
-Table 28 -- EXAMPLE: tile_table_metadata Insert Statement
+**Table 28 -- EXAMPLE: tile_table_metadata Insert Statement**
 
 ```SQL
 INSERT INTO tile_table_metadata VALUES (
@@ -252,8 +255,8 @@ GeoPackages SHALL not require that tiles be provided for level 0 or any other pa
 
 > NOTE 5:  The geopackage_contents table (see clause 8.2 above) contains coordinates that define a bounding box as the stated spatial extent for all tiles in a tile (matrix set) table.  If the geographic extent of the image data contained in these tiles is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.
 
-Table 29 -- tile_matrix_metadata
-Table or View Name:  tile_matrix_metadata
+**Table 29 -- tile_matrix_metadata**
++ Table or View Name:  tile_matrix_metadata
 
 |Column Name | Column Type | Column Description |	Null | Default | Key |
 |------------|-------------|--------------------|------|---------|-----|
@@ -266,7 +269,7 @@ Table or View Name:  tile_matrix_metadata
 | pixel_x_size |	double |	In t_table_name srid units or default meters for srid 0 (>0) |	no |	1 | |
 | pixel_y_size |	double |	In t_table_name srid units or default meters for srid 0 (>0) |	no |	1	| |
 
-Table 30 -- tile_matrix_metadata Table Creation SQL
+**Table 30 -- tile_matrix_metadata Table Creation SQL**
 
 ```SQL
 CREATE TABLE tile_matrix_metadata (
@@ -282,7 +285,7 @@ CONSTRAINT pk_ttm PRIMARY KEY (t_table_name, zoom_level) ON CONFLICT ROLLBACK,
 CONSTRAINT fk_ttm_t_table_name FOREIGN KEY (t_table_name) REFERENCES tile_table_metadata(t_table_name))
 ```
 
-Table 31 -- tile_matrix_metadata Trigger Definition SQL
+**Table 31 -- tile_matrix_metadata Trigger Definition SQL**
 
 ```SQL
 CREATE TRIGGER 'tile_matrix_metadata_zoom_level_insert'
@@ -357,7 +360,7 @@ END
 ```
 
 
-Table 32 -- EXAMPLE: tile_matrix_metadata Insert Statement
+**Table 32 -- EXAMPLE: tile_matrix_metadata Insert Statement**
 
 ```SQL
 INSERT INTO tile_matrix_metadata VALUES (
@@ -414,17 +417,18 @@ GeoPackages SHALL implement appropriate SQL triggers on each tiles table by exec
 
 3.	The tile _row value is between 0 and the matrix_width specified for the zoom_level in the tile_matrix_metadata table
 
-Table 33 – tiles table 
-Table or View Name:   {TilesTableName} tiles table
-Column Name	Column Type	Column Description	Null	Default	Key
-id	integer	Autoincrement primary key	no		PK
-zoom_level	integer	min(zoom_level) <= zoom_level <= max(zoom_level)  for t_table_name	no	0	UK
-tile_column	integer	0 to tile_matrix_metadata matrix_width – 1 	no	0	UK
-tile_row	integer	0 to tile_matrix_metadata matrix_height - 1	no	0	UK
-tile_data	BLOB	Of an image MIME type specified in clause 10.2 
-no		
+**Table 33 – tiles table** 
++ Table or View Name:   {TilesTableName} tiles table
 
-Table 34 -- EXAMPLE: tiles table Create Table SQL
+|Column Name | Column Type | Column Description |  Null | Default | Key |
+|------------|-------------|--------------------|------|---------|-----|
+|id	integer	 | Autoincrement primary key |	no |	|	PK |
+|zoom_level |	integer	min(zoom_level) <= zoom_level <= max(zoom_level)  for t_table_name |	no |	0	 | UK |
+|tile_column |	integer	0 to tile_matrix_metadata matrix_width – 1 |	no |	0	| UK |
+|tile_row |	integer	0 to tile_matrix_metadata matrix_height - 1 |	no	| 0 |	UK |
+|tile_data |	BLOB	Of an image MIME type specified in clause 10.2 | no	| | |	
+
+**Table 34 -- EXAMPLE: tiles table Create Table SQL**
 
 ```SQL
 CREATE TABLE sample_matrix_tiles (
@@ -440,7 +444,7 @@ UNIQUE (zoom_level, tile_column, tile_row))
 > NOTE 3:  zeroblob(n) is an SQLite function.
 
 
-Table 35 – EXAMPLE: tiles table Trigger Definition SQL
+**Table 35 – EXAMPLE: tiles table Trigger Definition SQL**
 
 ```SQL
 SELECT add_tile_triggers(‘sample_matrix_tiles’)
@@ -498,7 +502,7 @@ END
 ```
  
 
-Table 36 -- EXAMPLE:  tiles table Insert Statement
+**Table 36 -- EXAMPLE:  tiles table Insert Statement**
 ```SQL
 INSERT INTO sample_matrix_tiles VALUES (
 1,
