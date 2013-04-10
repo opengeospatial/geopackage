@@ -27,7 +27,7 @@ All GeoPackages SHALL support image/png and image/jpeg formats for rasters and t
 
 > NOTE 2:  A raster tile layer table has only one raster column named “tile_data”.
 
-Table 21 -- raster_columns 
+**Table 21** -- raster_columns 
 
 Table or View Name:   raster_columns
 
@@ -39,7 +39,7 @@ Table or View Name:   raster_columns
 | georectification |	integer |	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified |	no | -1 | |
 | srid |	integer |	Spatial Reference System ID: spatial_ref_sys.srid |	no | | FK |
 
-Table 22 -- raster_columns Table Definition SQL
+*Table 22* -- raster_columns Table Definition SQL
 
 ```SQL
 CREATE TABLE raster_columns (
