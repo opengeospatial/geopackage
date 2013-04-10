@@ -121,13 +121,14 @@ END
 
 Table 24 -  EXAMPLE: raster_columns INSERT Statement
 
+```SQL
 INSERT INTO raster_columns VALUES (
 "sample_matrix_tiles",
 "tile_data",
 90,
 2,
 4326)
-
+```
 
 Requirement: Core
 http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table  
@@ -163,9 +164,11 @@ A GeoPackage SHALL contain a tile_table_metadata table or view as defined in thi
 
 Table 25 -- tile_table_metadata
 Table or View Name:   tile_table_metadata
-Column Name	Column Type	Column Description	Null	Default	Key
-t_table_name	text	{RasterLayerName}{_tiles}	no		PK
-is_times_two_zoom	integer	Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	no	1	
+
+| Column Name | Column Type	| Column Description | Null	| Default	Key |
+|-------------|-------------|--------------------|------|-------------|
+| t_table_name | text	| {RasterLayerName}{_tiles}	| no | PK |
+| is_times_two_zoom	| integer	| Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	| no | 1 |
 
 Table 26 -- tile_table_metadata Table Definition SQL
 
@@ -416,13 +419,14 @@ GeoPackages SHALL implement appropriate SQL triggers on each tiles table by exec
 
 Table 33 – tiles table 
 Table or View Name:   {TilesTableName} tiles table
-Column Name	Column Type	Column Description	Null	Default	Key
-id	integer	Autoincrement primary key	no		PK
-zoom_level	integer	min(zoom_level) <= zoom_level <= max(zoom_level)  for t_table_name	no	0	UK
-tile_column	integer	0 to tile_matrix_metadata matrix_width – 1 	no	0	UK
-tile_row	integer	0 to tile_matrix_metadata matrix_height - 1	no	0	UK
-tile_data	BLOB	Of an image MIME type specified in clause 10.2 
-no		
+
+| Column Name	| Column Type	| Column Description | Null | Default	Key |
+|-------------|-------------|--------------------|------|-------------|
+| id | integer | Autoincrement primary key | no	| PK |
+| zoom_level | integer | min(zoom_level) <= zoom_level <= max(zoom_level)  for t_table_name | no	| 0	UK |
+| tile_column | integer	| 0 to tile_matrix_metadata matrix_width – 1 | no	| 0	UK |
+| tile_row | integer | 0 to tile_matrix_metadata matrix_height - 1 |	no |	0	UK |
+| tile_data |	BLOB |	Of an image MIME type specified in clause 10.2 | no	| |
 
 Table 34 -- EXAMPLE: tiles table Create Table SQL
 
