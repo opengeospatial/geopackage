@@ -254,15 +254,17 @@ GeoPackages SHALL not require that tiles be provided for level 0 or any other pa
 
 Table 29 -- tile_matrix_metadata
 Table or View Name:  tile_matrix_metadata
-Column Name	Column Type	Column Description	Null	Default	Key
-t_table_name	text	{RasterLayerName}_tiles	no		PK, FK
-zoom_level	integer	0 <= zoom_level <= max_level for t_table_name	no	0	PK
-matrix_width	integer	Number of columns (>= 1) in tile matrix at this zoom level 	no	1	
-matrix_height	integer	Number of rows (>= 1) in tile matrix at this zoom level	no	1	
-tile_width	integer	Tile width in pixels (>= 1)for this zoom level	no	256	
-tile_height	integer	Tile height in pixels (>= 1) for this zoom level	no	256	
-pixel_x_size	double	In t_table_name srid units or default meters for srid 0 (>0)	no	1	
-pixel_y_size	double	In t_table_name srid units or default meters for srid 0 (>0)	no	1	
+
+|Column Name | Column Type | Column Description |	Null | Default | Key |
+|------------|-------------|--------------------|------|---------|-----|
+|t_table_name |	text |	{RasterLayerName}_tiles |no	| | PK, FK |
+| zoom_level	| integer |	0 <= zoom_level <= max_level for t_table_name	| no |	0 |	PK |
+| matrix_width |	integer |	Number of columns (>= 1) in tile matrix at this zoom level | no |	1 | |	
+| matrix_height |	integer |	Number of rows (>= 1) in tile matrix at this zoom level |	no | 1 | |	
+| tile_width |	integer |	Tile width in pixels (>= 1)for this zoom level |	no |	256	| |
+| tile_height |	integer |	Tile height in pixels (>= 1) for this zoom level |	no |	256	| |
+| pixel_x_size |	double |	In t_table_name srid units or default meters for srid 0 (>0) |	no |	1 | |
+| pixel_y_size |	double |	In t_table_name srid units or default meters for srid 0 (>0) |	no |	1	| |
 
 Table 30 -- tile_matrix_metadata Table Creation SQL
 
