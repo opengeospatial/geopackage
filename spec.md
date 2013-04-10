@@ -27,7 +27,7 @@ All GeoPackages SHALL support image/png and image/jpeg formats for rasters and t
 
 > NOTE 2:  A raster tile layer table has only one raster column named “tile_data”.
 
-**Table 21 -- raster_columns**
+**Table 21** -- raster_columns 
 
  + Table or View Name:   raster_columns
 
@@ -39,7 +39,7 @@ All GeoPackages SHALL support image/png and image/jpeg formats for rasters and t
 | georectification |	integer |	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified |	no | -1 | |
 | srid |	integer |	Spatial Reference System ID: spatial_ref_sys.srid |	no | | FK |
 
-**Table 22 -- raster_columns Table Definition SQL**
+*Table 22* -- raster_columns Table Definition SQL
 
 ```SQL
 CREATE TABLE raster_columns (
@@ -129,7 +129,6 @@ INSERT INTO raster_columns VALUES (
 2,
 4326)
 ```
-
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table |
@@ -162,13 +161,13 @@ A GeoPackage SHALL contain a tile_table_metadata table or view as defined in thi
 
 > NOTE 2:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_table_metadata table.  
 
-**Table 25 -- tile_table_metadata**
-+ Table or View Name:   tile_table_metadata
+Table 25 -- tile_table_metadata
+Table or View Name:   tile_table_metadata
 
-| Column Name |	Column Type |	Column Description |	Null |	Default |	Key |
-|-------------|-------------|--------------------|-------|----------|-----|
-|t_table_name |	text    |	{RasterLayerName}{_tiles} |	no | |	PK |
-| is_times_two_zoom	| integer |	Zoom level pixel sizes vary by powers of 2 (0=false,1=true) |	no |	1 |	 |
+| Column Name | Column Type	| Column Description | Null	| Default	Key |
+|-------------|-------------|--------------------|------|-------------|
+| t_table_name | text	| {RasterLayerName}{_tiles}	| no | PK |
+| is_times_two_zoom	| integer	| Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	| no | 1 |
 
 **Table 26 -- tile_table_metadata Table Definition SQL**
 
