@@ -32,7 +32,9 @@ and discussed individually in the following subsections.
 
 > NOTE: Images of multiple MIME types may be stored in given table.  For example, in a tiles table, image/png 
 format tiles without compression could be used for transparency where there is no data on the tile edges, and 
-image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all pixels.  Images of multiple bit depths of the same MIME type may also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
+image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all 
+pixels.  Images of multiple bit depths of the same MIME type may also be stored in a given table, for example 
+image/png tiles in both 8 and 24 bit depths.
 
 ### 10.2	Raster Columns
 A GeoPackage SHALL contain a `raster_columns` table or view as defined in this clause.  The `raster_columns` 
@@ -193,11 +195,18 @@ INSERT INTO raster_columns VALUES (
 | REQ 42 | A GeoPackage SHALL support storage and use of MIME type image/tiff [[30]] (#30) for GeoTIFF images [[32]] (#31) [[33]] (#33) as defined in clause 10.2 |
 
 ### 10.3	Tile Table Metadata
-A GeoPackage SHALL contain a `tile_table_metadata` table or view as defined in this clause. The `tile_table_metadata` table or view SHALL contain one row record describing each tile table in a GeoPackage.  The `t_table_name` column value SHALL be a row value of `r_table_name` in the `raster_columns` table, enforced by a trigger.  The `is_times_two_zoom` column value SHALL be 1 if zoom level pixel sizes vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
+A GeoPackage SHALL contain a `tile_table_metadata` table or view as defined in this clause. The 
+`tile_table_metadata` table or view SHALL contain one row record describing each tile table in a 
+GeoPackage.  The `t_table_name` column value SHALL be a row value of `r_table_name` in the `raster_columns` 
+table, enforced by a trigger.  The `is_times_two_zoom` column value SHALL be 1 if zoom level pixel sizes 
+vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
 
-> NOTE 1:  A row record for a tile table must be inserted into this table before row records can be inserted into the tile_matrix_metadata table described in clause 10.4 due to the presence of foreign key and other integrity constraints on that table.  
+> NOTE 1:  A row record for a tile table must be inserted into this table before row records can be inserted 
+into the tile_matrix_metadata table described in clause 10.4 due to the presence of foreign key and other 
+integrity constraints on that table.  
 
-> NOTE 2:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the tile_table_metadata table.  
+> NOTE 2:  GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records 
+are responsible for maintaining the corresponding descriptive contents of the tile_table_metadata table.  
 
 **Table 25** - `tile_table_metadata`
 Table or View Name: `tile_table_metadata`
@@ -484,9 +493,16 @@ When the value of the `is_times_two_zoom` column in the `tile_table_metadata` re
 table row is 1 (true) then the pixel sizes for adjacent zoom levels in the tiles table SHALL only 
 vary by powers of 2.
 
-> NOTE 1:  The id primary key allows tiles table views to be created on [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index) version 1 raster table implementations, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.  
+> NOTE 1:  The id primary key allows tiles table views to be created on [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index) 
+version 1 raster table implementations, where the tiles are selected based on a spatially indexed 
+bounding box in a separate metadata table.  
 
-> NOTE 2:  The zoom_level / tile_column / tile_row unique key allows tiles to be selected and accessed by “z, x, y”, a common convention used by [MBTiles] (https://github.com/mapbox/mbtiles-spec), [Big Planet Tracks] (http://code.google.com/p/big-planet-tracks/), and other implementations.  In a SQLite implementation this unique key is automatically indexed.  This table / view definition may also follow [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index) version 1 conventions, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.
+> NOTE 2:  The zoom_level / tile_column / tile_row unique key allows tiles to be selected and accessed 
+by “z, x, y”, a common convention used by [MBTiles] (https://github.com/mapbox/mbtiles-spec), 
+[Big Planet Tracks] (http://code.google.com/p/big-planet-tracks/), and other implementations. 
+In a SQLite implementation this unique key is automatically indexed. This table / view definition 
+may also follow [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index) version 1 conventions, 
+where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.
 
 GeoPackages SHALL implement appropriate SQL triggers on each tiles table by executing the 
 `add_tile_triggers()` routine specified in clause 10.8 below with the tiles table as a parameter 
@@ -679,7 +695,10 @@ in a GeoPackage defined with the columns described in table 40 below.
 The data in a row record in this table refers to the raster in the `r_raster_column` column in the 
 {Raster|Tile TableName}table for the record with a rowed equal to the `row_id_value` primary key column value. 
 
-> NOTE2: In an SQLite implementation, the rowid value is always equal to the value of a single-column primary key on an [integer column] (http://www.sqlite.org/lang_createtable.html#rowid).  Althought not stated in the SQLite documentation, testing has not revealed a case where rowed values on a table with any primry key column(s) defined are changed by a database reorganization performed by the VACUUM SQL command.
+> NOTE2: In an SQLite implementation, the rowid value is always equal to the value of a single-column 
+primary key on an [integer column] (http://www.sqlite.org/lang_createtable.html#rowid).  Althought not 
+stated in the SQLite documentation, testing has not revealed a case where rowed values on a table with 
+any primry key column(s) defined are changed by a database reorganization performed by the VACUUM SQL command.
 
 The `compr_qual_factor` column value indicates the image quality of that raster on a scale from 1 
 (lowest) to 100 (highest) for rasters compressed with a lossy compression algorithm. It is always 
