@@ -135,7 +135,7 @@ INSERT INTO raster_columns VALUES (
 |REQ 38 | A GeoPackage SHALL include a `raster_columns` table or updateable view that includes the columns and foreign key constraint defined in Table 22 and clause 10.2, and containing data described in clause 10.2.|
 
 | **Requirement: Extension** | |  
-|-------|------|
+|-----------------------|------|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table/triggers |
 |REQ 39 | A GeoPackage SHALL include SQL triggers on the `raster_columns` table or updateable view as defined in Table 23 and clause 10.2.|
 
@@ -220,20 +220,21 @@ INSERT INTO tile_table_metadata VALUES (
 1);
 ```
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/table 
-REQ 43.
-A GeoPackage SHALL include a tile_table_metadata table as defined in clause 10.3 and table 26.
 
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/triggers
-REQ 44.
-A GeoPackage SHALL have tile_table_metadata table triggers as defined in clause 10.3 and table 27.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/table |
+| REQ 43 | A GeoPackage SHALL include a tile_table_metadata table as defined in clause 10.3 and table 26.|
 
-Requirement:Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/data
-REQ 45.
-A GeoPackage tile_table_metadata table SHALL contain a row record for each tile table in the GPKG as specified in clause 10.3.
+| **Requirement: Extension** | |  
+|-----------------------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/triggers |
+|REQ 44 | A GeoPackage SHALL have tile_table_metadata table triggers as defined in clause 10.3 and table 27.|
+
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_table_metadata/data |
+|REQ 45 | A GeoPackage tile_table_metadata table SHALL contain a row record for each tile table in the GPKG as specified in clause 10.3.|
 
 ### 10.4	Tile Matrix Metadata
 A GeoPackage SHALL contain a `tile_matrix_metadata` table or view as defined in this clause.  The `tile_matrix_metadata` table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tiles table.  It may contain row records for zoom levels in a tiles table that do not contain tiles.  A `tile_matrix_metadata` row record SHALL be inserted for a zoom level for `t_table_name` before any tiles are inserted into the corresponding tiles table, so that triggers on that table specified in clause 10.5 below may reference `tile_matrix_metadata` column values for that zoom level to reject invalid data. 
@@ -374,30 +375,30 @@ INSERT INTO tile_matrix_metadata VALUES (
 ```
 
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_metadata/table 
-REQ 46.
-A GeoPackage SHALL include a tile_matrix_metadata table as defined in clause 10.4 and table 30.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_metadata/table |
+|REQ 46 | A GeoPackage SHALL include a tile_matrix_metadata table as defined in clause 10.4 and table 30.|
 
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_metadata/triggers
-REQ 47.
-A GeoPackage SHALL have triggers on the tile_matrix_metadata table as defined in clause 10.4 and table 31.
+| **Requirement: Extension** | |  
+|-----------------------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_metadata/triggers|
+|REQ 47| A GeoPackage SHALL have triggers on the tile_matrix_metadata table as defined in clause 10.4 and table 31.|
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_metadata/data
-REQ 48.
-A GeoPackage tile_matrix_metadata table SHALL contain one row record for each zoom level that contains one or more tiles in each tiles table.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_metadata/data|
+|REQ 48| A GeoPackage tile_matrix_metadata table SHALL contain one row record for each zoom level that contains one or more tiles in each tiles table.|
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_zoom_levels/powers_of_two
-REQ 49.
-A GeoPackage SHALL support tile matrix set zoom levels for pixel sizes that differ by powers of two between adjacent zoom levels.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_zoom_levels/powers_of_two|
+REQ 49|A GeoPackage SHALL support tile matrix set zoom levels for pixel sizes that differ by powers of two between adjacent zoom levels.|
 
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_zoom_levels/other_intervals
-REQ 50.
-A GeoPackage SHALL support tile matrix set zoom levels for pixel sizes that differ by irregular intervals or by regular intervals other than powers of two between adjacent zoom levels.
+| **Requirement: Extension** | |  
+|-----------------------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_zoom_levels/other_intervals|
+|REQ 50|A GeoPackage SHALL support tile matrix set zoom levels for pixel sizes that differ by irregular intervals or by regular intervals other than powers of two between adjacent zoom levels.|
 
 ### 10.5	Tiles Table
 Tiles in a tile matrix set with one or more zoom levels SHALL be stored in a GeoPackage in a tiles table or view with a unique name for every different tile matrix set in the GeoPackage.  Each tiles table or view SHALL be defined with the columns described in table 35 below.  Each tiles table or view SHALL contain tile matrices at one or more zoom levels of different spatial resolution (map scale).  All tiles at a particular zoom level must have the same `pixel_x_size` and `pixel_y_size` values specified in the `tile_matrix_metadata` row record for that tiles table and zoom level.  
@@ -511,20 +512,20 @@ INSERT INTO sample_matrix_tiles VALUES (
 "BLOB VALUE")
 ```
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/table 
-REQ 51.
-All tile matrix sets in a GeoPackage SHALL be contained in tiles tables defined as specified in clause 10.5 and table 33and exemplified by table 34.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/table |
+|REQ 51 | All tile matrix sets in a GeoPackage SHALL be contained in tiles tables defined as specified in clause 10.5 and table 33and exemplified by table 34|
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/raster_column
-REQ 52.
-All tile table tile_data raster columns in a GeoPackage SHALL be defined with a BLOB data type that is an image mime type as specified in clause 10.2. 
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/raster_column|
+|REQ 52| All tile table tile_data raster columns in a GeoPackage SHALL be defined with a BLOB data type that is an image mime type as specified in clause 10.2.|
 
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/triggers
-REQ 53.
-All tile matrix set tables in a GeoPackage SHALL have triggers defined by executing the add_tile_triggers() routine specified in clause 10.8 as exemplified by table 35.
+| **Requirement: Extension** | |  
+|-----------------------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/triggers|
+|REQ 53|All tile matrix set tables in a GeoPackage SHALL have triggers defined by executing the add_tile_triggers() routine specified in clause 10.8 as exemplified by table 35.|
 
 ### 10.6 Raster Tables
 
@@ -565,20 +566,20 @@ INSERT INTO sample_rasters VALUES (
 {Area Photo} )
 ```
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/table
-REQ 64.
-All raster images in a GeoPackage that are not tiles in a tiles table shall be contained in rasters tables that are defined as specified by clause 10.6 and exemplified by tables 39 and 40.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/table|
+|REQ 64|All raster images in a GeoPackage that are not tiles in a tiles table shall be contained in rasters tables that are defined as specified by clause 10.6 and exemplified by tables 39 and 40.|
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/primary_key
-REQ 65.
-Every raster table in a GeoPackage shall have a primary key defined on one or more columns as specified by clause 10.6
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/primary_key|
+|REQ 65|Every raster table in a GeoPackage shall have a primary key defined on one or more columns as specified by clause 10.6|
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/raster_column
-REQ 66.
-All raster table raster columns in a GeoPackage shall be defined with a BLOB data type that is an image mime type as specified in clause 10.2.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/raster_column|
+|REQ 66|All raster table raster columns in a GeoPackage shall be defined with a BLOB data type that is an image mime type as specified in clause 10.2.|
 
 ###10.7	Rasters or Tiles Table Metadata
 
@@ -730,17 +731,20 @@ INSERT INTO sample_matrix_tiles_rt_metadata VALUES (
 )
 ```
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table
-REQ 67.	There SHALL be a {Raster|Tile TableName}{_rt_metadata} table as specified in clause 10.7 with the columns described in table 40 and exemplified by table 41 for every tile and raster table in a GeoPackage.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table|
+|REQ 67|	There SHALL be a {Raster|Tile TableName}{_rt_metadata} table as specified in clause 10.7 with the columns described in table 40 and exemplified by table 41 for every tile and raster table in a GeoPackage.|
 
-Requirement: Core
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table/data
-REQ 68.	Each {Raster|Tile TableName}{_rt_metadata} table specified in clause 10.7 for every tile and raster table in a GeoPackage SHALL have a row record describing each raster and tile in a GeoPackage.
+| **Requirement: Core** | |
+|------------------------|----|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table/data|
+|REQ 68|Each {Raster|Tile TableName}{_rt_metadata} table specified in clause 10.7 for every tile and raster table in a GeoPackage SHALL have a row record describing each raster and tile in a GeoPackage.|
 
-Requirement: Extension
-http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table/triggers
-REQ 69.	All raster table raster columns in a GeoPackage SHALL have triggers defined by executing the add_rt_metadata_triggers() routine specified in clause 10.8, as exemplified by table 42.
+| **Requirement: Extension** | |  
+|-----------------------|------|
+| | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table/triggers|
+|REQ 69 | All raster table raster columns in a GeoPackage SHALL have triggers defined by executing the add_rt_metadata_triggers() routine specified in clause 10.8, as exemplified by table 42.|
 
 ####Notes
 
