@@ -142,7 +142,7 @@ INSERT INTO raster_columns VALUES (
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/core  |
-| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24] (#notes) [25] (#25) [26]and image/png [27][28] as defined in clause 10.2. |
+| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24] (#24) [25] (#25) [26]and image/png [27][28] as defined in clause 10.2. |
 
 | **Requirement: Extension** | |  
 |-------|------|
@@ -743,7 +743,8 @@ REQ 69.	All raster table raster columns in a GeoPackage SHALL have triggers defi
 
 ####Notes
 
-[24]:  JPEG File Interchange Format Version 1.02, September 1, 1992   http://www.jpeg.org/public/jfif.pdf 
+######[24]  
+JPEG File Interchange Format Version 1.02, September 1, 1992   http://www.jpeg.org/public/jfif.pdf 
 
-[25](#25)  IETF RFC 2046 Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types http://www.ietf.org/rfc/rfc2046.txt 
+######[25] IETF RFC 2046 Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types http://www.ietf.org/rfc/rfc2046.txt 
 
