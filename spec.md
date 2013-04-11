@@ -526,4 +526,57 @@ http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/triggers
 REQ 53.
 All tile matrix set tables in a GeoPackage SHALL have triggers defined by executing the add_tile_triggers() routine specified in clause 10.8 as exemplified by table 35.
 
+### 10.6 Raster Tables
+
+Raster tables have raster columns defined as BLOB data types that contain rasters that are not part of tile matrix sets.  Every table in a GeoPackage that is not a tiles tables as as described in clause 9.5 and that includes one or more raster columns is a raster table.  Raster tables are also feature tables as specified in clause 8.4 above that may or may not have geometry columns in addition to raster columns.
+
+Every raster table in a GeoPackage shall have a primary key defined on one or more columns so that row level metadata records may be linked to the rasters in it by rowid as described in clauses 10.7 and 11.3 below.
+
+NOTE1: An integer column primary key is recommended for best performance.
+
+**Table 39 -- EXAMPLE: sample_rasters Table or View**
++ Table or View Name:   {TilesTableName} sample_rasters
+
+|Column Name | Column Type | Column Description |  Null | Default | Key |
+|------------|-------------|--------------------|------|---------|-----|
+|id integer	 | Autoincrement primary key |	no |	|	PK |
+|elevation  | BLOB | Elevation coverage; of type raster_format_metadata.mime_type | no | | |
+|description | text | Description of the area | no | 'no desc' | |
+|photo | BLOB | Photograph of the area; of type_raster_format_metadata.mime_type | no | |
+
+**Table 40 -- EXAMPLE: sample_rasters Table Definition SQL**
+
+```SQL
+CREATE TABLE sample_rasters (
+id INTEGER PRIMARY KEY AUTOINCREMENT,
+elevation BLOB NOT NULL,
+description TEXT NOT NULL DEFAULT 'no_desc',
+photo BLOB NOT NULL)
+```
+
+NOTE2: The sample_rasters table created in Table 40 above could be extended with one or more geometry columns by calls to the addGeometryColumn() routine specified in clause 9.4 to have both raster and geometry columns like the sample_feature_table shown in Figure3: GeoPackageTables above in clause 7.
+
+**Table 41 -- EXAMPLE: sample_rasters Insert Statement
+```SQL
+INSERT INTO sample_rasters VALUES (
+1,
+{Elevation Raster},
+'rough terrain',
+{Area Photo} )
+```
+
+Requirement: Core
+http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/table
+REQ 64.
+All raster images in a GeoPackage that are not tiles in a tiles table shall be contained in rasters tables that are defined as specified by clause 10.6 and exemplified by tables 39 and 40.
+
+Requirement: Core
+http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/primary_key
+REQ 65.
+Every raster table in a GeoPackage shall have a primary key defined on one or more columns as specified by clause 10.6
+
+Requirement: Core
+http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/raster_column
+REQ 66.
+All raster table raster columns in a GeoPackage shall be defined with a BLOB data type that is an image mime type as specified in clause 10.2.
 
