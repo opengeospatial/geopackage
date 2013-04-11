@@ -142,7 +142,7 @@ INSERT INTO raster_columns VALUES (
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/core  |
-| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24] (#24) [25] (#25) [26]and image/png [27][28] as defined in clause 10.2. |
+| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24] (#notes) [25] (#25) [26]and image/png [27][28] as defined in clause 10.2. |
 
 | **Requirement: Extension** | |  
 |-------|------|
