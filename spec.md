@@ -21,7 +21,7 @@ The georectification column value indicates the minimum level of georectificatio
 
 The srid SHALL have a value contained in the `spatial_ref_sys` table defined in clause 9.2 above.
 
-All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles. GeoPackages may support image/x-webp and image/tiff formats for rasters and tiles. GeoPackage support for the image/tiff format [31] (#31) is limited to GeoTIFF [32] (#32) images that meet the requirements of the NGA Implementation Profile [33] (#33) for coordinate transformation case 3 where the position and scale of thedata is known exactly, and no rotation of the image is required.
+All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles. GeoPackages may support image/x-webp and image/tiff formats for rasters and tiles. GeoPackage support for the image/tiff format [[31]] (#31) is limited to GeoTIFF [[32]] (#32) images that meet the requirements of the NGA Implementation Profile [[33]] (#33) for coordinate transformation case 3 where the position and scale of thedata is known exactly, and no rotation of the image is required.
 
 > NOTE 1:  A feature type may be defined to have 0..n raster attributes, so the corresponding feature table may contain from 0..n raster columns.
 
@@ -142,17 +142,17 @@ INSERT INTO raster_columns VALUES (
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/core  |
-| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24] (#24) [25] (#25) [26] (#26) and image/png [27] (#27) [28] (#28) as defined in clause 10.2. |
+| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [[24]] (#24) [[25]] (#25) [[26]] (#26) and image/png [[27]] (#27) [[28]] (#28) as defined in clause 10.2. |
 
 | **Requirement: Extension** | |  
 |-------|------|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/webp |
-| REQ 41 | A GeoPackage SHALL support storage and use of MIME type image/x-webp [29] (#29) as defined in clause 10.2 |
+| REQ 41 | A GeoPackage SHALL support storage and use of MIME type image/x-webp [[29]] (#29) as defined in clause 10.2 |
 
 | **Requirement: Extension** | |  
 |-------|------|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/ geotiff |
-| REQ 42 | A GeoPackage SHALL support storage and use of MIME type image/tiff [30] (#30) for GeoTIFF images [32] (#31) [33] (#33) as defined in clause 10.2 |
+| REQ 42 | A GeoPackage SHALL support storage and use of MIME type image/tiff [[30]] (#30) for GeoTIFF images [[32]] (#31) [[33]] (#33) as defined in clause 10.2 |
 
 ### 10.3	Tile Table Metadata
 A GeoPackage SHALL contain a `tile_table_metadata` table or view as defined in this clause. The `tile_table_metadata` table or view SHALL contain one row record describing each tile table in a GeoPackage.  The `t_table_name` column value SHALL be a row value of `r_table_name` in the `raster_columns` table, enforced by a trigger.  The `is_times_two_zoom` column value SHALL be 1 if zoom level pixel sizes vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
