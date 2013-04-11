@@ -240,7 +240,7 @@ A GeoPackage SHALL contain a `tile_matrix_metadata` table or view as defined in 
 
 The `tile_matrix_metadata` table documents the structure of the tile matrix at each zoom level in each tiles table.  It allows GeoPackages to contain rectangular as well as square tiles (e.g. for better representation of polar regions).  It allows tile pyramids with zoom levels that differ in resolution by powers of 2, irregular intervals, or regular intervals other than powers of 2.  When the value of the `is_times_two_zoom` column in the `tile_table_metadata` record for a tiles table is 1 (true) then the pixel sizes for adjacent zoom levels in the `tile_matrix_metadata` table for that table SHALL only vary by powers of 2.
 
-> NOTE 1:  Most tile pyramids have an origin at the upper left, a convention adopted by the OGC Web Map Tile Service (WMTS) [25], but some such as [TMS] (http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) used by [MB-Tiles] (https://github.com/mapbox/mbtiles-spec) have an origin at the lower left.  Most tile pyramids, such as [Open Street Map] (http://wiki.openstreetmap.org/wiki/Main_Page), [OSMDroidAtlas] (http://wiki.openstreetmap.org/wiki/Main_Page), and [FalconView] (http://www.falconview.org/trac/FalconView) use a zoom_out_level of 0 for the smallest map scale “whole world” zoom level view, another convention adopted by WMTS, but some such as [Big Planet Tracks] http://code.google.com/p/big-planet-tracks/ invert this convention and use 0 or 1 for the largest map scale “local detail” zoom level view.   
+> NOTE 1:  Most tile pyramids have an origin at the upper left, a convention adopted by the OGC Web Map Tile Service (WMTS) [25], but some such as [TMS] (http://wiki.osgeo.org/wiki/Tile_Map_Service_Specification) used by [MB-Tiles] (https://github.com/mapbox/mbtiles-spec) have an origin at the lower left.  Most tile pyramids, such as [Open Street Map] (http://wiki.openstreetmap.org/wiki/Main_Page), [OSMDroidAtlas] (http://wiki.openstreetmap.org/wiki/Main_Page), and [FalconView] (http://www.falconview.org/trac/FalconView) use a zoom_out_level of 0 for the smallest map scale “whole world” zoom level view, another convention adopted by WMTS, but some such as [Big Planet Tracks] (http://code.google.com/p/big-planet-tracks/) invert this convention and use 0 or 1 for the largest map scale “local detail” zoom level view.   
 
 GeoPackages SHALL follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view, as specified by [WMTS] (http://portal.opengeospatial.org/files/?artifact_id=35326).  The tile coordinate (0,0) SHALL always refer to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.  Pixel sizes for zoom levels sorted in ascending order SHALL be sorted in descending order.  
 
@@ -404,9 +404,9 @@ Tiles in a tile matrix set with one or more zoom levels SHALL be stored in a Geo
 
 When the value of the `is_times_two_zoom` column in the `tile_table_metadata` record for a tiles table row is 1 (true) then the pixel sizes for adjacent zoom levels in the tiles table SHALL only vary by powers of 2.
 
-> NOTE 1:  The id primary key allows tiles table views to be created on RasterLite [B13] version 1 raster table implementations, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.  
+> NOTE 1:  The id primary key allows tiles table views to be created on [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index) version 1 raster table implementations, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.  
 
-> NOTE 2:  The zoom_level / tile_column / tile_row unique key allows tiles to be selected and accessed by “z, x, y”, a common convention used by MB-Tiles [B12], Big Planet [B17], and other implementations.  In a SQLite implementation this unique key is automatically indexed.  This table / view definition may also follow RasterLite [B13] version 1 conventions, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.
+> NOTE 2:  The zoom_level / tile_column / tile_row unique key allows tiles to be selected and accessed by “z, x, y”, a common convention used by [MBTiles] (https://github.com/mapbox/mbtiles-spec), [Big Planet Tracks] (http://code.google.com/p/big-planet-tracks/), and other implementations.  In a SQLite implementation this unique key is automatically indexed.  This table / view definition may also follow [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index) version 1 conventions, where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.
 
 GeoPackages SHALL implement appropriate SQL triggers on each tiles table by executing the `add_tile_triggers()` routine specified in clause 10.8 below with the tiles table as a parameter value to ensure that 
 
@@ -585,12 +585,12 @@ All raster table raster columns in a GeoPackage shall be defined with a BLOB dat
 There SHALL be a {Raster|Tile TableName}_rt_metadata table or view for each rasters or tiles table 
 in a GeoPackage defined with the columns described in table 40 below.  
 
-> NOTE 1:  This table naming convention is adopted from RasterLite [B13].
+> NOTE 1:  This table naming convention is adopted from [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index).
 
 The data in a row record in this table refers to the raster in the r_raster_column column in the 
 {Raster|Tile TableName}table for the record with a rowed equal to the row_id_value primary key column value. 
 
-> NOTE2: In an SQLite implementation, the rowid value is always equal to the value of a single-column primary key on an integer column [B30].  Althought not stated in the SQLite documentation, testing has not revealed a case where rowed values on a table with any primry key column(s) defined are changed by a database reorganization performed by the VACUUM SQL command.
+> NOTE2: In an SQLite implementation, the rowid value is always equal to the value of a single-column primary key on an [integer column] (http://www.sqlite.org/lang_createtable.html#rowid).  Althought not stated in the SQLite documentation, testing has not revealed a case where rowed values on a table with any primry key column(s) defined are changed by a database reorganization performed by the VACUUM SQL command.
 
 The `compr_qual_factor` column value indicates the image quality of that raster on a scale from 1 
 (lowest) to 100 (highest) for rasters compressed with a lossy compression algorithm. It is always 
@@ -609,7 +609,7 @@ values define a bounding box that SHALL be the spatial extent of the area on the
 
 > NOTE 3:  This data structure can be implemented as a table in the absence of geometry data types or spatial 
 indexes. When implemented as a view, the min/max x/y columns could reference ordinates of a bounding box geometry 
-in an underlying table when geometry data types are available, e.g. in RasterLite [B13].
+in an underlying table when geometry data types are available, e.g. in [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index).
 
 **Table 40** - `{RasterLayerName}_rt_metadata`
 + Table or View Name: `{RasterLayerName}_rt_metadata`
