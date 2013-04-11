@@ -743,6 +743,7 @@ REQ 69.	All raster table raster columns in a GeoPackage SHALL have triggers defi
 
 ####Notes
 
-<a id="24"></a>[24]:  JPEG File Interchange Format Version 1.02, September 1, 1992   http://www.jpeg.org/public/jfif.pdf 
-<a id="25"/>[25]  IETF RFC 2046 Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types http://www.ietf.org/rfc/rfc2046.txt 
+<a id="B24"></a> [24]:  JPEG File Interchange Format Version 1.02, September 1, 1992   http://www.jpeg.org/public/jfif.pdf 
+
+<a id="25"/> [25]  IETF RFC 2046 Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types http://www.ietf.org/rfc/rfc2046.txt 
 
