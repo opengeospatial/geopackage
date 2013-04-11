@@ -17,7 +17,7 @@ A GeoPackage SHALL contain a `raster_columns` table or view as defined in this c
 
 The `compr_qual_` factor column value indicates the lowest image quality of any raster or tile in the associated column on a scale from 1 (lowest) to 100 (highest) for rasters compressed with a lossy compression algorithm.  It is always 100 if all rasters or tiles are compressed with a lossless compression algorithm, or are not compressed.  The value -1 indicates "unknown" and is specified as the default value.
 
-The georectification column value indicates the minimum level of georectification to areas on the earth for all rasters or tiles in the associated column are georectified.  A value of -1 indicates "unknown" as is specified as the default value.  A value of 0 indicates that no rasters or tiles are georectified. A value of 1 indicates that all rasters or tiles are georectified (but not necessarily orthorectified). A value of 2 indicates that all rasters or tiles are orthorectified (which implies georectified) to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
+The `georectification` column value indicates the minimum level of georectification to areas on the earth for all rasters or tiles in the associated column are georectified.  A value of -1 indicates "unknown" as is specified as the default value.  A value of 0 indicates that no rasters or tiles are georectified. A value of 1 indicates that all rasters or tiles are georectified (but not necessarily orthorectified). A value of 2 indicates that all rasters or tiles are orthorectified (which implies georectified) to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
 
 The srid SHALL have a value contained in the `spatial_ref_sys` table defined in clause 9.2 above.
 
@@ -132,12 +132,12 @@ INSERT INTO raster_columns VALUES (
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table |
-|REQ 38 | A GeoPackage SHALL include a raster_columns table or updateable view that includes the columns and foreign key constraint defined in Table 22 and clause 10.2, and containing data described in clause 10.2.|
+|REQ 38 | A GeoPackage SHALL include a `raster_columns` table or updateable view that includes the columns and foreign key constraint defined in Table 22 and clause 10.2, and containing data described in clause 10.2.|
 
 | **Requirement: Extension** | |  
 |-------|------|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table/triggers |
-|REQ 39 | A GeoPackage SHALL include SQL triggers on the raster_columns table or updateable view as defined in Table 23 and clause 10.2.|
+|REQ 39 | A GeoPackage SHALL include SQL triggers on the `raster_columns` table or updateable view as defined in Table 23 and clause 10.2.|
 
 | **Requirement: Core** | |
 |------------------------|----|
@@ -587,8 +587,8 @@ in a GeoPackage defined with the columns described in table 40 below.
 
 > NOTE 1:  This table naming convention is adopted from [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index).
 
-The data in a row record in this table refers to the raster in the r_raster_column column in the 
-{Raster|Tile TableName}table for the record with a rowed equal to the row_id_value primary key column value. 
+The data in a row record in this table refers to the raster in the `r_raster_column` column in the 
+{Raster|Tile TableName}table for the record with a rowed equal to the `row_id_value` primary key column value. 
 
 > NOTE2: In an SQLite implementation, the rowid value is always equal to the value of a single-column primary key on an [integer column] (http://www.sqlite.org/lang_createtable.html#rowid).  Althought not stated in the SQLite documentation, testing has not revealed a case where rowed values on a table with any primry key column(s) defined are changed by a database reorganization performed by the VACUUM SQL command.
 
@@ -613,6 +613,7 @@ in an underlying table when geometry data types are available, e.g. in [RasterLi
 
 **Table 40** - `{RasterLayerName}_rt_metadata`
 + Table or View Name: `{RasterLayerName}_rt_metadata`
+
 |Column Name | Column Type | Column Description |  Null | Default | Key |
 |------------|-------------|--------------------|------|---------|-----|
 | row_id_value |	integer |	rowid in rasters or tiles table |	no |	|	PK | 
