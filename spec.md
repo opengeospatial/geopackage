@@ -580,3 +580,164 @@ http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_table/raster_colum
 REQ 66.
 All raster table raster columns in a GeoPackage shall be defined with a BLOB data type that is an image mime type as specified in clause 10.2.
 
+###10.7	Rasters or Tiles Table Metadata
+
+There SHALL be a {Raster|Tile TableName}_rt_metadata table or view for each rasters or tiles table 
+in a GeoPackage defined with the columns described in table 40 below.  
+
+> NOTE 1:  This table naming convention is adopted from RasterLite [B13].
+
+The data in a row record in this table refers to the raster in the r_raster_column column in the 
+{Raster|Tile TableName}table for the record with a rowed equal to the row_id_value primary key column value. 
+
+> NOTE2: In an SQLite implementation, the rowid value is always equal to the value of a single-column primary key on an integer column [B30].  Althought not stated in the SQLite documentation, testing has not revealed a case where rowed values on a table with any primry key column(s) defined are changed by a database reorganization performed by the VACUUM SQL command.
+
+The `compr_qual_factor` column value indicates the image quality of that raster on a scale from 1 
+(lowest) to 100 (highest) for rasters compressed with a lossy compression algorithm. It is always 
+100 for rasters compressed with a lossless compression algorithm, or with no compression. A value 
+of -1 indicates "unknown" as is specified as the default value.  
+
+The `georectification` column value indicates whether or not that raster is georectified to an area 
+on the earth. A value of 0 indicates that the raster is not georectified. .  A value of -1 indicates 
+"unknown" as is specified as the default value.  A value of 1 indicates that the raster is georectified 
+(but not necessarily orthorectified). A value of 2 indicates that the raster is orthorectified (which 
+implies georectified) to accurately align with real world coordinates, have constant scale, and support 
+direct measurement of distances, angles, and areas
+
+For a georectified raster (i.e. georectification is 1 or 2), the `min_x`, `min_y`, `max_x` and `max_y` column 
+values define a bounding box that SHALL be the spatial extent of the area on the earth represented by the raster.  
+
+> NOTE 3:  This data structure can be implemented as a table in the absence of geometry data types or spatial 
+indexes. When implemented as a view, the min/max x/y columns could reference ordinates of a bounding box geometry 
+in an underlying table when geometry data types are available, e.g. in RasterLite [B13].
+
+**Table 40** - `{RasterLayerName}_rt_metadata`
++ Table or View Name: `{RasterLayerName}_rt_metadata`
+|Column Name | Column Type | Column Description |  Null | Default | Key |
+|------------|-------------|--------------------|------|---------|-----|
+| row_id_value |	integer |	rowid in rasters or tiles table |	no |	|	PK | 
+| r_raster_column |	text |	“tile_data” for a tiles table, or the name of a raster column for a rasters table	| no |	raster_column_name |	PK |
+| compr_qual_factor |	integer |	Compression quality factor: 1 (lowest) to 100 (highest) for lossy compression; always 100 for lossless or no compression, -1 if unknown. | no	| -1 | |
+| georectification |	integer |	Is the raster georectified; -1=unknown, 0=not georectified, 1=georectified, 2=orthorectified	| no |	-1 | |
+| min_x	| double |	In raster_columns.srid	| no |	-180.0	| |
+| min_y	| double	| In raster_columns.srid	| no	| -90.0	| |
+| max_x	| double	| In raster_columns.srid	| no	| 180.0	| |
+| max_y	| double	| In raster_columns.srid	| no	| 90.0	| |
+
+**Table** 41 - EXAMPLE: {RasterLayerName}_rt_metadata Table Definition SQL
+
+```SQL
+CREATE TABLE sample_matrix_tiles_rt_metadata (
+row_id_value INTEGER NOT NULL,
+r_raster_column TEXT NOT NULL DEFAULT 'tile_data',
+compr_qual_factor INTEGER NOT NULL DEFAULT -1,
+georectification INTEGER NOT NULL DEFAULT -1,
+min_x DOUBLE NOT NULL DEFAULT -180.0,
+min_y DOUBLE NOT NULL DEFAULT -90.0,
+max_x DOUBLE NOT NULL DEFAULT 180.0,
+max_y DOUBLE NOT NULL DEFAULT 90.0,
+CONSTRAINT pk_smt_rm PRIMARY KEY (row_id_value, r_raster_column)
+ON CONFLICT ROLLBACK
+)
+```
+
+**Table 42** - EXAMPLE: {RasterLayerName}_rt_metadata Trigger Definition SQL
+
+```SQL
+SELECT add_rt_metadata_triggers('sample_rasters')
+/* creates the following triggers */
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_r_raster_column_insert'
+BEFORE INSERT ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'insert on table ''sample_rasters_rt_metadata'' violates constraint: r_raster_column must be specified for table sample_rasters in table raster_columns')
+WHERE (NOT (NEW.r_raster_column IN (SELECT DISTINCT r_raster_column FROM raster_columns WHERE r_table_name = 'sample_rasters')));
+END
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_r_raster_column_update'
+BEFORE UPDATE OF r_raster_column ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'insert on table ''sample_rasters_rt_metadata'' violates constraint: r_raster_column must be specified for table sample_rasters in table raster_columns')
+WHERE (NOT (NEW.r_raster_column IN (SELECT DISTINCT r_raster_column FROM raster_columns WHERE r_table_name = 'sample_rasters')));
+END
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_georectification_insert'
+BEFORE INSERT ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'insert on table ''sample_rasters_rt_metadata'' violates constraint: georectification must be -1, 0, 1 or 2')
+WHERE (NOT (NEW.georectification IN (-1, 0, 1, 2)));
+END
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_georectification_update'
+BEFORE UPDATE OF georectification ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'update on table ''sample_rasters_rt_metadata'' violates constraint: georectification must be -1, 0, 1 or 2')
+WHERE (NOT (NEW.georectification IN (-1, 0, 1, 2)));
+END
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_compr_qual_factor_insert' 
+BEFORE INSERT ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'insert on table ''sample_rasters_rt_metadata'' violates constraint: compr_qual_factor < -1, must -1 or be between 1 and 100')
+WHERE NEW.compr_qual_factor < -1;
+SELECT RAISE(ROLLBACK, 'insert on table ''sample_rasters_rt_metadata'' violates constraint: compr_qual_factor = 0, must -1 or be between 1 and 100')
+WHERE NEW.compr_qual_factor = 0;
+SELECT RAISE(ROLLBACK, 'insert on table ''sample_rasters_rt_metadata'' violates constraint: compr_qual_factor > 100, must be -1 or between 1 and 100')
+WHERE NEW.compr_qual_factor > 100;
+END
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_compr_qual_factor_update' 
+BEFORE UPDATE OF compr_qual_factor ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'update on table ''sample_rasters_rt_metadata'' violates constraint: compr_qual_factor < -1, must be -1 or between 1 and 100')
+WHERE NEW.compr_qual_factor < -1;
+SELECT RAISE(ROLLBACK, 'update on table ''sample_rasters_rt_metadata'' violates constraint: compr_qual_factor = 0, must be -1 or between 1 and 100')
+WHERE NEW.compr_qual_factor = 0;
+SELECT RAISE(ROLLBACK, 'update on table ''sample_rasters_rt_metadata'' violates constraint: compr_qual_factor > 100, must be -1 or between 1 and 100')
+WHERE NEW.compr_qual_factor > 100;
+END
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_row_id_value_insert' 
+BEFORE INSERT ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'insert on table sample_rasters_rt_metadata violates constraint: row_id_value must exist in sample_rasters table')
+WHERE NOT EXISTS (SELECT rowid
+   FROM 'sample_rasters' WHERE rowid = NEW.row_id_value);
+END
+
+CREATE TRIGGER 'sample_rasters_rt_metadata_row_id_value_update' 
+BEFORE UPDATE OF 'row_id_value' ON 'sample_rasters_rt_metadata'
+FOR EACH ROW BEGIN
+SELECT RAISE(ROLLBACK, 'update on table sample_rasters_rt_metadata violates constraint: row_id_value must exist in sample_rasters table')
+WHERE NOT EXISTS (SELECT rowid
+   FROM 'sample_rasters' WHERE rowid = NEW.row_id_value);
+END
+```
+
+**Table 43** - EXAMPLE: {RasterLayerName}_rt_metadata Insert Statement
+
+```SQL
+INSERT INTO sample_matrix_tiles_rt_metadata VALUES (
+1,
+"tile_data",
+1,
+-77.0,
+38.0,
+-75.0,
+40.0,
+100,
+)
+```
+
+Requirement: Core
+http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table
+REQ 67.	There SHALL be a {Raster|Tile TableName}{_rt_metadata} table as specified in clause 10.7 with the columns described in table 40 and exemplified by table 41 for every tile and raster table in a GeoPackage.
+
+Requirement: Core
+http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table/data
+REQ 68.	Each {Raster|Tile TableName}{_rt_metadata} table specified in clause 10.7 for every tile and raster table in a GeoPackage SHALL have a row record describing each raster and tile in a GeoPackage.
+
+Requirement: Extension
+http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/rt_metadata_table/triggers
+REQ 69.	All raster table raster columns in a GeoPackage SHALL have triggers defined by executing the add_rt_metadata_triggers() routine specified in clause 10.8, as exemplified by table 42.
+
