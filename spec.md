@@ -21,7 +21,7 @@ The georectification column value indicates the minimum level of georectificatio
 
 The srid SHALL have a value contained in the `spatial_ref_sys` table defined in clause 9.2 above.
 
-All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles. GeoPackages may support image/x-webp and image/tiff formats for rasters and tiles. GeoPackage support for the image/tiff format [31] is limted to GeoTIFF [32] images that meet the requirements of the NGA Implementation Profile [33] for coordinate transformation case 3 where the position and scale of thedata is known exactly, and no rotation of the image is required.
+All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles. GeoPackages may support image/x-webp and image/tiff formats for rasters and tiles. GeoPackage support for the image/tiff format [31] (#31) is limited to GeoTIFF [32] (#32) images that meet the requirements of the NGA Implementation Profile [33] (#33) for coordinate transformation case 3 where the position and scale of thedata is known exactly, and no rotation of the image is required.
 
 > NOTE 1:  A feature type may be defined to have 0..n raster attributes, so the corresponding feature table may contain from 0..n raster columns.
 
@@ -142,17 +142,17 @@ INSERT INTO raster_columns VALUES (
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/core  |
-| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24] (#24) [25] (#25) [26]and image/png [27][28] as defined in clause 10.2. |
+| REQ 40 | A GeoPackage SHALL support storage and use of MIME types image/jpeg [24] (#24) [25] (#25) [26] (#26) and image/png [27] (#27) [28] (#28) as defined in clause 10.2. |
 
 | **Requirement: Extension** | |  
 |-------|------|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/webp |
-| REQ 41 | A GeoPackage SHALL support storage and use of MIME type image/x-webp [29] as defined in clause 10.2 |
+| REQ 41 | A GeoPackage SHALL support storage and use of MIME type image/x-webp [29] (#29) as defined in clause 10.2 |
 
 | **Requirement: Extension** | |  
 |-------|------|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/mime_types/extension/ geotiff |
-| REQ 42 | A GeoPackage SHALL support storage and use of MIME type image/tiff [30] for GeoTIFF images [32][33] as defined in clause 10.2 |
+| REQ 42 | A GeoPackage SHALL support storage and use of MIME type image/tiff [30] (#30) for GeoTIFF images [32] (#31) [33] (#33) as defined in clause 10.2 |
 
 ### 10.3	Tile Table Metadata
 A GeoPackage SHALL contain a `tile_table_metadata` table or view as defined in this clause. The `tile_table_metadata` table or view SHALL contain one row record describing each tile table in a GeoPackage.  The `t_table_name` column value SHALL be a row value of `r_table_name` in the `raster_columns` table, enforced by a trigger.  The `is_times_two_zoom` column value SHALL be 1 if zoom level pixel sizes vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
@@ -743,8 +743,24 @@ REQ 69.	All raster table raster columns in a GeoPackage SHALL have triggers defi
 
 ####Notes
 
-######[24]  
+######[24]
 JPEG File Interchange Format Version 1.02, September 1, 1992   http://www.jpeg.org/public/jfif.pdf 
-
-######[25] IETF RFC 2046 Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types http://www.ietf.org/rfc/rfc2046.txt 
+######[25]
+IETF RFC 2046 Multipurpose Internet Mail Extensions (MIME) Part Two: Media Types http://www.ietf.org/rfc/rfc2046.txt 
+######[26]  
+Portable Network Graphics http://libpng.org/pub/png/
+######[27]
+MIME Media Types http://www.iana.org/assignments/media-types/index.html 
+######[28]
+WebP  https://developers.google.com/speed/webp/
+######[29]  
+TIFF – Tagged Image File Format, Revision 6.0, Adobe Systems Inc., June 1992   	http://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf 
+######[30]  
+GeoTIFF Format Specification, Revision 1.0, 10 November 1995; version 1.8.2  http://www.remotesensing.org/geotiff/spec/geotiffhome.html 
+######[31]  
+NGA Standardization Document: Implementation Profile for Tagged Image File Format (TIFF) and Geographic Tagged Image File Format (GeoTIFF), Version 2.0,  2001-10-26  https://nsgreg.nga.mil/doc/view?i=2224  
+######[32]  
+IETF RFC 3986 Uniform Resource Identifier (URI): Generic Syntax http://www.ietf.org/rfc/rfc3986.txt 
+######[33]  
+OGC08-131r3 The Specification Model — A Standard for Modular specifications  https://portal.opengeospatial.org/files/?artifact_id=34762 
 
