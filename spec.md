@@ -79,6 +79,23 @@ table may contain from 0..n raster columns.
 | `georectification` |	integer |	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified |	no | -1 | |
 | `srid` |	integer |	Spatial Reference System ID: spatial_ref_sys.srid |	no | | FK |
 
+**SQL 1** - `raster_columns` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  raster_columns
+  (
+    r_table_name TEXT NOT NULL,
+    r_raster_column TEXT NOT NULL,
+    compr_qual_factor INTEGER NOT NULL DEFAULT -1,
+    georectification INTEGER NOT NULL DEFAULT -1,
+    srid INTEGER NOT NULL DEFAULT 0,
+    CONSTRAINT pk_rc PRIMARY KEY (r_table_name, r_raster_column) ON CONFLICT ROLLBACK,
+    CONSTRAINT fk_rc_r_srid FOREIGN KEY (srid) REFERENCES spatial_ref_sys(srid),
+    CONSTRAINT fk_rc_r_gc FOREIGN KEY (r_table_name) REFERENCES geopackage_contents(table_name)
+  )
+```
+
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/raster_columns_table |
@@ -125,6 +142,17 @@ Table or View Name: `tile_table_metadata`
 |-------------|-------------|--------------------|------|-------------|
 | t_table_name | text	| {RasterLayerName}{_tiles}	| no | PK |
 | is_times_two_zoom	| integer	| Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	| no | 1 |
+
+**SQL 2** - `tile_table_metadata` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  tile_table_metadata
+  (
+    t_table_name TEXT NOT NULL PRIMARY KEY,
+    is_times_two_zoom INTEGER NOT NULL DEFAULT 1
+  )
+```
 
 | **Requirement: Core** | |
 |------------------------|----|
@@ -208,6 +236,26 @@ non-image area of matrix edge tiles must be padded with no-data values, preferab
 | `pixel_x_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1 | |
 | `pixel_y_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1	| |
 
+**SQL 3** - `tile_matrix_metadata` Table Creation SQL
+
+```SQL
+CREATE TABLE
+  tile_matrix_metadata
+  (
+    t_table_name TEXT NOT NULL,
+    zoom_level INTEGER NOT NULL,
+    matrix_width INTEGER NOT NULL,
+    matrix_height INTEGER NOT NULL,
+    tile_width INTEGER NOT NULL,
+    tile_height INTEGER NOT NULL,
+    pixel_x_size DOUBLE NOT NULL,
+    pixel_y_size DOUBLE NOT NULL,
+    CONSTRAINT pk_ttm PRIMARY KEY (t_table_name, zoom_level) ON CONFLICT ROLLBACK,
+    CONSTRAINT fk_ttm_t_table_name FOREIGN KEY (t_table_name) REFERENCES tile_table_metadata(t_table_name
+  )
+```
+
+
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tile_matrix_metadata/table |
@@ -277,6 +325,21 @@ value to ensure that
 | `tile_row` |	integer	| 0 to `tile_matrix_metadata` `matrix_height` - 1 |	no	| 0 |	UK |
 | `tile_data` |	BLOB	| Of an image MIME type specified in clause 10.2 | no	| | |	
 
+**SQL 4** - EXAMPLE: `sample_matrix_tiles` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  sample_matrix_tiles
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    zoom_level INTEGER NOT NULL DEFAULT 0,
+    tile_column INTEGER NOT NULL DEFAULT 0,
+    tile_row INTEGER NOT NULL DEFAULT 0,
+    tile_data BLOB NOT NULL DEFAULT (zeroblob(4)),
+    UNIQUE (zoom_level, tile_column, tile_row)
+  )
+```
+
 | **Requirement: Core** | |
 |------------------------|----|
 | | http://www.opengis.net/spec/GPKG/1.0/req/rasters_tiles/tiles_table/table |
@@ -314,6 +377,23 @@ NOTE1: An integer column primary key is recommended for best performance.
 | `elevation`  | BLOB | Elevation coverage; of type raster_format_metadata.mime_type | no | | |
 | `description` | text | Description of the area | no | 'no desc' | |
 | `photo` | BLOB | Photograph of the area; of type_raster_format_metadata.mime_type | no | |
+
+**SQL 5** - EXAMPLE: `sample_rasters` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  sample_rasters
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    elevation BLOB NOT NULL,
+    description TEXT NOT NULL DEFAULT 'no_desc',
+    photo BLOB NOT NULL
+  )
+```
+
+> NOTE 5.1: The `sample_rasters` table created in SQL 5 above could be extended with one or more 
+geometry columns by calls to the `addGeometryColumn()` routine specified in clause 9.4 to have 
+both raster and geometry columns like the `sample_feature_table` shown in Figure3: GeoPackageTables above in clause 7.
 
 | **Requirement: Core** | |
 |------------------------|----|
@@ -377,6 +457,24 @@ in an underlying table when geometry data types are available, e.g. in [RasterLi
 | min_y	| double	| In raster_columns.srid	| no	| -90.0	| |
 | max_x	| double	| In raster_columns.srid	| no	| 180.0	| |
 | max_y	| double	| In raster_columns.srid	| no	| 90.0	| |
+
+**SQL 6** - EXAMPLE: `{RasterLayerName}_rt_metadata` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  sample_matrix_tiles_rt_metadata
+  (
+    row_id_value INTEGER NOT NULL,
+    r_raster_column TEXT NOT NULL DEFAULT 'tile_data',
+    compr_qual_factor INTEGER NOT NULL DEFAULT -1,
+    georectification INTEGER NOT NULL DEFAULT -1,
+    min_x DOUBLE NOT NULL DEFAULT -180.0,
+    min_y DOUBLE NOT NULL DEFAULT -90.0,
+    max_x DOUBLE NOT NULL DEFAULT 180.0,
+    max_y DOUBLE NOT NULL DEFAULT 90.0,
+    CONSTRAINT pk_smt_rm PRIMARY KEY (row_id_value, r_raster_column) ON CONFLICT ROLLBACK
+  )
+```
 
 | **Requirement: Core** | |
 |------------------------|----|
