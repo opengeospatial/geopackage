@@ -13,25 +13,9 @@ in the specification to live, so they don't clutter it up.
 
 ### 1.0 raster_columns SQL
 
-**Table 1.1** - `raster_columns` Table Definition SQL
+The `raster_columns` table or view in a GeoPackage SHALL have the triggers defined in *Table 1.1* below.
 
-```SQL
-CREATE TABLE raster_columns (
-r_table_name TEXT NOT NULL,
-r_raster_column TEXT NOT NULL,
-compr_qual_factor INTEGER NOT NULL DEFAULT -1,
-georectification INTEGER NOT NULL DEFAULT -1,
-srid INTEGER NOT NULL DEFAULT 0,
-CONSTRAINT pk_rc PRIMARY KEY (r_table_name, r_raster_column)
-ON CONFLICT ROLLBACK,
-CONSTRAINT fk_rc_r_srid FOREIGN KEY (srid)
-REFERENCES spatial_ref_sys(srid),
-CONSTRAINT fk_rc_r_gc FOREIGN KEY (r_table_name) REFERENCES geopackage_contents(table_name))
-```
-
-The `raster_columns` table or view in a GeoPackage SHALL have the triggers defined in *Table 1.2* below.
-
-**Table 1.2** - `raster_columns` Trigger Definition SQL
+**Table 1.1** - `raster_columns` Trigger Definition SQL
 
 ```SQL
 CREATE TRIGGER 'raster_columns_r_raster_column_insert' 
@@ -93,7 +77,7 @@ WHERE NEW.compr_qual_factor > 100;
 END
 ```
 
-**Table 1.3** - EXAMPLE: `raster_columns` INSERT Statement
+**Table 1.2** - EXAMPLE: `raster_columns` INSERT Statement
 
 ```SQL
 INSERT INTO raster_columns VALUES (
@@ -107,16 +91,7 @@ INSERT INTO raster_columns VALUES (
 -
 ### 2.0 tile_table_metadata SQL
 
-**Table 2.1** - `tile_table_metadata` Table Definition SQL
-
-```SQL
-CREATE TABLE tile_table_metadata (
-  t_table_name TEXT NOT NULL PRIMARY KEY,
-  is_times_two_zoom INTEGER NOT NULL DEFAULT 1
-)
-```
-
-**Table 2.2** - `tile_table_metadata` Trigger Definition SQL
+**Table 2.1** - `tile_table_metadata` Trigger Definition SQL
 
 ```SQL
 CREATE TRIGGER 'tile_table_metadata_t_table_name_insert' 
@@ -150,7 +125,7 @@ WHERE NOT(NEW.is_times_two_zoom IN (0,1));
 END
 ```
 
-**Table 2.3** - EXAMPLE: `tile_table_metadata` Insert Statement
+**Table 2.2** - EXAMPLE: `tile_table_metadata` Insert Statement
 
 ```SQL
 INSERT INTO tile_table_metadata VALUES (
@@ -161,23 +136,7 @@ INSERT INTO tile_table_metadata VALUES (
 -
 ### 3.0 tile_matrix_metadata SQL
 
-**Table 3.1** - `tile_matrix_metadata` Table Creation SQL
-
-```SQL
-CREATE TABLE tile_matrix_metadata (
-t_table_name TEXT NOT NULL,
-zoom_level INTEGER NOT NULL,
-matrix_width INTEGER NOT NULL,
-matrix_height INTEGER NOT NULL,
-tile_width INTEGER NOT NULL,
-tile_height INTEGER NOT NULL,
-pixel_x_size DOUBLE NOT NULL,
-pixel_y_size DOUBLE NOT NULL,
-CONSTRAINT pk_ttm PRIMARY KEY (t_table_name, zoom_level) ON CONFLICT ROLLBACK,
-CONSTRAINT fk_ttm_t_table_name FOREIGN KEY (t_table_name) REFERENCES tile_table_metadata(t_table_name))
-```
-
-**Table 3.2** - `tile_matrix_metadata` Trigger Definition SQL
+**Table 3.1** - `tile_matrix_metadata` Trigger Definition SQL
 
 ```SQL
 CREATE TRIGGER 'tile_matrix_metadata_zoom_level_insert'
@@ -251,7 +210,7 @@ WHERE NOT (NEW.pixel_y_size > 0);
 END
 ```
 
-**Table 3.3** - EXAMPLE: `tile_matrix_metadata` Insert Statement
+**Table 3.2** - EXAMPLE: `tile_matrix_metadata` Insert Statement
 
 ```SQL
 INSERT INTO tile_matrix_metadata VALUES (
@@ -268,21 +227,7 @@ INSERT INTO tile_matrix_metadata VALUES (
 -
 ### 4.0 sample_matrix_tiles SQL
 
-**Table 4.1** - EXAMPLE: `sample_matrix_tiles` Table Definition SQL
-
-```SQL
-CREATE TABLE sample_matrix_tiles (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-zoom_level INTEGER NOT NULL DEFAULT 0,
-tile_column INTEGER NOT NULL DEFAULT 0,
-tile_row INTEGER NOT NULL DEFAULT 0,
-tile_data BLOB NOT NULL DEFAULT (zeroblob(4)),
-UNIQUE (zoom_level, tile_column, tile_row))
-```
-
-> NOTE 4.1:  zeroblob(n) is an SQLite function.
-
-**Table 4.2** – EXAMPLE: `sample_matrix_tiles` Trigger Definition SQL
+**Table 4.1** – EXAMPLE: `sample_matrix_tiles` Trigger Definition SQL
 
 ```SQL
 SELECT add_tile_triggers(‘sample_matrix_tiles’)
@@ -339,7 +284,7 @@ WHERE NOT (NEW.tile_row < (SELECT matrix_height FROM tile_matrix_metadata WHERE 
 END
 ```
  
-**Table 4.3** - EXAMPLE:  `sample_matrix_tiles` Insert Statement
+**Table 4.2** - EXAMPLE:  `sample_matrix_tiles` Insert Statement
 
 ```SQL
 INSERT INTO sample_matrix_tiles VALUES (
@@ -352,21 +297,7 @@ INSERT INTO sample_matrix_tiles VALUES (
 -
 ### 5.0 sample_rasters SQL
 
-**Table 5.1** - EXAMPLE: `sample_rasters` Table Definition SQL
-
-```SQL
-CREATE TABLE sample_rasters (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-elevation BLOB NOT NULL,
-description TEXT NOT NULL DEFAULT 'no_desc',
-photo BLOB NOT NULL)
-```
-
-> NOTE 5.1: The `sample_rasters` table created in Table 40 above could be extended with one or more 
-geometry columns by calls to the `addGeometryColumn()` routine specified in clause 9.4 to have 
-both raster and geometry columns like the `sample_feature_table` shown in Figure3: GeoPackageTables above in clause 7.
-
-**Table 5.2** - EXAMPLE: `sample_rasters` Insert Statement
+**Table 5.1** - EXAMPLE: `sample_rasters` Insert Statement
 
 ```SQL
 INSERT INTO sample_rasters VALUES (
@@ -379,24 +310,7 @@ INSERT INTO sample_rasters VALUES (
 -
 ### 6.0 {RasterLayerName}_rt_metadata SQL
 
-**Table 6.1** - EXAMPLE: `{RasterLayerName}_rt_metadata` Table Definition SQL
-
-```SQL
-CREATE TABLE sample_matrix_tiles_rt_metadata (
-row_id_value INTEGER NOT NULL,
-r_raster_column TEXT NOT NULL DEFAULT 'tile_data',
-compr_qual_factor INTEGER NOT NULL DEFAULT -1,
-georectification INTEGER NOT NULL DEFAULT -1,
-min_x DOUBLE NOT NULL DEFAULT -180.0,
-min_y DOUBLE NOT NULL DEFAULT -90.0,
-max_x DOUBLE NOT NULL DEFAULT 180.0,
-max_y DOUBLE NOT NULL DEFAULT 90.0,
-CONSTRAINT pk_smt_rm PRIMARY KEY (row_id_value, r_raster_column)
-ON CONFLICT ROLLBACK
-)
-```
-
-**Table 6.2** - EXAMPLE: `{RasterLayerName}_rt_metadata` Trigger Definition SQL
+**Table 6.1** - EXAMPLE: `{RasterLayerName}_rt_metadata` Trigger Definition SQL
 
 ```SQL
 SELECT add_rt_metadata_triggers('sample_rasters')
