@@ -79,7 +79,7 @@ table may contain from 0..n raster columns.
 | `georectification` |	integer |	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified |	no | -1 | |
 | `srid` |	integer |	Spatial Reference System ID: spatial_ref_sys.srid |	no | | FK |
 
-**SQL 1** - `raster_columns` Table Definition SQL
+**Table 1** - `raster_columns` Table Definition SQL
 
 ```SQL
 CREATE TABLE
@@ -143,7 +143,7 @@ Table or View Name: `tile_table_metadata`
 | t_table_name | text	| {RasterLayerName}{_tiles}	| no | PK |
 | is_times_two_zoom	| integer	| Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	| no | 1 |
 
-**SQL 2** - `tile_table_metadata` Table Definition SQL
+**Table 2** - `tile_table_metadata` Table Definition SQL
 
 ```SQL
 CREATE TABLE
@@ -236,7 +236,7 @@ non-image area of matrix edge tiles must be padded with no-data values, preferab
 | `pixel_x_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1 | |
 | `pixel_y_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1	| |
 
-**SQL 3** - `tile_matrix_metadata` Table Creation SQL
+**Table 3** - `tile_matrix_metadata` Table Creation SQL
 
 ```SQL
 CREATE TABLE
@@ -325,7 +325,7 @@ value to ensure that
 | `tile_row` |	integer	| 0 to `tile_matrix_metadata` `matrix_height` - 1 |	no	| 0 |	UK |
 | `tile_data` |	BLOB	| Of an image MIME type specified in clause 10.2 | no	| | |	
 
-**SQL 4** - EXAMPLE: `sample_matrix_tiles` Table Definition SQL
+**Table 4** - EXAMPLE: `sample_matrix_tiles` Table Definition SQL
 
 ```SQL
 CREATE TABLE
@@ -378,7 +378,7 @@ NOTE1: An integer column primary key is recommended for best performance.
 | `description` | text | Description of the area | no | 'no desc' | |
 | `photo` | BLOB | Photograph of the area; of type_raster_format_metadata.mime_type | no | |
 
-**SQL 5** - EXAMPLE: `sample_rasters` Table Definition SQL
+**Table 5** - EXAMPLE: `sample_rasters` Table Definition SQL
 
 ```SQL
 CREATE TABLE
@@ -458,7 +458,7 @@ in an underlying table when geometry data types are available, e.g. in [RasterLi
 | max_x	| double	| In raster_columns.srid	| no	| 180.0	| |
 | max_y	| double	| In raster_columns.srid	| no	| 90.0	| |
 
-**SQL 6** - EXAMPLE: `{RasterLayerName}_rt_metadata` Table Definition SQL
+**Table 6** - EXAMPLE: `{RasterLayerName}_rt_metadata` Table Definition SQL
 
 ```SQL
 CREATE TABLE
