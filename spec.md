@@ -30,11 +30,7 @@ a “_rt_metadata” suffix, e.g. {RasterTableName}{_rt_metadata.
 The tables or views that implement the GeoPackage Raster / Tile Store data / metadata model are described 
 and discussed individually in the following subsections.
 
-> NOTE: Images of multiple MIME types may be stored in given table.  For example, in a tiles table, image/png 
-format tiles without compression could be used for transparency where there is no data on the tile edges, and 
-image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all 
-pixels.  Images of multiple bit depths of the same MIME type may also be stored in a given table, for example 
-image/png tiles in both 8 and 24 bit depths.
+[[Note 1]] (#note-1)
 
 ### 10.2	Raster Columns
 A GeoPackage SHALL contain a `raster_columns` table or view as defined in this clause.  The `raster_columns` 
@@ -62,7 +58,7 @@ format [[31]] (#31) is limited to GeoTIFF [[32]] (#32) images that meet the requ
 Implementation Profile [[33]] (#33) for coordinate transformation case 3 where the position and scale of 
 the data is known exactly, and no rotation of the image is required.
 
-[[Note 1]] (#note-1) and [[Note 2]] (#note-2)
+[[Note 2]] (#note-2) and [[Note 3]] (#note-3)
 
 **Table 21** - `raster_columns` 
 
@@ -100,7 +96,7 @@ GeoPackage.  The `t_table_name` column value SHALL be a row value of `r_table_na
 table, enforced by a trigger.  The `is_times_two_zoom` column value SHALL be 1 if zoom level pixel sizes 
 vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
 
-[[Note 3]] (#note-3) and [[Note 4]] (#note-4)
+[[Note 4]] (#note-4) and [[Note 5]] (#note-5)
 
 **Table 25** - `tile_table_metadata`
 Table or View Name: `tile_table_metadata`
@@ -138,7 +134,7 @@ When the value of the `is_times_two_zoom` column in the `tile_table_metadata` re
 table is 1 (true) then the pixel sizes for adjacent zoom levels in the `tile_matrix_metadata` table 
 for that table SHALL only vary by powers of 2.
 
-[[Note 5]] (#note-5)  
+[[Note 6]] (#note-6)  
 
 GeoPackages SHALL follow the most frequently used conventions of a tile origin at the upper left and
 a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view, as specified by 
@@ -153,7 +149,7 @@ at a certain tile zoom level. This does not affect the spatial extent stated by 
 values in the `geopackage_contents` record for the same `t_table_name`, or the tile matrix width and 
 height at that level.
 
-[[Note 6]] (#note-6), [[Note 7]] (#note-7), [[Note 8]] (#note-8), [[Note 9]] (#note-9) and [[Note 10]] (#note-10).
+[[Note 7]] (#note-7), [[Note 8]] (#note-8), [[Note 9]] (#note-9), and [[Note 10]] (#note-10) 
 
 **Table 29** - `tile_matrix_metadata`
 + Table or View Name: `tile_matrix_metadata`
@@ -341,6 +337,7 @@ CREATE TABLE
 
 
 ####Implementation Notes
+
 
 ######[Note 1]
 
