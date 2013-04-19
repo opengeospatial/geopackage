@@ -36,7 +36,7 @@ and discussed individually in the following subsections.
 A GeoPackage SHALL contain a `raster_columns` table or view as defined in this clause.  The `raster_columns` 
 table or view SHALL contain one row record describing each raster or tile column in any table in a GeoPackage.  The `r_raster_column` in `r_table_name` SHALL be defined as a BLOB data type.  
 
-The `compr_qual_` factor column value indicates the lowest image quality of any raster or tile in the 
+The `compr_qual_factor` column value indicates the lowest image quality of any raster or tile in the 
 associated column on a scale from 1 (lowest) to 100 (highest) for rasters compressed with a lossy 
 compression algorithm. It is always 100 if all rasters or tiles are compressed with a lossless 
 compression algorithm, or are not compressed.  The value -1 indicates "unknown" and is specified as 
