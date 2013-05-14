@@ -12,8 +12,8 @@ any contributions, if accepted by the OGC Membership, shall be incorporated into
 OGC GeoPackage standards document and that all copyright and intellectual property shall be 
 vested to the OGC.
 
-## 10  Raster Tile Store
-### 10.1	Raster Tile Introduction
+## 6.3.4  Raster Tables
+### 6.3.4.1	Raster and Tiles Introduction
 There are a wide variety of commercial and open source conventions for storing, indexing,
 accessing and describing individual rasters and tiles in tile matrix pyramids. Unfortunately, 
 no applicable existing consensus, national or international specifications have standardized 
@@ -30,49 +30,34 @@ all of the stored images. Applications that store GeoPackage raster and tile dat
 presumed to have this information available, SHALL store sufficient metadata to enable its 
 intended use. 
 
-Following a convention used by [MBTiles] (https://github.com/mapbox/mbtiles-spec), the Raster
-/ Tile Store data model may be implemented directly as SQL tables in a SQLite database for 
+The GeoPackge Raster / Tile Store data model may be implemented directly as SQL tables in a SQLite database for 
 maximum performance, or as SQL views on top of tables in an existing SQLite Raster / Tile store
-for maximum adaptability and loose coupling to enable widespread implementation. A GeoPackage 
-can store multiple raster and tile pyramid data sets in different tables or views in the same 
-container. Following a convention used by [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index), 
-tables or views containing record-level metadata are named with a raster or tile table name prefix and 
-a “_rt_metadata” suffix, e.g. {RasterTableName}{_rt_metadata.  
+for maximum adaptability and loose coupling to enable widespread implementation. 
+
+[[Note 1]] (#note-1) 
 
 The tables or views that implement the GeoPackage Raster / Tile Store data / metadata model are described 
 and discussed individually in the following subsections.
 
-[[Note 1]] (#note-1)
+[[Note]] (#note)
 
-### 10.2	Raster Columns
-A GeoPackage SHALL contain a `raster_columns` table or view as defined in this clause.  The `raster_columns` 
-table or view SHALL contain one row record describing each raster or tile column in any table in a GeoPackage.  The `r_raster_column` in `r_table_name` SHALL be defined as a BLOB data type.  
+### 6.3.4.2	Raster Columns Table
 
-The `compr_qual_factor` column value indicates the lowest image quality of any raster or tile in the 
-associated column on a scale from 1 (lowest) to 100 (highest) for rasters compressed with a lossy 
-compression algorithm. It is always 100 if all rasters or tiles are compressed with a lossless 
-compression algorithm, or are not compressed.  The value -1 indicates "unknown" and is specified as 
-the default value.
+> Requirement 12   /gpkg/1.0/req/core/ raster_columns_table:
 
-The `georectification` column value indicates the minimum level of georectification to areas on the 
-earth for all rasters or tiles in the associated column are georectified. A value of -1 indicates "unknown" 
-as is specified as the default value. A value of 0 indicates that no rasters or tiles are georectified. 
-A value of 1 indicates that all rasters or tiles are georectified (but not necessarily orthorectified). 
-A value of 2 indicates that all rasters or tiles are orthorectified (which implies georectified) to 
-accurately align with real world coordinates, have constant scale, and support direct measurement of 
-distances, angles, and areas.
+> A GeoPackage SHALL contain a raster_columns table or updateable view as defined in Tables 9 
+> and xx and specified in clause 6.3.4.2
 
-The srid SHALL have a value contained in the `spatial_ref_sys` table defined in clause 9.2 above.
 
-All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles. GeoPackages may 
-support image/x-webp and image/tiff formats for rasters and tiles. GeoPackage support for the image/tiff 
-format [[31]] (#31) is limited to GeoTIFF [[32]] (#32) images that meet the requirements of the NGA 
-Implementation Profile [[33]] (#33) for coordinate transformation case 3 where the position and scale of 
-the data is known exactly, and no rotation of the image is required.
+The `raster_columns` table or view SHALL contain one row record describing each raster or tile column 
+in any table in a GeoPackage.  The `r_raster_column` in `r_table_name` SHALL be defined as a BLOB data type.  
 
-[[Note 2]] (#note-2) and [[Note 3]] (#note-3)
+All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles as defined in clause 6.2.2. GeoPackages may 
+support image/x-webp and image/tiff formats for rasters and tiles as defined in clause 7.1.1. 
 
-**Table 21** - `raster_columns` 
+[[Note 2]] (#note-2)
+
+**Table 9** - `raster_columns` 
 
  + Table or View Name: `raster_columns`
 
@@ -80,37 +65,29 @@ the data is known exactly, and no rotation of the image is required.
 | ----------- | ---------- | ------------------ | ---- | ------- | --- | 
 | `r_table_name` | text |	Name of the table containing the raster column, e.g. {FeatureTableName} OR {RasterLayerName}_tiles | no	|	| PK FK |
 | `r_raster_column` | text | Name of a column in a table that is a raster column with a BLOB data type | no | |	PK |
-| `compr_qual_factor` |	integer |	Compression quality factor: 1 (lowest) to 100 (highest) for lossy compression; always 100 for lossless or no compression, -1 if unknown. | no |	-1 | |
-| `georectification` |	integer |	Is the raster georectified; 1=unknown, 0=not georectified, 1=georectified, 2=orthorectified |	no | -1 | |
-| `srid` |	integer |	Spatial Reference System ID: spatial_ref_sys.srid |	no | | FK |
 
-**Table 1** - `raster_columns` Table Definition SQL
+See Annex B: Table Definition SQL [clause B.7] (#clause-B.7) raster_columns
 
-```SQL
-CREATE TABLE
-  raster_columns
-  (
-    r_table_name TEXT NOT NULL,
-    r_raster_column TEXT NOT NULL,
-    compr_qual_factor INTEGER NOT NULL DEFAULT -1,
-    georectification INTEGER NOT NULL DEFAULT -1,
-    srid INTEGER NOT NULL DEFAULT 0,
-    CONSTRAINT pk_rc PRIMARY KEY (r_table_name, r_raster_column) ON CONFLICT ROLLBACK,
-    CONSTRAINT fk_rc_r_srid FOREIGN KEY (srid) REFERENCES spatial_ref_sys(srid),
-    CONSTRAINT fk_rc_r_gc FOREIGN KEY (r_table_name) REFERENCES geopackage_contents(table_name)
-  )
-```
 
-### 10.3	Tile Table Metadata
-A GeoPackage SHALL contain a `tile_table_metadata` table or view as defined in this clause. The 
-`tile_table_metadata` table or view SHALL contain one row record describing each tile table in a 
+
+### 6.3.5	Tile Tables
+
+#### 6.3.5.1 Tiles Table Metadata
+
+> Requirement 13   /gpkg/1.0/req/core/ tile_table_metadata_table:
+
+> A GeoPackage SHALL contain a tile_table_metadata table as defined in tables 11 and xx and 
+> specified in clause 6.3.5.1.
+
+
+The `tile_table_metadata` table or view SHALL contain one row record describing each tile table in a 
 GeoPackage.  The `t_table_name` column value SHALL be a row value of `r_table_name` in the `raster_columns` 
 table, enforced by a trigger.  The `is_times_two_zoom` column value SHALL be 1 if zoom level pixel sizes 
 vary by powers of 2 between adjacent zoom levels in the corresponding tile table, or 0 if not.
 
 [[Note 4]] (#note-4) and [[Note 5]] (#note-5)
 
-**Table 25** - `tile_table_metadata`
+**Table 11** - `tile_table_metadata`
 Table or View Name: `tile_table_metadata`
 
 | Column Name | Column Type	| Column Description | Null	| Default	Key |
@@ -118,25 +95,20 @@ Table or View Name: `tile_table_metadata`
 | t_table_name | text	| {RasterLayerName}{_tiles}	| no | PK |
 | is_times_two_zoom	| integer	| Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	| no | 1 |
 
-**Table 2** - `tile_table_metadata` Table Definition SQL
+See Annex B: Table Definition SQL clause B.9 tile_table_metadata
 
-```SQL
-CREATE TABLE
-  tile_table_metadata
-  (
-    t_table_name TEXT NOT NULL PRIMARY KEY,
-    is_times_two_zoom INTEGER NOT NULL DEFAULT 1
-  )
-```
+### 6.3.5.2	Tile Matrix Metadata
 
-### 10.4	Tile Matrix Metadata
-A GeoPackage SHALL contain a `tile_matrix_metadata` table or view as defined in this clause.  
+> Requirement 14   /gpkg/1.0/req/core/ tile_matrix_metadata_table:
+
+> A GeoPackage SHALL contain a tile_matrix_metadata table as defined in tables 12 and xx and specified in clause 6.3.5.2.
+
+  
 The `tile_matrix_metadata` table or view SHALL contain one row record for each zoom level that 
 contains one or more tiles in each tiles table.  It may contain row records for zoom levels in 
-a tiles table that do not contain tiles. A `tile_matrix_metadata` row record SHALL be inserted 
-for a zoom level for `t_table_name` before any tiles are inserted into the corresponding tiles 
-table, so that triggers on that table specified in clause 10.5 below may reference `tile_matrix_metadata` 
-column values for that zoom level to reject invalid data. 
+a tiles table that do not contain tiles. 
+
+[[Note 3]] (#note-3)
 
 The `tile_matrix_metadata` table documents the structure of the tile matrix at each zoom level 
 in each tiles table. It allows GeoPackages to contain rectangular as well as square tiles (e.g. 
@@ -163,7 +135,7 @@ height at that level.
 
 [[Note 7]] (#note-7), [[Note 8]] (#note-8), [[Note 9]] (#note-9), and [[Note 10]] (#note-10) 
 
-**Table 29** - `tile_matrix_metadata`
+**Table 12** - `tile_matrix_metadata`
 + Table or View Name: `tile_matrix_metadata`
 
 |Column Name | Column Type | Column Description |	Null | Default | Key |
@@ -177,24 +149,8 @@ height at that level.
 | `pixel_x_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1 | |
 | `pixel_y_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1	| |
 
-**Table 3** - `tile_matrix_metadata` Table Creation SQL
+See Annex B: Table Definition SQL clause B.10 tile_matrix_metadata
 
-```SQL
-CREATE TABLE
-  tile_matrix_metadata
-  (
-    t_table_name TEXT NOT NULL,
-    zoom_level INTEGER NOT NULL,
-    matrix_width INTEGER NOT NULL,
-    matrix_height INTEGER NOT NULL,
-    tile_width INTEGER NOT NULL,
-    tile_height INTEGER NOT NULL,
-    pixel_x_size DOUBLE NOT NULL,
-    pixel_y_size DOUBLE NOT NULL,
-    CONSTRAINT pk_ttm PRIMARY KEY (t_table_name, zoom_level) ON CONFLICT ROLLBACK,
-    CONSTRAINT fk_ttm_t_table_name FOREIGN KEY (t_table_name) REFERENCES tile_table_metadata(t_table_name
-  )
-```
 
 
 
@@ -347,17 +303,74 @@ CREATE TABLE
   )
 ```
 
+###Annex B
+
+##### Clause B.7
+
+**Table 1** - `raster_columns` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  raster_columns
+  (
+    r_table_name TEXT NOT NULL,
+    r_raster_column TEXT NOT NULL,
+    compr_qual_factor INTEGER NOT NULL DEFAULT -1,
+    georectification INTEGER NOT NULL DEFAULT -1,
+    srid INTEGER NOT NULL DEFAULT 0,
+    CONSTRAINT pk_rc PRIMARY KEY (r_table_name, r_raster_column) ON CONFLICT ROLLBACK,
+    CONSTRAINT fk_rc_r_srid FOREIGN KEY (srid) REFERENCES spatial_ref_sys(srid),
+    CONSTRAINT fk_rc_r_gc FOREIGN KEY (r_table_name) REFERENCES geopackage_contents(table_name)
+  )
+```
+
+##### Clause B.9
+
+**Table 2** - `tile_table_metadata` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  tile_table_metadata
+  (
+    t_table_name TEXT NOT NULL PRIMARY KEY,
+    is_times_two_zoom INTEGER NOT NULL DEFAULT 1
+  )
+```
+###### Clause B.10
+
+**Table 3** - `tile_matrix_metadata` Table Creation SQL
+
+```SQL
+CREATE TABLE
+  tile_matrix_metadata
+  (
+    t_table_name TEXT NOT NULL,
+    zoom_level INTEGER NOT NULL,
+    matrix_width INTEGER NOT NULL,
+    matrix_height INTEGER NOT NULL,
+    tile_width INTEGER NOT NULL,
+    tile_height INTEGER NOT NULL,
+    pixel_x_size DOUBLE NOT NULL,
+    pixel_y_size DOUBLE NOT NULL,
+    CONSTRAINT pk_ttm PRIMARY KEY (t_table_name, zoom_level) ON CONFLICT ROLLBACK,
+    CONSTRAINT fk_ttm_t_table_name FOREIGN KEY (t_table_name) REFERENCES tile_table_metadata(t_table_name
+  )
+```
 
 ####Implementation Notes
 
-
-######[Note 1]
+######[Note]
 
 Images of multiple MIME types may be stored in given table.  For example, in a tiles table, image/png 
 format tiles without compression could be used for transparency where there is no data on the tile edges, and 
 image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all 
 pixels.  Images of multiple bit depths of the same MIME type may also be stored in a given table, for example 
 image/png tiles in both 8 and 24 bit depths.
+
+######[Note 1]
+
+This table or view implementation architecture follows a convention used by SF/SQL [[14]] (#14), [[15]] (#15).
+
 
 ######[Note 2]
 
@@ -366,7 +379,10 @@ table may contain from 0..n raster columns.
 
 ######[Note 3]
 
- A raster tile layer table has only one raster column named `tile_data`.
+A `tile_matrix_metadata` row record must be inserted for a zoom level for `t_table_name` before 
+any tiles are inserted into the corresponding tiles table if there are triggers on that table as 
+specified in clause 7.3.5.x below that reference `tile_matrix_metadata`  column values for that zoom 
+level to reject invalid data 
 
 ######[Note 4]
 
@@ -456,6 +472,14 @@ in an underlying table when geometry data types are available, e.g. in [RasterLi
 
 
 ####Footnotes
+
+######[14]  OGC 06-104r4 OpenGIS® Implementation Standard for Geographic information - Simple feature 
+access - Part 2: SQL option   Version: 1.2.1 2010-08-04 http://portal.opengeospatial.org/files/?artifact_id=25354 	
+(also ISO/TC211 19125 Part 2)
+
+######[15]  OGC 99-049 OpenGIS® Simple Features Specification for SQL Revision 1.1 	May 5, 1999, Clause 2.3.8  
+http://portal.opengeospatial.org/files/?artifact_id=829 
+
 
 ######[31]  
 NGA Standardization Document: Implementation Profile for Tagged Image File Format (TIFF) and Geographic Tagged Image File Format (GeoTIFF), Version 2.0,  2001-10-26  https://nsgreg.nga.mil/doc/view?i=2224  
