@@ -43,7 +43,7 @@ and discussed individually in the following subsections.
 
 ### 6.3.4.2	Raster Columns Table
 
-> Requirement 12   /gpkg/1.0/req/core/ raster_columns_table:
+> **Requirement 12**   /gpkg/1.0/req/core/ raster_columns_table:
 
 > A GeoPackage SHALL contain a raster_columns table or updateable view as defined in Tables 9 
 > and xx and specified in clause 6.3.4.2
@@ -66,7 +66,7 @@ support image/x-webp and image/tiff formats for rasters and tiles as defined in 
 | `r_table_name` | text |	Name of the table containing the raster column, e.g. {FeatureTableName} OR {RasterLayerName}_tiles | no	|	| PK FK |
 | `r_raster_column` | text | Name of a column in a table that is a raster column with a BLOB data type | no | |	PK |
 
-See Annex B: Table Definition SQL [clause B.7] (#clause-B.7) raster_columns
+See Annex B: [Table Definition SQL clause B.7] (#clause-B7) - `raster_columns`
 
 
 
@@ -74,7 +74,7 @@ See Annex B: Table Definition SQL [clause B.7] (#clause-B.7) raster_columns
 
 #### 6.3.5.1 Tiles Table Metadata
 
-> Requirement 13   /gpkg/1.0/req/core/ tile_table_metadata_table:
+> **Requirement 13**   /gpkg/1.0/req/core/ tile_table_metadata_table:
 
 > A GeoPackage SHALL contain a tile_table_metadata table as defined in tables 11 and xx and 
 > specified in clause 6.3.5.1.
@@ -95,7 +95,7 @@ Table or View Name: `tile_table_metadata`
 | t_table_name | text	| {RasterLayerName}{_tiles}	| no | PK |
 | is_times_two_zoom	| integer	| Zoom level pixel sizes vary by powers of 2 (0=false,1=true)	| no | 1 |
 
-See Annex B: Table Definition SQL clause B.9 tile_table_metadata
+See Annex B: [Table Definition SQL clause B.9] (#clause-B9) - `tile_table_metadata`
 
 ### 6.3.5.2	Tile Matrix Metadata
 
@@ -149,22 +149,34 @@ height at that level.
 | `pixel_x_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1 | |
 | `pixel_y_size` |	double |	In `t_table_name` srid units or default meters for srid 0 (>0) |	no |	1	| |
 
-See Annex B: Table Definition SQL clause B.10 tile_matrix_metadata
+See Annex B: [Table Definition SQL clause B.10] (#clause-B10) - `tile_matrix_metadata`
 
 
 
+### 6.3.6.3	Tiles Matrix Data Tables
 
-### 10.5	Tiles Table
+> **Requirement 20**   /gpkg/1.0/req/core/tiles_table
+
+> All tile matrix sets in a GeoPackage SHALL be contained in tiles tables as defined in clause 6.3.6.3 and table 15
+and exemplified by table xx.
+
+
 Tiles in a tile matrix set with one or more zoom levels SHALL be stored in a GeoPackage in a tiles 
 table or view with a unique name for every different tile matrix set in the GeoPackage.  Each tiles 
-table or view SHALL be defined with the columns described in table 35 below.  Each tiles table or 
+table or view SHALL be defined with the columns described in table 15 below.  Each tiles table or 
 view SHALL contain tile matrices at one or more zoom levels of different spatial resolution (map scale).
-All tiles at a particular zoom level must have the same `pixel_x_size` and `pixel_y_size` values 
+All tiles at a particular zoom level SHALL have the same `pixel_x_size` and `pixel_y_size` values 
 specified in the `tile_matrix_metadata` row record for that tiles table and zoom level.  
 
 When the value of the `is_times_two_zoom` column in the `tile_table_metadata` record for a tiles 
 table row is 1 (true) then the pixel sizes for adjacent zoom levels in the tiles table SHALL only 
 vary by powers of 2.
+
+> **Requirement 20**   /gpkg/1.0/req/core/tiles_table
+
+> All tile matrix sets in a GeoPackage SHALL be contained in tiles tables as defined in clause 6.3.6.3 
+and table 15 and exemplified by table xx.
+
 
 [[Note 11]] (#note-11) and [[Note 12]] (#note-12)
 
@@ -178,7 +190,7 @@ value to ensure that
 
 3.	The `tile_row value is between 0 and the `matrix_width` specified for the `zoom_level` in the `tile_matrix_metadata` table
 
-**Table 33** – tiles table
+**Table 15** – tiles table
 + Table or View Name:   {TilesTableName} tiles table
 
 |Column Name | Column Type | Column Description |  Null | Default | Key |
@@ -189,119 +201,8 @@ value to ensure that
 | `tile_row` |	integer	| 0 to `tile_matrix_metadata` `matrix_height` - 1 |	no	| 0 |	UK |
 | `tile_data` |	BLOB	| Of an image MIME type specified in clause 10.2 | no	| | |	
 
-**Table 4** - EXAMPLE: `sample_matrix_tiles` Table Definition SQL
+See Annex B: [Table Definition SQL clause B.13] (#clause-B13) - `sample_matrix_tiles`
 
-```SQL
-CREATE TABLE
-  sample_matrix_tiles
-  (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    zoom_level INTEGER NOT NULL DEFAULT 0,
-    tile_column INTEGER NOT NULL DEFAULT 0,
-    tile_row INTEGER NOT NULL DEFAULT 0,
-    tile_data BLOB NOT NULL DEFAULT (zeroblob(4)),
-    UNIQUE (zoom_level, tile_column, tile_row)
-  )
-```
-
-### 10.6 Raster Tables
-
-Raster tables have raster columns defined as BLOB data types that contain rasters that are not part
-of tile matrix sets.  Every table in a GeoPackage that is not a tiles tables as as described in 
-clause 9.5 and that includes one or more raster columns is a raster table.  Raster tables are also 
-feature tables as specified in clause 8.4 above that may or may not have geometry columns in addition 
-to raster columns.
-
-Every raster table in a GeoPackage shall have a primary key defined on one or more columns so that row
-level metadata records may be linked to the rasters in it by rowid as described in clauses 10.7 and 11.3 below.
-
-[[Note 13]] (#note-13)
-
-**Table 39** - EXAMPLE: `sample_rasters` Table or View
-+ Table or View Name: {TilesTableName} `sample_rasters`
-
-|Column Name | Column Type | Column Description |  Null | Default | Key |
-|------------|-------------|--------------------|------|---------|-----|
-| `id` | integer	 | Autoincrement primary key |	no |	|	PK |
-| `elevation`  | BLOB | Elevation coverage; of type raster_format_metadata.mime_type | no | | |
-| `description` | text | Description of the area | no | 'no desc' | |
-| `photo` | BLOB | Photograph of the area; of type_raster_format_metadata.mime_type | no | |
-
-**Table 5** - EXAMPLE: `sample_rasters` Table Definition SQL
-
-```SQL
-CREATE TABLE
-  sample_rasters
-  (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    elevation BLOB NOT NULL,
-    description TEXT NOT NULL DEFAULT 'no_desc',
-    photo BLOB NOT NULL
-  )
-```
-
-[[Note 14]] (#note-14)
-
-###10.7	Rasters or Tiles Table Metadata
-
-There SHALL be a {Raster|Tile TableName}_rt_metadata table or view for each rasters or tiles table 
-in a GeoPackage defined with the columns described in table 40 below.  
-
-[[Note 15]] (#note-15)
-
-The data in a row record in this table refers to the raster in the `r_raster_column` column in the 
-{Raster|Tile TableName}table for the record with a rowed equal to the `row_id_value` primary key column value. 
-
-[[Note 16]] (#note-16)
-
-The `compr_qual_factor` column value indicates the image quality of that raster on a scale from 1 
-(lowest) to 100 (highest) for rasters compressed with a lossy compression algorithm. It is always 
-100 for rasters compressed with a lossless compression algorithm, or with no compression. A value 
-of -1 indicates "unknown" as is specified as the default value.  
-
-The `georectification` column value indicates whether or not that raster is georectified to an area 
-on the earth. A value of 0 indicates that the raster is not georectified. .  A value of -1 indicates 
-"unknown" as is specified as the default value.  A value of 1 indicates that the raster is georectified 
-(but not necessarily orthorectified). A value of 2 indicates that the raster is orthorectified (which 
-implies georectified) to accurately align with real world coordinates, have constant scale, and support 
-direct measurement of distances, angles, and areas
-
-For a georectified raster (i.e. georectification is 1 or 2), the `min_x`, `min_y`, `max_x` and `max_y` column 
-values define a bounding box that SHALL be the spatial extent of the area on the earth represented by the raster.  
-
-[[Note 17]] (#note-17)
-
-**Table 40** - `{RasterLayerName}_rt_metadata`
-+ Table or View Name: `{RasterLayerName}_rt_metadata`
-
-|Column Name | Column Type | Column Description |  Null | Default | Key |
-|------------|-------------|--------------------|------|---------|-----|
-| row_id_value |	integer |	rowid in rasters or tiles table |	no |	|	PK | 
-| r_raster_column |	text |	“tile_data” for a tiles table, or the name of a raster column for a rasters table	| no |	raster_column_name |	PK |
-| compr_qual_factor |	integer |	Compression quality factor: 1 (lowest) to 100 (highest) for lossy compression; always 100 for lossless or no compression, -1 if unknown. | no	| -1 | |
-| georectification |	integer |	Is the raster georectified; -1=unknown, 0=not georectified, 1=georectified, 2=orthorectified	| no |	-1 | |
-| min_x	| double |	In raster_columns.srid	| no |	-180.0	| |
-| min_y	| double	| In raster_columns.srid	| no	| -90.0	| |
-| max_x	| double	| In raster_columns.srid	| no	| 180.0	| |
-| max_y	| double	| In raster_columns.srid	| no	| 90.0	| |
-
-**Table 6** - EXAMPLE: `{RasterLayerName}_rt_metadata` Table Definition SQL
-
-```SQL
-CREATE TABLE
-  sample_matrix_tiles_rt_metadata
-  (
-    row_id_value INTEGER NOT NULL,
-    r_raster_column TEXT NOT NULL DEFAULT 'tile_data',
-    compr_qual_factor INTEGER NOT NULL DEFAULT -1,
-    georectification INTEGER NOT NULL DEFAULT -1,
-    min_x DOUBLE NOT NULL DEFAULT -180.0,
-    min_y DOUBLE NOT NULL DEFAULT -90.0,
-    max_x DOUBLE NOT NULL DEFAULT 180.0,
-    max_y DOUBLE NOT NULL DEFAULT 90.0,
-    CONSTRAINT pk_smt_rm PRIMARY KEY (row_id_value, r_raster_column) ON CONFLICT ROLLBACK
-  )
-```
 
 ###Annex B
 
@@ -354,6 +255,23 @@ CREATE TABLE
     pixel_y_size DOUBLE NOT NULL,
     CONSTRAINT pk_ttm PRIMARY KEY (t_table_name, zoom_level) ON CONFLICT ROLLBACK,
     CONSTRAINT fk_ttm_t_table_name FOREIGN KEY (t_table_name) REFERENCES tile_table_metadata(t_table_name
+  )
+```
+
+##### Clause B.13
+
+**Table 4** - EXAMPLE: `sample_matrix_tiles` Table Definition SQL
+
+```SQL
+CREATE TABLE
+  sample_matrix_tiles
+  (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    zoom_level INTEGER NOT NULL DEFAULT 0,
+    tile_column INTEGER NOT NULL DEFAULT 0,
+    tile_row INTEGER NOT NULL DEFAULT 0,
+    tile_data BLOB NOT NULL DEFAULT (zeroblob(4)),
+    UNIQUE (zoom_level, tile_column, tile_row)
   )
 ```
 
