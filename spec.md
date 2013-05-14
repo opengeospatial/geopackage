@@ -12,65 +12,21 @@ any contributions, if accepted by the OGC Membership, shall be incorporated into
 OGC GeoPackage standards document and that all copyright and intellectual property shall be 
 vested to the OGC.
 
-## 6.3.4  Raster Tables
-### 6.3.4.1	Raster and Tiles Introduction
-There are a wide variety of commercial and open source conventions for storing, indexing,
-accessing and describing individual rasters and tiles in tile matrix pyramids. Unfortunately, 
-no applicable existing consensus, national or international specifications have standardized 
-practices in this domain. In addition, various image file formats have different 
-representational capabilities, and include different self-descriptive metadata.  
 
-The Raster / Tile Store data / metadata model, conventions and SQL functions described below 
-support direct use of rasters and tiles in a GeoPackage in two ways. First, they specify how 
+### 6.3.5	Tile Tables
+
+The Tile table model and conventions described below support direct use of tiles in a GeoPackage in two ways. First, they specify how 
 existing applications may create SQL Views of the data /metadata model on top of existing 
-application tables that that follow different interface conventions. Second, they include 
+application tables that follow different interface conventions. Second, they include 
 and expose enough metadata information at both the dataset and record levels to allow 
 applications that use GeoPackage data to discover its characteristics without having to parse 
-all of the stored images. Applications that store GeoPackage raster and tile data, which are 
+all of the stored images. Applications that store GeoPackage tile data, which are 
 presumed to have this information available, SHALL store sufficient metadata to enable its 
 intended use. 
 
-The GeoPackge Raster / Tile Store data model may be implemented directly as SQL tables in a SQLite database for 
-maximum performance, or as SQL views on top of tables in an existing SQLite Raster / Tile store
+The GeoPackge Tile data model may be implemented directly as SQL tables in a SQLite database for 
+maximum performance, or as SQL views on top of tables in an existing SQLite Tile store
 for maximum adaptability and loose coupling to enable widespread implementation. 
-
-[[Note 1]] (#note-1) 
-
-The tables or views that implement the GeoPackage Raster / Tile Store data / metadata model are described 
-and discussed individually in the following subsections.
-
-[[Note]] (#note)
-
-### 6.3.4.2	Raster Columns Table
-
-> **Requirement 12**   /gpkg/1.0/req/core/ raster_columns_table:
-
-> A GeoPackage SHALL contain a raster_columns table or updateable view as defined in Tables 9 
-> and xx and specified in clause 6.3.4.2
-
-
-The `raster_columns` table or view SHALL contain one row record describing each raster or tile column 
-in any table in a GeoPackage.  The `r_raster_column` in `r_table_name` SHALL be defined as a BLOB data type.  
-
-All GeoPackages SHALL support image/png and image/jpeg formats for rasters and tiles as defined in clause 6.2.2. GeoPackages may 
-support image/x-webp and image/tiff formats for rasters and tiles as defined in clause 7.1.1. 
-
-[[Note 2]] (#note-2)
-
-**Table 9** - `raster_columns` 
-
- + Table or View Name: `raster_columns`
-
-| Column Name | ColumnType | Column Description | Null | Default | Key |
-| ----------- | ---------- | ------------------ | ---- | ------- | --- | 
-| `r_table_name` | text |	Name of the table containing the raster column, e.g. {FeatureTableName} OR {RasterLayerName}_tiles | no	|	| PK FK |
-| `r_raster_column` | text | Name of a column in a table that is a raster column with a BLOB data type | no | |	PK |
-
-See Annex B: [Table Definition SQL clause B.7] (#clause-B7) - `raster_columns`
-
-
-
-### 6.3.5	Tile Tables
 
 #### 6.3.5.1 Tiles Table Metadata
 
@@ -206,24 +162,6 @@ See Annex B: [Table Definition SQL clause B.13] (#clause-B13) - `sample_matrix_t
 
 ###Annex B
 
-##### Clause B.7
-
-**Table 1** - `raster_columns` Table Definition SQL
-
-```SQL
-CREATE TABLE
-  raster_columns
-  (
-    r_table_name TEXT NOT NULL,
-    r_raster_column TEXT NOT NULL,
-    compr_qual_factor INTEGER NOT NULL DEFAULT -1,
-    georectification INTEGER NOT NULL DEFAULT -1,
-    srid INTEGER NOT NULL DEFAULT 0,
-    CONSTRAINT pk_rc PRIMARY KEY (r_table_name, r_raster_column) ON CONFLICT ROLLBACK,
-    CONSTRAINT fk_rc_r_srid FOREIGN KEY (srid) REFERENCES spatial_ref_sys(srid),
-    CONSTRAINT fk_rc_r_gc FOREIGN KEY (r_table_name) REFERENCES geopackage_contents(table_name)
-  )
-```
 
 ##### Clause B.9
 
@@ -276,24 +214,6 @@ CREATE TABLE
 ```
 
 ####Implementation Notes
-
-######[Note]
-
-Images of multiple MIME types may be stored in given table.  For example, in a tiles table, image/png 
-format tiles without compression could be used for transparency where there is no data on the tile edges, and 
-image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all 
-pixels.  Images of multiple bit depths of the same MIME type may also be stored in a given table, for example 
-image/png tiles in both 8 and 24 bit depths.
-
-######[Note 1]
-
-This table or view implementation architecture follows a convention used by SF/SQL [[14]] (#14), [[15]] (#15).
-
-
-######[Note 2]
-
-A feature type may be defined to have 0..n raster attributes, so the corresponding feature 
-table may contain from 0..n raster columns.
 
 ######[Note 3]
 
