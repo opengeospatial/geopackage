@@ -281,33 +281,6 @@ In a SQLite implementation this unique key is automatically indexed. This table 
 may also follow [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index) version 1 conventions, 
 where the tiles are selected based on a spatially indexed bounding box in a separate metadata table.
 
-######[Note 13]
-
-An integer column primary key is recommended for best performance.
-
-######[Note 14]
-
-The `sample_rasters` table created in SQL 5 above could be extended with one or more 
-geometry columns by calls to the `addGeometryColumn()` routine specified in clause 9.4 to have 
-both raster and geometry columns like the `sample_feature_table` shown in Figure3: GeoPackageTables above in clause 7.
-
-######[Note 15]
-
-This table naming convention is adopted from [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index).
-
-######[Note 16]
-
-In an SQLite implementation, the rowid value is always equal to the value of a single-column 
-primary key on an [integer column] (http://www.sqlite.org/lang_createtable.html#rowid).  Althought not 
-stated in the SQLite documentation, testing has not revealed a case where rowed values on a table with 
-any primry key column(s) defined are changed by a database reorganization performed by the VACUUM SQL command.
-
-######[Note 17]
-
-This data structure can be implemented as a table in the absence of geometry data types or spatial 
-indexes. When implemented as a view, the min/max x/y columns could reference ordinates of a bounding box geometry 
-in an underlying table when geometry data types are available, e.g. in [RasterLite] (https://www.gaia-gis.it/fossil/librasterlite/index).
-
 
 ####Footnotes
 
