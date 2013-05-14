@@ -128,10 +128,11 @@ When the value of the `is_times_two_zoom` column in the `tile_table_metadata` re
 table row is 1 (true) then the pixel sizes for adjacent zoom levels in the tiles table SHALL only 
 vary by powers of 2.
 
-> **Requirement 20**   /gpkg/1.0/req/core/tiles_table
 
-> All tile matrix sets in a GeoPackage SHALL be contained in tiles tables as defined in clause 6.3.6.3 
-and table 15 and exemplified by table xx.
+> **Requirement 21**   /gpkg/1.0/req/core/times_two_zoom
+
+> A GeoPackage SHALL support tile matrix set zoom levels for pixel sizes that differ by powers of two between adjacent zoom levels.
+
 
 
 [[Note 11]] (#note-11) and [[Note 12]] (#note-12)
