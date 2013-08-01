@@ -149,7 +149,7 @@ See Annex C Table Definition SQL (Normative) C.2 `gpkg_contents`.
 > **Req 12:** Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `spatial_ref_sys` table `srs_id` column.
 
 
-[^1]: SQLite version 4 [B49], which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.
+[^1]: [SQLite version 4](http://sqlite.org/src4/doc/trunk/www/design.wiki), which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.
 
 [^2]: SQLite is in the public domain (see http://www.sqlite.org/copyright.html)
 
