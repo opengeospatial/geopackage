@@ -7,7 +7,8 @@ The main specification is in the [spec/](spec/) folder.
 
 Help with cleaning the markdown to more closely match the specification is appreciated.
 
-We are working on a process to allow public comments as github pull requests against this repository. See [process.md](process.md) for more information.
+We are working on a process to allow public comments as github pull requests against this repository. 
+See [process.md](process.md) for more information.
 
 If you are a github newbie then just hit 'edit' on any of the specification pages.
 This will automatically 'fork' the repository in to your own copy. After editing there you can create 
