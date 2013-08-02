@@ -1,7 +1,7 @@
 # 1 Base
 
 The required capabilities specified in this clause serve as the base for
-optional options and registered extensions capabilities specified in clauses 1
+optional features and registered extensions capabilities specified in clauses 1
 and 2.
 
 ## 1.1 Core
