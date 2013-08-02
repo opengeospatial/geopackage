@@ -60,39 +60,12 @@ Submitting Organizations
 The following organizations submitted this Implementation Specification
 to the Open Geospatial Consortium Inc. as a Request For Comment (RFC).
 
-1.  
-
-Envitia
-=======
-
-Luciad
-======
-
-Sigma Bravo
-===========
-
-The Carbon Project
-==================
-
-U.S. Army Geospatial Center
-===========================
-
-U.S. National Geospatial Intelligence Agency
-============================================
-
-All questions regarding this submission should be directed to the editor
-or the submitters:
-
-  ---------------------- -------------------------------- ----------------------------------------------
-  Contact                Email                            Company
-  Roger Brackin          roger.brackin@envitia.com        Envitia
-  Pepijn Van Eeckhoudt   pepijn.vaneeckhoudt@luciad.com   Luciad
-  Brad Hards             bhards@sigmabravo.com            Sigma Bravo
-  Jeff Harrison          jharrison@thecarbonproject.com   The Carbon Project
-  Kevin Backe            Kevin.Backe@usace.army.mil       U.S. Army Geospatial Center
-  David Wesloh           David.G.Wesloh@nga.mil           U.S. National Geospatial Intelligence Agency
-  Paul Daisey            pauld@imagemattersllc.com        Image Matters LLC
-  ---------------------- -------------------------------- ----------------------------------------------
+- Envitia
+- Luciad
+- Sigma Bravo
+- The Carbon Project
+- U.S. Army Geospatial Center
+- U.S. National Geospatial Intelligence Agency
 
 *Table A.3: Revision history*
 ----------------
@@ -227,53 +200,51 @@ None at present.
 Potential Future Work
 ---------------------
 
-1.  MAY investigate GeoPackage implementation on SQLite version 4 [B46].
+-  MAY investigate GeoPackage implementation on SQLite version 4 [B46].
 
-2.  Future versions of this specification MAY include requirements for
+-  Future versions of this specification MAY include requirements for
     elevation data and routes.
 
-3.  Future enhancements to this specification, a future GeoPackage Web
+-  Future enhancements to this specification, a future GeoPackage Web
     Service specification and modifications to existing OGC Web Service
     (OWS) specifications to use GeoPackages as exchange formats MAY
     allow OWS to support provisioning of GeoPackages throughout an
     enterprise.
 
-4.  Future versions of this specification MAY include additional raster
+-  Future versions of this specification MAY include additional raster
     / image formats, including fewer restrictions on the image/tiff
     format.
 
-5.  Future versions of this specification MAY include additional SQL API
+-  Future versions of this specification MAY include additional SQL API
     routines for interrogation and conversion of raster / image BLOBs.
 
-6.  Future versions of this specification and/or one for a GeoPackage
+-  Future versions of this specification and/or one for a GeoPackage
     Web Service MAY address utilities for importing and exporting
     vector, raster and tile data in various formats.
 
-7.  Future versions of this specification and/or one for a GeoPackage
+-  Future versions of this specification and/or one for a GeoPackage
     Web Service MAY address encryption of GeoPackages and/or individual
     tables or column values.
 
-8.  Future versions of this specification MAY add infrastructure to the
+-  Future versions of this specification MAY add infrastructure to the
     metadata tables such as a temporal\_columns table that refers to the
     time properties of data records.
 
-9.  MAY specify a streaming synchronization protocol for GeoPackage as
+-  MAY specify a streaming synchronization protocol for GeoPackage as
     part of a future GeoPackage Web Service specification, and/or a
     future version of the GeoPackage and/or Web Synchronization Service
     specification(s).
 
-10. Future versions of this specification MAY address symbology and
+- Future versions of this specification MAY address symbology and
     styling information.
 
-11. Future version of this specification MAY include geographic /
+- Future version of this specification MAY include geographic /
     geodesic geometry types.
 
-12. MAY create a GeoPackage Abstract Object Model to support data
+- MAY create a GeoPackage Abstract Object Model to support data
     encodings other than SQL in a future version of this specification.
 
-13. MAY add UTFGrid
-    ([https://github.com/mapbox/utfgrid-spec)](https://github.com/mapbox/utfgrid-spec%20)support
-    in a future version of this specification
+- MAY add [UTFGrid](https://github.com/mapbox/utfgrid-spec) support in a future version of this specification
 
 Contributors
 ------------
@@ -281,61 +252,39 @@ Contributors
 The following organizations and individuals have contributed to the
 preparation of this standard:
 
-1.  Alessandro Furieri
-
-2.  Compusult Limited
-
-3.  Development Seed
-
-4.  Environmental Systems Research Institute, Inc. (Esri)
-
-5.  Envitia
-
-6.  Feng China University
-
-7.  George Mason University
-
-8.  Image Matters LLC
-
-9.  International Geospatial Services Institute (iGSI) GmbH
-
-10. LMN Solutions
-
-11. Luciad
-
-12. MapBox
-
-13. OpenGeo
-
-14. Open Site Plan
-
-15. Sigma Bravo
-
-16. The Carbon Project
-
-17. Universitat Autònoma de Barcelona (CREAF)
-
-18. U.S. Army Geospatial Center (AGC)
-
-19. U.S. National Aeronautics and Space Administration (NASA)
-
-20. U.S. National Geospatial Intelligence Agency (NGA)
+-  Alessandro Furieri
+-  Compusult Limited
+-  Development Seed
+-  Environmental Systems Research Institute, Inc. (Esri)
+-  Envitia
+-  Feng China University
+-  George Mason University
+-  Image Matters LLC
+-  International Geospatial Services Institute (iGSI) GmbH
+- LMN Solutions
+- Luciad
+- MapBox
+- OpenGeo
+- Open Site Plan
+- Sigma Bravo
+- The Carbon Project
+- Universitat Autònoma de Barcelona (CREAF)
+- U.S. Army Geospatial Center (AGC)
+- U.S. National Aeronautics and Space Administration (NASA)
+- U.S. National Geospatial Intelligence Agency (NGA)
 
 Terms and Definitions
 ---------------------
 
-For the purposes of this document, the following terms and definitions
-apply.
+For the purposes of this document, the following terms and definitions apply.
 
 ### Empty GeoPackage
 
 A GeoPackage file that contains a spatial\_ref\_sys table,
 agpkg\_contents table with row record(s) with data\_type column values
 of “features” or “tiles”, and corresponding features tables per clause
-Error! Reference source not found. and/or tiles tables per clause Error!
-Reference source not found. where the user data tables per clauses
-Error! Reference source not found. and Error! Reference source not
-found. exist but contain no rows.
+2.1. and/or tiles tables per clause 2.2 where the user data tables per clauses
+2.1.6. and 2.2.7 exist but contain no rows.
 
 ### geolocate
 
@@ -436,8 +385,7 @@ Some frequently used abbreviated terms:
 <dd>Image Interpretability Rating Scale</dd>
 
 <dt>IRARS</dt>
-<dd>Imagery Resolution Assessments and Reporting Standards</dd>
-(Committee)
+<dd>Imagery Resolution Assessments and Reporting Standards (Committee)</dd>
 
 <dt>ISO</dt>
 <dd>International Organization for Standardization</dd>
@@ -511,54 +459,55 @@ Unified Modeling Language (UML) static structure diagrams. The UML
 notations used in this standard for RDBMS tables in the GeoPackage
 container are described in Figure 1 below.
 
+![Figure 3 - UML Notation for RDBMS Tables](images/umlnotationforrdbmstables.png "Figure 3 - UML Notation for RDBMS Tables")
 Figure 3 - UML Notation for RDBMS Tables
 
 In this standard, the following two stereotypes of UML classes are used
 to represent RDBMS tables:
 
-1.  \<\<table\>\> An instantiation of a UML class as an RDMBS table.
+a.  \<\<table\>\> An instantiation of a UML class as an RDMBS table.
 
-2.  \<\<column\>\> An instantiation of a UML attribute as an RDBMS table
+a.  \<\<column\>\> An instantiation of a UML attribute as an RDBMS table
     column.
 
 In this standard, the following standard data types are used for RDBMS
 columns:
 
-1.  NULL – The value is a NULL value.
+a.  NULL – The value is a NULL value.
 
-2.  INTEGER – A signed integer, stored in 1, 2, 3, 4, 6, or 8 bytes
+a.  INTEGER – A signed integer, stored in 1, 2, 3, 4, 6, or 8 bytes
     depending on the magnitude of the value
 
-3.  REAL – The value is a floating point value, stored as an 8-byte IEEE
+a.  REAL – The value is a floating point value, stored as an 8-byte IEEE
     floating point number.
 
-4.  TEXT – A sequence of characters, stored using the database encoding
+a.  TEXT – A sequence of characters, stored using the database encoding (UTF-8, UTF-16BE or UTF-16LE).
 
-(UTF-8, UTF-16BE or UTF-16LE).
+a.  BLOB – The value is a blob of data, stored exactly as it was input.
 
-1.  BLOB – The value is a blob of data, stored exactly as it was input.
-
-2.  NONE – The value is a Date / Time Timestamp
+a.  NONE – The value is a Date / Time Timestamp
 
 The UML notations used in this standard for the eXtensible Markup
 Language (XML) schema for the GeoPackage manifest are described in
 Figure 2 below.
 
-Figure  UML notation for XML Schema
+![Figure 2 - UML notation for XML Schema](images/umlnotationforxmlschema.png "Figure 2 - UML notation for XML Schema")
+
+Figure 2 - UML notation for XML Schema
 
 In this standard, the following stereotypes of UML classes are used to
 describe XML schemas:
 
-1.  \<\<DataType\>\> A descriptor of a set of values that lack identity
+a.  \<\<DataType\>\> A descriptor of a set of values that lack identity
     (independent existence and the possibility of side effects). A
     DataType is a class with no operations whose primary purpose is to
     hold the information.
 
-2.  \<\<Enumeration\>\> is a fixed enumeration that uses string values
+a.  \<\<Enumeration\>\> is a fixed enumeration that uses string values
     for expressing a list of potential values.
 
-3.  \<\<CodeList\>\> is an extensible enumeration that uses string
+a.  \<\<CodeList\>\> is an extensible enumeration that uses string
     values for expressing a list of potential values.
 
-In this standard, the standard data types defined in XML Schema Part 2:
-Datatypes[41]are used to describe XML Schemas.
+In this standard, the standard data types defined in [XML Schema Part 2:
+Datatypes](http://www.w3.org/TR/xmlschema-2/) are used to describe XML Schemas.
