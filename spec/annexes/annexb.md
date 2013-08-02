@@ -169,15 +169,7 @@ or the submitters:
 | 2013-05-29              | R5    | Paul Daisey            | A.2                                                                                   | Draft changes to A.2 Conformance Classes|
 | 2013-05-29              | R5    | Paul Daisey            | B.3                                                                                   | Add gpkg\_data\_columns table SQL|
 | 2013-05-30              | R5    | Paul Daisey            | Revision History                                                                      | Record 5/29 changes|
-| 2013-06-06              | R6    | Paul Daisey            | Preface, Submission Contact Points, Revision History, Changes to AS, Changes to IS,   | Remove all forward material except title page, submitting orgs, and introduction, and put in annexes.|
-                                                                                                                                             | |
-                                                       | Future Work,                                                                          | |
-                                                                                                                                             | |
-                                                       | Forward,                                                                              | |
-                                                                                                                                             | |
-                                                       | Introduction,                                                                         | |
-                                                                                                                                             | |
-                                                       | Clauses 1-5                                                                           | |
+| 2013-06-06              | R6    | Paul Daisey            | Preface, Submission Contact Points, Revision History, Changes to AS, Changes to IS, Future Work, Forward, Introduction, Clauses 1-5 | Remove all forward material except title page, submitting orgs, and introduction, and put in annexes.|
 | 2013-06-07              | R6    | Paul Daisey            | Old Clauses 6,7 -\> New 1-3                                                           | Restructure document iaw draft Requirements Dependencies|
 | 2013-06-07              | R6    | Paul Daisey            | Annex A                                                                               | Revised Requirements Dependencies and Diagram|
 | 2013-06-10              | R6    | Paul Daisey            | All                                                                                   | Fix clause and requirement references based on document restructure|
