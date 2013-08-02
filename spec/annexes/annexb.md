@@ -77,7 +77,7 @@ to the Open Geospatial Consortium Inc. as a Request For Comment (RFC).
 | 2013-01-15              | r2    | Paul Daisey            | 8.2                                                                                   | Change `gpkg_contents` description default value per change request 255 / 12-166|
 | 2013-01-15              | r2    | Paul Daisey            | 9.2, Annex A                                                                          | SRS Table Name Change per change request 256 / 12-165|
 | 2013-01-16              | r2    | Paul Daisey            | 7, Figure 2                                                                           | table diagram `gpkg_contents` `min_y` REAL instead of BLOB|
-| 2013-01-23              | r2    | Paul Daisey            | 11.3, 8.2                                                                             | Clause reference corrections, change gpkg_contents.identifier default value to “”|
+| 2013-01-23              | r2    | Paul Daisey            | 11.3, 8.2                                                                             | Clause reference corrections, change `gpkg_contents.identifier` default value to “”|
 | 2013-02-01              | r2    | Paul Daisey            | Changes to AS                                                                         | No changes to AS|
 | 2013-02-01              | r2    | Paul Daisey            | 8.2                                                                                   | new last sentence and NOTE1, additional table name triggers|
 | 2013-02-01              | r2    | Paul Daisey            | 9.6                                                                                   | drop tables 21, 22 and associated text|
