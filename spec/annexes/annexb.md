@@ -386,83 +386,122 @@ Conventions
 Symbols (and abbreviated terms)
 
 Some frequently used abbreviated terms:
+<dl>
+<dt>ACID</dt>
+<dd>Atomic, Consistent, Isolated, and Durable</dd>
 
-ACID        Atomic, Consistent, Isolated, and Durable
+<dt>ASCII</dt>
+<dd>American Standard Code for Information Interchange</dd>
 
-ASCII        American Standard Code for Information Interchange
+<dt>API</dt>
+<dd>Application Program Interface</dd>
 
-API        Application Program Interface
+<dt>ATOM</dt>
+<dd>Atom Syndication Format</dd>
 
-ATOM        Atom Syndication Format
+<dt>BLOB</dt>
+<dd>Binary Large OBject</dd>
 
-BLOB        Binary Large OBject
+<dt>CLI</dt>
+<dd>Call-Level Interface</dd>
 
-CLI        Call-Level Interface
+<dt>COTS</dt>
+<dd>Commercial Off The Shelf</dd>
 
-COTS        Commercial Off The Shelf
+<dt>DEM</dt>
+<dd>Digital Elevation Model</dd>
 
-DEM        Digital Elevation Model
+<dt>DIGEST</dt>
+<dd>Digital Geographic Information Exchange Standard</dd>
 
-DIGEST        Digital Geographic Information Exchange Standard
+<dt>GeoTIFF</dt>
+<dd>Geographic Tagged Image File Format</dd>
 
-GeoTIFF        Geographic Tagged Image File Format
+<dt>GPKG</dt>
+<dd>GeoPackage</dd>
 
-GPKG        GeoPackage
+<dt>GRD</dt>
+<dd>Ground Resolved Distance</dd>
 
-GRD        Ground Resolved Distance
+<dt>EPSG</dt>
+<dd>European Petroleum Survey Group</dd>
 
-EPSG        European Petroleum Survey Group
+<dt>FK</dt>
+<dd>Foreign Key</dd>
 
-FK        Foreign Key
+<dt>IETF</dt>
+<dd>Internet Engineering Task Force</dd>
 
-IETF        Internet Engineering Task Force
+<dt>IIRS</dt>
+<dd>Image Interpretability Rating Scale</dd>
 
-IIRS        Image Interpretability Rating Scale
-
-IRARS        Imagery Resolution Assessments and Reporting Standards
+<dt>IRARS</dt>
+<dd>Imagery Resolution Assessments and Reporting Standards</dd>
 (Committee)
 
-ISO        International Organization for Standardization
+<dt>ISO</dt>
+<dd>International Organization for Standardization</dd>
 
-JDBC        Java Data Base Connectivity
+<dt>JDBC</dt>
+<dd>Java Data Base Connectivity</dd>
 
-JPEG        Joint Photographics Expert Group (image format)
+<dt>JPEG</dt>
+<dd>Joint Photographics Expert Group (image format)</dd>
 
-MIME        Multipurpose Internet Mail Extensions
+<dt>MIME</dt>
+<dd>Multipurpose Internet Mail Extensions</dd>
 
-NATO        North Atlantic Treaty Organization
+<dt>NATO</dt>
+<dd>North Atlantic Treaty Organization</dd>
 
-NITF        National Imagery Transmission Format
+<dt>NITF</dt>
+<dd>National Imagery Transmission Format</dd>
 
-OGC        Open Geospatial Consortium
+<dt>OGC</dt>
+<dd>Open Geospatial Consortium</dd>
 
-PK        Primary Key
+<dt>PK</dt>
+<dd>Primary Key</dd>
 
-PNG        Portable Network Graphics (image format)
+<dt>PNG</dt>
+<dd>Portable Network Graphics (image format)</dd>
 
-RDBMS        Relational Data Base Management System
+<dt>RDBMS</dt>
+<dd>Relational Data Base Management System</dd>
 
-RFC        Request For Comments
+<dt>RFC</dt>
+<dd>Request For Comments</dd>
 
-SQL        Structured Query Language
+<dt>SQL</dt>
+<dd>Structured Query Language</dd>
 
-SRID        Spatial Reference (System) Identifier
+<dt>SRID</dt>
+<dd>Spatial Reference (System) Identifier</dd>
 
-TIFF        Tagged Image File Format
+<dt>TIFF</dt>
+<dd>Tagged Image File Format</dd>
 
-TIN        Triangulated Irregular Network
+<dt>TIN</dt>
+<dd>Triangulated Irregular Network</dd>
 
-UML        Unified Modeling Language
+<dt>UML</dt>
+<dd>Unified Modeling Language</dd>
 
-UTC        Coordinated Universal Time
+<dt>UTC</dt>
+<dd>Coordinated Universal Time</dd>
 
-XML        eXtensible Markup Language
+<dt>XML</dt>
+<dd>eXtensible Markup Language</dd>
 
-1D        One Dimensional
+<dt>1D</dt>
+<dd>One Dimensional</dd>
 
-2D        Two Dimensional
+<dt>2D</dt>
+<dd>Two Dimensional</dd>
 
-3D        Three Dimensional
+<dt>3D</dt>
+<dd>Three Dimensional</dd>
+</dl>
 
 UML Notation
 ------------
