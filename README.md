@@ -1,3 +1,5 @@
+![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
+
 GeoPackage Specification
 ==========
 
