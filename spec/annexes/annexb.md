@@ -1,58 +1,31 @@
 Background and Context (Informative)
+==============
 
 Preface
 -------
 
 An open standard non-proprietary platform-independent GeoPackage
-container for distribution and direct use of all kinds of geospatial
-data will increase the cross-platform interoperability of geospatial
-applications and web services. Standard APIs for access and management
-of GeoPackage data will provide consistent query and update results
-across such applications and services. Increased interoperability and
-result consistency will enlarge the potential market for such
-applications and services, particularly in resource-constrained mobile
-computing environments like cell phones and tablets. GeoPackages will
-become the standard containers for “MyGeoData” that are used as a
-transfer format by users and Geospatial Web Services and a storage
-format on personal and enterprise devices.
+container for distribution and direct use of all kinds of geospatial data will increase the cross-platform interoperability of geospatial applications and web services. Standard APIs for access and management of GeoPackage data will provide consistent query and update results across such applications and services. Increased interoperability and result consistency will enlarge the potential market for such applications and services, particularly in resource-constrained mobile computing environments like cell phones and tablets. GeoPackages will become the standard containers for “MyGeoData” that are used as a transfer format by users and Geospatial Web Services and a storage format on personal and enterprise devices.
 
 This OpenGIS® GeoPackage Implementation Specification defines a
-GeoPackage as a self-contained, single-file, cross-platform, serverless,
-transactional, open source SQLite data container with table definitions,
-relational integrity constraints, an SQL API exposed via a “C” CLI and
-JDBC, and manifest tables that together act as an exchange and
-direct-use format for multiple types of geospatial data including vector
-features, features with raster attributes and tile matrix pyramids,
-especially on mobile / hand held devices in disconnected or limited
-network connectivity environments.
+GeoPackage as a self-contained, single-file, cross-platform, serverless, transactional, open source SQLite data container with table definitions, relational integrity constraints, an SQL API exposed via a “C” CLI and JDBC, and manifest tables that together act as an exchange and direct-use format for multiple types of geospatial data including vector features, features with raster attributes and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity environments.
 
 Table formats, definitions of geometry types and metadata tables,
 relational integrity constraints, and SQL API are interdependent
-specification facets of the SF-SQL [13][11][12] and SQL-MM (Spatial)
-[14] standards that serve as normative references for the vector feature
-portion of this specification.
+specification facets of the SF-SQL [13][11][12] and SQL-MM (Spatial) [14] standards that serve as normative references for the vector feature portion of this specification.
 
-This specification attempts to support and use relevant raster types,
-storage table definitions, and metadata from widely adopted
+This specification attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted
 implementations and existing standards such as WMTS [22] and ISO
-metadata [42], to integrate use of rasters as attributes of geospatial
-features, and to define relational integrity constraints and an SQL API
-thereon to provide a raster analogy to the SF-SQL and SF-MM data access
+metadata [42], to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access
 and data quality assurance capabilities.
 
 Conformance classes for this specification are classified as core
 (mandatory) and extension (optional). The simple core of an Empty
 GeoPackage contains two SQL tables.
 
-Future versions of this specification willmay include requirements for
-elevation data and routes. Future enhancements to this specification, a
-future GeoPackage Web Service specification, and modifications to
-existing OGC Web Service (OWS) specifications to use GeoPackages as
-exchange formats willmay allow OWS to support provisioning of
-GeoPackages throughout an enterprise or information community.  
+Future versions of this specification may include requirements for
+elevation data and routes. Future enhancements to this specification, a future GeoPackage Web Service specification, and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats may allow OWS to support provisioning of GeoPackages throughout an enterprise or information community.  
 
-Submission Contact Points
--------------------------
 
 Submitting Organizations
 ------------------------
