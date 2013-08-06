@@ -1,7 +1,8 @@
-GeoPackage Tiles Specification
+GeoPackage Specification
 ==========
 
-This is a github version of the GeoPackage specification released for public comment.
+This is a github version of the GeoPackage 0.8 specification released for public comment. 
+See http://www.opengeospatial.org/standards/requests/105 for more information.
 
 The main specification is in the [spec/](spec/) folder. 
 
