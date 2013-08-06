@@ -18,8 +18,9 @@ components are defined below.
 
 In a GeoPackage file, “simple” features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) [16] geometry model shown in figure 2 below. 
 
-*Figure  – Core Geometry Model*
+*Figure 2 – Core Geometry Model*
 
+![core geometry model](images/core-geometry-model.png)
 
 The instantiable (not abstract) geometry types defined in this Standard are restricted to 0, 1 and
 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space (R2, R3 or R4).
