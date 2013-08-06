@@ -206,7 +206,9 @@ See Annex C: Table Definition SQL clause  C.5 `sample_feature_table`
 
 A feature geometry is stored in a geometry column specified by the `geometry_column` value for the feature table in the `gpkg_geometry_columns` table defined in clause 2.1.5 above. The geometry type of a feature geometry column specified in the `gpkg_geometry_columns` table `geometry_type_name` column is a name from Annex G.
 
-> **Req 26:** Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the `gpkg_geometry_columns` table `geometry_type_name` column value[^6].
+> **Req 26:** **A feature table SHALL have only one geometry column.**
+
+> Feature data models from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be transformed into GeoPackage? implementations with a separate feature table for each geometry type whose rows have matching integer primary key values that allow them to be joined in a view with the same column definitions as the non-GeoPackage feature data model with multiple geometry columns.[^6].
 
 Geometry subtypes are assignable  as defined in Annex G and shown in part in Figure 2 – Core Geometry Model. For example, if the `geometry_type_name` value in the `gpkg_geometry_columns` table is for a geometry type like POINT that has no subtypes, then the feature table geometry column MAY only contain geometries of that type. If the geometry `type_name` value in the `gpkg_geometry_columns` table is for a geometry type like GEOMCOLLECTION that has subtypes, then the feature table geometry column MAY only contain geometries of that type or any of its direct or indirect subtypes. If the geometry `type_name` is GEOMETRY (the root of the geometry type hierarchy) then the feature table geometry column MAY contain geometries of any geometry type. 
 The presence or absence of optional elevation (Z) and/or measure (M) values in a geometry does not change its type or assignability.

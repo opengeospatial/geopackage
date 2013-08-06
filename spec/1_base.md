@@ -6,16 +6,12 @@ and 2.
 
 ## 1.1 Core
 
-The mandatory core capabilities defined in sub clauses and requirement statements of this clause SHALL be implemented by every GeoPackage.
+The mandatory core capabilities defined in sub clauses and requirement statements of this clause SHALL be implemented by every **GeoPackage**.
 
 #### 1.1.1. SQLite Container
 
-A self-contained, single-file, cross-platform, serverless, transactional, open source RDBMS
-container is desired to simplify production, distribution and use of GeoPackages and guarantee the
-integrity of the data they contain. “Self-contained” means that container software requires very
-minimal support from external libraries or from the operating system. “Single-file” means that a
-container not currently opened by any software application consists of a single file in a file
-system supported by a computing platform operating system. “Cross-platform” means that a container
+A self-contained, single-file, cross-platform, serverless, transactional, open source RDBMS container is desired to simplify production, distribution and use of GeoPackages and guarantee the integrity of the data they contain. “Self-contained” means that container software requires very minimal support from external libraries or from the operating system. “Single-file” means that a
+container not currently opened by any software application consists of a single file in a file system supported by a computing platform operating system. “Cross-platform” means that a container
 file MAY be created and loaded with data on one computing platform, and used and updated on another,
 even if they use different operating systems, file systems, and byte order (endian) conventions.
 “Serverless” means that the RDBMS container is implemented without any intermediary server process,
@@ -127,14 +123,14 @@ is available for access and/or update.
 |-------------|------|-------------|------|---------|-----|
 | `table_name` | text | The name of the tiles, or feature table | no | | PK |
 | `data_type` | text | Type of data stored in the table:. “features” per  clause 2.1.2.1.1,  “tiles” per clause 2.2.2.1.1, or an implementer-defined value for other data tables per clause 2.5.| no | | |
-| `identifier` | text | A human-readable identifier (e.g. short name) for the table_name content | no | | |
-| `description` | text | A human-readable description for the table_name content | no | “” | | 
+| `identifier` | text | A human-readable identifier (e.g. short name) for the table_name content | yes | | |
+| `description` | text | A human-readable description for the table_name content | yes | “” | | 
 | `last_change` | text | timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time | no | `strftime('%Y-%m-%dT%H:%M:%fZ', CURRENT_TIMESTAMP)` | |
-| `min_x` | double | Bounding box for all content in table_name | no | | |
-| `min_y` | double | Bounding box for all content in table_name | no | | |
-| `max_x` | double | Bounding box for all content in table_name | no | | |
-| `max_y` | double | Bounding box for all content in table_name | no | | |
-| `srs_id` | integer | Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id` | no | | FK |
+| `min_x` | double | Bounding box for all content in table_name | yes | | |
+| `min_y` | double | Bounding box for all content in table_name | yes | | |
+| `max_x` | double | Bounding box for all content in table_name | yes | | |
+| `max_y` | double | Bounding box for all content in table_name | yes | | |
+| `srs_id` | integer | Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id` | yes | | FK |
 
 The `gpkg_contents` table is intended to provide a list of all geospatial contents in the GeoPackage. The `data_type` specifies the type of content. The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. If the `srs_id column` value references a geographic coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references a projected CRS and the min/max x/y values are in the units specified by that CRS.
 
