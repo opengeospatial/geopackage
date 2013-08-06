@@ -7,6 +7,18 @@ The following GitHub document has been translated from the Microsoft Word versio
 
 The contributor understands that any contributions, if accepted by the OGC Membership, shall be incorporated into the formal OGC GeoPackage standards document and that all copyright and intellectual property shall be vested to the OGC.
 
+About
+-----
+
+This specification describes an open, standards-based, platform-independent, portable, self-describing, 
+compact format for transferring geospatial information. It specifies a set of conventions for SQLite to
+store interoperable [Features](spec/2_features.md) and/or [Tiles](spec/3_tiles.md) on a common [base](spec/1_base.md).
+The core document additionally describes optional [Metadata](spec/5_metadata.md), and [Schema](spec/4_schema)
+information to build richer applications. An [Extension Mechanism](spec/7_extension_mechanism.md) is 
+specified to provide implementors a way to include additional functionality in their GeoPackages, with a 
+number of optional [extensions](spec/8_extensions.md) included.
+
+**Editor: Paul Daisey**
 
 Reading the document
 --------------------
