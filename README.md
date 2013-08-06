@@ -54,7 +54,7 @@ information on editing.
 Sample Implementations
 ----------------------
 
-[Luciad] has open sourced their implementation as [libgpkg](https://bitbucket.org/luciad/libgpkg). It is
+[Luciad](http://www.luciad.com/) has open sourced their implementation as [libgpkg](https://bitbucket.org/luciad/libgpkg). It is
 quite complete, with support for features, tiles, spatial indexes, and more.
 
 There has also been work on a GeoTools/GeoServer version.
