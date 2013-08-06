@@ -1,17 +1,16 @@
-[[]]
-== Base ==
+= Base
+
+== Base
 
 The required capabilities specified in this clause serve as the base for optional features and registered extensions
 capabilities specified in clauses 1 and 2.
 
-[[]]
-=== Core ===
+=== Core
 
 The mandatory core capabilities defined in sub clauses and requirement statements of this clause SHALL be implemented by
 every GeoPackage.
 
-[[]]
-==== SQLite Container ====
+==== SQLite Container
 
 A self-contained, single-file, cross-platform, serverless, transactional, open source RDBMS container is desired to
 simplify production, distribution and use of GeoPackages and guarantee the integrity of the data they contain.
@@ -24,11 +23,9 @@ container is implemented without any intermediary server process, and accessed d
 “Transactional” means that RDBMS transactions guarantee that all changes to data in the container are Atomic,
 Consistent, Isolated, and Durable (ACID) despite program crashes, operating system crashes, and power failures.
 
-[[]]
-===== Data =====
+===== Data
 
-[[]]
-====== File Format ======
+====== File Format
 
 ________________________________________________________________________________________________________________________
 *Req 1:* The GeoPackage file format SHALL be a http://www.sqlite.org/[SQLite] database
@@ -44,33 +41,28 @@ The maximum size of a GeoPackage file is about 140TB. In practice a lower size l
 which the file is written. Many mobile devices require external memory cards to be formatted using the FAT32 file system
 which imposes a maximum size limit of 4GB.
 
-[[]]
-====== File Extension Name ======
+====== File Extension Name
 
 ________________________________________________________________________________________________________________________
 *Req 2:* GeoPackage files SHALL have the file extension name “.gpkg”.
 ________________________________________________________________________________________________________________________
 
-[[]]
-====== Integrity Check ======
+====== Integrity Check
 
 ________________________________________________________________________________________________________________________
 *Req 3:* The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file.
 ________________________________________________________________________________________________________________________
 
-[[]]
-===== API =====
+===== API
 
-[[]]
-====== Structured Query Language (SQL) ======
+====== Structured Query Language (SQL)
 
 ________________________________________________________________________________________________________________________
 *Req 4:* A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via
 http://www.sqlite.org/download.html[SQLite sqlite3] software APIs.[^3]
 ________________________________________________________________________________________________________________________
 
-[[]]
-====== Every GPKG SQLite Configuration ======
+====== Every GPKG SQLite Configuration
 
 The http://www.sqlite.org/download.html[SQLite] library has many http://www.sqlite.org/compile.html[compile time] and
 http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. A
@@ -96,14 +88,11 @@ ________________________________________________________________________________
 |compile |SQLITE_OMIT_VIEW |Not |GeoPackage tables MAY be implemented as updateable views.
 |=======================================================================
 
-[[]]
-==== Spatial Reference Systems ====
+==== Spatial Reference Systems
 
-[[]]
-===== Data =====
+===== Data
 
-[[]]
-====== Table Definition ======
+====== Table Definition
 
 ________________________________________________________________________________________________________________________
 *Req 6:* A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table or updateable view per clause 1.1.2.1.1, table 2
@@ -135,8 +124,7 @@ http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumbe
 
 See Annex C Table Definition SQL (Normative) C.1 `gpkg_spatial_ref_sys`.
 
-[[]]
-====== Table Data Values ======
+====== Table Data Values
 
 ________________________________________________________________________________________________________________________
 *Req 7:* The `gpkg_spatial_ref_sys` table or updateable view in a GeoPackage SHALL contain a record for organization
@@ -153,14 +141,11 @@ ________________________________________________________________________________
 reference systems used by features and tiles in a GeoPackage.
 ________________________________________________________________________________________________________________________
 
-[[]]
-==== Contents ====
+==== Contents
 
-[[]]
-===== Data =====
+===== Data
 
-[[]]
-====== Table Definition ======
+====== Table Definition
 
 ________________________________________________________________________________________________________________________
 *Req 9:* A GeoPackage file SHALL include a `gpkg_contents` table or updateable view per clause 1.1.3.1.1, table 3 and
@@ -192,8 +177,7 @@ a projected CRS and the min/max x/y values are in the units specified by that CR
 
 See Annex C Table Definition SQL (Normative) C.2 `gpkg_contents`.
 
-[[]]
-====== Table Data Values ======
+====== Table Data Values
 
 ________________________________________________________________________________________________________________________
 *Req 10:* The `table_name` column value in a `gpkg_contents` table row SHALL contain the name of a SQLite table or view.
