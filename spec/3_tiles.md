@@ -1,3 +1,6 @@
+
+The optional capabilities specified in this section depend on the required capabilities specified in the [Base section](1_base.md).
+
 ## 2.2. Tiles
 
 The optional capabilities defined in sub-clauses and requirement statements of this clause MAY be implemented by any GeoPackage file.
