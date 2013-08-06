@@ -1,10 +1,15 @@
 **Copyright notice:**
 
-Copyright © 2012.Envitia
-Copyright © 2012.Luciad
+Copyright © 2012 Envitia
+
+Copyright © 2012 Luciad
+
 Copyright © 2012 Sigma Bravo.
+
 Copyright © 2012 The Carbon Project.
+
 Copyright © 2012 U.S. Army Geospatial Center.
+
 Copyright © 2012 U.S. National Geospatial Intelligence Agency.
 
 The companies listed above have granted the Open Geospatial Consortium, Inc. (OGC) a nonexclusive, 
