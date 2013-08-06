@@ -1,5 +1,5 @@
 # 2 Options
-The optional capabilities specified in this clause depend on the required capabilities specified in 1 Base above.
+The optional capabilities specified in this clause depend on the required capabilities specified in the [Base section](1_base.md).
 
 > **Req 13:** A Valid GeoPackage SHALL contain features per clause 2.1 and/or tiles per clause 2.2 and row(s) in the `gpkg_contents` table with `data_type` column values of “features” and/or “tiles” describing the user data tables.
 
