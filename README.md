@@ -4,11 +4,11 @@ GeoPackage Specification
 ==========
 
 This specification describes an open, standards-based, platform-independent, portable, self-describing, 
-compact format for transferring geospatial information. It specifies a set of conventions for SQLite to
+compact format for transferring geospatial information. It is a set of conventions for SQLite to
 store interoperable [Features](spec/2_features.md) and/or [Tiles](spec/3_tiles.md) on a common [base](spec/1_base.md).
-The core document additionally describes optional [Metadata](spec/5_metadata.md), and [Schema](spec/4_schema)
+The core document additionally specifies optional [Metadata](spec/5_metadata.md), and [Schema](spec/4_schema)
 information to build richer applications. An [Extension Mechanism](spec/7_extension_mechanism.md) is 
-specified to provide implementors a way to include additional functionality in their GeoPackages, with a 
+described to provide implementors a way to include additional functionality in their GeoPackages, with a 
 number of optional [extensions](spec/8_extensions.md) included.
 
 About
@@ -19,6 +19,11 @@ GeoPackage Standard [version 0.8](https://portal.opengeospatial.org/files/?artif
 released for [public comment](http://www.opengeospatial.org/standards/requests/105) on August 6, 2013. 
 With this repository the OGC invites collaboration and comments directed at the development 
 and enhancement of this candidate standard. 
+
+Based on feedback the final 1.0 specification will likely change, so consider this a work in progress,
+that you are encouraged to help shape. The core working group is particularly interested in making
+the specification easy to implement, so changes driven by attempted implementations will be given high
+priority.
 
 **Editor: Paul Daisey**
 
@@ -45,4 +50,5 @@ traditional OGC comment process on the [GeoPackage RFC](http://www.opengeospatia
 
 For more detailed guidance, or if you are new to github, see the [Process page](process.md) for additional 
 information on editing.
+
 
