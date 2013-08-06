@@ -51,4 +51,11 @@ traditional OGC comment process on the [GeoPackage RFC](http://www.opengeospatia
 For more detailed guidance, or if you are new to github, see the [Process page](process.md) for additional 
 information on editing.
 
+Sample Implementations
+----------------------
+
+[Luciad] has open sourced their implementation as [libgpkg](https://bitbucket.org/luciad/libgpkg). It is
+quite complete, with support for features, tiles, spatial indexes, and more.
+
+There has also been work on a GeoTools/GeoServer version.
 
