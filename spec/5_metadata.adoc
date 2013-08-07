@@ -30,10 +30,10 @@ per clause2.4.2.1.1, Table 10 and Table 33.
 ________________________________________________________________________________________________________________________
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME [25] encodings
-structured in accordance with any authoritative metadata specification, such as ISO 19115 [40], ISO 19115-2 [B31],
-ISO 19139 [B32], Dublin Core [B33], CSDGM [B34], DDMS [B35], NMF/NMIS [B36], etc. The GeoPackage interpretation of what
-constitutes “metadata” is a broad one that includes UML models [B37] encoded in XMI [B38], GML Application Schemas
-[B39], ISO 19110 feature catalogues [B40], OWL [B41] and SKOS [B42] taxonomies, etc.
+structured in accordance with any authoritative metadata specification, such as ISO 19115 [40], ISO 19115-2 <<B31>>,
+ISO 19139 <<B32>>, Dublin Core <<B33>>, CSDGM <<B34>>, DDMS <<B35>>, NMF/NMIS <<B36>>, etc. The GeoPackage interpretation of what
+constitutes “metadata” is a broad one that includes UML models <<B37>> encoded in XMI <<B38>>, GML Application Schemas
+<<B39>>, ISO 19110 feature catalogues <<B40>>, OWL <<B41>> and SKOS <<B42>> taxonomies, etc.
 
 .Metadata Table or View Definition
 [cols=",,,,,",options="header",]
@@ -81,7 +81,7 @@ contents of this table were obtained from the ISO 19115 [40], Annex B B.5.25 MD_
 |=======================================================================
 
 ________________________________________________________________________________________________________________________
-*Req 51:* Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL be one of the name column
+*Req {counter:req}:* Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL be one of the name column
 values from 11 in clause 2.4.2.1.2.
 ________________________________________________________________________________________________________________________
 
@@ -92,7 +92,7 @@ ________________________________________________________________________________
 ====== Table Definition
 
 ________________________________________________________________________________________________________________________
-*Req 52:* A GeoPackage file that contains a gpkg_metadata table SHALL contain a gpkg_metadata_reference table per clause
+*Req {counter:req}:* A GeoPackage file that contains a gpkg_metadata table SHALL contain a gpkg_metadata_reference table per clause
 2.4.3.1.1, Table 12 and Table 34.
 ________________________________________________________________________________________________________________________
 
@@ -120,42 +120,42 @@ See Annex C: Table Definition SQL clause C.10 `gpkg_metadata_reference`.
 ====== Table Data Values
 
 ________________________________________________________________________________________________________________________
-*Req 53:* Every `gpkg_metadata_reference` table reference scope column value SHALL be one of ‘geopackage’, ‘table’,
+*Req {counter:req}:* Every `gpkg_metadata_reference` table reference scope column value SHALL be one of ‘geopackage’, ‘table’,
 ‘column’, ’row’, ’row/col’.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 54:* Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’ SHALL have a
+*Req {counter:req}:* Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’ SHALL have a
 `table_name` column value that is NULL. Every other `gpkg_metadata_reference` table row SHALL have a `table_name` column
 value that references a value in the `gpkg_contents` `table_name` column.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 55:* Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’,‘table’ or
+*Req {counter:req}:* Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’,‘table’ or
 ‘row’ SHALL have a `column_name` column value that is NULL. Every other `gpkg_metadata_reference` table row SHALL have a
 `column_name` column value that contains the name of a column in the SQLite table or view identified by the `table_name`
 column value.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 56:* Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’, ‘table’ or
+*Req {counter:req}:* Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’, ‘table’ or
 ‘column’ SHALL have a `row_id_value` column value that is NULL. Every other `gpkg_metadata_reference` table row SHALL
 have a `row_id_value` column value that contains the ROWID of a row in the SQLite table or view identified by the
 `table_name` column value.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 57:* Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 [41]format containing a
+*Req {counter:req}:* Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 [41]format containing a
 complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating
 UTC.[^10]
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 58:* Every `gpkg_metadata_reference` table row `md_file_id` column value SHALL be an id column value from the
+*Req {counter:req}:* Every `gpkg_metadata_reference` table row `md_file_id` column value SHALL be an id column value from the
 `gpkg_metadata` table.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 59:* Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NOT NULL SHALL be an id column
+*Req {counter:req}:* Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NOT NULL SHALL be an id column
 value from the `gpkg_metadata` table that is not equal to the `md_file_id` column value for that row.
 ________________________________________________________________________________________________________________________

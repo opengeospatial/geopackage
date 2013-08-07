@@ -1,9 +1,10 @@
+[[options]]
 == Options
 
 The optional capabilities specified in this clause depend on the required capabilities specified in 1 Base above.
 
 ________________________________________________________________________________________________________________________
-*Req 13:* A Valid GeoPackage SHALL contain features per clause 2.1 and/or tiles per clause 2.2 and row(s) in the
+*Req {counter:req}:* A Valid GeoPackage SHALL contain features per clause 2.1 and/or tiles per clause 2.2 and row(s) in the
 `gpkg_contents` table with `data_type` column values of “features” and/or “tiles” describing the user data tables.
 ________________________________________________________________________________________________________________________
 
@@ -71,7 +72,7 @@ A brief description of each geometry type is provided below. A more detailed des
 ====== Contents Table – Features Row
 
 ________________________________________________________________________________________________________________________
-*Req 14:* `gpkg_contents` SHALL contain a row with a `data_type` column value of “features” for each vector features
+*Req {counter:req}:* `gpkg_contents` SHALL contain a row with a `data_type` column value of “features” for each vector features
 user data table.
 ________________________________________________________________________________________________________________________
 
@@ -82,7 +83,7 @@ ________________________________________________________________________________
 ====== BLOB Format
 
 ________________________________________________________________________________________________________________________
-*Req 15:* A GeoPackage file SHALL store feature table geometries with or without optional elevation (Z) and/or measure
+*Req {counter:req}:* A GeoPackage file SHALL store feature table geometries with or without optional elevation (Z) and/or measure
 (M) values in SQL BLOBs using the GeoPackageBinary format specified in 4 and clause 2.1.3.1.1.
 ________________________________________________________________________________________________________________________
 
@@ -141,7 +142,7 @@ defined in Annex D. Every implementation can be sure that triggers that only use
 provided by SQLite will work as intended across implementations.[^2] [^3]
 
 ________________________________________________________________________________________________________________________
-*Req 16:* A GeoPackage SQLite Extension MAY provide SQL function support for triggers in GeoPackage file. One that does
+*Req {counter:req}:* A GeoPackage SQLite Extension MAY provide SQL function support for triggers in GeoPackage file. One that does
 so SHALL provide the minimal runtime SQL functions listed in Annex D Table 36.
 ________________________________________________________________________________________________________________________
 
@@ -152,7 +153,7 @@ ________________________________________________________________________________
 ====== Core Types
 
 ________________________________________________________________________________________________________________________
-*Req 17:* A GeoPackage file SHALL store feature table geometries with the basic simple feature geometry types (Geometry,
+*Req {counter:req}:* A GeoPackage file SHALL store feature table geometries with the basic simple feature geometry types (Geometry,
 Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeomCollection) in Annex G Table 46 in the
 GeoPackageBinary geometry encoding format.
 ________________________________________________________________________________________________________________________
@@ -164,7 +165,7 @@ ________________________________________________________________________________
 ====== Table Definition
 
 ________________________________________________________________________________________________________________________
-*Req 18:* A GeoPackage file with a `gpkg_contents` table row with a “features” `data_type` SHALL contain a
+*Req {counter:req}:* A GeoPackage file with a `gpkg_contents` table row with a “features” `data_type` SHALL contain a
 `gpkg_geometry_columns` table or updateable view per clause 2.1.5.1.1, Table 5 and Table 24.
 ________________________________________________________________________________________________________________________
 
@@ -196,31 +197,31 @@ See clause C.4 `gpkg_geometry_columns`.
 ====== Table Data Values
 
 ________________________________________________________________________________________________________________________
-*Req 19:* Values of the `gpkg_geometry_columns` table `table_name` column SHALL reference values in the `gpkg_contents`
+*Req {counter:req}:* Values of the `gpkg_geometry_columns` table `table_name` column SHALL reference values in the `gpkg_contents`
 `table_name` column.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 20:* The `column_name` column value in a `gpkg_geometry_columns` table row SHALL be the name of a column in the
+*Req {counter:req}:* The `column_name` column value in a `gpkg_geometry_columns` table row SHALL be the name of a column in the
 table specified by the `table_name` column value for that row.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 21:* The `geometry_type_name` value in a `gpkg_geometry_columns` table row SHALL be one of the geometry type names
+*Req {counter:req}:* The `geometry_type_name` value in a `gpkg_geometry_columns` table row SHALL be one of the geometry type names
 specified in Annex G.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 22:* The `srs_id` value in a `gpkg_geometry_columns` table row SHALL be an `srs_id` column value from the
+*Req {counter:req}:* The `srs_id` value in a `gpkg_geometry_columns` table row SHALL be an `srs_id` column value from the
 `gpkg_spatial_ref_sys` table.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 23:* The z value in a `gpkg_geometry_columns` table row SHALL be one of 0, 1, or 2.
+*Req {counter:req}:* The z value in a `gpkg_geometry_columns` table row SHALL be one of 0, 1, or 2.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 24:* The m value in a `gpkg_geometry_columns` table row SHALL be one of 0, 1, or 2.
+*Req {counter:req}:* The m value in a `gpkg_geometry_columns` table row SHALL be one of 0, 1, or 2.
 ________________________________________________________________________________________________________________________
 
 ==== Vector Feature User Data Tables
@@ -234,7 +235,7 @@ that contain user data representing features. Feature attributes are columns in 
 [^4] Features are rows in a feature table.[^5]
 
 ________________________________________________________________________________________________________________________
-*Req 25:* A GeoPackage file MAY contain tables or updateable views containing vector features. Every such feature table
+*Req {counter:req}:* A GeoPackage file MAY contain tables or updateable views containing vector features. Every such feature table
 or view in a GeoPackage file SHALL have a primary key defined on one integer column per table 6 and table 27.
 ________________________________________________________________________________________________________________________
 
@@ -262,7 +263,7 @@ A feature geometry is stored in a geometry column specified by the `geometry_col
 the `gpkg_geometry_columns` table `geometry_type_name` column is a name from Annex G.
 
 ________________________________________________________________________________________________________________________
-*Req 26:* Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for
+*Req {counter:req}:* Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for
 the column by the `gpkg_geometry_columns` table `geometry_type_name` column value[^6].
 ________________________________________________________________________________________________________________________
 
@@ -279,7 +280,7 @@ The spatial reference system type of a feature geometry column specified by a `g
 column value is a code from the `gpkg_spatial_ref_sys` table `srs_id` column.
 
 ________________________________________________________________________________________________________________________
-*Req 27:* Feature table geometry columns SHALL contain geometries with the `srs_id` specified for the column by the
+*Req {counter:req}:* Feature table geometry columns SHALL contain geometries with the `srs_id` specified for the column by the
 `gpkg_geometry_columns` table `srs_id` column value.
 ________________________________________________________________________________________________________________________
 

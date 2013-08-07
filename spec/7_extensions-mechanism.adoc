@@ -13,7 +13,7 @@ GeoPackage file.
 ====== Table Definition
 
 ________________________________________________________________________________________________________________________
-*Req 60:* A GeoPackage file MAY contain a table or updateable view named gpkg_extensions. If present this table SHALL be
+*Req {counter:req}:* A GeoPackage file MAY contain a table or updateable view named gpkg_extensions. If present this table SHALL be
 defined per clause 2.6.1.1.1, Table 13 and Table 23.
 ________________________________________________________________________________________________________________________
 
@@ -36,17 +36,17 @@ See Annex C: Table Definition SQL clause C.3 gpkg_extensions.
 ====== Table Data Values
 
 ________________________________________________________________________________________________________________________
-*Req 61:* Values of the `gpkg_extensions` table `table_name` column SHALL reference values in the `gpkg_contents`
+*Req {counter:req}:* Values of the `gpkg_extensions` table `table_name` column SHALL reference values in the `gpkg_contents`
 `table_name` column or be NULL. They SHALL NOT be NULL for rows where the `column_name` value is not NULL.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 62:* The `column_name` column value in a `gpkg_extensions` table row SHALL be the name of a column in the table
+*Req {counter:req}:* The `column_name` column value in a `gpkg_extensions` table row SHALL be the name of a column in the table
 specified by the `table_name` column value for that row, or be NULL.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req 63:* Each `extension_name` column value in a `gpkg_extensions` table row SHALL be a unique value of the form \_\
+*Req {counter:req}:* Each `extension_name` column value in a `gpkg_extensions` table row SHALL be a unique value of the form \_\
 where \ indicates the person or organization that developed and maintains the extension. The valid character set for \
 SHALL be [a-zA-Z0-9]. The valid character set for \ SHALL be [a-zA-Z0-9_]. An `extension_name` for the “gpkg” author
 name SHALL be one of those listed in Table 14.
@@ -78,7 +78,7 @@ GeoPackage SQLite Extension.
 ====== API GeoPackage SQLite Config
 
 ________________________________________________________________________________________________________________________
-*Req 64:* A GeoPackage SQLite Extension MAY provide SQL runtime functions or rtree support for a GeoPackage file. One
+*Req {counter:req}:* A GeoPackage SQLite Extension MAY provide SQL runtime functions or rtree support for a GeoPackage file. One
 that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.1 Table 15
 ________________________________________________________________________________________________________________________
 
@@ -95,7 +95,7 @@ ________________________________________________________________________________
 ====== Safe GeoPackage SQLite Config
 
 ________________________________________________________________________________________________________________________
-*Req 65:* A GeoPackage SQLite Extension MAY provide primary/foreign key and trigger support for a GeoPackage file. One
+*Req {counter:req}:* A GeoPackage SQLite Extension MAY provide primary/foreign key and trigger support for a GeoPackage file. One
 that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.2 Table 16.
 ________________________________________________________________________________________________________________________
 
