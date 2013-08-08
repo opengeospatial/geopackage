@@ -45,8 +45,8 @@ To suggest changes to the specification please fork the repository and submit a 
 changes to the document. Please make one pull request per logical requested change, and be sure to
 include a comment in the PR with any justification or reasoning on why the change is needed.
 
-For more general comments (that don't include actual text changes to the spec) we recommend the 
-traditional OGC comment process on the [GeoPackage RFC](http://www.opengeospatial.org/standards/requests/105). 
+For more general comments (that don't include actual text changes to the spec) just create a github
+issue with the relevant information. With one issue per general change.
 
 For more detailed guidance, or if you are new to github, see the [Process page](process.md) for additional 
 information on editing.
