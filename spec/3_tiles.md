@@ -1,4 +1,3 @@
-
 The optional capabilities specified in this section depend on the required capabilities specified in the [Base section](1_base.md).
 
 ## 2.2. Tiles
@@ -78,7 +77,7 @@ resolution by powers of 2, irregular intervals, or regular intervals other than 
 See Annex C: Table Definition SQL clause C.6 `gpkg_tile_matrix_metadata`
 
 ##### 2.2.6.1.2. Table Data Values
-> **Req 33:** Values of the `tile_matrix_metadata` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column for rows with a `data_type` of “tiles”.
+> **Req 33:** Values of the `gpkg_tile_matrix_metadata` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column for rows with a `data_type` of “tiles”.
 
 > **Req 34:** A `gpkg_tile_matrix_metadata` table SHALL contain one row record for each zoom level that contains one or more tiles in each tile matrix user data table.
 
@@ -89,21 +88,21 @@ level view[^5], as specified by [WMTS](http://portal.opengeospatial.org/files/?a
 The tile coordinate (0,0) always refers to the tile in the upper left corner of the tile matrix at
 any zoom level, regardless of the actual availability of that tile.
 
-> **Req 35:** The `zoom_level` column value in a `tile_matrix_metadata` table row SHALL not be negative.
+> **Req 35:** The `zoom_level` column value in a `gpkg_tile_matrix_metadata` table row SHALL not be negative.
 
-> **Req 36:** The `matrix_width` column value in a `tile_matrix_metadata` table row SHALL be greater than 0.
+> **Req 36:** The `matrix_width` column value in a `gpkg_tile_matrix_metadata` table row SHALL be greater than 0.
 
-> **Req 37:** The `matrix_height` column value in a `tile_matrix_metadata` table row SHALL be greater than 0.
+> **Req 37:** The `matrix_height` column value in a `gpkg_tile_matrix_metadata` table row SHALL be greater than 0.
 
-> **Req 38:** The `tile_width` column value in a `tile_matrix_metadata` table row SHALL be greater than 0. 
+> **Req 38:** The `tile_width` column value in a `gpkg_tile_matrix_metadata` table row SHALL be greater than 0. 
 
-> **Req 39:** The `tile_height` column value in a `tile_matrix_metadata` table row SHALL be greater than 0.
+> **Req 39:** The `tile_height` column value in a `gpkg_tile_matrix_metadata` table row SHALL be greater than 0.
 
-> **Req 40:** The `pixel_x_size` column value in a `tile_matrix_metadata` table row SHALL be greater than 0.
+> **Req 40:** The `pixel_x_size` column value in a `gpkg_tile_matrix_metadata` table row SHALL be greater than 0.
 
-> **Req 41:** The `pixel_y_size` column value in a `tile_matrix_metadata` table row SHALL be greater than 0.
+> **Req 41:** The `pixel_y_size` column value in a `gpkg_tile_matrix_metadata` table row SHALL be greater than 0.
 
-> **Req 42:** The `pixel_x_size` and `pixel_y_size` column values for `zoom_level` column values in a `tile_matrix_metadata` table sorted in ascending order SHALL be sorted in descending order.
+> **Req 42:** The `pixel_x_size` and `pixel_y_size` column values for `zoom_level` column values in a `gpkg_tile_matrix_metadata` table sorted in ascending order SHALL be sorted in descending order.
 
 Tiles MAY or MAY NOT be provided for level 0 or any other particular zoom level.[^6] This means that a
 tile matrix set can be sparse, i.e. not contain a tile for any particular position at a certain tile
@@ -121,8 +120,8 @@ level.[^8]
 |------------|-------------|--------------------|------|---------|-----|
 | `id` |	integer	| Autoincrement primary key |	no |	|	PK |
 | `zoom_level` |	integer |	min(zoom_level) <= `zoom_level` <= max(zoom_level)  for `t_table_name` |	no |	0	 | UK |
-| `tile_column` |	integer	| 0 to `tile_matrix_metadata` `matrix_width` – 1 |	no |	0	| UK |
-| `tile_row` |	integer	| 0 to `tile_matrix_metadata` `matrix_height` - 1 |	no	| 0 |	UK |
+| `tile_column` |	integer	| 0 to `gpkg_tile_matrix_metadata` `matrix_width` – 1 |	no |	0	| UK |
+| `tile_row` |	integer	| 0 to `gpkg_tile_matrix_metadata` `matrix_height` - 1 |	no	| 0 |	UK |
 | `tile_data` |	BLOB	| Of an image MIME type specified in clause 10.2 | no	| | |	
 
 
@@ -134,9 +133,9 @@ Each tiles table or view[^9] MAY contain tile matrices at zero or more zoom leve
 
 > **Req 44:** For each distinct `table_name` from the `gpkg_tile_matrix_metadata` (tmm) table, the tile matrix set (tms) user data table `zoom_level` column value in a GeoPackage file SHALL be in the range min(tmm.zoom\_level) <= tms.zoom\_level <= max(tmm.zoom\_level).
 
-> **Req 45:** For each distinct `table_name` from the `tile_matrix_metadata` (tmm) table, the tile matrix set (tms) user data table `tile_column` column value in a GeoPackage file SHALL be in the range 0 <= tms.tile\_column <= tmm.matrix\_width – 1 where the tmm and tms `zoom_level` column values are equal.
+> **Req 45:** For each distinct `table_name` from the `gpkg_tile_matrix_metadata` (tmm) table, the tile matrix set (tms) user data table `tile_column` column value in a GeoPackage file SHALL be in the range 0 <= tms.tile\_column <= tmm.matrix\_width – 1 where the tmm and tms `zoom_level` column values are equal.
 
-> **Req 46:** For each distinct `table_name` from the `tile_matrix_metadata` (tmm) table, the tile matrix set (tms) user data table `tile_row` column value in a GeoPackage file SHALL be in the range 0 <= tms.tile_row <= tmm.matrix_height – 1 where the tmm and tms `zoom_level` column values are equal.
+> **Req 46:** For each distinct `table_name` from the `gpkg_tile_matrix_metadata` (tmm) table, the tile matrix set (tms) user data table `tile_row` column value in a GeoPackage file SHALL be in the range 0 <= tms.tile_row <= tmm.matrix_height – 1 where the tmm and tms `zoom_level` column values are equal.
 
 All tiles at a particular zoom level have the same `pixel_x_size` and `pixel_y_size` values specified in the `gpkg_tile_matrix_metadata` row record for that tiles table and zoom level.[^10] 
 
