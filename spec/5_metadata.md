@@ -59,7 +59,7 @@ specification by addition of entries with “NA” as the scope code column in T
 | undefined | NA | Metadata information scope is undefined |
 | fieldSession | 012 | Information applies to the field session |
 | collectionSession | 004 | Information applies to the collection session | 
-| series | 006 | Information applies to the (dataset) series4 | 
+| series | 006 | Information applies to the (dataset) series [^4] | 
 | dataset | 005 | Information applies to the (geographic feature) dataset |
 | featureType | 010 | Information applies to a feature type (class) | 
 | feature | 009 | Information applies to a feature (instance) |
