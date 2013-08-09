@@ -107,7 +107,7 @@ The triggers to enforce `gpkg_geometry_columns` `geometry_type_name` constraints
 
 ##### 3.1.4.1.2. Geometry Type Triggers – Extensions Name
 
-> **Req 76:** The “gpkg_geometry_type_trigger” extension name SHALL be used as a `geopackage_extension` table extension name column value to specify implementation of geometry type triggers.
+> **Req 76:** The “gpkg_geometry_type_trigger” extension name SHALL be used as a `gpkg_extensions` table extension name column value to specify implementation of geometry type triggers.
 
 ##### 3.1.4.1.3. Geometry Type Triggers – Extensions Row
 
@@ -152,7 +152,7 @@ The triggers to enforce `geometry_columns` `srs_id` constraints on feature table
 
 ##### 3.1.5.1.2. SRS_ID Triggers – Extensions Name
 
-> **Req 79:** The “gpkg\_srs\_id\_trigger” extension name SHALL be used as a `geopackage_extension` table extension name column value to specify implementation of `srs_id` triggers.
+> **Req 79:** The “gpkg\_srs\_id\_trigger” extension name SHALL be used as a `gpkg_extensions` table extension name column value to specify implementation of `srs_id` triggers.
 
 ##### 3.1.5.1.3. SRS_ID Triggers – Extensions Row
 
@@ -187,7 +187,7 @@ As a registered extension, a GeoPackage file that contains a tile matrix user da
 
 ##### 3.2.2.2.1. WEBP -- Extensions Name
 
-> **Req 83:** The “gpkg\_webp” extension name SHALL be used as a `geopackage_extension` table extension name column value to specify storage of raster images in WEBP format.
+> **Req 83:** The “gpkg\_webp” extension name SHALL be used as a `gpkg_extensions` table extension name column value to specify storage of raster images in WEBP format.
 
 ##### 3.2.2.2.2. WEBP -- Extensions Row
 
@@ -204,7 +204,7 @@ As a registered extension, a GeoPackage file that contains a tile matrix user da
 
 ##### 3.2.3.1.2. TIFF -- Extensions Name 
 
-> **Req 85:** The “gpkg\_tiff” extension name SHALL be used as a `geopackage_extension` table extension name column value to specify storage of raster images in TIFF format.
+> **Req 85:** The “gpkg\_tiff” extension name SHALL be used as a `gpkg_extensions` table extension name column value to specify storage of raster images in TIFF format.
 
 ##### 3.2.3.1.3. Extensions Row
 
@@ -221,7 +221,7 @@ As a registered extension, a GeoPackage file that contains a tile matrix user da
 
 ##### 3.2.4.1.2. NITF -- Extensions Name
 
-> **Req 87:** The “gpkg\_nitf” extension name SHALL be used as a `geopackage_extension` table extension name column value to specify storage of raster images in NITF format.
+> **Req 87:** The “gpkg\_nitf” extension name SHALL be used as a `gpkg_extensions` table extension name column value to specify storage of raster images in NITF format.
 
 ##### 3.2.4.1.3. NITF -- Extensions Row 
 
