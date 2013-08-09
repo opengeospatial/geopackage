@@ -200,7 +200,7 @@ The optional extension capabilities defined in sub clauses and requirement state
 
 ##### 3.2.3.1.1. TIFF MIME Type
 
-As a registered extension, a GeoPackage file that contains a tile matrix user data table that contains tile data MAY store tile_data in MIME type image/tiff [27] for GeoTIFF images [28][29] that meet the requirements of the NGA Implementation Profile [31] for coordinate transformation case 3 where the position and scale of the data is known exactly, and no rotation of the image is required.
+As a registered extension, a GeoPackage file that contains a tile matrix user data table that contains tile data MAY store tile_data in MIME type image/tiff [27] for GeoTIFF images [28] that meet the requirements of the NGA Implementation Profile [29] for coordinate transformation case 3 where the position and scale of the data is known exactly, and no rotation of the image is required.
 
 ##### 3.2.3.1.2. TIFF -- Extensions Name 
 
