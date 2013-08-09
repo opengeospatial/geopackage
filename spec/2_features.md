@@ -47,8 +47,9 @@ circumstances, such as topological representations.
 A brief description of each geometry type is provided below. A more detailed description can be found in ISO 13249-3[16]. 
 
  * Geometry: the root of the geometry type hierarchy. 
- * Point: a single location in space. Each point has an X and Y coordinate. A point may optionally also have a Z and/or an M value.* Curve: the base type for all 1-dimensional geometry types. A 1-dimensional geometry is a geometry that has a length, but no area. A curve is considered simple if it does not intersect itself (except at the start and end point). A curve is considered closed its start and end point are coincident. A simple, closed curve is called a ring. 
- * LineString: A Curve that connects two or points in space. 
+ * Point: a single location in space. Each point has an X and Y coordinate. A point may optionally also have a Z and/or an M value.
+ * Curve: the base type for all 1-dimensional geometry types. A 1-dimensional geometry is a geometry that has a length, but no area. A curve is considered simple if it does not intersect itself (except at the start and end point). A curve is considered closed its start and end point are coincident. A simple, closed curve is called a ring. 
+ * LineString: A Curve that connects two or more points in space. 
  * Surface: the base type for all 2-dimensional geometry types. A 2-dimensional geometry is a geometry that has an area. 
  * CurvePolygon: A planar surface defined by an exterior ring and zero or more interior ring. Each ring is defined by a Curve instance. 
  * Polygon: A restricted form of CurvePolygon where each ring is defined as a simple, closed LineString. 
