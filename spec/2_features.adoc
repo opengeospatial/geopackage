@@ -1,4 +1,3 @@
-[[options]]
 == Options
 
 The optional capabilities specified in this clause depend on the required capabilities specified in 1 Base above.
@@ -13,13 +12,14 @@ ________________________________________________________________________________
 The optional capabilities defined in sub clauses and requirement statements of this clause MAY be implemented by any
 GeoPackage file.
 
+[[sfsql_intro]]
 ==== Simple Features SQL Introduction
 
 Vector feature data represents geolocated entities including conceptual ones such as districts, real world objects such
 as roads and rivers, and observations thereof. International specifications [15][16] have standardized practices for the
 storage, access and use of vector geospatial features and geometries via SQL in relational databases. The first
 component of the SQL schema for vector features in a GeoPackage is the `gpkg_spatial_ref_sys` table defined in clause
-1.1.2 above. Other components are defined below.
+<<spatial_ref_sys>> above. Other components are defined below.
 
 In a GeoPackage file, “simple” features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) [16]
 geometry model shown in figure 2 below.

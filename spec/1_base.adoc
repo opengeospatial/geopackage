@@ -1,10 +1,8 @@
-[[base]]
 == Base
 
 The required capabilities specified in this clause serve as the base for optional features and registered extensions
 capabilities specified in clauses <<options>> and <<registered_extensions>>.
 
-[[base_core]]
 === Core
 
 The mandatory core capabilities defined in sub clauses and requirement statements of this clause SHALL be implemented by
@@ -92,6 +90,7 @@ ________________________________________________________________________________
 |compile |SQLITE_OMIT_VIEW |Not |GeoPackage tables MAY be implemented as updateable views.
 |=======================================================================
 
+[[spatial_ref_sys]]
 ==== Spatial Reference Systems
 
 ===== Data
@@ -100,21 +99,21 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
 *Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table or updateable view per table
-<<spatial_ref_sys_cols>> and table 19.
+<<gpkg_spatial_ref_sys_cols>> and table <<gpkg_spatial_ref_sys_sql>>.
 ________________________________________________________________________________________________________________________
 
 A table or updateable view named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple
-features described in clause 2.1.1 below. The coordinate reference system definitions it contains are referenced by the
-GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to
-locations on the earth. The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in SQL/MM
-(ISO 13249-3) [16] and shown in 2 below containing data that defines spatial reference systems. This table or view MAY
-include additional columns to meet the requirements of implementation software or other specifications. Views of this
-table or view MAY be used to provide compatibility with the
+features described in clause <<sfsql_intro>> below. The coordinate reference system definitions it contains are
+referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in
+user tables to locations on the earth. The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in
+SQL/MM (ISO 13249-3) [16] and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial
+reference systems. This table or view MAY include additional columns to meet the requirements of implementation software
+or other specifications. Views of this table or view MAY be used to provide compatibility with the
 http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM]
-(see table 20 in Annex C) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL]
-(see table 21 in Annex C) specifications.
+(see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL]
+(see <<sfsql_gpkg_spatial_ref_sys_sql>>) specifications.
 
-[[spatial_ref_sys_cols]]
+[[gpkg_spatial_ref_sys_cols]]
 .Spatial Ref Sys Table or View Definition
 [cols=",,,",options="header",]
 |=======================================================================
@@ -127,7 +126,7 @@ http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumbe
 |`description` |`text` |Human readable description of this SRS |
 |=======================================================================
 
-See Annex C Table Definition SQL (Normative) C.1 `gpkg_spatial_ref_sys`.
+See <<gpkg_spatial_ref_sys_sql>>.
 
 ====== Table Data Values
 
@@ -153,8 +152,8 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
 *Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_contents` table or updateable view per table <<gpkg_contents_cols>>
-and table 22. The purpose of the `gpkg_contents` table is to provide identifying and descriptive information that an
-application can display to a user in a menu of geospatial data that is available for access and/or update.
+and <<gpkg_contents_sql>>. The purpose of the `gpkg_contents` table is to provide identifying and descriptive information
+that an application can display to a user in a menu of geospatial data that is available for access and/or update.
 ________________________________________________________________________________________________________________________
 
 [[gpkg_contents_cols]]
@@ -163,7 +162,7 @@ ________________________________________________________________________________
 |=======================================================================
 |Column Name |Type |Description |Null |Default |Key
 |`table_name` |text |The name of the tiles, or feature table |no | |PK
-|`data_type` |text |Type of data stored in the table:. “features” per clause 2.1.2.1.1, “tiles” per clause 2.2.2.1.1, or an implementer-defined value for other data tables per clause 2.5. |no | |
+|`data_type` |text |Type of data stored in the table:. “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause <<other_data_tables>>. |no | |
 |`identifier` |text |A human-readable identifier (e.g. short name) for the table_name content |no | |
 |`description` |text |A human-readable description for the table_name content |no |“” |
 |`last_change` |text |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', CURRENT_TIMESTAMP)` |
@@ -180,7 +179,7 @@ box (not necessarily minimum bounding box) of the content. If the `srs_id column
 coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references
 a projected CRS and the min/max x/y values are in the units specified by that CRS.
 
-See Annex C Table Definition SQL (Normative) C.2 `gpkg_contents`.
+See <<gpkg_contents_sql>>.
 
 ====== Table Data Values
 

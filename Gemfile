@@ -33,6 +33,7 @@ gem 'rake', '>= 0.9.2'                                    # Needed for the Rakef
 # gem 'org-ruby', '>= 0.8'                                # If using Org-Mode
 # gem 'RedCloth', '>= 4.2.9'                              # If using Textile
 gem 'asciidoctor', '>= 0.1.3'                             # If using AsciiDoc syntax, need 0.1.1 for Header support
+gem 'coderay', '1.0.9'
 # gem 'slim', '>= 1.3.6'                                  # If using slim instead of haml
 gem 'kramdown', '>= 0.14.2'                             # If using Markdown
 # gem 'uglifier', '>= 1.3.0'                              # If using the minify transformer
