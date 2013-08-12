@@ -1,7 +1,7 @@
 == Base
 
 The required capabilities specified in this clause serve as the base for optional features and registered extensions
-capabilities specified in clauses <<options>> and <<registered_extensions>>.
+capabilities specified in clauses <<_options>> and <<_registered_extensions>>.
 
 === Core
 
@@ -162,7 +162,7 @@ ________________________________________________________________________________
 |=======================================================================
 |Column Name |Type |Description |Null |Default |Key
 |`table_name` |text |The name of the tiles, or feature table |no | |PK
-|`data_type` |text |Type of data stored in the table:. “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause <<other_data_tables>>. |no | |
+|`data_type` |text |Type of data stored in the table:. “features” per clause <<_features>>, “tiles” per clause <<_tiles>>, or an implementer-defined value for other data tables per clause <<other_data_tables>>. |no | |
 |`identifier` |text |A human-readable identifier (e.g. short name) for the table_name content |no | |
 |`description` |text |A human-readable description for the table_name content |no |“” |
 |`last_change` |text |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', CURRENT_TIMESTAMP)` |
