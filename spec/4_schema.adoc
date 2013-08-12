@@ -1,6 +1,7 @@
 === Schema
 
-The optional capabilities defined in sub clauses and requirement statements of this clause MAY be implemented by any GeoPackage file.
+The optional capabilities defined in sub clauses and requirement statements of this clause MAY be implemented by any
+GeoPackage file.
 
 ==== Data Columns
 
@@ -9,10 +10,11 @@ The optional capabilities defined in sub clauses and requirement statements of t
 ====== Table Definition
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage file MAY contain a table or updateable view named `gpkg_data_columns`. If present it SHALL be
-defined per clause 2.3.1.1.1, Table 9 and Table 32.
+*Req {counter:req}:* A GeoPackage file MAY contain a table or updateable view named `gpkg_data_columns`. If present it
+SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
 ________________________________________________________________________________________________________________________
 
+[[gpkg_data_columns_cols]]
 .Data Columns Table or View Definition
 [cols=",,,,",options="header",]
 |=======================================================================
@@ -25,14 +27,18 @@ ________________________________________________________________________________
 |`mime_type` |text |http://www.iana.org/assignments/media-types/index.html[MIME] type of column_name if BLOB type, or NULL for other types |yes |
 |=======================================================================
 
-GeoPackage applications MAY[^1] use the `gpkg_data_columns` table to store minimal application schema identifying,
-descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] type [^2] information about columns in user
-vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and
-pragma `table_info(table_name)` SQL function. The `gpkg_data_columns` data CAN be used to provide more specific column
-data types and value ranges and application specific structural and semantic information to enable more informative user
-menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
+:data_cols_foot1: footnote:[A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.]
+:data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses 2.2.4, 2.2.5, 3.2.2, 3.2.3, and 3.2.4 as feature attributes, but they are not required to do so.]
 
-See Annex C: Table Definition SQL clause C.8 `gpkg_data_columns`
+GeoPackage applications MAY {data_cols_foot1} use the `gpkg_data_columns` table to store minimal application schema
+identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] type {data_cols_foot2}
+information about columns in user vector feature and tile matrix data tables that supplements the data available from
+the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function. The `gpkg_data_columns` data CAN be
+used to provide more specific column data types and value ranges and application specific structural and semantic
+information to enable more informative user menu displays and more effective user decisions on the suitability of
+GeoPackage contents for specific purposes.
+
+See <<gpkg_data_columns_sql>>.
 
 ====== Table Data Values
 
@@ -42,6 +48,6 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `column_name` column value in a `gpkg_data_columns` table row SHALL contain the name of a column in the
-SQLite table or view identified by the `table_name` column value.
+*Req {counter:req}:* The `column_name` column value in a `gpkg_data_columns` table row SHALL contain the name of a
+column in the SQLite table or view identified by the `table_name` column value.
 ________________________________________________________________________________________________________________________
