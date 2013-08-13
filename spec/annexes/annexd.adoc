@@ -2,4 +2,51 @@
 [appendix]
 == Minimal Runtime SQL Functions (Normative)
 
-To be completed.
+.Minimal Runtime SQL Functions
+[cols=",,",options="header"]
+|====
+|SQL Function |Description | Use
+|ST_SRID(geom. Geometry) : INTEGER
+|Returns the spatial reference system id of a Geometry
+|Check that geometry srid matches what's specified in geometry_columns.srid
+|ST_GeometryType(geom. Geometry) : TEXT
+|Returns the WKB geometry type name of a Geometry
+|Check that the geometry type matches what’s specified in geometry_columns.geometry_type
+|GPKG_IsAssignable(expected_type_name TEXT, actual_type_name TEXT): INTEGER
+|Returns 1 if a value of type expected_type_name is the same or a super type of type actual_type_name.
+ Returns 0 otherwise.
+|Determine if the expected geometry type is the same as or a super type of the actual geometry type.
+|ST_IsEmpty(geom. Geometry)
+|Returns 1 if geometry value is empty, 0 if not empty, NULL if geometry value is NULL.
+|Test if a geometry value corresponds to the empty set
+|ST_Is3D(geom. Geometry)
+|Check that elevation values are present when they are required, and not present when they are prohibited.
+|Tests whether a Geometry value has z coordinates
+|ST_IsMeasured(geom. Geometry)
+|Check that measure values are present when they are required, and not present when they are prohibited.
+|Tests whether a Geometry value has m coordinates.
+|ST_MinX(geom. Geometry) : REAL
+|Returns the minimum X value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|ST_MaxX(geom. Geometry) : REAL
+|Returns the maximum X value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|ST_MinY(geom. Geometry) : REAL
+|Returns the minimum Y value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|ST_MaxY(geom. Geometry) : REAL
+|Returns the maximum Y value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|ST_MinZ(geom. Geometry) : REAL
+|Returns the minimum Z value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|ST_MaxZ(geom. Geometry) : REAL
+|Returns the maximum Z value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|ST_MinM(geom. Geometry) : REAL
+|Returns the minimum M value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|ST_MaxM(geom. Geometry) : REAL
+|Returns the maximum M value of the bounding Envelope of a Geometry
+|Update the spatial index on a geometry column in a feature table.
+|====
