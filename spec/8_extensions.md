@@ -102,7 +102,7 @@ WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
 END
 ```
 
-where <t> and <c> are replaced with the names of the feature table and geometry column being inserted or updated.
+where \<t\> and \<c\> are replaced with the names of the feature table and geometry column being inserted or updated.
 The triggers to enforce `gpkg_geometry_columns` `geometry_type_name` constraints on feature table geometries use Minimal Runtime SQL Functions specified in Annex D.
 
 ##### 3.1.4.1.2. Geometry Type Triggers – Extensions Name
@@ -147,7 +147,7 @@ WHERE (SELECT srs_id FROM gpkg_geometry_columns
 END
 ```
 
-where <t> and <c> are replaced with the names of the feature table and geometry column being inserted or updated.
+where \<t\> and \<c\> are replaced with the names of the feature table and geometry column being inserted or updated.
 The triggers to enforce `geometry_columns` `srs_id` constraints on feature table geometries use Minimal Runtime SQL Functions specified in Annex F
 
 ##### 3.1.5.1.2. SRS_ID Triggers – Extensions Name
