@@ -11,6 +11,8 @@ information to build richer applications. An [Extension Mechanism](spec/7_extens
 described to provide implementors a way to include additional functionality in their GeoPackages, with a 
 number of optional [extensions](spec/8_extensions.md) included.
 
+Sample HTML version of the spec is available at http://pepijnve.github.io/geopackage/
+
 About
 -----
 
