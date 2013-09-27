@@ -71,9 +71,11 @@ CREATE TABLE gpkg_contents (
 .gpkg_extensions Table Definition SQL
 ----
 CREATE TABLE gpkg_extensions (
-  table_name TEXT UNIQUE,
-  column_name TEXT UNIQUE,
-  extension_name TEXT NOT NULL UNIQUE,
+  table_name TEXT,
+  column_name TEXT,
+  extension_name TEXT NOT NULL,
+  scope TEXT NOT NULL,
+  UNIQUE KEY (table_name, column_name, extension_name)
 )
 ----
 
@@ -84,7 +86,7 @@ CREATE TABLE gpkg_extensions (
 .gpkg_geometry_columns Table Definition SQL
 ----
 CREATE TABLE gpkg_geometry_columns (
-  table_name TEXT NOT NULL REFERENCES gpkg_contents(table_name),
+  table_name TEXT UNIQUE NOT NULL REFERENCES gpkg_contents(table_name),
   column_name TEXT NOT NULL,
   geometry_type TEXT NOT NULL,
   srs_id INTEGER NOT NULL REFERENCES gpkg_spatial_ref_sys (srs_id),
@@ -130,12 +132,12 @@ CREATE VIEW geometry_columns AS
 .sample_feature_table Table Definition SQL
 ----
 CREATE TABLE sample_feature_table (
-  id INTEGER AUTOINCREMENT PRIMARY KEY,
-  geometry_one BLOB NOT NULL,
-  text_attribute TEXT NOT NULL,
-  real_attribute REAL NOT NULL,
-  numeric_attribute NUMERIC NOT NULL,
-  raster_or_photo BLOB NOT NULL
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  geometry BLOB,
+  text_attribute TEXT,
+  real_attribute REAL,
+  numeric_attribute NUMERIC,
+  raster_or_photo BLOB
 )
 ----
 

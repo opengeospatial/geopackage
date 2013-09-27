@@ -1,7 +1,13 @@
 [appendix]
 == Spatial Index SQL (Normative)
 
-=== Create Virtual Table
+The tables below contain SQL templates with variables.  Replace the following template variables with the specified
+values to create the required SQL statements:
+<t>: The name of the feature table containing the geometry column
+<c>: The name of the geometry column in <t> that is being indexed
+<i>: The name of the integer primary key column in <t> as specified in Req 25
+
+=== Create Virtual Table SQL Template
 
 GeoPackage files MAY contain a spatial index for each geometry column of a feature table.
 These spatial indexes SHALL be created using the SQLite Virtual Table RTree extension. An
@@ -30,11 +36,11 @@ Each newly created spatial index SHALL be populated using the following SQL stat
 [source,sql]
 ----
 INSERT OR REPLACE INTO rtree_<t>_<c>
-  SELECT rowid, st_minx(<c>), st_maxx(<c>), st_miny(<c>), st_maxy(<c>) FROM <t>;
+  SELECT <i>, st_minx(<c>), st_maxx(<c>), st_miny(<c>), st_maxy(<c>) FROM <t>;
 ----
 
 where <t> and <c> are replaced with the names of the feature table and geometry column
-being indexed.
+being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
 === Define Triggers to Maintain Spatial Index Values
 
@@ -51,7 +57,7 @@ CREATE TRIGGER rtree_<t>_<c>_insert AFTER INSERT ON <t>
   WHEN (new.<c> NOT NULL AND NOT ST_IsEmpty(NEW.<c>))
 BEGIN
   INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
-    NEW.rowid,
+    NEW.<i>,
     ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
     ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
   );
@@ -61,11 +67,11 @@ END;
                No row ID change
    Actions   : Update record in rtree */
 CREATE TRIGGER rtree_<t>_<c>_update1 AFTER UPDATE OF <c> ON <t>
-  WHEN OLD.rowid = NEW.rowid AND
+  WHEN OLD.<i> = NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
 BEGIN
   INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
-    NEW.rowid,
+    NEW.<i>,
     ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
     ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
   );
@@ -75,24 +81,24 @@ END;
                No row ID change
    Actions   : Remove record from rtree */
 CREATE TRIGGER rtree_<t>_<c>_update2 AFTER UPDATE OF <c> ON <t>
-  WHEN OLD.rowid = NEW.rowid AND
+  WHEN OLD.<i> = NEW.<i> AND
        (NEW.<c> ISNULL OR ST_IsEmpty(NEW.<c>))
 BEGIN
-  DELETE FROM rtree_<t>_<c> WHERE id = OLD.rowid;
+  DELETE FROM rtree_<t>_<c> WHERE id = OLD.<i>;
 END;
 
 /* Conditions: Update of any column
                Row ID change
                Non-empty geometry
-   Actions   : Remove record from rtree for old rowid
-               Insert record into rtree for new rowid */
+   Actions   : Remove record from rtree for old <i>
+               Insert record into rtree for new <i> */
 CREATE TRIGGER rtree_<t>_<c>_update3 AFTER UPDATE OF <c> ON <t>
-  WHEN OLD.rowid != NEW.rowid AND
+  WHEN OLD.<i> != NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
 BEGIN
-  DELETE FROM rtree_<t>_<c> WHERE id = OLD.rowid;
+  DELETE FROM rtree_<t>_<c> WHERE id = OLD.<i>;
   INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
-    NEW.rowid,
+    NEW.<i>,
     ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
     ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
   );
@@ -101,22 +107,22 @@ END;
 /* Conditions: Update of any column
                Row ID change
                Empty geometry
-   Actions   : Remove record from rtree for old and new rowid */
+   Actions   : Remove record from rtree for old and new <i> */
 CREATE TRIGGER rtree_<t>_<c>_update4 AFTER UPDATE ON <t>
-  WHEN OLD.rowid != NEW.rowid AND
+  WHEN OLD.<i> != NEW.<i> AND
        (NEW.<c> ISNULL OR ST_IsEmpty(NEW.<c>))
 BEGIN
-  DELETE FROM rtree_<t>_<c> WHERE id IN (OLD.rowid, NEW.rowid);
+  DELETE FROM rtree_<t>_<c> WHERE id IN (OLD.<i>, NEW.<i>);
 END;
 
 /* Conditions: Row deleted
-   Actions   : Remove record from rtree for old rowid */
+   Actions   : Remove record from rtree for old <i> */
 CREATE TRIGGER rtree_<t>_<c>_delete AFTER DELETE ON <t>
   WHEN old.<c> NOT NULL
 BEGIN
-  DELETE FROM rtree_<t>_<c> WHERE id = OLD.rowid;
+  DELETE FROM rtree_<t>_<c> WHERE id = OLD.<i>;
 END;
 ----
 
 where <t> and <c> are replaced with the names of the feature table and geometry column
-being indexed.
+being indexed and <i> is replaced with the name of the feature table integer primary key column.
