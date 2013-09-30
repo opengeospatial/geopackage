@@ -8,10 +8,10 @@
 |SQL Function |Description | Use
 |ST_SRID(geom. Geometry) : INTEGER
 |Returns the spatial reference system id of a Geometry
-|Check that geometry srid matches what's specified in geometry_columns.srid
+|Check that geometry srid matches what's specified in gpkg_geometry_columns.srid
 |ST_GeometryType(geom. Geometry) : TEXT
 |Returns the WKB geometry type name of a Geometry
-|Check that the geometry type matches what’s specified in geometry_columns.geometry_type
+|Check that the geometry type matches what’s specified in gpkg_geometry_columns.geometry_type_name
 |GPKG_IsAssignable(expected_type_name TEXT, actual_type_name TEXT): INTEGER
 |Returns 1 if a value of type expected_type_name is the same or a super type of type actual_type_name.
  Returns 0 otherwise.

@@ -27,7 +27,7 @@ relates it to GeoPackage contents SHALL NOT be stored in other tables as defined
 ====== Table Definition
 
 ________________________________________________________________________________________________________________________
-_Req 50:_ A GeoPackage file MAY contain a table or updateable view named gpkg_metadata. If present it SHALL be defined
+_Req 50:_ A GeoPackage file MAY contain a table named gpkg_metadata. If present it SHALL be defined
 per <<gpkg_metadata_cols>> and <<gpkg_metadata_sql>>.
 ________________________________________________________________________________________________________________________
 
@@ -39,16 +39,20 @@ GeoPackage interpretation of what constitutes “metadata” is a broad one that
 etc.
 
 [[gpkg_metadata_cols]]
-.Metadata Table or View Definition
+.Metadata Table Definition
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Default |Key
 |`id` |integer |Metadata primary key |no | |PK
-|`md_scope` |text |Name of the data scope to which this metadata applies; see table 11 below |no |‘dataset’ |
-|`md_standard_uri` |text |URI reference to the metadata structure definition authority |no |http://schemas.opengis.net/iso/19139/
+|`md_scope` |text |Case sensitive name of the data scope to which this metadata applies; see table 11 below |no |‘dataset’ |
+|`md_standard_uri` |text |URI reference to the metadata structure definition authority |no |
 |`mime_type` |text |MIME [25] encoding of metadata |no |text/xml |
 |`metadata` |text |metadata |no |’’
 |=======================================================================
+
+The md_standard_uri data value provides an identifier for the metadata structure (schema) specified by its definition
+authority. The structure (schema) information could be in whatever encoding is used by the definition authority, e.g.
+UML, or IDF, or XML/Schema, or RDF/S.
 
 See <<gpkg_metadata_sql>>.
 
@@ -108,7 +112,7 @@ The second component of GeoPackage metadata is the `gpkg_metadata_reference` tab
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Default |Key
-|`reference_scope` |text |Metadata reference scope; one of ‘geopackage’, ‘table’,‘column’, ’row’, ’row/col’ |no | |
+|`reference_scope` |text |Lowercase metadata reference scope; one of ‘geopackage’, ‘table’,‘column’, ’row’, ’row/col’ |no | |
 |`table_name` |text |Name of the table to which this metadata reference applies, or NULL for reference_scope of ‘geopackage’. |yes | |
 |`column_name` |text |Name of the column to which this metadata reference applies; NULL for `reference_scope` of ‘geopackage’,‘table’ or ‘row’, or the name of a column in the `table_name` table for `reference_scope` of ‘column’ or ‘row/col’ |yes | |
 |`row_id_value`[^8] |integer |NULL for `reference_scope` of ‘geopackage’, ‘table’ or ‘column’, or the rowed of a row record in the `table_name` table for `reference_scope` of ‘row’ or ‘row/col’ |yes | |
@@ -124,8 +128,8 @@ See Annex C: Table Definition SQL clause C.10 `gpkg_metadata_reference`.
 ====== Table Data Values
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* Every `gpkg_metadata_reference` table reference scope column value SHALL be one of ‘geopackage’, ‘table’,
-‘column’, ’row’, ’row/col’.
+*Req {counter:req}:* Every `gpkg_metadata_reference` table reference scope column value SHALL be one of ‘geopackage’,
+‘table’, ‘column’, ’row’, ’row/col’ in lowercase.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________

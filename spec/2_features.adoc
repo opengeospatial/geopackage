@@ -4,7 +4,7 @@ The optional capabilities specified in this clause depend on the required capabi
 
 ________________________________________________________________________________________________________________________
 *Req {counter:req}:* A Valid GeoPackage SHALL contain features per clause <<_features>> and/or tiles per clause
-<<_tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of “features” and/or “tiles”
+<<_tiles>> and row(s) in the `gpkg_contents` table with lowercase `data_type` column values of “features” and/or “tiles”
 describing the user data tables.
 ________________________________________________________________________________________________________________________
 
@@ -34,23 +34,25 @@ geometric objects that exist in 2, 3 or 4-dimensional coordinate space (R2, R3 o
 with coordinate values for x and y. Geometry values in R3 have points with coordinate values for x, y and z or for x, y
 and m. Geometry values in R4 have points with coordinate values for x, y, z and m. The interpretation of the coordinates
 is subject to the coordinate reference systems associated to the point. All coordinates within a geometry object should
-be in the same coordinate reference systems. Geometries may include z coordinate values. The z coordinate value
-traditionally represents the third dimension (i.e. 3D). In a Geographic Information System (GIS) this may be height
-above or below sea level. For example: A map might have a point identifying the position of a mountain peak by its
-location on the earth, with the x and y coordinate values, and the height of the mountain, with the z coordinate value.
+be in the same coordinate reference systems.
 
-Geometries may include m coordinate values. The m coordinate value allows the application environment to associate some
+Geometries MAY include z coordinate values. The z coordinate value traditionally represents the third dimension (i.e.
+3D). In a Geographic Information System (GIS) this may be height above or below sea level. For example: A map might have
+a point identifying the position of a mountain peak by its location on the earth, with the x and y coordinate values,
+and the height of the mountain, with the z coordinate value.
+
+Geometries MAY include m coordinate values. The m coordinate value allows the application environment to associate some
 measure with the point values. For example: A stream network may be modeled as multilinestring value with the m
 coordinate values measuring the distance from the mouth of stream.
 
 All geometry types described in this standard are defined so that instances of Geometry are topologically closed, i.e.
 all represented geometries include their boundary as point sets. This does not affect their representation, and open
-version of the same classes may be used in other circumstances, such as topological representations.
+version of the same classes MAY be used in other circumstances, such as topological representations.
 
 A brief description of each geometry type is provided below. A more detailed description can be found in ISO 13249-3 <<N16>>.
 
 * Geometry: the root of the geometry type hierarchy.
-* Point: a single location in space. Each point has an X and Y coordinate. A point may optionally also have a Z and/or
+* Point: a single location in space. Each point has an X and Y coordinate. A point MAY optionally also have a Z and/or
   an M value.
 * Curve: the base type for all 1-dimensional geometry types. A 1-dimensional geometry is a geometry that has a length,
   but no area. A curve is considered simple if it does not intersect itself (except at the start and end point). A curve
@@ -74,8 +76,8 @@ A brief description of each geometry type is provided below. A more detailed des
 ====== Contents Table – Features Row
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* `gpkg_contents` SHALL contain a row with a `data_type` column value of “features” for each vector
-features user data table.
+*Req {counter:req}:* The `gpkg_contents` table SHALL contain a row with a lowercase `data_type` column value of
+“features” for each vector features user data table or view.
 ________________________________________________________________________________________________________________________
 
 ==== Geometry Encoding
@@ -181,9 +183,7 @@ ________________________________________________________________________________
 ________________________________________________________________________________________________________________________
 
 The second component of the SQL schema for vector features in a GeoPackage is a `gpkg_geometry_columns` table that
-identifies the geometry columns in tables that contain user data representing features. This table or updateable view
-SHALL contain one row record for each geometry column in each vector feature data table (clause
-<<feature_user_data_tables>>) in a GeoPackage.
+identifies the geometry columns in tables that contain user data representing features.
 
 [[gpkg_geometry_columns_cols]]
 .Geometry Columns Table or View Definition
@@ -209,20 +209,24 @@ SQL/MM <<N16>> <<sqlmm_gpkg_geometry_columns_sql>> and OGC Simple Features SQL <
 See <<gpkg_geometry_columns_sql>>.
 
 ====== Table Data Values
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `gpkg_geometry_columns` table or updateable view SHALL contain one row record for each geometry
+column in each vector feature data table (clause <<feature_user_data_tables>>) in a GeoPackage.
+________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* Values of the `gpkg_geometry_columns` table `table_name` column SHALL reference values in the
+*Req {counter:req}:* Values of the `gpkg_geometry_columns` `table_name` column SHALL reference values in the
 `gpkg_contents` `table_name` column for rows with a `data_type` of 'features' or 'tiles'.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `column_name` column value in a `gpkg_geometry_columns` table row SHALL be the name of a column
-in the table specified by the `table_name` column value for that row.
+*Req {counter:req}:* The `column_name` column value in a `gpkg_geometry_columns` row SHALL be the name of a column
+in the table or view specified by the `table_name` column value for that row.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `geometry_type_name` value in a `gpkg_geometry_columns` table row SHALL be one of the geometry
-type names specified in <<geometry_types>>.
+*Req {counter:req}:* The `geometry_type_name` value in a `gpkg_geometry_columns` row SHALL be one of the uppercase
+geometry type names specified in <<geometry_types>>.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
@@ -261,16 +265,50 @@ The integer primary key of a feature table allows features to be linked to row l
 `gpkg_metadata` table by rowid values in the `gpkg_metadata_reference` table as described in clause
 <<_metadata_reference_table>> below.
 
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* A feature table SHALL have only one geometry column.
+________________________________________________________________________________________________________________________
+
+Feature data models from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be
+transformed into GeoPackage implementations with a separate feature table for each geometry type whose rows have
+matching integer primary key values that allow them to be joined in a view with the same column definitions as the
+non-GeoPackage feature data model with multiple geometry columns.
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The columns of a vector feature user data table SHALL only be declared using one of the data types
+specified in table <<vector_feature_data_types>>.
+________________________________________________________________________________________________________________________
+
+[[vector_feature_data_types]]
+.Vector Feature Data Types
+[cols=",,,,,",options="header"]
+|=======================================================================
+|Data Type            | Size and Description
+|BOOLEAN              | A boolean value representing true or false. Stored as SQLite INTEGER with value 0 for false or 1 for true
+|TINYINT              | 8-bit signed two's complement integer. Stored as SQLite INTEGER with values in the range [-128, 127]
+|SMALLINT             | 16-bit signed two's complement integer. Stored as SQLite INTEGER with values in the range [-32768, 32767]
+|MEDIUMINT            | 32-bit signed two's complement integer. Stored as SQLite INTEGER with values in the range [-2147483648, 2147483647]
+|INT, INTEGER         | 64-bit signed two's complement integer. Stored as SQLite INTEGER with values in the range [-9223372036854775808, 9223372036854775807]
+|FLOAT                | 32-bit IEEE floating point number Stored as SQLite REAL limited to values that can be represented as a 4-byte IEEE floating point number
+|DOUBLE, REAL         | 64-bit IEEE floating point number Stored as SQLite REAL
+|TEXT                 | Variable length string encoded in either UTF-8 or UTF-16, determined by PRAGMA encoding; see http://www.sqlite.org/pragma.html#pragma_encoding Stored as SQLite TEXT
+|BLOB                 | Variable length binary data Stored as SQLite BLOB
+|<geometry_type_name> | Geometry encoded as per clause 2.1.3 Geometry encoding. <geometry type_name> is one of the geometry types listed in Annex G Geometry Types. XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB
+|DATE                 | ISO-8601 date string encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT
+|DATETIME             | ISO-8601 date/time string encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT
+|DECIMAL_TEXT(m,d)    | Decimal value with maximum digits (precision) (m) from 1 to 65 and digits to the right of the decimal point (scale) (d) from 0 to 30 1
+|=======================================================================
+
 [[example_feature_table_cols]]
 .EXAMPLE : Sample Feature Table or View Definition
 [cols=",,,,,",options="header"]
 |=======================================================================
 |Column Name |Type |Description |Null |Default |Key
-|`id` |integer |Autoincrement primary key |no | |PK
-|`geometry` |BLOB |GeoPackage Geometry |yes | |
-|`text_attribute` |text |Text attribute of feature |yes | |
-|`real_attribute` |real |Real attribute of feature |yes | |
-|`numeric_attribute` |numeric |Numeric attribute of feature |yes | |
+|`id` |INTEGER |Autoincrement primary key |no | |PK
+|`geometry` |GEOMETRY |GeoPackage Geometry |yes | |
+|`text_attribute` |TEXT |Text attribute of feature |yes | |
+|`real_attribute` |REAL |Real attribute of feature |yes | |
+|`boolean_attribute` |BOOLEAN |Boolean attribute of feature |yes | |
 |`raster_or_photo` |BLOB |Photograph of the area |yes | |
 |=======================================================================
 
@@ -278,9 +316,11 @@ See <<example_feature_table_sql>>.
 
 ====== Table Data Values
 
-A feature geometry is stored in a geometry column specified by the `geometry_column` value for the feature table in the
-`gpkg_geometry_columns` table defined in clause <<_geometry_columns>> above. The geometry type of a feature geometry
-column specified in the `gpkg_geometry_columns` table `geometry_type_name` column is a name from <<geometry_types>>.
+A feature geometry is stored in a geometry column specified by the lowercase `geometry_column` value for the feature
+table in the `gpkg_geometry_columns` table defined in clause <<_geometry_columns>> above.
+
+The geometry type of a feature geometry column specified in the `gpkg_geometry_columns` table `geometry_type_name`
+column is a name from <<geometry_types>>.
 
 :geom_type_req_foot1: footnote:[GeoPackage applications MAY use SQL triggers or tests in application code to meet this requirement]
 ________________________________________________________________________________________________________________________

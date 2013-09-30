@@ -1,7 +1,8 @@
 == Base
 
 The required capabilities specified in this clause serve as the base for optional features and registered extensions
-capabilities specified in clauses <<_options>> and <<_registered_extensions>>.
+capabilities specified in clauses <<_options>> and <<_registered_extensions>>. All specified table and column name
+values SHALL be lowercase.
 
 === Core
 
@@ -87,7 +88,7 @@ ________________________________________________________________________________
 |compile |SQLITE_OMIT_FLOATING_POINT |Not |min/max x/y columns in `gpkg_contents` table are type REAL
 |compile |SQLITE_OMIT_PRAGMA |Not |GeoPackage configuration checks will require use of the http://www.sqlite.org/pragma.html#pragma_compile_options[compile_options] pragma.
 |compile |SQLITE_OMIT_FLAG_PRAGMAS |Not |GeoPackage conformance validation will require use of the http://www.sqlite.org/pragma.html#pragma_integrity_check[integrity_check] pragma
-|compile |SQLITE_OMIT_VIEW |Not |GeoPackage tables MAY be implemented as updateable views.
+|compile |SQLITE_OMIT_VIEW |Not |User data tables and some GeoPackage tables MAY be implemented as updateable views.
 |=======================================================================
 
 [[spatial_ref_sys]]
@@ -98,17 +99,17 @@ ________________________________________________________________________________
 ====== Table Definition
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table or updateable view per table
+*Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table per table
 <<gpkg_spatial_ref_sys_cols>> and table <<gpkg_spatial_ref_sys_sql>>.
 ________________________________________________________________________________________________________________________
 
-A table or updateable view named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple
+A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple
 features described in clause <<sfsql_intro>> below. The coordinate reference system definitions it contains are
 referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in
 user tables to locations on the earth. The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in
 SQL/MM (ISO 13249-3) <<N16>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial
-reference systems. This table or view MAY include additional columns to meet the requirements of implementation software
-or other specifications. Views of this table or view MAY be used to provide compatibility with the
+reference systems. This table MAY include additional columns to meet the requirements of implementation software
+or other specifications. Views of this table MAY be used to provide compatibility with the
 http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM]
 (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL]
 <<N3>><<N14>><<N15>> (Table 21) specifications.
@@ -131,7 +132,7 @@ See <<gpkg_spatial_ref_sys_sql>>.
 ====== Table Data Values
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `gpkg_spatial_ref_sys` table or updateable view in a GeoPackage SHALL contain a record for
+*Req {counter:req}:* The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain a record for
 organization http://www.epsg.org/Geodetic.html[EPSG] or epsg and `organization_coordsys_id` http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326]
 for http://www.google.com/search?as_q=WGS-84[WGS-84], a record with an `srs_id` of -1, an organization of “NONE”, an
 `organization_coordsys_id` of -1, and definition “undefined” for undefined Cartesian coordinate reference
@@ -140,7 +141,7 @@ definition “undefined” for undefined geographic coordinate reference systems
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `spatial_ref_sys` table or updateable view in a GeoPackage file SHALL contain records to define
+*Req {counter:req}:* The `gpkg_spatial_ref_sys` table in a GeoPackage file SHALL contain records to define
 all spatial reference systems used by features and tiles in a GeoPackage.
 ________________________________________________________________________________________________________________________
 
@@ -151,7 +152,7 @@ ________________________________________________________________________________
 ====== Table Definition
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_contents` table or updateable view per table
+*Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_contents` table per table
 <<gpkg_contents_cols>> and <<gpkg_contents_sql>>.
 ________________________________________________________________________________________________________________________
 
@@ -172,14 +173,15 @@ display to a user in a menu of geospatial data that is available for access and/
 |`min_y` |double |Bounding box for all content in table_name |yes | |
 |`max_x` |double |Bounding box for all content in table_name |yes | |
 |`max_y` |double |Bounding box for all content in table_name |yes | |
-|`srs_id` |integer |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id` |yes | |FK
+|`srs_id` |integer |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match gpkg_tile_matrix_set.srs.id |yes | |FK
 |=======================================================================
 
 The `gpkg_contents` table is intended to provide a list of all geospatial contents in the GeoPackage. The `data_type`
 specifies the type of content. The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding
 box (not necessarily minimum bounding box) of the content. If the `srs_id` column value references a geographic
 coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references
-a projected CRS and the min/max x/y values are in the units specified by that CRS.
+a projected CRS and the min/max x/y values are in the units specified by that CRS. This table MAY include additional
+columns to meet the requirements of implementation software or other specifications.
 
 See <<gpkg_contents_sql>>.
 

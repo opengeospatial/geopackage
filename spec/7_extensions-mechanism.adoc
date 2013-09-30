@@ -18,10 +18,10 @@ ________________________________________________________________________________
 defined per clause 2.6.1.1.1, Table 13 and Table 23.
 ________________________________________________________________________________________________________________________
 
-The `gpkg_extensions` table in a GeoPackage file registers extension capabilities required to make direct use of its
-contents. An application that access a GeoPackage file can query the `gpkg_extensions` table instead of the contents of
-all the user data tables to determine if it has the required capabilitiesto read or write to tables with extensions, and
-to “fail fast” and return an error message if it does not.
+The `gpkg_extensions` table or updateable view in a GeoPackage file registers extension capabilities required to make
+direct use of its contents. An application that access a GeoPackage file can query the `gpkg_extensions` table instead
+of the contents of all the user data tables to determine if it has the required capabilitiesto read or write to tables
+with extensions, and to “fail fast” and return an error message if it does not.
 
 .GeoPackage Extensions Table or View Definition
 [cols=",,,,",options="header",]
@@ -29,8 +29,8 @@ to “fail fast” and return an error message if it does not.
 |Column Name |Col Type |Column Description |Null |Key
 |`table_name` |text |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Unique
 |`column_name` |text |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Unique
-|`extension_name` |text |The name of the extension that is required, in the form \_\. |no |Unique
-|`scope` |text |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only'. |no |
+|`extension_name` |text |The case sensitive name of the extension that is required, in the form \_\. |no |Unique
+|`scope` |text |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only' in lowercase. |no |
 |=======================================================================
 
 See Annex C: Table Definition SQL clause C.3 gpkg_extensions.
@@ -38,31 +38,38 @@ See Annex C: Table Definition SQL clause C.3 gpkg_extensions.
 ====== Table Data Values
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* Values of the `gpkg_extensions` table `table_name` column SHALL reference values in the `gpkg_contents`
+*Req {counter:req}:* Values of the `gpkg_extensions` `table_name` column SHALL reference values in the `gpkg_contents`
 `table_name` column or be NULL. They SHALL NOT be NULL for rows where the `column_name` value is not NULL.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `column_name` column value in a `gpkg_extensions` table row SHALL be the name of a column in the table
+*Req {counter:req}:* The `column_name` column value in a `gpkg_extensions` row SHALL be the name of a column in the table
 specified by the `table_name` column value for that row, or be NULL.
 ________________________________________________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* Each `extension_name` column value in a `gpkg_extensions` table row SHALL be a unique value of the form \_\
-where \ indicates the person or organization that developed and maintains the extension. The valid character set for \
-SHALL be [a-zA-Z0-9]. The valid character set for \ SHALL be [a-zA-Z0-9_]. An `extension_name` for the “gpkg” author
-name SHALL be one of those listed in Table 14.
+*Req {counter:req}:* Each `extension_name` column value in a `gpkg_extensions` row SHALL be a unique case sensitive
+value of the form \<author\>_\<extension_name\> where \<author\> indicates the person or organization that developed and
+maintains the extension. The valid character set for \<author\> SHALL be [a-zA-Z0-9]. The valid character set for
+\<extension_name\> SHALL be [a-zA-Z0-9_]. An `extension_name` for the “gpkg” author name SHALL be one of those listed in
+<<gpkg_reserved_extensions>>.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The scope column value in a `gpkg_extensions` row SHALL be lowercase "read-write" for an extension
+ that affects both readers and writers, or "write-only" for an extension that affects only writers.
 ________________________________________________________________________________________________________________________
 
 The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC. Requirements for
 extension names for the “gpkg” author name are defined in the clauses listed in 14 below. GeoPackage implementers use
-their own author names to register other extensions.1
+their own author names to register other extensions.
 
+[[gpkg_reserved_extensions]]
 .Reserved GeoPackage Extensions
 [cols=",,",options="header",]
 |=======================================================================
 |Extension Name |Defined in Clause |Scope | Description
-|gpkg_geom_\<gname\> |3.1.2.1.2 |read-write |\<gname\> is name of specific extension geometry type from Annex G 47
+|gpkg_geom_\<gname\> |3.1.2.1.2 |read-write |\<gname\> is the uppercase name of specific extension geometry type from Annex G 47
 |gpkg_zoom_other |3.2.1.1.1 |read-write |Tile matrix set user data table with zoom intervals other than powers of two between adjacent layers
 |gpkg_webp |3.2.2.2.1 |read-write |Raster images in image/webp format
 |gpkg_tiff |3.2.3.1.2 |read-write |Raster images in image/tiff format

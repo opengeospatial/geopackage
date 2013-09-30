@@ -18,7 +18,7 @@ ________________________________________________________________________________
 
 Such tables do not count[^1] in the determination of GeoPackage file validity per clause 2 Req 13: but otherwise MAY
 differ from “features” and “tiles” tables only with respect to non-gpkg registered extensions that enable implementers
-to meet requirements not addressed in the current version of this specification, and may be included in a valid
+to meet requirements not addressed in the current version of this specification, and MAY be included in a valid
 GeoPackage.
 
 === Features
@@ -43,15 +43,16 @@ ________________________________________________________________________________
 
 ________________________________________________________________________________________________________________________
 *Req {counter:req}:* An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name
-using the “gpkg_geom_” template where is the name of the extension geometry type from Annex G used in a GeoPackage file.
+using the “gpkg_geom_\<gname\>” template where \<gname\> is the uppercase name of the extension geometry type from Annex
+G used in a GeoPackage file.
 ________________________________________________________________________________________________________________________
 
 ====== Extensions Types - Extensions Row
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage file that contains a `gpkg_geometry_columns` table or updateable view with row records that
-specify extension `geometry_type` column values SHALL contain a `gpkg_extensions` table that contains row records with
-`table_name` and `column_name` values from the `geometry_columns` row records that identify extension type uses, and
+*Req {counter:req}:* A GeoPackage file that contains a `gpkg_geometry_columns` table or updateable view with row records
+that specify extension `geometry_type_name` column values SHALL contain a `gpkg_extensions` table that contains row records with
+`table_name` and `column_name` values from the `gpkg_geometry_columns` row records that identify extension type uses, and
 `extension_name` column values for each of those geometry types constructed per clause 3.1.2.1.2.
 ________________________________________________________________________________________________________________________
 
@@ -113,7 +114,7 @@ ________________________________________________________________________________
 CREATE TRIGGER fgti_<t>_<c> BEFORE INSERT ON '<t>'
 FOR EACH ROW 
 BEGIN
-  SELECT RAISE (ROLLBACK, 'insert on <t> violates constraint: ST_GeometryType(<c>) is not assignable from gpkg_geometry_columns.geometry_type_name value')
+  SELECT RAISE (ABORT, 'insert on <t> violates constraint: ST_GeometryType(<c>) is not assignable from gpkg_geometry_columns.geometry_type_name value')
   WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
          WHERE Lower(table_name) = Lower('<t>') 
           AND   Lower(column_name) = Lower('<c>') 
@@ -125,7 +126,7 @@ END
 CREATE TRIGGER fgtu_<t>_<c> BEFORE UPDATE OF '<c>' ON '<t>'
 FOR EACH ROW 
 BEGIN
-SELECT RAISE (ROLLBACK, 
+SELECT RAISE (ABORT,
 'update of <c> on <t> violates constraint: ST_GeometryType(<c>) is not assignable from gpkg_geometry_columns.geometry_type_name value')
 WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
        WHERE Lower(table_name) = Lower('<t>') 
@@ -176,7 +177,7 @@ code,SQL
 CREATE TRIGGER fgsi_<t> _<c> BEFORE INSERT ON '<t>'
 FOR EACH ROW 
 BEGIN
-  SELECT RAISE (ROLLBACK, 'insert on <t>violates constraint: ST_SRID(<c>) does not match gpkg_geometry_columns.srs_id value')
+  SELECT RAISE (ABORT, 'insert on <t>violates constraint: ST_SRID(<c>) does not match gpkg_geometry_columns.srs_id value')
   WHERE (SELECT srs_id FROM gpkg_geometry_columns
        WHERE Lower(table_name) = Lower('<t>') 
        AND   Lower(column_name) = Lower('<c>') 
@@ -186,7 +187,7 @@ END
 CREATE TRIGGER fgsu_<t>_<c> BEFORE UPDATE OF '<c>' ON '<t>'
 FOR EACH ROW 
 BEGIN
-SELECT RAISE (ROLLBACK, 
+SELECT RAISE (ABORT,
 'update of <c> on <t> violates constraint: ST_SRID(<c>) does not match gpkg_geometry_columns.srs_id value')
 WHERE (SELECT srs_id FROM gpkg_geometry_columns
        WHERE Lower(table_name) = Lower('<t>') 
@@ -195,9 +196,10 @@ WHERE (SELECT srs_id FROM gpkg_geometry_columns
 END
 ------------------------------------------------------------------------------------------------------------------------
 
-where and are replaced with the names of the feature table and geometry column being inserted or updated. The triggers
-to enforce `geometry_columns` `srs_id` constraints on feature table geometries use Minimal Runtime SQL Functions
-specified in [minimal_runtime_sql_functions].
+where \<t\> and \<c\> are replaced with the names of the feature table and geometry column being inserted or updated.
+
+The triggers to enforce `gpkg_geometry_columns` `srs_id` constraints on feature table geometries use Minimal Runtime SQL
+Functions specified in [minimal_runtime_sql_functions].
 
 ====== SRS_ID Triggers – Extensions Name
 
@@ -226,8 +228,8 @@ by any GeoPackage file that implements the requirements of clause 2.2 and clause
 ====== Zoom Other Intervals
 
 As a registered extension, a GeoPackage file MAY contain tile matrix set user data tables with pixel sizes that vary by
-irregular intervals or by regular intervals other than powers of two (the default) between adjacent zoom levels, as
-described in the `gpkg_tile_matrix_metadata` table.
+irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels, as
+described in the `gpkg_tile_matrix` table.
 
 ====== Zoom Other – Extensions Name
 
@@ -347,9 +349,9 @@ purposes of determining GeoPackage file validity.
 ====== Other Extensions Name
 
 ________________________________________________________________________________________________________________________
-*Req {counter:req}:* An extension name in the form __mime_type SHALL be defined for an author name other than “gpkg” for
-each other MIME image format used for `tile_data` columns in tile matrix set user data tables, where is replaced by the
-other MIME type abbreviation in uppercase
+*Req {counter:req}:* An extension name in the form \<authorname\>_\<other\>_mime_type SHALL be defined for an author
+name other than “gpkg” for each other MIME image format used for `tile_data` columns in tile matrix set user data
+tables, where is replaced by the other MIME type abbreviation in uppercase
 ________________________________________________________________________________________________________________________
 
 ====== Other Extensions Row
