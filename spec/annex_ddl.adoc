@@ -151,9 +151,9 @@ CREATE TABLE gpkg_tile_matrix_set (
   table_name TEXT PRIMARY KEY NOT NULL REFERENCES gpkg_contents(table_name),
   srs_id INTEGER NOT NULL REFERENCES gpkg_spatial_ref_sys(srs_id),
   min_x DOUBLE NOT NULL,
-  min_x DOUBLE NOT NULL,
-  min_x DOUBLE NOT NULL,
-  min_x DOUBLE NOT NULL,
+  max_x DOUBLE NOT NULL,
+  min_y DOUBLE NOT NULL,
+  max_x DOUBLE NOT NULL,
 )
 ----
 
