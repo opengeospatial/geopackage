@@ -106,7 +106,7 @@ See Annex C Table Definition SQL (Normative) C.1 `gpkg_spatial_ref_sys`.
 > with an `srs_id` of 0, an organization of “NONE”, an `organization_coordsys_id`  of 0, and
 > definition  “undefined” for undefined geographic coordinate reference systems.
 
-> **Req 8:** The `spatial_ref_sys` table or updateable view in a GeoPackage file SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
+> **Req 8:** The `gpkg_spatial_ref_sys` table or updateable view in a GeoPackage file SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
 
 #### 1.1.3. Contents
 #### 1.1.3.1. Data
