@@ -11,7 +11,7 @@ The optional capabilities defined in sub clauses and requirement statements of t
 
 > **Req 60:** A GeoPackage file MAY contain a table or updateable view named gpkg_extensions. If present this table SHALL be defined per clause 2.6.1.1.1, Table 13 and Table 23.
 
-The `gpkg_extensions` table in a GeoPackage file registers extension capabilities required to make direct use of its contents. An application that access a GeoPackage file can query the `gpkg_extensions` table instead of the contents of an all of the user data tables to determine if it has the required capabilities, and to “fail fast” and return an error message if it does not.
+The `gpkg_extensions` table in a GeoPackage file registers extension capabilities required to make direct use of its contents. An application that access a GeoPackage file can query the `gpkg_extensions` table instead of the contents of all the user data tables to determine if it has the required capabilities, and to “fail fast” and return an error message if it does not.
 
 *Table 13: GeoPackage Extensions Table or View Definition*
 
