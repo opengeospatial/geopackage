@@ -7,10 +7,10 @@ gpkg\_spatial\_ref\_sys
 ### gpkg\_spatial\_ref\_sys Table Definition SQL
 
     CREATE TABLE gpkg_spatial_ref_sys (
-      Srs_name TEXT NOT NULL,
-      Srs_id INTEGER NOT NULL PRIMARY KEY,
+      srs_name TEXT NOT NULL,
+      srs_id INTEGER NOT NULL PRIMARY KEY,
       organization TEXT NOT NULL,
-      organization_coordsys_idINTEGER NOT NULL,
+      organization_coordsys_id INTEGER NOT NULL,
       definition TEXT NOT NULL,
       description TEXT
     )
