@@ -142,7 +142,7 @@ See Annex C Table Definition SQL (Normative) C.2 `gpkg_contents`.
 
 > **Req 11:** Values of the `gpkg_contents` table `last_change` column SHALL be in [ISO 8601](http://www.iso.org/iso/catalogue_detail?csnumber=40874) format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.[^4]
 
-> **Req 12:** Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `spatial_ref_sys` table `srs_id` column.
+> **Req 12:** Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
 
 
 [^1]: [SQLite version 4](http://sqlite.org/src4/doc/trunk/www/design.wiki), which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.
