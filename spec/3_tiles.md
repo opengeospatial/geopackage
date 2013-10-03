@@ -1,4 +1,3 @@
-
 The optional capabilities specified in this section depend on the required capabilities specified in the [Base section](1_base.md).
 
 ## 2.2. Tiles
@@ -141,7 +140,7 @@ Each tiles table or view[^9] MAY contain tile matrices at zero or more zoom leve
 All tiles at a particular zoom level have the same `pixel_x_size` and `pixel_y_size` values specified in the `gpkg_tile_matrix_metadata` row record for that tiles table and zoom level.[^10] 
 
 
-[^1]: Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles without compression could be used for transparency where there is no data on the tile edges, and image/jpeg format tiles with compression could be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
+[^1]: Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles could be used for transparency where there is no data on the tile edges, and image/jpeg format tiles could be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
 
 [^2]: See clause 3.2.1.1.1 for use of other zoom levels as a registered extensions.
 
