@@ -59,7 +59,7 @@ Spatial indexes are an optional GeoPackage extension with the following runtime 
 
 ##### 3.1.3.1.2. Spatial Indexes - Extensions Name
 
-> **Req 73:** The “gpkg\_rtree\_index” extension name SHALL be used as a `gpkg_extension` table extension name column value to specify implementation of spatial indexes on a geometry column.
+> **Req 73:** The “gpkg\_rtree\_index” extension name SHALL be used as a `gpkg_extensions` table extension name column value to specify implementation of spatial indexes on a geometry column.
 
 ##### 3.1.3.1.3. Spatial Indexes - Extensions Row
 
@@ -170,7 +170,7 @@ As a registered extension, a GeoPackage file MAY contain tile matrix set user da
 
 ##### 3.2.1.1.2. Zoom Other – Extensions Name
 
-> **Req 81:** The “gpkg\_zoom\_other” extension name SHALL be used as a `gpkg_extension` table extension name column value to specify implementation of other zoom intervals on a tile matrix set user data table.
+> **Req 81:** The “gpkg\_zoom\_other” extension name SHALL be used as a `gpkg_extensions` table extension name column value to specify implementation of other zoom intervals on a tile matrix set user data table.
 
 ##### 3.2.1.1.3. Zoom Other – Extensions Row
 
