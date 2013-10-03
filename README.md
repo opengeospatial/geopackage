@@ -1,23 +1,63 @@
+![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
+
 GeoPackage Specification
 ==========
 
-This is a github version of the GeoPackage 0.8 specification released for public comment. 
-See http://www.opengeospatial.org/standards/requests/105 for more information.
+This specification describes an open, standards-based, platform-independent, portable, self-describing, 
+compact format for transferring geospatial information. It is a set of conventions for SQLite to
+store interoperable [Features](spec/2_features.md) and/or [Tiles](spec/3_tiles.md) on a common [base](spec/1_base.md).
+The core document additionally specifies optional [Metadata](spec/5_metadata.md) and [Schema](spec/4_schema.md)
+information to build richer applications. An [Extension Mechanism](spec/7_extensions-mechanism.md) is 
+described to provide implementors a way to include additional functionality in their GeoPackages, with a 
+number of optional [extensions](spec/8_extensions.md) included.
 
+Sample HTML version of the spec is available at http://pepijnve.github.io/geopackage/
+
+About
+-----
+
+This GitHub repository has been extracted from the Microsoft Word version of the Candidate 
+GeoPackage Standard [version 0.8](https://portal.opengeospatial.org/files/?artifact_id=54838) 
+released for [public comment](http://www.opengeospatial.org/standards/requests/105) on August 6, 2013. 
+With this repository the OGC invites collaboration and comments directed at the development 
+and enhancement of this candidate standard. 
+
+Based on feedback the final 1.0 specification will likely change, so consider this a work in progress,
+that you are encouraged to help shape. The core working group is particularly interested in making
+the specification easy to implement, so changes driven by attempted implementations will be given high
+priority.
+
+**Editor: Paul Daisey**
+
+Reading the document
+--------------------
 The main specification is in the [spec/](spec/) folder. 
 
-Help with cleaning the markdown to more closely match the specification is appreciated.
+Contributing
+------------
+The contributor understands that any contributions, if accepted by the OGC Membership, shall 
+be incorporated into the formal OGC GeoPackage standards document and that all copyright and 
+intellectual property shall be vested to the OGC.
 
-We are working on a process to allow public comments as github pull requests against this repository. 
-See [process.md](process.md) for more information.
+Editing and commenting
+----------------------
+The GeoPackage SWG is accepting public comments and suggested revisions to the specification 
+via GitHub. This is the first time OGC has supported this mechanism for public comment and review. 
+To suggest changes to the specification please fork the repository and submit a pull request with
+changes to the document. Please make one pull request per logical requested change, and be sure to
+include a comment in the PR with any justification or reasoning on why the change is needed.
 
-If you are a github newbie then just hit 'edit' on any of the specification pages.
-This will automatically 'fork' the repository in to your own copy. After editing there you can create 
-a 'pull request' from your fork to submit the work for review and merging.
+For more general comments (that don't include actual text changes to the spec) just create a github
+issue with the relevant information. With one issue per general change.
 
-If you are making a more substantial set of changes please create a branch to work on the set. Pull requests
-stay with the branches they are made on, so if you make more changes based on feedback that can all get 
-pulled in when ready. Note you can create new branches as well as new files completely through the web.
+For more detailed guidance, or if you are new to github, see the [Process page](process.md) for additional 
+information on editing.
 
-For more on markdown there is a great [cheat sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
-And note you can hit 'preview' at any time in edit mode to see if you got things right. 
+Sample Implementations
+----------------------
+
+[Luciad](http://www.luciad.com/) has open sourced their implementation as [libgpkg](https://bitbucket.org/luciad/libgpkg). It is
+quite complete, with support for features, tiles, spatial indexes, and more.
+
+There has also been work on a GeoTools/GeoServer version.
+
