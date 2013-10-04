@@ -365,7 +365,7 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <div id="header">
 <h1>OGC® GeoPackage Encoding Standard (OGC 12-128r8)</h1>
 <span id="author" class="author">Paul Daisey et al.</span><br>
-<span id="revnumber">version 0.9.0,</span>
+<span id="revnumber">version 0.9.1,</span>
 <span id="revdate">2013</span>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -503,12 +503,11 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 <li><a href="#_submission_contact_points">B.2. Submission Contact Points</a></li>
 <li><a href="#_submitting_organizations">B.3. Submitting Organizations</a></li>
 <li><a href="#_changes_to_the_ogc_abstract_specification">B.4. Changes to the OGC® Abstract Specification</a></li>
-<li><a href="#_changes_to_opengis_implementation_standards">B.5. Changes to OpenGIS® Implementation Standards</a></li>
-<li><a href="#_potential_future_work">B.6. Potential Future Work</a></li>
-<li><a href="#_contributors">B.7. Contributors</a></li>
-<li><a href="#_terms_and_definitions">B.8. Terms and Definitions</a></li>
-<li><a href="#_conventions">B.9. Conventions</a></li>
-<li><a href="#_uml_notation">B.10. UML Notation</a></li>
+<li><a href="#_potential_future_work">B.5. Potential Future Work</a></li>
+<li><a href="#_contributors">B.6. Contributors</a></li>
+<li><a href="#_terms_and_definitions">B.7. Terms and Definitions</a></li>
+<li><a href="#_conventions">B.8. Conventions</a></li>
+<li><a href="#_uml_notation">B.9. UML Notation</a></li>
 </ul>
 </li>
 <li><a href="#_table_definition_sql_normative"> Annex C: Table Definition SQL (Normative)</a></li>
@@ -572,7 +571,7 @@ It is subject to change without notice and MAY not be referred to as an OGC Stan
 </div>
 <div class="paragraph">
 <p>Document type: OGC® Publicly Available Standard<br>
-Document subtype: Implementation Specification<br>
+Document subtype: Encoding Standard<br>
 Document stage: Draft<br>
 Document language: English</p>
 </div>
@@ -596,7 +595,7 @@ This standard is intended to facilitate widespread adoption and use of GeoPackag
 An application that accesses a GPKG will make use of the GPKG capabilities it requires; few if any such applications will make use of all GPKG capabilities.</p>
 </div>
 <div class="paragraph">
-<p>This OpenGIS ® Implementation Specification defines GeoPackage files for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales.
+<p>This OGC® Encoding Standard defines GeoPackage files for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales.
 Direct use means the ability to access and update data in a “native” format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.</p>
 </div>
 <div class="paragraph">
@@ -821,6 +820,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <col style="width:%;">
 <col style="width:%;">
 <col style="width:%;">
+<col style="width:%;">
 <col style="width:%;"> 
 </colgroup>
 <thead>
@@ -828,6 +828,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <th class="tableblock halign-left valign-top">Column Name</th>
 <th class="tableblock halign-left valign-top">Column Type</th>
 <th class="tableblock halign-left valign-top">Column Description</th>
+<th class="tableblock halign-left valign-top">Null</th>
 <th class="tableblock halign-left valign-top">Key</th>
 </tr>
 </thead>
@@ -836,36 +837,42 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Human readable name of this SRS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique identifier for each Spatial Reference System within a GeoPackage file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>organization</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Case-insensitive name of the defining organization e.g. EPSG or epsg</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>organization_coordsys_id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Numeric ID of the Spatial Reference System assigned by the organization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text Representation of the Spatial Reference System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>text</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Human readable description of this SRS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -1695,7 +1702,7 @@ Pixel sizes are real numbers in the terrain units of the spatia reference system
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a til matrix set.
 In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacen zoom levels, as shown in the example in Annex I.
 Other "zoom other intervals" conventions use different factors o irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincid with the original pixel size of commonly used global image products.
-See WMTS Annex E for additional examples o both conventions.</p>
+See WMTS Annex E for additional examples of both conventions.</p>
 </div>
 <div class="sect4">
   <h5 id="_data_10">2.2.3.1. Data</h5>
@@ -1904,7 +1911,7 @@ This bounding box SHALL be exact s that the bounding box coordinates for individ
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>zoom_level</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0 &#8656; <code>zoom_level</code> &#8656; max_level for <code>t_table_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 &#8656; <code>zoom_level</code> &#8656; max_level for <code>table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
@@ -1963,7 +1970,7 @@ This bounding box SHALL be exact s that the bounding box coordinates for individ
 <div class="paragraph">
 <p>The <code>gpkg_tile_matrix</code> table or updateable view documents the structure of the tile matrix at each zoom level in each tiles table.
 It allows GeoPackages to contain rectangular as well as square tiles (e.g. for better representation of polar regions).
-It allows tile pyramids with zoom levels that differ in resolution by powers of 2, irregular intervals, or regular intervals other than powers of 2.</p>
+It allows tile pyramids with zoom levels that differ in resolution by factors of 2, irregular intervals, or regular intervals other than factors of 2.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_tile_matrix_metadata_sql">[gpkg_tile_matrix_metadata_sql]</a></p>
@@ -3008,7 +3015,7 @@ GeoPackage implementers use their own author names to register other extensions.
 <td class="tableblock halign-left valign-top"><p class="tableblock">gpkg_zoom_other</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3.2.1.1.1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">read-write</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tile matrix set user data table with zoom intervals other than powers of two between adjacent layers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tile matrix set user data table with zoom intervals other than factors of two between adjacent layers</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">gpkg_webp</p></td>
@@ -3973,7 +3980,7 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.</p>
 <p><strong>Test Case ID</strong>: /base/core/spatial\_ref\_sys/data/table\_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the spatial\_ref\_sys table exists and has the correct definition.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_spatial\_ref\_sys table exists and has the correct definition.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -3988,8 +3995,8 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.</p>
 </li>
 <li>
 <p>Pass if column names and column definitions in the returned CREATE TABLE
-statement in the sql column value, including data type, nullability, default values and
-primary, foreign and unique key constraints match all of those in the contents of C.1
+statement in the sql column value, including data type, nullability, and
+primary key constraints match all of those in the contents of C.1
 Table 19. Column order, check constraint and trigger definitions, and other column
 definitions in the returned sql are irrelevant.</p>
 </li>
@@ -4299,7 +4306,7 @@ gc.table\_name)</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that the gpkg\_contents table\_name value table exists, and is
- apparently not a tiles table for every row with a data\_type column value of "features"</p>
+ apparently a feature table for every row with a data\_type column value of "features"</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4307,32 +4314,7 @@ gc.table\_name)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_contents where data\_type="features"</p>
-</li>
-<li>
-<p>Fail if returns empty result set</p>
-</li>
-<li>
-<p>For each row from step 1</p>
-<div class="ulist">
-<ul>
-<li>
-<p>PRAGMA table\_info(table\_name)</p>
-</li>
-<li>
-<p>Fail if returns an empty result set</p>
-</li>
-<li>
-<p>Fail if result set contains four rows where the name column values are "zoom\_level","tile\_column","tile\_row", and "tile\_data"</p>
-</li>
-<li>
-<p>Fail if result set does not contain one row where the pk column value is 1 and the type column value is "INTEGER"</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>Pass if no fails</p>
+<p>Execute test /opt/features/vector_features/data/feature_table_integer_primary_key</p>
 </li>
 </ol>
 </div>
@@ -4668,7 +4650,7 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT table\_name FROM gpkg\_geometry columns</p>
+<p>SELECT DISTINCT table\_name FROM gpkg\_geometry\_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set.</p>
@@ -5163,7 +5145,7 @@ are "zoom\_level","tile\_column","tile\_row", and "tile\_data".</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that by default zoom level pixel sizes for tile matrix user data tables
- vary by powers of 2 between adjacent zoom levels in the tile matrix metadata table.</p>
+ vary by factors of 2 between adjacent zoom levels in the tile matrix metadata table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5201,7 +5183,7 @@ WHERE table\_name = selected table name ORDER BY zoom\_level ASC</p>
 </li>
 <li>
 <p>Fail if any pair of rows for adjacent zoom levels have pixel\_x\_size or
-pixel\_y\_size values that differ by other than powers of two</p>
+pixel\_y\_size values that differ by other than factors of two</p>
 </li>
 </ul>
 </div>
@@ -6800,7 +6782,7 @@ returned by PRAGMA table\_info.</p>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite_compileoption\_used(<em>SQLITE\_ENABLE\_RTREE\_</em>)</p>
+<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_ENABLE\_RTREE</em>)</p>
 </li>
 <li>
 <p>Fail if returns 0</p>
@@ -7750,7 +7732,7 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that the "gpkg\_zoom\_other" extension name is used to register tiles
- tables with other than powers of two zoom intervals.</p>
+ tables with other than factors of two zoom intervals.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -7779,7 +7761,7 @@ WHERE table\_name = selected table name ORDER BY zoom\_level ASC</p>
 </li>
 <li>
 <p>Not testable if no pair of rows for adjacent zoom levels have pixel\_x\_size or
-pixel\_y\_size values that differ by other than powers of two</p>
+pixel\_y\_size values that differ by other than factors of two</p>
 </li>
 <li>
 <p>/opt/extension\_mechanism/extensions/data/table\_def</p>
@@ -7818,7 +7800,7 @@ name AND extension\_name = <em>gpkg\_zoom\_other</em></p>
 <p><strong>Test Case ID</strong>: / reg\_ext/tiles/zoom\_levels/data/zoom\_other\_ext\_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that tiles tables with other than powers of two zoom intervals are
+<p><strong>Test Purpose</strong>: Verify that tiles tables with other than factors of two zoom intervals are
  registered using the "gpkg\_zoom\_other" extension name.</p>
 </div>
 <div class="paragraph">
@@ -8320,7 +8302,7 @@ applications and services. Increased interoperability and result consistency wil
  and Geospatial Web Services and a storage format on personal and enterprise devices.</p>
 </div>
 <div class="paragraph">
-<p>This OpenGIS® GeoPackage Implementation Specification defines a GeoPackage as a self-contained, single-file,
+<p>This OGC® GeoPackage Encoding Standard defines a GeoPackage as a self-contained, single-file,
 cross-platform, serverless, transactional, open source SQLite data container with table definitions, relational
 integrity constraints, an SQL API exposed via a “C” CLI and JDBC, and manifest tables that together act as an exchange
 and direct-use format for multiple types of geospatial data including vector features, features with raster attributes
@@ -8356,7 +8338,7 @@ throughout an enterprise or information community.  </p>
 <div class="sect2">
   <h3 id="_submitting_organizations">B.3. Submitting Organizations</h3>
     <div class="paragraph">
-<p>The following organizations submitted this Implementation Specification to the Open Geospatial Consortium Inc. as a
+<p>The following organizations submitted this Encoding Standard to the Open Geospatial Consortium Inc. as a
 Request For Comment (RFC).</p>
 </div>
 <div class="ulist">
@@ -8416,15 +8398,16 @@ Request For Comment (RFC).</p>
     <div class="paragraph">
 <p>The OGC® Abstract Specification does not require changes to accommodate this OGC® standard.</p>
 </div>
+<div class="paragraph">
+<p>Changes to OGC® Implementation Standards
+<sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub><sub>~</sub>~~</p>
 </div>
-<div class="sect2">
-  <h3 id="_changes_to_opengis_implementation_standards">B.5. Changes to OpenGIS® Implementation Standards</h3>
-    <div class="paragraph">
+<div class="paragraph">
 <p>None at present.</p>
 </div>
 </div>
 <div class="sect2">
-  <h3 id="_potential_future_work">B.6. Potential Future Work</h3>
+  <h3 id="_potential_future_work">B.5. Potential Future Work</h3>
     <div class="ulist">
 <ul>
 <li>
@@ -8470,7 +8453,7 @@ Request For Comment (RFC).</p>
 </div>
 </div>
 <div class="sect2">
-  <h3 id="_contributors">B.7. Contributors</h3>
+  <h3 id="_contributors">B.6. Contributors</h3>
     <div class="paragraph">
 <p>The following organizations and individuals have contributed to the preparation of this standard:</p>
 </div>
@@ -8540,7 +8523,7 @@ Request For Comment (RFC).</p>
 </div>
 </div>
 <div class="sect2">
-  <h3 id="_terms_and_definitions">B.8. Terms and Definitions</h3>
+  <h3 id="_terms_and_definitions">B.7. Terms and Definitions</h3>
     <div class="paragraph">
 <p>For the purposes of this document, the following terms and definitions apply.</p>
 </div>
@@ -8582,7 +8565,7 @@ Request For Comment (RFC).</p>
 </div>
 </div>
 <div class="sect2">
-  <h3 id="_conventions">B.9. Conventions</h3>
+  <h3 id="_conventions">B.8. Conventions</h3>
     <div class="paragraph">
 <p>Symbols (and abbreviated terms)</p>
 </div>
@@ -8599,7 +8582,7 @@ Request For Comment (RFC).</p>
 </div>
 </div>
 <div class="sect2">
-  <h3 id="_uml_notation">B.10. UML Notation</h3>
+  <h3 id="_uml_notation">B.9. UML Notation</h3>
     <div class="paragraph">
 <p>The diagrams that appear in this standard are presented using the Unified Modeling Language (UML) static structure diagrams.
 The UML notations used in this standard for RDBMS tables in the GeoPackage container are described in Figure 1 below.</p>
@@ -8692,10 +8675,10 @@ columns:</p>
   srs_name TEXT NOT NULL,
   srs_id INTEGER NOT NULL PRIMARY KEY,
   organization TEXT NOT NULL,
-  organization_coordsys_idINTEGER NOT NULL,
-  definition TEXT NOT NULL,
+  organization_coordsys_id INTEGER NOT NULL,
+  definition  TEXT NOT NULL,
   description TEXT
-)</code></pre>
+);</code></pre>
 </div>
 </div>
 <div id="sqlmm_gpkg_spatial_ref_sys_sql" class="listingblock">
@@ -8715,12 +8698,13 @@ columns:</p>
 <div id="sfsql_gpkg_spatial_ref_sys_sql" class="listingblock">
 <div class="title">SF/SQL View of gpkg_spatial_ref_sys Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE VIEW spatial_ref_sys AS SELECT
-srs_id AS srid,
-organization AS auth_name,
-organization_coordsys_id AS auth_srid,
-definition AS srtext
-FROM gpkg_spatial_ref_sys;</code></pre>
+<pre class="highlight"><code class="sql language-sql">CREATE VIEW spatial_ref_sys AS
+  SELECT
+    srs_id AS srid,
+    organization AS auth_name,
+    organization_coordsys_id AS auth_srid,
+    definition AS srtext
+  FROM gpkg_spatial_ref_sys;</code></pre>
 </div>
 </div>
 </div>
@@ -8739,8 +8723,9 @@ FROM gpkg_spatial_ref_sys;</code></pre>
   min_y DOUBLE,
   max_x DOUBLE,
   max_y DOUBLE,
-  srs_id INTEGER REFERENCES gpkg_spatial_ref_sys(srs_id)
-)</code></pre>
+  srs_id INTEGER,
+  CONSTRAINT fk_gc_r_srs_id FOREIGN KEY (srs_id) REFERENCES gpkg_spatial_ref_sys(srs_id)
+);</code></pre>
 </div>
 </div>
 </div>
@@ -8754,8 +8739,8 @@ FROM gpkg_spatial_ref_sys;</code></pre>
   column_name TEXT,
   extension_name TEXT NOT NULL,
   scope TEXT NOT NULL,
-  UNIQUE KEY (table_name, column_name, extension_name)
-)</code></pre>
+  CONSTRAINT ge_tce UNIQUE (table_name, column_name, extension_name)
+);</code></pre>
 </div>
 </div>
 </div>
@@ -8765,14 +8750,17 @@ FROM gpkg_spatial_ref_sys;</code></pre>
 <div class="title">gpkg_geometry_columns Table Definition SQL</div>
 <div class="content">
 <pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_geometry_columns (
-  table_name TEXT UNIQUE NOT NULL REFERENCES gpkg_contents(table_name),
+  table_name TEXT NOT NULL,
   column_name TEXT NOT NULL,
   geometry_type_name TEXT NOT NULL,
-  srs_id INTEGER NOT NULL REFERENCES gpkg_spatial_ref_sys (srs_id),
+  srs_id INTEGER NOT NULL,
   z INTEGER NOT NULL,
   m INTEGER NOT NULL,
-  PRIMARY KEY (table_name, column_name)
-)</code></pre>
+  CONSTRAINT pk_geom_cols PRIMARY KEY (table_name, column_name),
+  CONSTRAINT uk_gc_table_name UNIQUE (table_name),
+  CONSTRAINT fk_gc_tn FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name),
+  CONSTRAINT fk_gc_srs FOREIGN KEY (srs_id) REFERENCES gpkg_spatial_ref_sys (srs_id)
+);</code></pre>
 </div>
 </div>
 <div id="sqlmm_gpkg_geometry_columns_sql" class="listingblock">
@@ -8815,7 +8803,7 @@ FROM gpkg_spatial_ref_sys;</code></pre>
   real_attribute REAL,
   boolean_attribute BOOLEAN,
   raster_or_photo BLOB
-)</code></pre>
+);</code></pre>
 </div>
 </div>
 </div>
@@ -8825,13 +8813,15 @@ FROM gpkg_spatial_ref_sys;</code></pre>
 <div class="title">gpkg_tile_matrix_set Table Creation SQL</div>
 <div class="content">
 <pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_tile_matrix_set (
-  table_name TEXT PRIMARY KEY NOT NULL REFERENCES gpkg_contents(table_name),
-  srs_id INTEGER NOT NULL REFERENCES gpkg_spatial_ref_sys(srs_id),
+  table_name TEXT NOT NULL PRIMARY KEY,
+  srs_id INTEGER NOT NULL
   min_x DOUBLE NOT NULL,
-  max_x DOUBLE NOT NULL,
   min_y DOUBLE NOT NULL,
   max_x DOUBLE NOT NULL,
-)</code></pre>
+  max_y DOUBLE NOT NULL,
+  CONSTRAINT fk_gtms_table_name FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name),
+  CONSTRAINT fk_gtms_srs FOREIGN KEY (srs_id) REFERENCES gpkg_spatial_ref_sys (srs_id)
+);</code></pre>
 </div>
 </div>
 </div>
@@ -8841,7 +8831,7 @@ FROM gpkg_spatial_ref_sys;</code></pre>
 <div class="title">gpkg_tile_matrix Table Creation SQL</div>
 <div class="content">
 <pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_tile_matrix (
-  table_name TEXT NOT NULL REFERENCES gpkg_contents(table_name),
+  table_name TEXT NOT NULL,
   zoom_level INTEGER NOT NULL,
   matrix_width INTEGER NOT NULL,
   matrix_height INTEGER NOT NULL,
@@ -8849,8 +8839,9 @@ FROM gpkg_spatial_ref_sys;</code></pre>
   tile_height INTEGER NOT NULL,
   pixel_x_size DOUBLE NOT NULL,
   pixel_y_size DOUBLE NOT NULL,
-  PRIMARY KEY (table_name, zoom_level),
-)</code></pre>
+  CONSTRAINT pk_ttm PRIMARY KEY (table_name, zoom_level),
+  CONSTRAINT fk_tmm_table_name FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name)
+);</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -8903,7 +8894,7 @@ FROM gpkg_spatial_ref_sys;</code></pre>
 <div class="title">gpkg_data_columns Table Definition SQL</div>
 <div class="content">
 <pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_data_columns (
-  table_name TEXT NOT NULL REFERENCES gpkg_contents(table_name),
+  table_name TEXT NOT NULL,
   column_name TEXT NOT NULL,
   name TEXT,
   title TEXT,
@@ -8911,8 +8902,9 @@ FROM gpkg_spatial_ref_sys;</code></pre>
   mime_type TEXT,
   constraint_name TEXT,
   constraint_type TEXT,
-  PRIMARY KEY (table_name, column_name)
-)</code></pre>
+  CONSTRAINT pk_gdc PRIMARY KEY (table_name, column_name),
+  CONSTRAINT fk_gdc_tn FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name)
+);</code></pre>
 </div>
 </div>
 </div>
@@ -8939,16 +8931,12 @@ FROM gpkg_spatial_ref_sys;</code></pre>
 <div class="title">gpkg_metadata Table Definition SQL</div>
 <div class="content">
 <pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_metadata (
-  id INTEGER CONSTRAINT m_pk PRIMARY KEY ASC
-  ON CONFLICT ROLLBACK AUTOINCREMENT NOT NULL UNIQUE,
-  Field Cod
-  95OGC 12-128r8
+  id INTEGER CONSTRAINT m_pk PRIMARY KEY ASC NOT NULL UNIQUE,
   md_scope TEXT NOT NULL DEFAULT 'dataset',
-  metadata_standard_URI TEXT NOT NULL DEFAULT
-  'http://schemas.opengis.net/iso/19139/',
+  metadata_standard_URI TEXT NOT NULL DEFAULT 'http://schemas.opengis.net/iso/19139/',
   mime_type TEXT NOT NULL DEFAULT ‘text/xml’,
   metadata TEXT NOT NULL DEFAULT (‘’)
-)</code></pre>
+);</code></pre>
 </div>
 </div>
 </div>
@@ -8963,9 +8951,11 @@ FROM gpkg_spatial_ref_sys;</code></pre>
   column_name TEXT,
   row_id_value INTEGER,
   timestamp TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
-  md_file_id INTEGER NOT NULL REFERENCES gpkg_metadata(id),
-  md_parent_id INTEGER REFERENCES gpkg_metadata(id)
-)</code></pre>
+  md_file_id INTEGER NOT NULL,
+  md_parent_id INTEGER,
+  CONSTRAINT crmr_mfi_fk FOREIGN KEY (md_file_id) REFERENCES gpkg_metadata(id),
+  CONSTRAINT crmr_mpi_fk FOREIGN KEY (md_parent_id) REFERENCES gpkg_metadata(id)
+);</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -9837,8 +9827,8 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.9.0<br>
-Last updated 2013-10-04 21:25:42 UTC
+Version 0.9.1<br>
+Last updated 2013-10-04 21:45:25 UTC
 </div>
 </div>
 </body>
