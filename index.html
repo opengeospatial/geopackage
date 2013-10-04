@@ -656,14 +656,12 @@ All specified table and column name values SHALL be lowercase.</p>
   <h5 id="_data">1.1.1.1. Data</h5>
     <div class="sect5">
   <h6 id="_file_format">1.1.1.1.1. File Format</h6>
-    <div class="openblock">
-<div class="content">
-<div class="paragraph">
-<p><strong>Req 1:</strong> The GeoPackage file format SHALL be a <a href="http://www.sqlite.org/">SQLite</a> database
+    <div class="quoteblock">
+<blockquote>
+<strong>Req 1:</strong> The GeoPackage file format SHALL be a <a href="http://www.sqlite.org/">SQLite</a> database
 <a href="http://sqlite.org/fileformat2.html">version 3 format file</a>, the first 16 bytes of which contain “SQLite format 3”
-<span class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</span> in ASCII. <span class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</span></p>
-</div>
-</div>
+<span class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</span> in ASCII. <span class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</span>
+</blockquote>
 </div>
 <div class="paragraph">
 <p>It is RECOMMENDED that data providers whose data is intended for use in multiple applications put the value “GPKG” in the SQLite database header application id field.
@@ -679,9 +677,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
   <h6 id="_file_extension_name">1.1.1.1.1. File Extension Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 2:</strong> GeoPackage files SHALL have the file extension name “.gpkg”.</p>
-</div>
+<strong>Req 2:</strong> GeoPackage files SHALL have the file extension name “.gpkg”.
 </blockquote>
 </div>
 </div>
@@ -689,16 +685,12 @@ Many mobile devices require external memory cards to be formatted using the FAT3
   <h6 id="_integrity_check">1.1.1.1.1. Integrity Check</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 3:</strong> The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file.</p>
-</div>
+<strong>Req 3:</strong> The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 4:</strong> Req 4:	The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return an empty result set indicating no invalid foreign key values for a GeoPackage file.</p>
-</div>
+<strong>Req 4:</strong> The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return an empty result set indicating no invalid foreign key values for a GeoPackage file.
 </blockquote>
 </div>
 </div>
@@ -709,9 +701,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
   <h6 id="_structured_query_language_sql">1.1.1.1.1. Structured Query Language (SQL)</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 5:</strong> A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via <a href="http://www.sqlite.org/download.html">SQLite sqlite3</a> software APIs. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span></p>
-</div>
+<strong>Req 5:</strong> A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via <a href="http://www.sqlite.org/download.html">SQLite sqlite3</a> software APIs. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -723,9 +713,7 @@ A GeoPackage application can use the <a href="http://www.sqlite.org/pragma.html#
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 6:</strong> Every GeoPackage SQLite Extension SHALL have the SQLite library compile and run time options specified in table <a href="#every_gpkg_sqlite_config_table">Every GeoPackage SQLite Configuration</a>.</p>
-</div>
+<strong>Req 6:</strong> Every GeoPackage SQLite Extension SHALL have the SQLite library compile and run time options specified in table <a href="#every_gpkg_sqlite_config_table">Every GeoPackage SQLite Configuration</a>.
 </blockquote>
 </div>
 <table id="every_gpkg_sqlite_config_table" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -801,9 +789,7 @@ A GeoPackage application can use the <a href="http://www.sqlite.org/pragma.html#
   <h6 id="_table_definition">1.1.2.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 7:</strong> A GeoPackage file SHALL include a <code>gpkg_spatial_ref_sys</code> table per table <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table or View Definition</a> and table <a href="#gpkg_spatial_ref_sys_sql">gpkg_spatial_ref_sys Table Definition SQL</a>.</p>
-</div>
+<strong>Req 7:</strong> A GeoPackage file SHALL include a <code>gpkg_spatial_ref_sys</code> table per table <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table or View Definition</a> and table <a href="#gpkg_spatial_ref_sys_sql">gpkg_spatial_ref_sys Table Definition SQL</a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -886,17 +872,13 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
   <h6 id="_table_data_values">1.1.2.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 8:</strong> The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL contain a record for
-organization <a href="http://www.epsg.org/Geodetic.html">EPSG</a> or epsg and <code>organization_coordsys_id</code> <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> for <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a>, a record with an <code>srs_id</code> of -1, an organization of “NONE”, an <code>organization_coordsys_id</code> of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an <code>srs_id</code> of 0, an organization of “NONE”, an <code>organization_coordsys_id</code> of 0, and definition “undefined” for undefined geographic coordinate reference systems.</p>
-</div>
+<strong>Req 8:</strong> The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL contain a record for
+organization <a href="http://www.epsg.org/Geodetic.html">EPSG</a> or epsg and <code>organization_coordsys_id</code> <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> for <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a>, a record with an <code>srs_id</code> of -1, an organization of “NONE”, an <code>organization_coordsys_id</code> of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an <code>srs_id</code> of 0, an organization of “NONE”, an <code>organization_coordsys_id</code> of 0, and definition “undefined” for undefined geographic coordinate reference systems.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 9:</strong> The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage file SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.</p>
-</div>
+<strong>Req 9:</strong> The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage file SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
 </blockquote>
 </div>
 </div>
@@ -910,9 +892,7 @@ organization <a href="http://www.epsg.org/Geodetic.html">EPSG</a> or epsg and <c
   <h6 id="_table_definition_2">1.1.3.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 10:</strong> A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a href="#gpkg_contents_cols">Contents Table or View Definition</a> and <a href="#gpkg_contents_sql">gpkg_contents Table Definition SQL</a>.</p>
-</div>
+<strong>Req 10:</strong> A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a href="#gpkg_contents_cols">Contents Table or View Definition</a> and <a href="#gpkg_contents_sql">gpkg_contents Table Definition SQL</a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1036,23 +1016,17 @@ If the <code>srs_id</code> column value references a geographic coordinate refer
   <h6 id="_table_data_values_2">1.1.3.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 11:</strong> The <code>table_name</code> column value in a <code>gpkg_contents</code> table row SHALL contain the name of a SQLite table or view.</p>
-</div>
+<strong>Req 11:</strong> The <code>table_name</code> column value in a <code>gpkg_contents</code> table row SHALL contain the name of a SQLite table or view.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 12:</strong> Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. <span class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</span></p>
-</div>
+<strong>Req 12:</strong> Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. <span class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</span>
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 13:</strong> Values of the <code>gpkg_contents</code> table <code>srs_id</code> column SHALL reference values in the <code>gpkg_spatial_ref_sys</code> table <code>srs_id</code> column.</p>
-</div>
+<strong>Req 13:</strong> Values of the <code>gpkg_contents</code> table <code>srs_id</code> column SHALL reference values in the <code>gpkg_spatial_ref_sys</code> table <code>srs_id</code> column.
 </blockquote>
 </div>
 </div>
@@ -1069,9 +1043,7 @@ If the <code>srs_id</code> column value references a geographic coordinate refer
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 14:</strong> A Valid GeoPackage SHALL contain features per clause <a href="#_features">Features</a> and/or tiles per clause <a href="#_tiles">Tiles</a> and row(s) in the <code>gpkg_contents</code> table with lowercase <code>data_type</code> column values of “features” and/or “tiles” describing the user data tables.</p>
-</div>
+<strong>Req 14:</strong> A Valid GeoPackage SHALL contain features per clause <a href="#_features">Features</a> and/or tiles per clause <a href="#_tiles">Tiles</a> and row(s) in the <code>gpkg_contents</code> table with lowercase <code>data_type</code> column values of “features” and/or “tiles” describing the user data tables.
 </blockquote>
 </div>
 <div class="sect2">
@@ -1183,9 +1155,7 @@ Each ring is defined by a Curve instance.</p>
   <h6 id="_contents_table_features_row">2.1.2.1.1. Contents Table – Features Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 15:</strong> The <code>gpkg_contents</code> table SHALL contain a row with a lowercase <code>data_type</code> column value of “features” for each vector features user data table or view.</p>
-</div>
+<strong>Req 15:</strong> The <code>gpkg_contents</code> table SHALL contain a row with a lowercase <code>data_type</code> column value of “features” for each vector features user data table or view.
 </blockquote>
 </div>
 </div>
@@ -1199,9 +1169,7 @@ Each ring is defined by a Curve instance.</p>
   <h6 id="gpb_format">2.1.3.1.1. BLOB Format</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 16:</strong> A GeoPackage file SHALL store feature table geometries with or without optional elevation (Z) and/or measure (M) values in SQL BLOBs using the GeoPackageBinary format specified in 4 and clause 2.1.3.1.1.</p>
-</div>
+<strong>Req 16:</strong> A GeoPackage file SHALL store feature table geometries with or without optional elevation (Z) and/or measure (M) values in SQL BLOBs using the GeoPackageBinary format specified in 4 and clause 2.1.3.1.1.
 </blockquote>
 </div>
 <div class="listingblock">
@@ -1262,10 +1230,8 @@ footnote:[SQL functions on geometries in addition to those defined in this claus
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 17:</strong> A GeoPackage SQLite Extension MAY provide SQL function support for triggers in GeoPackage file.
-One that does so SHALL provide the minimal runtime SQL functions listed in Annex D Table 36.</p>
-</div>
+<strong>Req 17:</strong> A GeoPackage SQLite Extension MAY provide SQL function support for triggers in GeoPackage file.
+One that does so SHALL provide the minimal runtime SQL functions listed in Annex D Table 36.
 </blockquote>
 </div>
 </div>
@@ -1279,9 +1245,7 @@ One that does so SHALL provide the minimal runtime SQL functions listed in Annex
   <h6 id="_core_types">2.1.4.1.1. Core Types</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 18:</strong> A GeoPackage file SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeomCollection) in <a href="#geometry_types">[geometry_types]</a> <a href="#geometry_types_core">[geometry_types_core]</a> in the GeoPackageBinary geometry encoding format.</p>
-</div>
+<strong>Req 18:</strong> A GeoPackage file SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeomCollection) in <a href="#geometry_types">[geometry_types]</a> <a href="#geometry_types_core">[geometry_types_core]</a> in the GeoPackageBinary geometry encoding format.
 </blockquote>
 </div>
 </div>
@@ -1295,9 +1259,7 @@ One that does so SHALL provide the minimal runtime SQL functions listed in Annex
   <h6 id="_table_definition_3">2.1.5.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 19:</strong> A GeoPackage file with a <code>gpkg_contents</code> table row with a “features” <code>data_type</code> SHALL contain a <code>gpkg_geometry_columns</code> table or updateable view per <a href="#gpkg_geometry_columns_cols">Geometry Columns Table or View Definition</a> and <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
-</div>
+<strong>Req 19:</strong> A GeoPackage file with a <code>gpkg_contents</code> table row with a “features” <code>data_type</code> SHALL contain a <code>gpkg_geometry_columns</code> table or updateable view per <a href="#gpkg_geometry_columns_cols">Geometry Columns Table or View Definition</a> and <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1374,51 +1336,37 @@ identifies the geometry columns in tables that contain user data representing fe
   <h6 id="_table_data_values_3">2.1.5.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 20:</strong> The <code>gpkg_geometry_columns</code> table or updateable view SHALL contain one row record for each geometry column in each vector feature data table (clause <a href="#feature_user_data_tables">Vector Feature User Data Tables</a>) in a GeoPackage.</p>
-</div>
+<strong>Req 20:</strong> The <code>gpkg_geometry_columns</code> table or updateable view SHALL contain one row record for each geometry column in each vector feature data table (clause <a href="#feature_user_data_tables">Vector Feature User Data Tables</a>) in a GeoPackage.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 21:</strong> Values of the <code>gpkg_geometry_columns</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column for rows with a <code>data_type</code> of <em>features</em> or <em>tiles</em>.</p>
-</div>
+<strong>Req 21:</strong> Values of the <code>gpkg_geometry_columns</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column for rows with a <code>data_type</code> of <em>features</em> or <em>tiles</em>.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 22:</strong> The <code>column_name</code> column value in a <code>gpkg_geometry_columns</code> row SHALL be the name of a column in the table or view specified by the <code>table_name</code> column value for that row.</p>
-</div>
+<strong>Req 22:</strong> The <code>column_name</code> column value in a <code>gpkg_geometry_columns</code> row SHALL be the name of a column in the table or view specified by the <code>table_name</code> column value for that row.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 23:</strong> The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be one of the uppercase geometry type names specified in <a href="#geometry_types">[geometry_types]</a>.</p>
-</div>
+<strong>Req 23:</strong> The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be one of the uppercase geometry type names specified in <a href="#geometry_types">[geometry_types]</a>.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 24:</strong> The <code>srs_id</code> value in a <code>gpkg_geometry_columns</code> table row SHALL be an <code>srs_id</code> column value from the <code>gpkg_spatial_ref_sys</code> table.</p>
-</div>
+<strong>Req 24:</strong> The <code>srs_id</code> value in a <code>gpkg_geometry_columns</code> table row SHALL be an <code>srs_id</code> column value from the <code>gpkg_spatial_ref_sys</code> table.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 25:</strong> The z value in a <code>gpkg_geometry_columns</code> table row SHALL be one of 0, 1, or 2.</p>
-</div>
+<strong>Req 25:</strong> The z value in a <code>gpkg_geometry_columns</code> table row SHALL be one of 0, 1, or 2.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 26:</strong> The m value in a <code>gpkg_geometry_columns</code> table row SHALL be one of 0, 1, or 2.</p>
-</div>
+<strong>Req 26:</strong> The m value in a <code>gpkg_geometry_columns</code> table row SHALL be one of 0, 1, or 2.
 </blockquote>
 </div>
 </div>
@@ -1441,10 +1389,8 @@ footnote:[A GeoPackage is not required to contain any feature data tables.</p>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 27:</strong> A GeoPackage file MAY contain tables or updateable views containing vector features.
-Every such feature table or view in a GeoPackage file SHALL have a primary key defined on one integer column per <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View Definition</a> and <a id="example_feature_table_sql"></a>.</p>
-</div>
+<strong>Req 27:</strong> A GeoPackage file MAY contain tables or updateable views containing vector features.
+Every such feature table or view in a GeoPackage file SHALL have a primary key defined on one integer column per <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View Definition</a> and <a id="example_feature_table_sql"></a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1452,9 +1398,7 @@ Every such feature table or view in a GeoPackage file SHALL have a primary key d
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 28:</strong> A feature table SHALL have only one geometry column.</p>
-</div>
+<strong>Req 28:</strong> A feature table SHALL have only one geometry column.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1462,9 +1406,7 @@ Every such feature table or view in a GeoPackage file SHALL have a primary key d
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 29:</strong> The columns of a vector feature user data table SHALL only be declared using one of the data types specified in table <a href="#vector_feature_data_types">Vector Feature Data Types</a>.</p>
-</div>
+<strong>Req 29:</strong> The columns of a vector feature user data table SHALL only be declared using one of the data types specified in table <a href="#vector_feature_data_types">Vector Feature Data Types</a>.
 </blockquote>
 </div>
 <table id="vector_feature_data_types" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -1621,9 +1563,7 @@ Every such feature table or view in a GeoPackage file SHALL have a primary key d
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 30:</strong> Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column value <span class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</span>.</p>
-</div>
+<strong>Req 30:</strong> Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column value <span class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</span>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1638,9 +1578,7 @@ The presence or absence of optional elevation (Z) and/or measure (M) values in a
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 31:</strong> Feature table geometry columns SHALL contain geometries with the <code>srs_id</code> specified for the column by the <code>gpkg_geometry_columns</code> table <code>srs_id</code> column value.</p>
-</div>
+<strong>Req 31:</strong> Feature table geometry columns SHALL contain geometries with the <code>srs_id</code> specified for the column by the <code>gpkg_geometry_columns</code> table <code>srs_id</code> column value.
 </blockquote>
 </div>
 </div>
@@ -1685,9 +1623,7 @@ footnote:[Images of multiple MIME types MAY be stored in given table. “Tile py
   <h6 id="_contents_table_tiles_row">2.2.2.1.1. Contents Table – Tiles Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 32:</strong> The <code>gpkg_contents</code> table SHALL contain a row with a <code>data_type</code> column value of “tiles” for eac tile pyramid user data table or view.</p>
-</div>
+<strong>Req 32:</strong> The <code>gpkg_contents</code> table SHALL contain a row with a <code>data_type</code> column value of “tiles” for eac tile pyramid user data table or view.
 </blockquote>
 </div>
 </div>
@@ -1710,9 +1646,7 @@ See WMTS Annex E for additional examples of both conventions.</p>
   <h6 id="_zoom_times_two">2.2.3.1.1. Zoom Times Two</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 33:</strong> In a GeoPackage file that contains a tile matrix user data table that contains tile data, b default <span class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</span>, zoom level pixel sizes for that table SHALL vary by a factor of 2 between adjacent zoo levels in the tile matrix metadata table.</p>
-</div>
+<strong>Req 33:</strong> In a GeoPackage file that contains a tile matrix user data table that contains tile data, b default <span class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</span>, zoom level pixel sizes for that table SHALL vary by a factor of 2 between adjacent zoo levels in the tile matrix metadata table.
 </blockquote>
 </div>
 </div>
@@ -1726,9 +1660,7 @@ See WMTS Annex E for additional examples of both conventions.</p>
   <h6 id="_mime_type_png">2.2.4.1.1. MIME Type PNG</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 34:</strong> In a GeoPackage file that contains a tile matrix user data table that contains tile data that is no <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a>, by default SHALL stor that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type http://libpng.org/pub/png/[image/png</a>. <span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span></p>
-</div>
+<strong>Req 34:</strong> In a GeoPackage file that contains a tile matrix user data table that contains tile data that is no <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a>, by default SHALL stor that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type http://libpng.org/pub/png/[image/png</a>. <span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -1742,9 +1674,7 @@ See WMTS Annex E for additional examples of both conventions.</p>
   <h6 id="_mime_type_jpeg">2.2.5.1.1. MIME Type JPEG</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 35:</strong> In a GeoPackage file that contains a tile matrix user data table that contains tile data that is no <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a>, by defaul SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type http://www.jpeg.org/public/jfif.pdf[image/jpeg</a>. <span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span></p>
-</div>
+<strong>Req 35:</strong> In a GeoPackage file that contains a tile matrix user data table that contains tile data that is no <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a>, by defaul SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type http://www.jpeg.org/public/jfif.pdf[image/jpeg</a>. <span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -1758,9 +1688,7 @@ See WMTS Annex E for additional examples of both conventions.</p>
   <h6 id="_table_definition_5">2.2.6.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 36:</strong> A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>gpkg_tile_matrix_set</code> table per <a href="#gpkg_tile_matrix_set_cols">Tile Matrix Set Table or View Definition</a> and <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.</p>
-</div>
+<strong>Req 36:</strong> A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>gpkg_tile_matrix_set</code> table per <a href="#gpkg_tile_matrix_set_cols">Tile Matrix Set Table or View Definition</a> and <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.
 </blockquote>
 </div>
 <table id="gpkg_tile_matrix_set_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -1844,23 +1772,17 @@ This bounding box SHALL be exact s that the bounding box coordinates for individ
   <h6 id="_table_data_values_5">2.2.6.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 37:</strong> Values of the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column SHALL reference values in th gpkg_contents table_name column for rows with a data type of "tiles".</p>
-</div>
+<strong>Req 37:</strong> Values of the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column SHALL reference values in th gpkg_contents table_name column for rows with a data type of "tiles".
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 38:</strong> The gpkg_tile_matrix_set table or view SHALL contain one row record for each tile pyramid user data table.</p>
-</div>
+<strong>Req 38:</strong> The gpkg_tile_matrix_set table or view SHALL contain one row record for each tile pyramid user data table.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 39:</strong> Values of the <code>gpkg_tile_matrix_set</code> <code>srs_id</code> column SHALL reference values in the <code>gpkg_spatial_ref_sys</code> <code>srs_id</code> column.</p>
-</div>
+<strong>Req 39:</strong> Values of the <code>gpkg_tile_matrix_set</code> <code>srs_id</code> column SHALL reference values in the <code>gpkg_spatial_ref_sys</code> <code>srs_id</code> column.
 </blockquote>
 </div>
 </div>
@@ -1874,9 +1796,7 @@ This bounding box SHALL be exact s that the bounding box coordinates for individ
   <h6 id="_table_definition_6">2.2.7.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 40:</strong> A GeoPackage taht contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrx</code> table or view per <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table or View Definition</a> and <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a></p>
-</div>
+<strong>Req 40:</strong> A GeoPackage taht contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrx</code> table or view per <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table or View Definition</a> and <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>
 </blockquote>
 </div>
 <table id="gpkg_tile_matrix_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -1980,16 +1900,12 @@ It allows tile pyramids with zoom levels that differ in resolution by factors of
   <h6 id="_table_data_values_6">2.2.7.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 41:</strong> Values of the <code>gpkg_tile_matrix</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column for rows with a <code>data_type</code> of “tiles”.</p>
-</div>
+<strong>Req 41:</strong> Values of the <code>gpkg_tile_matrix</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column for rows with a <code>data_type</code> of “tiles”.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 42:</strong> The <code>gpkg_tile_matrix</code> table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.</p>
-</div>
+<strong>Req 42:</strong> The <code>gpkg_tile_matrix</code> table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -2001,58 +1917,42 @@ The tile coordinate (0,0) always refers to the tile in the upper left corner of 
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 43:</strong> The <code>zoom_level</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL not be negative.</p>
-</div>
+<strong>Req 43:</strong> The <code>zoom_level</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL not be negative.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 44:</strong> The <code>matrix_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.</p>
-</div>
+<strong>Req 44:</strong> The <code>matrix_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 45:</strong> The <code>matrix_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.</p>
-</div>
+<strong>Req 45:</strong> The <code>matrix_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 46:</strong> The <code>tile_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.</p>
-</div>
+<strong>Req 46:</strong> The <code>tile_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 47:</strong> The <code>tile_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.</p>
-</div>
+<strong>Req 47:</strong> The <code>tile_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 48:</strong> The <code>pixel_x_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.</p>
-</div>
+<strong>Req 48:</strong> The <code>pixel_x_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 49:</strong> The <code>pixel_y_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.</p>
-</div>
+<strong>Req 49:</strong> The <code>pixel_y_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 50:</strong> The <code>pixel_x_size</code> and <code>pixel_y_size</code> column values for <code>zoom_level</code> column values in a <code>gpkg_tile_matrix</code> table sorted in ascending order SHALL be sorted in descending order.</p>
-</div>
+<strong>Req 50:</strong> The <code>pixel_x_size</code> and <code>pixel_y_size</code> column values for <code>zoom_level</code> column values in a <code>gpkg_tile_matrix</code> table sorted in ascending order SHALL be sorted in descending order.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -2074,9 +1974,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
   <h6 id="_table_definition_7">2.2.8.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 51:</strong> Each tile matrix set in a GeoPackage file SHALL be stored in a different tile pyramid user data table or updateable view with a unique name per <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL</a>.</p>
-</div>
+<strong>Req 51:</strong> Each tile matrix set in a GeoPackage file SHALL be stored in a different tile pyramid user data table or updateable view with a unique name per <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL</a>.
 </blockquote>
 </div>
 <table id="example_tiles_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -2154,23 +2052,17 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 52:</strong> For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>zoom_level</code> column value in a GeoPackage file SHALL be in the range min(tm.zoom_level) &#8656; tp.zoom_level &#8656; max(tm.zoom_level).</p>
-</div>
+<strong>Req 52:</strong> For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>zoom_level</code> column value in a GeoPackage file SHALL be in the range min(tm.zoom_level) &#8656; tp.zoom_level &#8656; max(tm.zoom_level).
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 53:</strong> For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_column</code> column value in a GeoPackage file SHALL be in the range 0 &#8656; tp.tile_column &#8656; tm.matrix_width – 1 where the tm and tp <code>zoom_level</code> column values are equal.</p>
-</div>
+<strong>Req 53:</strong> For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_column</code> column value in a GeoPackage file SHALL be in the range 0 &#8656; tp.tile_column &#8656; tm.matrix_width – 1 where the tm and tp <code>zoom_level</code> column values are equal.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 54:</strong> For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_row</code> column value in a GeoPackage file SHALL be in the range 0 &#8656; tp.tile_row &#8656; tm.matrix_height – 1 where the tm and tp <code>zoom_level</code> column values are equal.</p>
-</div>
+<strong>Req 54:</strong> For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_row</code> column value in a GeoPackage file SHALL be in the range 0 &#8656; tp.tile_row &#8656; tm.matrix_height – 1 where the tm and tp <code>zoom_level</code> column values are equal.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -2193,10 +2085,8 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
   <h6 id="_table_definition_8">2.3.1.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 55:</strong> A GeoPackage file MAY contain a table or updateable view named <code>gpkg_data_columns</code>.
-If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
-</div>
+<strong>Req 55:</strong> A GeoPackage file MAY contain a table or updateable view named <code>gpkg_data_columns</code>.
+If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.
 </blockquote>
 </div>
 <table id="gpkg_data_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -2289,32 +2179,24 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
   <h6 id="_table_data_values_8">2.3.1.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 56:</strong> Values of the <code>gpkg_data_columns</code> table <code>table_name</code> column value SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column.</p>
-</div>
+<strong>Req 56:</strong> Values of the <code>gpkg_data_columns</code> table <code>table_name</code> column value SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 57:</strong> The <code>column_name</code> column value in a <code>gpkg_data_columns</code> table row SHALL contain the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.</p>
-</div>
+<strong>Req 57:</strong> The <code>column_name</code> column value in a <code>gpkg_data_columns</code> table row SHALL contain the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 58:</strong> The constraint_name column value in a gpkg_data_columns table MAY be NULL.
-If it is not NULL, it SHALL contain a case sensitive constraint_name column value from the gpkg_data_column_constraints table.</p>
-</div>
+<strong>Req 58:</strong> The constraint_name column value in a gpkg_data_columns table MAY be NULL.
+If it is not NULL, it SHALL contain a case sensitive constraint_name column value from the gpkg_data_column_constraints table.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 59:</strong> The constraint_type column value in a gpkg_data_columns table MAY be NULL if the constraint_name column value is NULL.
-If the constraint_name column value is not NULL, then the constraint_type column value SHALL contain a lowercase constraint_type column value from the gpkg_data_column_constraints table for a row with a matching constraint_name value.</p>
-</div>
+<strong>Req 59:</strong> The constraint_type column value in a gpkg_data_columns table MAY be NULL if the constraint_name column value is NULL.
+If the constraint_name column value is not NULL, then the constraint_type column value SHALL contain a lowercase constraint_type column value from the gpkg_data_column_constraints table for a row with a matching constraint_name value.
 </blockquote>
 </div>
 </div>
@@ -2328,10 +2210,8 @@ If the constraint_name column value is not NULL, then the constraint_type column
   <h6 id="_table_definition_9">2.3.2.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 60:</strong> A GeoPackage file MAY contain a table or updateable view named gpkg_data_column_constraints.
-If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table or View Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
-</div>
+<strong>Req 60:</strong> A GeoPackage file MAY contain a table or updateable view named gpkg_data_column_constraints.
+If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table or View Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -2422,50 +2302,38 @@ These restrictions MAY be enforced by SQL triggers or by code in applications th
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 61:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains data, the lowercase <code>constraint_type</code> column values SHALL be one of "range", "enum", or "glob".</p>
-</div>
+<strong>Req 61:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
+If it contains data, the lowercase <code>constraint_type</code> column values SHALL be one of "range", "enum", or "glob".
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 62:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with constraint_type column values of "range", the <code>value</code> column values for those rows SHALL be NULL.</p>
-</div>
+<strong>Req 62:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
+If it contains rows with constraint_type column values of "range", the <code>value</code> column values for those rows SHALL be NULL.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 63:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "range", the <code>min</code> column values for those rows SHALL be NOT NULL and less than the <code>max</code> column value which shall be NOT NULL.</p>
-</div>
+<strong>Req 63:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
+If it contains rows with <code>constraint_type</code> column values of "range", the <code>min</code> column values for those rows SHALL be NOT NULL and less than the <code>max</code> column value which shall be NOT NULL.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 64:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "range", the <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be 0 or 1.</p>
-</div>
+<strong>Req 64:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
+If it contains rows with <code>constraint_type</code> column values of "range", the <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be 0 or 1.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 65:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be NULL.</p>
-</div>
+<strong>Req 65:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
+If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be NULL.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 66:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>value</code> column SHALL NOT be NULL.</p>
-</div>
+<strong>Req 66:</strong> The <code>gpkg_data_column_constraints</code> table MAY be empty.
+If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>value</code> column SHALL NOT be NULL.
 </blockquote>
 </div>
 </div>
@@ -2495,13 +2363,9 @@ Such metadata <span class="footnote">[<a id="_footnoteref_18" class="footnote" h
   <h5 id="_data_18">2.4.2.1. Data</h5>
     <div class="sect5">
   <h6 id="_table_definition_10">2.4.2.1.1. Table Definition</h6>
-    <div class="quoteblock">
-<blockquote>
-<div class="paragraph">
+    <div class="paragraph">
 <p><em>Req 50:</em> A GeoPackage file MAY contain a table named gpkg_metadata. If present it SHALL be defined
 per <a href="#gpkg_metadata_cols">Metadata Table Definition</a> and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
-</div>
-</blockquote>
 </div>
 <div class="paragraph">
 <p>The first component of GeoPackage metadata is the <code>gpkg_metadata</code> table that MAY contain metadata in MIME <a href="#N25">[N25]</a> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <a href="#N40">[N40]</a>, ISO 19115-2 <a href="#B31">[B31]</a>, ISO 19139 <a href="#B32">[B32]</a>, Dublin Core <a href="#B33">[B33]</a>, CSDGM <a href="#B34">[B34]</a>, DDMS <a href="#B35">[B35]</a>, NMF/NMIS <a href="#B36">[B36]</a>, etc.
@@ -2693,9 +2557,7 @@ The initial contents of this table were obtained from the ISO 19115 [40], Annex 
 
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 67:</strong> Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table or updateable view SHALL be one of the name column values from 11 in clause 2.4.2.1.2.</p>
-</div>
+<strong>Req 67:</strong> Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table or updateable view SHALL be one of the name column values from 11 in clause 2.4.2.1.2.
 </blockquote>
 </div>
 </div>
@@ -2709,9 +2571,7 @@ The initial contents of this table were obtained from the ISO 19115 [40], Annex 
   <h6 id="_table_definition_11">2.4.3.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 68:</strong> A GeoPackage file that contains a gpkg_metadata table SHALL contain a gpkg_metadata_reference table per clause 2.4.3.1.1, Table 12 and Table 34.</p>
-</div>
+<strong>Req 68:</strong> A GeoPackage file that contains a gpkg_metadata table SHALL contain a gpkg_metadata_reference table per clause 2.4.3.1.1, Table 12 and Table 34.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -2809,54 +2669,40 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
   <h6 id="_table_data_values_11">2.4.3.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 69:</strong> Every <code>gpkg_metadata_reference</code> table reference scope column value SHALL be one of ‘geopackage’, ‘table’, ‘column’, ’row’, ’row/col’ in lowercase.</p>
-</div>
+<strong>Req 69:</strong> Every <code>gpkg_metadata_reference</code> table reference scope column value SHALL be one of ‘geopackage’, ‘table’, ‘column’, ’row’, ’row/col’ in lowercase.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 70:</strong> Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’ SHALL have a <code>table_name</code> column value that is NULL.
-Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>table_name</code> column value that references a value in the <code>gpkg_contents</code> <code>table_name</code> column.</p>
-</div>
+<strong>Req 70:</strong> Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’ SHALL have a <code>table_name</code> column value that is NULL.
+Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>table_name</code> column value that references a value in the <code>gpkg_contents</code> <code>table_name</code> column.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 71:</strong> Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’,‘table’ or ‘row’ SHALL have a <code>column_name</code> column value that is NULL.
-Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>column_name</code> column value that contains the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.</p>
-</div>
+<strong>Req 71:</strong> Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’,‘table’ or ‘row’ SHALL have a <code>column_name</code> column value that is NULL.
+Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>column_name</code> column value that contains the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 72:</strong> Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’, ‘table’ or ‘column’ SHALL have a <code>row_id_value</code> column value that is NULL.
-Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>row_id_value</code> column value that contains the ROWID of a row in the SQLite table or view identified by the <code>table_name</code> column value.</p>
-</div>
+<strong>Req 72:</strong> Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’, ‘table’ or ‘column’ SHALL have a <code>row_id_value</code> column value that is NULL.
+Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>row_id_value</code> column value that contains the ROWID of a row in the SQLite table or view identified by the <code>table_name</code> column value.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 73:</strong> Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in ISO 8601 [41]format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.[^10]</p>
-</div>
+<strong>Req 73:</strong> Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in ISO 8601 [41]format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.[^10]
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 74:</strong> Every <code>gpkg_metadata_reference</code> table row <code>md_file_id</code> column value SHALL be an id column value from the <code>gpkg_metadata</code> table.</p>
-</div>
+<strong>Req 74:</strong> Every <code>gpkg_metadata_reference</code> table row <code>md_file_id</code> column value SHALL be an id column value from the <code>gpkg_metadata</code> table.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 75:</strong> Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> column value that is NOT NULL SHALL be an id column value from the <code>gpkg_metadata</code> table that is not equal to the <code>md_file_id</code> column value for that row.</p>
-</div>
+<strong>Req 75:</strong> Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> column value that is NOT NULL SHALL be an id column value from the <code>gpkg_metadata</code> table that is not equal to the <code>md_file_id</code> column value for that row.
 </blockquote>
 </div>
 </div>
@@ -2886,10 +2732,8 @@ Such other data tables MAY be described by rows in the <code>gpkg_spatial_ref_sy
   <h6 id="extensions_table_definition">2.6.1.1.1. Table Definition</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 76:</strong> A GeoPackage file MAY contain a table or updateable view named gpkg_extensions.
-If present this table SHALL be defined per clause 2.6.1.1.1, Table 13 and Table 23.</p>
-</div>
+<strong>Req 76:</strong> A GeoPackage file MAY contain a table or updateable view named gpkg_extensions.
+If present this table SHALL be defined per clause 2.6.1.1.1, Table 13 and Table 23.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -2954,33 +2798,25 @@ An application that access a GeoPackage file can query the <code>gpkg_extensions
   <h6 id="_table_data_values_12">2.6.1.1.1. Table Data Values</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 77:</strong> Values of the <code>gpkg_extensions</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column or be NULL.
-They SHALL NOT be NULL for rows where the <code>column_name</code> value is not NULL.</p>
-</div>
+<strong>Req 77:</strong> Values of the <code>gpkg_extensions</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column or be NULL.
+They SHALL NOT be NULL for rows where the <code>column_name</code> value is not NULL.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 78:</strong> The <code>column_name</code> column value in a <code>gpkg_extensions</code> row SHALL be the name of a column in the table specified by the <code>table_name</code> column value for that row, or be NULL.</p>
-</div>
+<strong>Req 78:</strong> The <code>column_name</code> column value in a <code>gpkg_extensions</code> row SHALL be the name of a column in the table specified by the <code>table_name</code> column value for that row, or be NULL.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 79:</strong> Each <code>extension_name</code> column value in a <code>gpkg_extensions</code> row SHALL be a unique case sensitive value of the form \&lt;author\&gt;_\&lt;extension_name\&gt; where \&lt;author\&gt; indicates the person or organization that developed and
+<strong>Req 79:</strong> Each <code>extension_name</code> column value in a <code>gpkg_extensions</code> row SHALL be a unique case sensitive value of the form \&lt;author\&gt;_\&lt;extension_name\&gt; where \&lt;author\&gt; indicates the person or organization that developed and
 maintains the extension. The valid character set for \&lt;author\&gt; SHALL be [a-zA-Z0-9].
-The valid character set for \&lt;extension_name\&gt; SHALL be [a-zA-Z0-9_]. An <code>extension_name</code> for the “gpkg” author name SHALL be one of those listed in <a href="#gpkg_reserved_extensions">Reserved GeoPackage Extensions</a>.</p>
-</div>
+The valid character set for \&lt;extension_name\&gt; SHALL be [a-zA-Z0-9_]. An <code>extension_name</code> for the “gpkg” author name SHALL be one of those listed in <a href="#gpkg_reserved_extensions">Reserved GeoPackage Extensions</a>.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 80:</strong> The scope column value in a <code>gpkg_extensions</code> row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.</p>
-</div>
+<strong>Req 80:</strong> The scope column value in a <code>gpkg_extensions</code> row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -3067,10 +2903,8 @@ GeoPackage implementers use their own author names to register other extensions.
   <h6 id="_api_geopackage_sqlite_config">2.6.1.1.1. API GeoPackage SQLite Config</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 81:</strong> A GeoPackage SQLite Extension MAY provide SQL runtime functions or rtree support for a GeoPackage file.
-One that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.1 Table 15.</p>
-</div>
+<strong>Req 81:</strong> A GeoPackage SQLite Extension MAY provide SQL runtime functions or rtree support for a GeoPackage file.
+One that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.1 Table 15.
 </blockquote>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
@@ -3122,10 +2956,8 @@ One that does so SHALL have the SQLite library compile and run time options spec
   <h6 id="_safe_geopackage_sqlite_config">2.6.1.1.1. Safe GeoPackage SQLite Config</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 82:</strong> A GeoPackage SQLite Extension MAY provide primary/foreign key and trigger support for a GeoPackage file.
-One that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.2 Table 16.</p>
-</div>
+<strong>Req 82:</strong> A GeoPackage SQLite Extension MAY provide primary/foreign key and trigger support for a GeoPackage file.
+One that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.2 Table 16.
 </blockquote>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
@@ -3204,19 +3036,15 @@ extension name and extension row for the optional capability.</p>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 83:</strong> A GeoPackage file with any extension described in the following sub clauses SHALL contain a
+<strong>Req 83:</strong> A GeoPackage file with any extension described in the following sub clauses SHALL contain a
 gpkg_extensions table per clause <a href="#extensions_table_definition">Table Definition</a>.  A GeoPackage file without any extension described in
-the following sub clauses MAY contain an empty <code>gpkg_extensions</code> table, or MAY NOT contain a <code>gpkg_extensions</code> table.</p>
-</div>
+the following sub clauses MAY contain an empty <code>gpkg_extensions</code> table, or MAY NOT contain a <code>gpkg_extensions</code> table.
 </blockquote>
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 84:</strong> Any table in a GeoPackage file subject to a registered extension with an <code>author_name</code> other than
-“gpkg” SHALL NOT be described by a <code>gpkg_contents</code> table row with a <code>data_type</code> value of “feature” or “tiles”.</p>
-</div>
+<strong>Req 84:</strong> Any table in a GeoPackage file subject to a registered extension with an <code>author_name</code> other than
+“gpkg” SHALL NOT be described by a <code>gpkg_contents</code> table row with a <code>data_type</code> value of “feature” or “tiles”.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -3240,11 +3068,9 @@ specified in Annex A.</p>
   <h6 id="_extension_types">3.1.1.1.1. Extension Types</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 85:</strong> A GeoPackage file MAY store feature table geometries with the extended non-linear geometry types
+<strong>Req 85:</strong> A GeoPackage file MAY store feature table geometries with the extended non-linear geometry types
 (CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in Annex G. If it does so, they
-SHALL be encoded in the GeoPackageBinary geometry format.</p>
-</div>
+SHALL be encoded in the GeoPackageBinary geometry format.
 </blockquote>
 </div>
 </div>
@@ -3252,11 +3078,9 @@ SHALL be encoded in the GeoPackageBinary geometry format.</p>
   <h6 id="_extensions_types_extensions_name">3.1.1.1.1. Extensions Types - Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 86:</strong> An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name
+<strong>Req 86:</strong> An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name
 using the “gpkg_geom_\&lt;gname\&gt;” template where \&lt;gname\&gt; is the uppercase name of the extension geometry type from Annex
-G used in a GeoPackage file.</p>
-</div>
+G used in a GeoPackage file.
 </blockquote>
 </div>
 </div>
@@ -3264,12 +3088,10 @@ G used in a GeoPackage file.</p>
   <h6 id="_extensions_types_extensions_row">3.1.1.1.1. Extensions Types - Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 87:</strong> A GeoPackage file that contains a <code>gpkg_geometry_columns</code> table or updateable view with row records
+<strong>Req 87:</strong> A GeoPackage file that contains a <code>gpkg_geometry_columns</code> table or updateable view with row records
 that specify extension <code>geometry_type_name</code> column values SHALL contain a <code>gpkg_extensions</code> table that contains row records with
 <code>table_name</code> and <code>column_name</code> values from the <code>gpkg_geometry_columns</code> row records that identify extension type uses, and
-<code>extension_name</code> column values for each of those geometry types constructed per clause 3.1.2.1.2.</p>
-</div>
+<code>extension_name</code> column values for each of those geometry types constructed per clause 3.1.2.1.2.
 </blockquote>
 </div>
 </div>
@@ -3307,10 +3129,8 @@ return subsets of the rows in a feature table with a non-trivial number (thousan
 </div>
 <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 88:</strong> A GeoPackage file SHALL implement spatial indexes on feature table geometry columns as specified in clause
-3.1.3.1.1 using the SQLite Virtual Table RTrees and triggers specified in Annex E.</p>
-</div>
+<strong>Req 88:</strong> A GeoPackage file SHALL implement spatial indexes on feature table geometry columns as specified in clause
+3.1.3.1.1 using the SQLite Virtual Table RTrees and triggers specified in Annex E.
 </blockquote>
 </div>
 </div>
@@ -3318,10 +3138,8 @@ return subsets of the rows in a feature table with a non-trivial number (thousan
   <h6 id="_spatial_indexes_extensions_name">3.1.2.1.1. Spatial Indexes - Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 89:</strong> The “gpkg_rtree_index” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
-column value to specify implementation of spatial indexes on a geometry column.</p>
-</div>
+<strong>Req 89:</strong> The “gpkg_rtree_index” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
+column value to specify implementation of spatial indexes on a geometry column.
 </blockquote>
 </div>
 </div>
@@ -3329,11 +3147,9 @@ column value to specify implementation of spatial indexes on a geometry column.<
   <h6 id="_spatial_indexes_extensions_row">3.1.2.1.1. Spatial Indexes - Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 90:</strong> A GeoPackage file that implements spatial indexes SHALL have a <code>gpkg_extensions</code> table that contains
+<strong>Req 90:</strong> A GeoPackage file that implements spatial indexes SHALL have a <code>gpkg_extensions</code> table that contains
 a row for each spatially indexed column with <code>extension_name</code> “gpkg_rtree_index”, the <code>table_name</code> of the table with a
-spatially indexed column, and the <code>column_name</code> of the spatially indexed column.</p>
-</div>
+spatially indexed column, and the <code>column_name</code> of the spatially indexed column.
 </blockquote>
 </div>
 </div>
@@ -3351,11 +3167,9 @@ by any GeoPackage file that implements requirements of clause 2.1 and clause 2.6
   <h6 id="_geometry_type_triggers_implementation">3.1.3.1.1. Geometry Type Triggers – Implementation</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 91:</strong> A GeoPackage file SHALL include the SQL insert and update triggers specified in clause 3.1.4.1.1
+<strong>Req 91:</strong> A GeoPackage file SHALL include the SQL insert and update triggers specified in clause 3.1.4.1.1
 and 17 on every feature table geometry column to enforce the geometry type values specified for those columns in the
-<code>gpkg_geometry_columns</code> table.</p>
-</div>
+<code>gpkg_geometry_columns</code> table.
 </blockquote>
 </div>
 <div class="listingblock">
@@ -3396,10 +3210,8 @@ Functions specified in Annex D.</p>
   <h6 id="_geometry_type_triggers_extensions_name">3.1.3.1.1. Geometry Type Triggers – Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 92:</strong> The “gpkg_geometry_type_trigger” extension name SHALL be used as a <code>gpkg_extensions</code> table
-extension name column value to specify implementation of geometry type triggers.</p>
-</div>
+<strong>Req 92:</strong> The “gpkg_geometry_type_trigger” extension name SHALL be used as a <code>gpkg_extensions</code> table
+extension name column value to specify implementation of geometry type triggers.
 </blockquote>
 </div>
 </div>
@@ -3407,12 +3219,10 @@ extension name column value to specify implementation of geometry type triggers.
   <h6 id="_geometry_type_triggers_extensions_row">3.1.3.1.1. Geometry Type Triggers – Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 93:</strong> A GeoPackage file that implements geometry type triggers on feature table geometry columns SHALL
+<strong>Req 93:</strong> A GeoPackage file that implements geometry type triggers on feature table geometry columns SHALL
 contain a <code>gpkg_extensions</code> table that contains a row for each such geometry column with <code>extension_name</code>
 “gpkg_geometry_type_trigger”, <code>table_name</code> of the feature table with a geometry column, and <code>column_name</code> of the
-geometry column.</p>
-</div>
+geometry column.
 </blockquote>
 </div>
 </div>
@@ -3430,11 +3240,9 @@ by any GeoPackage file that implements requirements of clause 2.1 and clause 2.6
   <h6 id="_srs_id_triggers_implementation">3.1.4.1.1. SRS_ID Triggers – Implementation</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 94:</strong> A GeoPackage file SHALL include the SQL insert and update triggers specified in clause 3.1.5.1.1 and 18 on
+<strong>Req 94:</strong> A GeoPackage file SHALL include the SQL insert and update triggers specified in clause 3.1.5.1.1 and 18 on
 every feature table geometry column to enforce the <code>srs_id</code> values specified for those columns in the
-<code>gpkg_geometry_columns</code> table.</p>
-</div>
+<code>gpkg_geometry_columns</code> table.
 </blockquote>
 </div>
 <div class="listingblock">
@@ -3475,10 +3283,8 @@ Functions specified in [minimal_runtime_sql_functions].</p>
   <h6 id="_srs_id_triggers_extensions_name">3.1.4.1.1. SRS_ID Triggers – Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 95:</strong> The “gpkg_srs_id_trigger” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
-column value to specify implementation of <code>srs_id</code> triggers.</p>
-</div>
+<strong>Req 95:</strong> The “gpkg_srs_id_trigger” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
+column value to specify implementation of <code>srs_id</code> triggers.
 </blockquote>
 </div>
 </div>
@@ -3486,11 +3292,9 @@ column value to specify implementation of <code>srs_id</code> triggers.</p>
   <h6 id="_srs_id_triggers_extensions_row">3.1.4.1.1. SRS_ID Triggers – Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 96:</strong> A GeoPackage file that implements <code>srs_id</code> triggers on feature table geometry columns SHALL contain
+<strong>Req 96:</strong> A GeoPackage file that implements <code>srs_id</code> triggers on feature table geometry columns SHALL contain
 a <code>gpkg_extensions</code> table that contains a row for each geometry column with <code>extension_name</code> “gpkg_srs_id_trigger”,
-<code>table_name</code> of the feature table with a geometry column, and <code>column_name</code> of the geometry column.</p>
-</div>
+<code>table_name</code> of the feature table with a geometry column, and <code>column_name</code> of the geometry column.
 </blockquote>
 </div>
 </div>
@@ -3519,10 +3323,8 @@ described in the <code>gpkg_tile_matrix</code> table.</p>
   <h6 id="_zoom_other_extensions_name">3.2.1.1.1. Zoom Other – Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 97:</strong> The “gpkg_zoom_other” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
-column value to specify implementation of other zoom intervals on a tile matrix set user data table.</p>
-</div>
+<strong>Req 97:</strong> The “gpkg_zoom_other” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
+column value to specify implementation of other zoom intervals on a tile matrix set user data table.
 </blockquote>
 </div>
 </div>
@@ -3530,11 +3332,9 @@ column value to specify implementation of other zoom intervals on a tile matrix 
   <h6 id="_zoom_other_extensions_row">3.2.1.1.1. Zoom Other – Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 98:</strong> A GeoPackage file that implements other zoom intervals SHALL have a <code>gpkg_extensions</code> table that
+<strong>Req 98:</strong> A GeoPackage file that implements other zoom intervals SHALL have a <code>gpkg_extensions</code> table that
 contains a row for each tile matrix set user data table with other zoom intervals with <code>extension_name</code>
-“gpkg_zoom_other”, the <code>table_name</code> of the table with other zoom intervals, and the “tile_data” <code>column_name</code>.</p>
-</div>
+“gpkg_zoom_other”, the <code>table_name</code> of the table with other zoom intervals, and the “tile_data” <code>column_name</code>.
 </blockquote>
 </div>
 </div>
@@ -3559,10 +3359,8 @@ store <code>tile_data</code> in MIME type image/x-webp[26].</p>
   <h6 id="_webp_extensions_name">3.2.2.1.1. WEBP&#8201;&#8212;&#8201;Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 99:</strong> The “gpkg_webp” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
-column value to specify storage of raster images in WEBP format.</p>
-</div>
+<strong>Req 99:</strong> The “gpkg_webp” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
+column value to specify storage of raster images in WEBP format.
 </blockquote>
 </div>
 </div>
@@ -3570,11 +3368,9 @@ column value to specify storage of raster images in WEBP format.</p>
   <h6 id="_webp_extensions_row">3.2.2.1.1. WEBP&#8201;&#8212;&#8201;Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 100:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
+<strong>Req 100:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
 raster images in WEBP format SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code> values
-for each such table, “tile_data” <code>column_name</code> values and <code>extension_name</code> column values of “gpkg_webp”.</p>
-</div>
+for each such table, “tile_data” <code>column_name</code> values and <code>extension_name</code> column values of “gpkg_webp”.
 </blockquote>
 </div>
 </div>
@@ -3601,10 +3397,8 @@ exactly, and no rotation of the image is required.</p>
   <h6 id="_tiff_extensions_name">3.2.3.1.1. TIFF&#8201;&#8212;&#8201;Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 101:</strong> The “gpkg_tiff” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
-column value to specify storage of raster images in TIFF format.</p>
-</div>
+<strong>Req 101:</strong> The “gpkg_tiff” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name
+column value to specify storage of raster images in TIFF format.
 </blockquote>
 </div>
 </div>
@@ -3612,11 +3406,9 @@ column value to specify storage of raster images in TIFF format.</p>
   <h6 id="_extensions_row">3.2.3.1.1. Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 102:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
+<strong>Req 102:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
 raster images in TIFF format per SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code>
-values for each such table, “tile_data” <code>column_name</code> values and <code>extension_name</code> column values of “gpkg_tiff”.</p>
-</div>
+values for each such table, “tile_data” <code>column_name</code> values and <code>extension_name</code> column values of “gpkg_tiff”.
 </blockquote>
 </div>
 </div>
@@ -3641,10 +3433,8 @@ store <code>tile_data</code> in MIME type application/vnd.NITF[46] for National 
   <h6 id="_nitf_extensions_name">3.2.4.1.1. NITF&#8201;&#8212;&#8201;Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 103:</strong> The “gpkg_nitf” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name column
-value to specify storage of raster images in NITF format.</p>
-</div>
+<strong>Req 103:</strong> The “gpkg_nitf” extension name SHALL be used as a <code>gpkg_extensions</code> table extension name column
+value to specify storage of raster images in NITF format.
 </blockquote>
 </div>
 </div>
@@ -3652,11 +3442,9 @@ value to specify storage of raster images in NITF format.</p>
   <h6 id="_nitf_extensions_row">3.2.4.1.1. NITF&#8201;&#8212;&#8201;Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 104:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
+<strong>Req 104:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
 raster images in NITF format SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code> values
-for each such table, “tile_data” <code>column_name</code> values and <code>extension_name</code> column values of “gpkg_nitf”.</p>
-</div>
+for each such table, “tile_data” <code>column_name</code> values and <code>extension_name</code> column values of “gpkg_nitf”.
 </blockquote>
 </div>
 </div>
@@ -3682,11 +3470,9 @@ purposes of determining GeoPackage file validity.</p>
   <h6 id="_other_extensions_name">3.2.5.1.1. Other Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 105:</strong> An extension name in the form \&lt;authorname\&gt;_\&lt;other\&gt;_mime_type SHALL be defined for an author
+<strong>Req 105:</strong> An extension name in the form \&lt;authorname\&gt;_\&lt;other\&gt;_mime_type SHALL be defined for an author
 name other than “gpkg” for each other MIME image format used for <code>tile_data</code> columns in tile matrix set user data
-tables, where is replaced by the other MIME type abbreviation in uppercase</p>
-</div>
+tables, where is replaced by the other MIME type abbreviation in uppercase
 </blockquote>
 </div>
 </div>
@@ -3694,12 +3480,10 @@ tables, where is replaced by the other MIME type abbreviation in uppercase</p>
   <h6 id="_other_extensions_row">3.2.5.1.1. Other Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 106:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
+<strong>Req 106:</strong> A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
 raster images in a MIME type format other than those defined in this specification SHALL contain a <code>gpkg_extensions</code>
 table that contains row records with <code>table_name</code> values for each such table, “tile_data” <code>column_name</code> values and
-<code>extension_name</code> column values of the other format extension name defined per clause 3.2.5.1.2.</p>
-</div>
+<code>extension_name</code> column values of the other format extension name defined per clause 3.2.5.1.2.
 </blockquote>
 </div>
 </div>
@@ -3729,10 +3513,8 @@ of determining GeoPackage file validity.</p>
   <h6 id="_blob_format_extensions_name">3.3.1.1.1. BLOB format - Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 107:</strong> An extension name in the form \&lt;author_name\&gt;_geometry encoding SHALL be defined for an author name
-other than “gpkg” for each geometry BLOB format other than GeoPackageBinary used in a GeoPackage file.</p>
-</div>
+<strong>Req 107:</strong> An extension name in the form \&lt;author_name\&gt;_geometry encoding SHALL be defined for an author name
+other than “gpkg” for each geometry BLOB format other than GeoPackageBinary used in a GeoPackage file.
 </blockquote>
 </div>
 </div>
@@ -3740,11 +3522,9 @@ other than “gpkg” for each geometry BLOB format other than GeoPackageBinary 
   <h6 id="_blob_format_extensions_row">3.3.1.1.1. BLOB format - Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 108:</strong> A GeoPackage file that contains other data tables with geometry column BLOB values encoded in an
+<strong>Req 108:</strong> A GeoPackage file that contains other data tables with geometry column BLOB values encoded in an
 extension format SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values
-that identify extension format uses, and with extension_name column values constructed per clause 3.3.1.</p>
-</div>
+that identify extension format uses, and with extension_name column values constructed per clause 3.3.1.
 </blockquote>
 </div>
 </div>
@@ -3770,11 +3550,9 @@ integrity or application business rule constraints. [^3]</p>
   <h6 id="_other_trigger_extensions_name">3.3.2.1.1. Other Trigger – Extensions Name</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 109:</strong> An extension name in the form for an author name other than “gpkg” SHALL be defined as a
+<strong>Req 109:</strong> An extension name in the form for an author name other than “gpkg” SHALL be defined as a
 <code>gpkg_extensions</code> table extension name column value to specify triggers in a GeoPackage file that use SQL functions
-other than those provided by SQLite or the GeoPackage Minimal Runtime SQL Functions.</p>
-</div>
+other than those provided by SQLite or the GeoPackage Minimal Runtime SQL Functions.
 </blockquote>
 </div>
 </div>
@@ -3782,12 +3560,10 @@ other than those provided by SQLite or the GeoPackage Minimal Runtime SQL Functi
   <h6 id="_other_trigger_extensions_row">3.3.2.1.1. Other Trigger – Extensions Row</h6>
     <div class="quoteblock">
 <blockquote>
-<div class="paragraph">
-<p><strong>Req 110:</strong> A GeoPackage file that implements triggers that use SQL functions other than those provided by
+<strong>Req 110:</strong> A GeoPackage file that implements triggers that use SQL functions other than those provided by
 SQLite or the GeoPackage Minimal Runtime SQL Functions SHALL have a <code>gpkg_extensions</code> table that contains row records
 with <code>table_name</code> values for each such table, <code>column_name</code> values for each such column and <code>extension_name</code> column
-values of the other trigger extension name defined per clause 3.3.1.1.2.</p>
-</div>
+values of the other trigger extension name defined per clause 3.3.1.1.2.
 </blockquote>
 </div>
 </div>
@@ -9828,7 +9604,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.1<br>
-Last updated 2013-10-04 21:45:25 UTC
+Last updated 2013-10-04 22:27:12 UTC
 </div>
 </div>
 </body>
