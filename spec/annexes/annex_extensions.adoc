@@ -1,18 +1,17 @@
 [appendix]
 == Spatial Index SQL (Normative)
 
-The tables below contain SQL templates with variables.  Replace the following template variables with the specified
-values to create the required SQL statements:
-<t>: The name of the feature table containing the geometry column
-<c>: The name of the geometry column in <t> that is being indexed
+The tables below contain SQL templates with variables.
+Replace the following template variables with the specified values to create the required SQL statements: +
+<t>: The name of the feature table containing the geometry column +
+<c>: The name of the geometry column in <t> that is being indexed +
 <i>: The name of the integer primary key column in <t> as specified in Req 25
 
 === Create Virtual Table SQL Template
 
 GeoPackage files MAY contain a spatial index for each geometry column of a feature table.
-These spatial indexes SHALL be created using the SQLite Virtual Table RTree extension. An
-application that creates a spatial index SHALL create it using the following SQL statement
-template:
+These spatial indexes SHALL be created using the SQLite Virtual Table RTree extension.
+An application that creates a spatial index SHALL create it using the following SQL statement template:
 
 .create virtual table SQL
 [source,sql]
@@ -20,11 +19,8 @@ template:
 CREATE VIRTUAL TABLE rtree_<t>_<c> USING rtree(id, minx, maxx, miny, maxy)
 ----
 
-where <t> and <c> are replaced with the names of the feature table and geometry column
-being indexed. The rtree function id parameter becomes the virtual table 64-bit signed integer
-primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored
-as 32-bit floating point numbers) for each dimension that become the virtual table data
-columns that are populated to create the spatial rtree index.
+where <t> and <c> are replaced with the names of the feature table and geometry column being indexed.
+The rtree function id parameter becomes the virtual table 64-bit signed integer primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored as 32-bit floating point numbers) for each dimension that become the virtual table data columns that are populated to create the spatial rtree index.
 
 === Load Spatial Index Values
 
@@ -39,14 +35,12 @@ INSERT OR REPLACE INTO rtree_<t>_<c>
   SELECT <i>, st_minx(<c>), st_maxx(<c>), st_miny(<c>), st_maxy(<c>) FROM <t>;
 ----
 
-where <t> and <c> are replaced with the names of the feature table and geometry column
-being indexed and <i> is replaced with the name of the feature table integer primary key column.
+where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
 === Define Triggers to Maintain Spatial Index Values
 
-For each spatial index in a GeoPackage file, corresponding insert, update and delete triggers
-that update the spatial index SHALL be present on the indexed geometry column. These
-spatial index triggers SHALL be defined as follows:
+For each spatial index in a GeoPackage file, corresponding insert, update and delete triggers that update the spatial index SHALL be present on the indexed geometry column.
+These spatial index triggers SHALL be defined as follows:
 
 .Spatial Index SQL Triggers Template
 [source,sql]
@@ -124,5 +118,4 @@ BEGIN
 END;
 ----
 
-where <t> and <c> are replaced with the names of the feature table and geometry column
-being indexed and <i> is replaced with the name of the feature table integer primary key column.
+where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
