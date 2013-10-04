@@ -31,9 +31,9 @@ priority.
 
 Reading the document
 --------------------
-The main specification is in the [spec/](spec/) folder. 
+The main specification can be read at http://opengis.github.io/geopackage/.
 
-It can also be read in HTML format at http://opengis.github.io/geopackage/.
+The asciidoc source for the specification is in the [spec/](spec/) folder.
 
 Contributing
 ------------
