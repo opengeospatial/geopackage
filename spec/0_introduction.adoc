@@ -53,11 +53,12 @@ an environment (e.g. through an API) that guarantees data model and data set int
 results in response to identical requests from different client applications.
 
 A **GeoPackage file** is a platform-independent SQLite database file that contains GeoPackage data and metadata tables
-shown in Figure 1, with specified definitions, integrity assertions, format limitations and content constraints.
+shown in <<geopackage_tables_figure>>, with specified definitions, integrity assertions, format limitations and content
+constraints.
 
-**Figure 1 - GeoPackage Tables**
-
-![image](images/geopackage-uml.png)
+[[geopackage_tables_figure]]
+.GeoPackage Tables
+image::geopackage-uml.png[GeoPackage Tables]
 
 A GeoPackage file MAY be “empty” (contain user data table(s) for vector features and/or tile matrix pyramids with no row
 record content) ) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile
