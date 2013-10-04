@@ -33,6 +33,8 @@ Reading the document
 --------------------
 The main specification is in the [spec/](spec/) folder. 
 
+It can also be read in HTML format at http://opengis.github.io/geopackage/.
+
 Contributing
 ------------
 The contributor understands that any contributions, if accepted by the OGC Membership, shall 
