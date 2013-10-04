@@ -11,10 +11,9 @@ The optional capabilities defined in sub clauses and requirement statements of t
 [[extensions_table_definition]]
 ====== Table Definition
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage file MAY contain a table or updateable view named gpkg_extensions.
+[requirement]
+A GeoPackage file MAY contain a table or updateable view named gpkg_extensions.
 If present this table SHALL be defined per clause 2.6.1.1.1, Table 13 and Table 23.
-________________________________________________________________________________________________________________________
 
 The `gpkg_extensions` table or updateable view in a GeoPackage file registers extension capabilities required to make direct use of its contents.
 An application that access a GeoPackage file can query the `gpkg_extensions` table instead of the contents of all the user data tables to determine if it has the required capabilitiesto read or write to tables with extensions, and to “fail fast” and return an error message if it does not.
@@ -33,24 +32,20 @@ See Annex C: Table Definition SQL clause C.3 gpkg_extensions.
 
 ====== Table Data Values
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* Values of the `gpkg_extensions` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column or be NULL.
+[requirement]
+Values of the `gpkg_extensions` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column or be NULL.
 They SHALL NOT be NULL for rows where the `column_name` value is not NULL.
-________________________________________________________________________________________________________________________
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `column_name` column value in a `gpkg_extensions` row SHALL be the name of a column in the table specified by the `table_name` column value for that row, or be NULL.
-________________________________________________________________________________________________________________________
+[requirement]
+The `column_name` column value in a `gpkg_extensions` row SHALL be the name of a column in the table specified by the `table_name` column value for that row, or be NULL.
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* Each `extension_name` column value in a `gpkg_extensions` row SHALL be a unique case sensitive value of the form \<author\>_\<extension_name\> where \<author\> indicates the person or organization that developed and
+[requirement]
+Each `extension_name` column value in a `gpkg_extensions` row SHALL be a unique case sensitive value of the form \<author\>_\<extension_name\> where \<author\> indicates the person or organization that developed and
 maintains the extension. The valid character set for \<author\> SHALL be [a-zA-Z0-9].
 The valid character set for \<extension_name\> SHALL be [a-zA-Z0-9_]. An `extension_name` for the “gpkg” author name SHALL be one of those listed in <<gpkg_reserved_extensions>>.
-________________________________________________________________________________________________________________________
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* The scope column value in a `gpkg_extensions` row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.
-________________________________________________________________________________________________________________________
+[requirement]
+The scope column value in a `gpkg_extensions` row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.
 
 The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC.
 Requirements for extension names for the “gpkg” author name are defined in the clauses listed in 14 below.
@@ -77,10 +72,9 @@ The optional capabilities defined in sub clauses and requirement statements of t
 
 ====== API GeoPackage SQLite Config
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage SQLite Extension MAY provide SQL runtime functions or rtree support for a GeoPackage file.
+[requirement]
+A GeoPackage SQLite Extension MAY provide SQL runtime functions or rtree support for a GeoPackage file.
 One that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.1 Table 15.
-________________________________________________________________________________________________________________________
 
 .API GeoPackage SQLite Configuration
 [cols=",,,",options="header",]
@@ -94,10 +88,9 @@ ________________________________________________________________________________
 
 ====== Safe GeoPackage SQLite Config
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage SQLite Extension MAY provide primary/foreign key and trigger support for a GeoPackage file.
+[requirement]
+A GeoPackage SQLite Extension MAY provide primary/foreign key and trigger support for a GeoPackage file.
 One that does so SHALL have the SQLite library compile and run time options specified in clause 2.6.1.2.2 Table 16.
-________________________________________________________________________________________________________________________
 
 .Safe GeoPackage SQLite Configuration
 [cols=",,,",options="header",]

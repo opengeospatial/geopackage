@@ -4,5 +4,6 @@
 #
 
 require 'asciidoctor_patch'
+require 'requirement_block'
 
 Awestruct::Extensions::Pipeline.new

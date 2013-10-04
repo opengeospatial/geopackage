@@ -24,11 +24,11 @@ A self-contained, single-file, cross-platform, serverless, transactional, open s
 
 :req1_foot1: footnote:[SQLite version 4 <<B49>>, which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.]
 :req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html[])]
---
-*Req {counter:req}:* The GeoPackage file format SHALL be a http://www.sqlite.org/[SQLite] database
+
+[requirement]
+The GeoPackage file format SHALL be a http://www.sqlite.org/[SQLite] database
 http://sqlite.org/fileformat2.html[version 3 format file], the first 16 bytes of which contain “SQLite format 3”
 {req1_foot1} in ASCII. {req1_foot2}
---
 
 It is RECOMMENDED that data providers whose data is intended for use in multiple applications put the value “GPKG” in the SQLite database header application id field.
 However, applications that put application-specific data in a GeoPackage MAY put their own application acronym in the application id field, so this is NOT a GeoPackage requirement.
@@ -39,38 +39,33 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 
 ====== File Extension Name
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* GeoPackage files SHALL have the file extension name “.gpkg”.
-________________________________________________________________________________________________________________________
+[requirement]
+GeoPackage files SHALL have the file extension name “.gpkg”.
 
 ====== Integrity Check
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file.
-________________________________________________________________________________________________________________________
+[requirement]
+The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file.
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* Req 4:	The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return an empty result set indicating no invalid foreign key values for a GeoPackage file.
-________________________________________________________________________________________________________________________
-
+[requirement]
+The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return an empty result set indicating no invalid foreign key values for a GeoPackage file.
 
 ===== API
 
 ====== Structured Query Language (SQL)
 
 :req4_foot1: footnote:[New applications should use the latest available SQLite version software]
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via http://www.sqlite.org/download.html[SQLite sqlite3] software APIs. {req4_foot1}
-________________________________________________________________________________________________________________________
+
+[requirement]
+A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via http://www.sqlite.org/download.html[SQLite sqlite3] software APIs. {req4_foot1}
 
 ====== Every GPKG SQLite Configuration
 
 The http://www.sqlite.org/download.html[SQLite] library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses.
 A GeoPackage application can use the http://www.sqlite.org/pragma.html#pragma_compile_options[compile options] and other SQLite pragmas to get the effective compile and run time option settings and compare them to those required for a particular GeoPackage.
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* Every GeoPackage SQLite Extension SHALL have the SQLite library compile and run time options specified in table <<every_gpkg_sqlite_config_table>>.
-________________________________________________________________________________________________________________________
+[requirement]
+Every GeoPackage SQLite Extension SHALL have the SQLite library compile and run time options specified in table <<every_gpkg_sqlite_config_table>>.
 
 [[every_gpkg_sqlite_config_table]]
 .Every GeoPackage SQLite Configuration
@@ -93,9 +88,8 @@ ________________________________________________________________________________
 
 ====== Table Definition
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table per table <<gpkg_spatial_ref_sys_cols>> and table <<gpkg_spatial_ref_sys_sql>>.
-________________________________________________________________________________________________________________________
+[requirement]
+A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table per table <<gpkg_spatial_ref_sys_cols>> and table <<gpkg_spatial_ref_sys_sql>>.
 
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
@@ -120,14 +114,12 @@ See <<gpkg_spatial_ref_sys_sql>>.
 
 ====== Table Data Values
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain a record for
+[requirement]
+The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain a record for
 organization http://www.epsg.org/Geodetic.html[EPSG] or epsg and `organization_coordsys_id` http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] for http://www.google.com/search?as_q=WGS-84[WGS-84], a record with an `srs_id` of -1, an organization of “NONE”, an `organization_coordsys_id` of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an `srs_id` of 0, an organization of “NONE”, an `organization_coordsys_id` of 0, and definition “undefined” for undefined geographic coordinate reference systems.
-________________________________________________________________________________________________________________________
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `gpkg_spatial_ref_sys` table in a GeoPackage file SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
-________________________________________________________________________________________________________________________
+[requirement]
+The `gpkg_spatial_ref_sys` table in a GeoPackage file SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
 
 ==== Contents
 
@@ -135,9 +127,8 @@ ________________________________________________________________________________
 
 ====== Table Definition
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_contents_cols>> and <<gpkg_contents_sql>>.
-________________________________________________________________________________________________________________________
+[requirement]
+A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_contents_cols>> and <<gpkg_contents_sql>>.
 
 The purpose of the `gpkg_contents` table is to provide identifying and descriptive information that an application can display to a user in a menu of geospatial data that is available for access and/or update.
 
@@ -167,15 +158,12 @@ See <<gpkg_contents_sql>>.
 
 ====== Table Data Values
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* The `table_name` column value in a `gpkg_contents` table row SHALL contain the name of a SQLite table or view.
-________________________________________________________________________________________________________________________
+[requirement]
+The `table_name` column value in a `gpkg_contents` table row SHALL contain the name of a SQLite table or view.
 
 :req13_foot1: footnote:[The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. {req13_foot1}
-________________________________________________________________________________________________________________________
+[requirement]
+Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. {req13_foot1}
 
-________________________________________________________________________________________________________________________
-*Req {counter:req}:* Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
-________________________________________________________________________________________________________________________
+[requirement]
+Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
