@@ -1,0 +1,109 @@
+<h1 id="using-github-for-geopackage-comments">Using GitHub for GeoPackage comments</h1>
+
+<h2 id="overview">Overview</h2>
+<p>The GeoPackage Standards Working Group (SWG) intends to experiment with the use of GitHub as a collaboration platform, 
+and the document formats suppored by GitHub as a way to evolve the specification 
+editing and public comment process. The versions of draft specifications in GitHub, in whole or in part, 
+should not be considered official positions of the OGC as an organization. In this experimental stage, 
+they are informal, non-normative, communications of the GeoPackage SWG.</p>
+
+<h2 id="comments">Comments</h2>
+
+<p>Comments on the specification can be made in one of two ways:</p>
+
+<ol>
+  <li>Pull Requests (PRs) that contain the proposed changes to the document, with a comment from the author. These should have a label for the priority. (preferred) 
+    <ul>
+      <li>Pull Requests be made for each logical set of changes to the spec, against a user's branch, not their master. Pull Requests that do too many things at once will be rejected and the submitter will be asked to break it up in to multiple pull requests.</li>
+      <li>Submitters should only change their pull requests in dialog with the SWG. In other words after submitting they should not modify their request at all unless asked to by the SWG.</li>
+    </ul>
+  </li>
+  <li>If the comment is of a more general nature then <a href="https://github.com/opengis/geopackage/issues/new">create a new 'issue'</a> in the standard GitHub repo issue tracker, with proper labeling as well as a comment on what section of the spec it applies to.</li>
+</ol>
+
+<p>You can review and comment on submitted <a href="https://github.com/opengis/geopackage/pulls">pull requests</a> and <a href="https://github.com/opengis/geopackage/issues?milestone=5&amp;page=1&amp;state=open">issues</a></p>
+
+<p>No need to assign a milestone, the SWG will reviews PR and issues, and assign them to the appropriate milestone if they are valid.</p>
+
+<p>If accepted the SWG will accept the change or provide a reason as to why it is not incorporated in the ticket, and
+then close it.</p>
+
+<h2 id="using-github">Using GitHub</h2>
+
+<p>For those who are new to GitHub the following information may help get you up to speed.</p>
+
+<h4 id="gui-only-editing">GUI only Editing</h4>
+
+<p>Most everything needed to edit the GeoPackage repository can be done completely through the web with GitHub,
+no need to learn git.</p>
+
+<p>You can just hit 'edit' on any of the specification pages. This will automatically 
+'fork' the repository in to your own copy. You can also create a fork before editing by hitting the 'Fork' button
+at the top right of this page. This creates a personal copy of the geopackage specification repository (a fork). 
+You can find more detailed instructions on forking a repo on the 
+<a href="https://help.github.com/articles/fork-a-repo">Fork A Repo</a> page.</p>
+
+<p>To edit the document we are using <a href="http://daringfireball.net/projects/markdown/">Markdown</a>, with 
+<a href="http://github.github.com/github-flavored-markdown/">GitHub's extensions</a>. For quick hints on markdown this
+<a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">cheat sheet</a> can be quite helpful.</p>
+
+<p>After editing there you can create a '<a href="https://help.github.com/articles/creating-a-pull-request">pull request</a>' 
+from your fork to submit the work for review and merging. You just hit 'compare and review' from your own 
+version of the repository, or any branch in it, and then can click to create a pull request right there.</p>
+
+<p>If you are making a more substantial set of changes, or more than one logical change to the spec, it is 
+best to create a branch to work on the set. Pull requests are associated with the branches they are made on, so if 
+you make more changes based on feedback then all changes can get pulled in when ready. </p>
+
+<p>Note you can create new branches as well as new files completely through the web. You can even create new
+directories:</p>
+
+<p><img src="http://i.stack.imgur.com/n3Wg3.gif" alt="creating directories" /></p>
+
+<p>If there is anything that you need to do with git, but you aren't comfortable with using it and don't want to
+learn it, then just create an issue and someone will certainly be able to assist.</p>
+
+<h4 id="using-git">Using Git</h4>
+
+<p>There are countless tutorials on using Git and Github, but we will give a quick overview here and point to
+more resources.</p>
+
+<p>After creating your fork of the geopackage repository you will need to copy it to your computer (clone). 
+The URL of your fork will be https://github.com/username/geopackage.git where username should be replaced by 
+your github username. Cloning the repository can be done using the git command-line client 
+(git clone https://github.com/username/geopackage.git) or using a git GUI like the GitHub 
+<a href="http://windows.github.com/">Windows</a> or <a href="http://mac.github.com/">Mac</a> or <a href="http://sourcetreeapp.com/">SourceTree</a>.</p>
+
+<p>Once the repository has been cloned to your computer you can make the changes to the specification that 
+you would like to suggest. Many text editors have plugins for formatting and previewing Markdown.</p>
+
+<p>Once you're done making your changes, commit them and push them to the github servers. The free 
+<a href="http://git-scm.com/book">Pro Git</a> book provides detailed instructions on <a href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository">committing 
+changes</a> and 
+<a href="http://git-scm.com/book/en/Git-Basics-Working-with-Remotes#Pushing-to-Your-Remotes">pushing changes to a server</a>.</p>
+
+<p>Now that your change has been pushed to github you should initiate a pull request to request that your 
+change be integrated in the master copy of the specification. The GitHub <a href="https://help.github.com/articles/using-pull-requests">pull request help page</a> 
+provides detailed instructions on how to do this.</p>
+
+<h2 id="process">Process</h2>
+
+<ul>
+  <li>SWG assigns pull requests/tickets to volunteer SWG members to work on resolution of the comment.
+    <ul>
+      <li>the volunteer becomes the 'owner', and is expected to move it towards a vote.</li>
+      <li>The owner gets any needed discussion going.</li>
+      <li>A proposed resolution is written in the comments of the ticket by the owner (could just be 'vote we accept this', or could be 'propose to reject this because of x,y,z reasons)</li>
+      <li>Owner marks it as 'ready for vote' and marks the milestone for the next teleconference.</li>
+      <li>ideally dialog happens in the pull requests about the merits, and people +1 in the comments in support of it.</li>
+    </ul>
+  </li>
+  <li>SWG teleconferences review tickets. 
+    <ul>
+      <li>Tickets with lots of comments that aren't resolved are discussed in the meetings. Ideally with an owner assigned to change the PR to reflect the consensus of the group.</li>
+      <li>Tickets with lots of +1's should be moved through quickly, basically most all the 'homework' should be done before the teleconference, telecons are just used to discuss open issues and ratify the +1's in the ticket.</li>
+      <li>An 'editor' either merges the pull request or post the official rejection comment, and closes the ticket.</li>
+    </ul>
+  </li>
+</ul>
+
