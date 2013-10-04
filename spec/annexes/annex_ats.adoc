@@ -104,15 +104,15 @@
 
 **Test Case ID**: /base/core/spatial\_ref\_sys/data/table\_def
 
-*Test Purpose*: Verify that the spatial\_ref\_sys table exists and has the correct definition.
+*Test Purpose*: Verify that the gpkg_spatial\_ref\_sys table exists and has the correct definition.
 
 *Test Method*:
 
 1. SELECT sql FROM sqlite\_master WHERE type = 'table' AND tbl\_name = 'gpkg\_spatial\_ref\_sys'
 2. Fail if returns an empty result set
 3. Pass if column names and column definitions in the returned CREATE TABLE
-    statement in the sql column value, including data type, nullability, default values and
-    primary, foreign and unique key constraints match all of those in the contents of C.1
+    statement in the sql column value, including data type, nullability, and
+    primary key constraints match all of those in the contents of C.1
     Table 19. Column order, check constraint and trigger definitions, and other column
     definitions in the returned sql are irrelevant.
 4. Fail otherwise.
@@ -287,18 +287,11 @@ gc.table\_name = sm.tbl\_name
 **Test Case ID**: /opt/features/contents/data/features\_row
 
 *Test Purpose*: Verify that the gpkg\_contents table\_name value table exists, and is
- apparently not a tiles table for every row with a data\_type column value of "features"
+ apparently a feature table for every row with a data\_type column value of "features"
 
 *Test Method*:
 
-1. SELECT table\_name FROM gpkg\_contents where data\_type="features"
-2. Fail if returns empty result set
-3. For each row from step 1
-  * PRAGMA table\_info(table\_name)
-  * Fail if returns an empty result set
-  * Fail if result set contains four rows where the name column values are "zoom\_level","tile\_column","tile\_row", and "tile\_data"
-  * Fail if result set does not contain one row where the pk column value is 1 and the type column value is "INTEGER"
-4. Pass if no fails
+1. Execute test /opt/features/vector_features/data/feature_table_integer_primary_key
 
 *Reference*:     Clause 2.1.2.1.1 Req 14:
 
@@ -476,7 +469,7 @@ gc.table\_name = sm.tbl\_name
 
 *Test Method*:
 
-1. SELECT DISTINCT table\_name FROM gpkg\_geometry columns
+1. SELECT DISTINCT table\_name FROM gpkg\_geometry\_columns
 2. Not testable if returns an empty result set.
 3. For each row from setp 1
     - Fail if table\_name value is NULL
@@ -720,7 +713,7 @@ defined in the gpkg\_spatial\_ref\_sys table.
 **Test Case ID**: /opt/tiles/zoom\_levels\_data\_zoom\_times\_two
 
 *Test Purpose*: Verify that by default zoom level pixel sizes for tile matrix user data tables
- vary by powers of 2 between adjacent zoom levels in the tile matrix metadata table.
+ vary by factors of 2 between adjacent zoom levels in the tile matrix metadata table.
 
 *Test Method*:
 
@@ -741,7 +734,7 @@ defined in the gpkg\_spatial\_ref\_sys table.
   - Not testable if returns empty result set, or only one row
   - Not testable if there are not two rows with adjacent zoom levels
   - Fail if any pair of rows for adjacent zoom levels have pixel\_x\_size or
-      pixel\_y\_size values that differ by other than powers of two
+      pixel\_y\_size values that differ by other than factors of two
 4. Pass if no fails
 
 *Reference*:      Clause 2.2.3.1.1 Req 30:
@@ -1585,7 +1578,7 @@ value is an id column value from the gpkg\_metadata table.
 2.   Fail if returns 1
 3.   SELECT sqlite\_compileoption\_used('SQLITE\_OMIT\_VIRTUALTABLE')
 4.   Fail if returns 1
-5.   SELECT sqlite\_compileoption\_used('SQLITE\_ENABLE\_RTREE\_')
+5.   SELECT sqlite\_compileoption\_used('SQLITE\_ENABLE\_RTREE')
 6.   Fail if returns 0
 7.   SELECT sqlite\_compileoption\_used('SQLITE\_RTREE\_INT\_ONLY')
 8.   Fail if returns 1
@@ -2094,7 +2087,7 @@ Same as /reg\_ext/features/geometry\_encoding/data/ext\_name
 **Test Case ID**: /reg\_ext/tiles/zoom\_levels/data/zoom\_other\_ext\_name
 
 *Test Purpose*: Verify that the "gpkg\_zoom\_other" extension name is used to register tiles
- tables with other than powers of two zoom intervals.
+ tables with other than factors of two zoom intervals.
 
 *Test Method*:
 
@@ -2106,7 +2099,7 @@ Same as /reg\_ext/features/geometry\_encoding/data/ext\_name
       - Not testable if returns empty result set
       - Not testable if there are not two rows with adjacent zoom levels
       - Not testable if no pair of rows for adjacent zoom levels have pixel\_x\_size or
-	  pixel\_y\_size values that differ by other than powers of two
+	  pixel\_y\_size values that differ by other than factors of two
       - /opt/extension\_mechanism/extensions/data/table\_def
       - Fail if failed
       - SELECT * FROM gpkg\_extensions WHERE table\_name = selected table
@@ -2126,7 +2119,7 @@ Same as /reg\_ext/features/geometry\_encoding/data/ext\_name
 
 **Test Case ID**: / reg\_ext/tiles/zoom\_levels/data/zoom\_other\_ext\_row
 
-*Test Purpose*: Verify that tiles tables with other than powers of two zoom intervals are
+*Test Purpose*: Verify that tiles tables with other than factors of two zoom intervals are
  registered using the "gpkg\_zoom\_other" extension name.
 
 *Test Method*:
