@@ -1,0 +1,128 @@
+[appendix]
+== Spatial Index SQL (Normative)
+
+The tables below contain SQL templates with variables.  Replace the following template variables with the specified
+values to create the required SQL statements:
+<t>: The name of the feature table containing the geometry column
+<c>: The name of the geometry column in <t> that is being indexed
+<i>: The name of the integer primary key column in <t> as specified in Req 25
+
+=== Create Virtual Table SQL Template
+
+GeoPackage files MAY contain a spatial index for each geometry column of a feature table.
+These spatial indexes SHALL be created using the SQLite Virtual Table RTree extension. An
+application that creates a spatial index SHALL create it using the following SQL statement
+template:
+
+.create virtual table SQL
+[source,sql]
+----
+CREATE VIRTUAL TABLE rtree_<t>_<c> USING rtree(id, minx, maxx, miny, maxy)
+----
+
+where <t> and <c> are replaced with the names of the feature table and geometry column
+being indexed. The rtree function id parameter becomes the virtual table 64-bit signed integer
+primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored
+as 32-bit floating point numbers) for each dimension that become the virtual table data
+columns that are populated to create the spatial rtree index.
+
+=== Load Spatial Index Values
+
+The indexes provided by the SQLite Virtual Table RTree extension are not automatic indices.
+This means the index data structure needs to be manually populated, updated and queried.
+Each newly created spatial index SHALL be populated using the following SQL statement
+
+.load spatial index values SQL
+[source,sql]
+----
+INSERT OR REPLACE INTO rtree_<t>_<c>
+  SELECT <i>, st_minx(<c>), st_maxx(<c>), st_miny(<c>), st_maxy(<c>) FROM <t>;
+----
+
+where <t> and <c> are replaced with the names of the feature table and geometry column
+being indexed and <i> is replaced with the name of the feature table integer primary key column.
+
+=== Define Triggers to Maintain Spatial Index Values
+
+For each spatial index in a GeoPackage file, corresponding insert, update and delete triggers
+that update the spatial index SHALL be present on the indexed geometry column. These
+spatial index triggers SHALL be defined as follows:
+
+.Spatial Index SQL Triggers Template
+[source,sql]
+----
+/* Conditions: Insertion of non-empty geometry
+   Actions   : Insert record into rtree */
+CREATE TRIGGER rtree_<t>_<c>_insert AFTER INSERT ON <t>
+  WHEN (new.<c> NOT NULL AND NOT ST_IsEmpty(NEW.<c>))
+BEGIN
+  INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
+    NEW.<i>,
+    ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
+    ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
+  );
+END;
+
+/* Conditions: Update of geometry column to non-empty geometry
+               No row ID change
+   Actions   : Update record in rtree */
+CREATE TRIGGER rtree_<t>_<c>_update1 AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
+BEGIN
+  INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
+    NEW.<i>,
+    ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
+    ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
+  );
+END;
+
+/* Conditions: Update of geometry column to empty geometry
+               No row ID change
+   Actions   : Remove record from rtree */
+CREATE TRIGGER rtree_<t>_<c>_update2 AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> ISNULL OR ST_IsEmpty(NEW.<c>))
+BEGIN
+  DELETE FROM rtree_<t>_<c> WHERE id = OLD.<i>;
+END;
+
+/* Conditions: Update of any column
+               Row ID change
+               Non-empty geometry
+   Actions   : Remove record from rtree for old <i>
+               Insert record into rtree for new <i> */
+CREATE TRIGGER rtree_<t>_<c>_update3 AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> != NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
+BEGIN
+  DELETE FROM rtree_<t>_<c> WHERE id = OLD.<i>;
+  INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
+    NEW.<i>,
+    ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
+    ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
+  );
+END;
+
+/* Conditions: Update of any column
+               Row ID change
+               Empty geometry
+   Actions   : Remove record from rtree for old and new <i> */
+CREATE TRIGGER rtree_<t>_<c>_update4 AFTER UPDATE ON <t>
+  WHEN OLD.<i> != NEW.<i> AND
+       (NEW.<c> ISNULL OR ST_IsEmpty(NEW.<c>))
+BEGIN
+  DELETE FROM rtree_<t>_<c> WHERE id IN (OLD.<i>, NEW.<i>);
+END;
+
+/* Conditions: Row deleted
+   Actions   : Remove record from rtree for old <i> */
+CREATE TRIGGER rtree_<t>_<c>_delete AFTER DELETE ON <t>
+  WHEN old.<c> NOT NULL
+BEGIN
+  DELETE FROM rtree_<t>_<c> WHERE id = OLD.<i>;
+END;
+----
+
+where <t> and <c> are replaced with the names of the feature table and geometry column
+being indexed and <i> is replaced with the name of the feature table integer primary key column.

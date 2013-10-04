@@ -1,0 +1,298 @@
+=== Tiles
+
+The optional capabilities defined in sub-clauses and requirement statements of this clause MAY be implemented by any
+GeoPackage file.
+
+==== Tile Matrix Introduction
+
+There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles
+in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have
+standardized practices in this domain. In addition, various image file formats have different representational
+capabilities, and include different self-descriptive metadata. The tile store data / metadata model and conventions
+described below support direct use of tiles in a GeoPackage in two ways. First, they specify how existing applications
+MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different
+interface conventions. Second, they include and expose enough metadata information at both the dataset and record levels
+to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored
+images. Applications that store GeoPackage tile data, which are presumed to have this information available, SHALL store
+sufficient metadata to enable its intended use.
+
+The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum
+performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose
+coupling to enable widespread implementation.
+
+:tiles_intro_foot1: footnote:[Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles could be used for transparency where there is no data on the tile edges, and image/jpeg format tiles could be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.]
+
+A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container.
+{tiles_intro_foot1} “Tile pyramid” refers to the concept of pyramid structure of tiles of different spatial extent and
+resolution at different zoom levels, and the tile data itself. “Tile matrix” refers to rows and columns of tiles that
+all have the same spatial extent and resolution at a particular zoom level.  “Tile matrix set” refers to the definition
+of a tile pyramid’s tiling structure.
+
+The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed
+individually in the following subsections.
+
+==== Contents
+
+===== Data
+
+====== Contents Table – Tiles Row
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `gpkg_contents` table SHALL contain a row with a `data_type` column value of “tiles” for each
+tile pyramid user data table or view.
+________________________________________________________________________________________________________________________
+
+==== Zoom Levels
+
+In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify tile matrix layers in a tile matrix set
+that contain tiles of decreasing spatial extent and finer spatial resolution. Adjacent zoom levels immediately precede
+or follow each other and differ by a value of 1. Pixel sizes are real numbers in the terrain units of the spatial
+reference system of a tile image specifying the dimensions of the real world area represented by one pixel. Pixel sizes
+MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile
+matrix set. In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent
+zoom levels, as shown in the example in Annex I. Other "zoom other intervals" conventions use different factors or
+irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide
+with the original pixel size of commonly used global image products.  See WMTS Annex E for additional examples of
+both conventions.
+
+===== Data
+
+====== Zoom Times Two
+
+:zoom_times_two_foot1: footnote:[See clause 3.2.1.1.1 for use of other zoom levels as a registered extensions.]
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* In a GeoPackage file that contains a tile matrix user data table that contains tile data, by
+default {zoom_times_two_foot1}, zoom level pixel sizes for that table SHALL vary by a factor of 2 between adjacent zoom
+levels in the tile matrix metadata table.
+________________________________________________________________________________________________________________________
+
+==== Tile Encoding PNG
+
+===== Data
+
+====== MIME Type PNG
+
+:png_req_foot1: footnote:[See Clauses <<ext_webp_tiles>>, <<ext_tiff_tiles>>, <<ext_nitf_tiles>> and <<ext_other_tiles>> regarding use of alternative tile MIME types as registered extensions.]
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* In a GeoPackage file that contains a tile matrix user data table that contains tile data that is not
+http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg], by default SHALL store
+that tile data in http://www.iana.org/assignments/media-types/index.html[MIME type]
+http://libpng.org/pub/png/[image/png]. {png_req_foot1}
+________________________________________________________________________________________________________________________
+
+==== Tile Encoding JPEG
+
+===== Data
+
+====== MIME Type JPEG
+
+:jpg_req_foot1: footnote:[See Clauses <<ext_webp_tiles>>, <<ext_tiff_tiles>>, <<ext_nitf_tiles>> and <<ext_other_tiles>> regarding use of alternative tile MIME types as registered extensions.]
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* In a GeoPackage file that contains a tile matrix user data table that contains tile data that is not
+http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png], by default
+SHALL store that tile data in http://www.ietf.org/rfc/rfc2046.txt[MIME type]
+http://www.jpeg.org/public/jfif.pdf[image/jpeg]. {jpg_req_foot1}
+________________________________________________________________________________________________________________________
+
+==== Tile Matrix Set
+
+===== Data
+
+====== Table Definition
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* A GeoPackage that contains a tile pyramid user data table SHALL contain a
+`gpkg_tile_matrix_set` table per <<gpkg_tile_matrix_set_cols>> and <<gpkg_tile_matrix_set_sql>>.
+________________________________________________________________________________________________________________________
+
+[[gpkg_tile_matrix_set_cols]]
+.Tile Matrix Set Table or View Definition
+[cols=",,,,,",options="header",]
+|=======================================================================
+|Column Name |Column Type |Column Description |Null |Default |Key
+|`table_name` |text |Tile Pyramid User Data Table Name |no | | PK, FK
+|`srs_id` | integer | Spatial Reference System ID: gpkg_spatial_ref_sys.srs_id |no |  |FK
+|`min_x` |double |Minimum bounding box for all content in table_name |no |  |
+|`min_y` |double |Minimum bounding box for all content in table_name |no |1 |
+|`max_x` |double |Minimum bounding box for all content in table_name |no |256 |
+|`max_y` |double |Minimum bounding box for all content in table_name |no |256 |
+|=======================================================================
+
+The gpkg_tile_matrix_set table or updateable view defines the minimum bounding box (min_x, min_y, max_x, max_y) and
+spatial reference system (srs_id) for all content in a tile pyramid user data table. This bounding box SHALL be exact so
+that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated based on the column values
+for the user data table in the gpkg_tile_matrix table or view defined in clause 2.2.7 below. This table or view MAY
+include additional columns to meet the requirements of implementation software or other specifications.
+
+====== Table Data Values
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* Values of the `gpkg_tile_matrix_set` `table_name` column SHALL reference values in the
+gpkg_contents table_name column for rows with a data type of "tiles".
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The gpkg_tile_matrix_set table or view SHALL contain one row record for each tile pyramid user data
+table.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* Values of the `gpkg_tile_matrix_set` `srs_id` column SHALL reference values in the
+`gpkg_spatial_ref_sys` `srs_id` column.
+________________________________________________________________________________________________________________________
+
+==== Tile Matrix
+
+===== Data
+
+====== Table Definition
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* A GeoPackage taht contains a tile pyramid user data table SHALL contain a `gpkg_tile_matrx` table
+or view per <<gpkg_tile_matrix_cols>> and <<gpkg_tile_matrix_sql>>
+________________________________________________________________________________________________________________________
+
+[[gpkg_tile_matrix_cols]]
+.Tile Matrix Metadata Table or View Definition
+[cols=",,,,,",options="header",]
+|=======================================================================
+|Column Name |Column Type |Column Description |Null |Default |Key
+|`table_name` |text |Tile Pyramid User Data Table Name |no | | PK, FK
+|`zoom_level` | integer | 0 <= `zoom_level` <= max_level for `t_table_name` |no |0 |PK
+|`matrix_width` |integer |Number of columns (>= 1) in tile matrix at this zoom level |no |1 |
+|`matrix_height` |integer |Number of rows (>= 1) in tile matrix at this zoom level |no |1 |
+|`tile_width` |integer |Tile width in pixels (>= 1)for this zoom level |no |256 |
+|`tile_height` |integer |Tile height in pixels (>= 1) for this zoom level |no |256 |
+|`pixel_x_size` |double |In `t_table_name` srid units or default meters for srid 0 (>0) |no |1 |
+|`pixel_y_size` |double |In `t_table_name` srid units or default meters for srid 0 (>0) |no |1 |
+|=======================================================================
+
+The `gpkg_tile_matrix` table or updateable view documents the structure of the tile matrix at each zoom level in each
+tiles table. It allows GeoPackages to contain rectangular as well as square tiles (e.g. for better representation of
+polar regions). It allows tile pyramids with zoom levels that differ in resolution by powers of 2, irregular intervals,
+or regular intervals other than powers of 2. This table or view MAY include additional columns to meet the requirements
+of implementation software or other specifications.
+
+See <<gpkg_tile_matrix_metadata_sql>>
+
+====== Table Data Values
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* Values of the `gpkg_tile_matrix` `table_name` column SHALL reference values in the
+`gpkg_contents` `table_name` column for rows with a `data_type` of “tiles”.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `gpkg_tile_matrix` table or view SHALL contain one row record for each zoom level that contains
+one or more tiles in each tile pyramid user data table or view.
+________________________________________________________________________________________________________________________
+
+
+The `gpkg_tile_matrix` table or view MAY contain row records for zoom levels in a tile pyramid user data table that do
+not contain tiles.
+
+:tile_matrix_meta_foot1: footnote:[GeoPackage applications MAY query the gpkg_tile_matrix_metadata table or the tile matrix user data table to determine the minimum and maximum zoom levels for a given tile matrix table.]
+
+GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a
+zoom-out-level of 0 for the smallest map scale “whole world” zoom level view {tile_matrix_meta_foot1}, as specified by
+http://portal.opengeospatial.org/files/?artifact_id=35326[WMTS]. The tile coordinate (0,0) always refers to the tile in
+the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `zoom_level` column value in a `gpkg_tile_matrix` table row SHALL not be negative.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `matrix_width` column value in a `gpkg_tile_matrix` table row SHALL be greater than 0.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `matrix_height` column value in a `gpkg_tile_matrix` table row SHALL be greater than 0.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `tile_width` column value in a `gpkg_tile_matrix` table row SHALL be greater than 0.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `tile_height` column value in a `gpkg_tile_matrix` table row SHALL be greater than 0.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `pixel_x_size` column value in a `gpkg_tile_matrix` table row SHALL be greater than 0.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `pixel_y_size` column value in a `gpkg_tile_matrix` table row SHALL be greater than 0.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* The `pixel_x_size` and `pixel_y_size` column values for `zoom_level` column values in a
+`gpkg_tile_matrix` table sorted in ascending order SHALL be sorted in descending order.
+________________________________________________________________________________________________________________________
+
+:sparse_tiles_foot1: footnote:[GeoPackage applications MAY query the tiles (matrix set) table to determine which tiles are available at each zoom level.]
+:sparse_tiles_foot2: footnote:[GeoPackage applications that insert, update, or delete tiles (matrix set) table tiles row records are responsible for maintaining the corresponding descriptive contents of the gpkg_tile_matrix_metadata table.]
+:sparse_tiles_foot3: footnote:[The gpkg_contents table contains coordinates that define a bounding box as the stated spatial extent for all tiles in a tile (matrix set) table. If the geographic extent of the image data contained in these tiles is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.]
+
+Tiles MAY or MAY NOT be provided for level 0 or any other particular zoom level. {sparse_tiles_foot1} This means that a
+tile matrix set can be sparse, i.e. not contain a tile for any particular position at a certain tile zoom level.
+{sparse_tiles_foot2} This does not affect the spatial extent stated by the min/max x/y columns values in the
+`gpkg_contents` record for the same `table_name`, or the tile matrix width and height at that level. {sparse_tiles_foot3}
+
+==== Tile Pyramid User Data Tables
+
+===== Data
+
+====== Table Definition
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* Each tile matrix set in a GeoPackage file SHALL be stored in a different tile pyramid user data
+table or updateable view with a unique name per <<example_tiles_table_cols>> and <<example_tiles_table_sql>>.
+________________________________________________________________________________________________________________________
+
+[[example_tiles_table_cols]]
+.Tiles Table or View Definition
+[cols=",,,,,",options="header",]
+|=======================================================================
+|Column Name |Column Type |Column Description |Null |Default |Key
+|`id` |integer |Autoincrement primary key |no | |PK
+|`zoom_level` |integer |min(zoom_level) <= `zoom_level` <= max(zoom_level) for `t_table_name` |no |0 |UK
+|`tile_column` |integer |0 to `tile_matrix` `matrix_width` – 1 |no |0 |UK
+|`tile_row` |integer |0 to `tile_matrix` `matrix_height` - 1 |no |0 |UK
+|`tile_data` |BLOB |Of an image MIME type specified in clause 10.2 |no | |
+|=======================================================================
+
+This table or view MAY include additional columns to meet the requirements of implementation software or other
+specifications.
+
+See <<example_tiles_table_sql>>.
+
+====== Table Data Values
+
+:tile_data_foot1: footnoteref:[tile_data_foot1, A GeoPackage is not required to contain any tile matrix data tables. Tile matrix user data tables in a GeoPackage MAY be empty.]
+:tile_data_foot1_ref: footnoteref:[tile_data_foot1]
+
+Each tile pyramid user data table or view {tile_data_foot1} MAY contain tile matrices at zero or more zoom levels of
+different spatial resolution (map scale).
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* For each distinct `table_name` from the `gpkg_tile_matrix` (tm) table, the tile pyramid (tp) user
+data table `zoom_level` column value in a GeoPackage file SHALL be in the range
+min(tm.zoom_level) <= tp.zoom_level <= max(tm.zoom_level).
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* For each distinct `table_name` from the `gpkg_tile_matrix` (tm) table, the tile pyramid (tp) user
+data table `tile_column` column value in a GeoPackage file SHALL be in the range
+0 <= tp.tile_column <= tm.matrix_width – 1 where the tm and tp `zoom_level` column values are equal.
+________________________________________________________________________________________________________________________
+
+________________________________________________________________________________________________________________________
+*Req {counter:req}:* For each distinct `table_name` from the `gpkg_tile_matrix` (tm) table, the tile pyramid (tp) user
+data table `tile_row` column value in a GeoPackage file SHALL be in the range
+0 <= tp.tile_row <= tm.matrix_height – 1 where the tm and tp `zoom_level` column values are equal.
+________________________________________________________________________________________________________________________
+
+All tiles at a particular zoom level have the same `pixel_x_size` and `pixel_y_size` values specified in the
+`gpkg_tile_matrix` row record for that tiles table and zoom level. {tile_data_foot1_ref}
