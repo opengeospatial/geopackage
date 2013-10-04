@@ -3,7 +3,6 @@
 #
 
 require 'asciidoctor'
-require 'asciidoctor/backends/html5'
 
 module Asciidoctor
   class Section
