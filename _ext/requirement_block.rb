@@ -6,10 +6,14 @@ class RequirementBlock < Asciidoctor::Extensions::BlockProcessor
   option :content_model, :simple
 
   def process parent, reader, attributes
-    lines = reader.lines
-    lines[0] = "*Req {counter:req}:* " + lines[0]
+    block = Asciidoctor::Block.new parent, :quote, :source => reader.lines, :attributes => attributes
 
-    Asciidoctor::Block.new parent, :quote, :source => lines, :attributes => attributes
+    doc = parent.document
+    requirement_id = doc.counter('requirement')
+    block.id = attributes[2] || "_requirement-#{requirement_id}"
+    block.title = "#{doc.attributes['requirement-caption'] || 'Requirement'} #{requirement_id}"
+
+    block
   end
 end
 
