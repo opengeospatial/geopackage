@@ -17,12 +17,9 @@ task :travis do
   repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:')
   deploy_branch = 'gh-pages'
 
-  system "git checkout -b #{deploy_branch} origin/#{deploy_branch}"
-  system "git clone . build"
-  system "git checkout master"
+  system "git clone --depth 1 -b #{deploy_branch} #{repo} build
   Dir.chdir 'build'
 
-  system "git remote set-url --push origin #{repo}"
   system "git config user.name '#{ENV['GIT_NAME']}'"
   system "git config user.email '#{ENV['GIT_EMAIL']}'"
   system 'git config credential.helper "store --file=.git/credentials"'
@@ -33,7 +30,7 @@ task :travis do
   system 'git rm -r .'
   system '../runasciidoctor -D . ../index.adoc'
   system 'git add *'
-  system 'git commit -m "Publish site to github pages"'
+  system 'git commit -m "Publish specification to github pages"'
   system 'git push origin'
 
   File.delete '.git/credentials'
