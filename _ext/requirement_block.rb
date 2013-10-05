@@ -6,17 +6,11 @@ class RequirementBlock < Asciidoctor::Extensions::BlockProcessor
   option :content_model, :simple
 
   def process parent, reader, attributes
-    block = Asciidoctor::Block.new parent, :quote, :source => reader.lines, :attributes => attributes
-
     doc = parent.document
     requirement_id = doc.counter('requirement')
-    block.id = attributes[2] || "_requirement-#{requirement_id}"
-    block.title = "#{doc.attributes['requirement-caption'] || 'Requirement'} #{requirement_id}"
+    attributes['id'] = "_requirement-#{requirement_id}" unless attributes['id']
+    attributes['title'] = "#{doc.attributes['requirement-caption'] || 'Requirement'} #{requirement_id}" unless attributes['title']
 
-    block
+    block = Asciidoctor::Block.new parent, :quote, :source => reader.lines, :attributes => attributes
   end
-end
-
-Asciidoctor::Extensions.register do |document|
-  block :requirement, RequirementBlock
 end

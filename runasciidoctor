@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+$:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
+
+require 'rubygems'
+require 'bundler/setup'
+
+require 'asciidoctor'
+require 'asciidoctor/cli/options'
+require 'asciidoctor/cli/invoker'
+require File.dirname(__FILE__) + '/_ext/asciidoctor_patch.rb'
+require File.dirname(__FILE__) + '/_ext/requirement_block'
+
+Asciidoctor::Extensions.register do |document|
+  block :requirement, RequirementBlock
+end
+
+invoker = Asciidoctor::Cli::Invoker.new(ARGV)
+invoker.invoke!
+exit invoker.code
