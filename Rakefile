@@ -14,7 +14,7 @@ task :travis do
     next
   end
 
-  repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:')
+  repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:').strip
   deploy_branch = 'gh-pages'
 
   system "git clone --depth 1 -b #{deploy_branch} #{repo} build"
