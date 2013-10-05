@@ -360,6 +360,95 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 
 </style>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
+<style>
+/* Foundation stylesheet for CodeRay (to match GitHub theme) | MIT License | http://foundation.zurb.com */
+table.CodeRay { border-collapse: collapse; padding: 2px; margin-bottom: 0; border: 0; background: transparent; }
+table.CodeRay td { padding: 0 .5em; vertical-align: top; }
+table.CodeRay td.line-numbers { text-align: right; color: #999; border-right: 1px solid #e5e5e5; padding-left: 0; }
+span.line-numbers { border-right: 1px solid #E5E5E5; color: #999; display: inline-block; margin-right: 0.5em; padding-right: 0.5em; }
+.CodeRay td.line-numbers strong, .CodeRay span.line-numbers strong { font-weight: normal; }
+.CodeRay .debug { color: white !important; background: blue !important; }
+.CodeRay .annotation { color: #007; }
+.CodeRay .attribute-name { color: #f08; }
+.CodeRay .attribute-value { color: #700; }
+.CodeRay .binary { color: #509; }
+.CodeRay .comment  { color: #999; font-style: italic; }
+.CodeRay .char { color: #04D; }
+.CodeRay .char .content { color: #04D; }
+.CodeRay .char .delimiter { color: #039; }
+.CodeRay .class { color: #458; }
+.CodeRay .complex { color: #A08; }
+.CodeRay .constant { color: teal; }
+.CodeRay .color { color: #0A0; }
+.CodeRay .class-variable { color: #369; }
+.CodeRay .decorator { color: #B0B; }
+.CodeRay .definition { color: #099; }
+.CodeRay .directive { color: #088; }
+.CodeRay .delimiter { color: black; }
+.CodeRay .doc { color: #970; }
+.CodeRay .doctype { color: #34b; }
+.CodeRay .doc-string { color: #D42; }
+.CodeRay .escape  { color: #666; }
+.CodeRay .entity { color: #800; }
+.CodeRay .error { color: #808; }
+.CodeRay .exception { color: #C00; }
+.CodeRay .filename { color: #099; }
+.CodeRay .function { color: #900; }
+.CodeRay .global-variable { color: teal; }
+.CodeRay .hex { color: #058; }
+.CodeRay .integer  { color: #099; }
+.CodeRay .include { color: #B44; }
+.CodeRay .inline { color: black; }
+.CodeRay .inline .inline { background: #ccc; }
+.CodeRay .inline .inline .inline { background: #bbb; }
+.CodeRay .inline .inline-delimiter { color: #D14; }
+.CodeRay .inline-delimiter { color: #D14; }
+.CodeRay .important { color: #f00; }
+.CodeRay .interpreted { color: #B2B; }
+.CodeRay .instance-variable { color: teal; }
+.CodeRay .label { color: #970; }
+.CodeRay .local-variable { color: #963; }
+.CodeRay .octal { color: #40E; }
+.CodeRay .predefined { color: #369; }
+.CodeRay .preprocessor { color: #579; }
+.CodeRay .pseudo-class { color: #00C; }
+.CodeRay .predefined-type { color: #074; }
+.CodeRay .reserved, .keyword  { color: #000; }
+.CodeRay .key { color: #808; }
+.CodeRay .key .delimiter { color: #606; }
+.CodeRay .key .char { color: #80f; }
+.CodeRay .value { color: #088; }
+.CodeRay .regexp { background-color: #fff0ff; }
+.CodeRay .regexp .content { color: #808; }
+.CodeRay .regexp .delimiter { color: #404; }
+.CodeRay .regexp .modifier { color: #C2C; }
+.CodeRay .regexp .function  { color: #404; font-weight: bold; }
+.CodeRay .string { color: #D20; }
+.CodeRay .string .string { }
+.CodeRay .string .string .string { background-color: #ffd0d0; }
+.CodeRay .string .content { color: #D14; }
+.CodeRay .string .char { color: #D14; }
+.CodeRay .string .delimiter { color: #D14; }
+.CodeRay .shell { color: #D14; }
+.CodeRay .shell .content { }
+.CodeRay .shell .delimiter { color: #D14; }
+.CodeRay .symbol { color: #990073; }
+.CodeRay .symbol .content { color: #A60; }
+.CodeRay .symbol .delimiter { color: #630; }
+.CodeRay .tag, .CodeRay .attribute-name { color: #070; }
+.CodeRay .tag-special { color: #D70; }
+.CodeRay .type { color: #339; }
+.CodeRay .variable  { color: #036; }
+.CodeRay .insert { background: #afa; }
+.CodeRay .delete { background: #faa; }
+.CodeRay .change { color: #aaf; background: #007; }
+.CodeRay .head { color: #f8f; background: #505; }
+.CodeRay .insert .insert { color: #080; }
+.CodeRay .delete .delete { color: #800; }
+.CodeRay .change .change { color: #66f; }
+.CodeRay .head .head { color: #f4f; }
+
+</style>
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
@@ -8559,40 +8648,40 @@ columns:</p>
 <div id="gpkg_spatial_ref_sys_sql" class="listingblock">
 <div class="title">gpkg_spatial_ref_sys Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_spatial_ref_sys (
-  srs_name TEXT NOT NULL,
-  srs_id INTEGER NOT NULL PRIMARY KEY,
-  organization TEXT NOT NULL,
-  organization_coordsys_id INTEGER NOT NULL,
-  definition  TEXT NOT NULL,
-  description TEXT
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_spatial_ref_sys (
+  srs_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  srs_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  organization <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  organization_coordsys_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  definition  <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  description <span class="predefined-type">TEXT</span>
 );</code></pre>
 </div>
 </div>
 <div id="sqlmm_gpkg_spatial_ref_sys_sql" class="listingblock">
 <div class="title">SQL/MM View of gpkg_spatial_ref_sys Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE VIEW st_spatial_ref_sys AS
-  SELECT
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> st_spatial_ref_sys <span class="keyword">AS</span>
+  <span class="class">SELECT</span>
     srs_name,
     srs_id,
     organization,
     organization_coordsys_id,
     definition,
     description
-  FROM gpkg_spatial_ref_sys;</code></pre>
+  <span class="keyword">FROM</span> gpkg_spatial_ref_sys;</code></pre>
 </div>
 </div>
 <div id="sfsql_gpkg_spatial_ref_sys_sql" class="listingblock">
 <div class="title">SF/SQL View of gpkg_spatial_ref_sys Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE VIEW spatial_ref_sys AS
-  SELECT
-    srs_id AS srid,
-    organization AS auth_name,
-    organization_coordsys_id AS auth_srid,
-    definition AS srtext
-  FROM gpkg_spatial_ref_sys;</code></pre>
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> spatial_ref_sys <span class="keyword">AS</span>
+  <span class="class">SELECT</span>
+    srs_id <span class="keyword">AS</span> srid,
+    organization <span class="keyword">AS</span> auth_name,
+    organization_coordsys_id <span class="keyword">AS</span> auth_srid,
+    definition <span class="keyword">AS</span> srtext
+  <span class="keyword">FROM</span> gpkg_spatial_ref_sys;</code></pre>
 </div>
 </div>
 </div>
@@ -8601,18 +8690,18 @@ columns:</p>
 <div id="gpkg_contents_sql" class="listingblock">
 <div class="title">gpkg_contents Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_contents (
-  table_name TEXT NOT NULL PRIMARY KEY,
-  data_type TEXT NOT NULL,
-  identifier TEXT UNIQUE,
-  description TEXT DEFAULT '',
-  last_change TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
-  min_x DOUBLE,
-  min_y DOUBLE,
-  max_x DOUBLE,
-  max_y DOUBLE,
-  srs_id INTEGER,
-  CONSTRAINT fk_gc_r_srs_id FOREIGN KEY (srs_id) REFERENCES gpkg_spatial_ref_sys(srs_id)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_contents (
+  table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  data_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  identifier <span class="predefined-type">TEXT</span> <span class="directive">UNIQUE</span>,
+  description <span class="predefined-type">TEXT</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>,
+  last_change <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,CURRENT_TIMESTAMP)),
+  min_x <span class="predefined-type">DOUBLE</span>,
+  min_y <span class="predefined-type">DOUBLE</span>,
+  max_x <span class="predefined-type">DOUBLE</span>,
+  max_y <span class="predefined-type">DOUBLE</span>,
+  srs_id <span class="predefined-type">INTEGER</span>,
+  <span class="type">CONSTRAINT</span> fk_gc_r_srs_id <span class="directive">FOREIGN</span> <span class="type">KEY</span> (srs_id) <span class="keyword">REFERENCES</span> gpkg_spatial_ref_sys(srs_id)
 );</code></pre>
 </div>
 </div>
@@ -8622,12 +8711,12 @@ columns:</p>
 <div id="gpkg_extension_sql" class="listingblock">
 <div class="title">gpkg_extensions Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_extensions (
-  table_name TEXT,
-  column_name TEXT,
-  extension_name TEXT NOT NULL,
-  scope TEXT NOT NULL,
-  CONSTRAINT ge_tce UNIQUE (table_name, column_name, extension_name)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_extensions (
+  table_name <span class="predefined-type">TEXT</span>,
+  column_name <span class="predefined-type">TEXT</span>,
+  extension_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  <span class="type">CONSTRAINT</span> ge_tce <span class="directive">UNIQUE</span> (table_name, column_name, extension_name)
 );</code></pre>
 </div>
 </div>
@@ -8637,45 +8726,45 @@ columns:</p>
 <div id="gpkg_geometry_columns_sql" class="listingblock">
 <div class="title">gpkg_geometry_columns Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_geometry_columns (
-  table_name TEXT NOT NULL,
-  column_name TEXT NOT NULL,
-  geometry_type_name TEXT NOT NULL,
-  srs_id INTEGER NOT NULL,
-  z INTEGER NOT NULL,
-  m INTEGER NOT NULL,
-  CONSTRAINT pk_geom_cols PRIMARY KEY (table_name, column_name),
-  CONSTRAINT uk_gc_table_name UNIQUE (table_name),
-  CONSTRAINT fk_gc_tn FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name),
-  CONSTRAINT fk_gc_srs FOREIGN KEY (srs_id) REFERENCES gpkg_spatial_ref_sys (srs_id)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_geometry_columns (
+  table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  column_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  geometry_type_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  srs_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  z <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  m <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  <span class="type">CONSTRAINT</span> pk_geom_cols <span class="directive">PRIMARY</span> <span class="type">KEY</span> (table_name, column_name),
+  <span class="type">CONSTRAINT</span> uk_gc_table_name <span class="directive">UNIQUE</span> (table_name),
+  <span class="type">CONSTRAINT</span> fk_gc_tn <span class="directive">FOREIGN</span> <span class="type">KEY</span> (table_name) <span class="keyword">REFERENCES</span> gpkg_contents(table_name),
+  <span class="type">CONSTRAINT</span> fk_gc_srs <span class="directive">FOREIGN</span> <span class="type">KEY</span> (srs_id) <span class="keyword">REFERENCES</span> gpkg_spatial_ref_sys (srs_id)
 );</code></pre>
 </div>
 </div>
 <div id="sqlmm_gpkg_geometry_columns_sql" class="listingblock">
 <div class="title">SQL/MM View of gpkg_geometry_columns Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE VIEW st_geometry_columns AS
-  SELECT
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> st_geometry_columns <span class="keyword">AS</span>
+  <span class="class">SELECT</span>
     table_name,
     column_name,
-    "ST_" || geometry_type_name,
+    <span class="string"><span class="delimiter">&quot;</span><span class="content">ST_</span><span class="delimiter">&quot;</span></span> || geometry_type_name,
     g.srs_id,
     srs_name
-  FROM gpkg_geometry_columns as g JOIN gpkg_spatial_ref_sys AS s
-  WHERE g.srs_id = s.srs_id;</code></pre>
+  <span class="keyword">FROM</span> gpkg_geometry_columns <span class="keyword">as</span> g <span class="keyword">JOIN</span> gpkg_spatial_ref_sys <span class="keyword">AS</span> s
+  <span class="keyword">WHERE</span> g.srs_id = s.srs_id;</code></pre>
 </div>
 </div>
 <div id="sfsql_gpkg_geometry_columns_sql" class="listingblock">
 <div class="title">SF/SQL VIEW of gpkg_geometry_columns Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE VIEW geometry_columns AS
-  SELECT
-    table_name AS f_table_name,
-    column_name AS f_geometry_column,
-    code4name 1 (geometry_type_name) AS geometry_type,
-    2 + (CASE z WHEN 1 THEN 1 WHEN 2 THEN 1 ELSE 0 END) + (CASE m WHEN 1 THEN 1 WHEN 2 THEN 1 ELSE 0 END) AS coord_dimension,
-    srs_id AS srid
-  FROM gpkg_geometry_columns;</code></pre>
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> geometry_columns <span class="keyword">AS</span>
+  <span class="class">SELECT</span>
+    table_name <span class="keyword">AS</span> f_table_name,
+    column_name <span class="keyword">AS</span> f_geometry_column,
+    code4name <span class="integer">1</span> (geometry_type_name) <span class="keyword">AS</span> geometry_type,
+    <span class="integer">2</span> + (<span class="keyword">CASE</span> z <span class="keyword">WHEN</span> <span class="integer">1</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">WHEN</span> <span class="integer">2</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">ELSE</span> <span class="integer">0</span> <span class="keyword">END</span>) + (<span class="keyword">CASE</span> m <span class="keyword">WHEN</span> <span class="integer">1</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">WHEN</span> <span class="integer">2</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">ELSE</span> <span class="integer">0</span> <span class="keyword">END</span>) <span class="keyword">AS</span> coord_dimension,
+    srs_id <span class="keyword">AS</span> srid
+  <span class="keyword">FROM</span> gpkg_geometry_columns;</code></pre>
 </div>
 </div>
 </div>
@@ -8684,13 +8773,13 @@ columns:</p>
 <div id="example_feature_table_sql" class="listingblock">
 <div class="title">sample_feature_table Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE sample_feature_table (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_feature_table (
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   geometry GEOMETRY,
-  text_attribute TEXT,
+  text_attribute <span class="predefined-type">TEXT</span>,
   real_attribute REAL,
-  boolean_attribute BOOLEAN,
-  raster_or_photo BLOB
+  boolean_attribute <span class="predefined-type">BOOLEAN</span>,
+  raster_or_photo <span class="predefined-type">BLOB</span>
 );</code></pre>
 </div>
 </div>
@@ -8700,15 +8789,15 @@ columns:</p>
 <div id="gpkg_tile_matrix_set_sql" class="listingblock">
 <div class="title">gpkg_tile_matrix_set Table Creation SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_tile_matrix_set (
-  table_name TEXT NOT NULL PRIMARY KEY,
-  srs_id INTEGER NOT NULL
-  min_x DOUBLE NOT NULL,
-  min_y DOUBLE NOT NULL,
-  max_x DOUBLE NOT NULL,
-  max_y DOUBLE NOT NULL,
-  CONSTRAINT fk_gtms_table_name FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name),
-  CONSTRAINT fk_gtms_srs FOREIGN KEY (srs_id) REFERENCES gpkg_spatial_ref_sys (srs_id)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_tile_matrix_set (
+  table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  srs_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
+  min_x <span class="predefined-type">DOUBLE</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  min_y <span class="predefined-type">DOUBLE</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  max_x <span class="predefined-type">DOUBLE</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  max_y <span class="predefined-type">DOUBLE</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  <span class="type">CONSTRAINT</span> fk_gtms_table_name <span class="directive">FOREIGN</span> <span class="type">KEY</span> (table_name) <span class="keyword">REFERENCES</span> gpkg_contents(table_name),
+  <span class="type">CONSTRAINT</span> fk_gtms_srs <span class="directive">FOREIGN</span> <span class="type">KEY</span> (srs_id) <span class="keyword">REFERENCES</span> gpkg_spatial_ref_sys (srs_id)
 );</code></pre>
 </div>
 </div>
@@ -8718,32 +8807,32 @@ columns:</p>
 <div id="gpkg_tile_matrix_sql" class="listingblock">
 <div class="title">gpkg_tile_matrix Table Creation SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_tile_matrix (
-  table_name TEXT NOT NULL,
-  zoom_level INTEGER NOT NULL,
-  matrix_width INTEGER NOT NULL,
-  matrix_height INTEGER NOT NULL,
-  tile_width INTEGER NOT NULL,
-  tile_height INTEGER NOT NULL,
-  pixel_x_size DOUBLE NOT NULL,
-  pixel_y_size DOUBLE NOT NULL,
-  CONSTRAINT pk_ttm PRIMARY KEY (table_name, zoom_level),
-  CONSTRAINT fk_tmm_table_name FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_tile_matrix (
+  table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  zoom_level <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  matrix_width <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  matrix_height <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  tile_width <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  tile_height <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  pixel_x_size <span class="predefined-type">DOUBLE</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  pixel_y_size <span class="predefined-type">DOUBLE</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  <span class="type">CONSTRAINT</span> pk_ttm <span class="directive">PRIMARY</span> <span class="type">KEY</span> (table_name, zoom_level),
+  <span class="type">CONSTRAINT</span> fk_tmm_table_name <span class="directive">FOREIGN</span> <span class="type">KEY</span> (table_name) <span class="keyword">REFERENCES</span> gpkg_contents(table_name)
 );</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">EXAMPLE: gpkg_tile_matrix Insert Statement</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">INSERT INTO gpkg_tile_matrix VALUES (
-  "sample_tile_pyramid",
-  0,
-  1,
-  1,
-  512,
-  512,
-  2.0,
-  2.0
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> gpkg_tile_matrix <span class="keyword">VALUES</span> (
+  <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>,
+  <span class="integer">0</span>,
+  <span class="integer">1</span>,
+  <span class="integer">1</span>,
+  <span class="integer">512</span>,
+  <span class="integer">512</span>,
+  <span class="float">2.0</span>,
+  <span class="float">2.0</span>
 );</code></pre>
 </div>
 </div>
@@ -8753,25 +8842,25 @@ columns:</p>
 <div id="example_tiles_table_sql" class="listingblock">
 <div class="title">EXAMPLE: tiles table Create Table SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE sample_matrix_pyramid (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  zoom_level INTEGER NOT NULL,
-  tile_column INTEGER NOT NULL,
-  tile_row INTEGER NOT NULL,
-  tile_data BLOB NOT NULL),
-  UNIQUE (zoom_level, tile_column, tile_row)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_matrix_pyramid (
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
+  zoom_level <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  tile_column <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  tile_row <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  tile_data <span class="predefined-type">BLOB</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>),
+  <span class="directive">UNIQUE</span> (zoom_level, tile_column, tile_row)
 )</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">EXAMPLE: tiles table Insert Statement</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">INSERT INTO sample_matrix_pyramid VALUES (
-  1,
-  1,
-  1,
-  1,
-  "BLOB VALUE"
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> sample_matrix_pyramid <span class="keyword">VALUES</span> (
+  <span class="integer">1</span>,
+  <span class="integer">1</span>,
+  <span class="integer">1</span>,
+  <span class="integer">1</span>,
+  <span class="string"><span class="delimiter">&quot;</span><span class="content">BLOB VALUE</span><span class="delimiter">&quot;</span></span>
 )</code></pre>
 </div>
 </div>
@@ -8781,17 +8870,17 @@ columns:</p>
 <div id="gpkg_data_columns_sql" class="listingblock">
 <div class="title">gpkg_data_columns Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_data_columns (
-  table_name TEXT NOT NULL,
-  column_name TEXT NOT NULL,
-  name TEXT,
-  title TEXT,
-  description TEXT,
-  mime_type TEXT,
-  constraint_name TEXT,
-  constraint_type TEXT,
-  CONSTRAINT pk_gdc PRIMARY KEY (table_name, column_name),
-  CONSTRAINT fk_gdc_tn FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_data_columns (
+  table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  column_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  name <span class="predefined-type">TEXT</span>,
+  title <span class="predefined-type">TEXT</span>,
+  description <span class="predefined-type">TEXT</span>,
+  mime_type <span class="predefined-type">TEXT</span>,
+  constraint_name <span class="predefined-type">TEXT</span>,
+  constraint_type <span class="predefined-type">TEXT</span>,
+  <span class="type">CONSTRAINT</span> pk_gdc <span class="directive">PRIMARY</span> <span class="type">KEY</span> (table_name, column_name),
+  <span class="type">CONSTRAINT</span> fk_gdc_tn <span class="directive">FOREIGN</span> <span class="type">KEY</span> (table_name) <span class="keyword">REFERENCES</span> gpkg_contents(table_name)
 );</code></pre>
 </div>
 </div>
@@ -8801,14 +8890,14 @@ columns:</p>
 <div id="gpkg_data_column_constraints_sql" class="listingblock">
 <div class="title">gpkg_data_columns Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_data_column_constraints (
-  constraint_name TEXT NOT NULL,
-  constraint_type TEXT NOT NULL, // 'range' | 'enum' | 'glob'
-  value TEXT,
-  min NUMERIC,
-  minIsInclusive INTEGER, // 0 = false, 1 = true
-  max NUMERIC,
-  maxIsInclusive INTEGER, // 0 = false, 1 = true
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_data_column_constraints (
+  constraint_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  constraint_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>, // <span class="string"><span class="delimiter">'</span><span class="content">range</span><span class="delimiter">'</span></span> | <span class="string"><span class="delimiter">'</span><span class="content">enum</span><span class="delimiter">'</span></span> | <span class="string"><span class="delimiter">'</span><span class="content">glob</span><span class="delimiter">'</span></span>
+  value <span class="predefined-type">TEXT</span>,
+  <span class="predefined">min</span> NUMERIC,
+  minIsInclusive <span class="predefined-type">INTEGER</span>, // <span class="integer">0</span> = <span class="predefined-constant">false</span>, <span class="integer">1</span> = <span class="predefined-constant">true</span>
+  <span class="predefined">max</span> NUMERIC,
+  maxIsInclusive <span class="predefined-type">INTEGER</span>, // <span class="integer">0</span> = <span class="predefined-constant">false</span>, <span class="integer">1</span> = <span class="predefined-constant">true</span>
 )</code></pre>
 </div>
 </div>
@@ -8818,12 +8907,12 @@ columns:</p>
 <div id="gpkg_metadata_sql" class="listingblock">
 <div class="title">gpkg_metadata Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_metadata (
-  id INTEGER CONSTRAINT m_pk PRIMARY KEY ASC NOT NULL UNIQUE,
-  md_scope TEXT NOT NULL DEFAULT 'dataset',
-  metadata_standard_URI TEXT NOT NULL DEFAULT 'http://schemas.opengis.net/iso/19139/',
-  mime_type TEXT NOT NULL DEFAULT ‘text/xml’,
-  metadata TEXT NOT NULL DEFAULT (‘’)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
+  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">UNIQUE</span>,
+  md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
+  metadata_standard_URI <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">http://schemas.opengis.net/iso/19139/</span><span class="delimiter">'</span></span>,
+  mime_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">text/xml</span><span class="delimiter">'</span></span>,
+  metadata <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>
 );</code></pre>
 </div>
 </div>
@@ -8833,30 +8922,30 @@ columns:</p>
 <div id="gpkg_metadata_reference_sql" class="listingblock">
 <div class="title">gpkg_metadata_reference Table Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TABLE gpkg_metadata_reference (
-  reference_scope TEXT NOT NULL,
-  table_name TEXT,
-  column_name TEXT,
-  row_id_value INTEGER,
-  timestamp TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
-  md_file_id INTEGER NOT NULL,
-  md_parent_id INTEGER,
-  CONSTRAINT crmr_mfi_fk FOREIGN KEY (md_file_id) REFERENCES gpkg_metadata(id),
-  CONSTRAINT crmr_mpi_fk FOREIGN KEY (md_parent_id) REFERENCES gpkg_metadata(id)
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata_reference (
+  reference_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  table_name <span class="predefined-type">TEXT</span>,
+  column_name <span class="predefined-type">TEXT</span>,
+  row_id_value <span class="predefined-type">INTEGER</span>,
+  <span class="predefined-type">timestamp</span> <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,CURRENT_TIMESTAMP)),
+  md_file_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  md_parent_id <span class="predefined-type">INTEGER</span>,
+  <span class="type">CONSTRAINT</span> crmr_mfi_fk <span class="directive">FOREIGN</span> <span class="type">KEY</span> (md_file_id) <span class="keyword">REFERENCES</span> gpkg_metadata(id),
+  <span class="type">CONSTRAINT</span> crmr_mpi_fk <span class="directive">FOREIGN</span> <span class="type">KEY</span> (md_parent_id) <span class="keyword">REFERENCES</span> gpkg_metadata(id)
 );</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">Example: gpkg_metadata_reference SQL insert statement</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">INSERT INTO gpkg_metadata_reference VALUES (
-  'table',
-  'sample_rasters',
-  NULL,
-  NULL,
-  '2012-08-17T14:49:32.932Z',
-  98,
-  99
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> gpkg_metadata_reference <span class="keyword">VALUES</span> (
+  <span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,
+  <span class="string"><span class="delimiter">'</span><span class="content">sample_rasters</span><span class="delimiter">'</span></span>,
+  <span class="predefined-constant">NULL</span>,
+  <span class="predefined-constant">NULL</span>,
+  <span class="string"><span class="delimiter">'</span><span class="content">2012-08-17T14:49:32.932Z</span><span class="delimiter">'</span></span>,
+  <span class="integer">98</span>,
+  <span class="integer">99</span>
 )</code></pre>
 </div>
 </div>
@@ -8977,7 +9066,7 @@ An application that creates a spatial index SHALL create it using the following 
 <div class="listingblock">
 <div class="title">create virtual table SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE VIRTUAL TABLE rtree_&lt;t&gt;_&lt;c&gt; USING rtree(id, minx, maxx, miny, maxy)</code></pre>
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> VIRTUAL <span class="type">TABLE</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">USING</span> rtree(id, minx, maxx, miny, maxy)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8995,8 +9084,8 @@ Each newly created spatial index SHALL be populated using the following SQL stat
 <div class="listingblock">
 <div class="title">load spatial index values SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">INSERT OR REPLACE INTO rtree_&lt;t&gt;_&lt;c&gt;
-  SELECT &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) FROM &lt;t&gt;;</code></pre>
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt;
+  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -9012,77 +9101,77 @@ These spatial index triggers SHALL be defined as follows:</p>
 <div class="listingblock">
 <div class="title">Spatial Index SQL Triggers Template</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">/* Conditions: Insertion of non-empty geometry
-   Actions   : Insert record into rtree */
-CREATE TRIGGER rtree_&lt;t&gt;_&lt;c&gt;_insert AFTER INSERT ON &lt;t&gt;
-  WHEN (new.&lt;c&gt; NOT NULL AND NOT ST_IsEmpty(NEW.&lt;c&gt;))
-BEGIN
-  INSERT OR REPLACE INTO rtree_&lt;t&gt;_&lt;c&gt; VALUES (
+<pre class="CodeRay"><code class="sql language-sql"><span class="comment">/* Conditions: Insertion of non-empty geometry
+   Actions   : Insert record into rtree */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_insert <span class="directive">AFTER</span> <span class="class">INSERT</span> <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> (new.&lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;))
+<span class="class">BEGIN</span>
+  <span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">VALUES</span> (
     NEW.&lt;i&gt;,
     ST_MinX(NEW.&lt;c&gt;), ST_MaxX(NEW.&lt;c&gt;),
     ST_MinY(NEW.&lt;c&gt;), ST_MaxY(NEW.&lt;c&gt;)
   );
-END;
+<span class="keyword">END</span>;
 
-/* Conditions: Update of geometry column to non-empty geometry
+<span class="comment">/* Conditions: Update of geometry column to non-empty geometry
                No row ID change
-   Actions   : Update record in rtree */
-CREATE TRIGGER rtree_&lt;t&gt;_&lt;c&gt;_update1 AFTER UPDATE OF &lt;c&gt; ON &lt;t&gt;
-  WHEN OLD.&lt;i&gt; = NEW.&lt;i&gt; AND
-       (NEW.&lt;c&gt; NOTNULL AND NOT ST_IsEmpty(NEW.&lt;c&gt;))
-BEGIN
-  INSERT OR REPLACE INTO rtree_&lt;t&gt;_&lt;c&gt; VALUES (
+   Actions   : Update record in rtree */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update1 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> OLD.&lt;i&gt; = NEW.&lt;i&gt; <span class="keyword">AND</span>
+       (NEW.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;))
+<span class="class">BEGIN</span>
+  <span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">VALUES</span> (
     NEW.&lt;i&gt;,
     ST_MinX(NEW.&lt;c&gt;), ST_MaxX(NEW.&lt;c&gt;),
     ST_MinY(NEW.&lt;c&gt;), ST_MaxY(NEW.&lt;c&gt;)
   );
-END;
+<span class="keyword">END</span>;
 
-/* Conditions: Update of geometry column to empty geometry
+<span class="comment">/* Conditions: Update of geometry column to empty geometry
                No row ID change
-   Actions   : Remove record from rtree */
-CREATE TRIGGER rtree_&lt;t&gt;_&lt;c&gt;_update2 AFTER UPDATE OF &lt;c&gt; ON &lt;t&gt;
-  WHEN OLD.&lt;i&gt; = NEW.&lt;i&gt; AND
-       (NEW.&lt;c&gt; ISNULL OR ST_IsEmpty(NEW.&lt;c&gt;))
-BEGIN
-  DELETE FROM rtree_&lt;t&gt;_&lt;c&gt; WHERE id = OLD.&lt;i&gt;;
-END;
+   Actions   : Remove record from rtree */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update2 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> OLD.&lt;i&gt; = NEW.&lt;i&gt; <span class="keyword">AND</span>
+       (NEW.&lt;c&gt; ISNULL <span class="keyword">OR</span> ST_IsEmpty(NEW.&lt;c&gt;))
+<span class="class">BEGIN</span>
+  <span class="class">DELETE</span> <span class="keyword">FROM</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">WHERE</span> id = OLD.&lt;i&gt;;
+<span class="keyword">END</span>;
 
-/* Conditions: Update of any column
+<span class="comment">/* Conditions: Update of any column
                Row ID change
                Non-empty geometry
    Actions   : Remove record from rtree for old &lt;i&gt;
-               Insert record into rtree for new &lt;i&gt; */
-CREATE TRIGGER rtree_&lt;t&gt;_&lt;c&gt;_update3 AFTER UPDATE OF &lt;c&gt; ON &lt;t&gt;
-  WHEN OLD.&lt;i&gt; != NEW.&lt;i&gt; AND
-       (NEW.&lt;c&gt; NOTNULL AND NOT ST_IsEmpty(NEW.&lt;c&gt;))
-BEGIN
-  DELETE FROM rtree_&lt;t&gt;_&lt;c&gt; WHERE id = OLD.&lt;i&gt;;
-  INSERT OR REPLACE INTO rtree_&lt;t&gt;_&lt;c&gt; VALUES (
+               Insert record into rtree for new &lt;i&gt; */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update3 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> OLD.&lt;i&gt; != NEW.&lt;i&gt; <span class="keyword">AND</span>
+       (NEW.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;))
+<span class="class">BEGIN</span>
+  <span class="class">DELETE</span> <span class="keyword">FROM</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">WHERE</span> id = OLD.&lt;i&gt;;
+  <span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">VALUES</span> (
     NEW.&lt;i&gt;,
     ST_MinX(NEW.&lt;c&gt;), ST_MaxX(NEW.&lt;c&gt;),
     ST_MinY(NEW.&lt;c&gt;), ST_MaxY(NEW.&lt;c&gt;)
   );
-END;
+<span class="keyword">END</span>;
 
-/* Conditions: Update of any column
+<span class="comment">/* Conditions: Update of any column
                Row ID change
                Empty geometry
-   Actions   : Remove record from rtree for old and new &lt;i&gt; */
-CREATE TRIGGER rtree_&lt;t&gt;_&lt;c&gt;_update4 AFTER UPDATE ON &lt;t&gt;
-  WHEN OLD.&lt;i&gt; != NEW.&lt;i&gt; AND
-       (NEW.&lt;c&gt; ISNULL OR ST_IsEmpty(NEW.&lt;c&gt;))
-BEGIN
-  DELETE FROM rtree_&lt;t&gt;_&lt;c&gt; WHERE id IN (OLD.&lt;i&gt;, NEW.&lt;i&gt;);
-END;
+   Actions   : Remove record from rtree for old and new &lt;i&gt; */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update4 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> OLD.&lt;i&gt; != NEW.&lt;i&gt; <span class="keyword">AND</span>
+       (NEW.&lt;c&gt; ISNULL <span class="keyword">OR</span> ST_IsEmpty(NEW.&lt;c&gt;))
+<span class="class">BEGIN</span>
+  <span class="class">DELETE</span> <span class="keyword">FROM</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">WHERE</span> id <span class="keyword">IN</span> (OLD.&lt;i&gt;, NEW.&lt;i&gt;);
+<span class="keyword">END</span>;
 
-/* Conditions: Row deleted
-   Actions   : Remove record from rtree for old &lt;i&gt; */
-CREATE TRIGGER rtree_&lt;t&gt;_&lt;c&gt;_delete AFTER DELETE ON &lt;t&gt;
-  WHEN old.&lt;c&gt; NOT NULL
-BEGIN
-  DELETE FROM rtree_&lt;t&gt;_&lt;c&gt; WHERE id = OLD.&lt;i&gt;;
-END;</code></pre>
+<span class="comment">/* Conditions: Row deleted
+   Actions   : Remove record from rtree for old &lt;i&gt; */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_delete <span class="directive">AFTER</span> <span class="class">DELETE</span> <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> old.&lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
+<span class="class">BEGIN</span>
+  <span class="class">DELETE</span> <span class="keyword">FROM</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">WHERE</span> id = OLD.&lt;i&gt;;
+<span class="keyword">END</span>;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -9099,31 +9188,31 @@ END;</code></pre>
 <div class="listingblock">
 <div class="title">gpkg_geometry_columns Trigger Definitions</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TRIGGER 'gpkg_geometry_columns_geometry_type_name_insert'
-BEFORE INSERT ON 'gpkg_geometry_columns'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT,'geometry_type name must be one of GEOMETRY,
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_geometry_columns_geometry_type_name_insert</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_geometry_columns</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT,<span class="string"><span class="delimiter">'</span><span class="content">geometry_type name must be one of GEOMETRY,
 POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON,
 GEOMCOLLECTION, CIRCULARSTRING, COMPOUNDCURVE, CURVEPOLYGON, MULTICURVE,
-MULTISURFACE, CURVE, SURFACE')
-WHERE NOT(NEW.geometry_type_name IN('GEOMETRY', 'POINT', 'LINESTRING',
-'POLYGON', 'MULTIPOINT', 'MULTILINESTRING', 'MULTIPOLYGON',
-'GEOMCOLLECTION', 'CIRCULARSTRING', 'COMPOUNDCURVE', 'CURVEPOLYGON',
-'MULTICURVE', 'MULTISURFACE', 'CURVE', 'SURFACE'));
-END
+MULTISURFACE, CURVE, SURFACE</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span>(NEW.geometry_type_name <span class="keyword">IN</span>(<span class="string"><span class="delimiter">'</span><span class="content">GEOMETRY</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">POINT</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">LINESTRING</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">POLYGON</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTIPOINT</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTILINESTRING</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTIPOLYGON</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">GEOMCOLLECTION</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">CIRCULARSTRING</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">COMPOUNDCURVE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">CURVEPOLYGON</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">MULTICURVE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTISURFACE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">CURVE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">SURFACE</span><span class="delimiter">'</span></span>));
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_geometry_columns_geometry_type_name_update'
-BEFORE UPDATE OF 'geometry_type_name' ON 'gpkg_geometry_columns'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT,'geometry_type name must be one of GEOMETRY,
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_geometry_columns_geometry_type_name_update</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">'</span><span class="content">geometry_type_name</span><span class="delimiter">'</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_geometry_columns</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT,<span class="string"><span class="delimiter">'</span><span class="content">geometry_type name must be one of GEOMETRY,
 POINT, LINESTRING, POLYGON, MULTIPOINT, MULTILINESTRING, MULTIPOLYGON,
 GEOMCOLLECTION, CIRCULARSTRING, COMPOUNDCURVE, CURVEPOLYGON, MULTICURVE,
-MULTISURFACE, CURVE, SURFACE ')
-WHERE NOT(NEW.geometry_type_name IN ('GEOMETRY', 'POINT', 'LINESTRING',
-'POLYGON', 'MULTIPOINT', 'MULTILINESTRING', 'MULTIPOLYGON',
-'GEOMCOLLECTION', 'CIRCULARSTRING', 'COMPOUNDCURVE', 'CURVEPOLYGON',
-'MULTICURVE', 'MULTISURFACE', 'CURVE', 'SURFACE'));
-END</code></pre>
+MULTISURFACE, CURVE, SURFACE </span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span>(NEW.geometry_type_name <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">GEOMETRY</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">POINT</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">LINESTRING</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">POLYGON</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTIPOINT</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTILINESTRING</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTIPOLYGON</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">GEOMCOLLECTION</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">CIRCULARSTRING</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">COMPOUNDCURVE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">CURVEPOLYGON</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">MULTICURVE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">MULTISURFACE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">CURVE</span><span class="delimiter">'</span></span>, <span class="string"><span class="delimiter">'</span><span class="content">SURFACE</span><span class="delimiter">'</span></span>));
+<span class="keyword">END</span></code></pre>
 </div>
 </div>
 </div>
@@ -9132,75 +9221,75 @@ END</code></pre>
 <div class="listingblock">
 <div class="title">gpkg_tile_matrix Trigger Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TRIGGER 'gpkg_tile_matrix_zoom_level_insert'
-BEFORE INSERT ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0')
-WHERE (NEW.zoom_level &lt; 0);
-END
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_zoom_level_insert</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.zoom_level &lt; <span class="integer">0</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_zoom_level_update'
-BEFORE UPDATE of zoom_level ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0')
-WHERE (NEW.zoom_level &lt; 0);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_zoom_level_update</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">of</span> zoom_level <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.zoom_level &lt; <span class="integer">0</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_matrix_width_insert'
-BEFORE INSERT ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: matrix_width cannot be less than 1')
-WHERE (NEW.matrix_width &lt; 1);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_matrix_width_insert</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''gpkg_tile_matrix'' violates constraint: matrix_width cannot be less than 1</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.matrix_width &lt; <span class="integer">1</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_matrix_width_update'
-BEFORE UPDATE OF matrix_width ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: matrix_width cannot be less than 1')
-WHERE (NEW.matrix_width &lt; 1);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_matrix_width_update</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> matrix_width <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''gpkg_tile_matrix'' violates constraint: matrix_width cannot be less than 1</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.matrix_width &lt; <span class="integer">1</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_matrix_height_insert'
-BEFORE INSERT ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: matrix_height cannot be less than 1')
-WHERE (NEW.matrix_height &lt; 1);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_matrix_height_insert</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''gpkg_tile_matrix'' violates constraint: matrix_height cannot be less than 1</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.matrix_height &lt; <span class="integer">1</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_matrix_height_update'
-BEFORE UPDATE OF matrix_height ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: matrix_height cannot be less than 1')
-WHERE (NEW.matrix_height &lt; 1);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_matrix_height_update</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> matrix_height <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''gpkg_tile_matrix'' violates constraint: matrix_height cannot be less than 1</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.matrix_height &lt; <span class="integer">1</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_pixel_x_size_insert'
-BEFORE INSERT ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: pixel_x_size must be greater than 0')
-WHERE NOT (NEW.pixel_x_size &gt; 0);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_pixel_x_size_insert</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''gpkg_tile_matrix'' violates constraint: pixel_x_size must be greater than 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.pixel_x_size &gt; <span class="integer">0</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_pixel_x_size_update'
-BEFORE UPDATE OF pixel_x_size ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: pixel_x_size must be greater than 0')
-WHERE NOT (NEW.pixel_x_size &gt; 0);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_pixel_x_size_update</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> pixel_x_size <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''gpkg_tile_matrix'' violates constraint: pixel_x_size must be greater than 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.pixel_x_size &gt; <span class="integer">0</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_pixel_y_size_insert'
-BEFORE INSERT ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: pixel_y_size must be greater than 0')
-WHERE NOT (NEW.pixel_y_size &gt; 0);
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_pixel_y_size_insert</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''gpkg_tile_matrix'' violates constraint: pixel_y_size must be greater than 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.pixel_y_size &gt; <span class="integer">0</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_tile_matrix_pixel_y_size_update'
-BEFORE UPDATE OF pixel_y_size ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: pixel_y_size must be greater than 0')
-WHERE NOT (NEW.pixel_y_size &gt; 0);
-END</code></pre>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_pixel_y_size_update</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> pixel_y_size <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''gpkg_tile_matrix'' violates constraint: pixel_y_size must be greater than 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.pixel_y_size &gt; <span class="integer">0</span>);
+<span class="keyword">END</span></code></pre>
 </div>
 </div>
 </div>
@@ -9209,37 +9298,37 @@ END</code></pre>
 <div class="listingblock">
 <div class="title">metadata Trigger Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TRIGGER 'gpkg_metadata_md_scope_insert'
-BEFORE INSERT ON 'gpkg_metadata'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata violates
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_md_scope_insert</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata violates
 constraint: md_scope must be one of undefined | fieldSession |
 collectionSession | series | dataset | featureType | feature |
 attributeType | attribute | tile | model | catalogue | schema |
 taxonomy software | service | collectionHardware |
-nonGeographicDataset | dimensionGroup')
-WHERE NOT(NEW.md_scope IN
-('undefined','fieldSession','collectionSession','series','dataset',
-'featureType','feature','attributeType','attribute','tile','model',
-'catalogue','schema','taxonomy','software','service',
-'collectionHardware','nonGeographicDataset','dimensionGroup'));
-END
+nonGeographicDataset | dimensionGroup</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span>(NEW.md_scope <span class="keyword">IN</span>
+(<span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">fieldSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">collectionSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">series</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">featureType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">feature</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attributeType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attribute</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">tile</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">model</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">catalogue</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">schema</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">taxonomy</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">software</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">service</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">collectionHardware</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">nonGeographicDataset</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dimensionGroup</span><span class="delimiter">'</span></span>));
+<span class="keyword">END</span>
 
-CREATE TRIGGER 'gpkg_metadata_md_scope_update'
-BEFORE UPDATE OF 'md_scope' ON 'gpkg_metadata'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table gpkg_metadata violates
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_md_scope_update</span><span class="delimiter">'</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">'</span><span class="content">md_scope</span><span class="delimiter">'</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata</span><span class="delimiter">'</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata violates
 constraint: md_scope must be one of undefined | fieldSession |
 collectionSession | series | dataset | featureType | feature |
 attributeType | attribute | tile | model | catalogue | schema |
 taxonomy software | service | collectionHardware |
-nonGeographicDataset | dimensionGroup')
-WHERE NOT(NEW.md_scope IN
-('undefined','fieldSession','collectionSession','series','dataset',
-'featureType','feature','attributeType','attribute','tile','model',
-'catalogue','schema','taxonomy','software','service',
-'collectionHardware','nonGeographicDataset','dimensionGroup'));
-END</code></pre>
+nonGeographicDataset | dimensionGroup</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span>(NEW.md_scope <span class="keyword">IN</span>
+(<span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">fieldSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">collectionSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">series</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">featureType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">feature</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attributeType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attribute</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">tile</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">model</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">catalogue</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">schema</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">taxonomy</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">software</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">service</span><span class="delimiter">'</span></span>,
+<span class="string"><span class="delimiter">'</span><span class="content">collectionHardware</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">nonGeographicDataset</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dimensionGroup</span><span class="delimiter">'</span></span>));
+<span class="keyword">END</span></code></pre>
 </div>
 </div>
 </div>
@@ -9368,22 +9457,16 @@ END</pre>
 <div class="listingblock">
 <div class="title">EXAMPLE: features table Trigger Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TRIGGER "sample_feature_table_real_insert"
-BEFORE INSERT ON "sample_feature_table"
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''sample_feature_table''
-violates constraint: real_attribute must be greater than 0')
-WHERE NOT (NEW.real_attribute &gt; 0);
-END
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_feature_table_real_insert</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_feature_table</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_feature_table''
+violates constraint: real_attribute must be greater than 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.real_attribute &gt; <span class="integer">0</span>);
+<span class="keyword">END</span>
 
-CREATE TRIGGER "sample_feature_table_real_update"
-BEFORE UPDATE OF "real_attribute" ON "sample_feature_table”
-FOR EACH ROW BEGIN
-SELECT RAISE (ABORT, 'update of ''real_attribute'' on table
-''sample_feature_table'' violates constraint: real_attribute value
-must be &gt; 0')
-WHERE NOT (NEW.real_attribute &gt; 0);
-END</code></pre>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_feature_table_real_update</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">real_attribute</span><span class="delimiter">&quot;</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -9395,55 +9478,55 @@ END</code></pre>
 <div class="listingblock">
 <div class="title">tiles table Trigger Definition SQL</div>
 <div class="content">
-<pre class="highlight"><code class="sql language-sql">CREATE TRIGGER "sample_matrix_tiles_zoom_insert"
-BEFORE INSERT ON "sample_matrix_tiles"
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''sample_matrix_tiles'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix')
-WHERE NOT (NEW.zoom_level IN (SELECT zoom_level FROM gpkg_tile_matrix WHERE t_table_name = 'sample_matrix_tiles')) ;
-END
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_zoom_insert</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span>)) ;
+<span class="keyword">END</span>
 
-CREATE TRIGGER "sample_matrix_tiles_zoom_update"
-BEFORE UPDATE OF zoom_level ON "sample_matrix_tiles"
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''sample_matrix_tiles'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix')
-WHERE NOT (NEW.zoom_level IN (SELECT zoom_level FROM gpkg_tile_matrix WHERE t_table_name = 'sample_matrix_tiles')) ;
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_zoom_update</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> zoom_level <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span>)) ;
+<span class="keyword">END</span>
 
-CREATE TRIGGER "sample_matrix_tiles_tile_column_insert"
-BEFORE INSERT ON "sample_matrix_tiles"
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''sample_matrix_tiles'' violates constraint: tile_column cannot be &lt; 0')
-WHERE (NEW.tile_column &lt; 0) ;
-SELECT RAISE(ABORT, 'insert on table ''sample_matrix_tiles'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix')
-WHERE NOT (NEW.tile_column &lt; (SELECT matrix_width FROM gpkg_tile_matrix WHERE t_table_name = 'sample_matrix_tiles' AND zoom_level = NEW.zoom_level));
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_column_insert</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.tile_column &lt; <span class="integer">0</span>) ;
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">END</span>
 
-CREATE TRIGGER "sample_matrix_tiles_tile_column_update"
-BEFORE UPDATE OF tile_column ON "sample_matrix_tiles"
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''sample_matrix_tiles'' violates constraint: tile_column cannot be &lt; 0')
-WHERE (NEW.tile_column &lt; 0) ;
-SELECT RAISE(ABORT, 'update on table ''sample_matrix_tiles'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix')
-WHERE NOT (NEW.tile_column &lt; (SELECT matrix_width FROM gpkg_tile_matrix WHERE t_table_name = 'sample_matrix_tiles' AND zoom_level = NEW.zoom_level));
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_column_update</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> tile_column <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.tile_column &lt; <span class="integer">0</span>) ;
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">END</span>
 
-CREATE TRIGGER "sample_matrix_tiles_tile_row_insert"
-BEFORE INSERT ON "sample_matrix_tiles"
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''sample_matrix_tiles'' violates constraint: tile_row cannot be &lt; 0')
-WHERE (NEW.tile_row &lt; 0) ;
-SELECT RAISE(ABORT, 'insert on table ''sample_matrix_tiles'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix')
-WHERE NOT (NEW.tile_row &lt; (SELECT matrix_height FROM gpkg_tile_matrix WHERE t_table_name = 'sample_matrix_tiles' AND zoom_level = NEW.zoom_level));
-END
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_row_insert</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.tile_row &lt; <span class="integer">0</span>) ;
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">END</span>
 
-CREATE TRIGGER "sample_matrix_tiles_tile_row_update"
-BEFORE UPDATE OF tile_row ON "sample_matrix_tiles"
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table ''sample_matrix_tiles'' violates constraint: tile_row cannot be &lt; 0')
-WHERE (NEW.tile_row &lt; 0) ;
-SELECT RAISE(ABORT, 'update on table ''sample_matrix_tiles'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix')
-WHERE NOT (NEW.tile_row &lt; (SELECT matrix_height FROM gpkg_tile_matrix WHERE t_table_name = 'sample_matrix_tiles' AND zoom_level = NEW.zoom_level));
-END</code></pre>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_row_update</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> tile_row <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> (NEW.tile_row &lt; <span class="integer">0</span>) ;
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">END</span></code></pre>
 </div>
 </div>
 </div>
@@ -9987,7 +10070,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.1<br>
-Last updated 2013-10-05 20:56:10 UTC
+Last updated 2013-10-05 21:02:39 UTC
 </div>
 </div>
 </body>
