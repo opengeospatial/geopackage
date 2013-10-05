@@ -308,36 +308,7 @@ A GeoPackage file that contains tile matrix user data tables with `tile_data` co
 raster images in NITF format SHALL contain a `gpkg_extensions` table that contains row records with `table_name` values
 for each such table, “tile_data” `column_name` values and `extension_name` column values of “gpkg_nitf”.
 
-[[ext_other_tiles]]
-==== Tile Encoding Other
-
-===== Data
-
-The optional extension capabilities defined in sub clauses and requirement statements of this clause MAY be implemented
-by any GeoPackage file that implements the requirements of clause 2.2 and clause 2.6.1.1 on which they depend.
-
-====== Other MIME Type
-
-As a registered extension, a GeoPackage file that contains a tile matrix user data table that contains tile data MAY
-store `tile_data` in other MIME types. However, a table with such data is not considered to be a “tiles” table for
-purposes of determining GeoPackage file validity.
-
-====== Other Extensions Name
-
-[requirement]
-An extension name in the form <authorname>_<other>_mime_type SHALL be defined for an author
-name other than “gpkg” for each other MIME image format used for `tile_data` columns in tile matrix set user data
-tables, where is replaced by the other MIME type abbreviation in uppercase
-
-====== Other Extensions Row
-
-[requirement]
-A GeoPackage file that contains tile matrix user data tables with `tile_data` columns that contain
-raster images in a MIME type format other than those defined in this specification SHALL contain a `gpkg_extensions`
-table that contains row records with `table_name` values for each such table, “tile_data” `column_name` values and
-`extension_name` column values of the other format extension name defined per clause 3.2.5.1.2.
-
-=== Any Tables
+=== Other Tables
 
 ==== Other Geometry Encoding
 
@@ -365,6 +336,29 @@ other than “gpkg” for each geometry BLOB format other than GeoPackageBinary 
 A GeoPackage file that contains other data tables with geometry column BLOB values encoded in an
 extension format SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values
 that identify extension format uses, and with extension_name column values constructed per clause 3.3.1.
+
+[[ext_other_tiles]]
+==== Other Tile Encoding
+
+===== Data
+
+The optional extension capabilities defined in sub clauses and requirement statements of this clause MAY be implemented
+by any GeoPackage file that implements the requirements of clause 2.6.1.1 on which they depend.
+
+====== Other MIME Type
+
+As a registered extension, a GeoPackage file can store images in other data tables specified in clause 2.5 using MIME types other than those specified in clause 2.2.
+However, other data tables with such data are not considered to be “tiles” tables for purposes of determining GeoPackage file validity.
+
+====== Other Extensions Name
+
+[requirement]
+An extension name in the form <author_name>_<other>_mime_type SHALL be defined for an author name other than “gpkg” for each other MIME image format used for data columns in other data tables, where <other> is replaced by the other MIME type abbreviation in uppercase
+
+====== Other Extensions Row
+
+[requirement]
+A GeoPackage file that contains other data tables with data columns that contain raster images in a MIME type format other than those defined in this specification SHALL contain a `gpkg_extensions` table that contains row records with `table_name` and `column_name` values that identify extension MIME type uses and `extension_name` column values of the other format extension name defined per clause 3.3.2.
 
 ==== Other Trigger
 
