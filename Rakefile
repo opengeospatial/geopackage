@@ -17,7 +17,7 @@ task :travis do
   repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:')
   deploy_branch = 'gh-pages'
 
-  system "git clone --depth 1 -b #{deploy_branch} #{repo} build
+  system "git clone --depth 1 -b #{deploy_branch} #{repo} build"
   Dir.chdir 'build'
 
   system "git config user.name '#{ENV['GIT_NAME']}'"
