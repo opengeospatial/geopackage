@@ -8,12 +8,7 @@ require 'bundler/setup'
 require 'asciidoctor'
 require 'asciidoctor/cli/options'
 require 'asciidoctor/cli/invoker'
-require File.dirname(__FILE__) + '/_ext/asciidoctor_patch.rb'
-require File.dirname(__FILE__) + '/_ext/requirement_block'
-
-Asciidoctor::Extensions.register do |document|
-  block :requirement, RequirementBlock
-end
+require File.dirname(__FILE__) + '/extensions/asciidoctor_extensions'
 
 invoker = Asciidoctor::Cli::Invoker.new(ARGV)
 invoker.invoke!
