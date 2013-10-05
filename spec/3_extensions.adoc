@@ -99,7 +99,7 @@ and 17 on every feature table geometry column to enforce the geometry type value
 `gpkg_geometry_columns` table.
 
 .Geometry Type Trigger Definition SQL Template
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+----
 CREATE TRIGGER fgti_<t>_<c> BEFORE INSERT ON '<t>'
 FOR EACH ROW 
 BEGIN
@@ -123,7 +123,7 @@ WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
         AND   gpkg_IsAssignable(geometry_type_name,
                                 ST_GeometryType(NEW.<c>)) = 0;
 END
-------------------------------------------------------------------------------------------------------------------------
+----
 
 where and are replaced with the names of the feature table and geometry column being inserted or updated. The triggers
 to enforce `gpkg_geometry_columns` `geometry_type_name` constraints on feature table geometries use Minimal Runtime SQL
@@ -158,7 +158,7 @@ every feature table geometry column to enforce the `srs_id` values specified for
 `gpkg_geometry_columns` table.
 
 .Table SRS_ID Trigger Definition SQL Templates
-------------------------------------------------------------------------------------------------------------------------
+----
 code,SQL
 CREATE TRIGGER fgsi_<t> _<c> BEFORE INSERT ON '<t>'
 FOR EACH ROW 
@@ -180,7 +180,7 @@ WHERE (SELECT srs_id FROM gpkg_geometry_columns
        AND   Lower(column_name) = Lower('<c>') 
        AND   ST_SRID(NEW.'<c>') <> srs_id);
 END
-------------------------------------------------------------------------------------------------------------------------
+----
 
 where \<t\> and \<c\> are replaced with the names of the feature table and geometry column being inserted or updated.
 
