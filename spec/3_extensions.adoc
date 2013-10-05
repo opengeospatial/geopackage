@@ -39,7 +39,7 @@ SHALL be encoded in the GeoPackageBinary geometry format.
 ====== Extensions Types - Extensions Name
 
 [requirement]
-An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_\<gname\>” template where \<gname\> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage file.
+An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_<gname>” template where <gname> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage file.
 
 ====== Extensions Types - Extensions Row
 
@@ -182,7 +182,7 @@ WHERE (SELECT srs_id FROM gpkg_geometry_columns
 END
 ----
 
-where \<t\> and \<c\> are replaced with the names of the feature table and geometry column being inserted or updated.
+where <t> and <c> are replaced with the names of the feature table and geometry column being inserted or updated.
 
 The triggers to enforce `gpkg_geometry_columns` `srs_id` constraints on feature table geometries use Minimal Runtime SQL
 Functions specified in [minimal_runtime_sql_functions].
@@ -325,7 +325,7 @@ purposes of determining GeoPackage file validity.
 ====== Other Extensions Name
 
 [requirement]
-An extension name in the form \<authorname\>_\<other\>_mime_type SHALL be defined for an author
+An extension name in the form <authorname>_<other>_mime_type SHALL be defined for an author
 name other than “gpkg” for each other MIME image format used for `tile_data` columns in tile matrix set user data
 tables, where is replaced by the other MIME type abbreviation in uppercase
 
@@ -356,7 +356,7 @@ of determining GeoPackage file validity.
 ====== BLOB format - Extensions Name
 
 [requirement]
-An extension name in the form \<author_name\>_geometry encoding SHALL be defined for an author name
+An extension name in the form <author_name>_geometry encoding SHALL be defined for an author name
 other than “gpkg” for each geometry BLOB format other than GeoPackageBinary used in a GeoPackage file.
 
 ====== BLOB format - Extensions Row

@@ -24,7 +24,7 @@ An application that access a GeoPackage file can query the `gpkg_extensions` tab
 |Column Name |Col Type |Column Description |Null |Key
 |`table_name` |text |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Unique
 |`column_name` |text |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Unique
-|`extension_name` |text |The case sensitive name of the extension that is required, in the form \_\. |no |Unique
+|`extension_name` |text |The case sensitive name of the extension that is required, in the form <author>_<extension_name>. |no |Unique
 |`scope` |text |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only' in lowercase. |no |
 |=======================================================================
 
@@ -40,9 +40,9 @@ They SHALL NOT be NULL for rows where the `column_name` value is not NULL.
 The `column_name` column value in a `gpkg_extensions` row SHALL be the name of a column in the table specified by the `table_name` column value for that row, or be NULL.
 
 [requirement]
-Each `extension_name` column value in a `gpkg_extensions` row SHALL be a unique case sensitive value of the form \<author\>_\<extension_name\> where \<author\> indicates the person or organization that developed and
-maintains the extension. The valid character set for \<author\> SHALL be [a-zA-Z0-9].
-The valid character set for \<extension_name\> SHALL be [a-zA-Z0-9_]. An `extension_name` for the “gpkg” author name SHALL be one of those listed in <<gpkg_reserved_extensions>>.
+Each `extension_name` column value in a `gpkg_extensions` row SHALL be a unique case sensitive value of the form <author>_<extension_name> where <author> indicates the person or organization that developed and
+maintains the extension. The valid character set for <author> SHALL be [a-zA-Z0-9].
+The valid character set for <extension_name> SHALL be [a-zA-Z0-9_]. An `extension_name` for the “gpkg” author name SHALL be one of those listed in <<gpkg_reserved_extensions>>.
 
 [requirement]
 The scope column value in a `gpkg_extensions` row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.
@@ -56,7 +56,7 @@ GeoPackage implementers use their own author names to register other extensions.
 [cols=",,",options="header",]
 |=======================================================================
 |Extension Name |Defined in Clause |Scope | Description
-|gpkg_geom_\<gname\> |3.1.2.1.2 |read-write |\<gname\> is the uppercase name of specific extension geometry type from Annex G 47
+|gpkg_geom_<gname> |3.1.2.1.2 |read-write |<gname> is the uppercase name of specific extension geometry type from Annex G 47
 |gpkg_zoom_other |3.2.1.1.1 |read-write |Tile matrix set user data table with zoom intervals other than factors of two between adjacent layers
 |gpkg_webp |3.2.2.2.1 |read-write |Raster images in image/webp format
 |gpkg_tiff |3.2.3.1.2 |read-write |Raster images in image/tiff format
