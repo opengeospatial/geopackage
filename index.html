@@ -2946,7 +2946,7 @@ An application that access a GeoPackage file can query the <code>gpkg_extensions
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>extension_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">text</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The case sensitive name of the extension that is required, in the form \_\.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The case sensitive name of the extension that is required, in the form &lt;author&gt;_&lt;extension_name&gt;.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
 </tr>
@@ -2982,9 +2982,9 @@ The <code>column_name</code> column value in a <code>gpkg_extensions</code> row 
 <div id="_requirement-79" class="quoteblock">
 <div class="title">Requirement 79</div>
 <blockquote>
-Each <code>extension_name</code> column value in a <code>gpkg_extensions</code> row SHALL be a unique case sensitive value of the form \&lt;author\&gt;_\&lt;extension_name\&gt; where \&lt;author\&gt; indicates the person or organization that developed and
-maintains the extension. The valid character set for \&lt;author\&gt; SHALL be [a-zA-Z0-9].
-The valid character set for \&lt;extension_name\&gt; SHALL be [a-zA-Z0-9_]. An <code>extension_name</code> for the “gpkg” author name SHALL be one of those listed in <a href="#gpkg_reserved_extensions">Reserved GeoPackage Extensions</a>.
+Each <code>extension_name</code> column value in a <code>gpkg_extensions</code> row SHALL be a unique case sensitive value of the form &lt;author&gt;_&lt;extension_name&gt; where &lt;author&gt; indicates the person or organization that developed and
+maintains the extension. The valid character set for &lt;author&gt; SHALL be [a-zA-Z0-9].
+The valid character set for &lt;extension_name&gt; SHALL be [a-zA-Z0-9_]. An <code>extension_name</code> for the “gpkg” author name SHALL be one of those listed in <a href="#gpkg_reserved_extensions">Reserved GeoPackage Extensions</a>.
 </blockquote>
 </div>
 <div id="_requirement-80" class="quoteblock">
@@ -3016,10 +3016,10 @@ GeoPackage implementers use their own author names to register other extensions.
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">gpkg_geom_\&lt;gname\&gt;</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">gpkg_geom_&lt;gname&gt;</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3.1.2.1.2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">read-write</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">\&lt;gname\&gt; is the uppercase name of specific extension geometry type from Annex G 47</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;gname&gt; is the uppercase name of specific extension geometry type from Annex G 47</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">gpkg_zoom_other</p></td>
@@ -3258,7 +3258,7 @@ SHALL be encoded in the GeoPackageBinary geometry format.
 <div id="_requirement-86" class="quoteblock">
 <div class="title">Requirement 86</div>
 <blockquote>
-An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_\&lt;gname\&gt;” template where \&lt;gname\&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage file.
+An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_&lt;gname&gt;” template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage file.
 </blockquote>
 </div>
 </div>
@@ -3458,7 +3458,7 @@ END</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>where \&lt;t\&gt; and \&lt;c\&gt; are replaced with the names of the feature table and geometry column being inserted or updated.</p>
+<p>where &lt;t&gt; and &lt;c&gt; are replaced with the names of the feature table and geometry column being inserted or updated.</p>
 </div>
 <div class="paragraph">
 <p>The triggers to enforce <code>gpkg_geometry_columns</code> <code>srs_id</code> constraints on feature table geometries use Minimal Runtime SQL
@@ -3667,7 +3667,7 @@ purposes of determining GeoPackage file validity.</p>
 <div id="_requirement-105" class="quoteblock">
 <div class="title">Requirement 105</div>
 <blockquote>
-An extension name in the form \&lt;authorname\&gt;_\&lt;other\&gt;_mime_type SHALL be defined for an author
+An extension name in the form &lt;authorname&gt;_&lt;other&gt;_mime_type SHALL be defined for an author
 name other than “gpkg” for each other MIME image format used for <code>tile_data</code> columns in tile matrix set user data
 tables, where is replaced by the other MIME type abbreviation in uppercase
 </blockquote>
@@ -3712,7 +3712,7 @@ of determining GeoPackage file validity.</p>
 <div id="_requirement-107" class="quoteblock">
 <div class="title">Requirement 107</div>
 <blockquote>
-An extension name in the form \&lt;author_name\&gt;_geometry encoding SHALL be defined for an author name
+An extension name in the form &lt;author_name&gt;_geometry encoding SHALL be defined for an author name
 other than “gpkg” for each geometry BLOB format other than GeoPackageBinary used in a GeoPackage file.
 </blockquote>
 </div>
@@ -3792,10 +3792,10 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <p><strong>File Format</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/container/data/file\_format</p>
+<p><strong>Test Case ID</strong>: /base/core/container/data/file_format</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the Geopackage file is an SQLite version\_3 database</p>
+<p><strong>Test Purpose</strong>: Verify that the Geopackage file is an SQLite version_3 database</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>: Pass if the first 16 bytes of the file contain "SQLite format 3" in ASCII.</p>
@@ -3810,7 +3810,7 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <p><strong>File Extension Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/container/data/file\_extension\_name</p>
+<p><strong>Test Case ID</strong>: /base/core/container/data/file_extension_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that the geopackage file extension is ".gpkg"</p>
@@ -3828,13 +3828,13 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <p><strong>Integrity Check</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/container/data/file\_integrity</p>
+<p><strong>Test Case ID</strong>: /base/core/container/data/file_integrity</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that the geopackage file passes the SQLite integrity check.</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Method</strong>: Pass if PRAGMA integrity\_check returns "ok"</p>
+<p><strong>Test Method</strong>: Pass if PRAGMA integrity_check returns "ok"</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>: Clause 1.1.1.1.3 Req 3:</p>
@@ -3861,7 +3861,7 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT * FROM sqlite\_master</p>
+<p>SELECT * FROM sqlite_master</p>
 </li>
 <li>
 <p>Fail if returns an SQL error.</p>
@@ -3881,7 +3881,7 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <p><strong>Every GPKG SQLite Configuration</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/container/api/every\_gpkg\_sqlite\_config</p>
+<p><strong>Test Case ID</strong>: /base/core/container/api/every_gpkg_sqlite_config</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that a GeoPackage SQLite Extension has the Every GeoPackage
@@ -3893,43 +3893,43 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_AUTOINCREMENT</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_AUTOINCREMENT</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_DATETIME\_FUNCS</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_DATETIME_FUNCS</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite_compileoption\_used('SQLITE\_OMIT\_ DEPRECATED ')</p>
+<p>SELECT sqlite_compileoption_used('SQLITE_OMIT_ DEPRECATED ')</p>
 </li>
 <li>
 <p>Fail if returns 0</p>
 </li>
 <li>
-<p>SELECT sqlite_compileoption\_used('SQLITE\_OMIT\_ FLOATING\_POINT ')</p>
+<p>SELECT sqlite_compileoption_used('SQLITE_OMIT_ FLOATING_POINT ')</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_PRAGMA</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_PRAGMA</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_FLAG\_PRAGMAS</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_FLAG_PRAGMAS</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_VIEW</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_VIEW</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
@@ -3955,10 +3955,10 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/spatial\_ref\_sys/data/table\_def</p>
+<p><strong>Test Case ID</strong>: /base/core/spatial_ref_sys/data/table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg_spatial\_ref\_sys table exists and has the correct definition.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_spatial_ref_sys table exists and has the correct definition.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -3966,7 +3966,7 @@ values of the other trigger extension name defined per clause 3.3.1.1.2.
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name = <em>gpkg\_spatial\_ref\_sys</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_spatial_ref_sys</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -3993,10 +3993,10 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/spatial\_ref\_sys/data\_values\_default</p>
+<p><strong>Test Case ID</strong>: /base/core/spatial_ref_sys/data_values_default</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the spatial\_ref\_sys table contains the required default contents.</p>
+<p><strong>Test Purpose</strong>: Verify that the spatial_ref_sys table contains the required default contents.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4004,16 +4004,16 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT srid, auth\_name, auth\_srid, srtext FROM spatial\_ref\_sys WHERE srid = -1
+<p>SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid = -1
 returns -1 "NONE" -1 "Undefined", AND</p>
 </li>
 <li>
-<p>SELECT srid, auth\_name, auth\_srid, srtext FROM spatial\_ref\_sys WHERE srid = 0
+<p>SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid = 0
 returns 0 "NONE" 0 "Undefined", AND</p>
 </li>
 <li>
-<p>SELECT srid, auth\_name, auth\_srid, srtext FROM spatial\_ref\_sys WHERE srid =
-  4326 returns 4326 epsg 4326 GEOGCS["WGS 84", DATUM["WGS\_1984",
+<p>SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid =
+  4326 returns 4326 epsg 4326 GEOGCS["WGS 84", DATUM["WGS_1984",
 SPHEROID["WGS 84",6378137,298.257223563, AUTHORITY["EPSG","7030"]],
 AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","
 8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],
@@ -4034,10 +4034,10 @@ AUTHORITY["EPSG","4326"]] (whitespace irrelevant)</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/spatial\_ref\_sys/data\_values\_required</p>
+<p><strong>Test Case ID</strong>: /base/core/spatial_ref_sys/data_values_required</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the spatial\_ref\_sys table contains rows to define all srs\_id values
+<p><strong>Test Purpose</strong>: Verify that the spatial_ref_sys table contains rows to define all srs_id values
  used by features and tiles in a GeoPackage.</p>
 </div>
 <div class="paragraph">
@@ -4046,9 +4046,9 @@ AUTHORITY["EPSG","4326"]] (whitespace irrelevant)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT gc.srs\_id AS gc\_srid, srs.srs\_name, srs.srs\_id, srs.organization,
-srs.organization\_coordsys\_id, srs.definition FROM gpkg\_contents AS gc LEFT
-OUTER JOIN gpkg\_spatial\_ref\_sys AS srs ON srs.srs\_id = gc.srs\_id</p>
+<p>SELECT DISTINCT gc.srs_id AS gc_srid, srs.srs_name, srs.srs_id, srs.organization,
+srs.organization_coordsys_id, srs.definition FROM gpkg_contents AS gc LEFT
+OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id</p>
 </li>
 <li>
 <p>Pass if no returned srs values are NULL.</p>
@@ -4071,10 +4071,10 @@ OUTER JOIN gpkg\_spatial\_ref\_sys AS srs ON srs.srs\_id = gc.srs\_id</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/contents/data/table\_def</p>
+<p><strong>Test Case ID</strong>: /base/core/contents/data/table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_contents table exists and has the correct definition.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_contents table exists and has the correct definition.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4082,7 +4082,7 @@ OUTER JOIN gpkg\_spatial\_ref\_sys AS srs ON srs.srs\_id = gc.srs\_id</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name = <em>gpkg\_contents</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_contents</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -4109,10 +4109,10 @@ returned sql are irrelevant.</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/contents/data/data\_values\_table\_name</p>
+<p><strong>Test Case ID</strong>: /base/core/contents/data/data_values_table_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the table\_name column values in the gpkg\_contents table are
+<p><strong>Test Purpose</strong>: Verify that the table_name column values in the gpkg_contents table are
  valid.</p>
 </div>
 <div class="paragraph">
@@ -4121,15 +4121,15 @@ returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT gc.table\_name AS gc\_table, sm.tbl\_name
-FROM gpkg\_contents AS ge LEFT OUTER JOIN sqlite\_master AS sm ON
-gc.table\_name = sm.tbl\_name</p>
+<p>SELECT DISTINCT gc.table_name AS gc_table, sm.tbl_name
+FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON
+gc.table_name = sm.tbl_name</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set.</p>
 </li>
 <li>
-<p>Fail if any gpkg\_contents.table\_name value is NULL</p>
+<p>Fail if any gpkg_contents.table_name value is NULL</p>
 </li>
 <li>
 <p>Pass otherwise.</p>
@@ -4143,10 +4143,10 @@ gc.table\_name = sm.tbl\_name</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/contents/data/data\_values\_last\_change</p>
+<p><strong>Test Case ID</strong>: /base/core/contents/data/data_values_last_change</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_contents table last\_change column values are in ISO
+<p><strong>Test Purpose</strong>: Verify that the gpkg_contents table last_change column values are in ISO
  8601 [41]format containing a complete date plus UTC hours, minutes, seconds and a
  decimal fraction of a second, with a <em>Z</em> (<em>zulu</em>) suffix indicating UTC.</p>
 </div>
@@ -4156,7 +4156,7 @@ gc.table\_name = sm.tbl\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT last\_change from gpkg\_contents.</p>
+<p>SELECT last_change from gpkg_contents.</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set.</p>
@@ -4186,11 +4186,11 @@ gc.table\_name = sm.tbl\_name</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /base/core/contents/data/data\_values\_srs\_id</p>
+<p><strong>Test Case ID</strong>: /base/core/contents/data/data_values_srs_id</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_contents table srs\_id column values are defined in the
- gpkg\_spatial\_ref\_sys table.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_contents table srs_id column values are defined in the
+ gpkg_spatial_ref_sys table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4198,22 +4198,22 @@ gc.table\_name = sm.tbl\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT srs\_id FROM gpkg\_contents</p>
+<p>SELECT srs_id FROM gpkg_contents</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT srs\_id FROM gpkg\_contents WHERE srs\_id NOT IN (SELECT srs\_id
-FROM gpkg\_spatial\_ref\_sys)</p>
+<p>SELECT srs_id FROM gpkg_contents WHERE srs_id NOT IN (SELECT srs_id
+FROM gpkg_spatial_ref_sys)</p>
 </li>
 <li>
 <p>Fail if does not return an empty result set</p>
 </li>
 <li>
-<p>SELECT srs\_id FROM gpkg\_contents gc WHERE data\_type = <em>features</em> AND srs\_id
-NOT IN (SELECT srs\_id FROM gpkg\_geometry\_columns WHERE table\_name =
-gc.table\_name)</p>
+<p>SELECT srs_id FROM gpkg_contents gc WHERE data_type = <em>features</em> AND srs_id
+NOT IN (SELECT srs_id FROM gpkg_geometry_columns WHERE table_name =
+gc.table_name)</p>
 </li>
 <li>
 <p>Fail if does not return an empty result set</p>
@@ -4236,10 +4236,10 @@ gc.table\_name)</p>
 <div class="sect2">
 <h3 id="_options_2">A.2. Options</h3>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/valid\_geopackage</p>
+<p><strong>Test Case ID</strong>: /opt/valid_geopackage</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that a GeoPackage contains a features or tiles table and gpkg\_contents
+<p><strong>Test Purpose</strong>: Verify that a GeoPackage contains a features or tiles table and gpkg_contents
  table row describing it.</p>
 </div>
 <div class="paragraph">
@@ -4248,13 +4248,13 @@ gc.table\_name)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Execute test /opt/features/contents/data/features\_row</p>
+<p>Execute test /opt/features/contents/data/features_row</p>
 </li>
 <li>
 <p>Pass if test passed</p>
 </li>
 <li>
-<p>Execute test /opt/tiles/contents/data/tiles\_row</p>
+<p>Execute test /opt/tiles/contents/data/tiles_row</p>
 </li>
 <li>
 <p>Pass if test passed</p>
@@ -4280,11 +4280,11 @@ gc.table\_name)</p>
 <p><strong>Contents Table Feature Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/contents/data/features\_row</p>
+<p><strong>Test Case ID</strong>: /opt/features/contents/data/features_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_contents table\_name value table exists, and is
- apparently a feature table for every row with a data\_type column value of "features"</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_contents table_name value table exists, and is
+ apparently a feature table for every row with a data_type column value of "features"</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4312,7 +4312,7 @@ gc.table\_name)</p>
 <p><strong>BLOB Format</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_encoding/data/blob</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_encoding/data/blob</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that geometries stored in feature table geometry columns are encoded
@@ -4324,9 +4324,9 @@ gc.table\_name)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name AS tn, column\_name AS cn FROM gpkg\_geometry\_columns
-WHERE table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE
-data\_type = <em>features</em>)</p>
+<p>SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns
+WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE
+data_type = <em>features</em>)</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -4349,10 +4349,10 @@ data\_type = <em>features</em>)</p>
 <p>Fail if the first three bytes of each gc are not "GPB"</p>
 </li>
 <li>
-<p>Fail if gc.version\_number is not 0</p>
+<p>Fail if gc.version_number is not 0</p>
 </li>
 <li>
-<p>Fail if ST\_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope values are not NaN</p>
+<p>Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope values are not NaN</p>
 </li>
 </ul>
 </div>
@@ -4378,7 +4378,7 @@ data\_type = <em>features</em>)</p>
 <p><strong>Minimal Runtime SQL Functions</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_encoding/sql\_func</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_encoding/sql_func</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that a GeoPackage SQLite Extension provides the GeoPackage
@@ -4393,56 +4393,56 @@ data\_type = <em>features</em>)</p>
 <p>Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension</p>
 </li>
 <li>
-<p>For each Geometry Test Data Set &lt;gtype\_test&gt; data table row for each assignable
+<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each assignable
 (gtype, atype) and non-assignable (ntype, atype) combination of geometry type in
-Annex G, for an assortment of srs\_ids, for an assortment of coordinate values,
+Annex G, for an assortment of srs_ids, for an assortment of coordinate values,
 without and with z and / or m values, in both big and little endian encodings:</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_SRID(geom) != srs\_id</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_SRID(geom) != srs_id</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_GeometryType(geom) !=
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_GeometryType(geom) !=
 atype</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE GPKG\_IsAssignable(gtype,
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE GPKG_IsAssignable(gtype,
 atype) = 0</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE GPKG\_IsAssignable(ntype,
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE GPKG_IsAssignable(ntype,
 atype) = 1</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_Is3D(geom) != is3d</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_Is3D(geom) != is3d</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_IsMeasured(geom) != ism</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_IsMeasured(geom) != ism</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MinX(geom) != minx</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MinX(geom) != minx</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MaxX(geom) != maxx</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MaxX(geom) != maxx</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MinY(geom) != miny</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MinY(geom) != miny</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MaxY(geom) != maxy</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MaxY(geom) != maxy</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MinZ(geom) != minz</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MinZ(geom) != minz</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MaxZ(geom) != maxz</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MaxZ(geom) != maxz</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MinM(geom) != minm</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MinM(geom) != minm</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype\_test&gt; WHERE ST\_MaxM(geom) != maxm</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_MaxM(geom) != maxm</p>
 </li>
 </ul>
 </div>
@@ -4468,7 +4468,7 @@ atype) = 1</p>
 <p><strong>Core Types</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_encoding/data/core\_types\_existing\_sparse\_data</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_encoding/data/core_types_existing_sparse_data</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that existing basic simple feature geometries are stored in valid GeoPackageBinary format encodings.</p>
@@ -4479,15 +4479,15 @@ atype) = 1</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_geometry\_columns</p>
+<p>SELECT table_name FROM gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table\_name AS tn, column\_name AS cn FROM gpkg\_geometry\_columns
-WHERE table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE
-data\_type = <em>features</em>),</p>
+<p>SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns
+WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE
+data_type = <em>features</em>),</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -4532,7 +4532,7 @@ data\_type = <em>features</em>),</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_encoding/data/core\_types\_all\_types\_test\_data</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_encoding/data/core_types_all_types_test_data</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that all basic simple feature geometry types and options are stored in valid GeoPackageBinary format encodings.</p>
@@ -4544,11 +4544,11 @@ data\_type = <em>features</em>),</p>
 <ol class="arabic">
 <li>
 <p>Open GeoPackage that has feature geometry values of geometry type in Annex G, for
-an assortment of srs\_ids, for an assortment of coordinate values, without and with z
+an assortment of srs_ids, for an assortment of coordinate values, without and with z
 and / or m values, in both big and little endian encodings:</p>
 </li>
 <li>
-<p>/opt/features/geometry\_encoding/data/core\_types\_existing\_sparse\_data</p>
+<p>/opt/features/geometry_encoding/data/core_types_existing_sparse_data</p>
 </li>
 <li>
 <p>Pass if log contains pass record for big and little endian GPB headers containing big
@@ -4576,10 +4576,10 @@ type value from Annex G Table 46 without and with z and/or m values.</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_columns/data/table\_def</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_columns/data/table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_geometry\_columns table exists and has the correct
+<p><strong>Test Purpose</strong>: Verify that the gpkg_geometry_columns table exists and has the correct
  definition.</p>
 </div>
 <div class="paragraph">
@@ -4588,8 +4588,8 @@ type value from Annex G Table 46 without and with z and/or m values.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name =
-<em>gpkg\_geometry\_columns</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name =
+<em>gpkg_geometry_columns</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -4616,10 +4616,10 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_columns/data/data\_values\_table\_name</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_columns/data/data_values_table_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the table\_name column values in the gpkg\_geometry\_columns
+<p><strong>Test Purpose</strong>: Verify that the table_name column values in the gpkg_geometry_columns
  table are valid.</p>
 </div>
 <div class="paragraph">
@@ -4628,7 +4628,7 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT table\_name FROM gpkg\_geometry\_columns</p>
+<p>SELECT DISTINCT table_name FROM gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set.</p>
@@ -4638,22 +4638,22 @@ definitions in the returned sql are irrelevant.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Fail if table\_name value is NULL</p>
+<p>Fail if table_name value is NULL</p>
 </li>
 </ul>
 </div>
 </li>
 <li>
-<p>SELECT DISTINCT ggc.table\_name AS ggc\_table, gc.table\_name
-FROM gpkg\_geometry\_columns AS ggc LEFT OUTER JOIN geopackage\_contents
-AS gc ON ggc.table\_name = gc.table\_name</p>
+<p>SELECT DISTINCT ggc.table_name AS ggc_table, gc.table_name
+FROM gpkg_geometry_columns AS ggc LEFT OUTER JOIN geopackage_contents
+AS gc ON ggc.table_name = gc.table_name</p>
 </li>
 <li>
 <p>For each row from step 4</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Fail if ggc.table\_name != gc.table\_name</p>
+<p>Fail if ggc.table_name != gc.table_name</p>
 </li>
 </ul>
 </div>
@@ -4670,10 +4670,10 @@ AS gc ON ggc.table\_name = gc.table\_name</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_columns/data/data\_values\_column\_name</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_columns/data/data_values_column_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the column\_name column values in the gpkg\_geometry\_columns
+<p><strong>Test Purpose</strong>: Verify that the column_name column values in the gpkg_geometry_columns
 table are valid.</p>
 </div>
 <div class="paragraph">
@@ -4682,7 +4682,7 @@ table are valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns</p>
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -4692,11 +4692,11 @@ table are valid.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRAGMA table\_info(table\_name)</p>
+<p>PRAGMA table_info(table_name)</p>
 </li>
 <li>
-<p>Fail if gpkg\_geometry\_columns.column\_name value does not equal a name
-column value returned by PRAGMA table\_info.</p>
+<p>Fail if gpkg_geometry_columns.column_name value does not equal a name
+column value returned by PRAGMA table_info.</p>
 </li>
 </ul>
 </div>
@@ -4713,11 +4713,11 @@ column value returned by PRAGMA table\_info.</p>
 <p><strong>Test Type</strong>: Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_columns/data/data\_values\_geometry\_type\_name</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_columns/data/data_values_geometry_type_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verrify that the geometry\_type\_name column values in the
-gpkg\_geometry\_columns table are valid.</p>
+<p><strong>Test Purpose</strong>: Verrify that the geometry_type_name column values in the
+gpkg_geometry_columns table are valid.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4725,7 +4725,7 @@ gpkg\_geometry\_columns table are valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT geometry\_type\_name from gpkg\_geometry\_columns</p>
+<p>SELECT DISTINCT geometry_type_name from gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -4735,7 +4735,7 @@ gpkg\_geometry\_columns table are valid.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Fail if a returned geometry\_type value is not in Table 46 or Table 47 in Annex G</p>
+<p>Fail if a returned geometry_type value is not in Table 46 or Table 47 in Annex G</p>
 </li>
 </ul>
 </div>
@@ -4752,11 +4752,11 @@ gpkg\_geometry\_columns table are valid.</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_columns/data/data\_values\_srs\_id</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_columns/data/data_values_srs_id</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_geometry\_columns table srs\_id column values are
-defined in the gpkg\_spatial\_ref\_sys table.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_geometry_columns table srs_id column values are
+defined in the gpkg_spatial_ref_sys table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4764,14 +4764,14 @@ defined in the gpkg\_spatial\_ref\_sys table.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT srs\_id FROM gpkg\_geometry\_columns</p>
+<p>SELECT srs_id FROM gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT srs\_id FROM gpkg\_geometry\_columns WHERE srs\_id NOT IN (SELECT
-srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
+<p>SELECT srs_id FROM gpkg_geometry_columns WHERE srs_id NOT IN (SELECT
+srs_id FROM gpkg_spatial_ref_sys)</p>
 </li>
 <li>
 <p>Fail if does not return an empty result set</p>
@@ -4788,10 +4788,10 @@ srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_columns/data/data\_values\_z</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_columns/data/data_values_z</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_geometry\_columns table z column values are valid.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_geometry_columns table z column values are valid.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4799,13 +4799,13 @@ srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT z FROM gpkg\_geometry\_columns</p>
+<p>SELECT z FROM gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT z FROM gpkg\_geometry\_columns WHERE z NOT IN (1,2,3)</p>
+<p>SELECT z FROM gpkg_geometry_columns WHERE z NOT IN (1,2,3)</p>
 </li>
 <li>
 <p>Fail if does not return an empty result set</p>
@@ -4822,10 +4822,10 @@ srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/geometry\_columns/data/data\_values\_m</p>
+<p><strong>Test Case ID</strong>: /opt/features/geometry_columns/data/data_values_m</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_geometry\_columns table m column values are valid.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_geometry_columns table m column values are valid.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4833,13 +4833,13 @@ srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT m FROM gpkg\_geometry\_columns</p>
+<p>SELECT m FROM gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT m FROM gpkg\_geometry\_columns WHERE m NOT IN (1,2,3)</p>
+<p>SELECT m FROM gpkg_geometry_columns WHERE m NOT IN (1,2,3)</p>
 </li>
 <li>
 <p>Fail if does not return an empty result set</p>
@@ -4865,7 +4865,7 @@ srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/vector\_features/data/feature\_table\_integer\_primary\_key</p>
+<p><strong>Test Case ID</strong>: /opt/features/vector_features/data/feature_table_integer_primary_key</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that every vector features user data table has an integer primary key.</p>
@@ -4876,7 +4876,7 @@ srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_contents WERE data\_type = <em>features</em></p>
+<p>SELECT table_name FROM gpkg_contents WERE data_type = <em>features</em></p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -4886,7 +4886,7 @@ srs\_id FROM gpkg\_spatial\_ref\_sys)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRAGMA table\_info(table\_name)</p>
+<p>PRAGMA table_info(table_name)</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -4910,7 +4910,7 @@ null column value is 1 and the type column value is "INTEGER"</p>
 <p><strong>Test Type</strong>:     Basic</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/vector/features/data/feature\_table\_one\_geometry\_column</p>
+<p><strong>Test Case ID</strong>: /opt/features/vector/features/data/feature_table_one_geometry_column</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that every vector features user data table has one geometry column.</p>
@@ -4921,7 +4921,7 @@ null column value is 1 and the type column value is "INTEGER"</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_contents WERE data\_type = <em>features</em></p>
+<p>SELECT table_name FROM gpkg_contents WERE data_type = <em>features</em></p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -4931,7 +4931,7 @@ null column value is 1 and the type column value is "INTEGER"</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT column\_name from gpkg\_geometry\_columns where table\_name = row
+<p>SELECT column_name from gpkg_geometry_columns where table_name = row
 table name</p>
 </li>
 <li>
@@ -4955,12 +4955,12 @@ table name</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/vector\_features/data/data\_values\_geometry\_type</p>
+<p><strong>Test Case ID</strong>: /opt/features/vector_features/data/data_values_geometry_type</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that the geometry type of feature geometries are of the type or are
- assignable for the geometry type specified by the gpkg\_geometry columns table
- geometry\_type\_name column value.</p>
+ assignable for the geometry type specified by the gpkg_geometry columns table
+ geometry_type_name column value.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -4968,9 +4968,9 @@ table name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name AS tn, column\_name AS cn, geometry\_type\_name AS gt\_name
-FROM gpkg\_geometry\_columns WHERE table\_name IN (SELECT table\_name
-FROM gpkg\_contents WHERE data\_type = <em>features</em>)</p>
+<p>SELECT table_name AS tn, column_name AS cn, geometry_type_name AS gt_name
+FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name
+FROM gpkg_contents WHERE data_type = <em>features</em>)</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -4980,11 +4980,11 @@ FROM gpkg\_contents WHERE data\_type = <em>features</em>)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT DISTINCT ST\_GeometryType(cn) FROM tn</p>
+<p>SELECT DISTINCT ST_GeometryType(cn) FROM tn</p>
 </li>
 <li>
-<p>For each row actual\_type\_name from step a
-+    SELECT GPKG\_IsAssignable(geometry\_type\_name, actual\_type\_name)
+<p>For each row actual_type_name from step a
++    SELECT GPKG_IsAssignable(geometry_type_name, actual_type_name)
 +    Fail if any returned 0</p>
 </li>
 </ul>
@@ -5002,11 +5002,11 @@ FROM gpkg\_contents WHERE data\_type = <em>features</em>)</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/features/vector\_features/data/tata\_value\_geometry\_srs\_id</p>
+<p><strong>Test Case ID</strong>: /opt/features/vector_features/data/tata_value_geometry_srs_id</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify the the srs\_id of feature geometries are the srs\_id specified for the
- gpkg\_geometry\_columns table srs\_id column value.</p>
+<p><strong>Test Purpose</strong>: Verify the the srs_id of feature geometries are the srs_id specified for the
+ gpkg_geometry_columns table srs_id column value.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5014,9 +5014,9 @@ FROM gpkg\_contents WHERE data\_type = <em>features</em>)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name AS tn, column\_name AS cn, srs\_id AS gc\_srs\_id FROM
-gpkg\_geometry\_columns WHERE table\_name IN (SELECT table\_name FROM
-gpkg\_contents where data\_type = <em>features</em>)</p>
+<p>SELECT table_name AS tn, column_name AS cn, srs_id AS gc_srs_id FROM
+gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM
+gpkg_contents where data_type = <em>features</em>)</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -5026,11 +5026,11 @@ gpkg\_contents where data\_type = <em>features</em>)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT DISTINCT st\_srid(cn) FROM tn</p>
+<p>SELECT DISTINCT st_srid(cn) FROM tn</p>
 </li>
 <li>
 <p>For each row from step a
-+     Fail if returnvalue not equal to gc\_srs\_id</p>
++     Fail if returnvalue not equal to gc_srs_id</p>
 </li>
 </ul>
 </div>
@@ -5059,11 +5059,11 @@ gpkg\_contents where data\_type = <em>features</em>)</p>
 <p><strong>Contents Table - Tiles Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/contents/data/tiles\_row</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/contents/data/tiles_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_contents table\_name value table exists and is apparently
- a tiles table for every row with a data\_type column value of "tiles".</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_contents table_name value table exists and is apparently
+ a tiles table for every row with a data_type column value of "tiles".</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5071,7 +5071,7 @@ gpkg\_contents where data\_type = <em>features</em>)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_contents WHERE data\_type = "tiles"</p>
+<p>SELECT table_name FROM gpkg_contents WHERE data_type = "tiles"</p>
 </li>
 <li>
 <p>Fail if returns empty result set</p>
@@ -5081,7 +5081,7 @@ gpkg\_contents where data\_type = <em>features</em>)</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRAGMA table\_info(table\_name)</p>
+<p>PRAGMA table_info(table_name)</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -5093,7 +5093,7 @@ name column value is "id"</p>
 </li>
 <li>
 <p>Fail if result set does not contain four other rows where the name column values
-are "zoom\_level","tile\_column","tile\_row", and "tile\_data".</p>
+are "zoom_level","tile_column","tile_row", and "tile_data".</p>
 </li>
 </ul>
 </div>
@@ -5119,7 +5119,7 @@ are "zoom\_level","tile\_column","tile\_row", and "tile\_data".</p>
 <p><strong>Zoom Times Two</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/zoom\_levels\_data\_zoom\_times\_two</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/zoom_levels_data_zoom_times_two</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that by default zoom level pixel sizes for tile matrix user data tables
@@ -5132,13 +5132,13 @@ are "zoom\_level","tile\_column","tile\_row", and "tile\_data".</p>
 <ol class="arabic">
 <li>
 <p>SELECT CASE
-WHEN (SELECT tbl\_name FROM sqlite\_master WHERE tbl\_name =
-<em>gpkg\_extensions</em>) = <em>gpkg\_extensions</em> THEN
-(SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em> AND
-table\_name NOT IN
-  (SELECT table\_name from gpkg\_extensions WHERE extension\_name =
-<em>gpkg\_zoom\_other</em>))
-ELSE (SELECT table\_name FROM geopackage\_contents WHERE data\_type =
+WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name =
+<em>gpkg_extensions</em>) = <em>gpkg_extensions</em> THEN
+(SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em> AND
+table_name NOT IN
+  (SELECT table_name from gpkg_extensions WHERE extension_name =
+<em>gpkg_zoom_other</em>))
+ELSE (SELECT table_name FROM geopackage_contents WHERE data_type =
 <em>tiles</em>)
 END;</p>
 </li>
@@ -5146,12 +5146,12 @@ END;</p>
 <p>Not testable if returns empty result set</p>
 </li>
 <li>
-<p>For each row table\_name from step 1</p>
+<p>For each row table_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT zoom\_level, pixel\_x\_size, pixel\_y\_size FROM tile\_matrix\_metadata
-WHERE table\_name = selected table name ORDER BY zoom\_level ASC</p>
+<p>SELECT zoom_level, pixel_x_size, pixel_y_size FROM tile_matrix_metadata
+WHERE table_name = selected table name ORDER BY zoom_level ASC</p>
 </li>
 <li>
 <p>Not testable if returns empty result set, or only one row</p>
@@ -5160,8 +5160,8 @@ WHERE table\_name = selected table name ORDER BY zoom\_level ASC</p>
 <p>Not testable if there are not two rows with adjacent zoom levels</p>
 </li>
 <li>
-<p>Fail if any pair of rows for adjacent zoom levels have pixel\_x\_size or
-pixel\_y\_size values that differ by other than factors of two</p>
+<p>Fail if any pair of rows for adjacent zoom levels have pixel_x_size or
+pixel_y_size values that differ by other than factors of two</p>
 </li>
 </ul>
 </div>
@@ -5187,7 +5187,7 @@ pixel\_y\_size values that differ by other than factors of two</p>
 <p><strong>MIME Type PNG</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tiles\_encoding/data/mime\_type\_png</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tiles_encoding/data/mime_type_png</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that a tile matrix user data table that contains tile data that is not
@@ -5200,13 +5200,13 @@ pixel\_y\_size values that differ by other than factors of two</p>
 <ol class="arabic">
 <li>
 <p>SELECT CASE
-WHEN (SELECT tbl\_name FROM sqlite\_master WHERE tbl\_name =
-<em>gpkg\_extensions</em>) = <em>gpkg\_extensions</em> THEN
-(SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em> AND
-table\_name NOT IN
-(SELECT table\_name from gpkg\_extensions WHERE extension\_name IN
-(<em>gpkg\_webp</em>,<em>gpkg\_tiff</em>,<em>gpkg\_nitf</em>)))
-ELSE (SELECT table\_name FROM geopackage\_contents WHERE data\_type =
+WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name =
+<em>gpkg_extensions</em>) = <em>gpkg_extensions</em> THEN
+(SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em> AND
+table_name NOT IN
+(SELECT table_name from gpkg_extensions WHERE extension_name IN
+(<em>gpkg_webp</em>,<em>gpkg_tiff</em>,<em>gpkg_nitf</em>)))
+ELSE (SELECT table_name FROM geopackage_contents WHERE data_type =
 <em>tiles</em>)
 END;</p>
 </li>
@@ -5214,14 +5214,14 @@ END;</p>
 <p>Not testable if returns empty result set</p>
 </li>
 <li>
-<p>For each row tbl\_name from step 1</p>
+<p>For each row tbl_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT tile\_data FROM tbl\_name</p>
+<p>SELECT tile_data FROM tbl_name</p>
 </li>
 <li>
-<p>For each row tile\_data from step a
+<p>For each row tile_data from step a
 + Pass if tile data in MIME type image/png</p>
 </li>
 </ul>
@@ -5248,7 +5248,7 @@ END;</p>
 <p><strong>MIME Type JPEG</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tiles\_encoding/data/mime\_type\_jpeg</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tiles_encoding/data/mime_type_jpeg</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that a tile matrix user data table that contains tile data that is not
@@ -5261,13 +5261,13 @@ END;</p>
 <ol class="arabic">
 <li>
 <p>SELECT CASE
-WHEN (SELECT tbl\_name FROM sqlite\_master WHERE tbl\_name =
-<em>gpkg\_extensions</em>) = <em>gpkg\_extensions</em> THEN
-(SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em> AND
-table\_name NOT IN
-  (SELECT table\_name from gpkg\_extensions WHERE extension\_name IN
-(<em>gpkg\_webp</em>,<em>gpkg\_tiff</em>,<em>gpkg\_nitf</em>)))
-ELSE (SELECT table\_name FROM geopackage\_contents WHERE data\_type =
+WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name =
+<em>gpkg_extensions</em>) = <em>gpkg_extensions</em> THEN
+(SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em> AND
+table_name NOT IN
+  (SELECT table_name from gpkg_extensions WHERE extension_name IN
+(<em>gpkg_webp</em>,<em>gpkg_tiff</em>,<em>gpkg_nitf</em>)))
+ELSE (SELECT table_name FROM geopackage_contents WHERE data_type =
 <em>tiles</em>)
 END;</p>
 </li>
@@ -5275,14 +5275,14 @@ END;</p>
 <p>Not testable if returns empty result set</p>
 </li>
 <li>
-<p>For each row tbl\_name from step 1</p>
+<p>For each row tbl_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT tile\_data FROM tbl\_name</p>
+<p>SELECT tile_data FROM tbl_name</p>
 </li>
 <li>
-<p>For each row tile\_data from step a
+<p>For each row tile_data from step a
 +   Pass if tile data in MIME type image/jpeg</p>
 </li>
 </ul>
@@ -5309,10 +5309,10 @@ END;</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/table\_def</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_tile\_matrix\_metadata table exists and has the correct
+<p><strong>Test Purpose</strong>: Verify that the gpkg_tile_matrix_metadata table exists and has the correct
  definition.</p>
 </div>
 <div class="paragraph">
@@ -5321,8 +5321,8 @@ END;</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name =
-<em>gpkg\_tile\_matrix\_metadata</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name =
+<em>gpkg_tile_matrix_metadata</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -5349,11 +5349,11 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data\_values\_table\_name</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data_values_table_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that values of the gpkg\_tile\_matrix\_metadata table\_name column
- reference values in the gpkg\_contents table\_name column for rows with a data type of
+<p><strong>Test Purpose</strong>: Verify that values of the gpkg_tile_matrix_metadata table_name column
+ reference values in the gpkg_contents table_name column for rows with a data type of
  "tiles".</p>
 </div>
 <div class="paragraph">
@@ -5362,15 +5362,15 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT table_name FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table\_name FROM gpkg\_tile\_matrix\_metadata tmm WHERE table\_name
-NOT IN (SELECT table\_name FROM gpkg\_contents gc WHERE tmm.table\_name =
-gc.table\_name)</p>
+<p>SELECT table_name FROM gpkg_tile_matrix_metadata tmm WHERE table_name
+NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tmm.table_name =
+gc.table_name)</p>
 </li>
 <li>
 <p>Fail if result set contains any rows</p>
@@ -5387,10 +5387,10 @@ gc.table\_name)</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_zoom\_level\_rows</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_zoom_level_rows</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_tile\_matrix\_metadata table contains a row record for
+<p><strong>Test Purpose</strong>: Verify that the gpkg_tile_matrix_metadata table contains a row record for
 each zoom level that contains one or more tiles in each tile matrix user data table.</p>
 </div>
 <div class="paragraph">
@@ -5399,8 +5399,8 @@ each zoom level that contains one or more tiles in each tile matrix user data ta
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name AS &lt;user\_data\_tiles\_table&gt; from gpkg\_contents where
-data\_type = <em>tiles</em></p>
+<p>SELECT table_name AS &lt;user_data_tiles_table&gt; from gpkg_contents where
+data_type = <em>tiles</em></p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -5410,13 +5410,13 @@ data\_type = <em>tiles</em></p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT DISTINCT gtmm.zoom\_level AS gtmm\_zoom, udt.zoom\_level AS
-udtt\_zoom FROM tile\_matrix\_metadata AS gtmm
-LEFT OUTER JOIN &lt;user\_data\_tiles\_table&gt; AS udtt ON udtt.zoom\_level =
-gtmm.zoom\_level AND gtmm.t\_table\_name = <em>&lt;user\_data\_tiles\_table&gt;</em></p>
+<p>SELECT DISTINCT gtmm.zoom_level AS gtmm_zoom, udt.zoom_level AS
+udtt_zoom FROM tile_matrix_metadata AS gtmm
+LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =
+gtmm.zoom_level AND gtmm.t_table_name = <em>&lt;user_data_tiles_table&gt;</em></p>
 </li>
 <li>
-<p>Fail if any gtmm\_zoom column value in the result set is NULL</p>
+<p>Fail if any gtmm_zoom column value in the result set is NULL</p>
 </li>
 </ul>
 </div>
@@ -5433,10 +5433,10 @@ gtmm.zoom\_level AND gtmm.t\_table\_name = <em>&lt;user\_data\_tiles\_table&gt;<
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_zoom\_level</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_zoom_level</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that zoom level column values in the gpkg\_tile\_matrix\_metadata table
+<p><strong>Test Purpose</strong>: Verify that zoom level column values in the gpkg_tile_matrix_metadata table
 are not negative.</p>
 </div>
 <div class="paragraph">
@@ -5445,13 +5445,13 @@ are not negative.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT zoom\_level FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT zoom_level FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT min(zoom\_level) FROM gpkg\_tile\_matrix\_metadata.</p>
+<p>SELECT min(zoom_level) FROM gpkg_tile_matrix_metadata.</p>
 </li>
 <li>
 <p>Fail if less than 0.</p>
@@ -5468,10 +5468,10 @@ are not negative.</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_matrix\_width</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_matrix_width</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the matrix\_width values in the gpkg\_tile\_matrix\_metadata table
+<p><strong>Test Purpose</strong>: Verify that the matrix_width values in the gpkg_tile_matrix_metadata table
 are valid.</p>
 </div>
 <div class="paragraph">
@@ -5480,13 +5480,13 @@ are valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT matrix\_width FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT matrix_width FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT min(matrix\_width) FROM gpkg\_tile\_matrix\_metadata.</p>
+<p>SELECT min(matrix_width) FROM gpkg_tile_matrix_metadata.</p>
 </li>
 <li>
 <p>Fail if less than 1.</p>
@@ -5503,10 +5503,10 @@ are valid.</p>
 <p><strong>Test Type</strong>:     Capabilty</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_matrix\_height</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_matrix_height</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the matrix\_height values in the gpkg\_tile\_matrix\_metadata table
+<p><strong>Test Purpose</strong>: Verify that the matrix_height values in the gpkg_tile_matrix_metadata table
 are valid.</p>
 </div>
 <div class="paragraph">
@@ -5515,13 +5515,13 @@ are valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT matrix\_height FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT matrix_height FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT min(matrix\_height) FROM gpkg\_tile\_matrix\_metadata.</p>
+<p>SELECT min(matrix_height) FROM gpkg_tile_matrix_metadata.</p>
 </li>
 <li>
 <p>Fail if less than 1.</p>
@@ -5538,10 +5538,10 @@ are valid.</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_tile\_width</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_tile_width</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the tile\_width values in the gpkg\_tile\_matrix\_metadata table are
+<p><strong>Test Purpose</strong>: Verify that the tile_width values in the gpkg_tile_matrix_metadata table are
 valid.</p>
 </div>
 <div class="paragraph">
@@ -5550,13 +5550,13 @@ valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT tile\_width FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT tile_width FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT min(tile\_width) FROM gpkg\_tile\_matrix\_metadata.</p>
+<p>SELECT min(tile_width) FROM gpkg_tile_matrix_metadata.</p>
 </li>
 <li>
 <p>Fail if less than 1.</p>
@@ -5573,10 +5573,10 @@ valid.</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_tile\_height</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_tile_height</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the tile\_height values in the gpkg\_tile\_matrix\_metadata table are
+<p><strong>Test Purpose</strong>: Verify that the tile_height values in the gpkg_tile_matrix_metadata table are
 valid.</p>
 </div>
 <div class="paragraph">
@@ -5585,13 +5585,13 @@ valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT tile\_height FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT tile_height FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT min(tile\_height) FROM gpkg\_tile\_matrix\_metadata.</p>
+<p>SELECT min(tile_height) FROM gpkg_tile_matrix_metadata.</p>
 </li>
 <li>
 <p>Fail if less than 1.</p>
@@ -5608,10 +5608,10 @@ valid.</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_pixel\_x\_size</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_pixel_x_size</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the pixel\_x\_size values in the gpkg\_tile\_matrix\_metadata table
+<p><strong>Test Purpose</strong>: Verify that the pixel_x_size values in the gpkg_tile_matrix_metadata table
 are valid.</p>
 </div>
 <div class="paragraph">
@@ -5620,13 +5620,13 @@ are valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT pixel\_x\_size FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT pixel_x_size FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT min(pixel\_x\_size) FROM gpkg\_tile\_matrix\_metadata.</p>
+<p>SELECT min(pixel_x_size) FROM gpkg_tile_matrix_metadata.</p>
 </li>
 <li>
 <p>Fail if less than 0.</p>
@@ -5643,10 +5643,10 @@ are valid.</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_pixel\_y\_size</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_pixel_y_size</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the pixel\_y\_size values in the gpkg\_tile\_matrix\_metadata table
+<p><strong>Test Purpose</strong>: Verify that the pixel_y_size values in the gpkg_tile_matrix_metadata table
 are valid.</p>
 </div>
 <div class="paragraph">
@@ -5655,13 +5655,13 @@ are valid.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT pixel\_y\_size FROM gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT pixel_y_size FROM gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT min(pixel\_y\_size) FROM gpkg\_tile\_matrix\_metadata.</p>
+<p>SELECT min(pixel_y_size) FROM gpkg_tile_matrix_metadata.</p>
 </li>
 <li>
 <p>Fail if less than 0.</p>
@@ -5678,11 +5678,11 @@ are valid.</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_metadata/data/data\_values\_pixel\_size\_sort</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_metadata/data/data_values_pixel_size_sort</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the pixel\_x\_size and pixel\_y\_size column values for zoom level
-column values in a gpkg\_tile\_matrix\_metadata table sorted in ascending order are sorted in
+<p><strong>Test Purpose</strong>: Verify that the pixel_x_size and pixel_y_size column values for zoom level
+column values in a gpkg_tile_matrix_metadata table sorted in ascending order are sorted in
 descending order, showing that lower zoom levels are zoomed "out".</p>
 </div>
 <div class="paragraph">
@@ -5691,28 +5691,28 @@ descending order, showing that lower zoom levels are zoomed "out".</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_contents WHERE data\_type = <em>tiles</em></p>
+<p>SELECT table_name FROM gpkg_contents WHERE data_type = <em>tiles</em></p>
 </li>
 <li>
 <p>Not testable if returns empty result set</p>
 </li>
 <li>
-<p>For each row table\_name from step 1</p>
+<p>For each row table_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT zoom\_level, pixel\_x\_size, pixel\_y\_size from
-gpkg\_tile\_matrix\_metadata WHERE table\_name = row table name ORDER BY
-zoom\_level ASC</p>
+<p>SELECT zoom_level, pixel_x_size, pixel_y_size from
+gpkg_tile_matrix_metadata WHERE table_name = row table name ORDER BY
+zoom_level ASC</p>
 </li>
 <li>
 <p>Not testable if returns empty result set</p>
 </li>
 <li>
-<p>Fail if pixel\_x\_sizes are not sorted in descending order</p>
+<p>Fail if pixel_x_sizes are not sorted in descending order</p>
 </li>
 <li>
-<p>Fail if pixel\_y\_sizes are not sorted in descending order</p>
+<p>Fail if pixel_y_sizes are not sorted in descending order</p>
 </li>
 </ul>
 </div>
@@ -5738,7 +5738,7 @@ zoom\_level ASC</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix/data/table\_def</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix/data/table_def</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that multiple tile matrix sets are stored in different tiles tables with
@@ -5750,20 +5750,20 @@ zoom\_level ASC</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT COUNT(table\_name) FROM gpkg\_contents WERE data\_type = "tiles"</p>
+<p>SELECT COUNT(table_name) FROM gpkg_contents WERE data_type = "tiles"</p>
 </li>
 <li>
 <p>Fail if less than 2</p>
 </li>
 <li>
-<p>SELECT table\_name FROM gpkg\_contents WHERE data\_type = "tiles"</p>
+<p>SELECT table_name FROM gpkg_contents WHERE data_type = "tiles"</p>
 </li>
 <li>
 <p>For each row from step 3</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRAGMA table\_info(table\_name)</p>
+<p>PRAGMA table_info(table_name)</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -5775,7 +5775,7 @@ name column value is "id"</p>
 </li>
 <li>
 <p>Fail if result set does not contain four other rows where the name column values
-are "zoom\_level","tile\_column","tile\_row", and "tile\_data".</p>
+are "zoom_level","tile_column","tile_row", and "tile_data".</p>
 </li>
 </ul>
 </div>
@@ -5795,11 +5795,11 @@ are "zoom\_level","tile\_column","tile\_row", and "tile\_data".</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix/data/data\_values\_zoom\_levels</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix/data/data_values_zoom_levels</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that the zoom level column values in each tile matrix user data table
- are within the range of zoom levels defined by rows in the tile\_matrix\_metadata table.</p>
+ are within the range of zoom levels defined by rows in the tile_matrix_metadata table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5807,30 +5807,30 @@ are "zoom\_level","tile\_column","tile\_row", and "tile\_data".</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT table\_name AS &lt;user\_data\_tiles\_table&gt; FROM
-gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT DISTINCT table_name AS &lt;user_data_tiles_table&gt; FROM
+gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each row &lt;user\_data\_tiles\_table&gt; from step 1</p>
+<p>For each row &lt;user_data_tiles_table&gt; from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT zoom\_level FROM &lt;user\_data\_tiles\_table&gt;</p>
+<p>SELECT zoom_level FROM &lt;user_data_tiles_table&gt;</p>
 </li>
 <li>
 <p>If result set not empty
-+ SELECT MIN(gtmm.zoom\_level) AS min\_gtmm\_zoom,
-    MAX(gtmm.zoom\_level) AS max\_gtmm\_zoom FROM
-    gpkg\_tile\_matrix\_metadata WHERE table\_name =
-    &lt;user\_data\_tiles\_table&gt;
-+ SELECT id FROM &lt;user\_data\_tiles\_table&gt; WHERE zoom\_level &lt;
-    min\_gtmm\_zoom
++ SELECT MIN(gtmm.zoom_level) AS min_gtmm_zoom,
+    MAX(gtmm.zoom_level) AS max_gtmm_zoom FROM
+    gpkg_tile_matrix_metadata WHERE table_name =
+    &lt;user_data_tiles_table&gt;
++ SELECT id FROM &lt;user_data_tiles_table&gt; WHERE zoom_level &lt;
+    min_gtmm_zoom
 + Fail if result set not empty
-+ SELECT id FROM &lt;user\_data\_tiles\_table&gt; WHERE zoom\_level &gt;
-    max\_gtmm\_zoom
++ SELECT id FROM &lt;user_data_tiles_table&gt; WHERE zoom_level &gt;
+    max_gtmm_zoom
 + Fail if result set not empty
 + Log pass otherwise</p>
 </li>
@@ -5849,12 +5849,12 @@ gpkg\_tile\_matrix\_metadata</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix/data/data\_values\_tile\_column</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix/data/data_values_tile_column</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the tile\_column column values for each zoom level value in each
+<p><strong>Test Purpose</strong>: Verify that the tile_column column values for each zoom level value in each
 tile matrix user data table are within the range of columns defined by rows in the
-tile\_matrix\_metadata table.</p>
+tile_matrix_metadata table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5862,21 +5862,21 @@ tile\_matrix\_metadata table.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT table\_name AS &lt;user\_data\_tiles\_table&gt; FROM
-gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT DISTINCT table_name AS &lt;user_data_tiles_table&gt; FROM
+gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each row &lt;user\_data\_tiles\_table&gt; from step 1
-+ SELECT DISTINCT gtmm.zoom\_level AS gtmm\_zoom, gtmm.matrix\_width
-  AS gtmm\_width, udt.zoom\_level AS udt\_zoom, udt.tile\_column AS
-  udt\_column FROM tile\_matrix\_metadata AS gtmm LEFT OUTER JOIN
-  &lt;user\_data\_tiles\_table&gt; AS udt ON udt.zoom\_level = gtmm.zoom\_level AND
-  gtmm.t\_table\_name = <em>&lt;user\_data\_tiles\_table&gt;</em> AND (udt\_column &lt; 0 OR
-  udt\_column &gt; (gtmm\_width - 1))
-+ Fail if any udt\_column value in the result set is not NULL
+<p>For each row &lt;user_data_tiles_table&gt; from step 1
++ SELECT DISTINCT gtmm.zoom_level AS gtmm_zoom, gtmm.matrix_width
+  AS gtmm_width, udt.zoom_level AS udt_zoom, udt.tile_column AS
+  udt_column FROM tile_matrix_metadata AS gtmm LEFT OUTER JOIN
+  &lt;user_data_tiles_table&gt; AS udt ON udt.zoom_level = gtmm.zoom_level AND
+  gtmm.t_table_name = <em>&lt;user_data_tiles_table&gt;</em> AND (udt_column &lt; 0 OR
+  udt_column &gt; (gtmm_width - 1))
++ Fail if any udt_column value in the result set is not NULL
 + Log pass otherwise</p>
 </li>
 <li>
@@ -5891,12 +5891,12 @@ gpkg\_tile\_matrix\_metadata</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/tiles/tile\_matrix\_data/data\_values\_tile\_row</p>
+<p><strong>Test Case ID</strong>: /opt/tiles/tile_matrix_data/data_values_tile_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the tile\_row column values for each zoom level value in each tile
+<p><strong>Test Purpose</strong>: Verify that the tile_row column values for each zoom level value in each tile
 matrix user data table are within the range of rows defined by rows in the
-tile\_matrix\_metadata table.</p>
+tile_matrix_metadata table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5904,21 +5904,21 @@ tile\_matrix\_metadata table.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT table\_name AS &lt;user\_data\_tiles\_table&gt; FROM
-gpkg\_tile\_matrix\_metadata</p>
+<p>SELECT DISTINCT table_name AS &lt;user_data_tiles_table&gt; FROM
+gpkg_tile_matrix_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each row &lt;user\_data\_tiles\_table&gt; from step 1
-+ SELECT DISTINCT gtmm.zoom\_level AS gtmm\_zoom, gtmm.matrix\_height
-AS gtmm\_height, udt.zoom\_level AS udt\_zoom, udt.tile\_row AS udt\_row
-FROM tile\_matrix\_metadata AS gtmm LEFT OUTER JOIN
-&lt;user\_data\_tiles\_table&gt; AS udt ON udt.zoom\_level = gtmm.zoom\_level AND
-gtmm.t\_table\_name = '&lt;user\_data\_tiles\_table&gt; ' AND (udt\_row &lt; 0 OR
-udt\_row &gt; (gtmm\_height - 1))
-+ Fail if any udt\_row value in the result set is not NULL
+<p>For each row &lt;user_data_tiles_table&gt; from step 1
++ SELECT DISTINCT gtmm.zoom_level AS gtmm_zoom, gtmm.matrix_height
+AS gtmm_height, udt.zoom_level AS udt_zoom, udt.tile_row AS udt_row
+FROM tile_matrix_metadata AS gtmm LEFT OUTER JOIN
+&lt;user_data_tiles_table&gt; AS udt ON udt.zoom_level = gtmm.zoom_level AND
+gtmm.t_table_name = '&lt;user_data_tiles_table&gt; ' AND (udt_row &lt; 0 OR
+udt_row &gt; (gtmm_height - 1))
++ Fail if any udt_row value in the result set is not NULL
 + Log pass otherwise</p>
 </li>
 <li>
@@ -5945,10 +5945,10 @@ udt\_row &gt; (gtmm\_height - 1))
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/schema/data\_columns/data\_table\_def</p>
+<p><strong>Test Case ID</strong>: /opt/schema/data_columns/data_table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_data\_columns table exists and has the correct definition.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_data_columns table exists and has the correct definition.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5956,7 +5956,7 @@ udt\_row &gt; (gtmm\_height - 1))
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name = <em>gpkg\_data\_columns</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_data_columns</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -5983,11 +5983,11 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/schema/data\_columns/data/data\_values\_table\_name</p>
+<p><strong>Test Case ID</strong>: /opt/schema/data_columns/data/data_values_table_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that values of the gpkg\_data\_columns table\_name column reference
- values in the gpkg\_contents table\_name column.</p>
+<p><strong>Test Purpose</strong>: Verify that values of the gpkg_data_columns table_name column reference
+ values in the gpkg_contents table_name column.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -5995,15 +5995,15 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_data columns</p>
+<p>SELECT table_name FROM gpkg_data columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table\_name FROM gpkg\_data\_columns gdc WHERE table\_name NOT IN
-(SELECT table\_name FROM gpkg\_contents gc WHERE gdc.table\_name =
-gc.t\_table\_name)</p>
+<p>SELECT table_name FROM gpkg_data_columns gdc WHERE table_name NOT IN
+(SELECT table_name FROM gpkg_contents gc WHERE gdc.table_name =
+gc.t_table_name)</p>
 </li>
 <li>
 <p>Fail if result set contains any rows</p>
@@ -6020,11 +6020,11 @@ gc.t\_table\_name)</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/schema/data\_columns/data/data\_values\_column\_name</p>
+<p><strong>Test Case ID</strong>: /opt/schema/data_columns/data/data_values_column_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that for each gpkg\_data\_columns row, the column\_name value is the
- name of a column in the table\_name table.</p>
+<p><strong>Test Purpose</strong>: Verify that for each gpkg_data_columns row, the column_name value is the
+ name of a column in the table_name table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6032,16 +6032,16 @@ gc.t\_table\_name)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_data\_columns</p>
+<p>SELECT table_name, column_name FROM gpkg_data_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
 <p>For each row from step 1
-+ PRAGMA table\_info(table\_name)
-+ Fail if gpkg\_data\_columns.column\_name value does not equal a name column
-value returned by PRAGMA table\_info.</p>
++ PRAGMA table_info(table_name)
++ Fail if gpkg_data_columns.column_name value does not equal a name column
+value returned by PRAGMA table_info.</p>
 </li>
 <li>
 <p>Pass if no fails.</p>
@@ -6067,10 +6067,10 @@ value returned by PRAGMA table\_info.</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata/data/table\_def</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata/data/table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_metadata table exists and has the correct definition.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_metadata table exists and has the correct definition.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6078,7 +6078,7 @@ value returned by PRAGMA table\_info.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name = <em>gpkg\_metadata</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_metadata</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -6105,10 +6105,10 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata/data/data\_values\_md\_scope</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata/data/data_values_md_scope</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that each of the md\_scope column values in a gpkg\_metadata table is
+<p><strong>Test Purpose</strong>: Verify that each of the md_scope column values in a gpkg_metadata table is
  one of the name column values from Table 11 in clause 2.4.2.1.2.</p>
 </div>
 <div class="paragraph">
@@ -6117,7 +6117,7 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT md\_scope FROM gpkg\_metadata</p>
+<p>SELECT md_scope FROM gpkg_metadata</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -6127,7 +6127,7 @@ definitions in the returned sql are irrelevant.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Fail if md\_scope value not one of the name column values from Table 11 in clause 2.4.2.1.2</p>
+<p>Fail if md_scope value not one of the name column values from Table 11 in clause 2.4.2.1.2</p>
 </li>
 </ul>
 </div>
@@ -6153,10 +6153,10 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference\_data\_table\_def</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference_data_table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_metadata\_reference table exists and has the correct
+<p><strong>Test Purpose</strong>: Verify that the gpkg_metadata_reference table exists and has the correct
  definition.</p>
 </div>
 <div class="paragraph">
@@ -6165,7 +6165,7 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name = <em>gpkg\_metadata\_reference</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_metadata_reference</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -6192,10 +6192,10 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference/data/data\_values\_reference\_scope</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference/data/data_values_reference_scope</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that gpkg\_metadata\_reference table reference\_scope column values
+<p><strong>Test Purpose</strong>: Verify that gpkg_metadata_reference table reference_scope column values
  are valid.</p>
 </div>
 <div class="paragraph">
@@ -6204,14 +6204,14 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT reference\_scope FROM gpkg\_metadata\_reference</p>
+<p>SELECT reference_scope FROM gpkg_metadata_reference</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT reference\_scope FROM gpkg\_metadata\_reference WHERE
-reference\_scope NOT IN (<em>geopackage</em>,<em>table</em>,<em>column</em>,<em>row</em>,<em>row/col</em>)</p>
+<p>SELECT reference_scope FROM gpkg_metadata_reference WHERE
+reference_scope NOT IN (<em>geopackage</em>,<em>table</em>,<em>column</em>,<em>row</em>,<em>row/col</em>)</p>
 </li>
 <li>
 <p>Fail if does not return an empty result set</p>
@@ -6228,12 +6228,12 @@ reference\_scope NOT IN (<em>geopackage</em>,<em>table</em>,<em>column</em>,<em>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference/data/data\_values\_table\_name</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference/data/data_values_table_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that gpkg\_metadata\_reference table\_name column values are NULL
-for rows with reference\_scope values of <em>geopackage</em>, and reference gpkg\_contents
-table\_name values for all other reference\_scope values.</p>
+<p><strong>Test Purpose</strong>: Verify that gpkg_metadata_reference table_name column values are NULL
+for rows with reference_scope values of <em>geopackage</em>, and reference gpkg_contents
+table_name values for all other reference_scope values.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6241,19 +6241,19 @@ table\_name values for all other reference\_scope values.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_metadata\_reference</p>
+<p>SELECT table_name FROM gpkg_metadata_reference</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table\_name FROM gpkg\_metadata\_reference WHERE reference\_scope = <em>geopackage</em></p>
+<p>SELECT table_name FROM gpkg_metadata_reference WHERE reference_scope = <em>geopackage</em></p>
 </li>
 <li>
 <p>Fail if result set contains any non-NULL values</p>
 </li>
 <li>
-<p>SELECT table\_name FROM metadata\_reference WHERE reference\_scope != <em>geopackage</em> AND table\_name NOT IN (SELECT table\_name FROM gpkg\_contents)</p>
+<p>SELECT table_name FROM metadata_reference WHERE reference_scope != <em>geopackage</em> AND table_name NOT IN (SELECT table_name FROM gpkg_contents)</p>
 </li>
 <li>
 <p>Fail if result set is not empty</p>
@@ -6270,12 +6270,12 @@ table\_name values for all other reference\_scope values.</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference/data/data\_values\_column\_name</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference/data/data_values_column_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that gpkg\_metadata\_reference column\_name column values are
+<p><strong>Test Purpose</strong>: Verify that gpkg_metadata_reference column_name column values are
 NULL for rows with reference scope values of <em>geopackage</em>, <em>table</em>, or <em>row</em>, and contain
-the name of a column in table\_name table for other reference scope values.</p>
+the name of a column in table_name table for other reference scope values.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6283,35 +6283,35 @@ the name of a column in table\_name table for other reference scope values.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT column\_name FROM gpkg\_metadata\_reference</p>
+<p>SELECT column_name FROM gpkg_metadata_reference</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT column\_name FROM gpkg\_metadata\_reference WHERE reference\_scope
+<p>SELECT column_name FROM gpkg_metadata_reference WHERE reference_scope
 IN (<em>geopackage</em>, <em>table</em>, <em>row</em>)</p>
 </li>
 <li>
 <p>Fail if result set contains any non-NULL values</p>
 </li>
 <li>
-<p>SELECT &lt;table\_name&gt;, &lt;column\_name&gt; FROM metadata\_reference WHERE
-reference\_scope NOT IN (<em>geopackage</em>, <em>table</em>, <em>row</em>)</p>
+<p>SELECT &lt;table_name&gt;, &lt;column_name&gt; FROM metadata_reference WHERE
+reference_scope NOT IN (<em>geopackage</em>, <em>table</em>, <em>row</em>)</p>
 </li>
 <li>
 <p>For each row from step 5</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name = <em>&lt;table\_name&gt;</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>&lt;table_name&gt;</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
 </li>
 <li>
 <p>Fail if the one of the column names in the returned sql Create TABLE statement
-is not &lt;column\_name&gt;</p>
+is not &lt;column_name&gt;</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -6331,12 +6331,12 @@ is not &lt;column\_name&gt;</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference/data/data\_values\_row\_id\_value</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference/data/data_values_row_id_value</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that gpkg\_metadata\_reference row\_id\_value column values are NULL
+<p><strong>Test Purpose</strong>: Verify that gpkg_metadata_reference row_id_value column values are NULL
 for rows with reference scope values of <em>geopackage</em>, <em>table</em>, or <em>row</em>, and contain the
-ROWID of a row in the table\_name for other reference scope values.</p>
+ROWID of a row in the table_name for other reference scope values.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6344,28 +6344,28 @@ ROWID of a row in the table\_name for other reference scope values.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT row\_id\_value FROM gpkg\_metadata\_reference</p>
+<p>SELECT row_id_value FROM gpkg_metadata_reference</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT row\_id\_value FROM gpkg\_metadata\_reference WHERE reference\_scope
+<p>SELECT row_id_value FROM gpkg_metadata_reference WHERE reference_scope
 IN (<em>geopackage</em>, <em>table</em>, <em>row</em>)</p>
 </li>
 <li>
 <p>Fail if result set contains any non-NULL values</p>
 </li>
 <li>
-<p>For each SELECT &lt;table\_name&gt;, &lt;row\_id\_value&gt; FROM gpkg\_metadata\_reference
-WHERE reference\_scope NOT IN (<em>geopackage</em>, <em>table</em>, <em>row</em>)</p>
+<p>For each SELECT &lt;table_name&gt;, &lt;row_id_value&gt; FROM gpkg_metadata_reference
+WHERE reference_scope NOT IN (<em>geopackage</em>, <em>table</em>, <em>row</em>)</p>
 </li>
 <li>
 <p>For each row from step 5</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT * FROM &lt;table\_name&gt; WHERE ROWID = &lt;row\_id\_value&gt;</p>
+<p>SELECT * FROM &lt;table_name&gt; WHERE ROWID = &lt;row_id_value&gt;</p>
 </li>
 <li>
 <p>Fail if result set is empty</p>
@@ -6388,10 +6388,10 @@ WHERE reference\_scope NOT IN (<em>geopackage</em>, <em>table</em>, <em>row</em>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference/data/data\_values\_timestamp</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference/data/data_values_timestamp</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that every gpkg\_metadata\_reference table row timestamp column
+<p><strong>Test Purpose</strong>: Verify that every gpkg_metadata_reference table row timestamp column
 value is in ISO 8601 UTC format.</p>
 </div>
 <div class="paragraph">
@@ -6400,7 +6400,7 @@ value is in ISO 8601 UTC format.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT timestamp from gpkg\_metadata\_reference.</p>
+<p>SELECT timestamp from gpkg_metadata_reference.</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -6430,11 +6430,11 @@ value is in ISO 8601 UTC format.</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference/data/data\_values\_md\_file\_id</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference/data/data_values_md_file_id</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that every gpkg\_metadata\_reference table row md\_file\_id column
-value is an id column value from the gpkg\_metadata table.</p>
+<p><strong>Test Purpose</strong>: Verify that every gpkg_metadata_reference table row md_file_id column
+value is an id column value from the gpkg_metadata table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6442,16 +6442,16 @@ value is an id column value from the gpkg\_metadata table.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT md\_file\_id FROM gpkg\_metadata\_reference</p>
+<p>SELECT md_file_id FROM gpkg_metadata_reference</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT gmr.md\_file\_id, gm.id FROM gpkg\_metadata\_reference AS gmr</p>
+<p>SELECT gmr.md_file_id, gm.id FROM gpkg_metadata_reference AS gmr</p>
 </li>
 <li>
-<p>LEFT OUTER JOIN gpkg\_metadata gm ON gmr.md\_file\_id = gm.id</p>
+<p>LEFT OUTER JOIN gpkg_metadata gm ON gmr.md_file_id = gm.id</p>
 </li>
 <li>
 <p>Fail if result set is empty</p>
@@ -6471,12 +6471,12 @@ value is an id column value from the gpkg\_metadata table.</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/metadata/metadata\_reference/data/data\_values\_md\_parent\_id</p>
+<p><strong>Test Case ID</strong>: /opt/metadata/metadata_reference/data/data_values_md_parent_id</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that every gpkg\_metadata\_reference table row md\_parent\_id column
- value that is not null is an id column value from the gpkg\_metadata\_table that is not equal to
- the md\_file\_id column value for that row.</p>
+<p><strong>Test Purpose</strong>: Verify that every gpkg_metadata_reference table row md_parent_id column
+ value that is not null is an id column value from the gpkg_metadata_table that is not equal to
+ the md_file_id column value for that row.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6484,31 +6484,31 @@ value is an id column value from the gpkg\_metadata table.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT md\_file\_id FROM gpkg\_metadata\_reference</p>
+<p>SELECT md_file_id FROM gpkg_metadata_reference</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT gmr.md\_file\_id, gmr.md\_parent\_id</p>
+<p>SELECT gmr.md_file_id, gmr.md_parent_id</p>
 </li>
 <li>
-<p>FROM gpkg\_metadata\_reference AS gmr</p>
+<p>FROM gpkg_metadata_reference AS gmr</p>
 </li>
 <li>
-<p>WHERE gmr.md\_file\_id == gmr.md\_parent\_id</p>
+<p>WHERE gmr.md_file_id == gmr.md_parent_id</p>
 </li>
 <li>
 <p>Fail if result set is not empty</p>
 </li>
 <li>
-<p>SELECT gmr.md\_file\_id, gmr.md\_parent\_id, gm.id</p>
+<p>SELECT gmr.md_file_id, gmr.md_parent_id, gm.id</p>
 </li>
 <li>
-<p>FROM gpkg\_metadata\_reference AS gmr</p>
+<p>FROM gpkg_metadata_reference AS gmr</p>
 </li>
 <li>
-<p>LEFT OUTER JOIN gpkg\_metadata gm ON gmr.md\_parent\_id =gm.id</p>
+<p>LEFT OUTER JOIN gpkg_metadata gm ON gmr.md_parent_id =gm.id</p>
 </li>
 <li>
 <p>Fail if any result set gm.id values are NULL</p>
@@ -6537,10 +6537,10 @@ value is an id column value from the gpkg\_metadata table.</p>
 <p><strong>Table Definition</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/extension\_mechanism/extensions/data/table\_def</p>
+<p><strong>Test Case ID</strong>: /opt/extension_mechanism/extensions/data/table_def</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that a gpkg\_extensions table exists and has the correct definition.</p>
+<p><strong>Test Purpose</strong>: Verify that a gpkg_extensions table exists and has the correct definition.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6548,8 +6548,8 @@ value is an id column value from the gpkg\_metadata table.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite\_master WHERE type = <em>table</em> AND tbl\_name =
-<em>gpkg\_extensions</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name =
+<em>gpkg_extensions</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -6576,10 +6576,10 @@ definitions in the returned sql are irrelevant.</p>
 <p><strong>Table Data Values</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/extension\_metchanism/extensions/data/data\_values\_table\_name</p>
+<p><strong>Test Case ID</strong>: /opt/extension_metchanism/extensions/data/data_values_table_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the table\_name column values in the gpkg\_extensions table are
+<p><strong>Test Purpose</strong>: Verify that the table_name column values in the gpkg_extensions table are
  valid.</p>
 </div>
 <div class="paragraph">
@@ -6588,7 +6588,7 @@ definitions in the returned sql are irrelevant.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_extensions</p>
+<p>SELECT table_name, column_name FROM gpkg_extensions</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -6598,15 +6598,15 @@ definitions in the returned sql are irrelevant.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Fail if table\_name value is NULL and column\_name value is not NULL.</p>
+<p>Fail if table_name value is NULL and column_name value is not NULL.</p>
 </li>
 <li>
-<p>SELECT DISTINCT ge.table\_name AS ge\_table, sm.tbl\_name
-FROM gpkg\_extensions AS ge LEFT OUTER JOIN sqlite\_master AS sm ON
-ge.table\_name = sm.tbl\_name</p>
+<p>SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name
+FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON
+ge.table_name = sm.tbl_name</p>
 </li>
 <li>
-<p>Log pass if every row ge.table\_name = sm.tbl\_name (MAY both be NULL).</p>
+<p>Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).</p>
 </li>
 </ul>
 </div>
@@ -6623,10 +6623,10 @@ ge.table\_name = sm.tbl\_name</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/extension\_metchanism/extensions/data/data\_values\_column\_name</p>
+<p><strong>Test Case ID</strong>: /opt/extension_metchanism/extensions/data/data_values_column_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the column\_name column values in the gpkg\_extensions table are
+<p><strong>Test Purpose</strong>: Verify that the column_name column values in the gpkg_extensions table are
  valid.</p>
 </div>
 <div class="paragraph">
@@ -6635,14 +6635,14 @@ ge.table\_name = sm.tbl\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_extensions</p>
+<p>SELECT table_name, column_name FROM gpkg_extensions</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_extensions WHERE table\_name
-IS NOT NULL AND column\_name IS NOT NULL</p>
+<p>SELECT table_name, column_name FROM gpkg_extensions WHERE table_name
+IS NOT NULL AND column_name IS NOT NULL</p>
 </li>
 <li>
 <p>Pass if returns an empty result set</p>
@@ -6652,11 +6652,11 @@ IS NOT NULL AND column\_name IS NOT NULL</p>
 <div class="ulist">
 <ul>
 <li>
-<p>PRAGMA table\_info(table\_name)</p>
+<p>PRAGMA table_info(table_name)</p>
 </li>
 <li>
-<p>Fail if gpkg\_extensions.column\_name value does not equal a name column value
-returned by PRAGMA table\_info.</p>
+<p>Fail if gpkg_extensions.column_name value does not equal a name column value
+returned by PRAGMA table_info.</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -6676,10 +6676,10 @@ returned by PRAGMA table\_info.</p>
 <p><strong>Test Type</strong>:    Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/extension\_mechanism/extensions/data/data\_values\_extension\_name</p>
+<p><strong>Test Case ID</strong>: /opt/extension_mechanism/extensions/data/data_values_extension_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the extension\_name column values in the gpkg\_extensions table
+<p><strong>Test Purpose</strong>: Verify that the extension_name column values in the gpkg_extensions table
  are valid.</p>
 </div>
 <div class="paragraph">
@@ -6688,7 +6688,7 @@ returned by PRAGMA table\_info.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT extension\_name FROM gpkg\_extensions</p>
+<p>SELECT extension_name FROM gpkg_extensions</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -6698,10 +6698,10 @@ returned by PRAGMA table\_info.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Log pass if extension\_name is one of those listed in Table 14</p>
+<p>Log pass if extension_name is one of those listed in Table 14</p>
 </li>
 <li>
-<p>Separate extension_name into &lt;author&gt; and &lt;extension&gt; at the first "\_"</p>
+<p>Separate extension_name into &lt;author&gt; and &lt;extension&gt; at the first "_"</p>
 </li>
 <li>
 <p>Fail if &lt;author&gt; is "gpkg"</p>
@@ -6710,7 +6710,7 @@ returned by PRAGMA table\_info.</p>
 <p>Fail if &lt;author&gt; contains characters other than [a-zA-Z0-9]</p>
 </li>
 <li>
-<p>Fail if &lt;extension&gt; contains characters other than [a-zA-Z0-9\_]</p>
+<p>Fail if &lt;extension&gt; contains characters other than [a-zA-Z0-9_]</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -6736,7 +6736,7 @@ returned by PRAGMA table\_info.</p>
 <div class="sect5">
 <h6 id="_api_geopackage_sqlite_config_2">API GeoPackage SQLite Config</h6>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/extension\_mechanism/extensions/api/api\_geopackage\_sqlite\_config</p>
+<p><strong>Test Case ID</strong>: /opt/extension_mechanism/extensions/api/api_geopackage_sqlite_config</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that a GeoPackage SQLite Extension has the API GeoPackage SQLite
@@ -6748,25 +6748,25 @@ returned by PRAGMA table\_info.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_LOAD\_EXTENSION</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_LOAD_EXTENSION</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_VIRTUALTABLE</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_VIRTUALTABLE</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_ENABLE\_RTREE</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_ENABLE_RTREE</em>)</p>
 </li>
 <li>
 <p>Fail if returns 0</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_RTREE\_INT\_ONLY</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_RTREE_INT_ONLY</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
@@ -6786,7 +6786,7 @@ returned by PRAGMA table\_info.</p>
 <p><strong>Safe GeoPackage SQLite Config</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /opt/extension\_mechanism/extensions/api/safe\_geopackage\_sqlite\_config</p>
+<p><strong>Test Case ID</strong>: /opt/extension_mechanism/extensions/api/safe_geopackage_sqlite_config</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that a GeoPackage SQLite Extension has the Safe GeoPackage
@@ -6798,37 +6798,37 @@ returned by PRAGMA table\_info.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sqlite\_compileoption\_used('SQLITE\_DEFAULT\_FOREIGN\_KEYS ')</p>
+<p>SELECT sqlite_compileoption_used('SQLITE_DEFAULT_FOREIGN_KEYS ')</p>
 </li>
 <li>
 <p>Fail if returns 0</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_FOREIGN\_KEY</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_FOREIGN_KEY</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>PRAGMA foreign\_keys</p>
+<p>PRAGMA foreign_keys</p>
 </li>
 <li>
 <p>Fail if returns 0</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_INTEGRITY\_CHECK</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_INTEGRITY_CHECK</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_SUBQUERY</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_SUBQUERY</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
 </li>
 <li>
-<p>SELECT sqlite\_compileoption\_used(<em>SQLITE\_OMIT\_TRIGGER</em>)</p>
+<p>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_TRIGGER</em>)</p>
 </li>
 <li>
 <p>Fail if returns 1</p>
@@ -6851,12 +6851,12 @@ returned by PRAGMA table\_info.</p>
 <div class="sect2">
 <h3 id="_registered_extensions_2">A.3. Registered Extensions</h3>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/all/author\_name/not\_gpkg/not\_features\_or\_tiles</p>
+<p><strong>Test Case ID</strong>: /reg_ext/all/author_name/not_gpkg/not_features_or_tiles</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that any table in a GeoPackage file subject to a registered extension
- with an author\_name other than "gpkg" is not described by a gpkg\_contents table row with a
- data\_type value of <em>features</em> or <em>tiles</em>.</p>
+ with an author_name other than "gpkg" is not described by a gpkg_contents table row with a
+ data_type value of <em>features</em> or <em>tiles</em>.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -6864,16 +6864,16 @@ returned by PRAGMA table\_info.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Not testable if failed</p>
 </li>
 <li>
-<p>SELECT table\_name FROM geopackage\_contents
-WHERE data\_type IN (<em>features</em>,<em>tiles</em>) AND table\_name IN
-(SELECT table\_name FROM gpkg\_extensions WHERE
-substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
+<p>SELECT table_name FROM geopackage_contents
+WHERE data_type IN (<em>features</em>,<em>tiles</em>) AND table_name IN
+(SELECT table_name FROM gpkg_extensions WHERE
+substr(lower(extension_name),1,4. != <em>gpkg</em>)</p>
 </li>
 <li>
 <p>Fail if result set is not empty</p>
@@ -6899,11 +6899,11 @@ substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
 <p><strong>BLOB Format - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_encoding/data/ext\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_encoding/data/ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that an extension name in the form
- &lt;author\_name&gt;\_geometry\_encoding is defined for an author name other than "gpkg" for
+ &lt;author_name&gt;_geometry_encoding is defined for an author name other than "gpkg" for
  each geometry BLOB format other than GeoPackageBinary used in a GeoPackage file.</p>
 </div>
 <div class="paragraph">
@@ -6912,19 +6912,19 @@ substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type NOT
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type NOT
 IN (<em>features</em>, <em>tiles</em>))</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each row table\_name, column\_name from step 1</p>
+<p>For each row table_name, column_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT result\_set\_column\_name FROM result\_set\_table\_name</p>
+<p>SELECT result_set_column_name FROM result_set_table_name</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -6935,12 +6935,12 @@ IN (<em>features</em>, <em>tiles</em>))</p>
 <ul>
 <li>
 <p>If the first three bytes of geometry column value are not "GPB", then
-+ /opt/extension\_mechanism/extensions/data/table\_def
++ /opt/extension_mechanism/extensions/data/table_def
 + Fail if failed
-+ SELECT extension\_name FROM gpkg\_extensions WERE
-table\_name = result\_set\_table\_name AND column\_name =
-result\_set\_column\_name AND
-substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
++ SELECT extension_name FROM gpkg_extensions WERE
+table_name = result_set_table_name AND column_name =
+result_set_column_name AND
+substr(lower(extension_name),1,4. != <em>gpkg</em>)</p>
 </li>
 </ul>
 </div>
@@ -6950,10 +6950,10 @@ substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
 </li>
 <li>
 <p>Separate extension_name into &lt;author&gt; and
-&lt;extension&gt; at the first "\_"</p>
+&lt;extension&gt; at the first "_"</p>
 </li>
 <li>
-<p>Fail if &lt;extension&gt; is not <em>\_geometry\_encoding</em>.</p>
+<p>Fail if &lt;extension&gt; is not <em>_geometry_encoding</em>.</p>
 </li>
 <li>
 <p>Otherwise log pass</p>
@@ -6976,19 +6976,19 @@ substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
 <p><strong>BLOB Format - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_encoding/data/ext\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_encoding/data/ext_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg\_extensions table contains a row with an extension\_name
- in the form &lt;author\_name&gt;\_geometry\_encoding is defined for an author name other than
- "gpkg" for each table\_name and column\_name that contain a geometry BLOB format other
+<p><strong>Test Purpose</strong>: Verify that the gpkg_extensions table contains a row with an extension_name
+ in the form &lt;author_name&gt;_geometry_encoding is defined for an author name other than
+ "gpkg" for each table_name and column_name that contain a geometry BLOB format other
  than GeoPackageBinary in a GeoPackage file.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>Same as /reg\_ext/features/geometry\_encoding/data/ext\_name</p>
+<p>Same as /reg_ext/features/geometry_encoding/data/ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.1.1.1.3 Req 69:</p>
@@ -7006,7 +7006,7 @@ substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
 <p><strong>Extension Types</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_encoding/data/extension\_types\_existing\_sparse\_data</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that existing extended non-linear geometry types are stored in valid
@@ -7018,15 +7018,15 @@ substr(lower(extension\_name),1,4. != <em>gpkg</em>)</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM gpkg\_geometry\_columns</p>
+<p>SELECT table_name FROM gpkg_geometry_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table\_name AS tn, column\_name AS cn FROM gpkg\_geometry\_columns
-WHERE table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE
-data\_type = <em>features</em>),</p>
+<p>SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns
+WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE
+data_type = <em>features</em>),</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -7083,7 +7083,7 @@ cn.envelope.minm,maxm then log fail</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_encoding/data/extension\_types\_all\_types\_test\_data</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_encoding/data/extension_types_all_types_test_data</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that all extended non-linear geometry types and options are stored in
@@ -7096,11 +7096,11 @@ cn.envelope.minm,maxm then log fail</p>
 <ol class="arabic">
 <li>
 <p>Open GeoPackage that has feature geometry values of geometry type in Annex G, for
-an assortment of srs\_ids, for an assortment of coordinate values, without and with z
+an assortment of srs_ids, for an assortment of coordinate values, without and with z
 and/or m values, in both big and little endian encodings:</p>
 </li>
 <li>
-<p>/reg\_ext/features/geometry\_encoding/data/extension\_types\_existing\_sparse\_data</p>
+<p>/reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data</p>
 </li>
 <li>
 <p>Pass if log contains pass record for big and little endian GPB headers containing big
@@ -7122,10 +7122,10 @@ type value from Annex G Table 47 without and with z and/or m values.</p>
 <p><strong>Geometry Types&#8201;&#8212;&#8201;Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_encoding/data/extension\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_encoding/data/extension_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that an extension name in the form gpkg_geom\_&lt;gname&gt; is defined
+<p><strong>Test Purpose</strong>: Verify that an extension name in the form gpkg_geom_&lt;gname&gt; is defined
  for each &lt;gname&gt; extension geometry type from Annex G Table 47 used in a GeoPackage
  file.</p>
 </div>
@@ -7135,19 +7135,19 @@ type value from Annex G Table 47 without and with z and/or m values.</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type ==
 <em>features</em>))</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>For each row result set table\_name, column\_name from step 3</p>
+<p>For each row result set table_name, column_name from step 3</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT result\_set\_column\_name FROM result\_set\_table\_name</p>
+<p>SELECT result_set_column_name FROM result_set_table_name</p>
 </li>
 <li>
 <p>For each geometry column value from step a
@@ -7155,18 +7155,18 @@ table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
 <div class="ulist">
 <ul>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT ST\_GeometryType(geometry column value) AS lt;gtype&gt;;</p>
+<p>SELECT ST_GeometryType(geometry column value) AS lt;gtype&gt;;</p>
 </li>
 <li>
-<p>SELECT extension_name FROM gpkg\_extensions WERE
-table\_name = result\_set\_table\_name AND column\_name =
-result\_set\_column\_name AND extension\_name = <em>gpkg\_geom\_</em>
+<p>SELECT extension_name FROM gpkg_extensions WERE
+table_name = result_set_table_name AND column_name =
+result_set_column_name AND extension_name = <em>gpkg_geom_</em>
 || &lt;gtype&gt;</p>
 </li>
 </ul>
@@ -7196,18 +7196,18 @@ result\_set\_column\_name AND extension\_name = <em>gpkg\_geom\_</em>
 <p><strong>Geometry Types&#8201;&#8212;&#8201;Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_encoding/data/extension\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_encoding/data/extension_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the gpkg_extensions table contains a row with an extension\_name
- in the form gpkg\_geom\_&lt;gname&gt; for each table\_name and column\_name in the
- gpkg\_geometry\_columns table with a &lt;gname&gt; geometry\_type\_name.</p>
+<p><strong>Test Purpose</strong>: Verify that the gpkg_extensions table contains a row with an extension_name
+ in the form gpkg_geom_&lt;gname&gt; for each table_name and column_name in the
+ gpkg_geometry_columns table with a &lt;gname&gt; geometry_type_name.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/features/geometry\_encoding/data/extension\_name</p>
+<p>/reg_ext/features/geometry_encoding/data/extension_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.1.2.1.3 Req 72:</p>
@@ -7225,7 +7225,7 @@ result\_set\_column\_name AND extension\_name = <em>gpkg\_geom\_</em>
 <p><strong>Spatial Indexes Implementation</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/spatial\_indexes/implementation</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/spatial_indexes/implementation</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify the correct implementation of spatial indexes on feature table
@@ -7237,52 +7237,52 @@ result\_set\_column\_name AND extension\_name = <em>gpkg\_geom\_</em>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type ==
 <em>features</em>))</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>For each row table\_name, column\_name from step 1</p>
+<p>For each row table_name, column_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE tbl\_name = <em>rtree\_</em> ||
-result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE tbl_name = <em>rtree_</em> ||
+result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
 <p>Fail if returned sql != <em>CREATE VIRTUAL TABLE rtree_</em> ' ||
-result\_set\_table\_name || <em>\_</em> || result\_set\_column\_name || USING rtree(id, minx,
+result_set_table_name || <em>_</em> || result_set_column_name || USING rtree(id, minx,
 maxx, miny, maxy)</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tname =
-<em>rtree\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name || <em>\_insert</em></p>
+<em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_insert</em></p>
 </li>
 <li>
 <p>Fail if returned sql != result of populating insert triggers template in Table 39
-using result\_set\_table\_name for &lt;t&gt; and result\_set\_column\_name for &lt;c&gt;</p>
+using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND name LIKE
-<em>rtree\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name || <em>\_update%</em></p>
+<em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_update%</em></p>
 </li>
 <li>
 <p>Fail if returned sql != result of populating 4 update triggers templates in Table
-39 using result\_set\_table\_name for &lt;t&gt; and result\_set\_column\_name for &lt;c&gt;</p>
+39 using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master WHERE type=<em>trigger</em> AND name =
-<em>rtree\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name || <em>\_delete</em></p>
+<em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_delete</em></p>
 </li>
 <li>
 <p>Fail if returned sql != result of populating delete trigger template in Table 39
-using result\_set\_table\_name for &lt;t&gt; and result\_set\_column\_name for &lt;c&gt;</p>
+using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -7305,10 +7305,10 @@ using result\_set\_table\_name for &lt;t&gt; and result\_set\_column\_name for &
 <p><strong>Spatial Indexes - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/spatial\_indexes/extension\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/spatial_indexes/extension_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the "gpkg\_rtree\_index" extension name is used to register spatial
+<p><strong>Test Purpose</strong>: Verify that the "gpkg_rtree_index" extension name is used to register spatial
  index extensions.</p>
 </div>
 <div class="paragraph">
@@ -7317,36 +7317,36 @@ using result\_set\_table\_name for &lt;t&gt; and result\_set\_column\_name for &
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type ==
 <em>features</em>))</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>For each row table\_name, column\_name from step 3</p>
+<p>For each row table_name, column_name from step 3</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE tbl\_name = <em>rtree\_</em> ||
-result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE tbl_name = <em>rtree_</em> ||
+result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT extension\_name from gpkg\_extensions WHERE table\_name =
-result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
+<p>SELECT extension_name from gpkg_extensions WHERE table_name =
+result_set_table_name AND column_name = result_set_column_name</p>
 </li>
 <li>
-<p>Log pass if result is "gpkg\_rtree\_index"</p>
+<p>Log pass if result is "gpkg_rtree_index"</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -7369,17 +7369,17 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <p><strong>Spatial Indexes - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/spatial\_indexes/extension\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/spatial_indexes/extension_row</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that spatial index extensions are registered using the
- "gpkg\_rtree\_index" name in the gpkg\_extensions table.</p>
+ "gpkg_rtree_index" name in the gpkg_extensions table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/features/spatial\_indexes/extension\_name</p>
+<p>/reg_ext/features/spatial_indexes/extension_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.1.3.1.3 Req 75:</p>
@@ -7397,7 +7397,7 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <p><strong>Geometry Type Triggers Implementation</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_type\_triggers/implementation</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_type_triggers/implementation</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that user feature data table geometry type triggers are implemented
@@ -7409,35 +7409,35 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type ==
 <em>features</em>))</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each row table\_name, column\_name from step 1</p>
+<p>For each row table_name, column_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl\_name =
-<em>fgti\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl_name =
+<em>fgti_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
 <p>Fail if sql != result of populating the first trigger template in Table 17 with &lt;t&gt;
-as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
+as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl\_name =
-<em>fgtu\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl_name =
+<em>fgtu_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Fail if sql != result of populating the second trigger template in Table 17 with
-&lt;t&gt; as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
+&lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -7460,10 +7460,10 @@ as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
 <p><strong>Geometry Type Triggers - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_type\_triggers/extension\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_type_triggers/extension_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the "gpkg\_geometry\_type\_trigger" extension name is used to
+<p><strong>Test Purpose</strong>: Verify that the "gpkg_geometry_type_trigger" extension name is used to
  register geometry type triggers.</p>
 </div>
 <div class="paragraph">
@@ -7472,36 +7472,36 @@ as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type ==
 <em>features</em>))</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>For each row table\_name, column\_name from step 1</p>
+<p>For each row table_name, column_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl\_name =
-<em>fgti\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl_name =
+<em>fgti_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT extension\_name from gpkg\_extensions WHERE table\_name =
-result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
+<p>SELECT extension_name from gpkg_extensions WHERE table_name =
+result_set_table_name AND column_name = result_set_column_name</p>
 </li>
 <li>
-<p>Log pass if result is "gpkg\_geometry\_type\_trigger"</p>
+<p>Log pass if result is "gpkg_geometry_type_trigger"</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -7524,17 +7524,17 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <p><strong>Geometry Type Triggers - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/geometry\_type\_triggers/extension\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/geometry_type_triggers/extension_row</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that geometry type triggers are registered using the
- "gpkg\_geometry\_type\_trigger" extension name.</p>
+ "gpkg_geometry_type_trigger" extension name.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/features/geometry\_type\_triggers/extension\_name</p>
+<p>/reg_ext/features/geometry_type_triggers/extension_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.1.4.1.3 Req 78:</p>
@@ -7545,17 +7545,17 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_srs_id_triggers_2">SRS\_ID Triggers</h5>
+<h5 id="_srs_id_triggers_2">SRS_ID Triggers</h5>
 <div class="sect5">
 <h6 id="_data_54">Data</h6>
 <div class="paragraph">
-<p><strong>SRS\_ID Triggers - Implementation</strong></p>
+<p><strong>SRS_ID Triggers - Implementation</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/srs\_id\_triggers/implementation</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/srs_id_triggers/implementation</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that user feature data table srs\_id triggers are implemented correctly.</p>
+<p><strong>Test Purpose</strong>: Verify that user feature data table srs_id triggers are implemented correctly.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -7563,35 +7563,35 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type ==
 <em>features</em>))</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>For each row table\_name, column\_name from step 1</p>
+<p>For each row table_name, column_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl\_name =
-<em>fgsi\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl_name =
+<em>fgsi_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
 <p>Fail if sql != result of populating the first trigger template in Table 18 with &lt;t&gt;
-as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
+as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl\_name =
-<em>fgsu\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl_name =
+<em>fgsu_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Fail if sql != result of populating the second trigger template in Table 18 with
-&lt;t&gt; as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
+&lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -7611,14 +7611,14 @@ as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
 <p><strong>Test Type</strong>:     Capability</p>
 </div>
 <div class="paragraph">
-<p><strong>SRS\_ID Triggers - Extensions Name</strong></p>
+<p><strong>SRS_ID Triggers - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/srs\_id\_triggers/extension\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/srs_id_triggers/extension_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the "gpkg\_srs\_id\_trigger" extension name is used to register
- srs\_id triggers.</p>
+<p><strong>Test Purpose</strong>: Verify that the "gpkg_srs_id_trigger" extension name is used to register
+ srs_id triggers.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
@@ -7626,36 +7626,36 @@ as result\_set\_table\_name and &lt;c&gt; as result\_set\_column\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name, column\_name FROM gpkg\_geometry\_columns WHERE
-table\_name IN (SELECT table\_name FROM gpkg\_contents WHERE data\_type ==
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE
+table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type ==
 <em>features</em>))</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>For each row table\_name, column\_name from step 1</p>
+<p>For each row table_name, column_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl\_name =
-<em>fgsi\_</em> || result_set\_table\_name || <em>\_</em> || result\_set\_column\_name</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tbl_name =
+<em>fgsi_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT extension\_name from gpkg\_extensions WHERE table\_name =
-result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
+<p>SELECT extension_name from gpkg_extensions WHERE table_name =
+result_set_table_name AND column_name = result_set_column_name</p>
 </li>
 <li>
-<p>Pass if result is "gpkg\_srs\_id\_trigger"</p>
+<p>Pass if result is "gpkg_srs_id_trigger"</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -7672,20 +7672,20 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <p><strong>Test Type</strong>:     Basic</p>
 </div>
 <div class="paragraph">
-<p><strong>SRS\_ID Triggers - Extensions Row</strong></p>
+<p><strong>SRS_ID Triggers - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/features/srs\_id\_triggers/extension\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/features/srs_id_triggers/extension_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that srs\_id triggers are registered using the "gpkg\_srs\_id\_trigger"
+<p><strong>Test Purpose</strong>: Verify that srs_id triggers are registered using the "gpkg_srs_id_trigger"
  extension name.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/features/srs\_id\_triggers/extension\_name</p>
+<p>/reg_ext/features/srs_id_triggers/extension_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.1.5.1.3 Req 81:</p>
@@ -7706,10 +7706,10 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <p><strong>Zoom Other Intervals—Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/zoom\_levels/data/zoom\_other\_ext\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/zoom_levels/data/zoom_other_ext_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the "gpkg\_zoom\_other" extension name is used to register tiles
+<p><strong>Test Purpose</strong>: Verify that the "gpkg_zoom_other" extension name is used to register tiles
  tables with other than factors of two zoom intervals.</p>
 </div>
 <div class="paragraph">
@@ -7718,18 +7718,18 @@ result\_set\_table\_name AND column\_name = result\_set\_column\_name</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em></p>
+<p>SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em></p>
 </li>
 <li>
 <p>Not testable if empty result set</p>
 </li>
 <li>
-<p>For each row table\_name from step 1</p>
+<p>For each row table_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>SELECT zoom\_level, pixel\_x\_size, pixel\_y\_size FROM tile\_matrix\_metadata
-WHERE table\_name = selected table name ORDER BY zoom\_level ASC</p>
+<p>SELECT zoom_level, pixel_x_size, pixel_y_size FROM tile_matrix_metadata
+WHERE table_name = selected table name ORDER BY zoom_level ASC</p>
 </li>
 <li>
 <p>Not testable if returns empty result set</p>
@@ -7738,18 +7738,18 @@ WHERE table\_name = selected table name ORDER BY zoom\_level ASC</p>
 <p>Not testable if there are not two rows with adjacent zoom levels</p>
 </li>
 <li>
-<p>Not testable if no pair of rows for adjacent zoom levels have pixel\_x\_size or
-pixel\_y\_size values that differ by other than factors of two</p>
+<p>Not testable if no pair of rows for adjacent zoom levels have pixel_x_size or
+pixel_y_size values that differ by other than factors of two</p>
 </li>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT * FROM gpkg\_extensions WHERE table\_name = selected table
-name AND extension\_name = <em>gpkg\_zoom\_other</em></p>
+<p>SELECT * FROM gpkg_extensions WHERE table_name = selected table
+name AND extension_name = <em>gpkg_zoom_other</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -7775,17 +7775,17 @@ name AND extension\_name = <em>gpkg\_zoom\_other</em></p>
 <p><strong>Zoom Other Intervals - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: / reg\_ext/tiles/zoom\_levels/data/zoom\_other\_ext\_row</p>
+<p><strong>Test Case ID</strong>: / reg_ext/tiles/zoom_levels/data/zoom_other_ext_row</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that tiles tables with other than factors of two zoom intervals are
- registered using the "gpkg\_zoom\_other" extension name.</p>
+ registered using the "gpkg_zoom_other" extension name.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/tiles/zoom\_levels/data/zoom\_other\_ext\_name</p>
+<p>/reg_ext/tiles/zoom_levels/data/zoom_other_ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.2.1.1.3 Req 83:</p>
@@ -7803,10 +7803,10 @@ name AND extension\_name = <em>gpkg\_zoom\_other</em></p>
 <p><strong>WEBP - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/tile\_encoding\_webp/data/webp\_ext\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/tile_encoding_webp/data/webp_ext_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the "gpkg\_webp" extensions name is used to register WEBP tile
+<p><strong>Test Purpose</strong>: Verify that the "gpkg_webp" extensions name is used to register WEBP tile
  encoding implementations.</p>
 </div>
 <div class="paragraph">
@@ -7815,34 +7815,34 @@ name AND extension\_name = <em>gpkg\_zoom\_other</em></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em></p>
+<p>SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em></p>
 </li>
 <li>
 <p>Not testable if empty result set</p>
 </li>
 <li>
-<p>For each row table\_name from step 1</p>
+<p>For each row table_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Select tile\_data FROM row table\_name</p>
+<p>Select tile_data FROM row table_name</p>
 </li>
 <li>
-<p>For each row tile\_data from step a
+<p>For each row tile_data from step a
 + Log webp if tile data in MIME type image/webp</p>
 </li>
 <li>
 <p>Not testable if no logged webps</p>
 </li>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT * FROM gpkg\_extensions WHERE table\_name = selected table
-name AND extension\_name = <em>gpkg\_webp</em></p>
+<p>SELECT * FROM gpkg_extensions WHERE table_name = selected table
+name AND extension_name = <em>gpkg_webp</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -7868,17 +7868,17 @@ name AND extension\_name = <em>gpkg\_webp</em></p>
 <div class="sect5">
 <h6 id="_webp_extensions_row_2">WEBP - Extensions Row</h6>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/tile\_encoding\_webp/data/webp\_ext\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/tile_encoding_webp/data/webp_ext_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that WEBP tile encodings are registered using the "gpkg\_webp"
+<p><strong>Test Purpose</strong>: Verify that WEBP tile encodings are registered using the "gpkg_webp"
  extensions name.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/tiles/tile\_encoding\_webp/data/webp\_ext\_name</p>
+<p>/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.2.2.2.2 Req 85:</p>
@@ -7896,10 +7896,10 @@ name AND extension\_name = <em>gpkg\_webp</em></p>
 <p><strong>TIFF - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/tile\_encoding\_tiff/data/tiff\_ext\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/tile_encoding_tiff/data/tiff_ext_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the "gpkg\_tiff" extensions name is used to register TIFF tile
+<p><strong>Test Purpose</strong>: Verify that the "gpkg_tiff" extensions name is used to register TIFF tile
  encoding implementations.</p>
 </div>
 <div class="paragraph">
@@ -7908,34 +7908,34 @@ name AND extension\_name = <em>gpkg\_webp</em></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em></p>
+<p>SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em></p>
 </li>
 <li>
 <p>Not testable if empty result set</p>
 </li>
 <li>
-<p>For each row table\_name from step 3</p>
+<p>For each row table_name from step 3</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Select tile\_data FROM row table\_name</p>
+<p>Select tile_data FROM row table_name</p>
 </li>
 <li>
-<p>For each row tile\_data from step a
+<p>For each row tile_data from step a
 + Log tiff if tile data in MIME type image/tiff</p>
 </li>
 <li>
 <p>Not testable if no logged webps</p>
 </li>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT * FROM gpkg\_extensions WHERE table\_name = selected table
-name AND extension\_name = <em>gpkg\_tiff</em></p>
+<p>SELECT * FROM gpkg_extensions WHERE table_name = selected table
+name AND extension_name = <em>gpkg_tiff</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -7961,17 +7961,17 @@ name AND extension\_name = <em>gpkg\_tiff</em></p>
 <p><strong>TIFF - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/tile\_encoding\_tiff/data/tiff\_ext\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/tile_encoding_tiff/data/tiff_ext_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that TIFF tile encodings are registered using the "gpkg\_tiff"
+<p><strong>Test Purpose</strong>: Verify that TIFF tile encodings are registered using the "gpkg_tiff"
  extensions name.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/tiles/tile\_encoding\_tiff/data/tiff\_ext\_name</p>
+<p>/reg_ext/tiles/tile_encoding_tiff/data/tiff_ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.2.3.1.3 Req 87:</p>
@@ -7989,10 +7989,10 @@ name AND extension\_name = <em>gpkg\_tiff</em></p>
 <p><strong>NITF - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/tile\_encoding\_nitf/data/nitf\_ext\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/tile_encoding_nitf/data/nitf_ext_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that the "gpkg\_nitf" extensions name is used to register NITF tile
+<p><strong>Test Purpose</strong>: Verify that the "gpkg_nitf" extensions name is used to register NITF tile
  encoding implementations.</p>
 </div>
 <div class="paragraph">
@@ -8001,34 +8001,34 @@ name AND extension\_name = <em>gpkg\_tiff</em></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em></p>
+<p>SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em></p>
 </li>
 <li>
 <p>Not testable if empty result set</p>
 </li>
 <li>
-<p>For each row table\_name from step 3</p>
+<p>For each row table_name from step 3</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Select tile\_data FROM row table\_name</p>
+<p>Select tile_data FROM row table_name</p>
 </li>
 <li>
-<p>For each row tile\_data from step a
+<p>For each row tile_data from step a
 + Log nitf if tile data in MIME type application/vnd.NITF</p>
 </li>
 <li>
 <p>Not testable if no logged webps</p>
 </li>
 <li>
-<p>/opt/extension\_mechanism/extensions/data/table\_def</p>
+<p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
 <li>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT * FROM gpkg\_extensions WHERE table\_name = selected table
-name AND extension\_name = <em>gpkg\_nitf</em></p>
+<p>SELECT * FROM gpkg_extensions WHERE table_name = selected table
+name AND extension_name = <em>gpkg_nitf</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -8054,17 +8054,17 @@ name AND extension\_name = <em>gpkg\_nitf</em></p>
 <p><strong>NITF - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/tile\_encoding/nitf/data/nitf\_ext\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/tile_encoding/nitf/data/nitf_ext_row</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that NITF tile encodings are registered in the gpkg\_extensions table
- using the "gpkg\_nitf" extensions name.</p>
+<p><strong>Test Purpose</strong>: Verify that NITF tile encodings are registered in the gpkg_extensions table
+ using the "gpkg_nitf" extensions name.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/tiles/tile\_encoding\_nitf/data/nitf\_ext\_name</p>
+<p>/reg_ext/tiles/tile_encoding_nitf/data/nitf_ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:     Clause 3.2.4.1.3 Req 89:</p>
@@ -8082,12 +8082,12 @@ name AND extension\_name = <em>gpkg\_nitf</em></p>
 <p><strong>Other Mime Type - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles/tile\_encoding/other/data/other\_ext\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles/tile_encoding/other/data/other_ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that an extension name in the form
- &lt;author_name&gt;\_&lt;other&gt;\_mime\_type is defined for an author name other than "gpkg" for
- each other MIME image format used for tile\_data columns in tile matrix set user data tables,
+ &lt;author_name&gt;_&lt;other&gt;_mime_type is defined for an author name other than "gpkg" for
+ each other MIME image format used for tile_data columns in tile matrix set user data tables,
  where &lt;other&gt; is replaced by the other MIME type abbreviation in uppercase.</p>
 </div>
 <div class="paragraph">
@@ -8096,44 +8096,44 @@ name AND extension\_name = <em>gpkg\_nitf</em></p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table\_name FROM geopackage\_contents WHERE data\_type = <em>tiles</em></p>
+<p>SELECT table_name FROM geopackage_contents WHERE data_type = <em>tiles</em></p>
 </li>
 <li>
 <p>Not testable if empty result set</p>
 </li>
 <li>
-<p>For each row table\_name from step 3
-+ Select tile\_data FROM row table\_name
-+ For each row tile\_data from step a</p>
+<p>For each row table_name from step 3
++ Select tile_data FROM row table_name
++ For each row tile_data from step a</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Log other MIME type name if tile data not in MIME type png, jpeg, webp, tiff or nitf
 + Not testable if no logged others
-+ /opt/extension\_mechanism/extensions/data/table\_def
++ /opt/extension_mechanism/extensions/data/table_def
 + Fail if failed
-+ For each other logged MIME type name for this table\_name</p>
++ For each other logged MIME type name for this table_name</p>
 </li>
 <li>
-<p>SELECT extension\_name FROM gpkg\_extensions WHERE
-table\_name = result set table name AND column\_name = <em>tile\_data</em>
-AND substr(lower(extension\_name),1,4. !- <em>gpkg</em>) AND
-instr(extension\_name, logged MIME type name) != 0</p>
+<p>SELECT extension_name FROM gpkg_extensions WHERE
+table_name = result set table name AND column_name = <em>tile_data</em>
+AND substr(lower(extension_name),1,4. !- <em>gpkg</em>) AND
+instr(extension_name, logged MIME type name) != 0</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
 </li>
 <li>
-<p>Separate extension_name into &lt;author&gt; and &lt;extension&gt; at the first "\_"</p>
+<p>Separate extension_name into &lt;author&gt; and &lt;extension&gt; at the first "_"</p>
 </li>
 <li>
-<p>Separate &lt;extension&gt; into &lt;mime&gt; and &lt;ext&gt; at the first "\_"</p>
+<p>Separate &lt;extension&gt; into &lt;mime&gt; and &lt;ext&gt; at the first "_"</p>
 </li>
 <li>
 <p>Fail if &lt;mime&gt; not logged MIME type</p>
 </li>
 <li>
-<p>Fail if &lt;ext&gt; not "mime\_type"</p>
+<p>Fail if &lt;ext&gt; not "mime_type"</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -8156,17 +8156,17 @@ instr(extension\_name, logged MIME type name) != 0</p>
 <p><strong>Other Mime Type - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/tiles\_tile\_encoding/other/data/other\_ext\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/tiles_tile_encoding/other/data/other_ext_row</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that other mime image type tile encodings are registered in the
- gpkg_extensions table using names of the form &lt;author\_name&gt;\_&lt;other&gt;\_mime\_type.</p>
+ gpkg_extensions table using names of the form &lt;author_name&gt;_&lt;other&gt;_mime_type.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/tiles/tile\_encoding/other/data/other\_ext\_name</p>
+<p>/reg_ext/tiles/tile_encoding/other/data/other_ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:    Clause 3.2.5.1.3 Req 91:</p>
@@ -8187,10 +8187,10 @@ instr(extension\_name, logged MIME type name) != 0</p>
 <p><strong>Other Trigger - Extensions Name</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/any/other\_triggers/data/ext\_name</p>
+<p><strong>Test Case ID</strong>: /reg_ext/any/other_triggers/data/ext_name</p>
 </div>
 <div class="paragraph">
-<p><strong>Test Purpose</strong>: Verify that an extension name in the form &lt;author_name&gt;\_&lt;extension&gt; is
+<p><strong>Test Purpose</strong>: Verify that an extension name in the form &lt;author_name&gt;_&lt;extension&gt; is
  defined for an author name other than "gpkg" for each other trigger implementation that
  uses SQL functions other than those provided by SQLite or the GeoPackage Minimal
  Runtime SQL Functions.</p>
@@ -8201,20 +8201,20 @@ instr(extension\_name, logged MIME type name) != 0</p>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql, tbl\_name FROM sqlite\_master WHERE type=<em>trigger</em></p>
+<p>SELECT sql, tbl_name FROM sqlite_master WHERE type=<em>trigger</em></p>
 </li>
 <li>
-<p>For each row sql, tbl\_name from step 1</p>
+<p>For each row sql, tbl_name from step 1</p>
 <div class="ulist">
 <ul>
 <li>
 <p>If sql contains an SQL function other than those provided by SQLite or the
 GeoPackage Minimal Runtime SQL Functions
   + Log trigger
-      + /opt/extension\_mechanism/extensions/data/table\_def
+      + /opt/extension_mechanism/extensions/data/table_def
       + Fail if failed
-      + SELECT extension\_name FROM gpkg\_extensions WHERE
-    table\_name = tbl\_name AND substr(lower(extension\_name),1,4. !-
+      + SELECT extension_name FROM gpkg_extensions WHERE
+    table_name = tbl_name AND substr(lower(extension_name),1,4. !-
     <em>gpkg</em>)
       + Fail if returns an empty result set
       + Log pass otherwise</p>
@@ -8240,18 +8240,18 @@ GeoPackage Minimal Runtime SQL Functions
 <p><strong>Other Trigger - Extensions Row</strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Test Case ID</strong>: /reg\_ext/any/other\_triggers/data/ext\_row</p>
+<p><strong>Test Case ID</strong>: /reg_ext/any/other_triggers/data/ext_row</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Purpose</strong>: Verify that other trigger implementations that use SQL functions other than
  those provided by SQLite or the GeoPackage Minimal Runtime SQL Functions.are
- registered with &lt;author_name&gt;\_&lt;extension&gt; names in the gpkg\_extensions table.</p>
+ registered with &lt;author_name&gt;_&lt;extension&gt; names in the gpkg_extensions table.</p>
 </div>
 <div class="paragraph">
 <p><strong>Test Method</strong>:</p>
 </div>
 <div class="paragraph">
-<p>/reg\_ext/any/other\_triggers/data/ext\_name</p>
+<p>/reg_ext/any/other_triggers/data/ext_name</p>
 </div>
 <div class="paragraph">
 <p><strong>Reference</strong>:    Clause 3.3.1.1.3 Req 93:</p>
@@ -8574,10 +8574,10 @@ The UML notations used in this standard for RDBMS tables in the GeoPackage conta
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>&lt;&lt;table&gt;&gt; An instantiation of a UML class as an RDMBS table.</p>
+<p><a href="#table">[table]</a> An instantiation of a UML class as an RDMBS table.</p>
 </li>
 <li>
-<p>&lt;&lt;column&gt;&gt; An instantiation of a UML attribute as an RDBMS table column.</p>
+<p><a href="#column">[column]</a> An instantiation of a UML attribute as an RDBMS table column.</p>
 </li>
 </ol>
 </div>
@@ -8622,13 +8622,13 @@ columns:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>&lt;&lt;DataType&gt;&gt; A descriptor of a set of values that lack identity (independent existence and the possibility of side effects). A DataType is a class with no operations whose primary purpose is to hold the information.</p>
+<p><a href="#DataType">[DataType]</a> A descriptor of a set of values that lack identity (independent existence and the possibility of side effects). A DataType is a class with no operations whose primary purpose is to hold the information.</p>
 </li>
 <li>
-<p>&lt;&lt;Enumeration&gt;&gt; is a fixed enumeration that uses string values for expressing a list of potential values.</p>
+<p><a href="#Enumeration">[Enumeration]</a> is a fixed enumeration that uses string values for expressing a list of potential values.</p>
 </li>
 <li>
-<p>&lt;&lt;CodeList&gt;&gt; is an extensible enumeration that uses string values for expressing a list of potential values.</p>
+<p><a href="#CodeList">[CodeList]</a> is an extensible enumeration that uses string values for expressing a list of potential values.</p>
 </li>
 </ol>
 </div>
@@ -10068,7 +10068,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.1<br>
-Last updated 2013-10-05 21:11:00 UTC
+Last updated 2013-10-05 21:15:43 UTC
 </div>
 </div>
 </body>
