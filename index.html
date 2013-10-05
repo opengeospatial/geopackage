@@ -544,14 +544,14 @@ span.line-numbers { border-right: 1px solid #E5E5E5; color: #999; display: inlin
 <li><a href="#ext_webp_tiles">3.2.2. Tile Encoding WEBP</a></li>
 <li><a href="#ext_tiff_tiles">3.2.3. Tiles Encoding TIFF</a></li>
 <li><a href="#ext_nitf_tiles">3.2.4. Tile Encoding NITF</a></li>
-<li><a href="#ext_other_tiles">3.2.5. Tile Encoding Other</a></li>
 </ul>
 </li>
-<li><a href="#_any_tables">3.3. Any Tables</a></li>
+<li><a href="#_other_tables">3.3. Other Tables</a></li>
 <li>
 <ul class="sectlevel3">
 <li><a href="#_other_geometry_encoding">3.3.1. Other Geometry Encoding</a></li>
-<li><a href="#_other_trigger">3.3.2. Other Trigger</a></li>
+<li><a href="#ext_other_tiles">3.3.2. Other Tile Encoding</a></li>
+<li><a href="#_other_trigger">3.3.3. Other Trigger</a></li>
 </ul>
 </li>
 </ul>
@@ -581,7 +581,7 @@ span.line-numbers { border-right: 1px solid #E5E5E5; color: #999; display: inlin
 <ul class="sectlevel3">
 <li><a href="#_features_4">A.3.1. Features</a></li>
 <li><a href="#_tiles_4">A.3.2. Tiles</a></li>
-<li><a href="#_any_tables_2">A.3.3. Any Tables</a></li>
+<li><a href="#_any_tables">A.3.3. Any Tables</a></li>
 </ul>
 </li>
 </ul>
@@ -611,7 +611,7 @@ span.line-numbers { border-right: 1px solid #E5E5E5; color: #999; display: inlin
 <li><a href="#_sample_feature_table_informative">C.5. sample_feature_table (Informative)</a></li>
 <li><a href="#_gpkg_tile_matrix_set">C.6. gpkg_tile_matrix_set</a></li>
 <li><a href="#_gpkg_tile_matrix">C.7. gpkg_tile_matrix</a></li>
-<li><a href="#_sample_matrix_tiles_informative">C.8. sample_matrix_tiles (Informative)</a></li>
+<li><a href="#_sample_tile_pyramid_informative">C.8. sample_tile_pyramid (Informative)</a></li>
 <li><a href="#_gpkg_data_columns">C.9. gpkg_data_columns</a></li>
 <li><a href="#_gpkg_data_column_constraints">C.10. gpkg_data_column_constraints</a></li>
 <li><a href="#_gpkg_metadata">C.11. gpkg_metadata</a></li>
@@ -635,7 +635,7 @@ span.line-numbers { border-right: 1px solid #E5E5E5; color: #999; display: inlin
 <li><a href="#_metadata_3">F.3. metadata</a></li>
 <li><a href="#_metadata_reference">F.4. metadata_reference</a></li>
 <li><a href="#_sample_feature_table">F.5. sample_feature_table</a></li>
-<li><a href="#_sample_matrix_tiles">F.6. sample_matrix_tiles</a></li>
+<li><a href="#_sample_tile_pyramid">F.6. sample_tile_pyramid</a></li>
 </ul>
 </li>
 <li><a href="#geometry_types"> Annex G: Geometry Types (Normative)</a></li>
@@ -3647,54 +3647,13 @@ for each such table, “tile_data” <code>column_name</code> values and <code>e
 </div>
 </div>
 </div>
-<div class="sect3">
-<h4 id="ext_other_tiles">3.2.5. Tile Encoding Other</h4>
-<div class="sect4">
-<h5 id="_data_29">Data</h5>
-<div class="paragraph">
-<p>The optional extension capabilities defined in sub clauses and requirement statements of this clause MAY be implemented
-by any GeoPackage file that implements the requirements of clause 2.2 and clause 2.6.1.1 on which they depend.</p>
-</div>
-<div class="sect5">
-<h6 id="_other_mime_type">Other MIME Type</h6>
-<div class="paragraph">
-<p>As a registered extension, a GeoPackage file that contains a tile matrix user data table that contains tile data MAY
-store <code>tile_data</code> in other MIME types. However, a table with such data is not considered to be a “tiles” table for
-purposes of determining GeoPackage file validity.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_other_extensions_name">Other Extensions Name</h6>
-<div id="_requirement-105" class="quoteblock">
-<div class="title">Requirement 105</div>
-<blockquote>
-An extension name in the form &lt;authorname&gt;_&lt;other&gt;_mime_type SHALL be defined for an author
-name other than “gpkg” for each other MIME image format used for <code>tile_data</code> columns in tile matrix set user data
-tables, where is replaced by the other MIME type abbreviation in uppercase
-</blockquote>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_other_extensions_row">Other Extensions Row</h6>
-<div id="_requirement-106" class="quoteblock">
-<div class="title">Requirement 106</div>
-<blockquote>
-A GeoPackage file that contains tile matrix user data tables with <code>tile_data</code> columns that contain
-raster images in a MIME type format other than those defined in this specification SHALL contain a <code>gpkg_extensions</code>
-table that contains row records with <code>table_name</code> values for each such table, “tile_data” <code>column_name</code> values and
-<code>extension_name</code> column values of the other format extension name defined per clause 3.2.5.1.2.
-</blockquote>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_any_tables">3.3. Any Tables</h3>
+<h3 id="_other_tables">3.3. Other Tables</h3>
 <div class="sect3">
 <h4 id="_other_geometry_encoding">3.3.1. Other Geometry Encoding</h4>
 <div class="sect4">
-<h5 id="_data_30">Data</h5>
+<h5 id="_data_29">Data</h5>
 <div class="paragraph">
 <p>The optional registered extension capabilities defined in sub clauses and requirement statements of this clause MAY be
 implemented by any GeoPackage file that implements the requirements of clause 2.6.1.1 on which they depend.</p>
@@ -3710,8 +3669,8 @@ of determining GeoPackage file validity.</p>
 </div>
 <div class="sect5">
 <h6 id="_blob_format_extensions_name">BLOB format - Extensions Name</h6>
-<div id="_requirement-107" class="quoteblock">
-<div class="title">Requirement 107</div>
+<div id="_requirement-105" class="quoteblock">
+<div class="title">Requirement 105</div>
 <blockquote>
 An extension name in the form &lt;author_name&gt;_geometry encoding SHALL be defined for an author name
 other than “gpkg” for each geometry BLOB format other than GeoPackageBinary used in a GeoPackage file.
@@ -3720,8 +3679,8 @@ other than “gpkg” for each geometry BLOB format other than GeoPackageBinary 
 </div>
 <div class="sect5">
 <h6 id="_blob_format_extensions_row">BLOB format - Extensions Row</h6>
-<div id="_requirement-108" class="quoteblock">
-<div class="title">Requirement 108</div>
+<div id="_requirement-106" class="quoteblock">
+<div class="title">Requirement 106</div>
 <blockquote>
 A GeoPackage file that contains other data tables with geometry column BLOB values encoded in an
 extension format SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values
@@ -3732,7 +3691,42 @@ that identify extension format uses, and with extension_name column values const
 </div>
 </div>
 <div class="sect3">
-<h4 id="_other_trigger">3.3.2. Other Trigger</h4>
+<h4 id="ext_other_tiles">3.3.2. Other Tile Encoding</h4>
+<div class="sect4">
+<h5 id="_data_30">Data</h5>
+<div class="paragraph">
+<p>The optional extension capabilities defined in sub clauses and requirement statements of this clause MAY be implemented
+by any GeoPackage file that implements the requirements of clause 2.6.1.1 on which they depend.</p>
+</div>
+<div class="sect5">
+<h6 id="_other_mime_type">Other MIME Type</h6>
+<div class="paragraph">
+<p>As a registered extension, a GeoPackage file can store images in other data tables specified in clause 2.5 using MIME types other than those specified in clause 2.2.
+However, other data tables with such data are not considered to be “tiles” tables for purposes of determining GeoPackage file validity.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_other_extensions_name">Other Extensions Name</h6>
+<div id="_requirement-107" class="quoteblock">
+<div class="title">Requirement 107</div>
+<blockquote>
+An extension name in the form &lt;author_name&gt;_&lt;other&gt;_mime_type SHALL be defined for an author name other than “gpkg” for each other MIME image format used for data columns in other data tables, where &lt;other&gt; is replaced by the other MIME type abbreviation in uppercase
+</blockquote>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_other_extensions_row">Other Extensions Row</h6>
+<div id="_requirement-108" class="quoteblock">
+<div class="title">Requirement 108</div>
+<blockquote>
+A GeoPackage file that contains other data tables with data columns that contain raster images in a MIME type format other than those defined in this specification SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code> and <code>column_name</code> values that identify extension MIME type uses and <code>extension_name</code> column values of the other format extension name defined per clause 3.3.2.
+</blockquote>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_other_trigger">3.3.3. Other Trigger</h4>
 <div class="sect4">
 <h5 id="_data_31">Data</h5>
 <div class="paragraph">
@@ -8188,7 +8182,7 @@ instr(extension_name, logged MIME type name) != 0</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_any_tables_2">A.3.3. Any Tables</h4>
+<h4 id="_any_tables">A.3.3. Any Tables</h4>
 <div class="sect4">
 <h5 id="_other_trigger_2">Other Trigger</h5>
 <div class="sect5">
@@ -8846,11 +8840,11 @@ columns:</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sample_matrix_tiles_informative">C.8. sample_matrix_tiles (Informative)</h3>
+<h3 id="_sample_tile_pyramid_informative">C.8. sample_tile_pyramid (Informative)</h3>
 <div id="example_tiles_table_sql" class="listingblock">
 <div class="title">EXAMPLE: tiles table Create Table SQL</div>
 <div class="content">
-<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_matrix_pyramid (
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_tile_pyramid (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   zoom_level <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tile_column <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -9482,58 +9476,58 @@ violates constraint: real_attribute must be greater than 0</span><span class="de
 </div>
 </div>
 <div class="sect2">
-<h3 id="_sample_matrix_tiles">F.6. sample_matrix_tiles</h3>
+<h3 id="_sample_tile_pyramid">F.6. sample_tile_pyramid</h3>
 <div class="listingblock">
 <div class="title">tiles table Trigger Definition SQL</div>
 <div class="content">
-<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_zoom_insert</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_zoom_insert</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span>)) ;
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span>)) ;
 <span class="keyword">END</span>
 
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_zoom_update</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> zoom_level <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_zoom_update</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> zoom_level <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span>)) ;
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span>)) ;
 <span class="keyword">END</span>
 
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_column_insert</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_column_insert</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_column &lt; <span class="integer">0</span>) ;
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span>
 
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_column_update</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> tile_column <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_column_update</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> tile_column <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_column &lt; <span class="integer">0</span>) ;
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span>
 
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_row_insert</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_row_insert</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_row &lt; <span class="integer">0</span>) ;
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_matrix_tiles'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span>
 
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles_tile_row_update</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> tile_row <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_matrix_tiles</span><span class="delimiter">&quot;</span></span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_row_update</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> tile_row <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_row &lt; <span class="integer">0</span>) ;
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_matrix_tiles'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_matrix_tiles</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span></code></pre>
 </div>
 </div>
@@ -10078,7 +10072,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.1<br>
-Last updated 2013-10-05 21:18:57 UTC
+Last updated 2013-10-05 21:27:21 UTC
 </div>
 </div>
 </body>
