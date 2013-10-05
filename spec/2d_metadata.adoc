@@ -4,8 +4,8 @@ The optional capabilities defined in sub clauses and requirement statements of t
 
 ==== Introduction
 
-Two tables in a GeoPackage file provide a means of storing metadata in MIME <<N25>> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
-These tables are intended to provide the support necessary to implement the hierarchical metadata model defined in ISO 19115 <<N40>>, Annex B B.5.25 MD_ScopeCode, Annex I and Annex J, so that as GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.
+Two tables in a GeoPackage file provide a means of storing metadata in MIME <<25>> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
+These tables are intended to provide the support necessary to implement the hierarchical metadata model defined in ISO 19115 <<40>>, Annex B B.5.25 MD_ScopeCode, <<metadata_example_appendix>> and <<raster_or_tile_metadata_example_appendix>>, so that as GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.
 
 The `gpkg_metadata` table that contains metadata is described in clause <<_metadata_table>>, and the `gpkg_metadata_reference` table that relates `gpkg_metadata` to GeoPackage data is described in clause <<_metadata_reference_table>>.
 There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion footnote:[Informative examples of hierarchical metadata are provided in <<metadata_example_appendix>>] with more than one level, only that if it is, these tables SHALL be used.
@@ -20,7 +20,7 @@ Such metadata footnote:[An informative example of raster image metadata is provi
 _Req 50:_ A GeoPackage file MAY contain a table named gpkg_metadata. If present it SHALL be defined
 per <<gpkg_metadata_cols>> and <<gpkg_metadata_sql>>.
 
-The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<N25>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<N40>>, ISO 19115-2 <<B31>>, ISO 19139 <<B32>>, Dublin Core <<B33>>, CSDGM <<B34>>, DDMS <<B35>>, NMF/NMIS <<B36>>, etc.
+The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<25>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<40>>, ISO 19115-2 <<B31>>, ISO 19139 <<B32>>, Dublin Core <<B33>>, CSDGM <<B34>>, DDMS <<B35>>, NMF/NMIS <<B36>>, etc.
 The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <<B37>> encoded in XMI <<B38>>, GML Application Schemas <<B39>>, ISO 19110 feature catalogues <<B40>>, OWL <<B41>> and SKOS <<B42>> taxonomies, etc.
 
 [[gpkg_metadata_cols]]
@@ -101,7 +101,7 @@ The `gpkg_metadata_reference` table is not required to contain any rows.
 
 Every row in `gpkg_metadata_reference` that has null value as `md_parent_id` forms the root of a metadata hierarchy [^9].
 
-See Annex C: Table Definition SQL clause C.10 `gpkg_metadata_reference`.
+See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 
 ====== Table Data Values
 

@@ -1,6 +1,6 @@
 == Base
 
-The required capabilities specified in this clause serve as the base for optional options and registered extensions capabilities specified in clauses 1 and 2.
+The required capabilities specified in this clause serve as the base for optional options and registered extensions capabilities specified in clauses <<_options>> and <<_registered_extensions>>.
 All gpkg_* tables and views and all tiles user data tables specified in this standard SHALL have only the specified columns.
 Any features user data tables MAY have columns in addition to those specified.
 All specified table and column name values SHALL be lowercase.
@@ -23,7 +23,7 @@ A self-contained, single-file, cross-platform, serverless, transactional, open s
 ====== File Format
 
 :req1_foot1: footnote:[SQLite version 4 <<B49>>, which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.]
-:req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html[])]
+:req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html)]
 
 [requirement]
 The GeoPackage file format SHALL be a http://www.sqlite.org/[SQLite] database
@@ -57,7 +57,7 @@ The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return a
 :req4_foot1: footnote:[New applications should use the latest available SQLite version software]
 
 [requirement]
-A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via http://www.sqlite.org/download.html[SQLite sqlite3] software APIs. {req4_foot1}
+A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via http://www.sqlite.org/download.html[SQLite sqlite3] <<12>> software APIs. {req4_foot1}
 
 ====== Every GPKG SQLite Configuration
 
@@ -94,8 +94,8 @@ A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table per table <<gpkg_
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
 
-The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in SQL/MM (ISO 13249-3) <<N16>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
-Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<N3>><<N14>><<N15>> (Table 21) specifications.
+The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in SQL/MM (ISO 13249-3) <<16>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
+Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<3>><<14>><<15>> (Table 21) specifications.
 
 [[gpkg_spatial_ref_sys_cols]]
 .Spatial Ref Sys Table or View Definition

@@ -27,21 +27,19 @@ GeoPackage.
 
 The optional extension capabilities defined in sub clauses and requirement statements of this clause MAY be implemented
 by any GeoPackage file that implements the requirements of clause 2.1 and clause 2.6.1.1 on which they depend, as
-specified in Annex A.
+specified in <<abstract_test_suite>>.
 
 ====== Extension Types
 
 [requirement]
 A GeoPackage file MAY store feature table geometries with the extended non-linear geometry types
-(CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in Annex G. If it does so, they
+(CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in <<geometry_types>>. If it does so, they
 SHALL be encoded in the GeoPackageBinary geometry format.
 
 ====== Extensions Types - Extensions Name
 
 [requirement]
-An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name
-using the “gpkg_geom_\<gname\>” template where \<gname\> is the uppercase name of the extension geometry type from Annex
-G used in a GeoPackage file.
+An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_\<gname\>” template where \<gname\> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage file.
 
 ====== Extensions Types - Extensions Row
 
@@ -67,11 +65,11 @@ Spatial indexes are an optional GeoPackage extension with the following runtime 
 
 * The SQLite RTree extension SHALL be available and loaded per clause
 * SQLite trigger support SHALL be present per clause 2.6.1.2.2. +
-* The ST_MinX, ST_MaxX, ST_MinY, ST_MaxY SQL functions specified in Annex D SHALL be available.
+* The ST_MinX, ST_MaxX, ST_MinY, ST_MaxY SQL functions specified in <<minimal_runtime_sql_functions>> SHALL be available.
 
 [requirement]
 A GeoPackage file SHALL implement spatial indexes on feature table geometry columns as specified in clause
-3.1.3.1.1 using the SQLite Virtual Table RTrees and triggers specified in Annex E.
+<<_spatial_indexes_implementation>> using the SQLite Virtual Table RTrees and triggers specified in <<spatial_index_sql>>.
 
 ====== Spatial Indexes - Extensions Name
 
@@ -125,11 +123,11 @@ WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
         AND   gpkg_IsAssignable(geometry_type_name,
                                 ST_GeometryType(NEW.<c>)) = 0;
 END
-----------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
 
 where and are replaced with the names of the feature table and geometry column being inserted or updated. The triggers
 to enforce `gpkg_geometry_columns` `geometry_type_name` constraints on feature table geometries use Minimal Runtime SQL
-Functions specified in Annex D.
+Functions specified in <<minimal_runtime_sql_functions>>.
 
 ====== Geometry Type Triggers – Extensions Name
 
