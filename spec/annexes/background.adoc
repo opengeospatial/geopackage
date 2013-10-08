@@ -111,21 +111,23 @@ For the purposes of this document, the following terms and definitions apply.
 
 [gloassary]
 Empty GeoPackage::
-    A GeoPackage file that contains a `spatial_ref_sys` table, `agpkg_contents` table with row record(s) with `data_type` column values of “features” or “tiles”, and corresponding features tables per clause 2.1. and/or tiles tables per clause 2.2 where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.
+    A GeoPackage that contains a `gpkg_spatial_ref_sys` table, a `gpkg_contents` table with row record(s) with `data_type` column values of “features” or “tiles”, and corresponding features tables per clause <<features>> and/or tiles tables per clause <<tiles>> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.
+Extended GeoPackage::
+    A GeoPackage that contains any additional data elements (tables or columns) or SQL constructs (data types, indexes, constraints or triggers) that are not specified in this encoding standard.
 geolocate::
     identify a real-world geographic location
-GeoPackage::
-    A GeoPackage file used with a GeoPackage SQLite Extension
 GeoPackage file::
     a platform-independent SQLite database file that contains GeoPackage data and metadata tables with specified definitions, integrity assertions, format limitations and content constraints.
+GeoPackage SQLite Configuration::
+    consists of the SQLite 3 software library and a set of compile- and runtime configurations options.
 GeoPackage SQLite Extension::
-    executable software linked to a SQLite library with specified configuration requirements to provide SQL API access to and functional manipulation of GeoPackage file contents.
+    a SQLite loadable extension that MAY provide SQL functions to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API access to a GeoPackage.
 georectified::
     raster whose pixels have been regularly spaced in a geographic (i.e., latitude / longitude) or projected map coordinate system using ground control points so that any pixel can be geolocated given its grid coordinate and the grid origin, cell spacing, and orientation.
 orthorectified::
     georectified raster that has also been corrected to remove image perspective (camera angle tilt), camera and lens induced distortions, and terrain induced distortions using camera calibration parameters and DEM elevation data to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
 Valid GeoPackage::
-    A GeoPackage file that contains features per clause Error! Reference source not found. and/or tiles per clause Error! Reference source not found. and row(s) in the `gpkg_contents` table with `data_type` column values of “features” and/or “tiles” describing the user data tables.
+    A GeoPackage that contains features per clause <<_features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of “features” and/or “tiles” describing the user data tables.
 
 === Conventions
 

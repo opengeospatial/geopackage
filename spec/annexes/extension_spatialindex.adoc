@@ -1,6 +1,49 @@
-[[spatial_index_sql]]
+[[extension_rtree]]
 [appendix]
-== Spatial Index SQL (Normative)
+== RTree Spatial Index Extension (Normative)
+
+[float]
+=== Extension Title
+
+Rtree Spatial Indexes
+
+[float]
+=== Introduction
+
+The rtree index extension provides a means to encode an rtree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.
+
+[float]
+=== Extension Author
+
+GeoPackage SWG, author_name “gpkg”.
+
+[float]
+=== Extension Name or Template
+
+“gpkg_rtree_index”
+
+[float]
+=== Extension Type
+
+New Requirement
+
+[float]
+=== Applicability
+
+This extension applies to any column specified in the `gpkg_geometry_columns` table.
+
+[float]
+=== Scope
+
+Write-only, because it does not change the result of reads, although it may improve their performance.
+
+[float]
+=== Requirements
+
+This extension uses the rtree implementation provided by the SQLite RTree extension (<http://www.sqlite.org/rtree.html>).
+
+[float]
+==== GeoPackage
 
 The tables below contain SQL templates with variables.
 Replace the following template variables with the specified values to create the required SQL statements: +
@@ -8,10 +51,10 @@ Replace the following template variables with the specified values to create the
 <c>: The name of the geometry column in <t> that is being indexed +
 <i>: The name of the integer primary key column in <t> as specified in Req 25
 
-=== Create Virtual Table SQL Template
+[float]
+===== Create Virtual Table SQL Template
 
-GeoPackage files MAY contain a spatial index for each geometry column of a feature table.
-These spatial indexes SHALL be created using the SQLite Virtual Table RTree extension.
+RTree spatial indexes on geometry columns SHALL be created using the SQLite Virtual Table RTree extension.
 An application that creates a spatial index SHALL create it using the following SQL statement template:
 
 .create virtual table SQL
@@ -23,7 +66,8 @@ CREATE VIRTUAL TABLE rtree_<t>_<c> USING rtree(id, minx, maxx, miny, maxy)
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed.
 The rtree function id parameter becomes the virtual table 64-bit signed integer primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored as 32-bit floating point numbers) for each dimension that become the virtual table data columns that are populated to create the spatial rtree index.
 
-=== Load Spatial Index Values
+[float]
+===== Load Spatial Index Values
 
 The indexes provided by the SQLite Virtual Table RTree extension are not automatic indices.
 This means the index data structure needs to be manually populated, updated and queried.
@@ -38,9 +82,10 @@ INSERT OR REPLACE INTO rtree_<t>_<c>
 
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
-=== Define Triggers to Maintain Spatial Index Values
+[float]
+===== Define Triggers to Maintain Spatial Index Values
 
-For each spatial index in a GeoPackage file, corresponding insert, update and delete triggers that update the spatial index SHALL be present on the indexed geometry column.
+For each spatial index in a GeoPackage, corresponding insert, update and delete triggers that update the spatial index SHALL be present on the indexed geometry column.
 These spatial index triggers SHALL be defined as follows:
 
 .Spatial Index SQL Triggers Template
@@ -120,3 +165,34 @@ END;
 ----
 
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
+
+[float]
+==== GeoPackage SQLite Configuration
+
+Definition of SQLite configuration settings
+
+[cols=",,,",options="header"]
+|======
+|Setting compile or runtime |Option |Shall / Not (Value) | Discussion
+|compile |SQLITE_OMIT_LOAD_EXTENSION |Not |The load_extension() function is required to implement the extensions
+|compile |SQLITE_OMIT_VIRTUALTABLE |Not |Virtual tables are required to implement RTrees
+|compile |SQLITE_ENABLE_RTREE |Shall |RTrees ares used for GeoPackage Spatial Indexes
+|compile |SQLITE_RTREE_INT_ONLY |Not |RTrees with floating point values are used for GeoPackage spatial indexes
+|compile |SQLITE_OMIT_FLOATING_POINT |Not |RTrees with floating point values are used for GeoPackage spatial indexes
+|compile |SQLITE_OMIT_TRIGGER |Not |Defining this option omits support for TRIGGER objects. Neither the CREATE TRIGGER or DROP TRIGGER commands are available in this case, and attempting to execute either will result in a parse error. This option also disables enforcement of foreign key constraints, since the code that implements triggers and which is omitted by this option is also used to implement foreign key actions. Triggers are used to maintain spatial indexes.
+|======
+
+[float]
+==== GeoPackage SQLite Extension
+
+Definition of SQL functions
+
+[cols=",,,",options="header"]
+|======
+|SQL Function |Description |Use
+|ST_IsEmpty(geom Geometry): integer |Returns 1 if geometry value is empty, 0 if not empty, NULL if geometry value is NULL |Test if a geometry value corresponds to the empty set
+|ST_MinX(geom Geometry): real |Returns the minimum X value of the bounding envelope of a geometry |Update the spatial index on a geometry column in a feature table
+|ST_MaxX(geom Geometry): real |Returns the maximum Y value of the bounding envelope of a geometry |Update the spatial index on a geometry column in a feature table
+|ST_MinY(geom Geometry): real |Returns the minimum X value of the bounding envelope of a geometry |Update the spatial index on a geometry column in a feature table
+|ST_MaxY(geom Geometry): real |Returns the maximum Y value of the bounding envelope of a geometry |Update the spatial index on a geometry column in a feature table
+|======

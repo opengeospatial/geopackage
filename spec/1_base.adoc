@@ -1,17 +1,20 @@
 == Base
 
-The required capabilities specified in this clause serve as the base for optional options and registered extensions capabilities specified in clauses <<_options>> and <<_registered_extensions>>.
+The required capabilities specified in this clause serve as the base for options and extensions capabilities specified in clauses <<_options>> and <<_registered_extensions>>.
 All gpkg_* tables and views and all tiles user data tables specified in this standard SHALL have only the specified columns.
 Any features user data tables MAY have columns in addition to those specified.
 All specified table and column name values SHALL be lowercase.
 
 === Core
 
-The mandatory core capabilities defined in sub clauses and requirement statements of this clause SHALL be implemented by every *GeoPackage*.
+The mandatory core capabilities defined in sub clauses and requirement statements of this clause SHALL be implemented by every *GeoPackage* and *GeoPackage SQLite Configuration*.
 
 ==== SQLite Container
 
-A self-contained, single-file, cross-platform, serverless, transactional, open source RDBMS container is desired to simplify production, distribution and use of GeoPackages and guarantee the integrity of the data they contain.
+The SQLite software library provides a self-contained, single-file, cross-platform, serverless, transactional, open source RDBMS container.
+The GeoPackage specification defines a SQL database schema designed for use with the SQLite software library.
+Using SQLite as the basis for GeoPackage simplifies production, distribution and use of GeoPackages and assists in guaranteeing the integrity of the data they contain.
+
 “Self-contained” means that container software requires very minimal support from external libraries or from the operating system.
 “Single-file” means that a container not currently opened by any software application consists of a single file in a file system supported by a computing platform operating system.
 “Cross-platform” means that a container file MAY be created and loaded with data on one computing platform, and used and updated on another, even if they use different operating systems, file systems, and byte order (endian) conventions.
@@ -20,18 +23,25 @@ A self-contained, single-file, cross-platform, serverless, transactional, open s
 
 ===== Data
 
+====== File Contents
+
+[requirement]
+Req 1:	A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the “gpkg” author name specified in this encoding standard.
+
+In order to guarantee maximum interoperability between applications, GeoPackages SHALL not contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
+SQLite databases that use constructs from the GeoPackage specification but extend that to contain any of these elements are referred to as Extended GeoPackages throughout this specification.
+
 ====== File Format
 
 :req1_foot1: footnote:[SQLite version 4 <<B49>>, which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.]
 :req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html)]
 
 [requirement]
-The GeoPackage file format SHALL be a http://www.sqlite.org/[SQLite] database
-http://sqlite.org/fileformat2.html[version 3 format file], the first 16 bytes of which contain “SQLite format 3”
-{req1_foot1} in ASCII. {req1_foot2}
+A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format].
+The first 16 bytes of a GeoPackage SHALL contain “SQLite format 3” {req1_foot1} in ASCII. {req1_foot2}
 
-It is RECOMMENDED that data providers whose data is intended for use in multiple applications put the value “GPKG” in the SQLite database header application id field.
-However, applications that put application-specific data in a GeoPackage MAY put their own application acronym in the application id field, so this is NOT a GeoPackage requirement.
+[requirement]
+A GeoPackage SHALL contain 0x47504b47 ("GPKG" in ASCII) in the application id field of the SQLite database header.
 
 The maximum size of a GeoPackage file is about 140TB.
 In practice a lower size limit MAY be imposed by the filesystem to which the file is written.
@@ -40,7 +50,9 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 ====== File Extension Name
 
 [requirement]
-GeoPackage files SHALL have the file extension name “.gpkg”.
+A GeoPackage SHALL have the file extension name “.gpkg”.
+
+It is RECOMMENDED that Extended GeoPackages use the file extension “.gpkx”, but this is NOT a GeoPackage requirement.
 
 ====== Integrity Check
 
@@ -57,15 +69,15 @@ The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return a
 :req4_foot1: footnote:[New applications should use the latest available SQLite version software]
 
 [requirement]
-A GeoPackage SQLite Extension SHALL provide SQL access to GeoPackage file contents via http://www.sqlite.org/download.html[SQLite sqlite3] <<12>> software APIs. {req4_foot1}
+A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<12>> software APIs. {req4_foot1}
 
 ====== Every GPKG SQLite Configuration
 
 The http://www.sqlite.org/download.html[SQLite] library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses.
-A GeoPackage application can use the http://www.sqlite.org/pragma.html#pragma_compile_options[compile options] and other SQLite pragmas to get the effective compile and run time option settings and compare them to those required for a particular GeoPackage.
+Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime.
 
 [requirement]
-Every GeoPackage SQLite Extension SHALL have the SQLite library compile and run time options specified in table <<every_gpkg_sqlite_config_table>>.
+Every GeoPackage SQLite Configuration SHALL have the SQLite library compile and run time options specified in table <<every_gpkg_sqlite_config_table>>.
 
 [[every_gpkg_sqlite_config_table]]
 .Every GeoPackage SQLite Configuration
@@ -74,11 +86,12 @@ Every GeoPackage SQLite Extension SHALL have the SQLite library compile and run 
 |Setting |Option |Shall / Not |Discussion
 |compile |SQLITE_OMIT_AUTOINCREMENT |Not |A number of tables in GeoPackage are specified to have autoincrement columns.
 |compile |SQLITE_OMIT_DATETIME_FUNCS |Not |`gpkg_contents` table `last_change` column requires timestamps
-|compile |SQLITE_OMIT_DEPRECATED |Shall |Omit http://www.sqlite.org/pragma.html#syntax[PRAGMA]s marked “Do not use this pragma!” in SQLite documentation.
 |compile |SQLITE_OMIT_FLOATING_POINT |Not |min/max x/y columns in `gpkg_contents` table are type REAL
-|compile |SQLITE_OMIT_PRAGMA |Not |GeoPackage configuration checks will require use of the http://www.sqlite.org/pragma.html#pragma_compile_options[compile_options] pragma.
-|compile |SQLITE_OMIT_FLAG_PRAGMAS |Not |GeoPackage conformance validation will require use of the http://www.sqlite.org/pragma.html#pragma_integrity_check[integrity_check] pragma
 |compile |SQLITE_OMIT_VIEW |Not |User data tables and some GeoPackage tables MAY be implemented as updateable views.
+|compile |SQLITE_DEFAULT_FOREIGN_KEYS |Shall(1) |Foreign key constraints are used to maintain GeoPackage referential integrity.
+|compile |SQLITE_OMIT_FOREIGN_KEYS |Not |Foreign key constraints are used to maintain GeoPackage referential integrity.
+|run |PRAGMA foreign_keys |Not (OFF) |Foreign key constraints are used to maintain GeoPackage referential integrity.
+|compile |SQLITE_OMIT_TRIGGER |Not |This option disables enforcement of foreign key constraints, since the code that implements triggers and which is omitted by this option is also used to implement foreign key actions. Foreign key constraints are used to maintain GeoPackage relational integrity.
 |=======================================================================
 
 [[spatial_ref_sys]]
@@ -89,7 +102,7 @@ Every GeoPackage SQLite Extension SHALL have the SQLite library compile and run 
 ====== Table Definition
 
 [requirement]
-A GeoPackage file SHALL include a `gpkg_spatial_ref_sys` table per table <<gpkg_spatial_ref_sys_cols>> and table <<gpkg_spatial_ref_sys_sql>>.
+A GeoPackage SHALL include a `gpkg_spatial_ref_sys` table per table <<gpkg_spatial_ref_sys_cols>> and table <<gpkg_spatial_ref_sys_sql>>.
 
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
@@ -103,7 +116,7 @@ Views of this table MAY be used to provide compatibility with the http://www.iso
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
 |`srs_name` |text |Human readable name of this SRS |no |
-|`srs_id` |integer |Unique identifier for each Spatial Reference System within a GeoPackage file |no |PK
+|`srs_id` |integer |Unique identifier for each Spatial Reference System within a GeoPackage |no |PK
 |`organization` |text |Case-insensitive name of the defining organization e.g. EPSG or epsg |no |
 |`organization_coordsys_id` |integer |Numeric ID of the Spatial Reference System assigned by the organization |no |
 |`definition` |text |Well-known Text Representation of the Spatial Reference System |no |
@@ -119,7 +132,7 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain a record for
 organization http://www.epsg.org/Geodetic.html[EPSG] or epsg and `organization_coordsys_id` http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] for http://www.google.com/search?as_q=WGS-84[WGS-84], a record with an `srs_id` of -1, an organization of “NONE”, an `organization_coordsys_id` of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an `srs_id` of 0, an organization of “NONE”, an `organization_coordsys_id` of 0, and definition “undefined” for undefined geographic coordinate reference systems.
 
 [requirement]
-The `gpkg_spatial_ref_sys` table in a GeoPackage file SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
+The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
 
 ==== Contents
 
@@ -138,7 +151,7 @@ The purpose of the `gpkg_contents` table is to provide identifying and descripti
 |=======================================================================
 |Column Name |Type |Description |Null |Default |Key
 |`table_name` |text |The name of the tiles, or feature table |no | |PK
-|`data_type` |text |Type of data stored in the table:. “features” per clause <<_features>>, “tiles” per clause <<_tiles>>, or an implementer-defined value for other data tables per clause <<_other_data_tables>>. |no | |
+|`data_type` |text |Type of data stored in the table:. “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage. |no | |
 |`identifier` |text |A human-readable identifier (e.g. short name) for the table_name content |yes | |
 |`description` |text |A human-readable description for the table_name content |yes |“” |
 |`last_change` |text |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', CURRENT_TIMESTAMP)` |
@@ -149,7 +162,7 @@ The purpose of the `gpkg_contents` table is to provide identifying and descripti
 |`srs_id` |integer |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match gpkg_tile_matrix_set.srs.id |yes | |FK
 |=======================================================================
 
-The `gpkg_contents` table is intended to provide a list of all geospatial contents in the GeoPackage.
+The `gpkg_contents` table is intended to provide a list of all geospatial contents in a GeoPackage.
 The `data_type` specifies the type of content.
 The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content.
 If the `srs_id` column value references a geographic coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references a projected CRS and the min/max x/y values are in the units specified by that CRS.

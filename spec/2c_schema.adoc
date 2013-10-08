@@ -1,6 +1,9 @@
 === Schema
 
-The optional capabilities defined in sub clauses and requirement statements of this clause MAY be implemented by any GeoPackage file.
+==== Schema Introduction
+
+The schema option provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
+The information provided by this option can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.
 
 ==== Data Columns
 
@@ -9,7 +12,7 @@ The optional capabilities defined in sub clauses and requirement statements of t
 ====== Table Definition
 
 [requirement]
-A GeoPackage file MAY contain a table or updateable view named `gpkg_data_columns`.
+A GeoPackage MAY contain a table or updateable view named `gpkg_data_columns`.
 If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
 
 [[gpkg_data_columns_cols]]
@@ -28,7 +31,7 @@ If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_co
 |=======================================================================
 
 :data_cols_foot1: footnote:[A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.]
-:data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses 2.2.4, 2.2.5, 3.2.2, 3.2.3, and 3.2.4 as feature attributes, but they are not required to do so.]
+:data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>>, <<tile_enc_webp>>, <<tile_enc_tiff>> and <<tile_enc_nitf>> as feature attributes, but they are not required to do so.]
 
 GeoPackage applications MAY {data_cols_foot1} use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] type {data_cols_foot2} information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
 The `gpkg_data_columns` data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
@@ -58,11 +61,11 @@ If the constraint_name column value is not NULL, then the constraint_type column
 ====== Table Definition
 
 [requirement]
-A GeoPackage file MAY contain a table or updateable view named gpkg_data_column_constraints.
+A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
 If present it SHALL be defined per <<gpkg_data_column_constraints_cols>> and <<gpkg_data_column_constraints_sql>>.
 
-The gpkg_data_column_constraints table contains data to specify restrictions on basic data type column values.
-The constraint_name and constraint_type columns are referenced by columns with the same names in the gpkg_data_columns table defined in clause 2.3.1.1.1.
+The `gpkg_data_column_constraints` table contains data to specify restrictions on basic data type column values.
+The constraint_name and constraint_type columns are referenced by columns with the same names in the `gpkg_data_columns` table defined in <<gpkg_data_columns_cols>>.
 
 [[gpkg_data_column_constraints_cols]]
 .Data Column Constraints Table or View Definition

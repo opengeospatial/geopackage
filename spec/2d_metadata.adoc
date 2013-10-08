@@ -1,10 +1,8 @@
 === Metadata
 
-The optional capabilities defined in sub clauses and requirement statements of this clause MAY be implemented by any *GeoPackage file*.
-
 ==== Introduction
 
-Two tables in a GeoPackage file provide a means of storing metadata in MIME <<25>> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
+Two tables in a GeoPackage provide a means of storing metadata in MIME <<25>> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
 These tables are intended to provide the support necessary to implement the hierarchical metadata model defined in ISO 19115 <<40>>, Annex B B.5.25 MD_ScopeCode, <<metadata_example_appendix>> and <<raster_or_tile_metadata_example_appendix>>, so that as GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.
 
 The `gpkg_metadata` table that contains metadata is described in clause <<_metadata_table>>, and the `gpkg_metadata_reference` table that relates `gpkg_metadata` to GeoPackage data is described in clause <<_metadata_reference_table>>.
@@ -17,7 +15,7 @@ Such metadata footnote:[An informative example of raster image metadata is provi
 
 ====== Table Definition
 
-_Req 50:_ A GeoPackage file MAY contain a table named gpkg_metadata. If present it SHALL be defined
+_Req 50:_ A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined
 per <<gpkg_metadata_cols>> and <<gpkg_metadata_sql>>.
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<25>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<40>>, ISO 19115-2 <<B31>>, ISO 19139 <<B32>>, Dublin Core <<B33>>, CSDGM <<B34>>, DDMS <<B35>>, NMF/NMIS <<B36>>, etc.
@@ -81,7 +79,7 @@ Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL
 ====== Table Definition
 
 [requirement]
-A GeoPackage file that contains a gpkg_metadata table SHALL contain a gpkg_metadata_reference table per clause 2.4.3.1.1, Table 12 and Table 34.
+A GeoPackage that contains a gpkg_metadata table SHALL contain a gpkg_metadata_reference table per clause 2.4.3.1.1, Table 12 and Table 34.
 
 The second component of GeoPackage metadata is the `gpkg_metadata_reference` table that links metadata in the `gpkg_metadata` table to data in the feature, and tiles tables defined in clauses 2.1.6 and 2.2.7.
 The `gpkg_metadata_reference` table is not required to contain any rows.
