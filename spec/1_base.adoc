@@ -28,7 +28,7 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 [requirement]
 Req 1:	A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the “gpkg” author name specified in this encoding standard.
 
-In order to guarantee maximum interoperability between applications, GeoPackages SHALL not contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
+In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
 SQLite databases that use constructs from the GeoPackage specification but extend that to contain any of these elements are referred to as Extended GeoPackages throughout this specification.
 
 ====== File Format
@@ -41,7 +41,7 @@ A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] database file using http:
 The first 16 bytes of a GeoPackage SHALL contain “SQLite format 3” {req1_foot1} in ASCII. {req1_foot2}
 
 [requirement]
-A GeoPackage SHALL contain 0x47504b47 ("GPKG" in ASCII) in the application id field of the SQLite database header.
+A GeoPackage SHALL contain 0x47503130 ("GP10" in ASCII) in the application id field of the SQLite database header to indicate a GeoPackage version 1.0 file.
 
 The maximum size of a GeoPackage file is about 140TB.
 In practice a lower size limit MAY be imposed by the filesystem to which the file is written.
@@ -54,7 +54,7 @@ A GeoPackage SHALL have the file extension name “.gpkg”.
 
 It is RECOMMENDED that Extended GeoPackages use the file extension “.gpkx”, but this is NOT a GeoPackage requirement.
 
-====== Integrity Check
+====== File Integrity
 
 [requirement]
 The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file.
@@ -84,14 +84,8 @@ Every GeoPackage SQLite Configuration SHALL have the SQLite library compile and 
 [cols=",,,",options="header",]
 |=======================================================================
 |Setting |Option |Shall / Not |Discussion
-|compile |SQLITE_OMIT_AUTOINCREMENT |Not |A number of tables in GeoPackage are specified to have autoincrement columns.
-|compile |SQLITE_OMIT_DATETIME_FUNCS |Not |`gpkg_contents` table `last_change` column requires timestamps
-|compile |SQLITE_OMIT_FLOATING_POINT |Not |min/max x/y columns in `gpkg_contents` table are type REAL
-|compile |SQLITE_OMIT_VIEW |Not |User data tables and some GeoPackage tables MAY be implemented as updateable views.
-|compile |SQLITE_DEFAULT_FOREIGN_KEYS |Shall(1) |Foreign key constraints are used to maintain GeoPackage referential integrity.
-|compile |SQLITE_OMIT_FOREIGN_KEYS |Not |Foreign key constraints are used to maintain GeoPackage referential integrity.
+|compile |SQLITE_OMIT_* |Not |SHALL NOT include any OMIT options from http://www.sqlite.org/compile.html#omitfeatures.
 |run |PRAGMA foreign_keys |Not (OFF) |Foreign key constraints are used to maintain GeoPackage referential integrity.
-|compile |SQLITE_OMIT_TRIGGER |Not |This option disables enforcement of foreign key constraints, since the code that implements triggers and which is omitted by this option is also used to implement foreign key actions. Foreign key constraints are used to maintain GeoPackage relational integrity.
 |=======================================================================
 
 [[spatial_ref_sys]]

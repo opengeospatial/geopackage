@@ -5,68 +5,53 @@
 [float]
 === Extension Title
 
-Title of the Extension
+Tile Encoding NITF
 
 [float]
 === Introduction
 
-Description of extension
+PNG and JPEG are the default MIME types for encoding images in tile pyramid user data tables.
+This extension allows the use of `application/vnd.NITF` as an additional encoding type.
 
 [float]
 === Extension Author
 
-Author of extension, author_name.
+GeoPackage SWG, author_name `gpkg`.
 
 [float]
 === Extension Name or Template
 
-Name of the extension or definition of the template to create the name of extensions that should be used in gpkg_extensions
+`gpkg_webp`
 
 [float]
 === Extension Type
 
-Extension of Existing or New Requirement
+Extension of Existing Requirement in clauses <<tile_enc_png>> and <<tile_enc_jpeg>>.
 
 [float]
 === Applicability
 
-Tables and/or columns on which this extension may be applied
+The MIME type of values of the `tile_data` column in tile pyramid user data tables SHALL be `application/vnd.NITF` <<46>> for National Imagery Transmission Format images.
 
 [float]
 === Scope
 
-Read-write or write-only with clarification if necessary
+Read-write
 
 [float]
 === Requirements
 
-Definition of extension
-
 [float]
 ==== GeoPackage
 
-Definition of extension data or MIME type(s)
-Definition of extension tables or table templates
-Definition of triggers or trigger templates
+The MIME type of values of the `tile_data` column in tile pyramid user data tables SHALL be `image/x-webp`.
 
 [float]
 ==== GeoPackage SQLite Configuration
 
-Definition of SQLite configuration settings
-
-[cols=",,,",options="header"]
-|======
-|Setting compile or runtime |Option |Shall / Not (Value) | Discussion
-| | | |
-|======
+None
 
 [float]
 ==== GeoPackage SQLite Extension
 
-Definition of SQL functions
-
-[cols=",,,",options="header"]
-|======
-|SQL Function |Description |Use
-|foo(bar, baz) : datatype |Returns r when w |
-|======
+None

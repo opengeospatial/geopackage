@@ -5,60 +5,71 @@
 [float]
 === Extension Title
 
-Title of the Extension
+Geometry SRS_ID Triggers
 
 [float]
 === Introduction
 
-Description of extension
+Geometry SRS_ID triggers prevent the storage of geometries with spatial reference system identifiers that are not specified in the `gpkg_geometry_columns` table in the geometry columns of the specified tables.
 
 [float]
 === Extension Author
 
-Author of extension, author_name.
+GeoPackage SWG, author_name `gpkg`.
 
 [float]
 === Extension Name or Template
 
-Name of the extension or definition of the template to create the name of extensions that should be used in gpkg_extensions
+`gpkg_srs_id_trigger`
 
 [float]
 === Extension Type
 
-Extension of Existing or New Requirement
+New Requirement dependent on clauses <<gpb_format>> and 3.1.2.
 
 [float]
 === Applicability
 
-Tables and/or columns on which this extension may be applied
+This extension applies to any column specified in the gpkg_geometry_columns table.
 
 [float]
 === Scope
 
-Read-write or write-only with clarification if necessary
+Write-only
 
 [float]
 === Requirements
 
-Definition of extension
+The <t> and <c> template parameters in the SRS_ID trigger definition SQL template in Table xx below are to be replaced with the names of the feature table and geometry column being inserted or updated
 
 [float]
 ==== GeoPackage
 
-Definition of extension data or MIME type(s)
-Definition of extension tables or table templates
-Definition of triggers or trigger templates
+[source,sql]
+----
+CREATE TRIGGER fgsi_<t> _<c> BEFORE INSERT ON '<t>' FOR EACH ROW
+BEGIN
+  SELECT RAISE (ABORT, 'insert on <t>violates constraint: ST_SRID(<c>) does not match gpkg_geometry_columns.srs_id value')
+  WHERE (SELECT srs_id FROM gpkg_geometry_columns
+         WHERE Lower(table_name) = Lower('<t>')
+	       AND   Lower(column_name) = Lower('<c>')
+	       AND   ST_SRID(NEW.'<c>') <> srs_id) ;
+END
+
+CREATE TRIGGER fgsu_<t>_<c> BEFORE UPDATE OF '<c>' ON '<t>' FOR EACH ROW
+BEGIN
+  SELECT RAISE (ABORT, 'update of <c> on <t> violates constraint: ST_SRID(<c>) does not match gpkg_geometry_columns.srs_id value')
+  WHERE (SELECT srs_id FROM gpkg_geometry_columns
+         WHERE Lower(table_name) = Lower('<t>')
+	       AND   Lower(column_name) = Lower('<c>')
+	       AND   ST_SRID(NEW.'<c>') <> srs_id);
+END
+----
 
 [float]
 ==== GeoPackage SQLite Configuration
 
-Definition of SQLite configuration settings
-
-[cols=",,,",options="header"]
-|======
-|Setting compile or runtime |Option |Shall / Not (Value) | Discussion
-| | | |
-|======
+None
 
 [float]
 ==== GeoPackage SQLite Extension
@@ -68,5 +79,7 @@ Definition of SQL functions
 [cols=",,,",options="header"]
 |======
 |SQL Function |Description |Use
-|foo(bar, baz) : datatype |Returns r when w |
+|ST_SRID(geom. Geometry) : INTEGER |Returns the spatial reference system id of a Geometry |Check that geometry srid matches what's specified in `gpkg_geometry_columns.srid`
 |======
+
+The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex K and/or Annex L when those extensions are also implemented.
