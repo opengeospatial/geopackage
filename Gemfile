@@ -27,3 +27,4 @@ source 'https://rubygems.org'                             # This tells Bundler w
 gem 'rake', '>= 0.9.2'                                    # Needed for the Rakefile to work
 gem 'asciidoctor', '>= 0.1.4'                             # If using AsciiDoc syntax, need 0.1.1 for Header support
 gem 'coderay', '1.0.9'
+gem 'tilt'
