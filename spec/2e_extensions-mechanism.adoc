@@ -31,14 +31,14 @@ An application that access a GeoPackage can query the `gpkg_extensions` table in
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Key
-|`table_name` |text |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Unique
-|`column_name` |text |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Unique
-|`extension_name` |text |The case sensitive name of the extension that is required, in the form <author>_<extension_name>. |no |Unique
-|`definition` |text |Definition of the extension in the form specfied by the template in <<extension_template>> or reference thereto. |no |
-|`scope` |text |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only' in lowercase. |no |
+|`table_name` |TEXT |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Unique
+|`column_name` |TEXT |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Unique
+|`extension_name` |TEXT |The case sensitive name of the extension that is required, in the form <author>_<extension_name>. |no |Unique
+|`definition` |TEXT |Definition of the extension in the form specfied by the template in <<extension_template>> or reference thereto. |no |
+|`scope` |TEXT |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only' in lowercase. |no |
 |=======================================================================
 
-See Annex C: Table Definition SQL clause C.3 gpkg_extensions.
+See <<gpkg_extensions_sql>>.
 
 ====== Table Data Values
 

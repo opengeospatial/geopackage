@@ -57,7 +57,7 @@ CREATE TABLE gpkg_contents (
   data_type TEXT NOT NULL,
   identifier TEXT UNIQUE,
   description TEXT DEFAULT '',
-  last_change TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
+  last_change DATETIME NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
   min_x DOUBLE,
   min_y DOUBLE,
   max_x DOUBLE,
@@ -93,8 +93,8 @@ CREATE TABLE gpkg_geometry_columns (
   column_name TEXT NOT NULL,
   geometry_type_name TEXT NOT NULL,
   srs_id INTEGER NOT NULL,
-  z INTEGER NOT NULL,
-  m INTEGER NOT NULL,
+  z TINYINT NOT NULL,
+  m TINYINT NOT NULL,
   CONSTRAINT pk_geom_cols PRIMARY KEY (table_name, column_name),
   CONSTRAINT uk_gc_table_name UNIQUE (table_name),
   CONSTRAINT fk_gc_tn FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name),
@@ -258,9 +258,9 @@ CREATE TABLE gpkg_data_column_constraints (
   constraint_type TEXT NOT NULL, // 'range' | 'enum' | 'glob'
   value TEXT,
   min NUMERIC,
-  minIsInclusive INTEGER, // 0 = false, 1 = true
+  minIsInclusive BOOLEAN, // 0 = false, 1 = true
   max NUMERIC,
-  maxIsInclusive INTEGER, // 0 = false, 1 = true
+  maxIsInclusive BOOLEAN, // 0 = false, 1 = true
   CONSTRAINT gdcc_ntv UNIQUE (constraint_name, constraint_type, value)
 )
 ----
@@ -291,7 +291,7 @@ CREATE TABLE gpkg_metadata_reference (
   table_name TEXT,
   column_name TEXT,
   row_id_value INTEGER,
-  timestamp TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
+  timestamp DATETIME NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
   md_file_id INTEGER NOT NULL,
   md_parent_id INTEGER,
   CONSTRAINT crmr_mfi_fk FOREIGN KEY (md_file_id) REFERENCES gpkg_metadata(id),
