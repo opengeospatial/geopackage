@@ -1,11 +1,11 @@
 [[extension_geometry_encoding]]
 [appendix]
-== Geometry Encoding Extension (Normative)
+== User-Defined Geometry Types Encoding Extension Template (Normative)
 
 [float]
 === Extension Title
 
-User Defined Extension of GeoPackageBinary Geometry Encoding
+User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding
 
 [float]
 === Introduction
@@ -41,13 +41,15 @@ Read-write
 [float]
 === Requirements
 
-This extension specifies the use of one of the reserved bits in the GeoPackageBinary header to indicate the presence of an ExtendedGeopackageBinary encoding format.
-In the extension case a four byte sequence follows the GPB header.
-This is intended to disambiguate various extensions.
-The actual extension geometry body is not specified.
+This extension specifies use of an ExtendedGeoPackageBinary encoding format for geometry types not listed in <<geometry_types>>, and use of the extension name in uppercase for the `geometry_type_name` column value in the `gpkg_geometry_columns` table.
 
 [float]
 ==== GeoPackage
+
+One of the reserved bits in the GeoPackageBinary header is used to indicate the presence of the ExtendedGeopackageBinary encoding format.
+In the extension case a four byte sequence follows the GPB header to disambiguate various extensions.
+This extension_code SHOULD identify the implementer of the extension and/or the particular geometry type extension, and SHOULD be unique.
+The actual extension geometry body is not specified, but SHALL be described in the extension document.
 
 ----
 ExtendedGeoPackageBinary {
@@ -69,4 +71,4 @@ None
 [float]
 ==== GeoPackage SQLite Extension
 
-SQL functions that operate on GeoPackageBinary geometries as specified in other extensions SHALL operate correctly on the ExtendedGeopackageBinary specified in this extension.
+SQL functions that operate on GeoPackageBinary geometries as specified in other extensions SHALL operate correctly on user-defined geometry types encoded in the ExtendedGeopackageBinary format as specified in this extension.
