@@ -29,8 +29,8 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 :req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html)]
 
 [requirement]
-A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format].
-The first 16 bytes of a GeoPackage SHALL contain “SQLite format 3” {req1_foot1} in ASCII. {req1_foot2}
+A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] <<5>> database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format] <<6>> <<7>>.
+The first 16 bytes of a GeoPackage SHALL contain “SQLite format 3” {req1_foot1} in ASCII <<B4>>. {req1_foot2}
 
 [requirement]
 A GeoPackage SHALL contain 0x47503130 ("GP10" in ASCII) in the application id field of the SQLite database header to indicate a GeoPackage version 1.0 file.
@@ -67,13 +67,13 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 |SMALLINT             | 16-bit signed two's complement integer. Stored as SQLite INTEGER with values in the range [-32768, 32767]
 |MEDIUMINT            | 32-bit signed two's complement integer. Stored as SQLite INTEGER with values in the range [-2147483648, 2147483647]
 |INT, INTEGER         | 64-bit signed two's complement integer. Stored as SQLite INTEGER with values in the range [-9223372036854775808, 9223372036854775807]
-|FLOAT                | 32-bit IEEE floating point number Stored as SQLite REAL limited to values that can be represented as a 4-byte IEEE floating point number
-|DOUBLE, REAL         | 64-bit IEEE floating point number Stored as SQLite REAL
-|TEXT                 | Variable length string encoded in either UTF-8 or UTF-16, determined by PRAGMA encoding; see http://www.sqlite.org/pragma.html#pragma_encoding Stored as SQLite TEXT
-|BLOB                 | Variable length binary data Stored as SQLite BLOB
+|FLOAT                | 32-bit IEEE floating point number. Stored as SQLite REAL limited to values that can be represented as a 4-byte IEEE floating point number
+|DOUBLE, REAL         | 64-bit IEEE floating point number. Stored as SQLite REAL
+|TEXT{(maxchar_count)}| Variable length string encoded in either UTF-8 or UTF-16, determined by PRAGMA encoding; see http://www.sqlite.org/pragma.html#pragma_encoding. The optional maxchar_count defines the maximum number of characters in the string. If not specified, the length is unbounded. The count is provided for informational purposes, and applications MAY choose to truncate longer strings if encountered. When present, it is best practice for applications to adhere to the character count. Stored as SQLite TEXT
+|BLOB{(max_size)}     | Variable length binary data. The optional max_size defines the maximum number of bytes in the blob. If not specified, the length is unbounded. The size is provided for informational purposes. When present, it is best practice for applications adhere to the maximum blob size. Stored as SQLite BLOB
 |<geometry_type_name> | Geometry encoded as per clause <<_geometry_encoding>>. <geometry type_name> is one of the geometry types listed in <<geometry_types>>. XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB
-|DATE                 | ISO-8601 date string encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT
-|DATETIME             | ISO-8601 date/time string encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT
+|DATE                 | ISO-8601 date string in the form YYYY-MM_DD encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT
+|DATETIME             | ISO-8601 date/time string in the form YYYY-MM-DDTHH:MM:SS.SSSZ with T separator character and Z suffix for coordinated universal time (UTC) encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT
 |=======================================================================
 
 ====== File Integrity
@@ -91,11 +91,11 @@ The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return a
 :req4_foot1: footnote:[New applications should use the latest available SQLite version software]
 
 [requirement]
-A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<12>> software APIs. {req4_foot1}
+A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<6>> software APIs. {req4_foot1}
 
 ====== Every GPKG SQLite Configuration
 
-The http://www.sqlite.org/download.html[SQLite] library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses.
+The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses.
 Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime.
 
 [requirement]
@@ -123,8 +123,8 @@ A GeoPackage SHALL include a `gpkg_spatial_ref_sys` table per table <<gpkg_spati
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
 
-The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in SQL/MM (ISO 13249-3) <<16>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
-Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<3>><<14>><<15>> (Table 21) specifications.
+The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
+Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) specifications.
 
 [[gpkg_spatial_ref_sys_cols]]
 .Spatial Ref Sys Table or View Definition
@@ -145,7 +145,7 @@ See <<gpkg_spatial_ref_sys_sql>>.
 
 [requirement]
 The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain a record for
-organization http://www.epsg.org/Geodetic.html[EPSG] or epsg and `organization_coordsys_id` http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] for http://www.google.com/search?as_q=WGS-84[WGS-84], a record with an `srs_id` of -1, an organization of “NONE”, an `organization_coordsys_id` of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an `srs_id` of 0, an organization of “NONE”, an `organization_coordsys_id` of 0, and definition “undefined” for undefined geographic coordinate reference systems.
+organization http://www.epsg.org/Geodetic.html[EPSG] or epsg <<B3>> and `organization_coordsys_id` http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] <<13>><<14>> for http://www.google.com/search?as_q=WGS-84[WGS-84] <<15>>, a record with an `srs_id` of -1, an organization of “NONE”, an `organization_coordsys_id` of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an `srs_id` of 0, an organization of “NONE”, an `organization_coordsys_id` of 0, and definition “undefined” for undefined geographic coordinate reference systems.
 
 [requirement]
 The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
@@ -192,7 +192,7 @@ The `table_name` column value in a `gpkg_contents` table row SHALL contain the n
 
 :req13_foot1: footnote:[The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
 [requirement]
-Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. {req13_foot1}
+Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. {req13_foot1}
 
 [requirement]
 Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.

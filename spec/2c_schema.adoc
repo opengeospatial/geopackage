@@ -25,14 +25,14 @@ If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_co
 |`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |
 |`title` |TEXT |A human-readable formal title for the column_name content |yes |
 |`description` |TEXT |A human-readable description for the table_name content |yes |
-|`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] type of column_name if BLOB type, or NULL for other types |yes |
+|`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type of column_name if BLOB type, or NULL for other types |yes |
 |`constraint_name` |TEXT |Case sensitive column value constraint name specified by reference to  gpkg_data_column_constraints.constraint name |yes |
 |=======================================================================
 
 :data_cols_foot1: footnote:[A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.]
 :data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>> and <<tile_enc_webp>> as feature attributes, but they are not required to do so.]
 
-GeoPackage applications MAY {data_cols_foot1} use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] type {data_cols_foot2} information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
+GeoPackage applications MAY {data_cols_foot1} use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type {data_cols_foot2} information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
 The `gpkg_data_columns` data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
 
 See <<gpkg_data_columns_sql>>.

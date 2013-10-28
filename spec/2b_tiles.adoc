@@ -37,7 +37,7 @@ Pixel sizes are real numbers in the terrain units of the spatia reference system
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a til matrix set.
 In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <<tiles_factor2_example_appendix>>.
 Other "zoom other intervals" conventions use different factors o irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincid with the original pixel size of commonly used global image products.
-See WMTS Annex E for additional examples of both conventions.
+See WMTS <<16>> Annex E for additional examples of both conventions.
 
 ===== Data
 
@@ -56,7 +56,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 
 :png_req_foot1: footnote:[See Clauses <<ext_webp_tiles>> regarding use of alternative tile MIME types as a registered extension.]
 [requirement]
-In a GeoPackage that contains a tile pyramid user data table that contains tile data that is no http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg], by default SHALL store that tile data in http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png]. {png_req_foot1}
+In a GeoPackage that contains a tile pyramid user data table that contains tile data that is no http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg] <<17>><<18>><<19>>, by default SHALL store that tile data in http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png] <<20>><<21>>. {png_req_foot1}
 
 [[tile_enc_jpeg]]
 ==== Tile Encoding JPEG
@@ -67,7 +67,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 
 :jpg_req_foot1: footnote:[See Clauses <<ext_webp_tiles>> regarding use of alternative tile MIME types as a registered extension.]
 [requirement]
-In a GeoPackage that contains a tile pyramid user data table that contains tile data that is no http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png], by defaul SHALL store that tile data in http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg]. {jpg_req_foot1}
+In a GeoPackage that contains a tile pyramid user data table that contains tile data that is no http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png] <<20>><<21>>, by default SHALL store that tile data in http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg] <<17>><<18>><<19>>. {jpg_req_foot1}
 
 ==== Tile Matrix Set
 
@@ -148,7 +148,7 @@ The `gpkg_tile_matrix` table or view MAY contain row records for zoom levels in 
 
 :tile_matrix_meta_foot1: footnote:[GeoPackage applications MAY query the gpkg_tile_matrix table or the tile pyramid user data table to determine the minimum and maximum zoom levels for a given tile pyramid table.]
 
-GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view {tile_matrix_meta_foot1}, as specified by http://portal.opengeospatial.org/files/?artifact_id=35326[WMTS].
+GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view {tile_matrix_meta_foot1}, as specified by http://portal.opengeospatial.org/files/?artifact_id=35326[WMTS] <<16>>.
 The tile coordinate (0,0) always refers to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.
 
 [requirement]
