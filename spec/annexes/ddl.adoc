@@ -67,22 +67,6 @@ CREATE TABLE gpkg_contents (
 );
 ----
 
-=== gpkg_extension
-
-[[gpkg_extensions_sql]]
-[source,sql]
-.gpkg_extensions Table Definition SQL
-----
-CREATE TABLE gpkg_extensions (
-  table_name TEXT,
-  column_name TEXT,
-  extension_name TEXT NOT NULL,
-  definition TEXT NOT NULL,
-  scope TEXT NOT NULL,
-  CONSTRAINT ge_tce UNIQUE (table_name, column_name, extension_name)
-);
-----
-
 === gpkg_geometry_columns
 
 [[gpkg_geometry_columns_sql]]
@@ -312,4 +296,20 @@ INSERT INTO gpkg_metadata_reference VALUES (
   98,
   99
 )
+----
+
+=== gpkg_extensions
+
+[[gpkg_extensions_sql]]
+[source,sql]
+.gpkg_extensions Table Definition SQL
+----
+CREATE TABLE gpkg_extensions (
+  table_name TEXT,
+  column_name TEXT,
+  extension_name TEXT NOT NULL,
+  definition TEXT NOT NULL,
+  scope TEXT NOT NULL,
+  CONSTRAINT ge_tce UNIQUE (table_name, column_name, extension_name)
+);
 ----

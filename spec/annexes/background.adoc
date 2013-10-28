@@ -138,12 +138,87 @@ Some frequently used abbreviated terms:
 [gloassary]
 ACID::
     Atomic, Consistent, Isolated, and Durable
+ASCII::
+    American Standard Code for Information Interchange
+API::
+       Application Program Interface
+ATOM::
+        Atom Syndication Format
+BLOB::
+        Binary Large OBject
+CLI::
+       Call-Level Interface
+COTS::
+        Commercial Off The Shelf
+DEM::
+       Digital Elevation Model
+DIGEST::
+          Digital Geographic Information Exchange Standard
+GeoTIFF::
+           Geographic Tagged Image File Format
+GPKG::
+        GeoPackage
+GRD::
+       Ground Resolved Distance
+EPSG::
+        European Petroleum Survey Group
+FK::
+      Foreign Key
+IETF::
+        Internet Engineering Task Force
+IIRS::
+        Image Interpretability Rating Scale
+IRARS::
+         Imagery Resolution Assessments and Reporting Standards (Committee)
+ISO::
+       International Organization for Standardization
+JDBC::
+        Java Data Base Connectivity
+JPEG::
+        Joint Photographics Expert Group (image format)
+MIME::
+        Multipurpose Internet Mail Extensions
+NATO::
+        North Atlantic Treaty Organization
+NITF::
+        National Imagery Transmission Format
+OGC::
+       Open Geospatial Consortium
+PK::
+      Primary Key
+PNG::
+       Portable Network Graphics (image format)
+RDBMS::
+         Relational Data Base Management System
+RFC::
+       Request For Comments
+SQL::
+       Structured Query Language
+SRID::
+        Spatial Reference (System) Identifier
+TIFF::
+        Tagged Image File Format
+TIN::
+       Triangulated Irregular Network
+UML::
+       Unified Modeling Language
+UTC::
+       Coordinated Universal Time
+XML::
+       eXtensible Markup Language
+1D::
+      One Dimensional
+2D::
+      Two Dimensional
+3D::
+      Three Dimensional
 
 === UML Notation
 
 The diagrams that appear in this standard are presented using the Unified Modeling Language (UML) static structure diagrams.
-The UML notations used in this standard for RDBMS tables in the GeoPackage container are described in Figure 1 below.
+The UML notations used in this standard for RDBMS tables in a GeoPackage are described in <<uml_notation_rdbms>> below.
 
+[[uml_notation_rdbms]]
 .UML Notation for RDBMS Tables
 image::umlnotationforrdbmstables.png[]
 
@@ -162,15 +237,18 @@ d. TEXT – A sequence of characters, stored using the database encoding (UTF-8,
 e. BLOB – The value is a blob of data, stored exactly as it was input.
 f. NONE – The value is a Date / Time Timestamp
 
-The UML notations used in this standard for the eXtensible Markup Language (XML) schema for the GeoPackage manifest are described in Figure 2 below.
+=== GeoPackage Tables Detailed Diagram
 
-.UML notation for XML Schema
-image::umlnotationforxmlschema.png[]
+.GeoPackage Tables Details
+image::geopackage-uml.png[]
 
-In this standard, the following stereotypes of UML classes are used to describe XML schemas:
+=== GeoPackage Minimal Tables for Features Diagram
 
-a. <<DataType>> A descriptor of a set of values that lack identity (independent existence and the possibility of side effects). A DataType is a class with no operations whose primary purpose is to hold the information.
-b. <<Enumeration>> is a fixed enumeration that uses string values for expressing a list of potential values.
-c. <<CodeList>> is an extensible enumeration that uses string values for expressing a list of potential values.
+.GeoPackage Minimal Tables for Features
+image::geopackage-features.png[]
 
-In this standard, the standard data types defined in http://www.w3.org/TR/xmlschema-2/[XML Schema Part 2: Datatypes] are used to describe XML Schemas.
+=== GeoPackage Minimal Tables for Tiles Diagram
+
+.GeoPackage Minimal Tables for Tiles
+image::geopackage-tiles.png[]
+
