@@ -30,6 +30,7 @@ An extension name to specify a feature geometry extension type SHALL be defined 
 [requirement]
 A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per clause 3.1.1.1.2.
 
+[[gpkg_user_geometry_types_extension]]
 ==== User-Defined Geometry Types Extension
 
 ===== Data
@@ -40,7 +41,7 @@ This extension of clauses <<gpb_format>>, <<sql_geometry_types>> and <<gpkg_geom
 
 [requirement]
 
-The ExtendedGeoPackageBinary format defined in <<extension_geometry_encoding>> SHALL be used to encode geometry types other than those specified in clauses <<sql_geometry_types>> and 3.1.1 and listed in <<geometry_types>>.
+The ExtendedGeoPackageBinary format defined in <<extension_geometry_encoding>> SHALL be used to encode geometry types other than those specified in clauses <<sql_geometry_types>> and <<gpkg_geometry_types_extension>> and listed in <<geometry_types>>.
 
 ===== Extensions Encoding - Extensions Name
 
@@ -62,7 +63,7 @@ The `geometry_type_name` value in a `gpkg_geometry_columns` row SHALL be the <<u
 
 ===== Data
 
-This extension described in <<extension_rtree>> adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and 3.1.2.
+This extension described in <<extension_rtree>> adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
 
 ===== Spatial Indexes Implementation
 Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.  
@@ -84,7 +85,7 @@ A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table 
 
 ===== Data
 
-This extension described in <<extension_geometry_type_triggers>> adds a new geometry type triggers capability for columns with geometries encoded per clause <<gpb_format>> and 3.1.2.
+This extension described in <<extension_geometry_type_triggers>> adds a new geometry type triggers capability for columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
 
 ===== Geometry Type Triggers – Implementation
 
@@ -95,6 +96,7 @@ A GeoPackage SHALL include the SQL insert and update triggers specified in <<ext
 
 [requirement]
 The “gpkg_geometry_type_trigger” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of geometry type triggers.
+
 ===== Geometry Type Triggers – Extensions Row
 
 [requirement]
@@ -104,12 +106,12 @@ A GeoPackage that implements geometry type triggers on geometry columns SHALL co
 
 ===== Data
 
-This extension described in <<extension_geometry_srsid_triggers>> adds a new srs_id triggers capability for columns with geometries encoded per clause <<gpb_format>> and 3.1.2.
+This extension described in <<extension_geometry_srsid_triggers>> adds a new srs_id triggers capability for columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
 
 ===== SRS_ID Triggers – Implementation
 
 [requirement]
-A GeoPackage SHALL include the SQL insert and update triggers specified in <<extension_geometry_srsid_triggers>> on every geometry column to enforce the srs_id values specified for those columns in the gpkg_geometry_columns table.
+A GeoPackage SHALL include the SQL insert and update triggers specified in <<extension_geometry_srsid_triggers>> on every geometry column to enforce the srs_id values specified for those columns in the `gpkg_geometry_columns` table.
 
 ===== SRS_ID Triggers – Extensions Name
 
@@ -154,7 +156,7 @@ This extension of clauses <<tile_enc_png>> and <<tile_enc_jpeg>> described in <<
 
 ===== WEBP MIME Type
 
-A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <<22>.
+A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <<22>>.
 
 ===== WEBP -- Extensions Name
 
