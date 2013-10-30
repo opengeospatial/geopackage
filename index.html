@@ -1782,13 +1782,13 @@ Feature table geometry columns SHALL contain geometries with the <code>srs_id</c
     <div class="sect3">
   <h4 id="_tile_matrix_introduction">2.2.1. Tile Matrix Introduction</h4>
     <div class="paragraph">
-<p>There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tile in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications hav standardized practices in this domain. In addition, various image file formats have different representationa capabilities, and include different self-descriptive metadata. The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways.
-First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow differen interface conventions.
-Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the store images.
-Applications that store GeoPackage tile data, which are presumed to have this information available, SHALL stor sufficient metadata to enable its intended use.</p>
+<p>There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain. In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata. The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways.
+First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions.
+Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images.
+Applications that store GeoPackage tile data, which are presumed to have this information available, SHALL store sufficient metadata to enable its intended use.</p>
 </div>
 <div class="paragraph">
-<p>The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximu performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loos coupling to enable widespread implementation.</p>
+<p>The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose coupling to enable widespread implementation.</p>
 </div>
 <div class="paragraph">
 <p>A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container.
@@ -1797,7 +1797,7 @@ Applications that store GeoPackage tile data, which are presumed to have this in
 “Tile matrix set” refers to the definitio of a tile pyramid’s tiling structure.</p>
 </div>
 <div class="paragraph">
-<p>The tables or views that implement the GeoPackage tile store data / metadata model are described and discusse individually in the following subsections.</p>
+<p>The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.</p>
 </div>
 </div>
 <div class="sect3">
@@ -1818,12 +1818,12 @@ The <code>gpkg_contents</code> table SHALL contain a row with a <code>data_type<
 <div class="sect3">
   <h4 id="zoom_levels">2.2.3. Zoom Levels</h4>
     <div class="paragraph">
-<p>In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify tile matrix layers in a tile matrix se that contain tiles of decreasing spatial extent and finer spatial resolution.
-Adjacent zoom levels immediately preced or follow each other and differ by a value of 1.
-Pixel sizes are real numbers in the terrain units of the spatia reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
-Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a til matrix set.
+<p>In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify tile matrix layers in a tile matrix set that contain tiles of decreasing spatial extent and finer spatial resolution.
+Adjacent zoom levels immediately preceed or follow each other and differ by a value of 1.
+Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
+Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
 In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.
-Other "zoom other intervals" conventions use different factors o irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincid with the original pixel size of commonly used global image products.
+Other "zoom other intervals" conventions use different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
 See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventions.</p>
 </div>
 <div class="sect4">
@@ -1833,7 +1833,7 @@ See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventi
     <div id="_requirement-34" class="quoteblock">
 <div class="title">Requirement 34</div>
 <blockquote>
-In a GeoPackage that contains a tile pyramid user data table that contains tile data, b default <span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span>, zoom level pixel sizes for that table SHALL vary by a factor of 2 between adjacent zoo levels in the tile matrix metadata table.
+In a GeoPackage that contains a tile pyramid user data table that contains tile data, by default <span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span>, zoom level pixel sizes for that table SHALL vary by a factor of 2 between adjacent zoo levels in the tile matrix metadata table.
 </blockquote>
 </div>
 </div>
@@ -1848,7 +1848,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
     <div id="_requirement-35" class="quoteblock">
 <div class="title">Requirement 35</div>
 <blockquote>
-In a GeoPackage that contains a tile pyramid user data table that contains tile data that is no <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>, by default SHALL store that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>. <span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span>
+In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>, by default SHALL store that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>. <span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -1863,7 +1863,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
     <div id="_requirement-36" class="quoteblock">
 <div class="title">Requirement 36</div>
 <blockquote>
-In a GeoPackage that contains a tile pyramid user data table that contains tile data that is no <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>. <span class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</span>
+In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>. <span class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -1954,7 +1954,7 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>g
 </table>
 
 <div class="paragraph">
-<p>The gpkg_tile_matrix_set table or updateable view defines the minimum bounding box (min_x, min_y, max_x, max_y) an spatial reference system (srs_id) for all content in a tile pyramid user data table.
+<p>The gpkg_tile_matrix_set table or updateable view defines the minimum bounding box (min_x, min_y, max_x, max_y) and spatial reference system (srs_id) for all content in a tile pyramid user data table.
 This bounding box SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated based on the column value for the user data table in the gpkg_tile_matrix table or view defined in clause <a href="#tile_matrix">Tile Matrix</a> below.</p>
 </div>
 </div>
@@ -1990,7 +1990,7 @@ Values of the <code>gpkg_tile_matrix_set</code> <code>srs_id</code> column SHALL
     <div id="_requirement-41" class="quoteblock">
 <div class="title">Requirement 41</div>
 <blockquote>
-A GeoPackage taht contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrx</code> table or view per <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table or View Definition</a> and <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>
+A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrix</code> table or view per <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table or View Definition</a> and <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>
 </blockquote>
 </div>
 <table id="gpkg_tile_matrix_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -5916,7 +5916,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.7<br>
-Last updated 2013-10-30 19:49:02 UTC
+Last updated 2013-10-30 19:57:03 UTC
 </div>
 </div>
 </body>
