@@ -544,8 +544,6 @@ span.line-numbers { border-right: 1px solid #E5E5E5; color: #999; display: inlin
 <ul class="sectlevel3">
 <li><a href="#_zoom_levels">3.2.1. Zoom Levels</a></li>
 <li><a href="#tile_enc_webp">3.2.2. Tile Encoding WEBP</a></li>
-<li><a href="#tile_enc_tiff">3.2.3. Tiles Encoding TIFF</a></li>
-<li><a href="#tile_enc_nitf">3.2.4. Tile Encoding NITF</a></li>
 </ul>
 </li>
 </ul>
@@ -2239,7 +2237,7 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tile_data</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Of an image MIME type specified in clauses <a href="#tile_enc_png">Tile Encoding PNG</a>, <a href="#tile_enc_jpeg">Tile Encoding JPEG</a>, <a href="#tile_enc_webp">Tile Encoding WEBP</a>, <a href="#tile_enc_tiff">Tiles Encoding TIFF</a>, <a href="#tile_enc_nitf">Tile Encoding NITF</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Of an image MIME type specified in clauses <a href="#tile_enc_png">Tile Encoding PNG</a>, <a href="#tile_enc_jpeg">Tile Encoding JPEG</a>, <a href="#tile_enc_webp">Tile Encoding WEBP</a>, <a href="#tile_enc_tiff">[tile_enc_tiff]</a>, <a href="#tile_enc_nitf">[tile_enc_nitf]</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -3117,9 +3115,8 @@ Definitions of those extensions in the form specified by the template in <a href
     <div class="paragraph">
 <p>This extension of clause <a href="#sql_geometry_types">SQL Geometry Types</a> partially described in <a href="#extension_geometry_types">GeoPackage Geometry Types Extension Template (Normative)</a> defines additional geometry types.</p>
 </div>
-</div>
-<div class="sect4">
-  <h5 id="_extension_types">3.1.1.1. Extension Types</h5>
+<div class="sect5">
+  <h6 id="_extension_types">3.1.1.1.1. Extension Types</h6>
     <div id="_requirement-85" class="quoteblock">
 <div class="title">Requirement 85</div>
 <blockquote>
@@ -3128,8 +3125,8 @@ If it does so, they SHALL be encoded in the GeoPackageBinary geometry format.
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_extensions_types_extensions_name">3.1.1.1. Extensions Types - Extensions Name</h5>
+<div class="sect5">
+  <h6 id="_extensions_types_extensions_name">3.1.1.1.1. Extensions Types - Extensions Name</h6>
     <div id="_requirement-86" class="quoteblock">
 <div class="title">Requirement 86</div>
 <blockquote>
@@ -3137,13 +3134,14 @@ An extension name to specify a feature geometry extension type SHALL be defined 
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_extensions_types_extensions_row">3.1.1.1. Extensions Types - Extensions Row</h5>
+<div class="sect5">
+  <h6 id="_extensions_types_extensions_row">3.1.1.1.1. Extensions Types - Extensions Row</h6>
     <div id="_requirement-87" class="quoteblock">
 <div class="title">Requirement 87</div>
 <blockquote>
 A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per clause 3.1.1.1.2.
 </blockquote>
+</div>
 </div>
 </div>
 </div>
@@ -3154,9 +3152,8 @@ A GeoPackage that contains a gpkg_geometry_columns table or updateable view with
     <div class="paragraph">
 <p>This extension of clauses <a href="#gpb_format">Geometry Encoding</a>, <a href="#sql_geometry_types">SQL Geometry Types</a> and <a href="#gpkg_geometry_types_extension">GeoPackage Geometry Types Extension</a> partially described in <a href="#extension_geometry_encoding">User-Defined Geometry Types Encoding Extension Template (Normative)</a> enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage.</p>
 </div>
-</div>
-<div class="sect4">
-  <h5 id="_extensions_encoding">3.1.2.1. Extensions Encoding</h5>
+<div class="sect5">
+  <h6 id="_extensions_encoding">3.1.2.1.1. Extensions Encoding</h6>
     <div id="_requirement-88" class="quoteblock">
 <div class="title">Requirement 88</div>
 <blockquote>
@@ -3164,8 +3161,8 @@ The ExtendedGeoPackageBinary format defined in <a href="#extension_geometry_enco
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_extensions_encoding_extensions_name">3.1.2.1. Extensions Encoding - Extensions Name</h5>
+<div class="sect5">
+  <h6 id="_extensions_encoding_extensions_name">3.1.2.1.1. Extensions Encoding - Extensions Name</h6>
     <div id="user_defined_geometry_ext_name_req" class="quoteblock">
 <div class="title">Requirement 89</div>
 <blockquote>
@@ -3173,8 +3170,8 @@ An extension name to specify a feature geometry extension type encoded in the Ex
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_extensions_encoding_extensions_row">3.1.2.1. Extensions Encoding - Extensions Row</h5>
+<div class="sect5">
+  <h6 id="_extensions_encoding_extensions_row">3.1.2.1.1. Extensions Encoding - Extensions Row</h6>
     <div id="_requirement-90" class="quoteblock">
 <div class="title">Requirement 90</div>
 <blockquote>
@@ -3182,13 +3179,14 @@ An Extended GeoPackage that contains a gpkg_geometry_columns table or updateable
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_geometry_columns_geometry_type_name">3.1.2.1. Geometry Columns Geometry Type Name</h5>
+<div class="sect5">
+  <h6 id="_geometry_columns_geometry_type_name">3.1.2.1.1. Geometry Columns Geometry Type Name</h6>
     <div id="_requirement-91" class="quoteblock">
 <div class="title">Requirement 91</div>
 <blockquote>
 The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be the <a href="#user_defined_geometry_ext_name_req">Requirement 89</a> extension name in uppercase.
 </blockquote>
+</div>
 </div>
 </div>
 </div>
@@ -3199,9 +3197,8 @@ The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code
     <div class="paragraph">
 <p>This extension described in <a href="#extension_rtree">RTree Spatial Index Extension (Normative)</a> adds a new capability for spatially indexing columns with geometries encoded per clause <a href="#gpb_format">Geometry Encoding</a> and <a href="#gpkg_user_geometry_types_extension">User-Defined Geometry Types Extension</a>.</p>
 </div>
-</div>
-<div class="sect4">
-  <h5 id="_spatial_indexes_implementation">3.1.3.1. Spatial Indexes Implementation</h5>
+<div class="sect5">
+  <h6 id="_spatial_indexes_implementation">3.1.3.1.1. Spatial Indexes Implementation</h6>
     <div class="paragraph">
 <p>Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.</p>
 </div>
@@ -3212,8 +3209,8 @@ A GeoPackage SHALL implement spatial indexes on feature table geometry columns a
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_spatial_indexes_extensions_name">3.1.3.1. Spatial Indexes - Extensions Name</h5>
+<div class="sect5">
+  <h6 id="_spatial_indexes_extensions_name">3.1.3.1.1. Spatial Indexes - Extensions Name</h6>
     <div id="_requirement-93" class="quoteblock">
 <div class="title">Requirement 93</div>
 <blockquote>
@@ -3221,13 +3218,14 @@ The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions tab
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_spatial_indexes_extensions_row">3.1.3.1. Spatial Indexes - Extensions Row</h5>
+<div class="sect5">
+  <h6 id="_spatial_indexes_extensions_row">3.1.3.1.1. Spatial Indexes - Extensions Row</h6>
     <div id="_requirement-94" class="quoteblock">
 <div class="title">Requirement 94</div>
 <blockquote>
 A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name “gpkg_rtree_index”, the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
 </blockquote>
+</div>
 </div>
 </div>
 </div>
@@ -3238,9 +3236,8 @@ A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table 
     <div class="paragraph">
 <p>This extension described in <a href="#extension_geometry_type_triggers">Geometry Type Triggers Extension (Normative)</a> adds a new geometry type triggers capability for columns with geometries encoded per clause <a href="#gpb_format">Geometry Encoding</a> and <a href="#gpkg_user_geometry_types_extension">User-Defined Geometry Types Extension</a>.</p>
 </div>
-</div>
-<div class="sect4">
-  <h5 id="_geometry_type_triggers_implementation">3.1.4.1. Geometry Type Triggers – Implementation</h5>
+<div class="sect5">
+  <h6 id="_geometry_type_triggers_implementation">3.1.4.1.1. Geometry Type Triggers – Implementation</h6>
     <div id="_requirement-95" class="quoteblock">
 <div class="title">Requirement 95</div>
 <blockquote>
@@ -3248,8 +3245,8 @@ A GeoPackage SHALL include the SQL insert and update triggers specified in <a hr
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_geometry_type_triggers_extensions_name">3.1.4.1. Geometry Type Triggers – Extensions Name</h5>
+<div class="sect5">
+  <h6 id="_geometry_type_triggers_extensions_name">3.1.4.1.1. Geometry Type Triggers – Extensions Name</h6>
     <div id="_requirement-96" class="quoteblock">
 <div class="title">Requirement 96</div>
 <blockquote>
@@ -3257,13 +3254,14 @@ The “gpkg_geometry_type_trigger” extension name SHALL be used as a gpkg_exte
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_geometry_type_triggers_extensions_row">3.1.4.1. Geometry Type Triggers – Extensions Row</h5>
+<div class="sect5">
+  <h6 id="_geometry_type_triggers_extensions_row">3.1.4.1.1. Geometry Type Triggers – Extensions Row</h6>
     <div id="_requirement-97" class="quoteblock">
 <div class="title">Requirement 97</div>
 <blockquote>
 A GeoPackage that implements geometry type triggers on geometry columns SHALL contain a gpkg_extensions table that contains a row for each such geometry column with extension_name “gpkg_geometry_type_trigger”, table_name of the feature table with a geometry column, and column_name of the geometry column.
 </blockquote>
+</div>
 </div>
 </div>
 </div>
@@ -3274,9 +3272,8 @@ A GeoPackage that implements geometry type triggers on geometry columns SHALL co
     <div class="paragraph">
 <p>This extension described in <a href="#extension_geometry_srsid_triggers">Geometry SRS ID Triggers Extension (Normative)</a> adds a new srs_id triggers capability for columns with geometries encoded per clause <a href="#gpb_format">Geometry Encoding</a> and <a href="#gpkg_user_geometry_types_extension">User-Defined Geometry Types Extension</a>.</p>
 </div>
-</div>
-<div class="sect4">
-  <h5 id="_srs_id_triggers_implementation">3.1.5.1. SRS_ID Triggers – Implementation</h5>
+<div class="sect5">
+  <h6 id="_srs_id_triggers_implementation">3.1.5.1.1. SRS_ID Triggers – Implementation</h6>
     <div id="_requirement-98" class="quoteblock">
 <div class="title">Requirement 98</div>
 <blockquote>
@@ -3284,8 +3281,8 @@ A GeoPackage SHALL include the SQL insert and update triggers specified in <a hr
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_srs_id_triggers_extensions_name">3.1.5.1. SRS_ID Triggers – Extensions Name</h5>
+<div class="sect5">
+  <h6 id="_srs_id_triggers_extensions_name">3.1.5.1.1. SRS_ID Triggers – Extensions Name</h6>
     <div id="_requirement-99" class="quoteblock">
 <div class="title">Requirement 99</div>
 <blockquote>
@@ -3293,13 +3290,14 @@ The “gpkg_srs_id_trigger” extension name SHALL be used as a gpkg_extensions 
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_srs_id_triggers_extensions_row">3.1.5.1. SRS_ID Triggers – Extensions Row</h5>
+<div class="sect5">
+  <h6 id="_srs_id_triggers_extensions_row">3.1.5.1.1. SRS_ID Triggers – Extensions Row</h6>
     <div id="_requirement-100" class="quoteblock">
 <div class="title">Requirement 100</div>
 <blockquote>
 A GeoPackage that implements srs_id triggers on feature table geometry columns SHALL contain a gpkg_extensions table that contains a row for each geometry column with extension_name “gpkg_srs_id_trigger”, table_name of the feature table with a geometry column, and column_name of the geometry column.
 </blockquote>
+</div>
 </div>
 </div>
 </div>
@@ -3316,15 +3314,14 @@ A GeoPackage that implements srs_id triggers on feature table geometry columns S
     <div class="paragraph">
 <p>This extension of clause <a href="#zoom_levels">Zoom Levels</a> described in <a href="#extension_zoom_other_intervals">Zoom Other Intervals Extension (Normative)</a> allows zoom level intervals other than a factor of two.</p>
 </div>
-</div>
-<div class="sect4">
-  <h5 id="_zoom_other_intervals">3.2.1.1. Zoom Other Intervals</h5>
+<div class="sect5">
+  <h6 id="_zoom_other_intervals">3.2.1.1.1. Zoom Other Intervals</h6>
     <div class="paragraph">
 <p>Tile pyramid user data tables MAY have pixel sizes that vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels.</p>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_zoom_other_extensions_name">3.2.1.1. Zoom Other – Extensions Name</h5>
+<div class="sect5">
+  <h6 id="_zoom_other_extensions_name">3.2.1.1.1. Zoom Other – Extensions Name</h6>
     <div id="_requirement-101" class="quoteblock">
 <div class="title">Requirement 101</div>
 <blockquote>
@@ -3332,13 +3329,14 @@ The “gpkg_zoom_other” extension name SHALL be used as a gpkg_extensions tabl
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_zoom_other_extensions_row">3.2.1.1. Zoom Other – Extensions Row</h5>
+<div class="sect5">
+  <h6 id="_zoom_other_extensions_row">3.2.1.1.1. Zoom Other – Extensions Row</h6>
     <div id="_requirement-102" class="quoteblock">
 <div class="title">Requirement 102</div>
 <blockquote>
 A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name “gpkg_zoom_other”, the table_name of the table with other zoom intervals, and the “tile_data” column_name.
 </blockquote>
+</div>
 </div>
 </div>
 </div>
@@ -3355,9 +3353,8 @@ A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions t
     <div class="paragraph">
 <p>A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <a href="#22">[22]</a>.</p>
 </div>
-</div>
-<div class="sect4">
-  <h5 id="_webp_extensions_name">3.2.2.1. WEBP&#8201;&#8212;&#8201;Extensions Name</h5>
+<div class="sect5">
+  <h6 id="_webp_extensions_name">3.2.2.1.1. WEBP&#8201;&#8212;&#8201;Extensions Name</h6>
     <div id="_requirement-103" class="quoteblock">
 <div class="title">Requirement 103</div>
 <blockquote>
@@ -3365,79 +3362,14 @@ The “gpkg_webp” extension name SHALL be used as a gpkg_extensions table exte
 </blockquote>
 </div>
 </div>
-<div class="sect4">
-  <h5 id="_webp_extensions_row">3.2.2.1. WEBP&#8201;&#8212;&#8201;Extensions Row</h5>
+<div class="sect5">
+  <h6 id="_webp_extensions_row">3.2.2.1.1. WEBP&#8201;&#8212;&#8201;Extensions Row</h6>
     <div id="_requirement-104" class="quoteblock">
 <div class="title">Requirement 104</div>
 <blockquote>
 A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.
 </blockquote>
 </div>
-</div>
-</div>
-<div class="sect3">
-  <h4 id="tile_enc_tiff">3.2.3. Tiles Encoding TIFF</h4>
-    <div class="sect4">
-  <h5 id="_data_28">3.2.3.1. Data</h5>
-    <div class="paragraph">
-<p>This extension of clauses <a href="#tile_enc_png">Tile Encoding PNG</a> and <a href="#tile_enc_jpeg">Tile Encoding JPEG</a> described in <a href="#extension_tiles_tiff">[extension_tiles_tiff]</a> allows encoding of tile images in TIFF format.</p>
-</div>
-</div>
-<div class="sect4">
-  <h5 id="_tiff_mime_type">3.2.3.1. TIFF MIME Type</h5>
-    <div class="paragraph">
-<p>A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/tiff <a href="#27">[27]</a> for GeoTIFF images <a href="#28">[28]</a> that meet the requirements of the NGA Implementation Profile <a href="#29">[29]</a> for coordinate transformation case 3 where the position and scale of the data is known exactly, and no rotation of the image is required.</p>
-</div>
-</div>
-<div class="sect4">
-  <h5 id="_tiff_extensions_name">3.2.3.1. TIFF&#8201;&#8212;&#8201;Extensions Name</h5>
-    <div id="_requirement-105" class="quoteblock">
-<div class="title">Requirement 105</div>
-<blockquote>
-The “gpkg_tiff” extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of raster images in TIFF format as specified in <a href="#extension_tiles_tiff">[extension_tiles_tiff]</a>.
-</blockquote>
-</div>
-</div>
-<div class="sect4">
-  <h5 id="_extensions_row">3.2.3.1. Extensions Row</h5>
-    <div id="_requirement-106" class="quoteblock">
-<div class="title">Requirement 106</div>
-<blockquote>
-A GeoPackage that contains tile matrix user data tables with tile_data columns that contain raster images in TIFF format per <a href="#extension_tiles_tiff">[extension_tiles_tiff]</a> SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_tiff”.
-</blockquote>
-</div>
-</div>
-</div>
-<div class="sect3">
-  <h4 id="tile_enc_nitf">3.2.4. Tile Encoding NITF</h4>
-    <div class="sect4">
-  <h5 id="_data_29">3.2.4.1. Data</h5>
-    <div class="paragraph">
-<p>This extension of clauses <a href="#tile_enc_png">Tile Encoding PNG</a> and <a href="#tile_enc_jpeg">Tile Encoding JPEG</a> described in <a href="#extension_tiles_nitf">[extension_tiles_nitf]</a> allows encoding of tile images in NITF format.</p>
-</div>
-</div>
-<div class="sect4">
-  <h5 id="_nitf_mime_type">3.2.4.1. NITF MIME Type</h5>
-    <div class="paragraph">
-<p>A GeoPackage that contains a tile matrix user data table that contains tile data MAY store tile_data in MIME type application/vnd.NITF <a href="#46">[46]</a> for National Imagery Transmission Format images.</p>
-</div>
-</div>
-<div class="sect4">
-  <h5 id="_nitf_extensions_name">3.2.4.1. NITF&#8201;&#8212;&#8201;Extensions Name</h5>
-    <div id="_requirement-107" class="quoteblock">
-<div class="title">Requirement 107</div>
-<blockquote>
-The “gpkg_nitf” extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of raster images in NITF format as specified in <a href="#extension_tiles_nitf">[extension_tiles_nitf]</a>.
-</blockquote>
-</div>
-</div>
-<div class="sect4">
-  <h5 id="_nitf_extensions_row">3.2.4.1. NITF&#8201;&#8212;&#8201;Extensions Row</h5>
-    <div id="_requirement-108" class="quoteblock">
-<div class="title">Requirement 108</div>
-<blockquote>
-A GeoPackage that contains tile matrix user data tables with tile_data columns that contain raster images in NITF format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_nitf”.
-</blockquote>
 </div>
 </div>
 </div>
@@ -5917,7 +5849,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.7<br>
-Last updated 2013-10-31 15:24:34 UTC
+Last updated 2013-10-31 17:16:40 UTC
 </div>
 </div>
 </body>
