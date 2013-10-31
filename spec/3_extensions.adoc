@@ -14,18 +14,18 @@ The extensions defined in the following sub clauses MAY be implemented in a GeoP
 
 This extension of clause <<sql_geometry_types>> partially described in <<extension_geometry_types>> defines additional geometry types.
 
-===== Extension Types
+====== Extension Types
 
 [requirement]
 A GeoPackage MAY store feature table geometries with the extended non-linear geometry types (CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in <<geometry_types>>.
 If it does so, they SHALL be encoded in the GeoPackageBinary geometry format.
 
-===== Extensions Types - Extensions Name
+====== Extensions Types - Extensions Name
 
 [requirement]
 An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_<gname>” template where <gname> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage.
 
-===== Extensions Types - Extensions Row
+====== Extensions Types - Extensions Row
 
 [requirement]
 A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per clause 3.1.1.1.2.
@@ -37,24 +37,24 @@ A GeoPackage that contains a gpkg_geometry_columns table or updateable view with
 
 This extension of clauses <<gpb_format>>, <<sql_geometry_types>> and <<gpkg_geometry_types_extension>> partially described in <<extension_geometry_encoding>> enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage.
 
-===== Extensions Encoding
+====== Extensions Encoding
 
 [requirement]
 
 The ExtendedGeoPackageBinary format defined in <<extension_geometry_encoding>> SHALL be used to encode geometry types other than those specified in clauses <<sql_geometry_types>> and <<gpkg_geometry_types_extension>> and listed in <<geometry_types>>.
 
-===== Extensions Encoding - Extensions Name
+====== Extensions Encoding - Extensions Name
 
 [[user_defined_geometry_ext_name_req]]
 [requirement]
 An extension name to specify a feature geometry extension type encoded in the ExtendedGeoPackageBinary format SHALL be defined for an author name that is NOT “gpkg” using the “<author_name>_geom_<gname> template where <gname> is the uppercase name of an extension geometry type NOT listed in <<geometry_types>> used in a GeoPackage.
 
-===== Extensions Encoding - Extensions Row
+====== Extensions Encoding - Extensions Row
 
 [requirement]
 An Extended GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values other than those specified in clauses <<sql_geometry_types>> and 3.1.1 and listed in <<geometry_types>> SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry type constructed per clause 3.1.2.1.2.
 
-===== Geometry Columns Geometry Type Name
+====== Geometry Columns Geometry Type Name
 
 [requirement]
 The `geometry_type_name` value in a `gpkg_geometry_columns` row SHALL be the <<user_defined_geometry_ext_name_req>> extension name in uppercase.
@@ -65,18 +65,18 @@ The `geometry_type_name` value in a `gpkg_geometry_columns` row SHALL be the <<u
 
 This extension described in <<extension_rtree>> adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
 
-===== Spatial Indexes Implementation
+====== Spatial Indexes Implementation
 Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.  
 
 [requirement]
 A GeoPackage SHALL implement spatial indexes on feature table geometry columns as specified in clause 3.1.3.1.1 using the SQLite Virtual Table RTrees and triggers specified in <<extension_rtree>>.
 
-===== Spatial Indexes - Extensions Name
+====== Spatial Indexes - Extensions Name
 
 [requirement]
 The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.
 
-===== Spatial Indexes - Extensions Row
+====== Spatial Indexes - Extensions Row
 
 [requirement]
 A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name “gpkg_rtree_index”, the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
@@ -87,17 +87,17 @@ A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table 
 
 This extension described in <<extension_geometry_type_triggers>> adds a new geometry type triggers capability for columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
 
-===== Geometry Type Triggers – Implementation
+====== Geometry Type Triggers – Implementation
 
 [requirement]
 A GeoPackage SHALL include the SQL insert and update triggers specified in <<extension_geometry_type_triggers>> on every geometry column to enforce the geometry type values specified for those columns in the gpkg_geometry_columns table.
 
-===== Geometry Type Triggers – Extensions Name
+====== Geometry Type Triggers – Extensions Name
 
 [requirement]
 The “gpkg_geometry_type_trigger” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of geometry type triggers.
 
-===== Geometry Type Triggers – Extensions Row
+====== Geometry Type Triggers – Extensions Row
 
 [requirement]
 A GeoPackage that implements geometry type triggers on geometry columns SHALL contain a gpkg_extensions table that contains a row for each such geometry column with extension_name “gpkg_geometry_type_trigger”, table_name of the feature table with a geometry column, and column_name of the geometry column.
@@ -108,17 +108,17 @@ A GeoPackage that implements geometry type triggers on geometry columns SHALL co
 
 This extension described in <<extension_geometry_srsid_triggers>> adds a new srs_id triggers capability for columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
 
-===== SRS_ID Triggers – Implementation
+====== SRS_ID Triggers – Implementation
 
 [requirement]
 A GeoPackage SHALL include the SQL insert and update triggers specified in <<extension_geometry_srsid_triggers>> on every geometry column to enforce the srs_id values specified for those columns in the `gpkg_geometry_columns` table.
 
-===== SRS_ID Triggers – Extensions Name
+====== SRS_ID Triggers – Extensions Name
 
 [requirement]
 The “gpkg_srs_id_trigger” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of SRS_ID triggers specified in <<extension_geometry_srsid_triggers>>.
 
-===== SRS_ID Triggers – Extensions Row
+====== SRS_ID Triggers – Extensions Row
 
 [requirement]
 A GeoPackage that implements srs_id triggers on feature table geometry columns SHALL contain a gpkg_extensions table that contains a row for each geometry column with extension_name “gpkg_srs_id_trigger”, table_name of the feature table with a geometry column, and column_name of the geometry column.
@@ -133,16 +133,16 @@ The extensions defined in the following sub clauses MAY be implemented in a GeoP
 
 This extension of clause <<zoom_levels>> described in <<extension_zoom_other_intervals>> allows zoom level intervals other than a factor of two.
 
-===== Zoom Other Intervals
+====== Zoom Other Intervals
 
 Tile pyramid user data tables MAY have pixel sizes that vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels.
 
-===== Zoom Other – Extensions Name
+====== Zoom Other – Extensions Name
 
 [requirement]
 The “gpkg_zoom_other” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of other zoom intervals on a tile pyramid user data table as specified in <<extension_zoom_other_intervals>>.
 
-===== Zoom Other – Extensions Row
+====== Zoom Other – Extensions Row
 
 [requirement]
 A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name “gpkg_zoom_other”, the table_name of the table with other zoom intervals, and the “tile_data” column_name.
@@ -158,54 +158,13 @@ This extension of clauses <<tile_enc_png>> and <<tile_enc_jpeg>> described in <<
 
 A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <<22>>.
 
-===== WEBP -- Extensions Name
+====== WEBP -- Extensions Name
 
 [requirement]
 The “gpkg_webp” extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of tile pyramidimages in WEBP format as specified in <<extension_tiles_webp>>.
 
-===== WEBP -- Extensions Row
+====== WEBP -- Extensions Row
 
 [requirement]
 A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.
 
-[[tile_enc_tiff]]
-==== Tiles Encoding TIFF
-
-===== Data
-
-This extension of clauses <<tile_enc_png>> and <<tile_enc_jpeg>> described in <<extension_tiles_tiff>> allows encoding of tile images in TIFF format.
-
-===== TIFF MIME Type
-
-A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/tiff <<27>> for GeoTIFF images <<28>> that meet the requirements of the NGA Implementation Profile <<29>> for coordinate transformation case 3 where the position and scale of the data is known exactly, and no rotation of the image is required.
-
-===== TIFF -- Extensions Name
-
-[requirement]
-The “gpkg_tiff” extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of raster images in TIFF format as specified in <<extension_tiles_tiff>>.
-
-===== Extensions Row
-
-[requirement]
-A GeoPackage that contains tile matrix user data tables with tile_data columns that contain raster images in TIFF format per <<extension_tiles_tiff>> SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_tiff”.
-
-[[tile_enc_nitf]]
-==== Tile Encoding NITF
-
-===== Data
-
-This extension of clauses <<tile_enc_png>> and <<tile_enc_jpeg>> described in <<extension_tiles_nitf>> allows encoding of tile images in NITF format.
-
-===== NITF MIME Type
-
-A GeoPackage that contains a tile matrix user data table that contains tile data MAY store tile_data in MIME type application/vnd.NITF <<46>> for National Imagery Transmission Format images.
-
-===== NITF -- Extensions Name
-
-[requirement]
-The “gpkg_nitf” extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of raster images in NITF format as specified in <<extension_tiles_nitf>>.
-
-===== NITF -- Extensions Row
-
-[requirement]
-A GeoPackage that contains tile matrix user data tables with tile_data columns that contain raster images in NITF format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_nitf”.
