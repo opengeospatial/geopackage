@@ -1602,14 +1602,14 @@ ii. Otherwise log pass
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty
 . For each row table_name, column_name from step 1
-.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if result set is empty
-.. Fail if returned sql != ‘CREATE VIRTUAL TABLE rtree_’ ’ || result_set_table_name || ‘_’ || result_set_column_name || USING rtree(id, minx, maxx, miny, maxy)
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tname = ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name || ‘_insert’
+.. Fail if returned sql != ‘CREATE VIRTUAL TABLE rtree_’ ’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| USING rtree(id, minx, maxx, miny, maxy)
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tname = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_insert’
 .. Fail if returned sql != result of populating insert triggers template in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND name LIKE ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name || ‘_update%’
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND name LIKE ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_update%’
 .. Fail if returned sql != result of populating 4 update triggers templates in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
-.. SELECT sql FROM sqlite_master WHERE type=’trigger’ AND name = ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name || ‘_delete’
+.. SELECT sql FROM sqlite_master WHERE type=’trigger’ AND name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_delete’
 .. Fail if returned sql != result of populating delete trigger template in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
 .. Log pass otherwise
 . Pass if logged pass and no fails
@@ -1645,7 +1645,7 @@ ii. Otherwise log pass
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty
 . For each row table_name, column_name from step 3
-.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if returns an empty result set
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
@@ -1681,10 +1681,10 @@ ii. Otherwise log pass
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if returns an empty result set
 . For each row table_name, column_name from step 1
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgti_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgti_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if returns an empty result set
 .. Fail if sql != result of populating the first trigger template in Annex M with <t> as result_set_table_name and <c> as result_set_column_name
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgtu_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgtu_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Fail if sql != result of populating the second trigger template in Annex M with <t> as result_set_table_name and <c> as result_set_column_name
 .. Log pass otherwise
 . Pass if logged pass and no fails
@@ -1717,7 +1717,7 @@ ii. Otherwise log pass
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty
 . For each row table_name, column_name from step 1
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgti_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgti_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if result set is empty
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
@@ -1753,10 +1753,10 @@ ii. Otherwise log pass
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty
 . For each row table_name, column_name from step 1
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsi_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsi_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if result set is empty
 .. Fail if sql != result of populating the first trigger template in Annex N with <t> as result_set_table_name and <c> as result_set_column_name
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsu_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsu_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Fail if sql != result of populating the second trigger template in Annex N with <t> as result_set_table_name and <c> as result_set_column_name
 .. Log pass otherwise
 . Pass if logged pass and no fails
@@ -1787,7 +1787,7 @@ ii. Otherwise log pass
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty
 . For each row table_name, column_name from step 1
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsi_’ || result_set_table_name || ‘_’ || result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsi_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if result set is empty
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
