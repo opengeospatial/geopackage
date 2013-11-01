@@ -6,8 +6,17 @@ require 'asciidoctor'
 
 module Asciidoctor
   class Section
+    alias_method :old_initialize, :initialize
+
+    def initialize(parent = nil, level = nil, numbered = true)
+      old_initialize(parent, level, numbered)
+      if parent.respond_to?(:numbered) && parent.numbered
+        @numbered = true
+      end
+    end
+
     def sectnum(delimiter = '.', append = nil)
-      append ||= (append == false ? '' : delimiter)
+      append ||= (!append ? '' : delimiter)
 
       if !@level.nil? && @level > 1 && @parent.is_a?(Section)
         if @parent.appendix_number
