@@ -16,7 +16,7 @@ module Asciidoctor
     end
 
     def sectnum(delimiter = '.', append = nil)
-      append ||= (!append ? '' : delimiter)
+      append ||= (append == false ? '' : delimiter)
 
       if !@level.nil? && @level > 1 && @parent.is_a?(Section)
         if @parent.appendix_number
