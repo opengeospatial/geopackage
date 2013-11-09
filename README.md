@@ -11,6 +11,8 @@ information to build richer applications. An [Extension Mechanism](spec/7_extens
 described to provide implementors a way to include additional functionality in their GeoPackages, with a 
 number of optional [extensions](spec/8_extensions.md) included.
 
+HTML version of the spec is available at http://opengis.github.io/geopackage/
+
 About
 -----
 
@@ -29,7 +31,9 @@ priority.
 
 Reading the document
 --------------------
-The main specification is in the [spec/](spec/) folder. 
+The main specification can be read at http://opengis.github.io/geopackage/.
+
+The asciidoc source for the specification is in the [spec/](spec/) folder.
 
 Contributing
 ------------

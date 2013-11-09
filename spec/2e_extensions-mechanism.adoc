@@ -1,0 +1,81 @@
+=== Extension Mechanism
+
+==== Introduction
+
+A GeoPackage extension is a set of one or more requirements clauses that are documented by filling out the GeoPackage Extension Template in <<extension_template>>.
+A GeoPackage Extension either profiles / extends existing requirements clauses in the geopackage specification or adds new requirements clauses.
+Existing requirement clause extension examples include additional geometry types, additional SQL geometry functions, and additional tile image formats.
+New requirement clause extension examples include spatial indexes, triggers, additional tables, other BLOB column encodings, and other SQL functions.
+
+GeoPackage extensions are identified by a name of the form <author>_<extension name> where <author> indicates the person or organization that developed and maintains the extension.
+The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC and used in Geopackages.
+Implementers use their own author names to register other extensions used in Extended GeoPackages.
+
+
+==== Extensions
+
+===== Data
+
+[[extensions_table_definition]]
+====== Table Definition
+
+[requirement]
+A GeoPackage MAY contain a table or updateable view named gpkg_extensions.
+If present this table SHALL be defined per <<gpkg_extensions_cols>> and <<gpkg_extensions_sql>>.
+
+The `gpkg_extensions` table or updateable view in a GeoPackage is used to indicate that a particular extension applies to a GeoPackage, a table in a GeoPackage or a column of a table in a GeoPackage.
+An application that access a GeoPackage can query the `gpkg_extensions` table instead of the contents of all the user data tables to determine if it has the required capabilitiesto read or write to tables with extensions, and to “fail fast” and return an error message if it does not.
+
+[[gpkg_extensions_cols]]
+.GeoPackage Extensions Table or View Definition
+[cols=",,,,",options="header",]
+|=======================================================================
+|Column Name |Col Type |Column Description |Null |Key
+|`table_name` |TEXT |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Unique
+|`column_name` |TEXT |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Unique
+|`extension_name` |TEXT |The case sensitive name of the extension that is required, in the form <author>_<extension_name>. |no |Unique
+|`definition` |TEXT |Definition of the extension in the form specfied by the template in <<extension_template>> or reference thereto. |no |
+|`scope` |TEXT |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only' in lowercase. |no |
+|=======================================================================
+
+See <<gpkg_extensions_sql>>.
+
+====== Table Data Values
+
+[requirement]
+Every extension of a GeoPackage SHALL be registered in a corresponding row in the gpkg_extensions table.
+The absence of a gpkg_extensions table or the absence of rows in gpkg_extnsions table SHALL both indicate the absence of extensions to a GeoPackage.
+
+[requirement]
+Values of the `gpkg_extensions` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column or be NULL.
+They SHALL NOT be NULL for rows where the `column_name` value is not NULL.
+
+[requirement]
+The `column_name` column value in a `gpkg_extensions` row SHALL be the name of a column in the table specified by the `table_name` column value for that row, or be NULL.
+
+[requirement]
+Each `extension_name` column value in a `gpkg_extensions` row SHALL be a unique case sensitive value of the form <author>_<extension_name> where <author> indicates the person or organization that developed and
+maintains the extension. The valid character set for <author> SHALL be [a-zA-Z0-9].
+The valid character set for <extension_name> SHALL be [a-zA-Z0-9_].
+An `extension_name` for the “gpkg” author name SHALL be one of those defined in this encoding standard or in an OGC Best Practices Document that extends it.
+
+Complete examples of how to fill out the GeoPackage Extension Template in <<extension_template>> are provided in the annexes.
+The definition column value in a `gpkg_extensions` row for those extensions SHALL contain the Annex name as a reference.
+
+Partial examples of how to fill out the GeoPackage Extension Template in <<extension_template>> are provided by the templates in <<extension_geometry_types>> and <<extension_geometry_encoding>>.
+Extension definitions created using those template and other extension definitions MAY be provided in the definition column, preferably as ASCII text, or as a reference such as a URI <<23>> or email address whereby the definition may be obtained.
+
+[requirement]
+The definition column value in a `gpkg_extensions` row SHALL contain or reference the text that results from documenting an extension by filling out the GeoPackage Extension Template in <<extension_template>>.
+
+Some extensions do not impose any additional requirements on software that accesses a GeoPackage in a read-only fashion.
+An example of this is an extension that defines an SQL trigger that uses a non-standard SQL function defined in a GeoPackage SQLite Extension.
+Triggers are only invoked when data is written to the GeoPackage, so usage of this type of extension can be safely ignored for read-only access.
+This is indicated by a gpkg_extensions.scope column value of “write_only”.
+
+[requirement]
+The scope column value in a `gpkg_extensions` row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.
+
+The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC.
+Requirements for extension names for the “gpkg” author name are defined in the clauses listed in 14 below.
+GeoPackage implementers use their own author names to register other extensions.
