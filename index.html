@@ -765,7 +765,7 @@ The first 16 bytes of a GeoPackage SHALL contain “SQLite format 3” <span cla
 <div id="_requirement-2" class="quoteblock">
 <div class="title">Requirement 2</div>
 <blockquote>
-A GeoPackage SHALL contain 0x47503130 ("GP10" in ASCII) in the application id field of the SQLite database header to indicate a GeoPackage version 1.0 file.
+A GeoPackage SHALL contain 0x47503130 ("GP10" in ASCII) in the application id field of the SQLite database header to indicate a GeoPackage version 1.0 file. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span>
 </blockquote>
 </div>
 <div class="paragraph">
@@ -892,7 +892,7 @@ The SQLite PRAGMA foreign_key_check() SQL with no parameter value SHALL return a
 <div id="_requirement-8" class="quoteblock">
 <div class="title">Requirement 8</div>
 <blockquote>
-A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via <a href="http://www.sqlite.org/download.html">SQLite version 3</a> <a href="#6">[6]</a> software APIs. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span>
+A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via <a href="http://www.sqlite.org/download.html">SQLite version 3</a> <a href="#6">[6]</a> software APIs. <span class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -1189,7 +1189,7 @@ The <code>table_name</code> column value in a <code>gpkg_contents</code> table r
 <div id="_requirement-15" class="quoteblock">
 <div class="title">Requirement 15</div>
 <blockquote>
-Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> <a href="#29">[29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. <span class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</span>
+Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> <a href="#29">[29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. <span class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</span>
 </blockquote>
 </div>
 <div id="_requirement-16" class="quoteblock">
@@ -1386,7 +1386,7 @@ StandardGeoPackageBinary {
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>per  ISO 13249-3 <a href="#12">[12]</a> clause 5.1.46 <span class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</span></td>
+<td>per  ISO 13249-3 <a href="#12">[12]</a> clause 5.1.46 <span class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</span></td>
 </tr>
 </table>
 </div>
@@ -1665,7 +1665,7 @@ The m value in a <code>gpkg_geometry_columns</code> table row SHALL be one of 0,
 <p>The third component of the SQL schema for vector features in a GeoPackage described in clause <a href="#sfsql_intro">Simple Features SQL Introduction</a> above are tables that contain user data representing features.
 Feature attributes are columns in a feature table, including geometries.
 Features are rows in a feature table.
-<span class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnote_6" title="View footnote.">6</a>]</span></p>
+<span class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</span></p>
 </div>
 <div id="requirement_feature_integer_pk" class="quoteblock">
 <div class="title">Requirement 29</div>
@@ -1773,7 +1773,7 @@ A feature table SHALL have only one geometry column.
 <div id="_requirement-31" class="quoteblock">
 <div class="title">Requirement 31</div>
 <blockquote>
-Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column value <span class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnote_7" title="View footnote.">7</a>]</span>.
+Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column value <span class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</span>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1813,7 +1813,7 @@ Applications that store GeoPackage tile data, which are presumed to have this in
 </div>
 <div class="paragraph">
 <p>A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container.
-<span class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</span> “Tile pyramid” refers to the concept of pyramid structure of tiles of different spatial extent an resolution at different zoom levels, and the tile data itself.
+<span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span> “Tile pyramid” refers to the concept of pyramid structure of tiles of different spatial extent an resolution at different zoom levels, and the tile data itself.
 “Tile matrix” refers to rows and columns of tiles tha all have the same spatial extent and resolution at a particular zoom level.
 “Tile matrix set” refers to the definitio of a tile pyramid’s tiling structure.</p>
 </div>
@@ -1854,7 +1854,7 @@ See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventi
 <div id="_requirement-34" class="quoteblock">
 <div class="title">Requirement 34</div>
 <blockquote>
-In a GeoPackage that contains a tile pyramid user data table that contains tile data, by default <span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span>, zoom level pixel sizes for that table SHALL vary by a factor of 2 between adjacent zoo levels in the tile matrix metadata table.
+In a GeoPackage that contains a tile pyramid user data table that contains tile data, by default <span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span>, zoom level pixel sizes for that table SHALL vary by a factor of 2 between adjacent zoo levels in the tile matrix metadata table.
 </blockquote>
 </div>
 </div>
@@ -1869,7 +1869,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 <div id="_requirement-35" class="quoteblock">
 <div class="title">Requirement 35</div>
 <blockquote>
-In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>, by default SHALL store that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>. <span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span>
+In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>, by default SHALL store that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>. <span class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -1884,7 +1884,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 <div id="_requirement-36" class="quoteblock">
 <div class="title">Requirement 36</div>
 <blockquote>
-In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>. <span class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnote_11" title="View footnote.">11</a>]</span>
+In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>. <span class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</span>
 </blockquote>
 </div>
 </div>
@@ -2132,7 +2132,7 @@ The <code>gpkg_tile_matrix</code> table or view SHALL contain one row record for
 <p>The <code>gpkg_tile_matrix</code> table or view MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.</p>
 </div>
 <div class="paragraph">
-<p>GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view <span class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnote_12" title="View footnote.">12</a>]</span>, as specified by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.
+<p>GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view <span class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</span>, as specified by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.
 The tile coordinate (0,0) always refers to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.</p>
 </div>
 <div id="_requirement-44" class="quoteblock">
@@ -2187,9 +2187,9 @@ The <code>pixel_x_size</code> and <code>pixel_y_size</code> column values for <c
 <p>If the geographic extent of the image data contained in tiles at a particular zoom level is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.]</p>
 </div>
 <div class="paragraph">
-<p>Tiles MAY or MAY NOT be provided for level 0 or any other particular zoom level. <span class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</span>
+<p>Tiles MAY or MAY NOT be provided for level 0 or any other particular zoom level. <span class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</span>
 This means that a tile matrix set can be sparse, i.e. not contain a tile for any particular position at a certain tile zoom level.
-<span class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</span> This does not affect the informative spatial extent stated by the min/max x/y columns values in the <code>gpkg_contents</code> record for the same <code>table_name</code>, the exact spatial extent stated by the min/max x/y columns values in the <code>gpkg_tile_matrix_set</code> record for the same table name, or the tile matrix width and height at that level. footnote:[The `gpkg_tile_matrix_set` table contains coordinates that define a bounding box as the exact stated spatial extent for all tiles in a tile (matrix set) table.</p>
+<span class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</span> This does not affect the informative spatial extent stated by the min/max x/y columns values in the <code>gpkg_contents</code> record for the same <code>table_name</code>, the exact spatial extent stated by the min/max x/y columns values in the <code>gpkg_tile_matrix_set</code> record for the same table name, or the tile matrix width and height at that level. footnote:[The `gpkg_tile_matrix_set` table contains coordinates that define a bounding box as the exact stated spatial extent for all tiles in a tile (matrix set) table.</p>
 </div>
 </div>
 </div>
@@ -2277,7 +2277,7 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 <div class="sect5">
 <h6 id="_table_data_values_5">2.2.8.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>Each tile pyramid user data table or view <span class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnote_15" title="View footnote.">15</a>]</span> MAY contain tile matrices at zero or more zoom levels of different spatial resolution (map scale).</p>
+<p>Each tile pyramid user data table or view <span class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</span> MAY contain tile matrices at zero or more zoom levels of different spatial resolution (map scale).</p>
 </div>
 <div id="_requirement-53" class="quoteblock">
 <div class="title">Requirement 53</div>
@@ -2398,7 +2398,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Column
 </table>
 
 <div class="paragraph">
-<p>GeoPackage applications MAY <span class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnote_16" title="View footnote.">16</a>]</span> use the <code>gpkg_data_columns</code> table to store minimal application schema identifying, descriptive and <a href="http://www.iana.org/assignments/media-types/index.html">MIME</a> <a href="#21">[21]</a> type <span class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</span> information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite <code>sqlite_master</code> table and pragma <code>table_info(table_name)</code> SQL function.
+<p>GeoPackage applications MAY <span class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</span> use the <code>gpkg_data_columns</code> table to store minimal application schema identifying, descriptive and <a href="http://www.iana.org/assignments/media-types/index.html">MIME</a> <a href="#21">[21]</a> type <span class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</span> information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite <code>sqlite_master</code> table and pragma <code>table_info(table_name)</code> SQL function.
 The <code>gpkg_data_columns</code> data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.</p>
 </div>
 <div class="paragraph">
@@ -2448,7 +2448,7 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 </div>
 <div id="gpkg_data_column_constraints_cols" class="paragraph">
 <div class="title">Data Column Constraints Table or View Definition</div>
-<p><span class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnote_18" title="View footnote.">18</a>]</span></p>
+<p><span class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</span></p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
@@ -2682,8 +2682,8 @@ These tables are intended to provide the support necessary to implement the hier
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_metadata</code> table that contains metadata is described in clause <a href="#_metadata_table">Metadata Table</a>, and the <code>gpkg_metadata_reference</code> table that relates <code>gpkg_metadata</code> to GeoPackage data is described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a>.
-There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion <span class="footnote">[<a id="_footnoteref_19" class="footnote" href="#_footnote_19" title="View footnote.">19</a>]</span> with more than one level, only that if it is, these tables SHALL be used.
-Such metadata <span class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</span> and data that relates it to GeoPackage contents SHALL NOT be stored in other tables as defined in clause <a href="#_other_data_tables">[_other_data_tables]</a>.</p>
+There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion <span class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</span> with more than one level, only that if it is, these tables SHALL be used.
+Such metadata <span class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</span> and data that relates it to GeoPackage contents SHALL NOT be stored in other tables as defined in clause <a href="#_other_data_tables">[_other_data_tables]</a>.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2771,7 +2771,7 @@ The structure (schema) information could be in whatever encoding is used by the 
 <div class="paragraph">
 <p>The <code>md_scope</code> column in the <code>gpkg_metadata</code> table is the name of the applicable scope for the contents of the metadata column for a given row.
 The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">Metadata Scopes</a> below.
-The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</span> for use in the GeoPackage specification by addition of entries with “NA” as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
+The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_22" class="footnote" href="#_footnote_22" title="View footnote.">22</a>]</span> for use in the GeoPackage specification by addition of entries with “NA” as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
 </div>
 <table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 14. Metadata Scopes</caption>
@@ -12419,9 +12419,27 @@ Annex A</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1, 2.1.3.1.1, 2.2.6.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>2.1.3.1.1, 2.2.6.1.1</p>
+<p>Add x/y axis definitions to  min/max x/y column descriptions and WKB geometry description.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Revise footnote (3) to Req 2 to include byte values instead of long value.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler, Paul Daisey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Misc editorial changes, mostly formatting.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -13754,43 +13772,43 @@ Suppose we have this metadata:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undefined</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">series</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">dataset</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">featureType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">feature</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attributeType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 </tbody>
@@ -14182,116 +14200,116 @@ level.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">undefined</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">fieldSession</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">collectionSession</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">series</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">dataset</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">featureType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">feature</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attributeType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">featureType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">feature</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">13</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">14</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">feature</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">15</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">17</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">feature</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">18</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">19</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://schemas.opengis.net/iso/19139/">http://schemas.opengis.net/iso/19139/</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 </tr>
 </tbody>
 </table>
@@ -15477,67 +15495,70 @@ For undated references, the latest edition of the normative document referred to
 <a href="#_footnoteref_2">2</a>. SQLite is in the public domain (see <a href="http://www.sqlite.org/copyright.html)">http://www.sqlite.org/copyright.html)</a>
 </div>
 <div class="footnote" id="_footnote_3">
-<a href="#_footnoteref_3">3</a>. New applications should use the latest available SQLite version software
+<a href="#_footnoteref_3">3</a>. With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196437808;" SQL statement, where 1196437808 is the 32-bit integer value of 0x47503130. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x31, 0x30 at offset 68 in the SQLite database file (see <a href="http://www.sqlite.org/fileformat2.html#database_header">http://www.sqlite.org/fileformat2.html#database_header</a> for details).
 </div>
 <div class="footnote" id="_footnote_4">
-<a href="#_footnoteref_4">4</a>. The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
+<a href="#_footnoteref_4">4</a>. New applications should use the latest available SQLite version software
 </div>
 <div class="footnote" id="_footnote_5">
-<a href="#_footnoteref_5">5</a>. OGC WKB simple feature geometry types specified in <<13>> are a subset of the ISO WKB geometry types specified in <<16>>
+<a href="#_footnoteref_5">5</a>. The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
 </div>
 <div class="footnote" id="_footnote_6">
-<a href="#_footnoteref_6">6</a>. A GeoPackage is not required to contain any feature data tables. Feature data tables in a GeoPackage MAY be empty.
+<a href="#_footnoteref_6">6</a>. OGC WKB simple feature geometry types specified in <<13>> are a subset of the ISO WKB geometry types specified in <<16>>
 </div>
 <div class="footnote" id="_footnote_7">
-<a href="#_footnoteref_7">7</a>. GeoPackage applications MAY use SQL triggers or tests in application code to meet this requirement
+<a href="#_footnoteref_7">7</a>. A GeoPackage is not required to contain any feature data tables. Feature data tables in a GeoPackage MAY be empty.
 </div>
 <div class="footnote" id="_footnote_8">
-<a href="#_footnoteref_8">8</a>. Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles COULD be used for transparency where there is no data on the tile edges, and image/jpeg format tiles COULD be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
+<a href="#_footnoteref_8">8</a>. GeoPackage applications MAY use SQL triggers or tests in application code to meet this requirement
 </div>
 <div class="footnote" id="_footnote_9">
-<a href="#_footnoteref_9">9</a>. See clause 3.2.1.1.1 for use of other zoom levels as a registered extensions.
+<a href="#_footnoteref_9">9</a>. Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles COULD be used for transparency where there is no data on the tile edges, and image/jpeg format tiles COULD be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
 </div>
 <div class="footnote" id="_footnote_10">
-<a href="#_footnoteref_10">10</a>. See Clauses <<ext_webp_tiles>> regarding use of alternative tile MIME types as a registered extension.
+<a href="#_footnoteref_10">10</a>. See clause 3.2.1.1.1 for use of other zoom levels as a registered extensions.
 </div>
 <div class="footnote" id="_footnote_11">
 <a href="#_footnoteref_11">11</a>. See Clauses <<ext_webp_tiles>> regarding use of alternative tile MIME types as a registered extension.
 </div>
 <div class="footnote" id="_footnote_12">
-<a href="#_footnoteref_12">12</a>. GeoPackage applications MAY query the gpkg_tile_matrix table or the tile pyramid user data table to determine the minimum and maximum zoom levels for a given tile pyramid table.
+<a href="#_footnoteref_12">12</a>. See Clauses <<ext_webp_tiles>> regarding use of alternative tile MIME types as a registered extension.
 </div>
 <div class="footnote" id="_footnote_13">
-<a href="#_footnoteref_13">13</a>. GeoPackage applications MAY query a tile pyramid user data table to determine which tiles are available at each zoom level.
+<a href="#_footnoteref_13">13</a>. GeoPackage applications MAY query the gpkg_tile_matrix table or the tile pyramid user data table to determine the minimum and maximum zoom levels for a given tile pyramid table.
 </div>
 <div class="footnote" id="_footnote_14">
-<a href="#_footnoteref_14">14</a>. GeoPackage applications that insert, update, or delete tile pyramid user data table tiles row records are responsible for maintaining the corresponding descriptive contents of the gpkg_tile_matrix_metadata table.
+<a href="#_footnoteref_14">14</a>. GeoPackage applications MAY query a tile pyramid user data table to determine which tiles are available at each zoom level.
 </div>
 <div class="footnote" id="_footnote_15">
-<a href="#_footnoteref_15">15</a>. A GeoPackage is not required to contain any tile pyramid user data tables. Tile pyramid user data tables in a GeoPackage MAY be empty.
+<a href="#_footnoteref_15">15</a>. GeoPackage applications that insert, update, or delete tile pyramid user data table tiles row records are responsible for maintaining the corresponding descriptive contents of the gpkg_tile_matrix_metadata table.
 </div>
 <div class="footnote" id="_footnote_16">
-<a href="#_footnoteref_16">16</a>. A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.
+<a href="#_footnoteref_16">16</a>. A GeoPackage is not required to contain any tile pyramid user data tables. Tile pyramid user data tables in a GeoPackage MAY be empty.
 </div>
 <div class="footnote" id="_footnote_17">
-<a href="#_footnoteref_17">17</a>. GeoPackages MAY contain MIME types other than the raster image types specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>> and <<tile_enc_webp>> as feature attributes, but they are not required to do so.
+<a href="#_footnoteref_17">17</a>. A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.
 </div>
 <div class="footnote" id="_footnote_18">
-<a href="#_footnoteref_18">18</a>. The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5.
+<a href="#_footnoteref_18">18</a>. GeoPackages MAY contain MIME types other than the raster image types specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>> and <<tile_enc_webp>> as feature attributes, but they are not required to do so.
 </div>
 <div class="footnote" id="_footnote_19">
-<a href="#_footnoteref_19">19</a>. Informative examples of hierarchical metadata are provided in &lt;&lt;metadata_example_appendix&gt;&gt;
+<a href="#_footnoteref_19">19</a>. The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5.
 </div>
 <div class="footnote" id="_footnote_20">
-<a href="#_footnoteref_20">20</a>. An informative example of raster image metadata is provided in &lt;&lt;tiles_example_appendix&gt;&gt;
+<a href="#_footnoteref_20">20</a>. Informative examples of hierarchical metadata are provided in &lt;&lt;metadata_example_appendix&gt;&gt;
 </div>
 <div class="footnote" id="_footnote_21">
-<a href="#_footnoteref_21">21</a>. The scope codes in &lt;&lt;metadata_scopes&gt;&gt; include a very wide set of descriptive information types as “metadata” to describe data.
+<a href="#_footnoteref_21">21</a>. An informative example of raster image metadata is provided in &lt;&lt;tiles_example_appendix&gt;&gt;
+</div>
+<div class="footnote" id="_footnote_22">
+<a href="#_footnoteref_22">22</a>. The scope codes in &lt;&lt;metadata_scopes&gt;&gt; include a very wide set of descriptive information types as “metadata” to describe data.
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.9.7<br>
-Last updated 2013-11-14 18:44:34 UTC
+Last updated 2013-11-14 23:00:40 UTC
 </div>
 </div>
 </body>
