@@ -62,8 +62,11 @@ If present it SHALL be defined per <<gpkg_data_column_constraints_cols>> and <<g
 The `gpkg_data_column_constraints` table contains data to specify restrictions on basic data type column values.
 The constraint_name column is referenced by the `constraint_name` column in the `gpkg_data_columns` table defined in <<gpkg_data_columns_cols>>.
 
+:geopackage_min_max_cols_numeric_foot: footnote:[The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5.]
+
 [[gpkg_data_column_constraints_cols]]
-.Data Column Constraints Table or View Definition
+.Data Column Constraints Table or View Definition 
+{geopackage_min_max_cols_numeric_foot}
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
@@ -81,10 +84,21 @@ See <<gpkg_data_column_constraints_sql>>.
 ====== Table Data Values
 
 The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (text pattern match).
-The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range".
-The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob".
-The minIsInclusive and maxIsInclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The minIsInclusive and maxIsInclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.
+
+.Sample Data Column Constraints
+[cols=",,,,,,,",options="header",]
+|=======================================================================
+|constraint_name| constraint_type| value| min| minIsInclusive| max| maxIsInclusive
+|sampleRange| range| NULL| 1| true| 10| true
+|sampleEnum| enum| 1| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 3| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 5| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 7| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 9| NULL| NULL| NULL| NULL
+|sampleGlob| glob| [1-2][0-9][0-9][0-9]| NULL| NULL| NULL| NULL
+|=======================================================================
 
 [requirement]
 The `gpkg_data_column_constraints` table MAY be empty.

@@ -171,10 +171,10 @@ The purpose of the `gpkg_contents` table is to provide identifying and descripti
 |`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |
 |`description` |TEXT |A human-readable description for the table_name content |yes |“” |
 |`last_change` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', CURRENT_TIMESTAMP)` |
-|`min_x` |DOUBLE |Bounding box for all content in table_name |yes | |
-|`min_y` |DOUBLE |Bounding box for all content in table_name |yes | |
-|`max_x` |DOUBLE |Bounding box for all content in table_name |yes | |
-|`max_y` |DOUBLE |Bounding box for all content in table_name |yes | |
+|`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name |yes | |
+|`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name |yes | |
+|`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name |yes | |
+|`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name |yes | |
 |`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match gpkg_tile_matrix_set.srs.id |yes | |FK
 |=======================================================================
 

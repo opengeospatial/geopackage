@@ -641,12 +641,12 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set+ /data/table_def
+|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/table_def+
 |*Test Purpose* |Verify that the gpkg_tile_matrix_set table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_tile_matrix_set' 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents ofAnnex C5Annex C Table 25. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
+. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <<example_feature_table_sql>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
 . Fail otherwise.
 |*Reference* |Clause 2.2.6.1.1 Req 37:
 |*Test Type* |Capability
@@ -1736,7 +1736,7 @@ ii. Otherwise log pass
 |*Test Case ID* |+/reg_ext/features/geometry_type_triggers/extension_row+
 |*Test Purpose* |Verify that geometry type triggers are registered using the “gpkg_geometry_type_trigger” extension name.
 |*Test Method* |
- /reg_ext/features/geometry_type_triggers/extension_name
+ Do test /reg_ext/features/geometry_type_triggers/extension_name
 |*Reference* |Clause 3.1.4.1.3 Req 97:
 |*Test Type* |Capability
 |========================================
@@ -1805,7 +1805,7 @@ ii. Otherwise log pass
 |*Test Case ID* |+/reg_ext/features/srs_id_triggers/extension_row+
 |*Test Purpose* |Verify that srs_id triggers are registered using the “gpkg_srs_id_trigger” extension name.
 |*Test Method* |
- /reg_ext/features/srs_id_triggers/extension_name
+ Do test /reg_ext/features/srs_id_triggers/extension_name
 |*Reference* |Clause 3.1.5.1.3 Req 100:
 |*Test Type* |Capability
 |========================================

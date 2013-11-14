@@ -10,21 +10,21 @@ Suppose we have this metadata:
 CREATE TABLE gpkg_metadata (
   id INTEGER NOT NULL PRIMARY KEY,
   md_scope TEXT NOT NULL DEFAULT 'undefined',
-  metadata_standard_URI TEXT NOT NULL DEFAULT 'http://schemas.opengis.net/iso/19139/',
-  metadata BLOB NOT NULL DEFAULT (zeroblob(4))
+  metadata_standard_uri TEXT NOT NULL, 
+  metadata TEXT NOT NULL
 )
 ----
 
 [cols=",,,,",options="header"]
 |======
 |id|md_scope|metadata_standard_uri|metadata
-|0|undefined|http://schemas.opengis.net/iso/19139/|BLOB
-|3|series|http://schemas.opengis.net/iso/19139/ |BLOB
-|4|dataset|http://schemas.opengis.net/iso/19139/ |BLOB
-|5|featureType|http://schemas.opengis.net/iso/19139/ |BLOB
-|6|feature|http://schemas.opengis.net/iso/19139/ |BLOB
-|7|attributeType|http://schemas.opengis.net/iso/19139/ |BLOB
-|8|attribute|http://schemas.opengis.net/iso/19139/ |BLOB
+|0|undefined|http://schemas.opengis.net/iso/19139/|TEXT
+|3|series|http://schemas.opengis.net/iso/19139/ |TEXT
+|4|dataset|http://schemas.opengis.net/iso/19139/ |TEXT
+|5|featureType|http://schemas.opengis.net/iso/19139/ |TEXT
+|6|feature|http://schemas.opengis.net/iso/19139/ |TEXT
+|7|attributeType|http://schemas.opengis.net/iso/19139/ |TEXT
+|8|attribute|http://schemas.opengis.net/iso/19139/ |TEXT
 |======
 
 and this reference table definition:
@@ -32,13 +32,13 @@ and this reference table definition:
 [source,sql]
 ----
 CREATE TABLE gpkg_metadata_reference (
-  reference_scope TEXT NOT NULL DEFAULT "table",  
-  table_name TEXT NOT NULL DEFAULT "undefined",
-  column_name TEXT NOT NULL DEFAULT "undefined",
-  row_id_value INTEGER NOT NULL DEFAULT 0,
+  reference_scope TEXT NOT NULL,  
+  table_name TEXT,
+  column_name TEXT,
+  row_id_value INTEGER,
   timestamp TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
-  md_file_id INTEGER NOT NULL DEFAULT 0,
-  md_parent_id INTEGER NOT NULL DEFAULT 0,
+  md_file_id INTEGER NOT NULL,
+  md_parent_id INTEGER,
   CONSTRAINT crmr_mfi_fk FOREIGN KEY (md_file_id) REFERENCES gpkg_metadata(id),
   CONSTRAINT crmr_mpi_fk FOREIGN KEY (md_parent_id) REFERENCES gpkg_metadata(id)
 )
@@ -154,17 +154,17 @@ Suppose a user with a mobile handheld device goes out in the field and collects 
 [cols=",,,,",options="header"]
 |======
 |id|md_scope|metadata_standard_uri|metadata
-|1 |fieldSession |http://schemas.opengis.net/iso/19139/ |BLOB
-|10 |featureType |http://schemas.opengis.net/iso/19139/ |BLOB
-|11 |feature |http://schemas.opengis.net/iso/19139/ |BLOB
-|12 |attribute |http://schemas.opengis.net/iso/19139/ |BLOB
-|13 |attribute |http://schemas.opengis.net/iso/19139/ |BLOB
-|14 |feature |http://schemas.opengis.net/iso/19139/ |BLOB
-|15 |attribute |http://schemas.opengis.net/iso/19139/ |BLOB
-|16 |attribute |http://schemas.opengis.net/iso/19139/ |BLOB
-|17 |feature |http://schemas.opengis.net/iso/19139/ |BLOB
-|18 |attribute |http://schemas.opengis.net/iso/19139/ |BLOB
-|19 |attribute |http://schemas.opengis.net/iso/19139/ |BLOB
+|1 |fieldSession |http://schemas.opengis.net/iso/19139/ |TEXT
+|10 |featureType |http://schemas.opengis.net/iso/19139/ |TEXT
+|11 |feature |http://schemas.opengis.net/iso/19139/ |TEXT
+|12 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|13 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|14 |feature |http://schemas.opengis.net/iso/19139/ |TEXT
+|15 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|16 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|17 |feature |http://schemas.opengis.net/iso/19139/ |TEXT
+|18 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|19 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
 |======
 
 (This example assumes that the field session data is still considered "raw" and won't be considered a data set or part of a data series until it has been verified and cleaned, but if that is wrong then additional series and data set metadata could be added.)
