@@ -728,8 +728,7 @@ Open Geospatial Consortium Inc. SHALL not be held responsible for identifying an
 <div class="sectionbody">
 <div class="paragraph">
 <p>The required capabilities specified in this clause serve as the base for options specified in clause <a href="#_options">Options</a> and extensions specified in clause <a href="#_registered_extensions">Registered Extensions</a>.
-All gpkg_* tables and views and all tiles user data tables specified in this standard SHALL have only the specified columns.
-Any features user data tables MAY have columns in addition to those specified.
+All gpkg_* tables and views and all tiles user data tables specified in this standard SHALL have only the specified columns and table constraints. Any features user data tables MAY have columns in addition to those specified.
 All specified table and column name values SHALL be lowercase.</p>
 </div>
 <div class="sect2">
@@ -1671,7 +1670,7 @@ Features are rows in a feature table.
 <div class="title">Requirement 29</div>
 <blockquote>
 A GeoPackage MAY contain tables or updateable views containing vector features.
-Every such feature table or view in a GeoPackage SHALL have a primary key defined on one integer column per <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View Definition</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL</a>.
+Every such feature table or view in a GeoPackage SHALL have a column with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View Definition</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL</a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -2203,7 +2202,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div id="_requirement-52" class="quoteblock">
 <div class="title">Requirement 52</div>
 <blockquote>
-Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name per <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL</a>.
+Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL</a>.
 </blockquote>
 </div>
 <table id="example_tiles_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -10409,13 +10408,13 @@ of geospatial data will increase the cross-platform interoperability of geospati
 Standard APIs for access and management of GeoPackage data will provide consistent query and update results across such
 applications and services. Increased interoperability and result consistency will enlarge the potential market for such
  applications and services, particularly in resource-constrained mobile computing environments like cell phones and
- tablets. GeoPackages will become the standard containers for “MyGeoData” that are used as a transfer format by users
+ tablets. GeoPackages will become the standard containers for "MyGeoData" that are used as a transfer format by users
  and Geospatial Web Services and a storage format on personal and enterprise devices.</p>
 </div>
 <div class="paragraph">
 <p>This OGC® GeoPackage Encoding Standard defines a GeoPackage as a self-contained, single-file,
 cross-platform, serverless, transactional, open source SQLite data container with table definitions, relational
-integrity constraints, an SQL API exposed via a “C” CLI and JDBC, and manifest tables that together act as an exchange
+integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest tables that together act as an exchange
 and direct-use format for multiple types of geospatial data including vector features, features with raster attributes
 and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity
 environments.</p>
@@ -10544,7 +10543,7 @@ per change request 250 / 12-135.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">11.3, 8.2</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause reference corrections, change gpkg_contents.identifier default value to “”</p>
+<p>Clause reference corrections, change gpkg_contents.identifier default value to ""</p>
 </div></div></td>
 </tr>
 <tr>
@@ -10607,7 +10606,7 @@ per change request 250 / 12-135.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">13.2</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>rename tables 56,57 remove “ows_” prefix</p>
+<p>rename tables 56,57 remove "ows_" prefix</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11223,7 +11222,7 @@ Clauses 1-5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add “gpkg_” prefix to all GeoPackage metadata tables</p>
+<p>Add "gpkg_" prefix to all GeoPackage metadata tables</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11232,7 +11231,7 @@ Clauses 1-5</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Figure 1, 2</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Update with “gpkg_” prefix</p>
+<p>Update with "gpkg_" prefix</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11361,7 +11360,7 @@ Annex C, F</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Clause 3</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Tables with non “gpkg” author registered extensions not data_type “features” or “tiles”</p>
+<p>Tables with non "gpkg" author registered extensions not data_type "features" or "tiles"</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11406,7 +11405,7 @@ Annex C, F</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annex B</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add “Potential” to “Future Work”, “MAY” to items.</p>
+<p>Add "Potential" to "Future Work", "MAY" to items.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11637,7 +11636,7 @@ One geometry column per feature table.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>change "first three bytes of each gc are not “GPB”" to "first two bytes of each gc are not "GP"</p>
+<p>change "first three bytes of each gc are not "GPB"" to "first two bytes of each gc are not "GP"</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11664,7 +11663,7 @@ One geometry column per feature table.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add “more”</p>
+<p>Add "more"</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11753,7 +11752,7 @@ Move corresponding tests in Annex A</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.2.3, 3.2.1, new Annex I</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change “power” to “factor” in and add text to zoom level descriptions and requirements.</p>
+<p>Change "power" to "factor" in and add text to zoom level descriptions and requirements.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12265,8 +12264,7 @@ Annex B</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-22</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">New 3.1.2.1.4
-Annex A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">New 3.1.2.1.4, Annex A</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>New Req 91</p>
 </div></div></td>
@@ -12331,7 +12329,7 @@ Annex A</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.1.1   Table 5</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Bit layout of flags byte and flag bits use --additional text</p>
+<p>Bit layout of flags byte and flag bits use&#8201;&#8212;&#8201;additional text</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12440,6 +12438,24 @@ Annex A</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Misc editorial changes, mostly formatting.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1, 2.1.6.1.1, 2.2.8.1.1</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Add "and table constraints" in clause 1, make INTEGER PRIMARY KEY AUTOINCREMENT explicit in Req 29 and Req 52 to avoid future "WITHOUT ROWID" SQLite v3.8.2 problems.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-19</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler, Paul Daisey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Misc formatting changes.</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -12583,7 +12599,7 @@ Annex A</p></td>
 <dl>
 <dt>Empty GeoPackage</dt>
 <dd>
-<p>A GeoPackage that contains a <code>gpkg_spatial_ref_sys</code> table, a <code>gpkg_contents</code> table with row record(s) with <code>data_type</code> column values of “features” or “tiles”, and corresponding features tables per clause <a href="#features">Features</a> and/or tiles tables per clause <a href="#tiles">Tiles</a> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.</p>
+<p>A GeoPackage that contains a <code>gpkg_spatial_ref_sys</code> table, a <code>gpkg_contents</code> table with row record(s) with <code>data_type</code> column values of "features" or "tiles", and corresponding features tables per clause <a href="#features">Features</a> and/or tiles tables per clause <a href="#tiles">Tiles</a> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.</p>
 </dd>
 <dt>Extended GeoPackage</dt>
 <dd>
@@ -12615,7 +12631,7 @@ Annex A</p></td>
 </dd>
 <dt>Valid GeoPackage</dt>
 <dd>
-<p>A GeoPackage that contains features per clause <a href="#_features">Features</a> and/or tiles per clause <a href="#tiles">Tiles</a> and row(s) in the <code>gpkg_contents</code> table with <code>data_type</code> column values of “features” and/or “tiles” describing the user data tables.</p>
+<p>A GeoPackage that contains features per clause <a href="#_features">Features</a> and/or tiles per clause <a href="#tiles">Tiles</a> and row(s) in the <code>gpkg_contents</code> table with <code>data_type</code> column values of "features" and/or "tiles" describing the user data tables.</p>
 </dd>
 </dl>
 </div>
@@ -12642,10 +12658,6 @@ Annex A</p></td>
 <dd>
 <p>Application Program Interface</p>
 </dd>
-<dt>ATOM</dt>
-<dd>
-<p>Atom Syndication Format</p>
-</dd>
 <dt>BLOB</dt>
 <dd>
 <p>Binary Large OBject</p>
@@ -12661,14 +12673,6 @@ Annex A</p></td>
 <dt>DEM</dt>
 <dd>
 <p>Digital Elevation Model</p>
-</dd>
-<dt>DIGEST</dt>
-<dd>
-<p>Digital Geographic Information Exchange Standard</p>
-</dd>
-<dt>GeoTIFF</dt>
-<dd>
-<p>Geographic Tagged Image File Format</p>
 </dd>
 <dt>GPKG</dt>
 <dd>
@@ -12714,13 +12718,9 @@ Annex A</p></td>
 <dd>
 <p>Multipurpose Internet Mail Extensions</p>
 </dd>
-<dt>NATO</dt>
+<dt>NIIRS</dt>
 <dd>
-<p>North Atlantic Treaty Organization</p>
-</dd>
-<dt>NITF</dt>
-<dd>
-<p>National Imagery Transmission Format</p>
+<p>National Imagery Interpretability Rating Scale</p>
 </dd>
 <dt>OGC</dt>
 <dd>
@@ -12749,14 +12749,6 @@ Annex A</p></td>
 <dt>SRID</dt>
 <dd>
 <p>Spatial Reference (System) Identifier</p>
-</dd>
-<dt>TIFF</dt>
-<dd>
-<p>Tagged Image File Format</p>
-</dd>
-<dt>TIN</dt>
-<dd>
-<p>Triangulated Irregular Network</p>
 </dd>
 <dt>UML</dt>
 <dd>
@@ -15558,7 +15550,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.11<br>
-Last updated 2013-11-15 11:04:19 UTC
+Last updated 2013-11-20 14:38:05 UTC
 </div>
 </div>
 </body>
