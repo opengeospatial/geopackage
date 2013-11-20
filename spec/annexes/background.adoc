@@ -9,12 +9,12 @@ of geospatial data will increase the cross-platform interoperability of geospati
 Standard APIs for access and management of GeoPackage data will provide consistent query and update results across such
 applications and services. Increased interoperability and result consistency will enlarge the potential market for such
  applications and services, particularly in resource-constrained mobile computing environments like cell phones and
- tablets. GeoPackages will become the standard containers for “MyGeoData” that are used as a transfer format by users
+ tablets. GeoPackages will become the standard containers for "MyGeoData" that are used as a transfer format by users
  and Geospatial Web Services and a storage format on personal and enterprise devices.
 
 This OGC® GeoPackage Encoding Standard defines a GeoPackage as a self-contained, single-file,
 cross-platform, serverless, transactional, open source SQLite data container with table definitions, relational
-integrity constraints, an SQL API exposed via a “C” CLI and JDBC, and manifest tables that together act as an exchange
+integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest tables that together act as an exchange
 and direct-use format for multiple types of geospatial data including vector features, features with raster attributes
 and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity
 environments.
@@ -60,14 +60,14 @@ per change request 250 / 12-135.
 |2013-01-15 |r2 |Paul Daisey |8.2 |Change gpkg_contents description default value per change request 255 / 12-166
 |2013-01-15 |r2 |Paul Daisey |9.2, Annex A  |SRS Table Name Change per change request 256 / 12-165
 |2013-01-16 |r2 |Paul Daisey |7, Figure 2 |table diagram gpkg_contents min_y REAL instead of BLOB
-|2013-01-23 |r2 |Paul Daisey |11.3, 8.2 |Clause reference corrections, change gpkg_contents.identifier default value to “”
+|2013-01-23 |r2 |Paul Daisey |11.3, 8.2 |Clause reference corrections, change gpkg_contents.identifier default value to ""
 |2013-02-01 |r2 |Paul Daisey |Changes to AS |No changes to AS
 |2013-02-01 |r2 |Paul Daisey |8.2 |new last sentence and NOTE1, additional table name triggers
 |2013-02-01 |r2 |Paul Daisey |9.6 |drop tables 21, 22 and associated text
 |2013-02-01 |r2 |Paul Daisey |10.5 |misc. editorial changes
 |2013-02-01 |r2 |Paul Daisey |11.2 |REQ 71 should refer to clause 11.2 and not 11.1
 |2013-02-01 |r2 |Paul Daisey |12 |new clause 12 other data
-|2013-02-01 |r2 |Paul Daisey |13.2 |rename tables 56,57 remove “ows_” prefix
+|2013-02-01 |r2 |Paul Daisey |13.2 |rename tables 56,57 remove "ows_" prefix
 |2013-02-08 |r3 |Paul Daisey |10.2, 10.7, 10.8 |Use -1 as "magic" value indicating "unknown" for both compr_qual_factor and georectification columns, and make it the default value. Remove NOTE1 in 10.7. Delete the next to last row in Table 46 - Image Routines for gpkgBboxToTiles (). Delete the corresponding sub-clause 10.8.10 Renumber sub-clause 10.8.11 to 10.8.10
 |2013-02-22 |R3 |Paul Daisey |Normative References, Future Work, 6, Bibliography |The GeoPackage file format and SQL API are provided by SQLite, which is the GeoPackage container implementation, not just a a reference implementation. 
 |2013-03-05 |R3 |Paul Daisey |6.4 |Add Security Considerations clause.
@@ -147,8 +147,8 @@ Clauses 1-5 |Remove all forward material except title page, submitting orgs, and
 |2013-06-12 |R6 |Paul Daisey |Annex G |Remove names and codes for Z and M geometry types, add Figure 5 and geometry subtype definitions
 |2013-06-12 |R6 |Paul Daisey |Clause 1.2.2.6 |Rewrite clause, add new Requirement 10, 11, renumber existing and subsequent ones.
 |2013-06-12 |R6 |Paul Daisey |Annex D |Add ST_Is3D() and ST_IsMeasured()
-|2013-06-12 |R6 |Paul Daisey |All |Add “gpkg_” prefix to all GeoPackage metadata tables
-|2013-06-12 |R6 |Paul Daisey |Figure 1, 2 |Update with “gpkg_” prefix
+|2013-06-12 |R6 |Paul Daisey |All |Add "gpkg_" prefix to all GeoPackage metadata tables
+|2013-06-12 |R6 |Paul Daisey |Figure 1, 2 |Update with "gpkg_" prefix
 |2013-06-12 |R6 |Paul Daisey |Annex A |Add Abstract Test Suite (incomplete)
 |2013-06-13  |R6 |Paul Daisey |1.2.4.1 |Add sentence to end of first paragraph describing gpkg_other_data_columns content..
 |2013-06-13  |R6 |Paul Daisey |Annex A |Add Abstract Test Suite (incomplete)
@@ -165,12 +165,12 @@ Clauses 1-5 |Remove all forward material except title page, submitting orgs, and
 |2013-06-28 |R6 |Paul Daisey |Figure 1, 
  2.1.5, 2.2.7,
 Annex C, F |Add gpkg_geometry_columns and gpkg_tile_matrix_metadata table_name foreign key constraints referencing gpkg_contents table_name now that gpkg_contents rows may describe other data tables.
-|2013-06-28 |R6 |Paul Daisey |Clause 3 |Tables with non “gpkg” author registered extensions not data_type “features” or “tiles”
+|2013-06-28 |R6 |Paul Daisey |Clause 3 |Tables with non "gpkg" author registered extensions not data_type "features" or "tiles"
 |2013-07-01 |R7 |Paul Daisey |Annex A |Change ATS format from numbered list to bold heading, add test definitions.
 |2013-07-02 |R7 |Paul Daisey |Annex A |Add test definitions.
 |2013-07-03 |R7 |Paul Daisey |Annex A |Revise, add test definitions.
 |2013-07-04 |R7 |Paul Daisey |1.1.1, Annex A |Change .geopackage to .gpkg
-|2013-07-24 |R7 |Paul Daisey |Annex B |Add “Potential” to “Future Work”, “MAY” to items.
+|2013-07-24 |R7 |Paul Daisey |Annex B |Add "Potential" to "Future Work", "MAY" to items.
 |2013-07-24 |R7 |Paul Daisey |Annex B |Add support for UTFGrid as a future work item.
 |2013-07-24 |R7 |Paul Daisey |1.1.1.1.1 |Add footnote to REQ 1 that SQLite is in the public domain.
 |2013-07-24 |R7 |Paul Daisey |2.1.3.1.1 |Add footnote to Table 4 that OGC WKB is subset of ISO WKB
@@ -201,10 +201,10 @@ One geometry column per feature table.
 |2013-09-09 |R8 |Paul Daisey |2.2.6.1.1 |Table 7 {RasterLayerName}_tiles change to Tile Matrix User Data Table Name
 |2013-09-09 |R8 |Paul Daisey |3.1.3.1.2, 3.2.1.1.2, Annex C |Change gpkg_extension to gpkg_extensions
 |2013-09-09 |R8 |Paul Daisey |3.2.3.1.1 |Remove [29] from GeoTiff, change [31] to [29] for NGA Implementation Profile
-|2013-09-09 |R8 |Paul Daisey |Annex A |change "first three bytes of each gc are not “GPB”" to "first two bytes of each gc are not "GP"
+|2013-09-09 |R8 |Paul Daisey |Annex A |change "first three bytes of each gc are not "GPB"" to "first two bytes of each gc are not "GP"
 |2013-09-09 |R8 |Paul Daisey |Annex A |Change (1,2,3) to (0,1,2)
 |2013-09-09 |R8 |Paul Daisey |Annex D |add INTEGER return type to ST_ISEmpty, ST_Is3D, ST_ISMeasured functions
-|2013-09-09 |R8 |Paul Daisey |2.1.1 |Add “more”
+|2013-09-09 |R8 |Paul Daisey |2.1.1 |Add "more"
 |2013-09-09 |R8 |Paul Daisey |Annex C |Add the following constraint to the gpkg_geometry_columns table: CONSTRAINT uk_gc_table_name UNIQUE (table_name),
 |2013-09-09 |R8 |Paul Daisey |3.1.4.1.2, 3.1.5.1.2 |Change geopackage_extension to gpkg_extensions
 |2013-09-18 |R8 |Paul Daisey |2.6.1, Annex A, Annex C |Add column 'scope text not null' to gpkg_extensions
@@ -221,7 +221,7 @@ Move corresponding tests in Annex A
 |2013-09-24 |R8 |Paul Daisey |Annex E |Replace all occurences of 'rowid' with '<i>' in trigger definitions.
 |2013-09-24 |R8 |Paul Daisey |All |Update normative [xx]and bibliographic  [Byy] references
 |2013-09-25 |R8 |Paul Daisey |3.1, Annex A, Annex D, Annex F |Change geometry_columns to gpkg_geometry_columns and geometry_type to geometry_type_name
-|2013-09-25 |R8 |Paul Daisey |2.2.3, 3.2.1, new Annex I |Change “power” to “factor” in and add text to zoom level descriptions and requirements.
+|2013-09-25 |R8 |Paul Daisey |2.2.3, 3.2.1, new Annex I |Change "power" to "factor" in and add text to zoom level descriptions and requirements.
 |2013-09-25 |R8 |Paul Daisey |2.1.6, Annex A, Annex C |Add required data types for vector feature user data table column definitions. 
 |2013-09-26 |R8 |Paul Daisey |New 2.3.2, Annex A, Annex C |Add gpkg_data_column_constraints table
 |2013-09-26 |R8 |Paul Daisey |1.1.3, 2.2.1, 2.2.6, 2.2.7, 2.2.8, Annex A, Annex C |Add gpkg_tile_matrix_set, rename gpkg_tile_matrix_metadata to gpkg_tile_matrix, standardize tile pyramid, tile matrix set and tile matrix term usage.
@@ -285,15 +285,14 @@ Annex B |Add Extended GeoPackage definition
 |2013-10-15 |R9 |Paul Daisey |2.3.3.1.1 |Add NUMERIC data type footnote for table gpkg_data_column_constraints
 |2013-10-15 |R9 |Paul Daisey |All |Misc editorial changes
 |2013-10-22 |R9 |Paul Daisey |3.2.3, 3.2.4, Annex A |Remove TIFF and NITF tile encodings
-|2013-10-22 |R9 |Paul Daisey |New 3.1.2.1.4
-Annex A |New Req 91
+|2013-10-22 |R9 |Paul Daisey |New 3.1.2.1.4, Annex A |New Req 91
 |2013-10-22 |R9 |Paul Daisey |Annex K |Rewrite requirement description
 |2013-10-22 |R9 |Paul Daisey |3.1.1, 3.1.2, Annex J, K |Renamed
 |2013-10-22 |R9 |Paul Daisey |All  |Misc editorial changes
 |2013-10-22 |R9 |Paul Daisey |Introduction, Annex B |Replace detailed table diagram in Introduction with an overview diagram; move detailed table diagram to Annex B, add minimal features and tiles diagrams to Annex B.
 |2013-10-24 |R9 |Paul Daisey |1.1.1.1.3  |Specify 8601 formats for DATE and DATETIME in Table 1
 |2013-10-24 |R9 |Paul Daisey |1.1.1.1.3  |{(size)} specs for BLOB and TEXT data types in Table 1
-|2013-10-24 |R9 |Paul Daisey |2.1.3.1.1   Table 5 |Bit layout of flags byte and flag bits use --additional text
+|2013-10-24 |R9 |Paul Daisey |2.1.3.1.1   Table 5 |Bit layout of flags byte and flag bits use -- additional text
 |2013-10-24 |R9 |Paul Daisey |All  |Misc editorial changes
 |2013-10-24 |R9 |Paul Daisey |Annex Q, R |Removed
 |2013-10-24 |R9 |Paul Daisey |All, Annex S, T |Remove unused normative [xx]and bibliographic  [Byy] references, update remaining ones
@@ -306,6 +305,8 @@ Annex A |New Req 91
 |2013-11-12| R9| Paul Daisey| 1.1.3.1.1, 2.1.3.1.1, 2.2.6.1.1| Add x/y axis definitions to  min/max x/y column descriptions and WKB geometry description.
 |2013-11-13| R9| Paul Daisey| 1.1.1.1.1| Revise footnote (3) to Req 2 to include byte values instead of long value.
 |2013-11-13| R9| Jeff Yutzler, Paul Daisey| All| Misc editorial changes, mostly formatting.
+|2013-11-18| R9| Paul Daisey| 1, 2.1.6.1.1, 2.2.8.1.1| Add "and table constraints" in clause 1, make INTEGER PRIMARY KEY AUTOINCREMENT explicit in Req 29 and Req 52 to avoid future "WITHOUT ROWID" SQLite v3.8.2 problems.
+|2013-11-19| R9| Jeff Yutzler, Paul Daisey| All| Misc formatting changes.
 |=======================================================================
 
 === Changes to the OGC® Abstract Specification
@@ -363,7 +364,7 @@ For the purposes of this document, the following terms and definitions apply.
 
 [gloassary]
 Empty GeoPackage::
-    A GeoPackage that contains a `gpkg_spatial_ref_sys` table, a `gpkg_contents` table with row record(s) with `data_type` column values of “features” or “tiles”, and corresponding features tables per clause <<features>> and/or tiles tables per clause <<tiles>> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.
+    A GeoPackage that contains a `gpkg_spatial_ref_sys` table, a `gpkg_contents` table with row record(s) with `data_type` column values of "features" or "tiles", and corresponding features tables per clause <<features>> and/or tiles tables per clause <<tiles>> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.
 Extended GeoPackage::
     A GeoPackage that contains any additional data elements (tables or columns) or SQL constructs (data types, indexes, constraints or triggers) that are not specified in this encoding standard.
 geolocate::
@@ -379,7 +380,7 @@ georectified::
 orthorectified::
     georectified raster that has also been corrected to remove image perspective (camera angle tilt), camera and lens induced distortions, and terrain induced distortions using camera calibration parameters and DEM elevation data to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
 Valid GeoPackage::
-    A GeoPackage that contains features per clause <<_features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of “features” and/or “tiles” describing the user data tables.
+    A GeoPackage that contains features per clause <<_features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of "features" and/or "tiles" describing the user data tables.
 
 === Conventions
 
@@ -394,8 +395,6 @@ ASCII::
     American Standard Code for Information Interchange
 API::
        Application Program Interface
-ATOM::
-        Atom Syndication Format
 BLOB::
         Binary Large OBject
 CLI::
@@ -404,10 +403,6 @@ COTS::
         Commercial Off The Shelf
 DEM::
        Digital Elevation Model
-DIGEST::
-          Digital Geographic Information Exchange Standard
-GeoTIFF::
-           Geographic Tagged Image File Format
 GPKG::
         GeoPackage
 GRD::
@@ -430,12 +425,10 @@ JPEG::
         Joint Photographics Expert Group (image format)
 MIME::
         Multipurpose Internet Mail Extensions
-NATO::
-        North Atlantic Treaty Organization
-NITF::
-        National Imagery Transmission Format
+NIIRS::
+        National Imagery Interpretability Rating Scale
 OGC::
-       Open Geospatial Consortium
+        Open Geospatial Consortium
 PK::
       Primary Key
 PNG::
@@ -448,10 +441,6 @@ SQL::
        Structured Query Language
 SRID::
         Spatial Reference (System) Identifier
-TIFF::
-        Tagged Image File Format
-TIN::
-       Triangulated Irregular Network
 UML::
        Unified Modeling Language
 UTC::

@@ -196,7 +196,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 ====== Table Definition
 
 [requirement]
-Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name per <<example_tiles_table_cols>> and <<example_tiles_table_sql>>.
+Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and 'PRIMARY KEY AUTOINCREMENT' column constraints per <<example_tiles_table_cols>> and <<example_tiles_table_sql>>.
 
 [[example_tiles_table_cols]]
 .Tiles Table or View Definition

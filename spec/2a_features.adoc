@@ -217,7 +217,7 @@ Features are rows in a feature table.
 [[requirement_feature_integer_pk]]
 [requirement]
 A GeoPackage MAY contain tables or updateable views containing vector features.
-Every such feature table or view in a GeoPackage SHALL have a primary key defined on one integer column per <<example_feature_table_cols>> and <<example_feature_table_sql>>.
+Every such feature table or view in a GeoPackage SHALL have a column with column type INTEGER and 'PRIMARY KEY AUTOINCREMENT' column constraints per <<example_feature_table_cols>> and <<example_feature_table_sql>>.
 
 The integer primary key of a feature table allows features to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below.
 
