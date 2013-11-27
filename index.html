@@ -12472,6 +12472,15 @@ Annex B</p></td>
 <p>Remove "()" from PRAGMA foreign_key_check()</p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-21</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex C, G</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Change metadata_standard_uri column name to md_standard_uri</p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 
@@ -13127,7 +13136,7 @@ columns:</p>
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
   id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">UNIQUE</span>,
   md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
-  metadata_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  md_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   mime_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">text/xml</span><span class="delimiter">'</span></span>,
   metadata <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
 );</code></pre>
@@ -13754,7 +13763,7 @@ Suppose we have this metadata:</p>
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
   id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
   md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>,
-  metadata_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  md_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   metadata <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
 )</code></pre>
 </div>
@@ -13770,7 +13779,7 @@ Suppose we have this metadata:</p>
 <tr>
 <th class="tableblock halign-left valign-top">id</th>
 <th class="tableblock halign-left valign-top">md_scope</th>
-<th class="tableblock halign-left valign-top">metadata_standard_uri</th>
+<th class="tableblock halign-left valign-top">md_standard_uri</th>
 <th class="tableblock halign-left valign-top">metadata</th>
 </tr>
 </thead>
@@ -13970,7 +13979,7 @@ level.</p>
 <tr>
 <th class="tableblock halign-left valign-top">id</th>
 <th class="tableblock halign-left valign-top">md_scope</th>
-<th class="tableblock halign-left valign-top">metadata_standard_uri</th>
+<th class="tableblock halign-left valign-top">md_standard_uri</th>
 <th class="tableblock halign-left valign-top">metadata</th>
 </tr>
 </thead>
@@ -14198,7 +14207,7 @@ level.</p>
 <tr>
 <th class="tableblock halign-left valign-top">id</th>
 <th class="tableblock halign-left valign-top">md_scope</th>
-<th class="tableblock halign-left valign-top">metadata_standard_uri</th>
+<th class="tableblock halign-left valign-top">md_standard_uri</th>
 <th class="tableblock halign-left valign-top">metadata</th>
 </tr>
 </thead>
@@ -15564,7 +15573,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footer">
 <div id="footer-text">
 Version 0.9.13<br>
-Last updated 2013-11-21 16:21:06 UTC
+Last updated 2013-11-27 04:09:03 UTC
 </div>
 </div>
 </body>
