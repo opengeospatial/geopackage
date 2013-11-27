@@ -10,14 +10,14 @@ Suppose we have this metadata:
 CREATE TABLE gpkg_metadata (
   id INTEGER NOT NULL PRIMARY KEY,
   md_scope TEXT NOT NULL DEFAULT 'undefined',
-  metadata_standard_uri TEXT NOT NULL, 
+  md_standard_uri TEXT NOT NULL, 
   metadata TEXT NOT NULL
 )
 ----
 
 [cols=",,,,",options="header"]
 |======
-|id |md_scope |metadata_standard_uri |metadata
+|id |md_scope |md_standard_uri |metadata
 |0 |undefined |http://www.isotc211.org/2005/gmd |TEXT
 |3 |series |http://www.isotc211.org/2005/gmd |TEXT
 |4 |dataset |http://www.isotc211.org/2005/gmd |TEXT
@@ -153,7 +153,7 @@ Suppose a user with a mobile handheld device goes out in the field and collects 
 
 [cols=",,,,",options="header"]
 |======
-|id|md_scope|metadata_standard_uri|metadata
+|id|md_scope|md_standard_uri|metadata
 |1 |fieldSession |http://schemas.opengis.net/iso/19139/ |TEXT
 |10 |featureType |http://schemas.opengis.net/iso/19139/ |TEXT
 |11 |feature |http://schemas.opengis.net/iso/19139/ |TEXT
@@ -305,7 +305,7 @@ So here is the data after both examples:
 .xml_metadata
 [cols=",,,,",options="header"]
 |======
-|id|md_scope|metadata_standard_uri|metadata
+|id|md_scope|md_standard_uri|metadata
 |0|undefined|http://www.isotc211.org/2005/gmd |TEXT
 |1 |fieldSession |http://www.isotc211.org/2005/gmd |TEXT
 |2 |collectionSession |http://www.isotc211.org/2005/gmd |TEXT
