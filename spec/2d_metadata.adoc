@@ -46,6 +46,13 @@ The `md_scope` column in the `gpkg_metadata` table is the name of the applicable
 The list of valid scope names and their definitions is provided in <<metadata_scopes>> below.
 The initial contents of this table were obtained from the ISO 19115 <<40>>, Annex B B.5.25 MD_ScopeCode code list, which was extended footnote:[The scope codes in <<metadata_scopes>> include a very wide set of descriptive information types as “metadata” to describe data.] for use in the GeoPackage specification by addition of entries with “NA” as the scope code column in <<gpkg_metadata_cols>>.
 
+
+:table_metadata_scopes_foot1: footnote:[ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.]
+:table_metadata_scopes_foot2: footnote:[The “catalog” md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.]
+:table_metadata_scopes_foot3: footnote:[The “schema” md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.]
+:table_metadata_scopes_foot4: footnote:[The “taxonomy” md_scope MAY be used for taxonomy or knowledge system (B41)(B42) “linked data” information stored as XML metadata that is linked to features stored in a GeoPackage.]
+
+
 [[metadata_scopes]]
 .Metadata Scopes
 [cols=",,",options="header",]
@@ -54,7 +61,7 @@ The initial contents of this table were obtained from the ISO 19115 <<40>>, Anne
 |undefined |NA |Metadata information scope is undefined
 |fieldSession |012 |Information applies to the field session
 |collectionSession |004 |Information applies to the collection session
-|series |006 |Information applies to the (dataset) series4
+|series |006 |Information applies to the (dataset) series {table_metadata_scopes_foot1}
 |dataset |005 |Information applies to the (geographic feature) dataset
 |featureType |010 |Information applies to a feature type (class)
 |feature |009 |Information applies to a feature (instance)
@@ -62,9 +69,9 @@ The initial contents of this table were obtained from the ISO 19115 <<40>>, Anne
 |attribute |001 |Information applies to the characteristic of a feature (instance)
 |tile |016 |Information applies to a tile, a spatial subset of geographic data
 |model |015 |Information applies to a copy or imitation of an existing or hypothetical object
-|catalog |NA |Metadata applies to a feature catalog [^5]
-|schema |NA |Metadata applies to an application schema [^6]
-|taxonomy |NA |Metadata applies to a taxonomy or knowledge system [^7]
+|catalog |NA |Metadata applies to a feature catalog {table_metadata_scopes_foot2}
+|schema |NA |Metadata applies to an application schema {table_metadata_scopes_foot3}
+|taxonomy |NA |Metadata applies to a taxonomy or knowledge system {table_metadata_scopes_foot4}
 |software |013 |Information applies to a computer program or routine
 |service |014 |Information applies to a capability which a service provider entity makes available to a service user entity through a set of interfaces that define a behaviour, such as a use case
 |collectionHardware |003 |Information applies to the collection hardware class
@@ -88,7 +95,7 @@ The second component of GeoPackage metadata is the `gpkg_metadata_reference` tab
 The `gpkg_metadata_reference` table is not required to contain any rows.
 
 [[gpkg_metadata_reference_cols]]
-.Metadata Reference Table or View Definition
+.Metadata Reference Table Definition (Table or View Name: gpkg_metadata_reference)
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Default |Key
