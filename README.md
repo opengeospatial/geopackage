@@ -41,6 +41,16 @@ The contributor understands that any contributions, if accepted by the OGC Membe
 be incorporated into the formal OGC GeoPackage standards document and that all copyright and 
 intellectual property shall be vested to the OGC.
 
+The Geopackage SWG currently has the following email lists:
+   - geopackage.swg@lists.opengeospatial.org
+      - Private List
+      - Access controlled archives
+      - Requires membership and Observer Agreement to protect IPR
+   - geopackage@lists.opengeospatial.org
+      - Public List
+      - Open archives
+      - No Intellectual Property items should be discussed here.
+
 Editing and commenting
 ----------------------
 The GeoPackage SWG is accepting public comments and suggested revisions to the specification 
