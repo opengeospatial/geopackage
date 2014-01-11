@@ -42,11 +42,11 @@ be incorporated into the formal OGC GeoPackage standards document and that all c
 intellectual property shall be vested to the OGC.
 
 The Geopackage SWG currently has the following email lists:
-   - geopackage.swg@lists.opengeospatial.org
+   - geopackage.swg@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage.swg)
       - Private List
       - Access controlled archives
       - Requires membership and Observer Agreement to protect IPR
-   - geopackage@lists.opengeospatial.org
+   - geopackage@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage)
       - Public List
       - Open archives
       - No Intellectual Property items should be discussed here.
