@@ -16,16 +16,14 @@ HTML version of the spec is available at http://opengis.github.io/geopackage/
 About
 -----
 
-This GitHub repository has been extracted from the Microsoft Word version of the Candidate 
+This GitHub repository was originally extracted from the Microsoft Word version of the Candidate 
 GeoPackage Standard [version 0.8](https://portal.opengeospatial.org/files/?artifact_id=54838) 
 released for [public comment](http://www.opengeospatial.org/standards/requests/105) on August 6, 2013. 
 With this repository the OGC invites collaboration and comments directed at the development 
 and enhancement of this candidate standard. 
 
-Based on feedback the final 1.0 specification will likely change, so consider this a work in progress,
-that you are encouraged to help shape. The core working group is particularly interested in making
-the specification easy to implement, so changes driven by attempted implementations will be given high
-priority.
+The repo tracks the latest version of the specification as it evolves. Pull requests for fixes are
+appreciated, and new functionality will be considered after 1.0 is finalized (Q1 2014).
 
 **Editor: Paul Daisey**
 
@@ -41,15 +39,18 @@ The contributor understands that any contributions, if accepted by the OGC Membe
 be incorporated into the formal OGC GeoPackage standards document and that all copyright and 
 intellectual property shall be vested to the OGC.
 
+The GeoPackage Standards Working Group (SWG) is the group at OGC responsible for the stewardship
+of the specification, but is working to do as much GeoPackage work in public as possible.
+
 The Geopackage SWG currently has the following email lists:
-   - geopackage.swg@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage.swg)
-      - Private List
-      - Access controlled archives
-      - Requires membership and Observer Agreement to protect IPR
    - geopackage@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage)
       - Public List
       - Open archives
       - No Intellectual Property items should be discussed here.
+   - geopackage.swg@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage.swg)
+      - Private List
+      - Access controlled archives
+      - Requires OGC membership and Observer Agreement to protect IPR (intellectual property rights)
 
 Editing and commenting
 ----------------------
@@ -71,5 +72,11 @@ Sample Implementations
 [Luciad](http://www.luciad.com/) has open sourced their implementation as [libgpkg](https://bitbucket.org/luciad/libgpkg). It is
 quite complete, with support for features, tiles, spatial indexes, and more.
 
-There has also been work on a GeoTools/GeoServer version.
+[GDAL](http://www.gdal.org/) has geopackage support in a [github repository](https://github.com/pramsey/gdal/tree/gpkg) under development.
+
+Sample GeoPackage Data
+----------------------
+
+[Sigma Bravo](http://www.sigmabravo.com.au/services/it.aspx) created a smaple geopackage of [Haiti OSM tiles and points](https://portal.opengeospatial.org/files/?artifact_id=52605).
+
 
