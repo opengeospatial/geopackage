@@ -23,7 +23,9 @@ With this repository the OGC invites collaboration and comments directed at the 
 and enhancement of this candidate standard. 
 
 The repo tracks the latest version of the specification as it evolves. Pull requests for fixes are
-appreciated, and new functionality will be considered after 1.0 is finalized (Q1 2014).
+appreciated, and new functionality will be considered after 1.0 is finalized (Q1 2014). The spec
+is done in [asciidoc](http://www.methods.co.nz/asciidoc/) a format supported by github, similar to markdown
+but with some features that make it better for specifications, like automatic section numbering.
 
 **Editor: Paul Daisey**
 
@@ -77,6 +79,6 @@ quite complete, with support for features, tiles, spatial indexes, and more.
 Sample GeoPackage Data
 ----------------------
 
-[Sigma Bravo](http://www.sigmabravo.com.au/services/it.aspx) created a smaple geopackage of [Haiti OSM tiles and points](https://portal.opengeospatial.org/files/?artifact_id=52605).
+[Sigma Bravo](http://www.sigmabravo.com.au/services/it.aspx) created a sample geopackage of [Haiti OSM tiles and points](https://portal.opengeospatial.org/files/?artifact_id=52605).
 
 
