@@ -181,8 +181,7 @@ The `pixel_x_size` and `pixel_y_size` column values for `zoom_level` column valu
 
 :sparse_tiles_foot1: footnote:[GeoPackage applications MAY query a tile pyramid user data table to determine which tiles are available at each zoom level.]
 :sparse_tiles_foot2: footnote:[GeoPackage applications that insert, update, or delete tile pyramid user data table tiles row records are responsible for maintaining the corresponding descriptive contents of the gpkg_tile_matrix_metadata table.]
-:sparse_tiles_foot3: footnote:[The `gpkg_tile_matrix_set` table contains coordinates that define a bounding box as the exact stated spatial extent for all tiles in a tile (matrix set) table.
-If the geographic extent of the image data contained in tiles at a particular zoom level is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.]
+:sparse_tiles_foot3: footnote:[The `gpkg_tile_matrix_set` table contains coordinates that define a bounding box as the exact stated spatial extent for all tiles in a tile (matrix set) table. If the geographic extent of the image data contained in tiles at a particular zoom level is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.]
 
 Tiles MAY or MAY NOT be provided for level 0 or any other particular zoom level. {sparse_tiles_foot1}
 This means that a tile matrix set can be sparse, i.e. not contain a tile for any particular position at a certain tile zoom level.
