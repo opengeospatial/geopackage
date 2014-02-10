@@ -1,32 +1,4 @@
 [preface]
-== Preface
-
-Copyright © 2012 Envitia +
-Copyright © 2012 Luciad +
-Copyright © 2012 Sigma Bravo +
-Copyright © 2012 The Carbon Project +
-Copyright © 2012 U.S. Army Geospatial Center +
-Copyright © 2012 U.S. National Geospatial Intelligence Agency +
-
-The companies listed above have granted the Open Geospatial Consortium, Inc. (OGC) a nonexclusive, royalty-free, paid up, worldwide license to copy and distribute this document and to modify this document and distribute copies of the modified version.
-To obtain additional rights of use, visit http://www.opengeospatial.org/legal/.
-
-*Warning*
-
-This document is not an OGC Standard. It is distributed for review and comment and to evaluate use of github at https://github.com/opengis/geopackage for public comments in addition to the PDF document format that was provided by the OGC RFC at http://www.opengeospatial.org/standards/requests/115.
-
-This document is subject to change without notice and SHALL NOT be referred to as an OGC Standard.
-The GeoPackage SWG is about to complete a final draft for consideration by the OGC Technical Committee for adoption as an OGC Standard.
-If your comments are not reflected in the final SWG draft, you may submit an OGC Change Request for the adopted GeoPackage Standard at http://www.opengeospatial.org/standards/cr.
-
-Document type: OGC® Publicly Available Standard +
-Document subtype: Encoding Standard +
-Document stage: Draft +
-Document language: English
-
-Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.
-
-[preface]
 == Introduction
 
 Mobile device users who require map/geospatial application services and operate in disconnected or limited network connectivity environments are challenged by limited storage capacity and the lack of open format geospatial data to support these applications.
@@ -51,14 +23,8 @@ A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers 
 
 A *GeoPackage SQLite Configuration* consists of the SQLite 3 software library and a set of compile- and runtime configurations options.
 
+A *GeoPackage SQLite Extension* is a SQLite loadable extension that MAY provide SQL functions <<12>> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <<1>> <<2>> <<3>> <<4>> access to a GeoPackage file. This standard does not address the issues listed in the <<_potential_future_work>> clause in <<background_and_context>>, which MAY be addressed in a subsequent version of this specification or by other specifications.
+
 [[geopackage_tables_figure]]
 .GeoPackage Tables Overview
 image::geopackage-overview.png[GeoPackage Tables]
-
-A *GeoPackage SQLite Extension* is a SQLite loadable extension that MAY provide SQL functions <<12>> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <<1>> <<2>> <<3>> <<4>> access to a GeoPackage file.
-This specification does not address the issues listed in the <<_potential_future_work>> clause in <<background_and_context>>, which MAY be addressed in a subsequent version of this specification or by other specifications.
-
-_Attention is drawn to the possibility that some of the elements of this document MAY be the subject of patent rights.
-Open Geospatial Consortium Inc. SHALL not be held responsible for identifying any or all such patent rights. However, to date, no such rights have been claimed or identified._
-
-_Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they MAY be aware that might be infringed by any implementation of the specification set forth in this document, and to provide supporting documentation._

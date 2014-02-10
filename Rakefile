@@ -5,7 +5,7 @@ task :init_local do
 end
 
 task :generate do
-  system './runasciidoctor -D build ./index.adoc'
+  system './runasciidoctor -D build/spec ./spec/index.adoc'
   FileUtils.cp_r 'images/.', 'build'
 end
 
@@ -16,7 +16,7 @@ task :init_travis do
   # if this is a pull request, do a simple build of the site and stop
   if ENV['TRAVIS_PULL_REQUEST'].to_s.to_i > 0
     puts 'Pull request detected. Executing build only.'
-    system './runasciidoctor ./index.adoc'
+    system './runasciidoctor -D build/spec ./spec/index.adoc'
     next
   end
 
@@ -25,8 +25,9 @@ task :init_travis do
 
   system "git clone --depth 1 -b #{deploy_branch} #{repo} build"
   Dir.chdir 'build'
+  Dir.chdir 'spec'
   system 'git rm -r .'
-  Dir.chdir '..'
+  Dir.chdir '../..'
 end
 
 task :publish do

@@ -1,40 +1,118 @@
 [appendix]
 [[background_and_context]]
-== Background and Context (Informative)
+== Background and Context (Normative)
 
-=== Preface
+=== Background
 
-An open standard non-proprietary platform-independent GeoPackage container for distribution and direct use of all kinds
-of geospatial data will increase the cross-platform interoperability of geospatial applications and web services.
-Standard APIs for access and management of GeoPackage data will provide consistent query and update results across such
-applications and services. Increased interoperability and result consistency will enlarge the potential market for such
- applications and services, particularly in resource-constrained mobile computing environments like cell phones and
- tablets. GeoPackages will become the standard containers for "MyGeoData" that are used as a transfer format by users
- and Geospatial Web Services and a storage format on personal and enterprise devices.
+An open standard non-proprietary platform-independent GeoPackage container for distribution and direct use of all kinds of geospatial data will increase the cross-platform interoperability of geospatial applications and web services. Standard APIs for access and management of GeoPackage data will provide consistent query and update results across such applications and services. Increased interoperability and result consistency will enlarge the potential market for such  applications and services, particularly in resource-constrained mobile computing environments like cell phones and tablets. GeoPackages will become the standard containers for "MyGeoData" that are used as a transfer format by users and Geospatial Web Services and a storage format on personal and enterprise devices.
 
 This OGC® GeoPackage Encoding Standard defines a GeoPackage as a self-contained, single-file,
 cross-platform, serverless, transactional, open source SQLite data container with table definitions, relational
-integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest tables that together act as an exchange
-and direct-use format for multiple types of geospatial data including vector features, features with raster attributes
-and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity
-environments.
+integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest tables that together act as an exchange and direct-use format for multiple types of geospatial data including vector features, features with raster attributes and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity environments.
 
-Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are
-interdependent specification facets of the SF-SQL <<9>><<10>><<11>> and SQL-MM (Spatial) <<12>> standards that serve as
-normative references for the vector feature portion of this specification.
+Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are interdependent specification facets of the SF-SQL <<9>><<10>><<11>> and SQL-MM (Spatial) <<12>> standards that serve as normative references for the vector feature portion of this specification.
 
-This specification attempts to support and use relevant raster types, storage table definitions, and metadata from
-widely adopted implementations and existing standards such as WMTS <<16>> and ISO metadata <<28>>, to integrate use of
-rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to
-provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.
+This specification attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted implementations and existing standards such as WMTS <<16>> and ISO metadata <<28>>, to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.
 
-Conformance classes for this specification are classified as core (mandatory) and extension (optional). The simple core
-of an Empty GeoPackage contains two SQL tables.
+Conformance classes for this specification are classified as core (mandatory) and extension (optional). The simple core of an Empty GeoPackage contains two SQL tables.
 
-Future versions of this specification willmay include requirements for elevation data and routes. Future enhancements to
-this specification, a future GeoPackage Web Service specification, and modifications to existing OGC Web Service (OWS)
-specifications to use GeoPackages as exchange formats willmay allow OWS to support provisioning of GeoPackages
-throughout an enterprise or information community.  
+Future versions of this specification willmay include requirements for elevation data and routes. Future enhancements to this specification, a future GeoPackage Web Service specification, and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats willmay allow OWS to support provisioning of GeoPackages throughout an enterprise or information community.
+
+=== Document terms and definitions
+
+This document uses the standard terms defined in Subclause 5.3 of [OGC 06-121], which is based on the ISO/IEC Directives, Part 2. Rules for the structure and drafting of International Standards. In particular, the word "shall" (not "must") is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following terms and definitions apply.
+
+[glossary]
+Empty GeoPackage::
+    A GeoPackage that contains a `gpkg_spatial_ref_sys` table, a `gpkg_contents` table with row record(s) with `data_type` column values of "features" or "tiles", and corresponding features tables per clause <<features>> and/or tiles tables per clause <<tiles>> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.
+Extended GeoPackage::
+    A GeoPackage that contains any additional data elements (tables or columns) or SQL constructs (data types, indexes, constraints or triggers) that are not specified in this encoding standard.
+geolocate::
+    identify a real-world geographic location
+GeoPackage file::
+    a platform-independent SQLite database file that contains GeoPackage data and metadata tables with specified definitions, integrity assertions, format limitations and content constraints.
+GeoPackage SQLite Configuration::
+    consists of the SQLite 3 software library and a set of compile- and runtime configurations options.
+GeoPackage SQLite Extension::
+    a SQLite loadable extension that MAY provide SQL functions to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API access to a GeoPackage.
+georectified::
+    raster whose pixels have been regularly spaced in a geographic (i.e., latitude / longitude) or projected map coordinate system using ground control points so that any pixel can be geolocated given its grid coordinate and the grid origin, cell spacing, and orientation.
+orthorectified::
+    georectified raster that has also been corrected to remove image perspective (camera angle tilt), camera and lens induced distortions, and terrain induced distortions using camera calibration parameters and DEM elevation data to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
+Valid GeoPackage::
+    A GeoPackage that contains features per clause <<_features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of "features" and/or "tiles" describing the user data tables.
+
+=== Conventions
+
+Symbols (and abbreviated terms)
+
+[terms]
+ACID::
+    Atomic, Consistent, Isolated, and Durable
+ASCII::
+    American Standard Code for Information Interchange
+API::
+       Application Program Interface
+BLOB::
+        Binary Large OBject
+CLI::
+       Call-Level Interface
+COTS::
+        Commercial Off The Shelf
+DEM::
+       Digital Elevation Model
+GPKG::
+        GeoPackage
+GRD::
+       Ground Resolved Distance
+EPSG::
+        European Petroleum Survey Group
+FK::
+      Foreign Key
+IETF::
+        Internet Engineering Task Force
+IIRS::
+        Image Interpretability Rating Scale
+IRARS::
+         Imagery Resolution Assessments and Reporting Standards (Committee)
+ISO::
+       International Organization for Standardization
+JDBC::
+        Java Data Base Connectivity
+JPEG::
+        Joint Photographics Expert Group (image format)
+MIME::
+        Multipurpose Internet Mail Extensions
+NIIRS::
+        National Imagery Interpretability Rating Scale
+OGC::
+        Open Geospatial Consortium
+PK::
+      Primary Key
+PNG::
+       Portable Network Graphics (image format)
+RDBMS::
+         Relational Data Base Management System
+RFC::
+       Request For Comments
+SQL::
+       Structured Query Language
+SRID::
+        Spatial Reference (System) Identifier
+UML::
+       Unified Modeling Language
+UTC::
+       Coordinated Universal Time
+XML::
+       eXtensible Markup Language
+1D::
+      One Dimensional
+2D::
+      Two Dimensional
+3D::
+      Three Dimensional
 
 === Submitting Organizations
 
@@ -47,6 +125,55 @@ Request For Comment (RFC).
 * The Carbon Project
 * U.S. Army Geospatial Center
 * U.S. National Geospatial Intelligence Agency
+
+=== Document contributor contact points
+
+All questions regarding this document should be directed to the editor or the contributors:
+
+.Document contributors
+[cols="1,2,2a",options="header",]
+|=======================================================================
+|Name |Organization |Email
+|Brett Antonides |LNM Solutions |brett.antonides@lmnsolutions.com
+|Kevin Backe |U.S. Army Geospatial Center GASD |Kevin.Backe@usace.army.mil
+|Roger Brackin |Envitia |roger.brackin@envitia.com
+|Scott Clark |LNM Solutions |scott.clark@lmnsolutions.com
+|David Cray |U.S. Army Geospatial Center GASD |David.Cray@usace.army.mil
+|Paul Daisey |Image Matters |pauld@imagemattersllc.com
+|Nathan P. Frantz |U.S. Army Geospatial Center ERDC |Nathan.P.Frantz@usace.army.mil
+|Alessandro Furieri |Spatialite |a.furieri@lqt.it
+|Randy Gladish |Image Matters |randyg@imagemattersllc.com
+|Eric Gundersen |MapBox |eric@mapbox.com
+|Brad Hards |Sigma Bravo |bhards@sigmabravo.com
+|Jeff Harrison |The Carbon Project |jharrison@thecarbonproject.com
+|Chris Holmes |OpenGeo |cholmes@9eo.org
+|Sean Hogan |Compusult |sean@compusult.net
+|Kirk Jensen |Image Matters |kirkj@imagemattersllc.com
+| (chinese chars not working) Joshua |Feng China University |joshua@gis.tw
+|Terry A. Idol |U.S. National Geospatial Intelligence Agency  |Terry.A.Idol@nga.mil
+|Drew Kurry |Digital Globe |dkurry@digitalglobe.com
+|Steven Lander |Reinventing Geospatial |steven.lander@rgi-corp.com
+|Tom MacWright |MapBox |tom@mapbox.com
+|Joan Maso Pau |Universitat Autònoma de Barcelona (CREAF) |joan.maso@uab.es
+|Kevin S. Mullane |U.S. Army Geospatial Center GASD |Kevin.S.Mullane@usace.army.mil
+| (chinese chars not working) Yi-Min Huang |Feng China University |niner@gis.tw
+|Andrea Peri |Regione Toscana Italy |andrea.peri@regione.toscana.it
+|Paul Ramsey |OpenGeo |pramsey@opengeo.org
+|Matthew L. Renner |U.S. Army Geospatial Center ERDC |Matthew.L.Renner@usace.army.mil
+|Even Rouault |Mines-Paris |even.rouault@mines-paris.org
+|Keith Ryden |Environmental Systems Research Institute |kryden@esri.com
+|Scott Simmons |CACI |scsimmons@caci.com
+|Ingo Simonis |International Geospatial Services Institute |ingo.simonis@igsi.eu
+|Raj Singh |Open Geospatial Consortium |rsingh@opengeospatial.org
+|Steve Smyth |Open Site Plan |steve@opensiteplan.org
+|Donald V. Sullivan |U.S. National Aeronautics and Space Administration |donald.v.sullivan@nasa.gov
+|Christopher Tucker |Mapstory |tucker@mapstory.org
+|Benjamin T. Tuttle |U.S. National Geospatial Intelligence Agency |Benjamin.T.Tuttle@nga.mil
+|Pepijn Van Eeckhoudt |Luciad |pepijn.vaneeckhoudt@gmail.com
+|David G. Wesloh |U.S. National Geospatial Intelligence Agency |David.G.Wesloh@nga.mil
+|Jeff Yutzler |Image Matters |jeffy@imagemattersllc.com
+|Eric Zimmerman |U.S. Army Geospatial Center ERDC |Eric.Zimmerman@usace.army.mil
+|=======================================================================
 
 === Revision History
 
@@ -309,6 +436,21 @@ Annex B |Add Extended GeoPackage definition
 |2013-11-19| R9| Jeff Yutzler, Paul Daisey| All| Misc formatting changes.
 |2013-11-21| R10| Paul Daisey| 1.1.1.4| Remove "()" from PRAGMA foreign_key_check()
 |2013-11-21| R10| Paul Daisey| Annex C, G| Change metadata_standard_uri column name to md_standard_uri
+|2013-12-26| R10| Paul Daisey| A.1.1.2.1.2 | Use the current gpkg_spatial_ref_sys table and column name definitions
+|2013-12-28| R10| Paul Daisey| Annex Q| Add normative reference [32] to OpenGIS® 01-009
+|2013-12-28| R10| Paul Daisey| 1.1.2.1.1| Add normative reference “[32]” to description of definition column in Table 3
+|2013-12-28| R10| Paul Daisey| A.1.1.2.1.2 | /base/core/gpkg_spatial_ref_sys/data_values_default  revise step 3 SQL
+|2013-12-28| R10| Paul Daisey| 1.1.2.1.2
+|Add paragraph on definition column WKT values
+|2013-12-31| R10| Paul Daisey| All| Misc editorial corrections.
+|2013-12-31| R10| Paul Daisey| A.2.2.3.1.1, A.2.2.4.1.1| Change “extension_name IN ('gpkg_webp’,’gpkg_tiff’,’gpkg_nitf’)” to “extension_name = ‘gpkg_webp’”
+|2013-12-31| R10| Paul Daisey| A.2.5.1.1.2| delete test steps 7 and 8:re tile encoding TIFF and NITF
+|2013-12-31| R10| Paul Daisey| 2.2.7.1.1| remove the default column from Table 9
+|2013-12-31| R10| Paul Daisey| 2.2.8.1.1| remove 3.2.3, 3.2.4  from table 10 tile_data column description
+|2013-12-31| R10| Paul Daisey| Annex D.5| Change t_table_name to table_name in Table 41
+|2013-12-31| R10| Paul Daisey| 2.1.5.1.2| Change “each geometry column” to “the geometry column” in Req 22
+|2014-01-10| R10| Paul Daisey| 1.1.2.1.1| Rename Table 3 Spatial Ref Sys Table Definition
+|2014-01-28| R10| Paul Daisey| 1.1.3.1.1, 2.4.3.1.1, Annex C, Annex H| strftime('%Y-%m-%dT%H:%M:%fZ', CURRENT_TIMESTAMP) changed to strftime('%Y-%m-%dT%H:%M:%fZ','now')
 |=======================================================================
 
 === Changes to the OGC® Abstract Specification
@@ -335,127 +477,6 @@ None at present.
 * MAY create a GeoPackage Abstract Object Model to support data encodings other than SQL in a future version of this specification.
 * MAY add https://github.com/mapbox/utfgrid-spec[UTFGrid] support in a future version of this specification
 
-=== Contributors
-
-The following organizations and individuals have contributed to the preparation of this standard:
-
-* Alessandro Furieri
-* Compusult Limited
-* Development Seed
-* Environmental Systems Research Institute, Inc. (Esri)
-* Envitia
-* Feng China University
-* George Mason University
-* Image Matters LLC
-* International Geospatial Services Institute (iGSI) GmbH
-* LMN Solutions
-* Luciad
-* MapBox
-* OpenGeo
-* Open Site Plan
-* Sigma Bravo
-* The Carbon Project
-* Universitat Autònoma de Barcelona (CREAF)
-* U.S. Army Geospatial Center (AGC)
-* U.S. National Aeronautics and Space Administration (NASA)
-* U.S. National Geospatial Intelligence Agency (NGA)
-
-=== Terms and Definitions
-
-For the purposes of this document, the following terms and definitions apply.
-
-[gloassary]
-Empty GeoPackage::
-    A GeoPackage that contains a `gpkg_spatial_ref_sys` table, a `gpkg_contents` table with row record(s) with `data_type` column values of "features" or "tiles", and corresponding features tables per clause <<features>> and/or tiles tables per clause <<tiles>> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.
-Extended GeoPackage::
-    A GeoPackage that contains any additional data elements (tables or columns) or SQL constructs (data types, indexes, constraints or triggers) that are not specified in this encoding standard.
-geolocate::
-    identify a real-world geographic location
-GeoPackage file::
-    a platform-independent SQLite database file that contains GeoPackage data and metadata tables with specified definitions, integrity assertions, format limitations and content constraints.
-GeoPackage SQLite Configuration::
-    consists of the SQLite 3 software library and a set of compile- and runtime configurations options.
-GeoPackage SQLite Extension::
-    a SQLite loadable extension that MAY provide SQL functions to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API access to a GeoPackage.
-georectified::
-    raster whose pixels have been regularly spaced in a geographic (i.e., latitude / longitude) or projected map coordinate system using ground control points so that any pixel can be geolocated given its grid coordinate and the grid origin, cell spacing, and orientation.
-orthorectified::
-    georectified raster that has also been corrected to remove image perspective (camera angle tilt), camera and lens induced distortions, and terrain induced distortions using camera calibration parameters and DEM elevation data to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
-Valid GeoPackage::
-    A GeoPackage that contains features per clause <<_features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of "features" and/or "tiles" describing the user data tables.
-
-=== Conventions
-
-Symbols (and abbreviated terms)
-
-Some frequently used abbreviated terms:
-
-[gloassary]
-ACID::
-    Atomic, Consistent, Isolated, and Durable
-ASCII::
-    American Standard Code for Information Interchange
-API::
-       Application Program Interface
-BLOB::
-        Binary Large OBject
-CLI::
-       Call-Level Interface
-COTS::
-        Commercial Off The Shelf
-DEM::
-       Digital Elevation Model
-GPKG::
-        GeoPackage
-GRD::
-       Ground Resolved Distance
-EPSG::
-        European Petroleum Survey Group
-FK::
-      Foreign Key
-IETF::
-        Internet Engineering Task Force
-IIRS::
-        Image Interpretability Rating Scale
-IRARS::
-         Imagery Resolution Assessments and Reporting Standards (Committee)
-ISO::
-       International Organization for Standardization
-JDBC::
-        Java Data Base Connectivity
-JPEG::
-        Joint Photographics Expert Group (image format)
-MIME::
-        Multipurpose Internet Mail Extensions
-NIIRS::
-        National Imagery Interpretability Rating Scale
-OGC::
-        Open Geospatial Consortium
-PK::
-      Primary Key
-PNG::
-       Portable Network Graphics (image format)
-RDBMS::
-         Relational Data Base Management System
-RFC::
-       Request For Comments
-SQL::
-       Structured Query Language
-SRID::
-        Spatial Reference (System) Identifier
-UML::
-       Unified Modeling Language
-UTC::
-       Coordinated Universal Time
-XML::
-       eXtensible Markup Language
-1D::
-      One Dimensional
-2D::
-      Two Dimensional
-3D::
-      Three Dimensional
-
 === UML Notation
 
 The diagrams that appear in this standard are presented using the Unified Modeling Language (UML) <<B14>> static structure diagrams.
@@ -467,8 +488,8 @@ image::umlnotationforrdbmstables.png[]
 
 In this standard, the following two stereotypes of UML classes are used to represent RDBMS tables:
 
-a. <<table>> An instantiation of a UML class as an RDMBS table.
-b. <<column>> An instantiation of a UML attribute as an RDBMS table column.
+a. \<<table>> An instantiation of a UML class as an RDMBS table.
+b. \<<column>> An instantiation of a UML attribute as an RDBMS table column.
 
 In this standard, the following standard data types are used for RDBMS
 columns:
