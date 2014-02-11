@@ -5,27 +5,20 @@ task :init_local do
 end
 
 task :generate do
-  system './runasciidoctor -D build/spec ./spec/index.adoc'
+  system './runasciidoctor -D build/spec -a stylesheet=./asciidoctor.css ./spec/index.adoc'
   FileUtils.cp_r 'images/.', 'build/spec'
+  FileUtils.cp_r 'stylesheets/.', 'build/spec'
 end
 
 desc 'Generate site'
 task :build => [:init_local, :generate]
 
 task :init_travis do
-  # if this is a pull request, do a simple build of the site and stop
-  if ENV['TRAVIS_PULL_REQUEST'].to_s.to_i > 0
-    puts 'Pull request detected. Executing build only.'
-    system './runasciidoctor -D build/spec ./spec/index.adoc'
-    next
-  end
-
   repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:').strip
   deploy_branch = 'gh-pages'
 
   system "git clone --depth 1 -b #{deploy_branch} #{repo} build"
-  Dir.chdir 'build'
-  Dir.chdir 'spec'
+  Dir.chdir 'build/spec'
   system 'git rm -r .'
   Dir.chdir '../..'
 end
@@ -50,3 +43,7 @@ end
 
 desc 'Generate site from Travis CI and publish site to GitHub Pages'
 task :travis => [:init_travis, :build, :publish]
+unless ENV['TRAVIS_PULL_REQUEST'].to_s.to_i > 0
+  # Only publish when we're not building to validate a pull request
+  task :travis => [:publish]
+end
