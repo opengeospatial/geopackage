@@ -3,10 +3,9 @@
 
 ==== Tile Matrix Introduction
 
-There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain. In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata. The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways. 
-First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions.
-Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images.
-Applications that store GeoPackage tile data, which are presumed to have this information available, SHALL store sufficient metadata to enable its intended use.
+There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain. In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata. 
+
+The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways. First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions. Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images. Applications that store GeoPackage tile data, which are presumed to have this information available, SHALL store sufficient metadata to enable its intended use.
 
 The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose coupling to enable widespread implementation.
 
@@ -26,7 +25,7 @@ The tables or views that implement the GeoPackage tile store data / metadata mod
 ====== Contents Table – Tiles Row
 
 [requirement]
-The `gpkg_contents` table SHALL contain a row with a `data_type` column value of “tiles” for eac tile pyramid user data table or view.
+The `gpkg_contents` table SHALL contain a row with a `data_type` column value of “tiles” for each tile pyramid user data table or view.
 
 [[zoom_levels]]
 ==== Zoom Levels
@@ -54,7 +53,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 
 ====== MIME Type PNG
 
-:png_req_foot1: footnote:[See Clauses <<ext_webp_tiles>> regarding use of alternative tile MIME types as a registered extension.]
+:png_req_foot1: footnote:[See Clause 3.2.2 regarding use of the WebP alternative tile MIME type as a registered extension.]
 [requirement]
 In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg] <<17>><<18>><<19>>, by default SHALL store that tile data in http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png] <<20>><<21>>. {png_req_foot1}
 
@@ -65,7 +64,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 
 ====== MIME Type JPEG
 
-:jpg_req_foot1: footnote:[See Clauses <<ext_webp_tiles>> regarding use of alternative tile MIME types as a registered extension.]
+:jpg_req_foot1: footnote:[See Clause 3.2.2 regarding use of the WebP alternative tile MIME type as a registered extension.]
 [requirement]
 In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png] <<20>><<21>>, by default SHALL store that tile data in http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg] <<17>><<18>><<19>>. {jpg_req_foot1}
 
@@ -73,10 +72,11 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 
 ===== Data
 
+[[tile_matrix_set_data_table_definition]]
 ====== Table Definition
 
 [requirement]
-A GeoPackage that contains a tile pyramid user data table SHALL contain  `gpkg_tile_matrix_set` table per <<gpkg_tile_matrix_set_cols>> and <<gpkg_tile_matrix_set_sql>>.
+A GeoPackage that contains a tile pyramid user data table SHALL contain  `gpkg_tile_matrix_set` table or view per <<tile_matrix_set_data_table_definition>>, <<gpkg_tile_matrix_set_cols>> and <<gpkg_tile_matrix_set_sql>>.
 
 [[gpkg_tile_matrix_set_cols]]
 .Tile Matrix Set Table or View Definition
@@ -92,7 +92,8 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain  `gpkg_t
 |=======================================================================
 
 The gpkg_tile_matrix_set table or updateable view defines the minimum bounding box (min_x, min_y, max_x, max_y) and spatial reference system (srs_id) for all content in a tile pyramid user data table.
-This bounding box SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated based on the column value for the user data table in the gpkg_tile_matrix table or view defined in clause <<tile_matrix>> below.
+
+See <<gpkg_tile_matrix_set_sql>>.
 
 [[clause_tile_matrix_set_table_data_values]]
 ====== Table Data Values
@@ -113,24 +114,25 @@ Values of the `gpkg_tile_matrix_set` `srs_id` column SHALL reference values in t
 
 ===== Data
 
+[[tile_matrix_data_table_definition]]
 ====== Table Definition
 
 [requirement]
-A GeoPackage that contains a tile pyramid user data table SHALL contain a `gpkg_tile_matrix` table or view per <<gpkg_tile_matrix_cols>> and <<gpkg_tile_matrix_sql>>
+A GeoPackage that contains a tile pyramid user data table SHALL contain a `gpkg_tile_matrix` table or view per clause <<tile_matrix_data_table_definition>>.
 
 [[gpkg_tile_matrix_cols]]
 .Tile Matrix Metadata Table or View Definition
-[cols=",,,,,",options="header",]
+[cols=",,,,",options="header",]
 |=======================================================================
-|Column Name |Column Type |Column Description |Null |Default |Key
-|`table_name` |TEXT |Tile Pyramid User Data Table Name |no | | PK, FK
-|`zoom_level` |INTEGER | 0 <= `zoom_level` <= max_level for `table_name` |no |0 |PK
-|`matrix_width` |INTEGER |Number of columns (>= 1) in tile matrix at this zoom level |no |1 |
-|`matrix_height` |INTEGER |Number of rows (>= 1) in tile matrix at this zoom level |no |1 |
-|`tile_width` |INTEGER |Tile width in pixels (>= 1)for this zoom level |no |256 |
-|`tile_height` |INTEGER |Tile height in pixels (>= 1) for this zoom level |no |256 |
-|`pixel_x_size` |DOUBLE |In `t_table_name` srid units or default meters for srid 0 (>0) |no |1 |
-|`pixel_y_size` |DOUBLE |In `t_table_name` srid units or default meters for srid 0 (>0) |no |1 |
+|Column Name |Column Type |Column Description |Null  |Key
+|`table_name` |TEXT |Tile Pyramid User Data Table Name |no |PK, FK
+|`zoom_level` |INTEGER | 0 <= `zoom_level` <= max_level for `table_name` |no |PK
+|`matrix_width` |INTEGER |Number of columns (>= 1) in tile matrix at this zoom level |1 |
+|`matrix_height` |INTEGER |Number of rows (>= 1) in tile matrix at this zoom level |1 |
+|`tile_width` |INTEGER |Tile width in pixels (>= 1)for this zoom level |no |
+|`tile_height` |INTEGER |Tile height in pixels (>= 1) for this zoom level |no |
+|`pixel_x_size` |DOUBLE |In `t_table_name` srid units or default meters for srid 0 (>0) |no |
+|`pixel_y_size` |DOUBLE |In `t_table_name` srid units or default meters for srid 0 (>0) |no |
 |=======================================================================
 
 The `gpkg_tile_matrix` table or updateable view documents the structure of the tile matrix at each zoom level in each tiles table.
@@ -192,10 +194,11 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 
 ===== Data
 
+[[tiles_user_tables_data_table_definition]]
 ====== Table Definition
 
 [requirement]
-Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and 'PRIMARY KEY AUTOINCREMENT' column constraints per <<example_tiles_table_cols>> and <<example_tiles_table_sql>>.
+Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and 'PRIMARY KEY AUTOINCREMENT' column constraints per Clause 2.2.8.1.1 <<tiles_user_tables_data_table_definition>>, <<example_tiles_table_cols>> and <<example_tiles_table_insert_sql>>.
 
 [[example_tiles_table_cols]]
 .Tiles Table or View Definition
@@ -214,6 +217,8 @@ See <<example_tiles_table_sql>>.
 ====== Table Data Values
 
 :tile_data_foot1: footnote:[A GeoPackage is not required to contain any tile pyramid user data tables. Tile pyramid user data tables in a GeoPackage MAY be empty.]
+
+:tile_data_foot1_ref: footnote:[The zoom_level / tile_column / tile_row unique key is automatically indexed, and allows tiles to be selected and accessed by "z, x, y", a common convention used by some implementations.  This table / view definition MAY also allow tiles to be selected based on a spatially indexed bounding box in a separate metadata table.]
 
 Each tile pyramid user data table or view {tile_data_foot1} MAY contain tile matrices at zero or more zoom levels of different spatial resolution (map scale).
 

@@ -73,12 +73,15 @@ The `gpkg_contents` table SHALL contain a row with a lowercase `data_type` colum
 
 ===== Data
 
+[[gpb_data_blob_format]]
 ====== BLOB Format
 
 [requirement]
-A GeoPackage SHALL store feature table geometries with or without optional elevation (Z) and/or measure (M) values in SQL BLOBs using the Standard GeoPackageBinary format specified in table <<gpb_spec>> and clause <<gpb_format>>.
+A GeoPackage SHALL store feature table geometries with or without optional elevation (Z) and/or measure (M) values in SQL BLOBs using the Standard GeoPackageBinary format specified in table <<gpb_spec>> and clause <<gpb_data_blob_format>>.
 
 :geopackage_binary_foot1: footnote:[OGC WKB simple feature geometry types specified in <<13>> are a subset of the ISO WKB geometry types specified in <<16>>]
+:geopackage_binary_foot2: footnote:[WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.]
+:geopackage_binary_foot3: footnote:[The axis order in WKB is always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation and m is optional measure.]
 
 .GeoPackage SQL Geometry Binary Format
 [[gpb_spec]]
@@ -102,7 +105,7 @@ StandardGeoPackageBinary {
 <3> see <<flags_layout>>
 <4> see flags envelope contents indicator code below
 <5> The X bit in the header flags field must be set to 0.
-<6> per  ISO 13249-3 <<12>> clause 5.1.46 {geopackage_binary_foot1}
+<6> per  ISO 13249-3 <<12>> clause 5.1.46 {geopackage_binary_foot1}{geopackage_binary_foot2}{geopackage_binary_foot3}
 
 [[flags_layout]]
 .bit layout of GeoPackageBinary flags byte
@@ -111,6 +114,8 @@ StandardGeoPackageBinary {
 |bit |7 |6 |5 |4 |3 |2| 1| 0
 |use |R |R |X |Y |E |E| E| B
 |===========================
+
+*flag bits use:*
 
 * R: reserved for future use; set to 0
 * X: GeoPackageBinary type
@@ -180,10 +185,10 @@ See <<gpkg_geometry_columns_sql>>.
 
 ====== Table Data Values
 [requirement]
-The `gpkg_geometry_columns` table or updateable view SHALL contain one row record for each geometry column in each vector feature data table (clause <<feature_user_tables>>) in a GeoPackage.
+The `gpkg_geometry_columns` table or updateable view SHALL contain one row record for the geometry column in each vector feature data table (clause <<feature_user_tables>>) in a GeoPackage.
 
 [requirement]
-Values of the `gpkg_geometry_columns` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column for rows with a `data_type` of 'features' or 'tiles'.
+Values of the `gpkg_geometry_columns` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column for rows with a `data_type` of 'features'.
 
 [requirement]
 The `column_name` column value in a `gpkg_geometry_columns` row SHALL be the name of a column in the table or view specified by the `table_name` column value for that row.
@@ -249,7 +254,7 @@ The geometry type of a feature geometry column specified in the `gpkg_geometry_c
 
 :geom_type_req_foot1: footnote:[GeoPackage applications MAY use SQL triggers or tests in application code to meet this requirement]
 [requirement]
-Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the `gpkg_geometry_columns` table `geometry_type_name` column value {geom_type_req_foot1}.
+Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the `gpkg_geometry_columns` table `geometry_type_name` uppercase column value {geom_type_req_foot1}.
 
 Geometry subtypes are assignable as defined in <<geometry_types>> and shown in part in <<core_geometry_model_figure>>.
 For example, if the `geometry_type_name` value in the `gpkg_geometry_columns` table is for a geometry type like POINT that has no subtypes, then the feature table geometry column MAY only contain geometries of that type.

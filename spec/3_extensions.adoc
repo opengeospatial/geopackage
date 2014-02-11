@@ -1,7 +1,7 @@
 == Registered Extensions
 
 This clause specifies requirements for GeoPackage extensions.
-Definitions of those extensions in the form specified by the template in <<extension_template>> are provided in referenced Annexes.
+Definitions of those extensions in the form specified by the template in <<extension_template>> are provided in Annexes J through P.
  
 === Features
 
@@ -66,7 +66,10 @@ The `geometry_type_name` value in a `gpkg_geometry_columns` row SHALL be the <<u
 This extension described in <<extension_rtree>> adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
 
 ====== Spatial Indexes Implementation
-Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.  
+
+:spatial_indexes_impl_foot1: footnote:[If an application process will make many updates, it is often faster to drop the indexes, do the updates, and then recreate the indexes.]
+
+Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.{spatial_indexes_impl_foot1}
 
 [requirement]
 A GeoPackage SHALL implement spatial indexes on feature table geometry columns as specified in clause 3.1.3.1.1 using the SQLite Virtual Table RTrees and triggers specified in <<extension_rtree>>.

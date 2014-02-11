@@ -6,20 +6,22 @@ Two tables in a GeoPackage provide a means of storing metadata in MIME <<21>> en
 These tables are intended to provide the support necessary to implement the hierarchical metadata model defined in ISO 19115 <<28>>, Annex B B.5.25 MD_ScopeCode, <<metadata_example_appendix>> and <<raster_or_tile_metadata_example_appendix>>, so that as GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.
 
 The `gpkg_metadata` table that contains metadata is described in clause <<_metadata_table>>, and the `gpkg_metadata_reference` table that relates `gpkg_metadata` to GeoPackage data is described in clause <<_metadata_reference_table>>.
-There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion footnote:[Informative examples of hierarchical metadata are provided in <<metadata_example_appendix>>] with more than one level, only that if it is, these tables SHALL be used.
-Such metadata footnote:[An informative example of raster image metadata is provided in <<tiles_example_appendix>>] and data that relates it to GeoPackage contents SHALL NOT be stored in other tables as defined in clause <<_other_data_tables>>.
+There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion footnote:[Informative examples of hierarchical metadata are provided in <<metadata_example_appendix>>] with more than one level, only that if it is, these tables SHALL be used. Such metadata footnote:[An informative example of raster image metadata is provided in <<tiles_example_appendix>>] and data that relates it to GeoPackage contents SHALL NOT be stored in other tables.
 
 ==== Metadata Table
 
 ===== Data
 
+[[metadata_table_table_definition]]
 ====== Table Definition
 
 [requirement]
-A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per <<gpkg_metadata_cols>> and <<gpkg_metadata_sql>>.
+A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clause 2.4.2.1.1 <<metadata_table_table_definition>>, <<gpkg_metadata_cols>> and <<gpkg_metadata_sql>>.
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<21>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<28>>, ISO 19115-2 <<B6>>, ISO 19139 <<B7>>, Dublin Core <<B8>>, CSDGM <<B10>>, DDMS <<B12>>, NMF/NMIS <<B13>>, etc.
 The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <<B14>> encoded in XMI <<B15>>, GML Application Schemas <<30>>, ISO 19110 feature catalogues <<B18>>, OWL <<B20>> and SKOS <<B21>> taxonomies, etc.
+	
+:metadata_table_definition_foot1: footnote:[For example, for ISO 19139 metadata the URI value should be the metadata schema namespace http://www.isotc211.org/2005/gmd]
 
 [[gpkg_metadata_cols]]
 .Metadata Table Definition
@@ -28,7 +30,7 @@ The GeoPackage interpretation of what constitutes “metadata” is a broad one 
 |Column Name |Column Type |Column Description |Null |Default |Key
 |`id` |INTEGER |Metadata primary key |no | |PK
 |`md_scope` |TEXT |Case sensitive name of the data scope to which this metadata applies; see <<metadata_scopes>> below |no |‘dataset’ |
-|`md_standard_uri` |TEXT |URI <<23>> reference to the metadata structure definition authority |no | |
+|`md_standard_uri` |TEXT |URI <<23>> reference to the metadata structure definition authority {metadata_table_definition_foot1} |no | |
 |`mime_type` |TEXT |MIME <<21>> encoding of metadata |no |text/xml <<24>> |
 |`metadata` |TEXT |metadata |no |’’| 
 |=======================================================================
@@ -86,29 +88,34 @@ Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL
 
 ===== Data
 
+[[metadata_reference_table_table_definition]]
 ====== Table Definition
 
 [requirement]
-A GeoPackage that contains a `gpkg_metadata` table SHALL contain a `gpkg_metadata_reference` table per <<gpkg_metadata_reference_cols>> and <<gpkg_metadata_reference_sql>>.
+A GeoPackage that contains a `gpkg_metadata` table SHALL contain a `gpkg_metadata_reference` table per clause 2.4.3.1.1 <<metadata_reference_table_table_definition>>, <<gpkg_metadata_reference_cols>> and <<gpkg_metadata_reference_sql>>.
 
 The second component of GeoPackage metadata is the `gpkg_metadata_reference` table that links metadata in the `gpkg_metadata` table to data in the feature, and tiles tables defined in clauses 2.1.6 and 2.2.7.
 The `gpkg_metadata_reference` table is not required to contain any rows.
 
+:gpkg_metadata_reference_cols_foot1: footnote:[In SQLite, the rowid value is always equal to the value of a single-column primary key on an integer column [B30\] and is not changed by a database reorganization performed by the VACUUM SQL command.]
+
 [[gpkg_metadata_reference_cols]]
-.Metadata Reference Table Definition (Table or View Name: gpkg_metadata_reference)
+.Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Default |Key
 |`reference_scope` |TEXT |Lowercase metadata reference scope; one of ‘geopackage’, ‘table’,‘column’, ’row’, ’row/col’ |no | |
 |`table_name` |TEXT |Name of the table to which this metadata reference applies, or NULL for reference_scope of ‘geopackage’. |yes | |
 |`column_name` |TEXT |Name of the column to which this metadata reference applies; NULL for `reference_scope` of ‘geopackage’,‘table’ or ‘row’, or the name of a column in the `table_name` table for `reference_scope` of ‘column’ or ‘row/col’ |yes | |
-|`row_id_value` |INTEGER |NULL for `reference_scope` of ‘geopackage’, ‘table’ or ‘column’, or the rowed of a row record in the `table_name` table for `reference_scope` of ‘row’ or ‘row/col’ |yes | |
-|`timestamp` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |strftime('%Y-%m-%dT%H:%M:%fZ', CURRENT_TIMESTAMP) |
+|`row_id_value` {gpkg_metadata_reference_cols_foot1} |INTEGER |NULL for `reference_scope` of ‘geopackage’, ‘table’ or ‘column’, or the rowed of a row record in the `table_name` table for `reference_scope` of ‘row’ or ‘row/col’ |yes | |
+|`timestamp` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |strftime('%Y-%m-%dT%H:%M:%fZ', 'now') |
 |`md_file_id` |INTEGER |`gpkg_metadata` table id column value for the metadata to which this `gpkg_metadata_reference` applies |no | |FK
 |`md_parent_id` |INTEGER |`gpkg_metadata` table id column value for the hierarchical parent `gpkg_metadata` for the `gpkg_metadata` to which this `gpkg_metadata_reference` applies, or NULL if `md_file_id` forms the root of a metadata hierarchy |yes | |FK
 |=======================================================================
 
-Every row in `gpkg_metadata_reference` that has null value as `md_parent_id` forms the root of a metadata hierarchy [^9].
+:gpkg_metadata_reference_null_foot1: footnote:[Such a metadata hierarchy MAY have only one level of defined metadata]
+
+Every row in `gpkg_metadata_reference` that has null value as `md_parent_id` forms the root of a metadata hierarchy.{gpkg_metadata_reference_null_foot1}
 
 See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 
@@ -129,8 +136,9 @@ Every other `gpkg_metadata_reference` table row SHALL have a `column_name` colum
 Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’, ‘table’ or ‘column’ SHALL have a `row_id_value` column value that is NULL.
 Every other `gpkg_metadata_reference` table row SHALL have a `row_id_value` column value that contains the ROWID of a row in the SQLite table or view identified by the `table_name` column value.
 
+:req_75_foot1: footnote:[The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
 [requirement]
-Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.[^10]
+Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.{req_75_foot1}
 
 [requirement]
 Every `gpkg_metadata_reference` table row `md_file_id` column value SHALL be an id column value from the `gpkg_metadata` table.

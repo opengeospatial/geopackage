@@ -9,11 +9,12 @@ The information provided by this option can be used by applications to, for inst
 
 ===== Data
 
+[[schema_data_columns_table_definition]]
 ====== Table Definition
 
 [requirement]
 A GeoPackage MAY contain a table or updateable view named `gpkg_data_columns`.
-If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
+If present it SHALL be defined per clause 2.3.2.1.1 <<schema_data_columns_table_definition>>, <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
 
 [[gpkg_data_columns_cols]]
 .Data Columns Table or View Definition
@@ -30,7 +31,7 @@ If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_co
 |=======================================================================
 
 :data_cols_foot1: footnote:[A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.]
-:data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>> and <<tile_enc_webp>> as feature attributes, but they are not required to do so.]
+:data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses 2.2.4, 2.2.5, and 3.2.2 as feature attributes, but they are not required to do so.]
 
 GeoPackage applications MAY {data_cols_foot1} use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type {data_cols_foot2} information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
 The `gpkg_data_columns` data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
@@ -53,20 +54,19 @@ If it is not NULL, it SHALL contain a case sensitive constraint_name column valu
 
 ===== Data
 
+[[data_column_constraints_table_definition]]
 ====== Table Definition
 
 [requirement]
 A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
-If present it SHALL be defined per <<gpkg_data_column_constraints_cols>> and <<gpkg_data_column_constraints_sql>>.
+If present it SHALL be defined per clause 2.3.3.1.1 <<data_column_constraints_table_definition>>, <<gpkg_data_column_constraints_cols>> and <<gpkg_data_column_constraints_sql>>.
 
 The `gpkg_data_column_constraints` table contains data to specify restrictions on basic data type column values.
 The constraint_name column is referenced by the `constraint_name` column in the `gpkg_data_columns` table defined in <<gpkg_data_columns_cols>>.
 
-:geopackage_min_max_cols_numeric_foot: footnote:[The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5.]
 
 [[gpkg_data_column_constraints_cols]]
-.Data Column Constraints Table or View Definition 
-{geopackage_min_max_cols_numeric_foot}
+.Data Column Constraints Table or View Definition
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
@@ -77,7 +77,9 @@ The constraint_name column is referenced by the `constraint_name` column in the 
 |`minIsInclusive` |BOOLEAN |0 (false) if min value is exclusive, or 1 (true) if min value is inclusive |yes |
 |`max` |NUMERIC |Maximum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
 |`maxIsInclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
+|`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes| 
 |=======================================================================
+_The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
 
 See <<gpkg_data_column_constraints_sql>>.
 

@@ -6,7 +6,7 @@ end
 
 task :generate do
   system './runasciidoctor -D build/spec ./spec/index.adoc'
-  FileUtils.cp_r 'images/.', 'build'
+  FileUtils.cp_r 'images/.', 'build/spec'
 end
 
 desc 'Generate site'
