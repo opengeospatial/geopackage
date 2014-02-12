@@ -601,7 +601,7 @@ END;
 . SELECT CASE 
 WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN 
 (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp',\'gpkg_tiff',\'gpkg_nitf')))
+ (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp')))
 ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles')
 END;
 . Not testable if returns empty result set
@@ -628,7 +628,7 @@ END;
 . SELECT CASE 
 WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN 
 (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp',\'gpkg_tiff',\'gpkg_nitf')))
+ (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp')))
 ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles')
 END;
 . Not testable if returns empty result set
