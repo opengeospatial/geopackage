@@ -955,7 +955,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/schema/data_columns/data_table_def+
+|*Test Case ID* |+/opt/schema/data_columns/data/data_table_def+
 |*Test Purpose* |Verify that the gpkg_data_columns table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_columns' 
@@ -1022,7 +1022,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/schema/data_column_constraints/data_table_def+
+|*Test Case ID* |+/opt/schema/data_column_constraints/data/table_def+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_column_constraints' 
@@ -1185,7 +1185,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference_data_table_def+
+|*Test Case ID* |+/opt/metadata/metadata_reference/data/table_def+
 |*Test Purpose* |Verify that the gpkg_metadata_reference table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_metadata_reference'
@@ -1500,8 +1500,8 @@ viii. Otherwise log pass
 .... Fail if failed
 .... SELECT ST_GeometryType(geometry column value) AS <gtype>;
 .... SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = \'gpkg_geom_' \|\| <gtype>
-.. Fail if result set is empty
-.. Log pass otherwise
+..... Fail if result set is empty
+..... Log pass otherwise
 . Pass if logged pass and no fails
 |*Reference* |Clause 3.1.1.1.2 Req 86:
 |*Test Type* |Basic
