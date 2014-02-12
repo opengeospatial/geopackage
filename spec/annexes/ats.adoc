@@ -74,7 +74,7 @@
 .. PRAGMA table_info(table_name)
 .. Fail if returns empty set
 .. For each row type column value
-.. Fail if value is not one of the data type names specified by <<table_column_data_types>>
+... Fail if value is not one of the data type names specified by <<table_column_data_types>>
 . Pass if no fails
 |*Reference* |<<table_column_data_types>> Req 5:
 |*Test Type* |Basic
@@ -140,12 +140,12 @@
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/base/core/spatial_ref_sys/data/table_def+
+|*Test Case ID* |+/base/core/gpkg_spatial_ref_sys/data/table_def+
 |*Test Purpose* |Verify that the gpkg_spatial_ref_sys table exists and has the correct definition.
 |*Test Method* |
 . `SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_spatial_ref_sys'`
 . Fail if returns an empty result set
-. Pass if column names and column definitions in the returned `CREATE TABLE statement` in the sql column value, including data type, nullability,  and primary key constraints match all of those in the contents of C.1 Table 17. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if column names and column definitions in the returned `CREATE TABLE statement` in the sql column value, including data type, nullability,  and primary key constraints match all of those in the contents of C.1 Table 18. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Clause 1.1.2.1.1 Req 10:
 |*Test Type* |Basic
@@ -156,15 +156,21 @@
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/base/core/spatial_ref_sys/data_values_default+
+|*Test Case ID* |+/base/core/gpkg_spatial_ref_sys/data_values_default+
 |*Test Purpose* |Verify that the spatial_ref_sys table contains the required default contents.
 |*Test Method* |
 . `SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND`
 . `SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND`
-. `SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid = 4326 returns 4326 epsg 4326 GEOGCS["WGS 84", DATUM["WGS_1984", SPHEROID["WGS 84",6378137,298.257223563, AUTHORITY["EPSG","7030"]], AUTHORITY["EPSG","6326"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]], AUTHORITY["EPSG","4326"]]` (whitespace irrelevant)
+. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEOGCS ["WGS 84",
+ DATUM ["World Geodetic System 1984", 
+   SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]], 
+   AUTHORITY["EPSG","6326"]],
+ PRIMEM["Greenwich", 0 , AUTHORITY["EPSG","8901"]], 
+ UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]], 
+ AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components <twin axes> and <to wgs84> and whitespace differences in the returned text)
 . Pass if tests 1-3 are met
 . Fail otherwise
-|*Reference* |Clause 1.1.2.1.2 Req 11:
+|*Reference* |Clause 1.1.2.1.2 Requirement 11:
 |*Test Type* |Capability
 |========================================
 
@@ -189,9 +195,9 @@
 |*Test Case ID* |+/base/core/contents/data/table_def+
 |*Test Purpose* |Verify that the gpkg_contents table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_contents' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_contents' 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned CREATE TABLE statement, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.2Table 18. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if the column names and column definitions in the returned CREATE TABLE statement, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.2 Table <<geometry_types_extension>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail Otherwise
 |*Reference* |Clause 1.1.3.1.1 Req 13:
 |*Test Type* |Basic
@@ -292,10 +298,10 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 .. SELECT cn FROM tn
 .. Not testable if none found
 .. For each cn value from step a
-.. Fail if the first two bytes of each gc are not “GP”
-ii. Fail if gc.version_number is not 0
-iii. Fail if gc.flags.GeopackageBinary type != 0
-iv. Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope values are not NaN
+... Fail if the first two bytes of each gc are not “GP”
+... Fail if gc.version_number is not 0
+... Fail if gc.flags.GeopackageBinary type != 0
+... Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope values are not NaN
 .  Pass if no fails
 |*Reference* |Clause 2.1.3.1.1 Req 19:
 |*Test Type* |Capability
@@ -318,15 +324,15 @@ iv. Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope val
 . Fail if returns an empty result set
 . For each row from step 3
 .. SELECT cn FROM tn;
-.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 41, then
-.. Log cn.header values, wkb endianness and geometry type 
-.. If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail
-.. If cn.flags.E is 1 - 4 and some cn.wkbx is outside of cn.envelope.minx,maxx then log fail
-.. If cn.flags.E is 1 - 4 and some gc.wkby is outside of cn.envelope.miny,maxy then log fail
-.. If cn.flags.E is 2,4 and some gc.wkb.z is outside of cnenvelope.minz,maxz then log fail
-.. If cn.flags.E is 3,4 and some gc.wkb.m is outside of cn.envelope.minm,maxm then log fail
-.. If cn.flags.E is 5-7 then log fail 
-.. Otherwise log pass
+.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 42, then
+... Log cn.header values, wkb endianness and geometry type 
+... If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail
+... If cn.flags.E is 1 - 4 and some cn.wkbx is outside of cn.envelope.minx,maxx then log fail
+... If cn.flags.E is 1 - 4 and some gc.wkby is outside of cn.envelope.miny,maxy then log fail
+... If cn.flags.E is 2,4 and some gc.wkb.z is outside of cnenvelope.minz,maxz then log fail
+... If cn.flags.E is 3,4 and some gc.wkb.m is outside of cn.envelope.minm,maxm then log fail
+... If cn.flags.E is 5-7 then log fail 
+... Otherwise log pass
 . Pass if log contanins pass and no fails
 |*Reference* |Clause 2.1.4.1.1 Req 20:
 |*Test Type* |Capability
@@ -356,7 +362,7 @@ iv. Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope val
 |*Test Case ID* |+/opt/features/geometry_columns/data/table_def+
 |*Test Purpose* |Verify that the gpkg_geometry_columns table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_geometry_columns' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_geometry_columns' 
 . Fail if returns an empty result set. 
 . Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.4Table 20. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
@@ -371,9 +377,9 @@ iv. Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope val
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_geometry_columns+
 |*Test Purpose* |Verify that gpkg_geometry_columns contains one row record for each geometry column in each vector feature user data table.
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’
+. SELECT table_name FROM gpkg_contents WHERE data_type = \'features'
 . Not testable  if returns an empty result set
-. SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’ AND table_name NOT IN (SELECT table_name FROM gpkg_geometry_columns)
+. SELECT table_name FROM gpkg_contents WHERE data_type = \'features' AND table_name NOT IN (SELECT table_name FROM gpkg_geometry_columns)
 . Fail if result set is not empty
 |*Reference* |Clause 2.1.5.1.2 Req 22:
 |*Test Type* |Capability
@@ -400,7 +406,8 @@ iv. Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope val
 . For each row from step 1
 .. PRAGMA table_info(table_name) 
 .. Fail if gpkg_geometry_columns.column_name value does not equal a name column value returned by PRAGMA table_info.
-Pass if no fails. |*Reference* |Clause 2.1.5.1.2 Req 24:
+. Pass if no fails. 
+|*Reference* |Clause 2.1.5.1.2 Req 24:
 |*Test Type* |Capability
 |========================================
 
@@ -412,7 +419,7 @@ Pass if no fails. |*Reference* |Clause 2.1.5.1.2 Req 24:
 . SELECT DISTINCT geometry_type_name from gpkg_geometry_columns 
 . Not testable  if returns an empty result set
 . For each row from step 1
-.. Fail if a returned geometry_type_name value is not in Table 41 or Table 42 in Annex E
+.. Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex E
 . Pass if no fails.
 |*Reference* |Clause 2.1.5.1.2 Req 25:
 |*Test Type* |Capability
@@ -506,8 +513,8 @@ Pass if no fails. |*Reference* |Clause 2.1.5.1.2 Req 24:
 . For each row from step 1
 .. SELECT DISTINCT ST_GeometryType(cn) FROM tn
 .. For each row actual_type_name from step a
-.. SELECT GPKG_IsAssignable(geometry_type_name, actual_type_name) 
-ii. Fail if any returned 0 
+... SELECT GPKG_IsAssignable(geometry_type_name, actual_type_name) 
+... Fail if any returned 0 
 . Pass if no fails
 |*Reference* |Clause 2.1.6.1.2 Req 31:
 |*Test Type* |Capability
@@ -515,7 +522,7 @@ ii. Fail if any returned 0
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/features/vector_features/data/tata_value_geometry_srs_id+
+|*Test Case ID* |+/opt/features/vector_features/data/data_value_geometry_srs_id+
 |*Test Purpose* |Verify the the srs_id of feature geometries are the srs_id specified for the gpkg_geometry_columns table srs_id column value.
 |*Test Method* |
 . SELECT table_name AS tn, column_name AS cn, srs_id AS gc_srs_id FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents where data_type = ‘features’)
@@ -523,7 +530,7 @@ ii. Fail if any returned 0
 . For each row from step 1
 .. SELECT DISTINCT st_srid(cn) FROM tn
 .. For each row from step a
-.. Fail if returnvalue not equal to gc_srs_id
+... Fail if returnvalue not equal to gc_srs_id
 . Pass if no fails
 |*Reference* |Clause 2.1.6.1.2 Req 32:
 |*Test Type* |Capability
@@ -562,7 +569,7 @@ ii. Fail if any returned 0
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/tiles/zoom_levels_data_zoom_times_two+
+|*Test Case ID* |+/opt/tiles/zoom_levels/data/zoom_times_two+
 |*Test Purpose* |Verify that by default zoom level pixel sizes for tile matrix user data tables vary by factors of 2 between adjacent zoom levels in the tile matrix metadata table.
 |*Test Method* |
 . SELECT CASE 
@@ -592,16 +599,16 @@ END;
 |*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type image/jpeg by default contains tile data in MIME type image/png.
 |*Test Method* |
 . SELECT CASE 
-WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN 
-(SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN ('gpkg_webp’,’gpkg_tiff’,’gpkg_nitf’)))
-ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles')
+WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN 
+(SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles' AND table_name NOT IN
+ (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp',\'gpkg_tiff',\'gpkg_nitf')))
+ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles')
 END;
 . Not testable if returns empty result set
 . For each row tbl_name from step 1
 .. SELECT tile_data FROM tbl_name
 .. For each row tile_data from step a
-.. Pass if tile data in MIME type image/png
+... Pass if tile data in MIME type image/png
 . Fail if no passes
 |*Reference* |Clause 2.2.4.1.1 Req 35:
 |*Test Type* |Capability
@@ -619,16 +626,16 @@ END;
 |*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type image/png by default contains tile data in MIME type image/jpeg.
 |*Test Method* |
 . SELECT CASE 
-WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN 
-(SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN ('gpkg_webp’,’gpkg_tiff’,’gpkg_nitf’)))
-ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles')
+WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN 
+(SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles' AND table_name NOT IN
+ (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp',\'gpkg_tiff',\'gpkg_nitf')))
+ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles')
 END;
 . Not testable if returns empty result set
 . For each row tbl_name from step 1
 .. SELECT tile_data FROM tbl_name
 .. For each row tile_data from step a
-.. Pass if  tile data in MIME type image/jpeg
+... Pass if tile data in MIME type image/jpeg
 . Fail if no passes
 |*Reference* |Clause 2.2.5.1.1 Req 36:
 |*Test Type* |Capability
@@ -645,7 +652,7 @@ END;
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/table_def+
 |*Test Purpose* |Verify that the gpkg_tile_matrix_set table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_tile_matrix_set' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_tile_matrix_set' 
 . Fail if returns an empty result set. 
 . Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <<example_feature_table_sql>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
 . Fail otherwise.
@@ -657,7 +664,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data_values_table_name+
+|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/data_values_table_name+
 |*Test Purpose* |Verify that values of the gpkg_tile_matrix_set table_name column reference values in the gpkg_contents table_name column for rows with a data type of “tiles”.
 |*Test Method* |
 . SELECT table_name FROM gpkg_tile_matrix_set
@@ -704,9 +711,9 @@ END;
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/table_def+
 |*Test Purpose* |Verify that the gpkg_tile_matrix table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_tile_matrix' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_tile_matrix' 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C Table 22. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
+. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C Table 23. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
 . Fail otherwise.
 |*Reference* |Clause 2.2.7.1.1 Req 41:
 |*Test Type* |Basic
@@ -716,14 +723,14 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data_values_table_name+
+|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_table_name+
 |*Test Purpose* |Verify that values of the gpkg_tile_matrix table_name column reference values in the gpkg_contents table_name column for rows with a data type of “tiles”.
 |*Test Method* |
 . SELECT table_name FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
 . SELECT table_name FROM gpkg_tile_matrix tmm WHERE table_name NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tmm.table_name = gc.table_name AND gc.data_type != ‘tiles’)
 . Fail if result set contains any rows
-10) Pass otherwise
+. Pass otherwise
 |*Reference* |Clause 2.2.7.1.2 Req 42:
 |*Test Type* |Capability
 |========================================
@@ -895,12 +902,12 @@ END;
 . For each row <user_data_tiles_table> from step 1
 .. SELECT zoom_level FROM <user_data_tiles_table>
 .. If result set not empty
-.. SELECT MIN(gtmm.zoom_level) AS min_gtmm_zoom, MAX(gtmm.zoom_level) AS max_gtmm_zoom FROM gpkg_tile_matrix WHERE table_name = <user_data_tiles_table>
-ii. SELECT id FROM <user_data_tiles_table> WHERE zoom_level < min_gtmm_zoom
-iii. Fail if result set not empty
-iv. SELECT id FROM <user_data_tiles_table> WHERE zoom_level > max_gtmm_zoom
-.. Fail if result set not empty
-vi. Log pass otherwise
+... SELECT MIN(gtmm.zoom_level) AS min_gtmm_zoom, MAX(gtmm.zoom_level) AS max_gtmm_zoom FROM gpkg_tile_matrix WHERE table_name = <user_data_tiles_table>
+... SELECT id FROM <user_data_tiles_table> WHERE zoom_level < min_gtmm_zoom
+... Fail if result set not empty
+... SELECT id FROM <user_data_tiles_table> WHERE zoom_level > max_gtmm_zoom
+... Fail if result set not empty
+... Log pass otherwise
 . Pass if logged pas and no fails
 |*Reference* |Clause 2.2.8.1.2 Req 53:
 |*Test Type* |Capability
