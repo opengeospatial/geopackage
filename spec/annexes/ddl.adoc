@@ -20,7 +20,7 @@ CREATE TABLE gpkg_spatial_ref_sys (
 
 [[sqlmm_gpkg_spatial_ref_sys_sql]]
 [source,sql]
-.SQL/MM View of gpkg_spatial_ref_sys Definition SQL
+.SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)
 ----
 CREATE VIEW st_spatial_ref_sys AS
   SELECT
@@ -35,7 +35,7 @@ CREATE VIEW st_spatial_ref_sys AS
 
 [[sfsql_gpkg_spatial_ref_sys_sql]]
 [source,sql]
-.SF/SQL View of gpkg_spatial_ref_sys Definition SQL
+.SF/SQL View of gpkg_spatial_ref_sys Definition SQL (Informative)
 ----
 CREATE VIEW spatial_ref_sys AS
   SELECT
@@ -57,7 +57,7 @@ CREATE TABLE gpkg_contents (
   data_type TEXT NOT NULL,
   identifier TEXT UNIQUE,
   description TEXT DEFAULT '',
-  last_change DATETIME NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
+  last_change DATETIME NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   min_x DOUBLE,
   min_y DOUBLE,
   max_x DOUBLE,
@@ -89,7 +89,7 @@ CREATE TABLE gpkg_geometry_columns (
 
 [[sqlmm_gpkg_geometry_columns_sql]]
 [source,sql]
-.SQL/MM View of gpkg_geometry_columns Definition SQL
+.SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)
 ----
 CREATE VIEW st_geometry_columns AS
   SELECT
@@ -104,23 +104,24 @@ CREATE VIEW st_geometry_columns AS
 
 [[sfsql_gpkg_geometry_columns_sql]]
 [source,sql]
-.SF/SQL VIEW of gpkg_geometry_columns Definition SQL
+.SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)
 ----
 CREATE VIEW geometry_columns AS
   SELECT
     table_name AS f_table_name,
     column_name AS f_geometry_column,
-    code4name 1 (geometry_type_name) AS geometry_type,
+    code4name (geometry_type_name) AS geometry_type,
     2 + (CASE z WHEN 1 THEN 1 WHEN 2 THEN 1 ELSE 0 END) + (CASE m WHEN 1 THEN 1 WHEN 2 THEN 1 ELSE 0 END) AS coord_dimension,
     srs_id AS srid
   FROM gpkg_geometry_columns;
 ----
+NOTE: Implementer must provide code4name(geometry_type_name) SQL function
 
 === sample_feature_table (Informative)
 
 [[example_feature_table_sql]]
 [source,sql]
-.sample_feature_table Table Definition SQL
+.sample_feature_table Table Definition SQL (Informative)
 ----
 CREATE TABLE sample_feature_table (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -171,7 +172,7 @@ CREATE TABLE gpkg_tile_matrix (
 ----
 
 [source,sql]
-.EXAMPLE: gpkg_tile_matrix Insert Statement
+.EXAMPLE: gpkg_tile_matrix Insert Statement (Informative)
 ----
 INSERT INTO gpkg_tile_matrix VALUES (
   "sample_tile_pyramid",
@@ -189,7 +190,7 @@ INSERT INTO gpkg_tile_matrix VALUES (
 
 [[example_tiles_table_sql]]
 [source,sql]
-.EXAMPLE: tiles table Create Table SQL
+.EXAMPLE: tiles table Create Table SQL (Informative)
 ----
 CREATE TABLE sample_tile_pyramid (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -203,7 +204,7 @@ CREATE TABLE sample_tile_pyramid (
 
 [[example_tiles_table_insert_sql]]
 [source,sql]
-.EXAMPLE: tiles table Insert Statement
+.EXAMPLE: tiles table Insert Statement (Informative)
 ----
 INSERT INTO sample_matrix_pyramid VALUES (
   1,
@@ -277,7 +278,7 @@ CREATE TABLE gpkg_metadata_reference (
   table_name TEXT,
   column_name TEXT,
   row_id_value INTEGER,
-  timestamp DATETIME NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ',CURRENT_TIMESTAMP)),
+  timestamp DATETIME NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   md_file_id INTEGER NOT NULL,
   md_parent_id INTEGER,
   CONSTRAINT crmr_mfi_fk FOREIGN KEY (md_file_id) REFERENCES gpkg_metadata(id),
@@ -286,7 +287,7 @@ CREATE TABLE gpkg_metadata_reference (
 ----
 
 [source,sql]
-.Example: gpkg_metadata_reference SQL insert statement
+.Example: gpkg_metadata_reference SQL insert statement (Informative)
 ----
 INSERT INTO gpkg_metadata_reference VALUES (
   'table',

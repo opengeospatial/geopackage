@@ -248,7 +248,7 @@ WHERE NOT (NEW.real_attribute > 0);
 END
 
 CREATE TRIGGER "sample_feature_table_real_update"
-BEFORE UPDATE OF "real_attribute" ON "sample_feature_table”
+BEFORE UPDATE OF "real_attribute" ON "sample_feature_table"
 FOR EACH ROW BEGIN
 SELECT RAISE (ABORT, 'update of ''real_attribute'' on table
 ''sample_feature_table'' violates constraint: real_attribute value

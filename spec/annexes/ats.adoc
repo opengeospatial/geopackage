@@ -958,7 +958,7 @@ END;
 |*Test Case ID* |+/opt/schema/data_columns/data_table_def+
 |*Test Purpose* |Verify that the gpkg_data_columns table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_data_columns' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_columns' 
 . Fail if returns an empty result set
 . Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C8 Table 30. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
@@ -1025,7 +1025,7 @@ END;
 |*Test Case ID* |+/opt/schema/data_column_constraints/data_table_def+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_data_column_constraints' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_column_constraints' 
 . Fail if returns an empty result set
 . Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C Table 31. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
@@ -1058,7 +1058,7 @@ END;
 .. SELECT count(*) FROM gpkg_data column_constraints WHERE constraint_name = cn
 .. Fail if count > 1
 . Pass if no fails.
-|*Reference* |Clause 0 Req 62:
+|*Reference* |Clause 2.3.3.1.2 Req 62:
 |*Test Type* |Capability
 |========================================
 
@@ -1153,9 +1153,9 @@ END;
 |*Test Case ID* |+/opt/metadata/metadata/data/table_def+
 |*Test Purpose* |Verify that the gpkg_metadata table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata'
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_metadata'
 . Fail if returns an empty result set.
-. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 32. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Clause 2.4.2.1.1 Req 68:
 |*Test Type* |Basic
@@ -1166,12 +1166,12 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/metadata/metadata/data/data_values_md_scope+
-|*Test Purpose* |Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from Table 14 in clause 2.4.2.1.2.
+|*Test Purpose* |Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from Table 15 in clause 2.4.2.1.2.
 |*Test Method* |
 . SELECT md_scope FROM gpkg_metadata
 . Not testable if returns an empty result set
 . For each row returned from step 1
-.. Fail if md_scope value not one of the name column values from Table 14 in clause 2.4.2.1.2
+.. Fail if md_scope value not one of the name column values from Table 15 in clause 2.4.2.1.2
 . Pass if no fails
 |*Reference* |Clause 2.4.2.1.2 Req 69:
 |*Test Type:* |Capabilities
@@ -1188,7 +1188,7 @@ END;
 |*Test Case ID* |+/opt/metadata/metadata_reference_data_table_def+
 |*Test Purpose* |Verify that the gpkg_metadata_reference table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata_reference'
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_metadata_reference'
 . Fail if returns an empty result set.
 . Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33.  Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
@@ -1219,9 +1219,9 @@ END;
 |*Test Method* |
 . SELECT table_name FROM gpkg_metadata_reference
 . Not testable if returns an empty result set
-. SELECT table_name FROM gpkg_metadata_reference WHERE reference_scope = 'geopackage'
+. SELECT table_name FROM gpkg_metadata_reference WHERE reference_scope = \'geopackage'
 . Fail if result set contains any non-NULL values
-. SELECT table_name FROM metadata_reference WHERE reference_scope != 'geopackage' AND table_name NOT IN (SELECT table_name FROM gpkg_contents)
+. SELECT table_name FROM metadata_reference WHERE reference_scope != \'geopackage' AND table_name NOT IN (SELECT table_name FROM gpkg_contents)
 . Fail if result set is not empty
 . Pass otherwise.
 |*Reference* |Clause 2.4.3.1.2 Req 72:
@@ -1239,7 +1239,7 @@ END;
 . Fail if result set contains any non-NULL values
 . SELECT <table_name>, <column_name> FROM metadata_reference WHERE reference_scope NOT IN ('geopackage', ‘table’, ‘row’)
 . For each row from step 5
-.. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = '<table_name>'
+.. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'<table_name>'
 .. Fail if returns an empty result set.
 .. Fail if the one of the column names in the returned sql Create TABLE statement is not  <column_name>
 .. Log pass otherwise
@@ -1289,7 +1289,7 @@ END;
 |*Test Method* |
 . PRAGMA foreign_key_check(‘geometry_columns’)
 . Fail if returns any rows with a fourth column foreign key index value of 0
-|*Reference* |Clause 2.4.3.1.2 Req 75:
+|*Reference* |Clause 2.4.3.1.2 Req 76:
 |*Test Type* |Capability
 |========================================
 
@@ -1300,15 +1300,11 @@ END;
 |*Test Method* |
 . SELECT md_file_id FROM gpkg_metadata_reference
 . Not testable if returns an empty result set
-. SELECT gmr.md_file_id, gmr.md_parent_id
-. FROM gpkg_metadata_reference AS gmr
-. WHERE gmr.md_file_id == gmr.md_parent_id
+. SELECT gmr.md_file_id, gmr.md_parent_id FROM gpkg_metadata_reference AS gmr WHERE gmr.md_file_id == gmr.md_parent_id
 . Fail if result set is not empty
-. SELECT gmr.md_file_id, gmr.md_parent_id, gm.id
-. FROM gpkg_metadata_reference  AS gmr
-. LEFT OUTER JOIN gpkg_metadata gm ON gmr.md_parent_id =gm.id
-10) Fail if any result set gm.id values are NULL
-11) Pass otherwise
+. SELECT gmr.md_file_id, gmr.md_parent_id, gm.id FROM gpkg_metadata_reference  AS gmr LEFT OUTER JOIN gpkg_metadata gm ON gmr.md_parent_id =gm.id
+. Fail if any result set gm.id values are NULL
+. Pass otherwise
 |*Reference* |Clause 2.4.3.1.2 Req 77:
 |*Test Type* |Capability
 |========================================
@@ -1323,9 +1319,9 @@ END;
 |*Test Case ID* |+/opt/extension_mechanism/extensions/data/table_def+
 |*Test Purpose* |Verify that a gpkg_extensions table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_extensions'
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_extensions'
 . Fail if returns an empty result set.
-. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents ofTable 35.  Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 36. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Clause 2.5.2.1.1 Req 78:
 |*Test Type* |Basic
@@ -1339,8 +1335,8 @@ END;
 |*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the gpkg_extensions table
 |*Test Method* |
 . For each SELECT DISTINCT geometry_type_name FROM geometry_columns
-.. Fail if geometry_type_name IN Annex E Table 42 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_<geometry_type_name>
-.. Fail if geometry_type_name NOT IN Annex E Table 41 or Table 42 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “_geom_<geometry_type_name>
+.. Fail if geometry_type_name IN Annex E Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_<geometry_type_name>
+.. Fail if geometry_type_name NOT IN Annex E Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “_geom_<geometry_type_name>
 . For each SELECT tbl_name FROM sqlite_master WHERE tbl_name LIKE ‘rtree_%’
 .. Fail if gpkg_extensions does not contain a row where extension_name = “gpkg_rtree_index”
 . For each SELECT tbl_name FROM sqlite_master WHERE name LIKE ‘fgti_%’
@@ -1361,14 +1357,13 @@ END;
 |*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_table_name+
 |*Test Purpose* |Verify that the table_name column values in the gpkg_extensions table are valid.
 |*Test Method* |
-10) SELECT table_name, column_name FROM gpkg_extensions
-11) Not testable if returns an empty result set
-12) For each row from step one
+. SELECT table_name, column_name FROM gpkg_extensions
+. Not testable if returns an empty result set
+. For each row from step one
 .. Fail if table_name value is NULL and column_name value is not NULL.
-.. SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name
-FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
+.. SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
 .. Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).
-13) Pass if logged pass and no fails.
+. Pass if logged pass and no fails.
 |*Reference* |Clause 2.5.2.1.2 Req 80:
 |*Test Type* |Capability
 |========================================
@@ -1399,7 +1394,7 @@ FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name 
 . SELECT extension_name FROM gpkg_extensions
 . Not testable if returns an empty result set
 . For each row returned from step 1
-.. Log pass if extension_name is one of those listed in Annex J or Annex L through Annex R.
+.. Log pass if extension_name is one of those listed in Annex J or Annex L through Annex P.
 .. Separate extension_name into <author> and <extension> at the first “_”
 .. Fail if <author> is “gpkg”
 .. Fail if <author> contains characters other than [a-zA-Z0-9]
@@ -1461,7 +1456,7 @@ FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name 
 . For each row from step 3
 .. SELECT cn FROM tn;
 .. For each row from step a, log fail if GeoPackageBinary “X” type flag is 1
-.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 42, then
+.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 43, then
 .. Log cn.header values, wkb endianness and geometry type
 ii. If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail
 iii. If cn.flags.E is 1 - 4 and some cn.wkbx is outside of cn.envelope.minx,maxx then log fail
@@ -1479,10 +1474,10 @@ viii. Otherwise log pass
 |========================================
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/all_types_test_data+
 |*Test Purpose* |Verify that all extended non-linear geometry types and options are stored in valid GeoPackageBinary format encodings.
-Test Method
-. Open GeoPackage that has feature geometry values of geometry type inAnnex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
+|*Test Method* |
+. Open GeoPackage that has feature geometry values of geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
 . /reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data
-. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 42without and with z and/or m values.
+. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 43 without and with z and/or m values.
 . Fail otherwise
 |*Reference* |Clause 3.1.1.1.1 Req 85:
 |*Test Type* |Capability
@@ -1493,18 +1488,18 @@ Test Method
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/extension_name+
-|*Test Purpose* |Verify that an extension name in the form gpkg_geom_<gname> is defined for each <gname> extension geometry type from Annex E Table 42  used in a GeoPackage.
+|*Test Purpose* |Verify that an extension name in the form gpkg_geom_<gname> is defined for each <gname> extension geometry type from Annex E Table 43  used in a GeoPackage.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty
 . For each row result set table_name, column_name from step 3
 .. SELECT result_set_column_name FROM result_set_table_name
 .. For each geometry column value from step a
-.. If the first two bytes of each geometry column value are “GP”, then
-1. /opt/extension_mechanism/extensions/data/table_def
-2. Fail if failed
-3. SELECT ST_GeometryType(geometry column value) AS <gtype>;
-4. SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = 'gpkg_geom_’ || <gtype>
+... If the first two bytes of each geometry column value are “GP”, then
+.... /opt/extension_mechanism/extensions/data/table_def
+.... Fail if failed
+.... SELECT ST_GeometryType(geometry column value) AS <gtype>;
+.... SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = \'gpkg_geom_' \|\| <gtype>
 .. Fail if result set is empty
 .. Log pass otherwise
 . Pass if logged pass and no fails
@@ -1541,8 +1536,8 @@ Test Method
 . For each row from step 3
 .. SELECT cn FROM tn;
 .. For each row from step a,
-.. log fail if GeoPackageBinary “X” type flag is 0
-ii. Otherwise log pass
+... log fail if GeoPackageBinary “X” type flag is 0
+... Otherwise log pass
 . Log pass if log contains pass and no fails
 |*Reference* |Clause 3.1.1.1.1 Req 88:
 |*Test Type* |Capability
@@ -1555,18 +1550,18 @@ ii. Otherwise log pass
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/user_defined_geometry_types/extension_name+
 |*Test Purpose* |Verify that an extension name in the form <author>_geom_<gname> is defined for each extended geometry type not listed in Annex E used in a GeoPackage.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == \'features'))
 . Not testable if result set is empty
 . For each row result set table_name, column_name from step 3
 .. SELECT result_set_column_name FROM result_set_table_name
 .. For each geometry column value from step a
-.. If the first two bytes of each geometry column value are “GP”, then
-1. /opt/extension_mechanism/extensions/data/table_def
-2. Fail if failed
-3. SELECT ST_GeometryType(geometry column value) AS <gtype>;
-4. SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name NOT LIKE ‘gpkg_%’ and extension_name  LIKE '%_geom_’ || <gtype>
-.. Fail if result set is empty
-.. Log pass otherwise
+... If the first two bytes of each geometry column value are “GP”, then
+.... /opt/extension_mechanism/extensions/data/table_def
+.... Fail if failed
+.... SELECT ST_GeometryType(geometry column value) AS <gtype>;
+.... SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name NOT LIKE ‘gpkg_%’ and extension_name  LIKE \'%_geom_' \|\| <gtype>
+..... Fail if result set is empty
+..... Log pass otherwise
 . Pass if logged pass and no fails
 |*Reference* |Clause 3.1.1.1.2 Req 89:
 |*Test Type* |Basic
@@ -1705,7 +1700,7 @@ ii. Otherwise log pass
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/features/geometry_type_triggers/implementation+ /sql_functions
+|*Test Case ID* |+/reg_ext/features/geometry_type_triggers/implementation/sql_functions+
 |*Test Purpose* |Verify the correct implementation of sql functions used in geometry type triggers on feature table geometry columns.
 |*Test Method* |
 . Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
@@ -1777,7 +1772,7 @@ ii. Otherwise log pass
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/features/srs_id_triggers/implementation+ /sql_functions
+|*Test Case ID* |+/reg_ext/features/srs_id_triggers/implementation/sql_functions+
 |*Test Purpose* |Verify the correct implementation of sql functions used in srs_id triggers on feature table geometry columns.
 |*Test Method* |
 . Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
@@ -1831,7 +1826,7 @@ ii. Otherwise log pass
 |*Test Case ID* |+/reg_ext/tiles/zoom_levels/data/zoom_other_ext_name+
 |*Test Purpose* |Verify that the “gpkg_zoom_other” extension name is used to register tiles tables with other than factors of two zoom intervals.
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles'
+. SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'
 . Not testable if empty result set
 . For each row table_name from step 1
 .. SELECT zoom_level, pixel_x_size, pixel_y_size FROM gpkg_tile_matrix WHERE table_name = selected table name ORDER BY zoom_level ASC
@@ -1840,11 +1835,11 @@ ii. Otherwise log pass
 .. Not testable if no pair of rows for adjacent zoom levels have pixel_x_size or pixel_y_size values that differ by other than factors of two
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
-.. SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = 'gpkg_zoom_other'
+.. SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = \'gpkg_zoom_other'
 .. Fail if returns an empty result set
 .. Log pass otherwise
 . Pass if logged pass and no fails
-|*Reference* |Clause 0 Req 101:
+|*Reference* |Clause 3.2.1.1.1 Req 101:
 |*Test Type* |Basic
 |========================================
 
@@ -1852,7 +1847,7 @@ ii. Otherwise log pass
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/+ reg_ext/tiles/zoom_levels/data/zoom_other_ext_row
+|*Test Case ID* |+/reg_ext/tiles/zoom_levels/data/zoom_other_ext_row+
 |*Test Purpose* |Verify that tiles tables with other than factors of two zoom intervals are registered using the “gpkg_zoom_other” extension name.
 |*Test Method* |
  /reg_ext/tiles/zoom_levels/data/zoom_other_ext_name
@@ -1869,12 +1864,12 @@ ii. Otherwise log pass
 |*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
 |*Test Purpose:* |Verify that the “gpkg_webp” extensions name is used to register WEBP tile encoding implementations.
 |*Test Method:* |
-. +SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles'+
+. +SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'+
 . Not testable if empty result set
 . For each row table_name from step 1
 .. Select tile_data FROM row table_name
 .. For each row tile_data from step a
-.. Log webp if tile data in MIME type image/webp
+... Log webp if tile data in MIME type image/webp
 .. Not testable if no logged webps
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
