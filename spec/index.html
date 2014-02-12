@@ -559,7 +559,7 @@ Every GeoPackage SQLite Configuration SHALL have the SQLite library compile and 
 <div id="_requirement-10" class="quoteblock">
 <div class="title">Requirement 10</div>
 <blockquote>
-A GeoPackage SHALL include a <code>gpkg_spatial_ref_sys</code> table per clause 1.1.2.1.1 <a href="#spatial_ref_sys_data_table_definition">Table Definition</a>, table <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> and table <a href="#gpkg_spatial_ref_sys_sql">gpkg_spatial_ref_sys Table Definition SQL</a>.
+A GeoPackage SHALL include a <code>gpkg_spatial_ref_sys</code> table per clause 1.1.2.1.1 <a href="#spatial_ref_sys_data_table_definition">Table Definition</a>, Table <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> and Table <a href="#gpkg_spatial_ref_sys_sql">gpkg_spatial_ref_sys Table Definition SQL</a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1629,7 +1629,7 @@ Values of the <code>gpkg_tile_matrix_set</code> <code>srs_id</code> column SHALL
 <div id="_requirement-41" class="quoteblock">
 <div class="title">Requirement 41</div>
 <blockquote>
-A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrix</code> table or view per clause <a href="#tile_matrix_data_table_definition">Table Definition</a>.
+A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrix</code> table or view per clause 2.2.7.1.1 <a href="#tile_matrix_data_table_definition">Table Definition</a>, Table <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table or View Definition</a> and Table <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>.
 </blockquote>
 </div>
 <table id="gpkg_tile_matrix_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -2583,9 +2583,9 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>timestamp</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATETIME</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">timestamp value in ISO 8601 format as defined by the strftime function <em>%Y-%m-%dT%H:%M:%fZ</em> format string applied to the current time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">strftime(<em>%Y-%m-%dT%H:%M:%fZ</em>, <em>now</em>)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">strftime('%Y-%m-%dT%H:%M:%fZ', 'now')</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -6594,7 +6594,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_columns/data_table_def</code></p>
+<p><code>/opt/schema/data_columns/data/data_table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6847,7 +6847,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data_table_def</code></p>
+<p><code>/opt/schema/data_column_constraints/data/table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -7471,7 +7471,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference_data_table_def</code></p>
+<p><code>/opt/metadata/metadata_reference/data/table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -8656,18 +8656,22 @@ viii. Otherwise log pass</p>
 </li>
 <li>
 <p>SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = 'gpkg_geom_' || &lt;gtype&gt;</p>
-</li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</li>
+<div class="olist upperroman">
+<ol class="upperroman" type="I">
 <li>
 <p>Fail if result set is empty</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
@@ -15954,7 +15958,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-02-12 16:33:35 UTC
+Last updated 2014-02-12 18:06:06 UTC
 </div>
 </div>
 </body>
