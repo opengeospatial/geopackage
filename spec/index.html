@@ -5283,7 +5283,7 @@ END;</p>
 <p>SELECT CASE
 WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN
 (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN ('gpkg_webp','gpkg_tiff','gpkg_nitf')))
+ (SELECT table_name from gpkg_extensions WHERE extension_name IN ('gpkg_webp')))
 ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles')
 END;</p>
 </li>
@@ -5366,7 +5366,7 @@ END;</p>
 <p>SELECT CASE
 WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN
 (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN ('gpkg_webp','gpkg_tiff','gpkg_nitf')))
+ (SELECT table_name from gpkg_extensions WHERE extension_name IN ('gpkg_webp')))
 ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles')
 END;</p>
 </li>
@@ -15958,7 +15958,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-02-12 18:06:06 UTC
+Last updated 2014-02-12 18:15:24 UTC
 </div>
 </div>
 </body>
