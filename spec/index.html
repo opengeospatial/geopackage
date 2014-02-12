@@ -17,7 +17,7 @@
 <p>Open Geospatial Consortium<br></p>
 </div>
 <div id="ogcheading" class="paragraph">
-<p>Publication Date: 2014-01-xx<br>
+<p>Publication Date: 2014-02-xx<br>
 Approval Date:   2014-01-19<br>
 Submission Date: 2013-10-13<br>
 External identifier of this OGC® document: <a href="http://www.opengis.net/doc/IS/geopackage/1.0">http://www.opengis.net/doc/IS/geopackage/1.0</a><br>
@@ -229,12 +229,12 @@ Document language: 	English<br></p>
 <li><a href="#_background">B.1. Background</a></li>
 <li><a href="#_document_terms_and_definitions">B.2. Document terms and definitions</a></li>
 <li><a href="#_conventions">B.3. Conventions</a></li>
-<li><a href="#_submitting_organizations">B.4. Submitting Organizations</a></li>
-<li><a href="#_document_contributor_contact_points">B.5. Document contributor contact points</a></li>
-<li><a href="#_revision_history">B.6. Revision History</a></li>
+<li><a href="#_submitting_organizations_informative">B.4. Submitting Organizations (Informative)</a></li>
+<li><a href="#_document_contributor_contact_points_informative">B.5. Document contributor contact points (Informative)</a></li>
+<li><a href="#_revision_history_informative">B.6. Revision History (Informative)</a></li>
 <li><a href="#_changes_to_the_ogc_abstract_specification">B.7. Changes to the OGC® Abstract Specification</a></li>
 <li><a href="#_changes_to_ogc_implementation_standards">B.8. Changes to OGC® Implementation Standards</a></li>
-<li><a href="#_potential_future_work">B.9. Potential Future Work</a></li>
+<li><a href="#_potential_future_work_informative">B.9. Potential Future Work (Informative)</a></li>
 <li><a href="#_uml_notation">B.10. UML Notation</a></li>
 <li><a href="#_geopackage_tables_detailed_diagram">B.11. GeoPackage Tables Detailed Diagram</a></li>
 <li><a href="#_geopackage_minimal_tables_for_features_diagram">B.12. GeoPackage Minimal Tables for Features Diagram</a></li>
@@ -322,7 +322,7 @@ A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers 
 <p>A <strong>GeoPackage SQLite Configuration</strong> consists of the SQLite 3 software library and a set of compile- and runtime configurations options.</p>
 </div>
 <div class="paragraph">
-<p>A <strong>GeoPackage SQLite Extension</strong> is a SQLite loadable extension that MAY provide SQL functions <a href="#12">[12]</a> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <a href="#1">[1]</a> <a href="#2">[2]</a> <a href="#3">[3]</a> <a href="#4">[4]</a> access to a GeoPackage file. This standard does not address the issues listed in the <a href="#_potential_future_work">Potential Future Work</a> clause in <a href="#background_and_context">Background and Context (Normative)</a>, which MAY be addressed in a subsequent version of this specification or by other specifications.</p>
+<p>A <strong>GeoPackage SQLite Extension</strong> is a SQLite loadable extension that MAY provide SQL functions <a href="#12">[12]</a> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <a href="#1">[1]</a> <a href="#2">[2]</a> <a href="#3">[3]</a> <a href="#4">[4]</a> access to a GeoPackage file. This standard does not address the issues listed in the <a href="#_potential_future_work">[_potential_future_work]</a> clause in <a href="#background_and_context">Background and Context (Normative)</a>, which MAY be addressed in a subsequent version of this specification or by other specifications.</p>
 </div>
 <div id="geopackage_tables_figure" class="imageblock">
 <div class="content">
@@ -463,7 +463,7 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;geometry_type_name&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#_geometry_encoding">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the geometry types listed in <a href="#geometry_types">Geometry Types (Normative)</a> encoded per clause 3.1.2 or a user-defined geometry type encoded per clause 3.1.2 and <a href="#extension_geometry_encoding">User-Defined Geometry Types Encoding Extension Template (Normative)</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#_geometry_encoding">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the geometry types listed in <a href="#geometry_types">Geometry Types (Normative)</a> encoded per clause 2.1.3 or a user-defined geometry type encoded per clause 3.1.2 and <a href="#extension_geometry_encoding">User-Defined Geometry Types Encoding Extension Template (Normative)</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
@@ -568,7 +568,7 @@ The coordinate reference system definitions it contains are referenced by the Ge
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_spatial_ref_sys</code> table includes at a minimum the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> below containing data that defines spatial reference systems.
-Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) specifications.</p>
+Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) specifications.</p>
 </div>
 <table id="gpkg_spatial_ref_sys_cols" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 3. Spatial Ref Sys Table Definition</caption>
@@ -1215,7 +1215,7 @@ identifies the geometry columns in tables that contain user data representing fe
 <p>The FK on <code>gpkg_geometry_columns.srs_id</code> references the PK on <code>gpkg_spatial_ref_sys.srs_id</code> to ensure that geometry columns are only defined in feature tables for defined spatial reference systems.</p>
 </div>
 <div class="paragraph">
-<p>Views of this table or view MAY be used to provide compatibility with the SQL/MM <a href="#12">[12]</a> <a href="#sqlmm_gpkg_geometry_columns_sql">SQL/MM View of gpkg_geometry_columns Definition SQL</a> and OGC Simple Features SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> <a href="#sfsql_gpkg_geometry_columns_sql">SF/SQL VIEW of gpkg_geometry_columns Definition SQL</a> specifications.</p>
+<p>Views of this table or view MAY be used to provide compatibility with the SQL/MM <a href="#12">[12]</a> <a href="#sqlmm_gpkg_geometry_columns_sql">SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</a> and OGC Simple Features SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> <a href="#sfsql_gpkg_geometry_columns_sql">SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</a> specifications.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
@@ -1284,7 +1284,7 @@ Features are rows in a feature table.
 <div class="title">Requirement 29</div>
 <blockquote>
 A GeoPackage MAY contain tables or updateable views containing vector features.
-Every such feature table or view in a GeoPackage SHALL have a column with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View Definition</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL</a>.
+Every such feature table or view in a GeoPackage SHALL have a column with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View Definition</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1372,7 +1372,7 @@ A feature table SHALL have only one geometry column.
 </table>
 
 <div class="paragraph">
-<p>See <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL</a>.</p>
+<p>See <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.</p>
 </div>
 </div>
 <div class="sect5">
@@ -1805,7 +1805,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div id="_requirement-52" class="quoteblock">
 <div class="title">Requirement 52</div>
 <blockquote>
-Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per Clause 2.2.8.1.1 <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_insert_sql">EXAMPLE: tiles table Insert Statement</a>.
+Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per Clause 2.2.8.1.1 <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_insert_sql">EXAMPLE: tiles table Insert Statement (Informative)</a>.
 </blockquote>
 </div>
 <table id="example_tiles_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -1873,7 +1873,7 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 </table>
 
 <div class="paragraph">
-<p>See <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL</a>.</p>
+<p>See <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>.</p>
 </div>
 </div>
 <div class="sect5">
@@ -6608,7 +6608,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_data_columns</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_data_columns'</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -6861,7 +6861,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_data_column_constraints</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_data_column_constraints'</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -6996,7 +6996,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause 0 Req 62:</p>
+<p>Clause 2.3.3.1.2 Req 62:</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7362,13 +7362,13 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_metadata</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata'</p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
 </li>
 <li>
-<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 32. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -7409,7 +7409,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from Table 14 in clause 2.4.2.1.2.</p>
+<p>Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from Table 15 in clause 2.4.2.1.2.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7427,7 +7427,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if md_scope value not one of the name column values from Table 14 in clause 2.4.2.1.2</p>
+<p>Fail if md_scope value not one of the name column values from Table 15 in clause 2.4.2.1.2</p>
 </li>
 </ol>
 </div>
@@ -7485,7 +7485,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_metadata_reference</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata_reference'</p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -7601,13 +7601,13 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table_name FROM gpkg_metadata_reference WHERE reference_scope = <em>geopackage</em></p>
+<p>SELECT table_name FROM gpkg_metadata_reference WHERE reference_scope = 'geopackage'</p>
 </li>
 <li>
 <p>Fail if result set contains any non-NULL values</p>
 </li>
 <li>
-<p>SELECT table_name FROM metadata_reference WHERE reference_scope != <em>geopackage</em> AND table_name NOT IN (SELECT table_name FROM gpkg_contents)</p>
+<p>SELECT table_name FROM metadata_reference WHERE reference_scope != 'geopackage' AND table_name NOT IN (SELECT table_name FROM gpkg_contents)</p>
 </li>
 <li>
 <p>Fail if result set is not empty</p>
@@ -7675,7 +7675,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>&lt;table_name&gt;</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = '&lt;table_name&gt;'</p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -7880,7 +7880,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause 2.4.3.1.2 Req 75:</p>
+<p>Clause 2.4.3.1.2 Req 76:</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7921,27 +7921,19 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT gmr.md_file_id, gmr.md_parent_id</p>
-</li>
-<li>
-<p>FROM gpkg_metadata_reference AS gmr</p>
-</li>
-<li>
-<p>WHERE gmr.md_file_id == gmr.md_parent_id</p>
+<p>SELECT gmr.md_file_id, gmr.md_parent_id FROM gpkg_metadata_reference AS gmr WHERE gmr.md_file_id == gmr.md_parent_id</p>
 </li>
 <li>
 <p>Fail if result set is not empty</p>
 </li>
 <li>
-<p>SELECT gmr.md_file_id, gmr.md_parent_id, gm.id</p>
+<p>SELECT gmr.md_file_id, gmr.md_parent_id, gm.id FROM gpkg_metadata_reference  AS gmr LEFT OUTER JOIN gpkg_metadata gm ON gmr.md_parent_id =gm.id</p>
 </li>
 <li>
-<p>FROM gpkg_metadata_reference  AS gmr</p>
+<p>Fail if any result set gm.id values are NULL</p>
 </li>
 <li>
-<p>LEFT OUTER JOIN gpkg_metadata gm ON gmr.md_parent_id =gm.id
-10) Fail if any result set gm.id values are NULL
-11) Pass otherwise</p>
+<p>Pass otherwise</p>
 </li>
 </ol>
 </div></div></td>
@@ -7996,13 +7988,13 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_extensions</em></p>
+<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_extensions'</p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
 </li>
 <li>
-<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents ofTable 35.  Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 36. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -8055,10 +8047,10 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if geometry_type_name IN Annex E Table 42 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_&lt;geometry_type_name&gt;</p>
+<p>Fail if geometry_type_name IN Annex E Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_&lt;geometry_type_name&gt;</p>
 </li>
 <li>
-<p>Fail if geometry_type_name NOT IN Annex E Table 41 or Table 42 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “<em>geom</em>&lt;geometry_type_name&gt;</p>
+<p>Fail if geometry_type_name NOT IN Annex E Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “<em>geom</em>&lt;geometry_type_name&gt;</p>
 </li>
 </ol>
 </div>
@@ -8146,15 +8138,34 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>10) SELECT table_name, column_name FROM gpkg_extensions
-11) Not testable if returns an empty result set
-12) For each row from step one
-.. Fail if table_name value is NULL and column_name value is not NULL.
-.. SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name
-FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
-.. Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).
-13) Pass if logged pass and no fails.</p>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT table_name, column_name FROM gpkg_extensions</p>
+</li>
+<li>
+<p>Not testable if returns an empty result set</p>
+</li>
+<li>
+<p>For each row from step one</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if table_name value is NULL and column_name value is not NULL.</p>
+</li>
+<li>
+<p>SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name</p>
+</li>
+<li>
+<p>Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if logged pass and no fails.</p>
+</li>
+</ol>
 </div></div></td>
 </tr>
 <tr>
@@ -8276,7 +8287,7 @@ FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Log pass if extension_name is one of those listed in Annex J or Annex L through Annex R.</p>
+<p>Log pass if extension_name is one of those listed in Annex J or Annex L through Annex P.</p>
 </li>
 <li>
 <p>Separate extension_name into &lt;author&gt; and &lt;extension&gt; at the first “_”</p>
@@ -8498,7 +8509,7 @@ FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name 
 <p>For each row from step a, log fail if GeoPackageBinary “X” type flag is 1</p>
 </li>
 <li>
-<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 42, then</p>
+<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 43, then</p>
 </li>
 <li>
 <p>Log cn.header values, wkb endianness and geometry type
@@ -8551,12 +8562,26 @@ viii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that all extended non-linear geometry types and options are stored in valid GeoPackageBinary format encodings.
-Test Method
-. Open GeoPackage that has feature geometry values of geometry type inAnnex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
-. /reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data
-. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 42without and with z and/or m values.
-. Fail otherwise</p>
+<p>Verify that all extended non-linear geometry types and options are stored in valid GeoPackageBinary format encodings.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open GeoPackage that has feature geometry values of geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
+</li>
+<li>
+<p>/reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data</p>
+</li>
+<li>
+<p>Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 43 without and with z and/or m values.</p>
+</li>
+<li>
+<p>Fail otherwise</p>
+</li>
+</ol>
 </div></div></td>
 </tr>
 <tr>
@@ -8592,7 +8617,7 @@ Test Method
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that an extension name in the form gpkg_geom_&lt;gname&gt; is defined for each &lt;gname&gt; extension geometry type from Annex E Table 42  used in a GeoPackage.</p>
+<p>Verify that an extension name in the form gpkg_geom_&lt;gname&gt; is defined for each &lt;gname&gt; extension geometry type from Annex E Table 43  used in a GeoPackage.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8614,11 +8639,12 @@ Test Method
 </li>
 <li>
 <p>For each geometry column value from step a</p>
-</li>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
 <li>
 <p>If the first two bytes of each geometry column value are “GP”, then</p>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="olist upperalpha">
+<ol class="upperalpha" type="A">
 <li>
 <p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
@@ -8629,7 +8655,7 @@ Test Method
 <p>SELECT ST_GeometryType(geometry column value) AS &lt;gtype&gt;;</p>
 </li>
 <li>
-<p>SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = 'gpkg_geom_’</p>
+<p>SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = 'gpkg_geom_' || &lt;gtype&gt;</p>
 </li>
 </ol>
 </div>
@@ -8637,16 +8663,19 @@ Test Method
 </ol>
 </div>
 </li>
+<li>
+<p>Fail if result set is empty</p>
+</li>
+<li>
+<p>Log pass otherwise</p>
+</li>
 </ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>&lt;gtype&gt;
-.. Fail if result set is empty
-.. Log pass otherwise
-. Pass if logged pass and no fails</p>
+</div>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
 </div></div></td>
 </tr>
 <tr>
@@ -8758,10 +8787,16 @@ Test Method
 </li>
 <li>
 <p>For each row from step a,</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>log fail if GeoPackageBinary “X” type flag is 0</p>
 </li>
 <li>
-<p>log fail if GeoPackageBinary “X” type flag is 0
-ii. Otherwise log pass</p>
+<p>Otherwise log pass</p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
@@ -8813,7 +8848,7 @@ ii. Otherwise log pass</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))</p>
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == 'features'))</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
@@ -8827,11 +8862,12 @@ ii. Otherwise log pass</p>
 </li>
 <li>
 <p>For each geometry column value from step a</p>
-</li>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
 <li>
 <p>If the first two bytes of each geometry column value are “GP”, then</p>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="olist upperalpha">
+<ol class="upperalpha" type="A">
 <li>
 <p>/opt/extension_mechanism/extensions/data/table_def</p>
 </li>
@@ -8842,7 +8878,14 @@ ii. Otherwise log pass</p>
 <p>SELECT ST_GeometryType(geometry column value) AS &lt;gtype&gt;;</p>
 </li>
 <li>
-<p>SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name NOT LIKE ‘gpkg_%’ and extension_name  LIKE '%<em>geom</em>’</p>
+<p>SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name NOT LIKE ‘gpkg_%’ and extension_name  LIKE '%<em>geom</em>' || &lt;gtype&gt;</p>
+<div class="olist upperroman">
+<ol class="upperroman" type="I">
+<li>
+<p>Fail if result set is empty</p>
+</li>
+<li>
+<p>Log pass otherwise</p>
 </li>
 </ol>
 </div>
@@ -8851,15 +8894,15 @@ ii. Otherwise log pass</p>
 </div>
 </li>
 </ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>&lt;gtype&gt;
-.. Fail if result set is empty
-.. Log pass otherwise
-. Pass if logged pass and no fails</p>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
 </div></div></td>
 </tr>
 <tr>
@@ -9359,7 +9402,7 @@ ii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/geometry_type_triggers/implementation</code> /sql_functions</p>
+<p><code>/reg_ext/features/geometry_type_triggers/implementation/sql_functions</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -9626,7 +9669,7 @@ ii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/srs_id_triggers/implementation</code> /sql_functions</p>
+<p><code>/reg_ext/features/srs_id_triggers/implementation/sql_functions</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -9827,7 +9870,7 @@ ii. Otherwise log pass</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name FROM gpkg_contents WHERE data_type = <em>tiles</em></p>
+<p>SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles'</p>
 </li>
 <li>
 <p>Not testable if empty result set</p>
@@ -9855,7 +9898,7 @@ ii. Otherwise log pass</p>
 <p>Fail if failed</p>
 </li>
 <li>
-<p>SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = <em>gpkg_zoom_other</em></p>
+<p>SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = 'gpkg_zoom_other'</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -9875,7 +9918,7 @@ ii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause 0 Req 101:</p>
+<p>Clause 3.2.1.1.1 Req 101:</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9899,7 +9942,7 @@ ii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/</code> reg_ext/tiles/zoom_levels/data/zoom_other_ext_row</p>
+<p><code>/reg_ext/tiles/zoom_levels/data/zoom_other_ext_row</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -9961,7 +10004,7 @@ ii. Otherwise log pass</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>tiles</em></code></p>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles'</code></p>
 </li>
 <li>
 <p>Not testable if empty result set</p>
@@ -9975,9 +10018,13 @@ ii. Otherwise log pass</p>
 </li>
 <li>
 <p>For each row tile_data from step a</p>
-</li>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
 <li>
 <p>Log webp if tile data in MIME type image/webp</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p>Not testable if no logged webps</p>
@@ -10107,7 +10154,7 @@ integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest t
 <dl>
 <dt>Empty GeoPackage</dt>
 <dd>
-<p>A GeoPackage that contains a <code>gpkg_spatial_ref_sys</code> table, a <code>gpkg_contents</code> table with row record(s) with <code>data_type</code> column values of "features" or "tiles", and corresponding features tables per clause <a href="#features">Features</a> and/or tiles tables per clause <a href="#tiles">Tiles</a> where the user data tables per clauses 2.1.6. and 2.2.7 exist but contain no rows.</p>
+<p>A GeoPackage that contains a <code>gpkg_spatial_ref_sys</code> table, a <code>gpkg_contents</code> table with row record(s) with <code>data_type</code> column values of "features" or "tiles", and corresponding features tables per clause <a href="#features">Features</a> and/or tiles tables per clause <a href="#tiles">Tiles</a> where the user data tables per clauses 2.1.6. and 2.2.8 exist but contain no rows.</p>
 </dd>
 <dt>Extended GeoPackage</dt>
 <dd>
@@ -10283,7 +10330,7 @@ integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest t
 </div>
 </div>
 <div class="sect2">
-<h3 id="_submitting_organizations">B.4. Submitting Organizations</h3>
+<h3 id="_submitting_organizations_informative">B.4. Submitting Organizations (Informative)</h3>
 <div class="paragraph">
 <p>The following organizations submitted this Encoding Standard to the Open Geospatial Consortium Inc. as a
 Request For Comment (RFC).</p>
@@ -10312,7 +10359,7 @@ Request For Comment (RFC).</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_document_contributor_contact_points">B.5. Document contributor contact points</h3>
+<h3 id="_document_contributor_contact_points_informative">B.5. Document contributor contact points (Informative)</h3>
 <div class="paragraph">
 <p>All questions regarding this document should be directed to the editor or the contributors:</p>
 </div>
@@ -10609,7 +10656,7 @@ Request For Comment (RFC).</p>
 
 </div>
 <div class="sect2">
-<h3 id="_revision_history">B.6. Revision History</h3>
+<h3 id="_revision_history_informative">B.6. Revision History (Informative)</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 19. Revision History</caption>
 <colgroup>
@@ -12757,7 +12804,7 @@ Annex B</p></td>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_potential_future_work">B.9. Potential Future Work</h3>
+<h3 id="_potential_future_work_informative">B.9. Potential Future Work (Informative)</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -12902,7 +12949,7 @@ columns:</p>
 </div>
 </div>
 <div id="sqlmm_gpkg_spatial_ref_sys_sql" class="listingblock">
-<div class="title">SQL/MM View of gpkg_spatial_ref_sys Definition SQL</div>
+<div class="title">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> st_spatial_ref_sys <span class="keyword">AS</span>
   <span class="class">SELECT</span>
@@ -12916,7 +12963,7 @@ columns:</p>
 </div>
 </div>
 <div id="sfsql_gpkg_spatial_ref_sys_sql" class="listingblock">
-<div class="title">SF/SQL View of gpkg_spatial_ref_sys Definition SQL</div>
+<div class="title">SF/SQL View of gpkg_spatial_ref_sys Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> spatial_ref_sys <span class="keyword">AS</span>
   <span class="class">SELECT</span>
@@ -12938,7 +12985,7 @@ columns:</p>
   data_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   identifier <span class="predefined-type">TEXT</span> <span class="directive">UNIQUE</span>,
   description <span class="predefined-type">TEXT</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>,
-  last_change <span class="predefined-type">DATETIME</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,CURRENT_TIMESTAMP)),
+  last_change <span class="predefined-type">DATETIME</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">now</span><span class="delimiter">'</span></span>)),
   min_x <span class="predefined-type">DOUBLE</span>,
   min_y <span class="predefined-type">DOUBLE</span>,
   max_x <span class="predefined-type">DOUBLE</span>,
@@ -12969,7 +13016,7 @@ columns:</p>
 </div>
 </div>
 <div id="sqlmm_gpkg_geometry_columns_sql" class="listingblock">
-<div class="title">SQL/MM View of gpkg_geometry_columns Definition SQL</div>
+<div class="title">SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> st_geometry_columns <span class="keyword">AS</span>
   <span class="class">SELECT</span>
@@ -12983,23 +13030,35 @@ columns:</p>
 </div>
 </div>
 <div id="sfsql_gpkg_geometry_columns_sql" class="listingblock">
-<div class="title">SF/SQL VIEW of gpkg_geometry_columns Definition SQL</div>
+<div class="title">SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> geometry_columns <span class="keyword">AS</span>
   <span class="class">SELECT</span>
     table_name <span class="keyword">AS</span> f_table_name,
     column_name <span class="keyword">AS</span> f_geometry_column,
-    code4name <span class="integer">1</span> (geometry_type_name) <span class="keyword">AS</span> geometry_type,
+    code4name (geometry_type_name) <span class="keyword">AS</span> geometry_type,
     <span class="integer">2</span> + (<span class="keyword">CASE</span> z <span class="keyword">WHEN</span> <span class="integer">1</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">WHEN</span> <span class="integer">2</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">ELSE</span> <span class="integer">0</span> <span class="keyword">END</span>) + (<span class="keyword">CASE</span> m <span class="keyword">WHEN</span> <span class="integer">1</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">WHEN</span> <span class="integer">2</span> <span class="keyword">THEN</span> <span class="integer">1</span> <span class="keyword">ELSE</span> <span class="integer">0</span> <span class="keyword">END</span>) <span class="keyword">AS</span> coord_dimension,
     srs_id <span class="keyword">AS</span> srid
   <span class="keyword">FROM</span> gpkg_geometry_columns;</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+Implementer must provide code4name(geometry_type_name) SQL function
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_sample_feature_table_informative">C.4. sample_feature_table (Informative)</h3>
 <div id="example_feature_table_sql" class="listingblock">
-<div class="title">sample_feature_table Table Definition SQL</div>
+<div class="title">sample_feature_table Table Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_feature_table (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -13050,7 +13109,7 @@ columns:</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">EXAMPLE: gpkg_tile_matrix Insert Statement</div>
+<div class="title">EXAMPLE: gpkg_tile_matrix Insert Statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> gpkg_tile_matrix <span class="keyword">VALUES</span> (
   <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>,
@@ -13068,7 +13127,7 @@ columns:</p>
 <div class="sect2">
 <h3 id="_sample_tile_pyramid_informative">C.7. sample_tile_pyramid (Informative)</h3>
 <div id="example_tiles_table_sql" class="listingblock">
-<div class="title">EXAMPLE: tiles table Create Table SQL</div>
+<div class="title">EXAMPLE: tiles table Create Table SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_tile_pyramid (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -13081,7 +13140,7 @@ columns:</p>
 </div>
 </div>
 <div id="example_tiles_table_insert_sql" class="listingblock">
-<div class="title">EXAMPLE: tiles table Insert Statement</div>
+<div class="title">EXAMPLE: tiles table Insert Statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> sample_matrix_pyramid <span class="keyword">VALUES</span> (
   <span class="integer">1</span>,
@@ -13155,7 +13214,7 @@ columns:</p>
   table_name <span class="predefined-type">TEXT</span>,
   column_name <span class="predefined-type">TEXT</span>,
   row_id_value <span class="predefined-type">INTEGER</span>,
-  <span class="predefined-type">timestamp</span> <span class="predefined-type">DATETIME</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,CURRENT_TIMESTAMP)),
+  <span class="predefined-type">timestamp</span> <span class="predefined-type">DATETIME</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">now</span><span class="delimiter">'</span></span>)),
   md_file_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   md_parent_id <span class="predefined-type">INTEGER</span>,
   <span class="type">CONSTRAINT</span> crmr_mfi_fk <span class="directive">FOREIGN</span> <span class="type">KEY</span> (md_file_id) <span class="keyword">REFERENCES</span> gpkg_metadata(id),
@@ -13164,7 +13223,7 @@ columns:</p>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">Example: gpkg_metadata_reference SQL insert statement</div>
+<div class="title">Example: gpkg_metadata_reference SQL insert statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> gpkg_metadata_reference <span class="keyword">VALUES</span> (
   <span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,
@@ -13449,7 +13508,13 @@ violates constraint: real_attribute must be greater than 0</span><span class="de
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_feature_table_real_update</span><span class="delimiter">&quot;</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">real_attribute</span><span class="delimiter">&quot;</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span></span></code></pre>
+<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">real_attribute</span><span class="delimiter">&quot;</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_feature_table</span><span class="delimiter">&quot;</span></span>
+<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
+<span class="class">SELECT</span> RAISE (ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update of ''real_attribute'' on table
+''sample_feature_table'' violates constraint: real_attribute value
+must be &gt; 0</span><span class="delimiter">'</span></span>)
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.real_attribute &gt; <span class="integer">0</span>);
+<span class="keyword">END</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -13533,35 +13598,35 @@ violates constraint: real_attribute must be greater than 0</span><span class="de
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GEOMETRY</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Point</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POINT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">LineString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">LINESTRING</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Polygon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">POLYGON</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MultiPoint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MULTIPOINT</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MultiLineString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MULTILINESTRING</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MultiPolygon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MULTIPOLYGON</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">GeometryCollection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">GEOMETRYCOLLECTION</p></td>
 </tr>
 </tbody>
 </table>
@@ -13581,52 +13646,55 @@ violates constraint: real_attribute must be greater than 0</span><span class="de
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CircularString</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CIRCULARSTRING</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CompoundCurve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">COMPOUNDCURVE</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">CurvePolygon</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CURVEPOLYGON</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MultiCurve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MULTICURVE</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MultiSurface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MULTISURFACE</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">13</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Curve</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">CURVE</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">14</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Surface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SURFACE</p></td>
 </tr>
 </tbody>
 </table>
 
 <div class="paragraph">
-<p>Geometry subtypes are Point, Curve, Surface and GeometryCollection. Curve subtypes are LineString, CircularString and CompoundCurve.</p>
+<p>GEOMETRY subtypes are POINT, CURVE, SURFACE and GEOMCOLLECTION.</p>
 </div>
 <div class="paragraph">
-<p>Surface subtype is CurvePolygon.</p>
+<p>CURVE subtypes are LINESTRING, CIRCULARSTRING and COMPOUNDCURVE.</p>
 </div>
 <div class="paragraph">
-<p>CurvePolygon subtype is Polygon.</p>
+<p>SURFACE subtype is CURVEPOLYGON.</p>
 </div>
 <div class="paragraph">
-<p>GeometryCollection subtypes are MultiPoint, MultiCurve and MultiSurface.</p>
+<p>CURVEPOLYGON subtype is POLYGON.</p>
 </div>
 <div class="paragraph">
-<p>MultiCurve subtype is MultiLineString.</p>
+<p>GEOMETRYCOLLECTION subtypes are MULTIPOINT, MULTICURVE and MULTISURFACE.</p>
 </div>
 <div class="paragraph">
-<p>MultiSurface subtype is MultiPolygon.</p>
+<p>MULTICURVE subtype is MULTILINESTRING.</p>
+</div>
+<div class="paragraph">
+<p>MULTISURFACE subtype is MULTIPOLYGON.</p>
 </div>
 </div>
 </div>
@@ -13841,7 +13909,7 @@ Suppose we have this metadata:</p>
   table_name <span class="predefined-type">TEXT</span>,
   column_name <span class="predefined-type">TEXT</span>,
   row_id_value <span class="predefined-type">INTEGER</span>,
-  <span class="predefined-type">timestamp</span> <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,CURRENT_TIMESTAMP)),
+  <span class="predefined-type">timestamp</span> <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">now</span><span class="delimiter">'</span></span>)),
   md_file_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   md_parent_id <span class="predefined-type">INTEGER</span>,
   <span class="type">CONSTRAINT</span> crmr_mfi_fk <span class="directive">FOREIGN</span> <span class="type">KEY</span> (md_file_id) <span class="keyword">REFERENCES</span> gpkg_metadata(id),
@@ -14593,9 +14661,13 @@ An example of the data items in such a model is shown in the following table.</p
 </div>
 <h4 id="_geopackage" class="float">GeoPackage</h4>
 <div class="paragraph">
-<p>Definition of extension data or MIME type(s)
-Definition of extension tables or table templates
-Definition of triggers or trigger templates</p>
+<p>Definition of extension data or MIME type(s)</p>
+</div>
+<div class="paragraph">
+<p>Definition of extension tables or table templates</p>
+</div>
+<div class="paragraph">
+<p>Definition of triggers or trigger templates</p>
 </div>
 <h4 id="_geopackage_sqlite_configuration" class="float">GeoPackage SQLite Configuration</h4>
 <div class="paragraph">
@@ -15053,7 +15125,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 </div>
 <h3 id="_requirements_5" class="float">Requirements</h3>
 <div class="paragraph">
-<p>The &lt;t&gt; and &lt;c&gt; template parameters in the geometry type trigger definition SQL template in Table xx below are to be replaced with the names of the feature table and geometry column being inserted or updated.</p>
+<p>The &lt;t&gt; and &lt;c&gt; template parameters in the geometry type trigger definition SQL template in the table below are to be replaced with the names of the feature table and geometry column being inserted or updated.</p>
 </div>
 <h4 id="_geopackage_5" class="float">GeoPackage</h4>
 <div class="listingblock">
@@ -15150,7 +15222,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 </div>
 <h3 id="_requirements_6" class="float">Requirements</h3>
 <div class="paragraph">
-<p>The &lt;t&gt; and &lt;c&gt; template parameters in the SRS_ID trigger definition SQL template in Table xx below are to be replaced with the names of the feature table and geometry column being inserted or updated</p>
+<p>The &lt;t&gt; and &lt;c&gt; template parameters in the SRS_ID trigger definition SQL template in the table below are to be replaced with the names of the feature table and geometry column being inserted or updated</p>
 </div>
 <h4 id="_geopackage_6" class="float">GeoPackage</h4>
 <div class="listingblock">
@@ -15205,7 +15277,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 </table>
 
 <div class="paragraph">
-<p>The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex K and/or Annex L when those extensions are also implemented.</p>
+<p>The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex J and/or Annex K when those extensions are also implemented.</p>
 </div>
 </div>
 </div>
@@ -15415,7 +15487,7 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="31"></a>[31] SQLite R*Tree Module <a href="http://www.sqlite.org/rtree.html">http://www.sqlite.org/rtree.html</a></p>
 </li>
 <li>
-<p><a id="32"></a>[32] OpenGIS® 01-009 Implementation Specification:  Coordinate Transformation Services Revision 1.0  <a href="http://portal.opengeospatial.org/files/?artifact_id=999">http://portal.opengeospatial.org/files/?artifact_id=999</a></p>
+<p><a id="32"></a>[32] OpenGIS® 01-009 Implementation Specification: Coordinate Transformation Services Revision 1.0  <a href="http://portal.opengeospatial.org/files/?artifact_id=999">http://portal.opengeospatial.org/files/?artifact_id=999</a></p>
 </li>
 </ul>
 </div>
@@ -15618,7 +15690,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-02-12 01:45:34 UTC
+Last updated 2014-02-12 15:11:45 UTC
 </div>
 </div>
 </body>
