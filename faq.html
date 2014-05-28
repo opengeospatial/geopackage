@@ -54,9 +54,13 @@
       <div class="page-header">
         <h1>Frequently Asked Questions</h1>
       </div>
-      <p class="lead"><a class="btn btn-warning" role="button">Q</a> What were
+      <p class="lead"><br/><a class="btn btn-warning" role="button">Q</a> How are GeoPackage files shared between apps on iOS and Android devices?</p>
+      <p><a class="btn btn-warning" role="button">A</a> OGC does not yet have a methodology or best practice for sharing files between apps on mobile devices. On Android there are a couple of different options. With some of the newer updates, Android has some interesting security constraints. There could be a nice solution using the ContentProvider API.
+	</p>
+	<p>On the iPhone, the security issues of the device cause a lot of problems for cross-app file sharing. Inherently, the device does not want applications to share data except in very narrowly defined ways. So data sharing between apps is not feasible at this time.</p>
+      <p class="lead"><br/><a class="btn btn-warning" role="button">Q</a> What were
         the reasons to go with SQLite, when OGC has invested heavily in PostGIS?</p>
-      <a class="btn btn-warning" role="button">A</a> I wouldn't say
+      <p><a class="btn btn-warning" role="button">A</a> I wouldn't say
       OGC has invested in PostGIS. PostGIS implements OGC standards, but OGC as
       an organization hasn't put any time or effort into PostGIS. To us it's
       just like any other RDBMS implementation of the Simple Features spec. The
@@ -66,16 +70,20 @@
       did not make the decision lightly, but practicality and ease of
       implementation won out over standards purity. And I'm happy to say we have
       yet to get any negative feedback on this decision -- probably because
-      SQLite is considered more like a library than a standalone application. <br>
-      <br>
-      <p><br>
-      </p>
+      SQLite is considered more like a library than a standalone application.
+	</p>
     </div>
-    <div id="footer">
-      <div class="container">
-        <p class="text-muted">Place sticky footer content here.</p>
-      </div>
-    </div>
+		<div class="footer">
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-12 column text-center">
+						<p>
+							<small>Copyright 2014 Open Geospatial Consortium. Some rights reserved.</small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

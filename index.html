@@ -92,17 +92,9 @@
 				</div>
 				<div class="col-md-4 column">
 					<div class="panel panel-default panel-info center">
-						<div class="panel-heading">
-							Latest News
-						</div>
+						<div class="panel-heading">Latest News</div>
 						<div class="panel-body">
-							<b><a href="http://www.directionsmag.com/pressreleases/esri-supports-ogc-geopackage-encoding-standard/399554">Esri Supports OGC GeoPackage Encoding Standard</a></b>
-							<ul style="text-align:left">
-								<li>ArcGIS 10.2.2 for Desktop and Server support the 1.0 vector spec
-								</li>
-								<li>Summer 2014: ArcGIS 10.3 for Desktop will add vector and tiled raster support, and ArcGIS Runtime 10.2.4 for Android and Java will also support GeoPackage!
-								</li>
-							</ul>
+							<b><a href="https://www.gaia-gis.it/fossil/libspatialite/index" target="_blank">GeoPackage support in SpatiaLite 4.2.0 (Release Candidate 1)</a></b>
 						</div>
 					</div>
 					<div class="panel panel-default panel-warning center">
@@ -160,7 +152,7 @@
 						</li>
 						<li>&nbsp; <a href="https://lists.opengeospatial.org/mailman/listinfo/geopackage">Mailing List</a>
 						</li>
-						<li>&nbsp; <a href="#faq" class="comingsoon">FAQ</a>
+						<li>&nbsp; <a href="#faq">FAQ</a>
 						</li>
 					</ul>
 				</div>
@@ -177,9 +169,7 @@
 				<div class="row clearfix">
 					<div class="col-md-12 column text-center">
 						<a name="implementations" id="implementations"></a>
-						<h1>
-							&nbsp;Implementations
-						</h1>
+						<h1>Implementations</h1>
 					</div>
 				</div>
 				<div class="row clearfix">
@@ -226,6 +216,12 @@
 							<li>
 								<a href="http://geotoolsnews.blogspot.com/2014/02/geotools-11-rc1-released.html" target="_blank">GeoTools 11-RC1 improves GeoPackage support</a>
 							</li>
+						</ul>
+						<h3>
+							Esri ArcGIS</h3>
+						<ul>
+							<li>ArcGIS 10.2.2 for Desktop and Server support the 1.0 vector spec</li>
+							<li>Summer 2014: ArcGIS 10.3 for Desktop will add vector and tiled raster support, and ArcGIS Runtime 10.2.4 for Android and Java will also support GeoPackage!</li>
 						</ul>
 						<h3>
 							SpatiaLite
@@ -309,7 +305,37 @@
 					&nbsp;
 				</div>
 			</div>
+
+		
+		<!-- FAQ -->
+		<div class="row clearfix well">
+			<div class="col-md-12 column text-center">
+				<a name="faq" id="faq"></a>
+				<h1>FAQ</h1>
+			</div>
+			<div>
+      <p class="lead"><br/><a class="btn btn-warning" role="button">Q</a> How are GeoPackage files shared between apps on iOS and Android devices?</p>
+      <p><a class="btn btn-warning" role="button">A</a> OGC does not yet have a methodology or best practice for sharing files between apps on mobile devices. On Android there are a couple of different options. With some of the newer updates, Android has some interesting security constraints. There could be a nice solution using the ContentProvider API.
+	</p>
+	<p>On the iPhone, the security issues of the device cause a lot of problems for cross-app file sharing. Inherently, the device does not want applications to share data except in very narrowly defined ways. So data sharing between apps is not feasible at this time.</p>
+      <p class="lead"><br/><a class="btn btn-warning" role="button">Q</a> What were
+        the reasons to go with SQLite, when OGC has invested heavily in PostGIS?</p>
+      <p><a class="btn btn-warning" role="button">A</a> I wouldn't say
+      OGC has invested in PostGIS. PostGIS implements OGC standards, but OGC as
+      an organization hasn't put any time or effort into PostGIS. To us it's
+      just like any other RDBMS implementation of the Simple Features spec. The
+      primary use case for designing GeoPackage was mobile device use, and
+      that's why SQLite was chosen as a platform. In this case OGC as an
+      organization IS investing in a technology. This is unusual for us and we
+      did not make the decision lightly, but practicality and ease of
+      implementation won out over standards purity. And I'm happy to say we have
+      yet to get any negative feedback on this decision -- probably because
+      SQLite is considered more like a library than a standalone application.
+	</p>
+			</div>
 		</div>
+		</div>
+		
 		<div class="footer">
 			<div class="container">
 				<div class="row clearfix">
