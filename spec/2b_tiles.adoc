@@ -127,8 +127,8 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain a `gpkg_
 |Column Name |Column Type |Column Description |Null  |Key
 |`table_name` |TEXT |Tile Pyramid User Data Table Name |no |PK, FK
 |`zoom_level` |INTEGER | 0 <= `zoom_level` <= max_level for `table_name` |no |PK
-|`matrix_width` |INTEGER |Number of columns (>= 1) in tile matrix at this zoom level |1 |
-|`matrix_height` |INTEGER |Number of rows (>= 1) in tile matrix at this zoom level |1 |
+|`matrix_width` |INTEGER |Number of columns (>= 1) in tile matrix at this zoom level |no |
+|`matrix_height` |INTEGER |Number of rows (>= 1) in tile matrix at this zoom level |no |
 |`tile_width` |INTEGER |Tile width in pixels (>= 1)for this zoom level |no |
 |`tile_height` |INTEGER |Tile height in pixels (>= 1) for this zoom level |no |
 |`pixel_x_size` |DOUBLE |In `t_table_name` srid units or default meters for srid 0 (>0) |no |
