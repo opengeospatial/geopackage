@@ -13798,14 +13798,14 @@ must be &gt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span>)) ;
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span>)) ;
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_zoom_update</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> zoom_level <span class="keyword">ON</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span>)) ;
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.zoom_level <span class="keyword">IN</span> (<span class="class">SELECT</span> zoom_level <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span>)) ;
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_column_insert</span><span class="delimiter">&quot;</span></span>
@@ -13814,7 +13814,7 @@ must be &gt; 0</span><span class="delimiter">'</span></span>)
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_column &lt; <span class="integer">0</span>) ;
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_column_update</span><span class="delimiter">&quot;</span></span>
@@ -13823,7 +13823,7 @@ must be &gt; 0</span><span class="delimiter">'</span></span>)
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_column cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_column &lt; <span class="integer">0</span>) ;
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_column must by &lt; matrix_width specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_column &lt; (<span class="class">SELECT</span> matrix_width <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_row_insert</span><span class="delimiter">&quot;</span></span>
@@ -13832,7 +13832,7 @@ must be &gt; 0</span><span class="delimiter">'</span></span>)
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_row &lt; <span class="integer">0</span>) ;
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''sample_tile_pyramid'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid_tile_row_update</span><span class="delimiter">&quot;</span></span>
@@ -13841,7 +13841,7 @@ must be &gt; 0</span><span class="delimiter">'</span></span>)
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_row cannot be &lt; 0</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.tile_row &lt; <span class="integer">0</span>) ;
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''sample_tile_pyramid'' violates constraint: tile_row must by &lt; matrix_height specified for table and zoom level in gpkg_tile_matrix</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> t_table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
+<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.tile_row &lt; (<span class="class">SELECT</span> matrix_height <span class="keyword">FROM</span> gpkg_tile_matrix <span class="keyword">WHERE</span> table_name = <span class="string"><span class="delimiter">'</span><span class="content">sample_tile_pyramid</span><span class="delimiter">'</span></span> <span class="keyword">AND</span> zoom_level = NEW.zoom_level));
 <span class="keyword">END</span></code></pre>
 </div>
 </div>
@@ -15958,7 +15958,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-12-02 09:07:54 UTC
+Last updated 2014-12-07 19:11:21 UTC
 </div>
 </div>
 </body>
