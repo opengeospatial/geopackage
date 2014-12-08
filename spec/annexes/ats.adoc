@@ -197,7 +197,7 @@
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_contents' 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned CREATE TABLE statement, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.2 Table <<geometry_types_extension>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if the column names and column definitions in the returned CREATE TABLE statement, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.2 Table <<gpkg_contents_sql>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail Otherwise
 |*Reference* |Clause 1.1.3.1.1 Req 13:
 |*Test Type* |Basic
