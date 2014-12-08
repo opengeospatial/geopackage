@@ -3691,10 +3691,10 @@ The GeoPackage specification does not place any constraints on application, plat
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND</code></p>
+<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND</code></p>
 </li>
 <li>
-<p><code>SELECT srid, auth_name, auth_srid, srtext FROM spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND</code></p>
+<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND</code></p>
 </li>
 <li>
 <p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEOGCS ["WGS 84",
@@ -15958,7 +15958,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2014-12-08 09:42:48 UTC
+Last updated 2014-12-08 09:51:28 UTC
 </div>
 </div>
 </body>
