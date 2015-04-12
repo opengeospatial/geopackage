@@ -3,15 +3,24 @@
 GeoPackage Specification
 ==========
 
-This specification describes an open, standards-based, platform-independent, portable, self-describing, 
-compact format for transferring geospatial information. It is a set of conventions for SQLite to
-store interoperable [Features](spec/2_features.md) and/or [Tiles](spec/3_tiles.md) on a common [base](spec/1_base.md).
-The core document additionally specifies optional [Metadata](spec/5_metadata.md) and [Schema](spec/4_schema.md)
-information to build richer applications. An [Extension Mechanism](spec/7_extensions-mechanism.md) is 
-described to provide implementors a way to include additional functionality in their GeoPackages, with a 
-number of optional [extensions](spec/8_extensions.md) included.
+GeoPackage is an open, standards-based, platform-independent, portable, self-describing, 
+compact format for transferring geospatial information. The GeoPackage specification 
+describes a set of conventions for storing the following within an SQLite database:
+   * [vector features](spec/2_features.md)
+   * [tile matrix sets of imagery and raster maps at various scales](spec/3_tiles.md)
+   * [schema](spec/4_schema.md)
+   * [metadata](spec/5_metadata.md)
+   * [extensions](spec/8_extensions.md)
 
-For more about GeoPackage, including implementations and sample data, 
+These capabilities are built on a common [base](spec/1_base.md) and an 
+[Extension Mechanism](spec/7_extensions-mechanism.md) is 
+described to provide implementors a way to include additional functionality in their GeoPackages.
+
+This OGC® Encoding Standard defines the schema for a GeoPackage, 
+including table definitions, integrity assertions, format limitations, and content constraints. 
+The allowable content of a GeoPackage is entirely defined in this specification.
+
+For more information about GeoPackage, including implementations and sample data, 
 go to the public page at http://www.geopackage.org. 
 An HTML version of the specification is available at http://www.geopackage.org/spec/.
 The asciidoc source for the specification is in the [spec/](spec/) folder.
@@ -50,6 +59,11 @@ The Geopackage SWG currently has the following email lists:
       - Private List
       - Access controlled archives
       - Requires OGC membership and Observer Agreement to protect IPR (intellectual property rights)
+
+**SWG Chair: Jeff Yutzler**
+
+**SWG Vice Chair: Roy Rathbun**
+
 
 Editing and commenting
 ----------------------
