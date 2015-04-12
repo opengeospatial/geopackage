@@ -11,7 +11,10 @@ information to build richer applications. An [Extension Mechanism](spec/7_extens
 described to provide implementors a way to include additional functionality in their GeoPackages, with a 
 number of optional [extensions](spec/8_extensions.md) included.
 
-HTML version of the spec is available at http://www.geopackage.org/spec/
+For more about GeoPackage, including implementations and sample data, 
+go to the public page at http://www.geopackage.org. 
+An HTML version of the specification is available at http://www.geopackage.org/spec/.
+The asciidoc source for the specification is in the [spec/](spec/) folder.
 
 About
 -----
@@ -23,17 +26,11 @@ With this repository the OGC invites collaboration and comments directed at the 
 and enhancement of this candidate standard. 
 
 The repo tracks the latest version of the specification as it evolves. Pull requests for fixes are
-appreciated, and new functionality will be considered after 1.0 is finalized (Q1 2014). The spec
-is done in [asciidoc](http://www.methods.co.nz/asciidoc/) a format supported by github, similar to markdown
+appreciated, and new functionality will still be considered even though version 1.0 has been adopted. The spec
+is done in [asciidoc](http://www.methods.co.nz/asciidoc/) a format supported by GitHub, similar to markdown
 but with some features that make it better for specifications, like automatic section numbering.
 
 **Editor: Paul Daisey**
-
-Reading the document
---------------------
-The main specification can be read at http://opengis.github.io/geopackage/.
-
-The asciidoc source for the specification is in the [spec/](spec/) folder.
 
 Contributing
 ------------
@@ -59,26 +56,14 @@ Editing and commenting
 The GeoPackage SWG is accepting public comments and suggested revisions to the specification 
 via GitHub. This is the first time OGC has supported this mechanism for public comment and review. 
 To suggest changes to the specification please fork the repository and submit a pull request with
-changes to the document. Please make one pull request per logical requested change, and be sure to
+the desired changes. Please make one pull request per logical requested change and be sure to
 include a comment in the PR with any justification or reasoning on why the change is needed.
 
-For more general comments (that don't include actual text changes to the spec) just create a github
-issue with the relevant information. With one issue per general change.
+For more general comments (that don't include actual text changes to the spec) please create a GitHub
+[issue](https://github.com/opengeospatial/geopackage/issues) for that topic.
 
-For more detailed guidance, or if you are new to github, see the [Process page](process.md) for additional 
+Complex changes and feature requests must go throught the [change request](http://portal.opengeospatial.org/public_ogc/change_request.php) process. The details entered
+in the change request form will help the SWG adjudicate and prioritize the request.
+
+For more detailed guidance, or if you are new to GitHub, see the [Process page](process.md) for additional 
 information on editing.
-
-Sample Implementations
-----------------------
-
-[Luciad](http://www.luciad.com/) has open sourced their implementation as [libgpkg](https://bitbucket.org/luciad/libgpkg). It is
-quite complete, with support for features, tiles, spatial indexes, and more.
-
-[GDAL](http://www.gdal.org/) has geopackage support in a [github repository](https://github.com/pramsey/gdal/tree/gpkg) under development.
-
-Sample GeoPackage Data
-----------------------
-
-[Sigma Bravo](http://www.sigmabravo.com.au/services/it.aspx) created a sample geopackage of [Haiti OSM tiles and points](https://portal.opengeospatial.org/files/?artifact_id=52605).
-
-
