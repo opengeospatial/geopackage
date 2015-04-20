@@ -488,7 +488,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/features/vector/features/data/feature_table_one_geometry_column+
+|*Test Case ID* |+/opt/features/vector_features/data/feature_table_one_geometry_column+
 |*Test Purpose* |Verify that every vector features user data table has one geometry column. 
 |*Test Method* |
 . SELECT table_name FROM gpkg_contents WERE data_type = ‘features’
@@ -498,6 +498,25 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 .. Fail if returns more than one column name
 . Pass if no fails
 |*Reference* |Clause 2.1.6.1.1 Req 30:
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/features/vector_features/data/feature_table_geometry_column_type+
+|*Test Purpose* |Verify that the declared SQL type of a feature table geometry column is the uppercase geometry type name from Annex E specified by the geometry_type_name 
+column for that column_name and table_name in the gpkg_geometry_columns table.
+|*Test Method* |
+. SELECT table_name, column_name, geometry_type_name table_name
+FROM gpkg_geometry_columns WHERE table_name IN 
+(SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
+. For each row selected in (1):
+.. Fail if selected geometry_type_name value is not a value from the NAME column in Annex E Table 42 or Table 43.
+.. SELECT sql FROM sqlite_master 
+WHERE type = 'table' AND name = ‘{selected table_ name}’
+.. Pass if declared type of column_name selected in (1) is the geometry_type_name selected in (1)
+..	Fail otherwise
+|*Reference* |Clause 2.1.6.1.1 Req 30b:
 |*Test Type* |Capability
 |========================================
 
@@ -713,7 +732,7 @@ END;
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_tile_matrix' 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C Table 23. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
+. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values, primary, and foreign +++<del>and unique</del>+++ key constraints match all of those in the contents of Annex C Table 23. +++<del>Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</del>+++ 
 . Fail otherwise.
 |*Reference* |Clause 2.2.7.1.1 Req 41:
 |*Test Type* |Basic
@@ -878,7 +897,7 @@ END;
 |*Test Purpose* |Verify that multiple tile pyramids are stored in different tiles tables with unique names containing the required columns.
 |*Test Method* |
 . SELECT COUNT(table_name) FROM gpkg_contents WERE data_type = “tiles”
-. Fail if less than 2
+. +++<del>Fail if less than 2</del> <ins>Not testable if less than 1</ins>+++
 . SELECT table_name FROM gpkg_contents WHERE data_type = “tiles”
 . For each row from step 3
 .. PRAGMA table_info(table_name)

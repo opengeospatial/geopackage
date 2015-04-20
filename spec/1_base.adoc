@@ -77,9 +77,10 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 |=======================================================================
 
 ====== File Integrity
+:req4_foot1: footnote:[The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.]
 
 [requirement]
-The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file.
+The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file. {req4_foot1} 
 
 [requirement]
 The SQLite PRAGMA foreign_key_check SQL with no parameter value SHALL return an empty result set indicating no invalid foreign key values for a GeoPackage file.
@@ -88,18 +89,17 @@ The SQLite PRAGMA foreign_key_check SQL with no parameter value SHALL return an 
 
 [[api_sql]]
 ====== Structured Query Language (SQL)
-
-:req4_foot1: footnote:[New applications should use the latest available SQLite version software <<8>>]
+:req4_foot2: footnote:[New applications should use the latest available SQLite version software <<8>>]
 
 [requirement]
-A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<6>> software APIs. {req4_foot1}
+A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<6>> software APIs. {req4_foot2}
 
 ====== Every GPKG SQLite Configuration
 
-The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile- and runtime options that SHALL or SHALL NOT be used.
+The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile +++<del>- and run</del>+++ time options that SHALL or SHALL NOT be used.
 
 [requirement]
-Every GeoPackage SQLite Configuration SHALL have the SQLite library compile and run time options specified in table <<every_gpkg_sqlite_config_table>>.
+Every GeoPackage SQLite Configuration SHALL have the SQLite library compile +++<del>and run</del>+++ time options specified in clause 1.1.1.2.2 table <<every_gpkg_sqlite_config_table>>.
 
 [[every_gpkg_sqlite_config_table]]
 .Every GeoPackage SQLite Configuration
@@ -107,7 +107,7 @@ Every GeoPackage SQLite Configuration SHALL have the SQLite library compile and 
 |=======================================================================
 |Setting |Option |Shall / Not |Discussion
 |compile |SQLITE_OMIT_* |Not |SHALL NOT include any OMIT options from http://www.sqlite.org/compile.html#omitfeatures.
-|run |PRAGMA foreign_keys |Not (OFF) |Foreign key constraints are used to maintain GeoPackage referential integrity.
+|+++<del>run</del>+++ |+++<del>PRAGMA foreign_keys</del>+++ |+++<del>Not (OFF)</del>+++ |+++<del>Foreign key constraints are used to maintain GeoPackage referential integrity.</del>+++
 |=======================================================================
 
 [[spatial_ref_sys]]
@@ -124,7 +124,7 @@ A GeoPackage SHALL include a `gpkg_spatial_ref_sys` table per clause 1.1.2.1.1 <
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
 
-The `gpkg_spatial_ref_sys` table includes at a minimum the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
+The `gpkg_spatial_ref_sys` table includes +++<del>+++at a minimum+++</del>+++ the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
 Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) specifications.
 
 [[gpkg_spatial_ref_sys_cols]]
@@ -172,7 +172,7 @@ The purpose of the `gpkg_contents` table is to provide identifying and descripti
 |`table_name` |TEXT |The name of the tiles, or feature table |no | |PK
 |`data_type` |TEXT |Type of data stored in the table:. “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage. |no | |
 |`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |
-|`description` |TEXT |A human-readable description for the table_name content |yes |“” |
+|`description` |TEXT |A human-readable description for the table_name content |yes |+++<del>“”</del>+++ +++<ins>+++ ’’ +++</ins>+++ |
 |`last_change` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
 |`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name |yes | |
 |`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name |yes | |
