@@ -100,13 +100,15 @@ blockquote, blockquote p { line-height: 1.6; color: #6f6f6f; }
 .vcard .fn { font-weight: bold; font-size: 0.9375em; }
 .vevent .summary { font-weight: bold; }
 .vevent abbr { cursor: auto; text-decoration: none; font-weight: bold; border: none; padding: 0 0.0625em; }
-@media only screen and (min-width: 768px) { h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.4; }
+@media only screen and (min-width: 768px) { 
+  h1, h2, h3, #toctitle, .sidebarblock > .content > .title, h4, h5, h6 { line-height: 1.4; }
   h1 { font-size: 2.75em; }
   h2 { font-size: 2.3125em; }
   h3, #toctitle, .sidebarblock > .content > .title { font-size: 1.6875em; }
   h4 { font-size: 1.4375em; } }
 .print-only { display: none !important; }
-@media print { * { background: transparent !important; color: #000 !important; box-shadow: none !important; text-shadow: none !important; }
+@media print { 
+  * { background: transparent !important; color: #000  !important; box-shadow: none !important; text-shadow: none !important; }
   a, a:visited { text-decoration: underline; }
   a[href]:after { content: " (" attr(href) ")"; }
   abbr[title]:after { content: " (" attr(title) ")"; }
@@ -351,3 +353,6 @@ span.icon > [class^="icon-"], span.icon > [class*=" icon-"] { cursor: default; }
 .literalblock > .content > pre, .listingblock > .content > pre { -webkit-border-radius: 0; border-radius: 0; }
 #ogcheading {text-align:right;}
 #ogcname {font-size: 24pt;text-align:right;font-weight:bold;}
+ins {color: green; background: yellow; text-decoration: none;}
+del {color: red;}
+.docwarning {border: 1px solid #F00; border-radius: 1em; margin: 10px; padding: 10px; text-align: center;}
