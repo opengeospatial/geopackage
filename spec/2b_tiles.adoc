@@ -3,7 +3,7 @@
 
 ==== Tile Matrix Introduction
 
-There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain. In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata. 
+There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain. In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata.
 
 The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways. First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions. Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images. Applications that store GeoPackage tile data, which are presumed to have this information available, SHALL store sufficient metadata to enable its intended use.
 
@@ -12,15 +12,9 @@ The GeoPackage tile store data model MAY be implemented directly as SQL tables i
 :tiles_intro_foot1: footnote:[Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles COULD be used for transparency where there is no data on the tile edges, and image/jpeg format tiles COULD be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.]
 
 A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container.
-<<<<<<< HEAD
 {tiles_intro_foot1} “Tile pyramid” refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself.
 “Tile matrix” refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level.
 “Tile matrix set” refers to the definition of a tile pyramid’s tiling structure.
-=======
-{tiles_intro_foot1} “Tile pyramid” refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself.
-“Tile matrix” refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level.
-“Tile matrix set” refers to the definitio of a tile pyramid’s tiling structure.
->>>>>>> pr/107
 
 The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.
 
@@ -157,7 +151,7 @@ Values of the `gpkg_tile_matrix` `table_name` column SHALL reference values in t
 [requirement]
 The `gpkg_tile_matrix` table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.
 
-+++<ins>+++Req 44b: The width of a tile matrix (the difference between `min_x` and `max_x` in `gpkg_tile_matrix_set`) SHALL equal the product of `matrix_width`, `tile_width`, and `pixel_x_size` for that zoom level. 
++++<ins>+++Req 44b: The width of a tile matrix (the difference between `min_x` and `max_x` in `gpkg_tile_matrix_set`) SHALL equal the product of `matrix_width`, `tile_width`, and `pixel_x_size` for that zoom level.
 Similarly, height of a tile matrix (the difference between `min_y` and `max_y` in `gpkg_tile_matrix_set`) SHALL equal the product of `matrix_height`, `tile_height`, and `pixel_y_size` for that zoom level.+++</ins>+++
 
 The `gpkg_tile_matrix` table or view MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.
