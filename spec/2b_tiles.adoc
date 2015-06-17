@@ -91,7 +91,8 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain  `gpkg_t
 |`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name |no | |
 |=======================================================================
 
-The gpkg_tile_matrix_set table or updateable view defines the minimum bounding box (min_x, min_y, max_x, max_y) and spatial reference system (srs_id) for all content in a tile pyramid user data table.
+The gpkg_tile_matrix_set table or updateable view defines the +++<del>+++minimum bounding box (min_x, min_y, max_x, max_y) and +++</del>+++spatial reference system (srs_id) +++<ins>+++and the maximum bounding box (min_x, min_y, max_x, max_y) +++</ins>+++for all +++<ins>+++possible tiles+++</ins><del>+++content+++</del>+++ in a tile pyramid user data table.
++++<ins>+++All tiles present in the tile pyramid SHALL fall within this bounding box. However, the bounding box MAY be larger than the minimum bounding rectangle around the actual tiles in that pyramid.+++</ins>+++
 
 See <<gpkg_tile_matrix_set_sql>>.
 
@@ -149,6 +150,9 @@ Values of the `gpkg_tile_matrix` `table_name` column SHALL reference values in t
 
 [requirement]
 The `gpkg_tile_matrix` table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.
+
++++<ins>+++Req 44b: The width of a tile matrix (the difference between `min_x` and `max_x` in `gpkg_tile_matrix_set`) SHALL equal the product of `matrix_width`, `tile_width`, and `pixel_x_size` for that zoom level. 
+Similarly, height of a tile matrix (the difference between `min_y` and `max_y` in `gpkg_tile_matrix_set`) SHALL equal the product of `matrix_height`, `tile_height`, and `pixel_y_size` for that zoom level.+++</ins>+++
 
 The `gpkg_tile_matrix` table or view MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.
 
