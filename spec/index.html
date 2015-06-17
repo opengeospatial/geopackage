@@ -1442,7 +1442,7 @@ Feature table geometry columns SHALL contain geometries with the <code>srs_id</c
 <p>A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container.
 <span class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnote_13" title="View footnote.">13</a>]</span> “Tile pyramid” refers to the concept of pyramid structure of tiles of different spatial extent an resolution at different zoom levels, and the tile data itself.
 “Tile matrix” refers to rows and columns of tiles tha all have the same spatial extent and resolution at a particular zoom level.
-“Tile matrix set” refers to the definitio of a tile pyramid’s tiling structure.</p>
+“Tile matrix set” refers to the definition of a tile pyramid’s tiling structure.</p>
 </div>
 <div class="paragraph">
 <p>The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.</p>
@@ -1602,7 +1602,8 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>g
 </table>
 
 <div class="paragraph">
-<p>The gpkg_tile_matrix_set table or updateable view defines the minimum bounding box (min_x, min_y, max_x, max_y) and spatial reference system (srs_id) for all content in a tile pyramid user data table.</p>
+<p>The gpkg_tile_matrix_set table or updateable view defines the <del>minimum bounding box (min_x, min_y, max_x, max_y) and </del>spatial reference system (srs_id) <ins>and the maximum bounding box (min_x, min_y, max_x, max_y) </ins>for all <ins>possible tiles</ins><del>content</del> in a tile pyramid user data table.
+<ins>All tiles present in the tile pyramid SHALL fall within this bounding box. However, the bounding box MAY be larger than the minimum bounding rectangle around the actual tiles in that pyramid.</ins></p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.</p>
@@ -1746,6 +1747,10 @@ Values of the <code>gpkg_tile_matrix</code> <code>table_name</code> column SHALL
 <blockquote>
 The <code>gpkg_tile_matrix</code> table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.
 </blockquote>
+</div>
+<div class="paragraph">
+<p><ins>Req 44b: The width of a tile matrix (the difference between <code>min_x</code> and <code>max_x</code> in <code>gpkg_tile_matrix_set</code>) SHALL equal the product of <code>matrix_width</code>, <code>tile_width</code>, and <code>pixel_x_size</code> for that zoom level.
+Similarly, height of a tile matrix (the difference between <code>min_y</code> and <code>max_y</code> in <code>gpkg_tile_matrix_set</code>) SHALL equal the product of <code>matrix_height</code>, <code>tile_height</code>, and <code>pixel_y_size</code> for that zoom level.</ins></p>
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_tile_matrix</code> table or view MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.</p>
@@ -16267,7 +16272,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-05-05 18:14:31 UTC
+Last updated 2015-06-17 18:47:56 UTC
 </div>
 </div>
 </body>
