@@ -142,7 +142,7 @@ Views of this table MAY be used to provide compatibility with the http://www.iso
 
 See <<gpkg_spatial_ref_sys_sql>>.
 
-====== Table Data +++<add>+++Definition +++</add>+++Values
+====== Table Data Values
 
 Definition column WKT values in the `gpkg_spatial_ref_sys` table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <<_requirement-11>>. Values SHALL be constructed per the EBNF syntax in <<32>> clause 7. Values SHALL include optional <authority> EBNF entities. Values for SRS other than WGS-84 SHOULD include optional <to wgs84> EBNF entities. Values MAY omit optional <to wgs84> and <twin axes> EBNF entities. EBNF name and number values MAY be obtained from any specified <authority>, e.g. <<13>><<14>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<_requirement-11>>:
 
