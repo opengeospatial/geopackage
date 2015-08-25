@@ -14,10 +14,7 @@
 </div>
 <div id="content">
 <div class="docwarning hide-on-print">
-<br>This Document is a Corrigendum.  Tracked Changes from the original document are displayed by default.<br><br>
-<span style="color: green; background: yellow; text-decoration: none;">Additions are displayed with green text and yellow highlighting.</span><br>
-<span style="color: red; text-decoration: line-through;">Deletions are displayed with red strike-through text.</span><br><br>
-<br><br>
+<br>This Document is a Corrigendum. A version with tracked changes from the original document is available upon request.<br><br>
 </div>
 <div id="ogcname" class="paragraph">
 <p>Open Geospatial Consortium<br></p>
@@ -36,7 +33,7 @@ Editor:   Paul Daisey<br>
 <em>Original Version: <a href="http://www.opengis.net/doc/IS/geopackage/1.0">http://www.opengis.net/doc/IS/geopackage/1.0</a></em><br></p>
 </div>
 <div class="sect1">
-<h2 id="_ogc_geopackage_encoding_standard_ins_with_corrigendum_ins">OGC® GeoPackage Encoding Standard <ins>with corrigendum</ins></h2>
+<h2 id="_ogc_geopackage_encoding_standard_with_corrigendum">OGC® GeoPackage Encoding Standard with corrigendum</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Copyright © 2015 Open Geospatial Consortium.<br>
@@ -46,7 +43,7 @@ To obtain additional rights of use, visit <a href="http://www.opengeospatial.org
 <p><strong>Warning</strong></p>
 </div>
 <div class="paragraph">
-<p>This document is an OGC Member approved international standard. This document is available on a royalty free, non-discriminatory basis. Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation. <ins>This is a corrigendum for OGC 12-128r1.</ins></p>
+<p>This document is an OGC Member approved international standard. This document is available on a royalty free, non-discriminatory basis. Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation. This is a corrigendum for OGC 12-128r1.</p>
 </div>
 <div class="paragraph">
 <p>Document type:   	OGC® Publicly Available Standard<br>
@@ -108,7 +105,7 @@ Document language: 	English<br></p>
 <div id="toc" class="toc2">
 <div id="toctitle" class="title">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_ogc_geopackage_encoding_standard_ins_with_corrigendum_ins">OGC® GeoPackage Encoding Standard <ins>with corrigendum</ins></a></li>
+<li><a href="#_ogc_geopackage_encoding_standard_with_corrigendum">OGC® GeoPackage Encoding Standard with corrigendum</a></li>
 <li>
 <ul class="sectlevel1">
 <li><a href="#_license_agreement">License Agreement</a></li>
@@ -516,7 +513,7 @@ A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage content
 <div class="sect5">
 <h6 id="_every_gpkg_sqlite_configuration">1.1.1.2.2. Every GPKG SQLite Configuration</h6>
 <div class="paragraph">
-<p>The <a href="http://www.sqlite.org/download.html">SQLite</a> <a href="#8">[8]</a> library has many <a href="http://www.sqlite.org/compile.html">compile time</a> and <a href="http://www.sqlite.org/pragma.html">run time</a> options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile <del>- and run</del> time options that SHALL or SHALL NOT be used.</p>
+<p>The <a href="http://www.sqlite.org/download.html">SQLite</a> <a href="#8">[8]</a> library has many <a href="http://www.sqlite.org/compile.html">compile time</a> and <a href="http://www.sqlite.org/pragma.html">run time</a> options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile  time options that SHALL or SHALL NOT be used.</p>
 </div>
 <div id="_requirement-9" class="quoteblock">
 <div class="title">Requirement 9</div>
@@ -547,12 +544,6 @@ Every GeoPackage SQLite Configuration SHALL have the SQLite library compile <del
 <td class="tableblock halign-left valign-top"><p class="tableblock">Not</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SHALL NOT include any OMIT options from <a href="http://www.sqlite.org/compile.html#omitfeatures">http://www.sqlite.org/compile.html#omitfeatures</a>.</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><del>run</del></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><del>PRAGMA foreign_keys</del></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><del>Not (OFF)</del></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><del>Foreign key constraints are used to maintain GeoPackage referential integrity.</del></p></td>
-</tr>
 </tbody>
 </table>
 
@@ -576,7 +567,7 @@ A GeoPackage SHALL include a <code>gpkg_spatial_ref_sys</code> table per clause 
 The coordinate reference system definitions it contains are referenced by the GeoPackage <code>gpkg_contents</code> and <code>gpkg_geometry_columns</code> tables to relate the vector and tile data in user tables to locations on the earth.</p>
 </div>
 <div class="paragraph">
-<p>The <code>gpkg_spatial_ref_sys</code> table includes <del>at a minimum</del> the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> below containing data that defines spatial reference systems.
+<p>The <code>gpkg_spatial_ref_sys</code> table includes the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> below containing data that defines spatial reference systems.
 Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) specifications.</p>
 </div>
 <table id="gpkg_spatial_ref_sys_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -655,7 +646,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div id="_requirement-11" class="quoteblock">
 <div class="title">Requirement 11</div>
 <blockquote>
-<ins>The <code>gpkg_spatial_ref_sys</code> table SHALL contain at a minimum the records listed in <a href="#gpkg_spatial_ref_sys_records">Spatial Ref Sys Table Records</a>. The record with an <code>srs_id</code> of 4326 SHALL correspond to <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a> <a href="#15">[15]</a> as defined by  <a href="http://www.epsg.org/Geodetic.html">EPSG</a> <a href="#B3">[B3]</a> in <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> <a href="#13">[13]</a><a href="#14">[14]</a>. The record with an <code>srs_id</code> of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an <code>srs_id</code> of 0 SHALL be used for undefined geographic coordinate reference systems.
+The <code>gpkg_spatial_ref_sys</code> table SHALL contain at a minimum the records listed in <a href="#gpkg_spatial_ref_sys_records">Spatial Ref Sys Table Records</a>. The record with an <code>srs_id</code> of 4326 SHALL correspond to <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a> <a href="#15">[15]</a> as defined by  <a href="http://www.epsg.org/Geodetic.html">EPSG</a> <a href="#B3">[B3]</a> in <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> <a href="#13">[13]</a><a href="#14">[14]</a>. The record with an <code>srs_id</code> of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an <code>srs_id</code> of 0 SHALL be used for undefined geographic coordinate reference systems.
 </blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_records" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -706,12 +697,6 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 </tbody>
 </table>
 
-<div class="paragraph">
-<p></ins><del>
-The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL contain a record for
-organization <a href="http://www.epsg.org/Geodetic.html">EPSG</a> or epsg <a href="#B3">[B3]</a> and <code>organization_coordsys_id</code> <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> <a href="#13">[13]</a><a href="#14">[14]</a> for <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a> <a href="#15">[15]</a>, a record with an <code>srs_id</code> of -1, an organization of “NONE”, an <code>organization_coordsys_id</code> of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an <code>srs_id</code> of 0, an organization of “NONE”, an <code>organization_coordsys_id</code> of 0, and definition “undefined” for undefined geographic coordinate reference systems.
-</del></p>
-</div>
 <div id="_requirement-12" class="quoteblock">
 <div class="title">Requirement 12</div>
 <blockquote>
@@ -786,7 +771,7 @@ A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a 
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A human-readable description for the table_name content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><del>“”</del> <ins> ’’ </ins></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">''</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -1058,7 +1043,7 @@ StandardGeoPackageBinary {
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>per  <del>ISO 13249-3 <a href="#12">[12]</a> clause 5.1.46 </del><ins> OGC 06-103r4 <a href="#9">[9]</a> </ins>  <span class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</span><span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span><span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span></td>
+<td>per  OGC 06-103r4 <a href="#9">[9]</a>  <span class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnote_8" title="View footnote.">8</a>]</span><span class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnote_9" title="View footnote.">9</a>]</span><span class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnote_10" title="View footnote.">10</a>]</span></td>
 </tr>
 </table>
 </div>
@@ -1176,7 +1161,7 @@ StandardGeoPackageBinary {
 </ul>
 </div>
 <div class="paragraph">
-<p>Well-Known Binary as defined in <del> ISO 13249-3 <a href="#12">[12]</a> </del> <ins> OGC 06-103r4 <a href="#9">[9]</a> </ins> does not provide a standardized encoding for an empty point set (i.e., <em>Point Empty</em> in Well-Known Text).
+<p>Well-Known Binary as defined in OGC 06-103r4 <a href="#9">[9]</a> does not provide a standardized encoding for an empty point set (i.e., <em>Point Empty</em> in Well-Known Text).
 In GeoPackages these points SHALL be encoded as a Point where each coordinate value is set to an IEEE-754 quiet NaN value.
 GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000000f87f as the binary encoding of the NaN values.</p>
 </div>
@@ -1215,7 +1200,7 @@ A GeoPackage with a <code>gpkg_contents</code> table row with a “features” <
 </div>
 <div class="paragraph">
 <p>The second component of the SQL schema for vector features in a GeoPackage is a <code>gpkg_geometry_columns</code> table that
-identifies the geometry columns <ins>and geometry types</ins> in tables that contain user data representing features.</p>
+identifies the geometry columns and geometry types in tables that contain user data representing features.</p>
 </div>
 <table id="gpkg_geometry_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 7. Geometry Columns Table or View Definition</caption>
@@ -1364,7 +1349,7 @@ A feature table SHALL have only one geometry column.
 <div id="_requirement-31" class="quoteblock">
 <div class="title">Requirement 31</div>
 <blockquote>
-<ins>Req 30b: The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex E specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.</ins>
+The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex E specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.
 </blockquote>
 </div>
 <table id="example_feature_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -1464,7 +1449,7 @@ If the geometry <code>type_name</code> value in the <code>gpkg_geometry_columns<
 If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry type hierarchy) then the feature table geometry column MAY contain geometries of any geometry type.</p>
 </div>
 <div class="paragraph">
-<p>The presence or absence of optional elevation (Z) and/or measure (M) values in a geometry does not change its type or assignability. <ins>The unit of measure for optional elevation(Z) values is determined by the CRS of the geometry; it is as-defined by a 3D CRS, and undefined for a 2D CRS. The unit of measure for optional measure (M) values is determined by the CRS of the geometry.</ins></p>
+<p>The presence or absence of optional elevation (Z) and/or measure (M) values in a geometry does not change its type or assignability. The unit of measure for optional elevation(Z) values is determined by the CRS of the geometry; it is as-defined by a 3D CRS, and undefined for a 2D CRS. The unit of measure for optional measure (M) values is determined by the CRS of the geometry.</p>
 </div>
 <div class="paragraph">
 <p>The spatial reference system type of a feature geometry column specified by a <code>gpkg_geometry_columns</code> table <code>srs_id</code> column value is a code from the <code>gpkg_spatial_ref_sys</code> table <code>srs_id</code> column.</p>
@@ -1656,8 +1641,8 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>g
 </table>
 
 <div class="paragraph">
-<p>The gpkg_tile_matrix_set table or updateable view defines the <del>minimum bounding box (min_x, min_y, max_x, max_y) and </del>spatial reference system (srs_id) <ins>and the maximum bounding box (min_x, min_y, max_x, max_y) </ins>for all <ins>possible tiles</ins><del>content</del> in a tile pyramid user data table.
-<ins>All tiles present in the tile pyramid SHALL fall within this bounding box. However, the bounding box MAY be larger than the minimum bounding rectangle around the actual tiles in that pyramid.</ins></p>
+<p>The gpkg_tile_matrix_set table or updateable view defines the spatial reference system (srs_id) and the maximum bounding box (min_x, min_y, max_x, max_y) for all possible tiles in a tile pyramid user data table.
+All tiles present in the tile pyramid SHALL fall within this bounding box. However, the bounding box MAY be larger than the minimum bounding rectangle around the actual tiles in that pyramid.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.</p>
@@ -1802,9 +1787,12 @@ Values of the <code>gpkg_tile_matrix</code> <code>table_name</code> column SHALL
 The <code>gpkg_tile_matrix</code> table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.
 </blockquote>
 </div>
-<div class="paragraph">
-<p><ins>Req 44b: The width of a tile matrix (the difference between <code>min_x</code> and <code>max_x</code> in <code>gpkg_tile_matrix_set</code>) SHALL equal the product of <code>matrix_width</code>, <code>tile_width</code>, and <code>pixel_x_size</code> for that zoom level.
-Similarly, height of a tile matrix (the difference between <code>min_y</code> and <code>max_y</code> in <code>gpkg_tile_matrix_set</code>) SHALL equal the product of <code>matrix_height</code>, <code>tile_height</code>, and <code>pixel_y_size</code> for that zoom level.</ins></p>
+<div id="_requirement-45" class="quoteblock">
+<div class="title">Requirement 45</div>
+<blockquote>
+The width of a tile matrix (the difference between <code>min_x</code> and <code>max_x</code> in <code>gpkg_tile_matrix_set</code>) SHALL equal the product of <code>matrix_width</code>, <code>tile_width</code>, and <code>pixel_x_size</code> for that zoom level.
+Similarly, height of a tile matrix (the difference between <code>min_y</code> and <code>max_y</code> in <code>gpkg_tile_matrix_set</code>) SHALL equal the product of <code>matrix_height</code>, <code>tile_height</code>, and <code>pixel_y_size</code> for that zoom level.
+</blockquote>
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_tile_matrix</code> table or view MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.</p>
@@ -1813,50 +1801,50 @@ Similarly, height of a tile matrix (the difference between <code>min_y</code> an
 <p>GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view <span class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnote_17" title="View footnote.">17</a>]</span>, as specified by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.
 The tile coordinate (0,0) always refers to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.</p>
 </div>
-<div id="_requirement-45" class="quoteblock">
-<div class="title">Requirement 45</div>
-<blockquote>
-The <code>zoom_level</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL not be negative.
-</blockquote>
-</div>
 <div id="_requirement-46" class="quoteblock">
 <div class="title">Requirement 46</div>
 <blockquote>
-The <code>matrix_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
+The <code>zoom_level</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL not be negative.
 </blockquote>
 </div>
 <div id="_requirement-47" class="quoteblock">
 <div class="title">Requirement 47</div>
 <blockquote>
-The <code>matrix_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
+The <code>matrix_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div id="_requirement-48" class="quoteblock">
 <div class="title">Requirement 48</div>
 <blockquote>
-The <code>tile_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
+The <code>matrix_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div id="_requirement-49" class="quoteblock">
 <div class="title">Requirement 49</div>
 <blockquote>
-The <code>tile_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
+The <code>tile_width</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div id="_requirement-50" class="quoteblock">
 <div class="title">Requirement 50</div>
 <blockquote>
-The <code>pixel_x_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
+The <code>tile_height</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div id="_requirement-51" class="quoteblock">
 <div class="title">Requirement 51</div>
 <blockquote>
-The <code>pixel_y_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
+The <code>pixel_x_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
 </blockquote>
 </div>
 <div id="_requirement-52" class="quoteblock">
 <div class="title">Requirement 52</div>
+<blockquote>
+The <code>pixel_y_size</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL be greater than 0.
+</blockquote>
+</div>
+<div id="_requirement-53" class="quoteblock">
+<div class="title">Requirement 53</div>
 <blockquote>
 The <code>pixel_x_size</code> and <code>pixel_y_size</code> column values for <code>zoom_level</code> column values in a <code>gpkg_tile_matrix</code> table sorted in ascending order SHALL be sorted in descending order.
 </blockquote>
@@ -1875,10 +1863,10 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <h5 id="_data_15">2.2.8.1. Data</h5>
 <div class="sect5">
 <h6 id="tiles_user_tables_data_table_definition">2.2.8.1.1. Table Definition</h6>
-<div id="_requirement-53" class="quoteblock">
-<div class="title">Requirement 53</div>
+<div id="_requirement-54" class="quoteblock">
+<div class="title">Requirement 54</div>
 <blockquote>
-Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per Clause 2.2.8.1.1 <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <ins> <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a> </ins><del> <a href="#example_tiles_table_insert_sql">EXAMPLE: tiles table Insert Statement (Informative)</a> </del>.
+Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per Clause 2.2.8.1.1 <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>.
 </blockquote>
 </div>
 <table id="example_tiles_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -1954,20 +1942,20 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 <div class="paragraph">
 <p>Each tile pyramid user data table or view <span class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</span> MAY contain tile matrices at zero or more zoom levels of different spatial resolution (map scale).</p>
 </div>
-<div id="_requirement-54" class="quoteblock">
-<div class="title">Requirement 54</div>
+<div id="_requirement-55" class="quoteblock">
+<div class="title">Requirement 55</div>
 <blockquote>
 For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>zoom_level</code> column value in a GeoPackage SHALL be in the range min(tm.zoom_level) &#8656; tp.zoom_level &#8656; max(tm.zoom_level).
 </blockquote>
 </div>
-<div id="_requirement-55" class="quoteblock">
-<div class="title">Requirement 55</div>
+<div id="_requirement-56" class="quoteblock">
+<div class="title">Requirement 56</div>
 <blockquote>
 For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_column</code> column value in a GeoPackage SHALL be in the range 0 &#8656; tp.tile_column &#8656; tm.matrix_width – 1 where the tm and tp <code>zoom_level</code> column values are equal.
 </blockquote>
 </div>
-<div id="_requirement-56" class="quoteblock">
-<div class="title">Requirement 56</div>
+<div id="_requirement-57" class="quoteblock">
+<div class="title">Requirement 57</div>
 <blockquote>
 For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_row</code> column value in a GeoPackage SHALL be in the range 0 &#8656; tp.tile_row &#8656; tm.matrix_height – 1 where the tm and tp <code>zoom_level</code> column values are equal.
 </blockquote>
@@ -1994,8 +1982,8 @@ The information provided by this option can be used by applications to, for inst
 <h5 id="_data_16">2.3.2.1. Data</h5>
 <div class="sect5">
 <h6 id="schema_data_columns_table_definition">2.3.2.1.1. Table Definition</h6>
-<div id="_requirement-57" class="quoteblock">
-<div class="title">Requirement 57</div>
+<div id="_requirement-58" class="quoteblock">
+<div class="title">Requirement 58</div>
 <blockquote>
 A GeoPackage MAY contain a table or updateable view named <code>gpkg_data_columns</code>.
 If present it SHALL be defined per clause 2.3.2.1.1 <a href="#schema_data_columns_table_definition">Table Definition</a>, <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.
@@ -2082,20 +2070,20 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
 </div>
 <div class="sect5">
 <h6 id="_table_data_values_6">2.3.2.1.2. Table Data Values</h6>
-<div id="_requirement-58" class="quoteblock">
-<div class="title">Requirement 58</div>
+<div id="_requirement-59" class="quoteblock">
+<div class="title">Requirement 59</div>
 <blockquote>
 Values of the <code>gpkg_data_columns</code> table <code>table_name</code> column value SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column.
 </blockquote>
 </div>
-<div id="_requirement-59" class="quoteblock">
-<div class="title">Requirement 59</div>
+<div id="_requirement-60" class="quoteblock">
+<div class="title">Requirement 60</div>
 <blockquote>
 The <code>column_name</code> column value in a <code>gpkg_data_columns</code> table row SHALL contain the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.
 </blockquote>
 </div>
-<div id="_requirement-60" class="quoteblock">
-<div class="title">Requirement 60</div>
+<div id="_requirement-61" class="quoteblock">
+<div class="title">Requirement 61</div>
 <blockquote>
 The constraint_name column value in a gpkg_data_columns table MAY be NULL.
 If it is not NULL, it SHALL contain a case sensitive constraint_name column value from the gpkg_data_column_constraints table.
@@ -2110,8 +2098,8 @@ If it is not NULL, it SHALL contain a case sensitive constraint_name column valu
 <h5 id="_data_17">2.3.3.1. Data</h5>
 <div class="sect5">
 <h6 id="data_column_constraints_table_definition">2.3.3.1.1. Table Definition</h6>
-<div id="_requirement-61" class="quoteblock">
-<div class="title">Requirement 61</div>
+<div id="_requirement-62" class="quoteblock">
+<div class="title">Requirement 62</div>
 <blockquote>
 A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
 If present it SHALL be defined per clause 2.3.3.1.1 <a href="#data_column_constraints_table_definition">Table Definition</a>, <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table or View Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.
@@ -2302,49 +2290,49 @@ These restrictions MAY be enforced by SQL triggers or by code in applications th
 </tbody>
 </table>
 
-<div id="_requirement-62" class="quoteblock">
-<div class="title">Requirement 62</div>
+<div id="_requirement-63" class="quoteblock">
+<div class="title">Requirement 63</div>
 <blockquote>
 The <code>gpkg_data_column_constraints</code> table MAY be empty.
 If it contains data, the lowercase <code>constraint_type</code> column values SHALL be one of "range", "enum", or "glob".
 </blockquote>
 </div>
-<div id="_requirement-63" class="quoteblock">
-<div class="title">Requirement 63</div>
-<blockquote>
-gpkg_data_column_constraint constraint_name values for rows with constraint_type values of <em>range</em> and <em>glob</em> SHALL be unique.
-</blockquote>
-</div>
 <div id="_requirement-64" class="quoteblock">
 <div class="title">Requirement 64</div>
 <blockquote>
-The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with constraint_type column values of "range", the <code>value</code> column values for those rows SHALL be NULL.
+gpkg_data_column_constraint constraint_name values for rows with constraint_type values of <em>range</em> and <em>glob</em> SHALL be unique.
 </blockquote>
 </div>
 <div id="_requirement-65" class="quoteblock">
 <div class="title">Requirement 65</div>
 <blockquote>
 The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "range", the <code>min</code> column values for those rows SHALL be NOT NULL and less than the <code>max</code> column value which shall be NOT NULL.
+If it contains rows with constraint_type column values of "range", the <code>value</code> column values for those rows SHALL be NULL.
 </blockquote>
 </div>
 <div id="_requirement-66" class="quoteblock">
 <div class="title">Requirement 66</div>
 <blockquote>
 The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "range", the <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be 0 or 1.
+If it contains rows with <code>constraint_type</code> column values of "range", the <code>min</code> column values for those rows SHALL be NOT NULL and less than the <code>max</code> column value which shall be NOT NULL.
 </blockquote>
 </div>
 <div id="_requirement-67" class="quoteblock">
 <div class="title">Requirement 67</div>
 <blockquote>
 The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be NULL.
+If it contains rows with <code>constraint_type</code> column values of "range", the <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be 0 or 1.
 </blockquote>
 </div>
 <div id="_requirement-68" class="quoteblock">
 <div class="title">Requirement 68</div>
+<blockquote>
+The <code>gpkg_data_column_constraints</code> table MAY be empty.
+If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be NULL.
+</blockquote>
+</div>
+<div id="_requirement-69" class="quoteblock">
+<div class="title">Requirement 69</div>
 <blockquote>
 The <code>gpkg_data_column_constraints</code> table MAY be empty.
 If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>value</code> column SHALL NOT be NULL.
@@ -2373,8 +2361,8 @@ There is no GeoPackage requirement that such metadata be provided or that define
 <h5 id="_data_18">2.4.2.1. Data</h5>
 <div class="sect5">
 <h6 id="metadata_table_table_definition">2.4.2.1.1. Table Definition</h6>
-<div id="_requirement-69" class="quoteblock">
-<div class="title">Requirement 69</div>
+<div id="_requirement-70" class="quoteblock">
+<div class="title">Requirement 70</div>
 <blockquote>
 A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clause 2.4.2.1.1 <a href="#metadata_table_table_definition">Table Definition</a>, <a href="#gpkg_metadata_cols">Metadata Table Definition</a> and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.
 </blockquote>
@@ -2575,8 +2563,8 @@ The initial contents of this table were obtained from the ISO 19115 <a href="#40
 </tbody>
 </table>
 
-<div id="_requirement-70" class="quoteblock">
-<div class="title">Requirement 70</div>
+<div id="_requirement-71" class="quoteblock">
+<div class="title">Requirement 71</div>
 <blockquote>
 Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table or updateable view SHALL be one of the name column values from <a href="#metadata_scopes">Metadata Scopes</a>.
 </blockquote>
@@ -2590,8 +2578,8 @@ Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table or
 <h5 id="_data_19">2.4.3.1. Data</h5>
 <div class="sect5">
 <h6 id="metadata_reference_table_table_definition">2.4.3.1.1. Table Definition</h6>
-<div id="_requirement-71" class="quoteblock">
-<div class="title">Requirement 71</div>
+<div id="_requirement-72" class="quoteblock">
+<div class="title">Requirement 72</div>
 <blockquote>
 A GeoPackage that contains a <code>gpkg_metadata</code> table SHALL contain a <code>gpkg_metadata_reference</code> table per clause 2.4.3.1.1 <a href="#metadata_reference_table_table_definition">Table Definition</a>, <a href="#gpkg_metadata_reference_cols">Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</a> and <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.
 </blockquote>
@@ -2689,47 +2677,47 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
 </div>
 <div class="sect5">
 <h6 id="_table_data_values_9">2.4.3.1.2. Table Data Values</h6>
-<div id="_requirement-72" class="quoteblock">
-<div class="title">Requirement 72</div>
-<blockquote>
-Every <code>gpkg_metadata_reference</code> table reference scope column value SHALL be one of ‘geopackage’, ‘table’, ‘column’, ’row’, ’row/col’ in lowercase.
-</blockquote>
-</div>
 <div id="_requirement-73" class="quoteblock">
 <div class="title">Requirement 73</div>
 <blockquote>
-Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’ SHALL have a <code>table_name</code> column value that is NULL.
-Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>table_name</code> column value that references a value in the <code>gpkg_contents</code> <code>table_name</code> column.
+Every <code>gpkg_metadata_reference</code> table reference scope column value SHALL be one of ‘geopackage’, ‘table’, ‘column’, ’row’, ’row/col’ in lowercase.
 </blockquote>
 </div>
 <div id="_requirement-74" class="quoteblock">
 <div class="title">Requirement 74</div>
 <blockquote>
-Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’,‘table’ or ‘row’ SHALL have a <code>column_name</code> column value that is NULL.
-Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>column_name</code> column value that contains the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.
+Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’ SHALL have a <code>table_name</code> column value that is NULL.
+Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>table_name</code> column value that references a value in the <code>gpkg_contents</code> <code>table_name</code> column.
 </blockquote>
 </div>
 <div id="_requirement-75" class="quoteblock">
 <div class="title">Requirement 75</div>
 <blockquote>
-Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’, ‘table’ or ‘column’ SHALL have a <code>row_id_value</code> column value that is NULL.
-Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>row_id_value</code> column value that contains the ROWID of a row in the SQLite table or view identified by the <code>table_name</code> column value.
+Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’,‘table’ or ‘row’ SHALL have a <code>column_name</code> column value that is NULL.
+Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>column_name</code> column value that contains the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.
 </blockquote>
 </div>
 <div id="_requirement-76" class="quoteblock">
 <div class="title">Requirement 76</div>
 <blockquote>
-Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in ISO 8601 <a href="#29">[29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.<span class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnote_35" title="View footnote.">35</a>]</span>
+Every <code>gpkg_metadata_reference</code> table row with a <code>reference_scope</code> column value of ‘geopackage’, ‘table’ or ‘column’ SHALL have a <code>row_id_value</code> column value that is NULL.
+Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>row_id_value</code> column value that contains the ROWID of a row in the SQLite table or view identified by the <code>table_name</code> column value.
 </blockquote>
 </div>
 <div id="_requirement-77" class="quoteblock">
 <div class="title">Requirement 77</div>
 <blockquote>
-Every <code>gpkg_metadata_reference</code> table row <code>md_file_id</code> column value SHALL be an id column value from the <code>gpkg_metadata</code> table.
+Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in ISO 8601 <a href="#29">[29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.<span class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnote_35" title="View footnote.">35</a>]</span>
 </blockquote>
 </div>
 <div id="_requirement-78" class="quoteblock">
 <div class="title">Requirement 78</div>
+<blockquote>
+Every <code>gpkg_metadata_reference</code> table row <code>md_file_id</code> column value SHALL be an id column value from the <code>gpkg_metadata</code> table.
+</blockquote>
+</div>
+<div id="_requirement-79" class="quoteblock">
+<div class="title">Requirement 79</div>
 <blockquote>
 Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> column value that is NOT NULL SHALL be an id column value from the <code>gpkg_metadata</code> table that is not equal to the <code>md_file_id</code> column value for that row.
 </blockquote>
@@ -2757,8 +2745,8 @@ Implementers use their own author names to register other extensions<span class=
 <h5 id="_data_20">2.5.2.1. Data</h5>
 <div class="sect5">
 <h6 id="extensions_table_definition">2.5.2.1.1. Table Definition</h6>
-<div id="_requirement-79" class="quoteblock">
-<div class="title">Requirement 79</div>
+<div id="_requirement-80" class="quoteblock">
+<div class="title">Requirement 80</div>
 <blockquote>
 A GeoPackage MAY contain a table or updateable view named gpkg_extensions.
 If present this table SHALL be defined per clause 2.5.2.1.1 <a href="#extensions_table_definition">Table Definition</a>, <a href="#gpkg_extensions_cols">GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</a> and <a href="#gpkg_extensions_sql">gpkg_extensions Table Definition SQL</a>.
@@ -2831,28 +2819,28 @@ An application that accesses a GeoPackage can query the <code>gpkg_extensions</c
 </div>
 <div class="sect5">
 <h6 id="_table_data_values_10">2.5.2.1.2. Table Data Values</h6>
-<div id="_requirement-80" class="quoteblock">
-<div class="title">Requirement 80</div>
+<div id="_requirement-81" class="quoteblock">
+<div class="title">Requirement 81</div>
 <blockquote>
 Every extension of a GeoPackage SHALL be registered in a corresponding row in the gpkg_extensions table.
 The absence of a gpkg_extensions table or the absence of rows in gpkg_extnsions table SHALL both indicate the absence of extensions to a GeoPackage.
 </blockquote>
 </div>
-<div id="_requirement-81" class="quoteblock">
-<div class="title">Requirement 81</div>
+<div id="_requirement-82" class="quoteblock">
+<div class="title">Requirement 82</div>
 <blockquote>
 Values of the <code>gpkg_extensions</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column or be NULL.
 They SHALL NOT be NULL for rows where the <code>column_name</code> value is not NULL.
 </blockquote>
 </div>
-<div id="_requirement-82" class="quoteblock">
-<div class="title">Requirement 82</div>
+<div id="_requirement-83" class="quoteblock">
+<div class="title">Requirement 83</div>
 <blockquote>
 The <code>column_name</code> column value in a <code>gpkg_extensions</code> row SHALL be the name of a column in the table specified by the <code>table_name</code> column value for that row, or be NULL.
 </blockquote>
 </div>
-<div id="_requirement-83" class="quoteblock">
-<div class="title">Requirement 83</div>
+<div id="_requirement-84" class="quoteblock">
+<div class="title">Requirement 84</div>
 <blockquote>
 Each <code>extension_name</code> column value in a <code>gpkg_extensions</code> row SHALL be a unique case sensitive value of the form &lt;author&gt;_&lt;extension_name&gt; where &lt;author&gt; indicates the person or organization that developed and
 maintains the extension. The valid character set for &lt;author&gt; SHALL be [a-zA-Z0-9].
@@ -2868,8 +2856,8 @@ The definition column value in a <code>gpkg_extensions</code> row for those exte
 <p>Partial examples of how to fill out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Normative)</a> are provided by the templates in <a href="#extension_geometry_types">GeoPackage Geometry Types Extension Template (Normative)</a> and <a href="#extension_geometry_encoding">User-Defined Geometry Types Encoding Extension Template (Normative)</a>.
 Extension definitions created using those template and other extension definitions MAY be provided in the definition column, preferably as ASCII text, or as a reference such as a URI <a href="#23">[23]</a> or email address whereby the definition may be obtained.</p>
 </div>
-<div id="_requirement-84" class="quoteblock">
-<div class="title">Requirement 84</div>
+<div id="_requirement-85" class="quoteblock">
+<div class="title">Requirement 85</div>
 <blockquote>
 The definition column value in a <code>gpkg_extensions</code> row SHALL contain or reference the text that results from documenting an extension by filling out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Normative)</a>.
 </blockquote>
@@ -2880,8 +2868,8 @@ An example of this is an extension that defines an SQL trigger that uses a non-s
 Triggers are only invoked when data is written to the GeoPackage, so usage of this type of extension can be safely ignored for read-only access.
 This is indicated by a gpkg_extensions.scope column value of “write_only”.</p>
 </div>
-<div id="_requirement-85" class="quoteblock">
-<div class="title">Requirement 85</div>
+<div id="_requirement-86" class="quoteblock">
+<div class="title">Requirement 86</div>
 <blockquote>
 The scope column value in a <code>gpkg_extensions</code> row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.
 </blockquote>
@@ -2918,8 +2906,8 @@ Definitions of those extensions in the form specified by the template in <a href
 </div>
 <div class="sect5">
 <h6 id="_extension_types">3.1.1.1.1. Extension Types</h6>
-<div id="_requirement-86" class="quoteblock">
-<div class="title">Requirement 86</div>
+<div id="_requirement-87" class="quoteblock">
+<div class="title">Requirement 87</div>
 <blockquote>
 A GeoPackage MAY store feature table geometries with the extended non-linear geometry types (CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in <a href="#geometry_types">Geometry Types (Normative)</a>.
 If it does so, they SHALL be encoded in the GeoPackageBinary geometry format.
@@ -2928,8 +2916,8 @@ If it does so, they SHALL be encoded in the GeoPackageBinary geometry format.
 </div>
 <div class="sect5">
 <h6 id="_extensions_types_extensions_name">3.1.1.1.2. Extensions Types - Extensions Name</h6>
-<div id="_requirement-87" class="quoteblock">
-<div class="title">Requirement 87</div>
+<div id="_requirement-88" class="quoteblock">
+<div class="title">Requirement 88</div>
 <blockquote>
 An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_&lt;gname&gt;” template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage.
 </blockquote>
@@ -2937,8 +2925,8 @@ An extension name to specify a feature geometry extension type SHALL be defined 
 </div>
 <div class="sect5">
 <h6 id="_extensions_types_extensions_row">3.1.1.1.3. Extensions Types - Extensions Row</h6>
-<div id="_requirement-88" class="quoteblock">
-<div class="title">Requirement 88</div>
+<div id="_requirement-89" class="quoteblock">
+<div class="title">Requirement 89</div>
 <blockquote>
 A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per clause 3.1.1.1.2.
 </blockquote>
@@ -2955,8 +2943,8 @@ A GeoPackage that contains a gpkg_geometry_columns table or updateable view with
 </div>
 <div class="sect5">
 <h6 id="_extensions_encoding">3.1.2.1.1. Extensions Encoding</h6>
-<div id="_requirement-89" class="quoteblock">
-<div class="title">Requirement 89</div>
+<div id="_requirement-90" class="quoteblock">
+<div class="title">Requirement 90</div>
 <blockquote>
 The ExtendedGeoPackageBinary format defined in <a href="#extension_geometry_encoding">User-Defined Geometry Types Encoding Extension Template (Normative)</a> SHALL be used to encode geometry types other than those specified in clauses <a href="#sql_geometry_types">SQL Geometry Types</a> and <a href="#gpkg_geometry_types_extension">GeoPackage Geometry Types Extension</a> and listed in <a href="#geometry_types">Geometry Types (Normative)</a>.
 </blockquote>
@@ -2965,7 +2953,7 @@ The ExtendedGeoPackageBinary format defined in <a href="#extension_geometry_enco
 <div class="sect5">
 <h6 id="_extensions_encoding_extensions_name">3.1.2.1.2. Extensions Encoding - Extensions Name</h6>
 <div id="user_defined_geometry_ext_name_req" class="quoteblock">
-<div class="title">Requirement 90</div>
+<div class="title">Requirement 91</div>
 <blockquote>
 An extension name to specify a feature geometry extension type encoded in the ExtendedGeoPackageBinary format SHALL be defined for an author name that is NOT “gpkg” using the “&lt;author_name&gt;_geom_&lt;gname&gt; template where &lt;gname&gt; is the uppercase name of an extension geometry type NOT listed in <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage.
 </blockquote>
@@ -2973,8 +2961,8 @@ An extension name to specify a feature geometry extension type encoded in the Ex
 </div>
 <div class="sect5">
 <h6 id="_extensions_encoding_extensions_row">3.1.2.1.3. Extensions Encoding - Extensions Row</h6>
-<div id="_requirement-91" class="quoteblock">
-<div class="title">Requirement 91</div>
+<div id="_requirement-92" class="quoteblock">
+<div class="title">Requirement 92</div>
 <blockquote>
 An Extended GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values other than those specified in clauses <a href="#sql_geometry_types">SQL Geometry Types</a> and 3.1.1 and listed in <a href="#geometry_types">Geometry Types (Normative)</a> SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry type constructed per clause 3.1.2.1.2.
 </blockquote>
@@ -2982,10 +2970,10 @@ An Extended GeoPackage that contains a gpkg_geometry_columns table or updateable
 </div>
 <div class="sect5">
 <h6 id="_geometry_columns_geometry_type_name">3.1.2.1.4. Geometry Columns Geometry Type Name</h6>
-<div id="_requirement-92" class="quoteblock">
-<div class="title">Requirement 92</div>
+<div id="_requirement-93" class="quoteblock">
+<div class="title">Requirement 93</div>
 <blockquote>
-The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be the <a href="#user_defined_geometry_ext_name_req">Requirement 90</a> extension name in uppercase.
+The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be the <a href="#user_defined_geometry_ext_name_req">Requirement 91</a> extension name in uppercase.
 </blockquote>
 </div>
 </div>
@@ -3003,8 +2991,8 @@ The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code
 <div class="paragraph">
 <p>Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.<span class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnote_37" title="View footnote.">37</a>]</span></p>
 </div>
-<div id="_requirement-93" class="quoteblock">
-<div class="title">Requirement 93</div>
+<div id="_requirement-94" class="quoteblock">
+<div class="title">Requirement 94</div>
 <blockquote>
 A GeoPackage SHALL implement spatial indexes on feature table geometry columns as specified in clause 3.1.3.1.1 using the SQLite Virtual Table RTrees and triggers specified in <a href="#extension_rtree">RTree Spatial Index Extension (Normative)</a>.
 </blockquote>
@@ -3012,8 +3000,8 @@ A GeoPackage SHALL implement spatial indexes on feature table geometry columns a
 </div>
 <div class="sect5">
 <h6 id="_spatial_indexes_extensions_name">3.1.3.1.2. Spatial Indexes - Extensions Name</h6>
-<div id="_requirement-94" class="quoteblock">
-<div class="title">Requirement 94</div>
+<div id="_requirement-95" class="quoteblock">
+<div class="title">Requirement 95</div>
 <blockquote>
 The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.
 </blockquote>
@@ -3021,8 +3009,8 @@ The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions tab
 </div>
 <div class="sect5">
 <h6 id="_spatial_indexes_extensions_row">3.1.3.1.3. Spatial Indexes - Extensions Row</h6>
-<div id="_requirement-95" class="quoteblock">
-<div class="title">Requirement 95</div>
+<div id="_requirement-96" class="quoteblock">
+<div class="title">Requirement 96</div>
 <blockquote>
 A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name “gpkg_rtree_index”, the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
 </blockquote>
@@ -3039,8 +3027,8 @@ A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table 
 </div>
 <div class="sect5">
 <h6 id="_geometry_type_triggers_implementation">3.1.4.1.1. Geometry Type Triggers – Implementation</h6>
-<div id="_requirement-96" class="quoteblock">
-<div class="title">Requirement 96</div>
+<div id="_requirement-97" class="quoteblock">
+<div class="title">Requirement 97</div>
 <blockquote>
 A GeoPackage SHALL include the SQL insert and update triggers specified in <a href="#extension_geometry_type_triggers">Geometry Type Triggers Extension (Normative)</a> on every geometry column to enforce the geometry type values specified for those columns in the gpkg_geometry_columns table.
 </blockquote>
@@ -3048,8 +3036,8 @@ A GeoPackage SHALL include the SQL insert and update triggers specified in <a hr
 </div>
 <div class="sect5">
 <h6 id="_geometry_type_triggers_extensions_name">3.1.4.1.2. Geometry Type Triggers – Extensions Name</h6>
-<div id="_requirement-97" class="quoteblock">
-<div class="title">Requirement 97</div>
+<div id="_requirement-98" class="quoteblock">
+<div class="title">Requirement 98</div>
 <blockquote>
 The “gpkg_geometry_type_trigger” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of geometry type triggers.
 </blockquote>
@@ -3057,8 +3045,8 @@ The “gpkg_geometry_type_trigger” extension name SHALL be used as a gpkg_exte
 </div>
 <div class="sect5">
 <h6 id="_geometry_type_triggers_extensions_row">3.1.4.1.3. Geometry Type Triggers – Extensions Row</h6>
-<div id="_requirement-98" class="quoteblock">
-<div class="title">Requirement 98</div>
+<div id="_requirement-99" class="quoteblock">
+<div class="title">Requirement 99</div>
 <blockquote>
 A GeoPackage that implements geometry type triggers on geometry columns SHALL contain a gpkg_extensions table that contains a row for each such geometry column with extension_name “gpkg_geometry_type_trigger”, table_name of the feature table with a geometry column, and column_name of the geometry column.
 </blockquote>
@@ -3075,8 +3063,8 @@ A GeoPackage that implements geometry type triggers on geometry columns SHALL co
 </div>
 <div class="sect5">
 <h6 id="_srs_id_triggers_implementation">3.1.5.1.1. SRS_ID Triggers – Implementation</h6>
-<div id="_requirement-99" class="quoteblock">
-<div class="title">Requirement 99</div>
+<div id="_requirement-100" class="quoteblock">
+<div class="title">Requirement 100</div>
 <blockquote>
 A GeoPackage SHALL include the SQL insert and update triggers specified in <a href="#extension_geometry_srsid_triggers">Geometry SRS ID Triggers Extension (Normative)</a> on every geometry column to enforce the srs_id values specified for those columns in the <code>gpkg_geometry_columns</code> table.
 </blockquote>
@@ -3084,8 +3072,8 @@ A GeoPackage SHALL include the SQL insert and update triggers specified in <a hr
 </div>
 <div class="sect5">
 <h6 id="_srs_id_triggers_extensions_name">3.1.5.1.2. SRS_ID Triggers – Extensions Name</h6>
-<div id="_requirement-100" class="quoteblock">
-<div class="title">Requirement 100</div>
+<div id="_requirement-101" class="quoteblock">
+<div class="title">Requirement 101</div>
 <blockquote>
 The “gpkg_srs_id_trigger” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of SRS_ID triggers specified in <a href="#extension_geometry_srsid_triggers">Geometry SRS ID Triggers Extension (Normative)</a>.
 </blockquote>
@@ -3093,8 +3081,8 @@ The “gpkg_srs_id_trigger” extension name SHALL be used as a gpkg_extensions 
 </div>
 <div class="sect5">
 <h6 id="_srs_id_triggers_extensions_row">3.1.5.1.3. SRS_ID Triggers – Extensions Row</h6>
-<div id="_requirement-101" class="quoteblock">
-<div class="title">Requirement 101</div>
+<div id="_requirement-102" class="quoteblock">
+<div class="title">Requirement 102</div>
 <blockquote>
 A GeoPackage that implements srs_id triggers on feature table geometry columns SHALL contain a gpkg_extensions table that contains a row for each geometry column with extension_name “gpkg_srs_id_trigger”, table_name of the feature table with a geometry column, and column_name of the geometry column.
 </blockquote>
@@ -3123,8 +3111,8 @@ A GeoPackage that implements srs_id triggers on feature table geometry columns S
 </div>
 <div class="sect5">
 <h6 id="_zoom_other_extensions_name">3.2.1.1.2. Zoom Other – Extensions Name</h6>
-<div id="_requirement-102" class="quoteblock">
-<div class="title">Requirement 102</div>
+<div id="_requirement-103" class="quoteblock">
+<div class="title">Requirement 103</div>
 <blockquote>
 The “gpkg_zoom_other” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of other zoom intervals on a tile pyramid user data table as specified in <a href="#extension_zoom_other_intervals">Zoom Other Intervals Extension (Normative)</a>.
 </blockquote>
@@ -3132,8 +3120,8 @@ The “gpkg_zoom_other” extension name SHALL be used as a gpkg_extensions tabl
 </div>
 <div class="sect5">
 <h6 id="_zoom_other_extensions_row">3.2.1.1.3. Zoom Other – Extensions Row</h6>
-<div id="_requirement-103" class="quoteblock">
-<div class="title">Requirement 103</div>
+<div id="_requirement-104" class="quoteblock">
+<div class="title">Requirement 104</div>
 <blockquote>
 A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name “gpkg_zoom_other”, the table_name of the table with other zoom intervals, and the “tile_data” column_name.
 </blockquote>
@@ -3156,8 +3144,8 @@ A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions t
 </div>
 <div class="sect5">
 <h6 id="_webp_extensions_name">3.2.2.2.1. WEBP&#8201;&#8212;&#8201;Extensions Name</h6>
-<div id="_requirement-104" class="quoteblock">
-<div class="title">Requirement 104</div>
+<div id="_requirement-105" class="quoteblock">
+<div class="title">Requirement 105</div>
 <blockquote>
 The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of tile pyramid images in WEBP format as specified in <a href="#extension_tiles_webp">Tiles Encoding WebP Extension (Normative)</a>.
 </blockquote>
@@ -3165,8 +3153,8 @@ The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extensio
 </div>
 <div class="sect5">
 <h6 id="_webp_extensions_row">3.2.2.2.2. WEBP&#8201;&#8212;&#8201;Extensions Row</h6>
-<div id="_requirement-105" class="quoteblock">
-<div class="title">Requirement 105</div>
+<div id="_requirement-106" class="quoteblock">
+<div class="title">Requirement 106</div>
 <blockquote>
 A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.
 </blockquote>
@@ -5818,7 +5806,7 @@ END;</p>
 <p>Fail if returns an empty result set.</p>
 </li>
 <li>
-<p>Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values, primary, and foreign <del>and unique</del> key constraints match all of those in the contents of Annex C Table 23. <del>Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</del></p>
+<p>Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values, primary, and foreign key constraints match all of those in the contents of Annex C Table 23.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -6450,7 +6438,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <p>SELECT COUNT(table_name) FROM gpkg_contents WERE data_type = “tiles”</p>
 </li>
 <li>
-<p><del>Fail if less than 2</del> <ins>Not testable if less than 1</ins></p>
+<p>Not testable if less than 1</p>
 </li>
 <li>
 <p>SELECT table_name FROM gpkg_contents WHERE data_type = “tiles”</p>
@@ -10820,2114 +10808,6 @@ Request For Comment (RFC).</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2012-11-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove min/max x/y fields from all tables and text in clause 10.3 Tile Table Metadata
-per change request 250 / 12-135.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2012-11-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10.2, Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>add compr_qual_factor and georectification columns to raster_columns table create statement and sample insert statement; add triggers for those columns matching those for _rt_metadata per change request 251 / 12-134</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-01-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change gpkg_contents description default value per change request 255 / 12-166</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-01-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">9.2, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>SRS Table Name Change per change request 256 / 12-165</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-01-16</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7, Figure 2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>table diagram gpkg_contents min_y REAL instead of BLOB</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-01-23</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">11.3, 8.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause reference corrections, change gpkg_contents.identifier default value to ""</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Changes to AS</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>No changes to AS</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>new last sentence and NOTE1, additional table name triggers</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">9.6</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>drop tables 21, 22 and associated text</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10.5</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>misc. editorial changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">11.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>REQ 71 should refer to clause 11.2 and not 11.1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>new clause 12 other data</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r2</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">13.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>rename tables 56,57 remove "ows_" prefix</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-08</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">r3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">10.2, 10.7, 10.8</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Use -1 as "magic" value indicating "unknown" for both compr_qual_factor and georectification columns, and make it the default value. Remove NOTE1 in 10.7. Delete the next to last row in Table 46 - Image Routines for gpkgBboxToTiles (). Delete the corresponding sub-clause 10.8.10 Renumber sub-clause 10.8.11 to 10.8.10</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-02-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Normative References, Future Work, 6, Bibliography</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>The GeoPackage file format and SQL API are provided by SQLite, which is the GeoPackage container implementation, not just a a reference implementation.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-03-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.4</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add Security Considerations clause.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-03-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Future Work</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Streaming synchronization</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-03-30</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Normative References,
-All, Bibliography</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Move references to geos and proj4 libraries from Normative References to Bibliography, remove references to them from main text.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-03-30 2013-04-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Reorganize document and Annexes</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>New Core / Extension outline.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-03-30</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>auth_name column case-insensitive</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-03-30</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add feature table layout example</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All,Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Move table definition SQL to Annex B</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.2.4</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove requirements for SQL/MM functions, REQ 21 – 33.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-03</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R3</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Renumber tables, figures, normative references</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.6</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Make integer primary keys mandatory for user vector, raster and tile data tables.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.3.2,</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Rewrite clause, remove references to geometry_columns table columns that are superfuluous in SQLite implementation.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.6.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Rewrite clause, remove references to SF/SQL gS and gB architectures.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-18</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.4.1, 6.3.4.2, 6.3.6.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove normative references to RasterLite</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-19</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.6.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GeoPackage description of other data tables.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove implementation references</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.6.3, Annex G</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove manifest other data entries</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.4.2, Annex B, E</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Allow metadata of specified MIME type</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.4.3, Annex B, E</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Allow NULLs in metadata_reference table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.3.2, new Annex F</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Geometry type codes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-04-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R4</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.4, new Annex L</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Feature Schema Metadata example</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-03</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Future Work</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Geographic / Geodetic Geometries</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.4.2, Annex C, E</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove compr_qual_factor and georectification columns from raster_columns table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.4, 6.3.4.3, new Annex M</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>delete _rt_metadata tables
-add Annex M
-reference Annex M from note in 6.3.2.4</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.1.1, Normative References, Bibliography</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add NITF as an extension image format</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise Table Diagram</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.3.3, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove raster functions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.4.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>metadata_reference table is not required to contain any rows</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.4.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Recommend ISO 19139 metadata</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3, Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Default values</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.3.3, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Minimal Runtime SQL Functions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.3.4, Annex D</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Spatial Indexes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-13</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6, 7</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Reformat requirement tables, unduplicate requirement text</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.1, 6.3.2.4,
-6.3.4.2,
-7.3.5.5,
-Annex B,
-remove Annex L</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Replace raster_columns table, Annex L with gpkg_data_columns table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-16</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.3, 7.4, Annex G,H,I</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop manifest table, schemas, sample document</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-16</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Future Work</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add GeoPackage Abstract Object Model</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.2.1, 6.3.3.1,
-new 7.1.1,
-Annex F</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add optional support for non-linear geometry types</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.3.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add SQLite configuration requirements</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3, 7.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Require only gpkg_contents and spatial_ref_sys tables</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.2.1.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add gpkg_extensions table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.3.4, Annex D</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Provide spatial index templates instead of examples</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-25</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Preface, Scope, Terms, 6, 7</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Simplify, rewrite, add terms, use terms</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-26</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Incorporate terms, renumber requirements and tables</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add "GPKG" as SQLite application id</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add SQLITE PRAGMA integrity_check</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.2.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Geometry format minor changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">6.3.2.2, Annex E</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove references to raster_columns table (removed previously)</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause number references and text changes required by 5/22 changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove comments on accepted changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex E E.4</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add non-linear geometry type codes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">7.2.4.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change reference from SF/SQL to SQL/MM</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change core and extension requirement names required by 5/22 changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Table 16</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change extension to API to avoid overloading extension term</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Draft changes to A.2 Conformance Classes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-29</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">B.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add gpkg_data_columns table SQL</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-05-30</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R5</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Revision History</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Record 5/29 changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-06</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Preface, Submission Contact Points, Revision History, Changes to AS, Changes to IS,
-Future Work,
-Forward,
-Introduction,
-Clauses 1-5</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove all forward material except title page, submitting orgs, and introduction, and put in annexes.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Old Clauses 6,7 &#8594; New 1-3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Restructure document iaw draft Requirements Dependencies</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revised Requirements Dependencies and Diagram</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Fix clause and requirement references based on document restructure</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add Abstract Test Suite (incomplete)</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clause 1,2, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Insert Base and Extension subclauses, renumber more deeply nested subclauses</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex G</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove names and codes for Z and M geometry types, add Figure 5 and geometry subtype definitions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clause 1.2.2.6</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Rewrite clause, add new Requirement 10, 11, renumber existing and subsequent ones.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex D</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add ST_Is3D() and ST_IsMeasured()</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add "gpkg_" prefix to all GeoPackage metadata tables</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Figure 1, 2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Update with "gpkg_" prefix</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add Abstract Test Suite (incomplete)</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-13</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.2.4.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add sentence to end of first paragraph describing gpkg_other_data_columns content..</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-13</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add Abstract Test Suite (incomplete)</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-17</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clause 1,2,3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revised notes and turned them into footnotes; moved normative text into requirement statements.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-20</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Restructure document iaw SpecificationStructureAlternative3</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Pepijn Van Eeckhoudt</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Created and applied Word Styles and Outline List Numbering</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-26</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.2, 2.1.1, 2.1.4,  3.1.2, Annex C, D, F, G</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GeoPackage Geometry Encoding Revisions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.1.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add footnote recommendation on Spatial Index drop/add if many updates.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Figure 1,
-2.2.6, 2.2.7</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove gpkg_tile_table_metadata table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change requirement statement format to Req # s SHALL o in bold italic</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Update definition of Empty GeoPackage, add definition of Valid GeoPackage</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Figure 1, 2.2.7, Annex C, F</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change tile_matrxI_metadata t_table_name column name to table_name iaw changes to gpkg_geometry_columns column name changes.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Figure 1,
- 2.1.5, 2.2.7,
-Annex C, F</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add gpkg_geometry_columns and gpkg_tile_matrix_metadata table_name foreign key constraints referencing gpkg_contents table_name now that gpkg_contents rows may describe other data tables.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-06-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R6</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clause 3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Tables with non "gpkg" author registered extensions not data_type "features" or "tiles"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change ATS format from numbered list to bold heading, add test definitions.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-02</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add test definitions.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-03</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise, add test definitions.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-04</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change .geopackage to .gpkg</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add "Potential" to "Future Work", "MAY" to items.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add support for UTFGrid as a future work item.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add footnote to REQ 1 that SQLite is in the public domain.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add footnote to Table 4 that OGC WKB is subset of ISO WKB</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise definition of geometry type in Table 4 to include is_empty flag; add paragraph on encoding empty point geometries.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex E</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise spatial index triggers to handle NULL values.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex C, F</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Correct SQL errors in tables 13, 32, 43</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex D</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add ST_IsEmpty(geom. Geometry)</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex E
-Table 39</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise spatial index triggers to handle empty geometries, changed ROWID values.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A
-A.3.1.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise test method iaw changes to spatial index triggers</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Envelope in geopackage geometry binary for empty geometry</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-07-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R7</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A
-A.2.1.2.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise test method to test for NaN values in envelope of empty geometries</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-08-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Submitting Organizations, Submission Contact Points</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Moved Submitting Organizations to B2; deleted previous B2 Submission Contact Points</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-08-01</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1
-Table 3, 2.1.6.1.2,
-Annex A, C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Nullable gpkg_contents columns
-One geometry column per feature table.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Clause 3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add new Req 67 re gpkg_extensions table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.6.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>remove footnote 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.6.1.1,  Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>change no to yes for null in Table 6, 27 except for id column</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Req 12 add gpkg_ prefix to gpkg_spatial_ref_sys</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>remove "with compression" and "without compression from footnote 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.6.1.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>"an all of" changed to "all"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.6.1.2, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add gpkg_ prefix to gpkg_tile_matrix_metdata</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.7.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Space between 8and</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.6.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Table 7 {rasterlayername}_tiles change to Tile Matrix User Data Table Name</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.1.3.1.2, 3.2.1.1.2, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change gpkg_extension to gpkg_extensions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.2.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove [29] from GeoTiff, change [31] to [29] for NGA Implementation Profile</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>change "first three bytes of each gc are not "GPB"" to "first two bytes of each gc are not "GP"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change (1,2,3) to (0,1,2)</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex D</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>add INTEGER return type to ST_ISEmpty, ST_Is3D, ST_ISMeasured functions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add "more"</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add the following constraint to the gpkg_geometry_columns table: CONSTRAINT uk_gc_table_name UNIQUE (table_name),</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.1.4.1.2, 3.1.5.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change geopackage_extension to gpkg_extensions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-18</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.6.1, Annex A, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add column <em>scope text not null</em> to gpkg_extensions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-18</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.5</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Reword clause 2.5 to preclude reference to other data tables by rows in gpkg_geometry_columns or gpkg_tile_matrix_metadata tables.
-Add data_type constraint to Req 19.
-Add data_type constraint to Annex A tests.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-18</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.1, 3.3, Annex A, Annex D</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Rename clause 3.3 Other Tables
-Move clause 3.1.1 Geometry Encoding to clause 3.3.1 Other Geometry Encoding
-Move clause 3.2.5 Tile Encoding Other to clause 3.3.2 Other Tile Encoding
-Rename clause 3.3.1 Other Trigger to clause 3.3.3 Other Trigger
-Renumber contained requirements
-Add footnote to Annex D table
-Move corresponding tests in Annex A</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex E</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Replace all occurences of <em>rowid</em> with <em>&lt;i&gt;</em> in trigger definitions.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Update normative [xx]and bibliographic  [Byy] references</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-25</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.1, Annex A, Annex D, Annex F</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change geometry_columns to gpkg_geometry_columns and geometry_type to geometry_type_name</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-25</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.3, 3.2.1, new Annex I</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change "power" to "factor" in and add text to zoom level descriptions and requirements.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-25</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.6, Annex A, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add required data types for vector feature user data table column definitions.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-26</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">New 2.3.2, Annex A, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add gpkg_data_column_constraints table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-26</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3, 2.2.1, 2.2.6, 2.2.7, 2.2.8, Annex A, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add gpkg_tile_matrix_set, rename gpkg_tile_matrix_metadata to gpkg_tile_matrix, standardize tile pyramid, tile matrix set and tile matrix term usage.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Figure 1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Added gpkg_tile_matrix_set, gpkg_data_columns_constraints to Figure 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.5.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Replace normative text in 2.1.5.1.1 with new requirement 19 in 2.1.5.1.2.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clarify which tables may be implemented as views or extended with additional columns.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.4.2.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop md_standard_uri default value, add footnote and text paragraph.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Specify case sensitivity for required column values.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-09-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R8</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change SQL trigger action from ROLLBACK to ABORT</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-02</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.2.1.1, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add Null column to table 2 per table 22, remove default value, foreign and unique key tests from Annex A A.1.1.2.1.1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-02</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc. Editorial corrections.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-02</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Title Page</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Changed title from Implementation Specification to Encoding Standard per Carl Reed email.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-04</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.3, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add new Req 4 requirement for SQLite PRAGMA foreign_key_check()</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-04</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Disallow addition of columns to all gpkg tables except user data feature tables.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction,
-All, Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>GeoPackage replaces GeoPackage file</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction,
-1.1.1.1.1,
-Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add Extended GeoPackage definition</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction Figure 1, 2.6, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add definition column to gpkg_extensions table.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction, Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add GeoPackage SQLite Configuration definition</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction, Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Modify definition of GeoPackage SQLite Extension</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise Container Definition, add new Req 1 and Req 3</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.2.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove rows from Table 1 SQLite Configuration</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop clause.  Required SQL functions to be defined in extension template documents.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.5.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>New Introduction clause for Extension Mechanism</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-05</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.5.2.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>New Req 79, Req 83, revised Req 82, added explanatory text for Req 84, deleted Table 47</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.2.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Move foreign key rows from Table 9 Safe GeoPackage to Table 1 SQLite Configuration</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.5.2.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Extend Req 79 with semantic equivalence of empty and missing gpkg_extensions table.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.5.2.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop Clasue.  Required SQL Configuration settings to be defined in extension template documents.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>New clause for Geometry Encoding Extension</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-07</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex J - S</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>New Extension Template and Extension Annexes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-08</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.2.2,  Annex M, N, O</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Prohibit all SQLITE_OMIT_* compile time options instead of specific ones.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.\*.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Simplify extension prerequisite descriptions, reference extension annexes.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annexes J - S</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Style subheadings as subtitles, add clause references</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3, Annex L</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Replace GeoPackageBinary definition with StandardGeoPackageBinary definition.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction, 2.3.2, 2.3.3, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Drop constraint_type column from gpkg_data_columns, Req 60</p>
-</li>
-<li>
-<p>Add Req 61</p>
-</li>
-<li>
-<p>Change description of constraint name.</p>
-</li>
-<li>
-<p>Revise Figure 1 Table Diagram</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.5.2.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add guidance for extension template</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.6.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add footnote re further restrictions on the geometry types that are allowed in a feature table</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-09</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add footnote that WKB geometries are not geographic / geodesic</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change Req 3 SQLite database header required contents to include version number.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add and revise tests in accordance with other R9 draft changes.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.3.3, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add unique key on gpkg_data_column_constraints constraint_name, constraint_type, constraint_value columns;  Add new Req 63, ATS test</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex D</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop D.1 Geometry Column Triggers</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop Annex F</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.3.3.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove first sentence on constrain name column values.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction, 2.3.3.1.1, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add description column to gpkg_data_column_constraints table.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.3.3.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop requirement 61</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.6.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Drop footnote 2 on p.13</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.6.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Delete DECIMAL_TEXT row from Table 6</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Move to 1.1.1.1.3, renumber requirements.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.6.1.1, 1.1.1.1.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Move Req 30 and Table 6 to Req5 and Table 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.4.3.1.1, Annex C</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change timestamp column from TEXT to DATETIME data type</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change data types to those specified in Table 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.3.3.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add NUMERIC data type footnote for table gpkg_data_column_constraints</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-15</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc editorial changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.2.3, 3.2.4, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove TIFF and NITF tile encodings</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">New 3.1.2.1.4, Annex A</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>New Req 91</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex K</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Rewrite requirement description</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.1.1, 3.1.2, Annex J, K</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Renamed</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc editorial changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-22</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Introduction, Annex B</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Replace detailed table diagram in Introduction with an overview diagram; move detailed table diagram to Annex B, add minimal features and tiles diagrams to Annex B.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Specify 8601 formats for DATE and DATETIME in Table 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.3</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>{(size)} specs for BLOB and TEXT data types in Table 1</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.1.1   Table 5</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Bit layout of flags byte and flag bits use&#8201;&#8212;&#8201;additional text</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc editorial changes</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex Q, R</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Removed</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-10-24</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All, Annex S, T</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove unused normative [xx]and bibliographic  [Byy] references, update remaining ones</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-11</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc editorial changes, mostly formatting.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex  C, G</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Correct gpkg_metadata table definition SQL default values, metadata column type from BLOB to TEXT</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add footnote (3) to Req 2</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex L, O</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add <a href="http://www.sqlite.org/rtree.html">http://www.sqlite.org/rtree.html</a></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.6.1.1, 2.2.6.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Cut sentence from 2.2.6.1.1, paste revised version and additional sentence describing origin georeferenced coordinates to 2.2.6.1.2.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.3.3.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add a new third sentence in first paragraph; add new Table 13 example</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1, 2.1.3.1.1, 2.2.6.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add x/y axis definitions to  min/max x/y column descriptions and WKB geometry description.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-13</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Revise footnote (3) to Req 2 to include byte values instead of long value.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-13</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler, Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc editorial changes, mostly formatting.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-18</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1, 2.1.6.1.1, 2.2.8.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add "and table constraints" in clause 1, make INTEGER PRIMARY KEY AUTOINCREMENT explicit in Req 29 and Req 52 to avoid future "WITHOUT ROWID" SQLite v3.8.2 problems.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-19</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R9</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler, Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc formatting changes.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-21</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.4</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove "()" from PRAGMA foreign_key_check()</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-11-21</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex C, G</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change metadata_standard_uri column name to md_standard_uri</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-26</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A.1.1.2.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Use the current gpkg_spatial_ref_sys table and column name definitions</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex Q</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add normative reference [32] to OpenGIS® 01-009</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.2.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add normative reference “[32]” to description of definition column in Table 3</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A.1.1.2.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/base/core/gpkg_spatial_ref_sys/data_values_default  revise step 3 SQL</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.2.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add paragraph on definition column WKT values</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Misc editorial corrections.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A.2.2.3.1.1, A.2.2.4.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change “extension_name IN ('gpkg_webp’,’gpkg_tiff’,’gpkg_nitf’)” to “extension_name = ‘gpkg_webp’”</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A.2.5.1.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>delete test steps 7 and 8:re tile encoding TIFF and NITF</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.7.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>remove the default column from Table 9</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.8.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>remove 3.2.3, 3.2.4  from table 10 tile_data column description</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Annex D.5</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change t_table_name to table_name in Table 41</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2013-12-31</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.5.1.2</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change “each geometry column” to “the geometry column” in Req 22</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2014-01-10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.2.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Rename Table 3 Spatial Ref Sys Table Definition</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2014-01-28</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R10</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1, 2.4.3.1.1, Annex C, Annex H</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>strftime(<em>%Y-%m-%dT%H:%M:%fZ</em>, CURRENT_TIMESTAMP) changed to strftime(<em>%Y-%m-%dT%H:%M:%fZ</em>,<em>now</em>)</p>
-</div></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2014-07-14</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">R11</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
@@ -13163,7 +11043,7 @@ Annex B</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2015-06-10</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Brad Hards</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.2.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -13172,7 +11052,7 @@ Annex B</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2015-06-17</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.2.6.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -13181,7 +11061,7 @@ Annex B</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2015-06-17</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.2.7.1.2</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -13190,7 +11070,7 @@ Annex B</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2015-06-24</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.1.2.1.2</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -13199,11 +11079,29 @@ Annex B</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2015-08-04</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Figures 4, 5, 6</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Correcting multiplicity <a href="https://github.com/opengeospatial/geopackage/issues/117">https://github.com/opengeospatial/geopackage/issues/117</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-08-25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whole document</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Removing revision markup <a href="https://github.com/opengeospatial/geopackage/issues/135">https://github.com/opengeospatial/geopackage/issues/135</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-08-25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex B, B.6</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Removing old changes <a href="https://github.com/opengeospatial/geopackage/issues/133">https://github.com/opengeospatial/geopackage/issues/133</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -13336,11 +11234,6 @@ columns:</p>
 <img src="geopackage-features.png" alt="geopackage features">
 </div>
 <div class="title">Figure 5. GeoPackage Minimal Tables for Features</div>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="geopackage-features_1.0.1.png" alt="geopackage features 1.0.1">
-</div>
 </div>
 </div>
 <div class="sect2">
@@ -16293,7 +14186,7 @@ For undated references, the latest edition of the normative document referred to
 <a href="#_footnoteref_7">7</a>. GeometryCollection is a generic term for the ST_GeomCollection type defined in [12\], which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMCOLLECTION defined in [10\] and used in Clause 1.1.2.1.1 and Annex E below refers to the SQL BLOB encoding of a GeometryCollection.
 </div>
 <div class="footnote" id="_footnote_8">
-<a href="#_footnoteref_8">8</a>. OGC WKB simple feature geometry types specified in <del> <<13>> </del><ins> <<9>> </ins> are a subset of the ISO WKB geometry types specified in <del> <<16>> </del><ins> <<12>> </ins>
+<a href="#_footnoteref_8">8</a>. OGC WKB simple feature geometry types specified in <<9>> are a subset of the ISO WKB geometry types specified in <<12>>
 </div>
 <div class="footnote" id="_footnote_9">
 <a href="#_footnoteref_9">9</a>. WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.
@@ -16385,7 +14278,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-08-11 02:12:58 UTC
+Last updated 2015-08-25 20:45:23 UTC
 </div>
 </div>
 </body>
