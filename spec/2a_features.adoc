@@ -82,7 +82,7 @@ The `gpkg_contents` table SHALL contain a row with a lowercase `data_type` colum
 [requirement]
 A GeoPackage SHALL store feature table geometries with or without optional elevation (Z) and/or measure (M) values in SQL BLOBs using the Standard GeoPackageBinary format specified in table <<gpb_spec>> and clause <<gpb_data_blob_format>>.
 
-:geopackage_binary_foot1: footnote:[OGC WKB simple feature geometry types specified in <del> <<13>> </del><ins> <<9>> </ins> are a subset of the ISO WKB geometry types specified in <del> <<16>> </del><ins> <<12>> </ins>]
+:geopackage_binary_foot1: footnote:[OGC WKB simple feature geometry types specified in <<9>> are a subset of the ISO WKB geometry types specified in <<12>>]
 :geopackage_binary_foot2: footnote:[WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.]
 :geopackage_binary_foot3: footnote:[The axis order in WKB is always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation and m is optional measure.]
 
@@ -108,7 +108,7 @@ StandardGeoPackageBinary {
 <3> see <<flags_layout>>
 <4> see flags envelope contents indicator code below
 <5> The X bit in the header flags field must be set to 0.
-<6> per  +++<del>+++ISO 13249-3 <<12>> clause 5.1.46 +++</del><ins>+++ OGC 06-103r4 <<9>> +++</ins>+++  {geopackage_binary_foot1}{geopackage_binary_foot2}{geopackage_binary_foot3}
+<6> per  OGC 06-103r4 <<9>>  {geopackage_binary_foot1}{geopackage_binary_foot2}{geopackage_binary_foot3}
 
 [[flags_layout]]
 .bit layout of GeoPackageBinary flags byte
@@ -139,7 +139,7 @@ StandardGeoPackageBinary {
 ** 1: Little Endian (least significant byte first)
 
 
-Well-Known Binary as defined in +++<del>+++ ISO 13249-3 <<12>> +++</del> <ins>+++ OGC 06-103r4 <<9>> +++</ins>+++ does not provide a standardized encoding for an empty point set (i.e., 'Point Empty' in Well-Known Text).
+Well-Known Binary as defined in OGC 06-103r4 <<9>> does not provide a standardized encoding for an empty point set (i.e., 'Point Empty' in Well-Known Text).
 In GeoPackages these points SHALL be encoded as a Point where each coordinate value is set to an IEEE-754 quiet NaN value.
 GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000000f87f as the binary encoding of the NaN values.
 
@@ -165,7 +165,7 @@ A GeoPackage SHALL store feature table geometries with the basic simple feature 
 A GeoPackage with a `gpkg_contents` table row with a “features” `data_type` SHALL contain a `gpkg_geometry_columns` table or updateable view per <<gpkg_geometry_columns_cols>> and <<gpkg_geometry_columns_sql>>.
 
 The second component of the SQL schema for vector features in a GeoPackage is a `gpkg_geometry_columns` table that
-identifies the geometry columns +++<ins>+++and geometry types+++</ins>+++ in tables that contain user data representing features.
+identifies the geometry columns and geometry types in tables that contain user data representing features.
 
 [[gpkg_geometry_columns_cols]]
 .Geometry Columns Table or View Definition
@@ -234,8 +234,8 @@ A feature table SHALL have only one geometry column.
 
 Feature data models <<B23>> from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be transformed into GeoPackage implementations with a separate feature table for each geometry type whose rows have matching integer primary key values that allow them to be joined in a view with the same column definitions as the non-GeoPackage feature data model with multiple geometry columns.
 
-[requirement]
-+++<ins>+++Req 30b: The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex E specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.+++</ins>+++
+[requirement] 
+The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex E specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.
 
 [[example_feature_table_cols]]
 .EXAMPLE : Sample Feature Table or View Definition
@@ -267,7 +267,7 @@ For example, if the `geometry_type_name` value in the `gpkg_geometry_columns` ta
 If the geometry `type_name` value in the `gpkg_geometry_columns` table is for a geometry type like GEOMCOLLECTION that has subtypes, then the feature table geometry column MAY only contain geometries of that type or any of its direct or indirect subtypes.
 If the geometry `type_name` is GEOMETRY (the root of the geometry type hierarchy) then the feature table geometry column MAY contain geometries of any geometry type.
 
-The presence or absence of optional elevation (Z) and/or measure (M) values in a geometry does not change its type or assignability. +++<ins>+++The unit of measure for optional elevation(Z) values is determined by the CRS of the geometry; it is as-defined by a 3D CRS, and undefined for a 2D CRS. The unit of measure for optional measure (M) values is determined by the CRS of the geometry.+++</ins>+++
+The presence or absence of optional elevation (Z) and/or measure (M) values in a geometry does not change its type or assignability. The unit of measure for optional elevation(Z) values is determined by the CRS of the geometry; it is as-defined by a 3D CRS, and undefined for a 2D CRS. The unit of measure for optional measure (M) values is determined by the CRS of the geometry.
 
 The spatial reference system type of a feature geometry column specified by a `gpkg_geometry_columns` table `srs_id` column value is a code from the `gpkg_spatial_ref_sys` table `srs_id` column.
 
