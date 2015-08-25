@@ -96,7 +96,7 @@ A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage content
 
 ====== Every GPKG SQLite Configuration
 
-The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile +++<del>- and run</del>+++ time options that SHALL or SHALL NOT be used.
+The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile  time options that SHALL or SHALL NOT be used.
 
 [requirement]
 Every GeoPackage SQLite Configuration SHALL have the SQLite library compile +++<del>and run</del>+++ time options specified in clause 1.1.1.2.2 table <<every_gpkg_sqlite_config_table>>.
@@ -107,7 +107,6 @@ Every GeoPackage SQLite Configuration SHALL have the SQLite library compile +++<
 |=======================================================================
 |Setting |Option |Shall / Not |Discussion
 |compile |SQLITE_OMIT_* |Not |SHALL NOT include any OMIT options from http://www.sqlite.org/compile.html#omitfeatures.
-|+++<del>run</del>+++ |+++<del>PRAGMA foreign_keys</del>+++ |+++<del>Not (OFF)</del>+++ |+++<del>Foreign key constraints are used to maintain GeoPackage referential integrity.</del>+++
 |=======================================================================
 
 [[spatial_ref_sys]]
@@ -124,7 +123,7 @@ A GeoPackage SHALL include a `gpkg_spatial_ref_sys` table per clause 1.1.2.1.1 <
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
 
-The `gpkg_spatial_ref_sys` table includes +++<del>+++at a minimum+++</del>+++ the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
+The `gpkg_spatial_ref_sys` table includes the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
 Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) specifications.
 
 [[gpkg_spatial_ref_sys_cols]]
@@ -147,7 +146,7 @@ See <<gpkg_spatial_ref_sys_sql>>.
 Definition column WKT values in the `gpkg_spatial_ref_sys` table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <<_requirement-11>>. Values SHALL be constructed per the EBNF syntax in <<32>> clause 7. Values SHALL include optional <authority> EBNF entities. Values for SRS other than WGS-84 SHOULD include optional <to wgs84> EBNF entities. Values MAY omit optional <to wgs84> and <twin axes> EBNF entities. EBNF name and number values MAY be obtained from any specified <authority>, e.g. <<13>><<14>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<_requirement-11>>:
 
 [requirement]
-+++<ins>+++The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed in <<gpkg_spatial_ref_sys_records>>. The record with an `srs_id` of 4326 SHALL correspond to http://www.google.com/search?as_q=WGS-84[WGS-84] <<15>> as defined by  http://www.epsg.org/Geodetic.html[EPSG] <<B3>> in http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] <<13>><<14>>. The record with an `srs_id` of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an `srs_id` of 0 SHALL be used for undefined geographic coordinate reference systems.
+The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed in <<gpkg_spatial_ref_sys_records>>. The record with an `srs_id` of 4326 SHALL correspond to http://www.google.com/search?as_q=WGS-84[WGS-84] <<15>> as defined by  http://www.epsg.org/Geodetic.html[EPSG] <<B3>> in http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] <<13>><<14>>. The record with an `srs_id` of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an `srs_id` of 0 SHALL be used for undefined geographic coordinate reference systems.
 
 [[gpkg_spatial_ref_sys_records]]
 .Spatial Ref Sys Table Records
@@ -158,10 +157,6 @@ Definition column WKT values in the `gpkg_spatial_ref_sys` table SHALL define th
 |any|-1|`NONE`|-1|`undefined`|any
 |any|0|`NONE`|0|`undefined`|any
 |=======================================================================
-+++</ins><del>+++
-The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain a record for
-organization http://www.epsg.org/Geodetic.html[EPSG] or epsg <<B3>> and `organization_coordsys_id` http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] <<13>><<14>> for http://www.google.com/search?as_q=WGS-84[WGS-84] <<15>>, a record with an `srs_id` of -1, an organization of “NONE”, an `organization_coordsys_id` of -1, and definition “undefined” for undefined Cartesian coordinate reference systems, and a record with an `srs_id` of 0, an organization of “NONE”, an `organization_coordsys_id` of 0, and definition “undefined” for undefined geographic coordinate reference systems.
-+++</del>+++
 
 [requirement]
 The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
@@ -185,7 +180,7 @@ The purpose of the `gpkg_contents` table is to provide identifying and descripti
 |`table_name` |TEXT |The name of the tiles, or feature table |no | |PK
 |`data_type` |TEXT |Type of data stored in the table:. “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage. |no | |
 |`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |
-|`description` |TEXT |A human-readable description for the table_name content |yes |+++<del>“”</del>+++ +++<ins>+++ ’’ +++</ins>+++ |
+|`description` |TEXT |A human-readable description for the table_name content |yes |'' |
 |`last_change` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
 |`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name |yes | |
 |`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name |yes | |

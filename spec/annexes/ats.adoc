@@ -732,7 +732,7 @@ END;
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_tile_matrix' 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values, primary, and foreign +++<del>and unique</del>+++ key constraints match all of those in the contents of Annex C Table 23. +++<del>Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</del>+++ 
+. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values, primary, and foreign key constraints match all of those in the contents of Annex C Table 23. 
 . Fail otherwise.
 |*Reference* |Clause 2.2.7.1.1 Req 41:
 |*Test Type* |Basic
@@ -897,7 +897,7 @@ END;
 |*Test Purpose* |Verify that multiple tile pyramids are stored in different tiles tables with unique names containing the required columns.
 |*Test Method* |
 . SELECT COUNT(table_name) FROM gpkg_contents WERE data_type = “tiles”
-. +++<del>Fail if less than 2</del> <ins>Not testable if less than 1</ins>+++
+. Not testable if less than 1
 . SELECT table_name FROM gpkg_contents WHERE data_type = “tiles”
 . For each row from step 3
 .. PRAGMA table_info(table_name)
