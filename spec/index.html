@@ -344,7 +344,7 @@ A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers 
 <div class="paragraph">
 <p>The required capabilities specified in this clause serve as the base for options specified in clause <a href="#_options">Options</a> and extensions specified in clause <a href="#_registered_extensions">Registered Extensions</a>.
 All gpkg_* tables and views and all tiles user data tables specified in this standard SHALL have only the specified columns and table constraints. Any features user data tables MAY have columns in addition to those specified.
-All specified table and column name values SHALL be lowercase.</p>
+All specified table, view, column, trigger, and constraint name values SHALL be lowercase.</p>
 </div>
 <div class="sect2">
 <h3 id="_core">1.1. Core</h3>
@@ -641,7 +641,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="sect5">
 <h6 id="_table_data_values">1.1.2.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">Requirement 11</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. Values SHALL include optional &lt;authority&gt; EBNF entities. Values for SRS other than WGS-84 SHOULD include optional &lt;to wgs84&gt; EBNF entities. Values MAY omit optional &lt;to wgs84&gt; and &lt;twin axes&gt; EBNF entities. EBNF name and number values MAY be obtained from any specified &lt;authority&gt;, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">Requirement 11</a>:</p>
+<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">Requirement 11</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">Requirement 11</a>:</p>
 </div>
 <div id="_requirement-11" class="quoteblock">
 <div class="title">Requirement 11</div>
@@ -2053,7 +2053,7 @@ If present it SHALL be defined per clause 2.3.2.1.1 <a href="#schema_data_column
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>constraint_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Case sensitive column value constraint name specified by reference to  gpkg_data_column_constraints.constraint name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Column value constraint name (lowercase) specified by reference to <code>gpkg_data_column_constraints.constraint</code> name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -2086,7 +2086,7 @@ The <code>column_name</code> column value in a <code>gpkg_data_columns</code> ta
 <div class="title">Requirement 61</div>
 <blockquote>
 The constraint_name column value in a gpkg_data_columns table MAY be NULL.
-If it is not NULL, it SHALL contain a case sensitive constraint_name column value from the gpkg_data_column_constraints table.
+If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
 </blockquote>
 </div>
 </div>
@@ -2131,14 +2131,14 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>constraint_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Case sensitive name of constraint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of constraint (lowercase)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>constraint_type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Lowercase type name of constraint: <em>range</em> | <em>enum</em> | <em>glob</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type name of constraint: <em>range</em> | <em>enum</em> | <em>glob</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
 </tr>
@@ -2157,7 +2157,7 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>minIsInclusive</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>min_is_inclusive</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0 (false) if min value is exclusive, or 1 (true) if min value is inclusive</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
@@ -2171,7 +2171,7 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>maxIsInclusive</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>max_is_inclusive</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0 (false) if max value is exclusive, or 1 (true) if max value is inclusive</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
@@ -2198,7 +2198,7 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <h6 id="_table_data_values_7">2.3.3.1.2. Table Data Values</h6>
 <div class="paragraph">
 <p>The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (text pattern match).
-The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The minIsInclusive and maxIsInclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
@@ -2218,9 +2218,9 @@ These restrictions MAY be enforced by SQL triggers or by code in applications th
 <th class="tableblock halign-left valign-top">constraint_type</th>
 <th class="tableblock halign-left valign-top">value</th>
 <th class="tableblock halign-left valign-top">min</th>
-<th class="tableblock halign-left valign-top">minIsInclusive</th>
+<th class="tableblock halign-left valign-top">min_is_inclusive</th>
 <th class="tableblock halign-left valign-top">max</th>
-<th class="tableblock halign-left valign-top">maxIsInclusive</th>
+<th class="tableblock halign-left valign-top">max_is_inclusive</th>
 </tr>
 </thead>
 <tbody>
@@ -2321,14 +2321,14 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="title">Requirement 67</div>
 <blockquote>
 The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "range", the <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be 0 or 1.
+If it contains rows with <code>constraint_type</code> column values of "range", the <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values for those rows SHALL be 0 or 1.
 </blockquote>
 </div>
 <div id="_requirement-68" class="quoteblock">
 <div class="title">Requirement 68</div>
 <blockquote>
 The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>minIsInclusive</code> and <code>maxIsInclusive</code> column values for those rows SHALL be NULL.
+If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values for those rows SHALL be NULL.
 </blockquote>
 </div>
 <div id="_requirement-69" class="quoteblock">
@@ -11104,6 +11104,24 @@ Request For Comment (RFC).</p>
 <p>Removing old changes <a href="https://github.com/opengeospatial/geopackage/issues/133">https://github.com/opengeospatial/geopackage/issues/133</a></p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-08-26</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex B, B.6</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Fix casing of minIsInclusive and maxIsInclusive <a href="https://github.com/opengeospatial/geopackage/issues/130">https://github.com/opengeospatial/geopackage/issues/130</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-08-25</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex B, B.6</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Case sensitivity for views, triggers, constraints <a href="https://github.com/opengeospatial/geopackage/issues/131">https://github.com/opengeospatial/geopackage/issues/131</a></p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 
@@ -11663,9 +11681,9 @@ Implementer must provide code4name(geometry_type_name) SQL function
   constraint_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>, // <span class="string"><span class="delimiter">'</span><span class="content">range</span><span class="delimiter">'</span></span> | <span class="string"><span class="delimiter">'</span><span class="content">enum</span><span class="delimiter">'</span></span> | <span class="string"><span class="delimiter">'</span><span class="content">glob</span><span class="delimiter">'</span></span>
   value <span class="predefined-type">TEXT</span>,
   <span class="predefined">min</span> NUMERIC,
-  minIsInclusive <span class="predefined-type">BOOLEAN</span>, // <span class="integer">0</span> = <span class="predefined-constant">false</span>, <span class="integer">1</span> = <span class="predefined-constant">true</span>
+  min_is_inclusive <span class="predefined-type">BOOLEAN</span>, // <span class="integer">0</span> = <span class="predefined-constant">false</span>, <span class="integer">1</span> = <span class="predefined-constant">true</span>
   <span class="predefined">max</span> NUMERIC,
-  maxIsInclusive <span class="predefined-type">BOOLEAN</span>, // <span class="integer">0</span> = <span class="predefined-constant">false</span>, <span class="integer">1</span> = <span class="predefined-constant">true</span>
+  max_is_inclusive <span class="predefined-type">BOOLEAN</span>, // <span class="integer">0</span> = <span class="predefined-constant">false</span>, <span class="integer">1</span> = <span class="predefined-constant">true</span>
   Description <span class="predefined-type">TEXT</span>,
   <span class="type">CONSTRAINT</span> gdcc_ntv <span class="directive">UNIQUE</span> (constraint_name, constraint_type, value)
 )</code></pre>
@@ -14278,7 +14296,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-08-25 20:45:23 UTC
+Last updated 2015-08-26 16:37:51 UTC
 </div>
 </div>
 </body>
