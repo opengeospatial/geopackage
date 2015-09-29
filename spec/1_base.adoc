@@ -186,7 +186,7 @@ The purpose of the `gpkg_contents` table is to provide identifying and descripti
 |`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name |yes | |
 |`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name |yes | |
 |`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name |yes | |
-|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match gpkg_tile_matrix_set.srs.id |yes | |FK
+|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match `gpkg_tile_matrix_set.srs_id` |yes | |FK
 |=======================================================================
 
 The `gpkg_contents` table is intended to provide a list of all geospatial contents in a GeoPackage.
