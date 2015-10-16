@@ -53,7 +53,7 @@ BEGIN
   WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
          WHERE Lower(table_name) = Lower('<t>')
 	         AND Lower(column_name) = Lower('<c>')
-	         AND gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.<c>)) = 0;
+	         AND gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.<c>)) = 0);
 END
 
 CREATE TRIGGER fgtu_<t>_<c> BEFORE UPDATE OF '<c>' ON '<t>' FOR EACH ROW
@@ -62,7 +62,7 @@ BEGIN
   WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
          WHERE Lower(table_name) = Lower('<t>')
 	         AND Lower(column_name) = Lower('<c>')
-	         AND gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.<c>)) = 0;
+	         AND gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.<c>)) = 0);
 END
 ----
 
