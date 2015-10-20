@@ -13736,7 +13736,7 @@ These spatial index triggers SHALL be defined as follows:</p>
   <span class="keyword">WHERE</span> (<span class="class">SELECT</span> geometry_type_name <span class="keyword">FROM</span> gpkg_geometry_columns
          <span class="keyword">WHERE</span> Lower(table_name) = Lower(<span class="string"><span class="delimiter">'</span><span class="content">&lt;t&gt;</span><span class="delimiter">'</span></span>)
                  <span class="keyword">AND</span> Lower(column_name) = Lower(<span class="string"><span class="delimiter">'</span><span class="content">&lt;c&gt;</span><span class="delimiter">'</span></span>)
-                 <span class="keyword">AND</span> gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.&lt;c&gt;)) = <span class="integer">0</span>;
+                 <span class="keyword">AND</span> gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.&lt;c&gt;)) = <span class="integer">0</span>);
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> fgtu_&lt;t&gt;_&lt;c&gt; <span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">'</span><span class="content">&lt;c&gt;</span><span class="delimiter">'</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">&lt;t&gt;</span><span class="delimiter">'</span></span> <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span>
@@ -13745,7 +13745,7 @@ These spatial index triggers SHALL be defined as follows:</p>
   <span class="keyword">WHERE</span> (<span class="class">SELECT</span> geometry_type_name <span class="keyword">FROM</span> gpkg_geometry_columns
          <span class="keyword">WHERE</span> Lower(table_name) = Lower(<span class="string"><span class="delimiter">'</span><span class="content">&lt;t&gt;</span><span class="delimiter">'</span></span>)
                  <span class="keyword">AND</span> Lower(column_name) = Lower(<span class="string"><span class="delimiter">'</span><span class="content">&lt;c&gt;</span><span class="delimiter">'</span></span>)
-                 <span class="keyword">AND</span> gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.&lt;c&gt;)) = <span class="integer">0</span>;
+                 <span class="keyword">AND</span> gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.&lt;c&gt;)) = <span class="integer">0</span>);
 <span class="keyword">END</span></code></pre>
 </div>
 </div>
@@ -14296,7 +14296,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-09-29 19:05:34 UTC
+Last updated 2015-10-20 00:34:58 UTC
 </div>
 </div>
 </body>
