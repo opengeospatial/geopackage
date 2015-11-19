@@ -11,7 +11,7 @@ The mandatory core capabilities defined in sub clauses and requirement statement
 ==== SQLite Container
 
 The SQLite software library provides a self-contained, single-file, cross-platform, serverless, transactional, open source RDBMS container.
-The GeoPackage specification defines a SQL database schema designed for use with the SQLite software library.
+The GeoPackage standard defines a SQL database schema designed for use with the SQLite software library.
 Using SQLite as the basis for GeoPackage simplifies production, distribution and use of GeoPackages and assists in guaranteeing the integrity of the data they contain.
 
 “Self-contained” means that container software requires very minimal support from external libraries or from the operating system.
@@ -24,7 +24,7 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 
 ====== File Format
 
-:req1_foot1: footnote:[SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.]
+:req1_foot1: footnote:[SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this standard was written. See Future Work clause in Annex B.]
 :req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html)]
 :req2_foot1: footnote:[With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196437808;" SQL statement, where 1196437808 is the 32-bit integer value of 0x47503130. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x31, 0x30 at offset 68 in the SQLite database file (see http://www.sqlite.org/fileformat2.html#database_header for details).]
 
@@ -52,7 +52,7 @@ It is RECOMMENDED that Extended GeoPackages use the file extension “.gpkx”, 
 A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the “gpkg” author name specified in this encoding standard.
 
 In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
-SQLite databases that use constructs from the GeoPackage specification but extend that to contain any of these elements are referred to as Extended GeoPackages throughout this specification.
+SQLite databases that use constructs from the GeoPackage standard but extend that to contain any of these elements are referred to as Extended GeoPackages throughout this standard.
 
 [requirement]
 The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <<table_column_data_types>>.
