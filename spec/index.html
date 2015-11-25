@@ -81,7 +81,7 @@ Document language: 	English<br></p>
 <h2 id="_patent_call">Patent Call</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium Inc. shall not be held responsible for identifying any or all such patent rights.</em></p>
+<p><em>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.</em></p>
 </div>
 <div class="paragraph">
 <p><em>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</em></p>
@@ -314,7 +314,7 @@ Direct use means the ability to access and update data in a “native” format 
 </div>
 <div class="paragraph">
 <p>A <strong>GeoPackage</strong> is a platform-independent SQLite <a href="#5">[5]</a> database file that contains GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">GeoPackage Tables Overview</a> below, with specified definitions, integrity assertions, format limitations and content constraints.
-The allowable content of a GeoPackage is entirely defined in this specification.</p>
+The allowable content of a GeoPackage is entirely defined in this standard.</p>
 </div>
 <div class="paragraph">
 <p>An <strong>Extended GeoPackage</strong> is a <strong>GeoPackage</strong> that contains any additional data elements (tables or columns) or SQL constructs (data types, functions, indexes, constraints or triggers) that are not specified in this encoding standard.</p>
@@ -328,7 +328,7 @@ A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers 
 <p>A <strong>GeoPackage SQLite Configuration</strong> consists of the SQLite 3 software library and a set of compile- and runtime configurations options.</p>
 </div>
 <div class="paragraph">
-<p>A <strong>GeoPackage SQLite Extension</strong> is a SQLite loadable extension that MAY provide SQL functions <a href="#12">[12]</a> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <a href="#1">[1]</a> <a href="#2">[2]</a> <a href="#3">[3]</a> <a href="#4">[4]</a> access to a GeoPackage file. This standard does not address the issues listed in the <a href="#_potential_future_work">[_potential_future_work]</a> clause in <a href="#background_and_context">Background and Context (Normative)</a>, which MAY be addressed in a subsequent version of this specification or by other specifications.</p>
+<p>A <strong>GeoPackage SQLite Extension</strong> is a SQLite loadable extension that MAY provide SQL functions <a href="#12">[12]</a> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <a href="#1">[1]</a> <a href="#2">[2]</a> <a href="#3">[3]</a> <a href="#4">[4]</a> access to a GeoPackage file. This standard does not address the issues listed in the <a href="#_potential_future_work">[_potential_future_work]</a> clause in <a href="#background_and_context">Background and Context (Normative)</a>, which MAY be addressed in a subsequent version of this standard or by other specifications.</p>
 </div>
 <div id="geopackage_tables_figure" class="imageblock">
 <div class="content">
@@ -355,7 +355,7 @@ All specified table, view, column, trigger, and constraint name values SHALL be 
 <h4 id="_sqlite_container">1.1.1. SQLite Container</h4>
 <div class="paragraph">
 <p>The SQLite software library provides a self-contained, single-file, cross-platform, serverless, transactional, open source RDBMS container.
-The GeoPackage specification defines a SQL database schema designed for use with the SQLite software library.
+The GeoPackage standard defines a SQL database schema designed for use with the SQLite software library.
 Using SQLite as the basis for GeoPackage simplifies production, distribution and use of GeoPackages and assists in guaranteeing the integrity of the data they contain.</p>
 </div>
 <div class="paragraph">
@@ -410,7 +410,7 @@ A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage ext
 </div>
 <div class="paragraph">
 <p>In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
-SQLite databases that use constructs from the GeoPackage specification but extend that to contain any of these elements are referred to as Extended GeoPackages throughout this specification.</p>
+SQLite databases that use constructs from the GeoPackage standard but extend those constructs to contain elements not specified in the core GeoPackage standard are referred to as Extended GeoPackages throughout this standard.</p>
 </div>
 <div id="_requirement-5" class="quoteblock">
 <div class="title">Requirement 5</div>
@@ -883,7 +883,7 @@ A GeoPackage SHALL contain features per clause <a href="#features">Features</a> 
 <h4 id="sfsql_intro">2.1.1. Simple Features SQL Introduction</h4>
 <div class="paragraph">
 <p>Vector feature data represents geolocated entities including conceptual ones such as districts, real world objects such as roads and rivers, and observations thereof.
-International specifications <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a><a href="#12">[12]</a> have standardized practices for the storage, access and use of vector geospatial features and geometries via SQL in relational databases.
+International standards <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a><a href="#12">[12]</a> have standardized practices for the storage, access and use of vector geospatial features and geometries via SQL in relational databases.
 The first component of the SQL schema for vector features in a GeoPackage is the <code>gpkg_spatial_ref_sys</code> table defined in clause <a href="#spatial_ref_sys">Spatial Reference Systems</a> above.
 Other components are defined below.</p>
 </div>
@@ -1511,7 +1511,7 @@ Pixel sizes are real numbers in the terrain units of the spatial reference syste
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
 In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.
 Other "zoom other intervals" conventions use different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
-See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventions.</p>
+See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional examples of both conventions.</p>
 </div>
 <div class="sect4">
 <h5 id="_data_10">2.2.3.1. Data</h5>
@@ -2731,11 +2731,11 @@ Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> c
 <div class="sect3">
 <h4 id="_introduction_3">2.5.1. Introduction</h4>
 <div class="paragraph">
-<p>A GeoPackage extension is a set of one or more requirements clauses that are documented by filling out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Normative)</a>. A GeoPackage Extension either profiles / extends existing requirements clauses in the geopackage specification or adds new requirements clauses. Existing requirement clause extension examples include additional geometry types, additional SQL geometry functions, and additional tile image formats. New requirement clause extension examples include spatial indexes, triggers, additional tables, other BLOB column encodings, and other SQL functions.</p>
+<p>A GeoPackage extension is a set of one or more requirements clauses that are documented by filling out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Normative)</a>. A GeoPackage Extension either profiles / extends existing requirements clauses in the GeoPackage standard or adds new requirements clauses. Existing requirement clause extension examples include additional geometry types, additional SQL geometry functions, and additional tile image formats. New requirement clause extension examples include spatial indexes, triggers, additional tables, other BLOB column encodings, and other SQL functions.</p>
 </div>
 <div class="paragraph">
 <p>GeoPackage extensions are identified by a name of the form &lt;author&gt;_&lt;extension name&gt; where &lt;author&gt; indicates the person or organization that developed and maintains the extension.
-The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC and used in Geopackages.
+The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC and used in GeoPackages.
 Implementers use their own author names to register other extensions<span class="footnote">[<a id="_footnoteref_36" class="footnote" href="#_footnote_36" title="View footnote.">36</a>]</span> used in Extended GeoPackages.</p>
 </div>
 </div>
@@ -3170,7 +3170,7 @@ A GeoPackage that contains tile pyramid user data tables with tile_data columns 
 <div class="sectionbody">
 <div class="paragraph">
 <p>Security considerations for implementations utilizing GeoPackages are in the domain of the implementing application, deployment platform, operating system and networking environment.
-The GeoPackage specification does not place any constraints on application, platform, operating system level or network security.</p>
+The GeoPackage standard does not place any constraints on application, platform, operating system level or network security.</p>
 </div>
 </div>
 </div>
@@ -10261,16 +10261,16 @@ cross-platform, serverless, transactional, open source SQLite data container wit
 integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest tables that together act as an exchange and direct-use format for multiple types of geospatial data including vector features, features with raster attributes and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity environments.</p>
 </div>
 <div class="paragraph">
-<p>Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are interdependent specification facets of the SF-SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> and SQL-MM (Spatial) <a href="#12">[12]</a> standards that serve as normative references for the vector feature portion of this specification.</p>
+<p>Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are interdependent specification facets of the SF-SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> and SQL-MM (Spatial) <a href="#12">[12]</a> standards that serve as normative references for the vector feature portion of this standard.</p>
 </div>
 <div class="paragraph">
-<p>This specification attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted implementations and existing standards such as WMTS <a href="#16">[16]</a> and ISO metadata <a href="#28">[28]</a>, to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.</p>
+<p>This standard attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted implementations and existing standards such as WMTS <a href="#16">[16]</a> and ISO metadata <a href="#28">[28]</a>, to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.</p>
 </div>
 <div class="paragraph">
-<p>Conformance classes for this specification are classified as core (mandatory) and extension (optional). The simple core of an Empty GeoPackage contains two SQL tables.</p>
+<p>Conformance classes for this standard are classified as core (mandatory) and extension (optional). The simple core of an Empty GeoPackage contains two SQL tables.</p>
 </div>
 <div class="paragraph">
-<p>Future versions of this specification willmay include requirements for elevation data and routes. Future enhancements to this specification, a future GeoPackage Web Service specification, and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats willmay allow OWS to support provisioning of GeoPackages throughout an enterprise or information community.</p>
+<p>Future versions of this standard may include requirements for elevation data and routes. Future enhancements to this standard, a future GeoPackage Web Service specification, and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats may allow OWS to support provisioning of GeoPackages throughout an enterprise or information community.</p>
 </div>
 </div>
 <div class="sect2">
@@ -10463,7 +10463,7 @@ integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest t
 <div class="sect2">
 <h3 id="_submitting_organizations_informative">B.4. Submitting Organizations (Informative)</h3>
 <div class="paragraph">
-<p>The following organizations submitted this Encoding Standard to the Open Geospatial Consortium Inc. as a
+<p>The following organizations submitted this Encoding Standard to the Open Geospatial Consortium as a
 Request For Comment (RFC).</p>
 </div>
 <div class="ulist">
@@ -11140,48 +11140,24 @@ Request For Comment (RFC).</p>
 </div>
 <div class="sect2">
 <h3 id="_potential_future_work_informative">B.9. Potential Future Work (Informative)</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>MAY investigate GeoPackage implementation on SQLite version 4 <a href="#B25">[B25]</a>.</p>
-</li>
-<li>
-<p>Future versions of this specification MAY include requirements for elevation data and routes.</p>
-</li>
-<li>
-<p>Future enhancements to this specification, a future GeoPackage Web Service specification and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats MAY allow OWS to support provisioning of GeoPackages throughout an enterprise.</p>
-</li>
-<li>
-<p>Future versions of this specification MAY include additional raster / image formats, including fewer restrictions on the image/tiff format.</p>
-</li>
-<li>
-<p>Future versions of this specification MAY include additional SQL API routines for interrogation and conversion of raster / image BLOBs.</p>
-</li>
-<li>
-<p>Future versions of this specification and/or one for a GeoPackage Web Service MAY address utilities for importing and exporting vector, raster and tile data in various formats.</p>
-</li>
-<li>
-<p>Future versions of this specification and/or one for a GeoPackage Web Service MAY address encryption of GeoPackages and/or individual tables or column values.</p>
-</li>
-<li>
-<p>Future versions of this specification MAY add infrastructure to the metadata tables such as a <code>temporal_columns</code> table that refers to the time properties of data records.</p>
-</li>
-<li>
-<p>MAY specify a streaming synchronization protocol for GeoPackage as part of a future GeoPackage Web Service specification, and/or a future version of the GeoPackage and/or Web Synchronization Service specification(s).</p>
-</li>
-<li>
-<p>Future versions of this specification MAY address symbology and styling information.</p>
-</li>
-<li>
-<p>Future version of this specification MAY include geographic / geodesic geometry types.</p>
-</li>
-<li>
-<p>MAY create a GeoPackage Abstract Object Model to support data encodings other than SQL in a future version of this specification.</p>
-</li>
-<li>
-<p>MAY add <a href="https://github.com/mapbox/utfgrid-spec">UTFGrid</a> support in a future version of this specification</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Future versions of this standard MAY do the following:
+* investigate GeoPackage implementation on SQLite version 4 <a href="#B25">[B25]</a>.
+* include requirements for elevation data and routes.
+* Future enhancements to this standard, a future GeoPackage Web Service specification and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats MAY allow OWS to support provisioning of GeoPackages throughout an enterprise.
+* include additional raster / image formats, including fewer restrictions on the image/tiff format.
+* include additional SQL API routines for interrogation and conversion of raster / image BLOBs.
+* add infrastructure to the metadata tables such as a <code>temporal_columns</code> table that refers to the time properties of data records.
+* specify a streaming synchronization protocol for GeoPackage as part of a future GeoPackage Web Service specification, and/or a future version of the GeoPackage and/or Web Synchronization Service specification(s).
+* address symbology and styling information.
+* include geographic / geodesic geometry types.
+* create a GeoPackage Abstract Object Model to support data encodings other than SQL.
+* add <a href="https://github.com/mapbox/utfgrid-spec">UTFGrid</a> support.</p>
+</div>
+<div class="paragraph">
+<p>Future versions of this standard and/or one for a GeoPackage Web Service MAY do the following:
+* address utilities for importing and exporting vector, raster and tile data in various formats.
+* address encryption of GeoPackages and/or individual tables or column values.</p>
 </div>
 </div>
 <div class="sect2">
@@ -14186,7 +14162,7 @@ For undated references, the latest edition of the normative document referred to
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnote_1">
-<a href="#_footnoteref_1">1</a>. SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this specification was written. See Future Work clause in Annex B.
+<a href="#_footnoteref_1">1</a>. SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this standard was written. See Future Work clause in Annex B.
 </div>
 <div class="footnote" id="_footnote_2">
 <a href="#_footnoteref_2">2</a>. SQLite is in the public domain (see <a href="http://www.sqlite.org/copyright.html)">http://www.sqlite.org/copyright.html)</a>
@@ -14299,7 +14275,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-25 14:04:19 UTC
+Last updated 2015-11-25 14:04:29 UTC
 </div>
 </div>
 </body>
