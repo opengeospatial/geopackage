@@ -2197,7 +2197,7 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <div class="sect5">
 <h6 id="_table_data_values_7">2.3.3.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (text pattern match).
+<p>The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
 The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
@@ -14089,6 +14089,9 @@ For undated references, the latest edition of the normative document referred to
 <li>
 <p><a id="32"></a>[32] OpenGIS® 01-009 Implementation Specification: Coordinate Transformation Services Revision 1.0  <a href="http://portal.opengeospatial.org/files/?artifact_id=999">http://portal.opengeospatial.org/files/?artifact_id=999</a></p>
 </li>
+<li>
+<p><a id="33"></a>[33] SQLite GLOB operator <a href="https://www.sqlite.org/lang_expr.html#glob">https://www.sqlite.org/lang_expr.html#glob</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -14296,7 +14299,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-10 03:28:51 UTC
+Last updated 2015-11-25 14:04:19 UTC
 </div>
 </div>
 </body>
