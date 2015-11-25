@@ -1,10 +1,10 @@
 ![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
 
-GeoPackage Specification
+GeoPackage Standard
 ==========
 
 GeoPackage is an open, standards-based, platform-independent, portable, self-describing, 
-compact format for transferring geospatial information. The GeoPackage specification 
+compact format for transferring geospatial information. The GeoPackage standard 
 describes a set of conventions for storing the following within an SQLite database:
    * [vector features](spec/2_features.md)
    * [tile matrix sets of imagery and raster maps at various scales](spec/3_tiles.md)
@@ -18,12 +18,12 @@ described to provide implementors a way to include additional functionality in t
 
 This OGC® Encoding Standard defines the schema for a GeoPackage, 
 including table definitions, integrity assertions, format limitations, and content constraints. 
-The allowable content of a GeoPackage is entirely defined in this specification.
+The allowable content of a GeoPackage is entirely defined in this standard.
 
 For more information about GeoPackage, including implementations and sample data, 
 go to the public page at http://www.geopackage.org. 
-An HTML version of the specification is available at http://www.geopackage.org/spec/.
-The asciidoc source for the specification is in the [spec/](spec/) folder.
+An HTML version of the standard is available at http://www.geopackage.org/spec/.
+The asciidoc source for the standard is in the [spec/](spec/) folder.
 
 About
 -----
@@ -34,12 +34,14 @@ released for [public comment](http://www.opengeospatial.org/standards/requests/1
 With this repository the OGC invites collaboration and comments directed at the development 
 and enhancement of this candidate standard. 
 
-The repo tracks the latest version of the specification as it evolves. Pull requests for fixes are
+The repo tracks the latest version of the standard as it evolves. Pull requests for fixes are
 appreciated, and new functionality will still be considered even though version 1.0 has been adopted. The spec
 is done in [asciidoc](http://www.methods.co.nz/asciidoc/) a format supported by GitHub, similar to markdown
 but with some features that make it better for specifications, like automatic section numbering.
 
-**Editor: Paul Daisey**
+**Editor: Jeff Yutzler**
+
+**Editor Emeritus: Paul Daisey**
 
 Contributing
 ------------
@@ -48,7 +50,7 @@ be incorporated into the formal OGC GeoPackage standards document and that all c
 intellectual property shall be vested to the OGC.
 
 The GeoPackage Standards Working Group (SWG) is the group at OGC responsible for the stewardship
-of the specification, but is working to do as much GeoPackage work in public as possible.
+of the standard, but is working to do as much GeoPackage work in public as possible.
 
 The Geopackage SWG currently has the following email lists:
    - geopackage@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage)
@@ -67,9 +69,9 @@ The Geopackage SWG currently has the following email lists:
 
 Editing and commenting
 ----------------------
-The GeoPackage SWG is accepting public comments and suggested revisions to the specification 
+The GeoPackage SWG is accepting public comments and suggested revisions to the standard 
 via GitHub. This is the first time OGC has supported this mechanism for public comment and review. 
-To suggest changes to the specification please fork the repository and submit a pull request with
+To suggest changes to the standard please fork the repository and submit a pull request with
 the desired changes. Please make one pull request per logical requested change and be sure to
 include a comment in the PR with any justification or reasoning on why the change is needed.
 

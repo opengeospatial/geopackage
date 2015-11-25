@@ -12,7 +12,7 @@ Copyright © 2012 U.S. Army Geospatial Center.
 
 Copyright © 2012 U.S. National Geospatial Intelligence Agency.
 
-The companies listed above have granted the Open Geospatial Consortium, Inc. (OGC) a nonexclusive, 
+The companies listed above have granted the Open Geospatial Consortium (OGC) a nonexclusive, 
 royalty-free, paid up, worldwide license to copy and distribute this document and to modify this 
 document and distribute copies of the modified version. To obtain additional rights of use, 
 visit http://www.opengeospatial.org/legal/.

@@ -10,13 +10,13 @@ This OGC® GeoPackage Encoding Standard defines a GeoPackage as a self-contained
 cross-platform, serverless, transactional, open source SQLite data container with table definitions, relational
 integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest tables that together act as an exchange and direct-use format for multiple types of geospatial data including vector features, features with raster attributes and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity environments.
 
-Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are interdependent specification facets of the SF-SQL <<9>><<10>><<11>> and SQL-MM (Spatial) <<12>> standards that serve as normative references for the vector feature portion of this specification.
+Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are interdependent specification facets of the SF-SQL <<9>><<10>><<11>> and SQL-MM (Spatial) <<12>> standards that serve as normative references for the vector feature portion of this standard.
 
-This specification attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted implementations and existing standards such as WMTS <<16>> and ISO metadata <<28>>, to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.
+This standard attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted implementations and existing standards such as WMTS <<16>> and ISO metadata <<28>>, to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.
 
-Conformance classes for this specification are classified as core (mandatory) and extension (optional). The simple core of an Empty GeoPackage contains two SQL tables.
+Conformance classes for this standard are classified as core (mandatory) and extension (optional). The simple core of an Empty GeoPackage contains two SQL tables.
 
-Future versions of this specification willmay include requirements for elevation data and routes. Future enhancements to this specification, a future GeoPackage Web Service specification, and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats willmay allow OWS to support provisioning of GeoPackages throughout an enterprise or information community.
+Future versions of this standard may include requirements for elevation data and routes. Future enhancements to this standard, a future GeoPackage Web Service specification, and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats may allow OWS to support provisioning of GeoPackages throughout an enterprise or information community.
 
 === Document terms and definitions
 
@@ -116,7 +116,7 @@ XML::
 
 === Submitting Organizations (Informative)
 
-The following organizations submitted this Encoding Standard to the Open Geospatial Consortium Inc. as a
+The following organizations submitted this Encoding Standard to the Open Geospatial Consortium as a
 Request For Comment (RFC).
 
 * Envitia
@@ -228,19 +228,22 @@ None at present.
 
 === Potential Future Work (Informative)
 
-* MAY investigate GeoPackage implementation on SQLite version 4 <<B25>>.
-* Future versions of this specification MAY include requirements for elevation data and routes.
-* Future enhancements to this specification, a future GeoPackage Web Service specification and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats MAY allow OWS to support provisioning of GeoPackages throughout an enterprise.
-* Future versions of this specification MAY include additional raster / image formats, including fewer restrictions on the image/tiff format.
-* Future versions of this specification MAY include additional SQL API routines for interrogation and conversion of raster / image BLOBs.
-* Future versions of this specification and/or one for a GeoPackage Web Service MAY address utilities for importing and exporting vector, raster and tile data in various formats.
-* Future versions of this specification and/or one for a GeoPackage Web Service MAY address encryption of GeoPackages and/or individual tables or column values.
-* Future versions of this specification MAY add infrastructure to the metadata tables such as a `temporal_columns` table that refers to the time properties of data records.
-* MAY specify a streaming synchronization protocol for GeoPackage as part of a future GeoPackage Web Service specification, and/or a future version of the GeoPackage and/or Web Synchronization Service specification(s).
-* Future versions of this specification MAY address symbology and styling information.
-* Future version of this specification MAY include geographic / geodesic geometry types.
-* MAY create a GeoPackage Abstract Object Model to support data encodings other than SQL in a future version of this specification.
-* MAY add https://github.com/mapbox/utfgrid-spec[UTFGrid] support in a future version of this specification
+Future versions of this standard MAY do the following:
+* investigate GeoPackage implementation on SQLite version 4 <<B25>>.
+* include requirements for elevation data and routes.
+* Future enhancements to this standard, a future GeoPackage Web Service specification and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats MAY allow OWS to support provisioning of GeoPackages throughout an enterprise.
+* include additional raster / image formats, including fewer restrictions on the image/tiff format.
+* include additional SQL API routines for interrogation and conversion of raster / image BLOBs.
+* add infrastructure to the metadata tables such as a `temporal_columns` table that refers to the time properties of data records.
+* specify a streaming synchronization protocol for GeoPackage as part of a future GeoPackage Web Service specification, and/or a future version of the GeoPackage and/or Web Synchronization Service specification(s).
+* address symbology and styling information.
+* include geographic / geodesic geometry types.
+* create a GeoPackage Abstract Object Model to support data encodings other than SQL.
+* add https://github.com/mapbox/utfgrid-spec[UTFGrid] support.
+
+Future versions of this standard and/or one for a GeoPackage Web Service MAY do the following:
+* address utilities for importing and exporting vector, raster and tile data in various formats.
+* address encryption of GeoPackages and/or individual tables or column values.
 
 === UML Notation
 
