@@ -5,7 +5,7 @@
 ==== Introduction
 
 Two tables in a GeoPackage provide a means of storing metadata in MIME <<21>> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
-These tables are intended to provide the support necessary to implement the hierarchical metadata model defined in ISO 19115 <<28>>, Annex B B.5.25 MD_ScopeCode, <<metadata_example_appendix>> and <<raster_or_tile_metadata_example_appendix>>, so that as GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.
+These tables are intended to provide the support necessary to implement the hierarchical metadata models as defined in ISO 19115 <<28>> and illustrated in <<metadata_example_appendix>> and <<raster_or_tile_metadata_example_appendix>>. As GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.
 
 The `gpkg_metadata` table that contains metadata is described in clause <<_metadata_table>>, and the `gpkg_metadata_reference` table that relates `gpkg_metadata` to GeoPackage data is described in clause <<_metadata_reference_table>>.
 There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion footnote:[Informative examples of hierarchical metadata are provided in <<metadata_example_appendix>>] with more than one level, only that if it is, these tables SHALL be used. Such metadata footnote:[An informative example of raster image metadata is provided in <<tiles_example_appendix>>] and data that relates it to GeoPackage contents SHALL NOT be stored in other tables.
@@ -42,6 +42,7 @@ Read-write
 ===== Metadata Table
 
 [[metadata_table_table_definition]]
+[float]
 ====== Table Definition
 
 [requirement]
@@ -180,6 +181,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [float]
 ===== Metadata Table
 
+[float]
 ====== Table Definition
 
 [cols="1,5a"]
@@ -195,6 +197,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Type* |Basic
 |========================================
 
+[float]
 ====== Table Data Values
 
 [cols="1,5a"]
@@ -214,6 +217,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [float]
 ===== Metadata Reference Table
 
+[float]
 ====== Table Definition
 
 [cols="1,5a"]
@@ -229,6 +233,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Type* |Basic
 |========================================
 
+[float]
 ====== Data Values
 
 [cols="1,5a"]

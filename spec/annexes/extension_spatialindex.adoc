@@ -4,9 +4,9 @@
 [float]
 ==== Introduction
 
-This extension adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
+This extension adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and <<extension_geometry_encoding>>.
 
-The rtree index extension provides a means to encode an rtree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.
+The RTree index extension provides a means to encode an RTree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.
 
 :spatial_indexes_impl_foot1: footnote:[If an application process will make many updates, it is often faster to drop the indexes, do the updates, and then recreate the indexes.]
 
@@ -25,7 +25,7 @@ GeoPackage SWG, author_name `gpkg`.
 [float]
 ==== Extension Type
 
-New Requirement dependent on clauses <<gpb_format>> and 3.1.2.
+New Requirement dependent on clauses <<gpb_format>> and <<extension_geometry_encoding>>.
 
 [float]
 ==== Applicability
