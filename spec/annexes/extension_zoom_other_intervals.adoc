@@ -1,14 +1,13 @@
 [[extension_zoom_other_intervals]]
-[appendix]
-== Zoom Other Intervals Extension (Normative)
+=== Zoom Other Intervals Extension (Normative)
 
 [float]
-=== Extension Title
+==== Extension Title
 
 Zoom Other Intervals
 
 [float]
-=== Introduction
+==== Introduction
 
 In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify tile matrix layers in a tile matrix set that contain tiles of decreasing spatial extent and finer spatial resolution.
 Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
@@ -21,44 +20,44 @@ See WMTS <<16>> Annex E for additional examples of both conventions.
 
 
 [float]
-=== Extension Author
+==== Extension Author
 
 GeoPackage SWG, author_name `gpkg`
 
 [float]
-=== Extension Name or Template
+==== Extension Name or Template
 
 `gpkg_zoom_other`
 
 [float]
-=== Extension Type
+==== Extension Type
 
 Extension of Existing Requirement in clause 2.2.3.
 
 [float]
-=== Applicability
+==== Applicability
 
 This extension applies to any table listed in the `gpkg_contents` table with a data_type of `tiles`.
 
 [float]
-=== Scope
+==== Scope
 
 Read-write
 
 [float]
-=== Requirements
+==== Requirements
 
 [float]
-==== GeoPackage
+===== GeoPackage
 
 The `pixel_x_size` and / or `pixel_y_size` column values in the `gpkg_tile_matrix` table vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels for a particular tile matrix set pyramid table.
 
 [float]
-==== GeoPackage SQLite Configuration
+===== GeoPackage SQLite Configuration
 
 None
 
 [float]
-==== GeoPackage SQLite Extension
+===== GeoPackage SQLite Extension
 
 None
