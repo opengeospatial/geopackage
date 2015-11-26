@@ -38,6 +38,7 @@ Read-write
 [float]
 ==== Requirements
 
+[float]
 ===== Metadata Table
 
 [[metadata_table_table_definition]]
@@ -68,8 +69,7 @@ The structure (schema) information could be in whatever encoding is used by the 
 
 See <<gpkg_metadata_sql>>.
 
-
-
+[float]
 ====== Table Data Values
 
 The `md_scope` column in the `gpkg_metadata` table is the name of the applicable scope for the contents of the metadata column for a given row.
@@ -82,7 +82,7 @@ The initial contents of this table were obtained from the ISO 19115 <<40>>, Anne
 :table_metadata_scopes_foot3: footnote:[The “schema” md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.]
 :table_metadata_scopes_foot4: footnote:[The “taxonomy” md_scope MAY be used for taxonomy or knowledge system (B41)(B42) “linked data” information stored as XML metadata that is linked to features stored in a GeoPackage.]
 
-
+[float]
 [[metadata_scopes]]
 .Metadata Scopes
 [cols=",,",options="header",]
@@ -112,6 +112,7 @@ The initial contents of this table were obtained from the ISO 19115 <<40>>, Anne
 [requirement]
 Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL be one of the name column values from <<metadata_scopes>>.
 
+[float]
 ===== Metadata Reference Table
 
 [[metadata_reference_table_table_definition]]
@@ -145,6 +146,7 @@ Every row in `gpkg_metadata_reference` that has null value as `md_parent_id` for
 
 See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 
+[float]
 ====== Table Data Values
 
 [requirement]
@@ -178,9 +180,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [float]
 ===== Metadata Table
 
-====== Data
-
-*Table Definition*
+====== Table Definition
 
 [cols="1,5a"]
 |========================================
@@ -195,7 +195,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Type* |Basic
 |========================================
 
-*Table Data Values*
+====== Table Data Values
 
 [cols="1,5a"]
 |========================================
@@ -211,11 +211,10 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Type:* |Capabilities
 |========================================
 
+[float]
 ===== Metadata Reference Table
 
-====== Data
-
-*Table Definition*
+====== Table Definition
 
 [cols="1,5a"]
 |========================================
@@ -230,7 +229,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Type* |Basic
 |========================================
 
-*Data Values*
+====== Data Values
 
 [cols="1,5a"]
 |========================================
@@ -346,6 +345,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [float]
 ==== Table Definition SQL
 
+[float]
 ===== gpkg_metadata
 
 [[gpkg_metadata_sql]]
@@ -365,6 +365,7 @@ CREATE TABLE gpkg_metadata (
 );
 ----
 
+[float]
 ===== gpkg_metadata_reference
 
 [[gpkg_metadata_reference_sql]]
@@ -409,6 +410,7 @@ INSERT INTO gpkg_metadata_reference VALUES (
 [float]
 ==== Trigger Definition SQL (Informative)
 
+[float]
 ===== metadata
 
 .metadata Trigger Definition SQL
@@ -451,6 +453,7 @@ WHERE NOT(NEW.md_scope IN
 END
 ----
 
+[float]
 ===== metadata_reference
 
 .gpkg_metadata_reference Trigger Definition SQL
