@@ -1,13 +1,10 @@
 [[extension_geometry_encoding]]
-=== User-Defined Geometry Types Encoding Extension Template (Normative)
-
-[float]
-==== Extension Title
-
-User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding
+=== User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding
 
 [float]
 ==== Introduction
+
+This extension of clauses <<gpb_format>>, <<sql_geometry_types>> and <<gpkg_geometry_types_extension>> enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage.
 
 This extension specifies a standard way to implement user defined extensions of the GeoPackageBinary geometry encoding format to encode geometry types not specified in clauses <<sql_geometry_types>> and 3.1.1 and listed in <<geometry_types>>.
 It is intended to be a bridge to enable use of geometry types like EllipiticalCurve in Extended GeoPackages until standard encodings of such types are developed and published for the Well Known Binary (WKB) format.
@@ -45,6 +42,20 @@ This extension specifies use of an ExtendedGeoPackageBinary encoding format for 
 [float]
 ===== GeoPackage
 
+[requirement]
+The ExtendedGeoPackageBinary format defined in <<extension_geometry_encoding>> SHALL be used to encode geometry types other than those specified in clauses <<sql_geometry_types>> and <<gpkg_geometry_types_extension>> and listed in <<geometry_types>>.
+
+[[user_defined_geometry_ext_name_req]]
+[requirement]
+An extension name to specify a feature geometry extension type encoded in the ExtendedGeoPackageBinary format SHALL be defined for an author name that is NOT “gpkg” using the “<author_name>_geom_<gname> template where <gname> is the uppercase name of an extension geometry type NOT listed in <<geometry_types>> used in a GeoPackage.
+
+[requirement]
+An Extended GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values other than those specified in clauses <<sql_geometry_types>> and 3.1.1 and listed in <<geometry_types>> SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry type constructed per clause 3.1.2.1.2.
+
+[requirement]
+The `geometry_type_name` value in a `gpkg_geometry_columns` row SHALL be the <<user_defined_geometry_ext_name_req>> extension name in uppercase.
+
+[requirement]
 One of the reserved bits in the GeoPackageBinary header is used to indicate the presence of the ExtendedGeopackageBinary encoding format.
 In the extension case a four byte sequence follows the GPB header to disambiguate various extensions.
 This extension_code SHOULD identify the implementer of the extension and/or the particular geometry type extension, and SHOULD be unique.
@@ -70,4 +81,5 @@ None
 [float]
 ===== GeoPackage SQLite Extension
 
+[requirement]
 SQL functions that operate on GeoPackageBinary geometries as specified in other extensions SHALL operate correctly on user-defined geometry types encoded in the ExtendedGeopackageBinary format as specified in this extension.

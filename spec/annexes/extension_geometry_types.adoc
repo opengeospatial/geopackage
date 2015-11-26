@@ -1,13 +1,10 @@
 [[extension_geometry_types]]
-=== GeoPackage Geometry Types Extension Template (Normative)
-
-[float]
-==== Extension Title
-
-GeoPackage Non-Linear Geometry Types
+=== GeoPackage Non-Linear Geometry Types
 
 [float]
 ==== Introduction
+
+This extension of clause <<sql_geometry_types>> defines additional geometry types.
 
 Clause 2.1.4 of the GeoPackage Version 1 Encoding Standard specifies support for the Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeomCollection geometry types in the GeoPackageBinary geometry encoding format specified in clause 2.1.3.
 This extension specifies support for the additional CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, and Surface geometry types in the GeoPackage Binary geometry encoding format using the codes listed in Annex D.
@@ -43,7 +40,18 @@ Read-write
 [float]
 ===== GeoPackage
 
+[requirement]
+A GeoPackage MAY store feature table geometries with the extended non-linear geometry types (CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in <<geometry_types>>.
+
+[requirement]
 The GeoPackageBinary geometry encoding format specified in clause <<gpb_format>> SHALL be used to encode non-linear geometry types using the type codes in <<geometry_types>> table <<geometry_types_extension>>.
+
+[requirement]
+[[extension_geometry_types_extensions_name]]
+An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_<gname>” template where <gname> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage.
+
+[requirement]
+A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per the previous requirement <<extension_geometry_types_extensions_name>>.
 
 [float]
 ===== GeoPackage SQLite Configuration
@@ -53,4 +61,5 @@ None
 [float]
 ===== GeoPackage SQLite Extension
 
+[requirement]
 SQL functions that operate on GeoPackageBinary geometries as specified in other extensions SHALL operate correctly on the non-linear geometries specified in this extension.

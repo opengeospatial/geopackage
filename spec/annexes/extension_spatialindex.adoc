@@ -1,15 +1,16 @@
 [[extension_rtree]]
-=== RTree Spatial Index Extension (Normative)
-
-[float]
-==== Extension Title
-
-Rtree Spatial Indexes
+=== RTree Spatial Indexes
 
 [float]
 ==== Introduction
 
+This extension adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
+
 The rtree index extension provides a means to encode an rtree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.
+
+:spatial_indexes_impl_foot1: footnote:[If an application process will make many updates, it is often faster to drop the indexes, do the updates, and then recreate the indexes.]
+
+Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.{spatial_indexes_impl_foot1}
 
 [float]
 ==== Extension Author
@@ -43,7 +44,14 @@ This extension uses the rtree implementation provided by the SQLite R*Tree Modul
 
 [float]
 ===== GeoPackage
+[requirement]
+The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.
 
+[requirement]
+A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name “gpkg_rtree_index”, the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
+
+[requirement]
+A GeoPackage SHALL implement spatial indexes on feature table geometry columns using the SQLite Virtual Table RTrees and triggers specified below.
 The tables below contain SQL templates with variables.
 Replace the following template variables with the specified values to create the required SQL statements: +
 <t>: The name of the feature table containing the geometry column +
@@ -189,4 +197,5 @@ Definition of SQL functions
 |ST_MaxY(geom Geometry): real |Returns the maximum Y value of the bounding envelope of a geometry |Update the spatial index on a geometry column in a feature table
 |======
 
+[requirement]
 The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.

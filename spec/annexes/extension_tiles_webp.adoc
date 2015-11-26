@@ -1,13 +1,10 @@
 [[extension_tiles_webp]]
-=== Tiles Encoding WebP Extension (Normative)
-
-[float]
-==== Extension Title
-
-Tile Encoding WebP
+=== Tiles Encoding WebP
 
 [float]
 ==== Introduction
+
+This extension of clauses <<tile_enc_png>> and <<tile_enc_jpeg>> allows encoding of tile images in WebP format.
 
 PNG and JPEG are the default MIME types for encoding images in tile pyramid user data tables.
 This extension allows the use of `image/x-webp` as an additional encoding type.
@@ -43,6 +40,14 @@ Read-write
 [float]
 ===== GeoPackage
 
+[requirement]
+The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of tile pyramid images in WEBP format as specified in <<extension_tiles_webp>>.
+
+[requirement]
+A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.
+
+[requirement]
+A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <<22>>.
 The MIME type of values of the `tile_data` column in tile pyramid user data tables SHALL be `image/x-webp`.
 
 [float]

@@ -1,13 +1,10 @@
 [[extension_zoom_other_intervals]]
-=== Zoom Other Intervals Extension (Normative)
-
-[float]
-==== Extension Title
-
-Zoom Other Intervals
+=== Zoom Other Intervals 
 
 [float]
 ==== Introduction
+
+This extension of clause <<zoom_levels>> allows zoom level intervals other than a factor of two.
 
 In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify tile matrix layers in a tile matrix set that contain tiles of decreasing spatial extent and finer spatial resolution.
 Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
@@ -49,6 +46,15 @@ Read-write
 
 [float]
 ===== GeoPackage
+
+[requirement]
+The “gpkg_zoom_other” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of other zoom intervals on a tile pyramid user data table as specified in <<extension_zoom_other_intervals>>.
+
+[requirement]
+A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name “gpkg_zoom_other”, the table_name of the table with other zoom intervals, and the “tile_data” column_name.
+
+[requirement]
+Tile pyramid user data tables MAY have pixel sizes that vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels.
 
 The `pixel_x_size` and / or `pixel_y_size` column values in the `gpkg_tile_matrix` table vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels for a particular tile matrix set pyramid table.
 

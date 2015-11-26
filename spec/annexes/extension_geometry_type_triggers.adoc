@@ -1,13 +1,10 @@
 [[extension_geometry_type_triggers]]
-=== Geometry Type Triggers Extension (Normative)
-
-[float]
-==== Extension Title
-
-Geometry Type Triggers
+=== Geometry Type Triggers 
 
 [float]
 ==== Introduction
+
+This extension adds a new geometry type triggers capability for columns with geometries encoded per clause <<gpb_format>> and <<extension_geometry_encoding>>.
 
 Geometry type triggers prevent the storage of geometries of types that are not assignable from the geometry types specified in the gpkg_geometry_columns table in the geometry columns of the specified tables.
 
@@ -39,10 +36,19 @@ Write-only
 [float]
 ==== Requirements
 
-The <t> and <c> template parameters in the geometry type trigger definition SQL template in the table below are to be replaced with the names of the feature table and geometry column being inserted or updated.
-
 [float]
 ===== GeoPackage
+
+[requirement]
+The “gpkg_geometry_type_trigger” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of geometry type triggers.
+
+[requirement]
+A GeoPackage that implements geometry type triggers on geometry columns SHALL contain a gpkg_extensions table that contains a row for each such geometry column with extension_name “gpkg_geometry_type_trigger”, table_name of the feature table with a geometry column, and column_name of the geometry column.
+
+[requirement]
+A GeoPackage SHALL include the SQL insert and update triggers specified in <<extension_geometry_type_triggers>> on every geometry column to enforce the geometry type values specified for those columns in the gpkg_geometry_columns table.
+
+The <t> and <c> template parameters in the geometry type trigger definition SQL template in the table below are to be replaced with the names of the feature table and geometry column being inserted or updated.
 
 [source,sql]
 ----
@@ -82,4 +88,5 @@ Definition of SQL functions
 |GPKG_IsAssignable(expected_type_name TEXT, actual_type_name TEXT): INTEGER |Returns 1 if a value of type expected_type_name is the same or a super type of type actual_type_name. Returns 0 otherwise. |Determine if the expected geometry type is the same as or a super type of the actual geometry type.
 |======
 
+[requirement]
 The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.
