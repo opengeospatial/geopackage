@@ -1,0 +1,69 @@
+[[extension_crs_wkt]]
+=== WKT for Coordinate Reference Systems
+
+[float]
+==== Introduction
+
+The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <<34>>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <<32>> which has known ambiguities that are being encountered in the field. This extension updates the references to use the new standard.
+
+[float]
+==== Extension Author
+
+GeoPackage SWG, author_name `gpkg`.
+
+[float]
+==== Extension Name or Template
+
+`gpkg_crs_wkt`
+
+[float]
+==== Extension Type
+
+Extension of Existing Requirement in clause <<gpkg_srs_table_data_values>>.
+
+[float]
+==== Applicability
+
+Applies to `definition` column WKT values in the `gpkg_spatial_ref_sys` table.
+
+[float]
+==== Scope
+
+Read-write
+
+*Warning: As <<34>> is not reverse compatible with <<32>>, it is the responsibility of the producer to ensure that the consumer is capable of supporting this extension before using it.*
+
+[float]
+==== Requirements
+
+Definition column WKT values in the `gpkg_spatial_ref_sys` table SHALL be constructed per the WKT syntax in <<34>>. They SHALL NOT be constructed per the EBNF syntax in <<32>> clause 7.
+
+[float]
+==== Abstract Test Suite
+
+[[spatial_ref_sys_data_values_default]]
+[float]
+===== Table Data Values
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extension_crs_wkt/data_values_default+
+|*Test Purpose* |Verify that the spatial_ref_sys table contains the required default contents.
+|*Test Method* |
+. `SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND`
+. `SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND`
+. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEODCRS["WGS 84",
+  DATUM["World Geodetic System 1984",
+    ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
+  PRIMEM["Greenwich", 0.0, ANGLEUNIT["degree",0.0174532925199433]],
+  CS[ellipsoidal, 2],
+  AXIS["latitude", north, ORDER[1]],
+  AXIS["longitude", east, ORDER[2]],
+  ANGLEUNIT["degree", 0.0174532925199433],
+  ID["EPSG", 4326]]
+. Pass if tests 1-3 are met
+. Fail otherwise
+|*Reference* |Clause 1.1.2.1.2 Requirement 11:
+|*Test Type* |Capability
+|========================================
+
