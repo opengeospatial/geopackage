@@ -592,7 +592,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 </div>
 </div>
 <div class="sect5">
-<h6 id="_table_data_values">1.1.2.1.2. Table Data Values</h6>
+<h6 id="gpkg_srs_table_data_values">1.1.2.1.2. Table Data Values</h6>
 <div class="paragraph">
 <p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">Requirement 11</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">Requirement 11</a>:</p>
 </div>
@@ -789,7 +789,7 @@ If the <code>srs_id</code> column value references a geographic coordinate refer
 </div>
 </div>
 <div class="sect5">
-<h6 id="_table_data_values_2">1.1.3.1.2. Table Data Values</h6>
+<h6 id="_table_data_values">1.1.3.1.2. Table Data Values</h6>
 <div id="_requirement-14" class="quoteblock">
 <div class="title">Requirement 14</div>
 <blockquote>
@@ -1222,7 +1222,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 </div>
 </div>
 <div class="sect5">
-<h6 id="_table_data_values_3">2.1.5.1.2. Table Data Values</h6>
+<h6 id="_table_data_values_2">2.1.5.1.2. Table Data Values</h6>
 <div id="_requirement-22" class="quoteblock">
 <div class="title">Requirement 22</div>
 <blockquote>
@@ -1382,7 +1382,7 @@ The declared SQL type of the geometry column in a vector feature user data table
 </div>
 </div>
 <div class="sect5">
-<h6 id="_table_data_values_4">2.1.6.1.2. Table Data Values</h6>
+<h6 id="_table_data_values_3">2.1.6.1.2. Table Data Values</h6>
 <div class="paragraph">
 <p>A feature geometry is stored in a geometry column specified by the <code>geometry_column</code> value for the feature table in the <code>gpkg_geometry_columns</code> table defined in clause <a href="#_geometry_columns">Geometry Columns</a> above.</p>
 </div>
@@ -1891,7 +1891,7 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 </div>
 </div>
 <div class="sect5">
-<h6 id="_table_data_values_5">2.2.8.1.2. Table Data Values</h6>
+<h6 id="_table_data_values_4">2.2.8.1.2. Table Data Values</h6>
 <div class="paragraph">
 <p>Each tile pyramid user data table or view <span class="footnote">[<a id="_footnoteref_21" class="footnote" href="#_footnote_21" title="View footnote.">21</a>]</span> MAY contain tile matrices at zero or more zoom levels of different spatial resolution (map scale).</p>
 </div>
@@ -2012,7 +2012,7 @@ An application that accesses a GeoPackage can query the <code>gpkg_extensions</c
 </div>
 </div>
 <div class="sect5">
-<h6 id="_table_data_values_6">2.3.2.1.2. Table Data Values</h6>
+<h6 id="_table_data_values_5">2.3.2.1.2. Table Data Values</h6>
 <div id="_requirement-59" class="quoteblock">
 <div class="title">Requirement 59</div>
 <blockquote>
@@ -10349,7 +10349,7 @@ The structure (schema) information could be in whatever encoding is used by the 
 <div class="paragraph">
 <p>See <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_7" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_6" class="float">Table Data Values</h6>
 <div class="paragraph">
 <p>The <code>md_scope</code> column in the <code>gpkg_metadata</code> table is the name of the applicable scope for the contents of the metadata column for a given row.
 The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">Metadata Scopes</a> below.
@@ -10572,7 +10572,7 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
 <div class="paragraph">
 <p>See <a href="#table_definition_sql">Table Definition SQL (Normative)</a> clause <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_8" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_7" class="float">Table Data Values</h6>
 <div id="_requirement-96" class="quoteblock">
 <div class="title">Requirement 96</div>
 <blockquote>
@@ -10673,7 +10673,7 @@ Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> c
 </tbody>
 </table>
 
-<h6 id="_table_data_values_9" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_8" class="float">Table Data Values</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -12392,7 +12392,7 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
 <div class="paragraph">
 <p>See <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_10" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_9" class="float">Table Data Values</h6>
 <div id="_requirement-104" class="quoteblock">
 <div class="title">Requirement 104</div>
 <blockquote>
@@ -12509,7 +12509,7 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <div class="paragraph">
 <p>See <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_11" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_10" class="float">Table Data Values</h6>
 <div class="paragraph">
 <p>The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
 The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
@@ -13443,6 +13443,9 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 )</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>include:extension_crs_wkt.adoc[]</p>
+</div>
 </div>
 </div>
 </div>
@@ -13777,7 +13780,7 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="26"></a>[26] W3C Recommendation 28 October 2004 XML Schema Part 1: Structures Second Edition <a href="http://www.w3.org/TR/xmlschema-1/">http://www.w3.org/TR/xmlschema-1/</a></p>
 </li>
 <li>
-<p>[<a id="27"></a> W3C Recommendation 28 October 2004 XML Schema Part 2: Datatypes Second Edition <a href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2/</a></p>
+<p><a id="27"></a>[27] W3C Recommendation 28 October 2004 XML Schema Part 2: Datatypes Second Edition <a href="http://www.w3.org/TR/xmlschema-2/">http://www.w3.org/TR/xmlschema-2/</a></p>
 </li>
 <li>
 <p><a id="28"></a>[28] ISO 19115 Geographic information&#8201;&#8212;&#8201;Metadata, 8 May 2003, with Technical Corrigendum 1, 5 July 2006</p>
@@ -13796,6 +13799,9 @@ For undated references, the latest edition of the normative document referred to
 </li>
 <li>
 <p><a id="33"></a>[33] SQLite GLOB operator <a href="https://www.sqlite.org/lang_expr.html#glob">https://www.sqlite.org/lang_expr.html#glob</a></p>
+</li>
+<li>
+<p><a id="34"></a>[34] OGC® 12-063r5 Geographic information - Well-known text representation of coordinate reference systems <a href="http://docs.opengeospatial.org/is/12-063r5/12-063r5.html">http://docs.opengeospatial.org/is/12-063r5/12-063r5.html</a></p>
 </li>
 </ul>
 </div>
@@ -14004,7 +14010,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-26 19:36:14 UTC
+Last updated 2015-11-26 20:22:32 UTC
 </div>
 </div>
 </body>
