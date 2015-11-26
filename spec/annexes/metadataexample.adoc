@@ -1,8 +1,7 @@
 [[metadata_example_appendix]]
-[appendix]
-== Hierarchical Metadata Example (Informative)
-
-The first example use case is from ISO19115 H.2.
+[float]
+===== Hierarchical Metadata Example One - ISO19115.
+ 
 Suppose we have this metadata:
 
 [source,sql]
@@ -44,7 +43,7 @@ CREATE TABLE gpkg_metadata_reference (
 )
 ----
 
-H.2   1) Consider a geographic data provider generating vector mapping data for three Administrative areas(A, B and C).  ... The metadata could be carried exclusively at Dataset Series level.
+1) Consider a geographic data provider generating vector mapping data for three Administrative areas(A, B and C).  ... The metadata could be carried exclusively at Dataset Series level.
 
 Then we need a record for each layer table for the three admin areas, like this:
 
@@ -61,7 +60,7 @@ INSERT INTO gpkg_metadata_reference VALUES (
 )
 ----
 
-H.2 2) After some time alternate vector mapping of Administrative area A becomes available. The metadata would then be extended for Administrative area A, to describe the new quality date values. These values would supersede those given for the Dataset series, but only for Administrative area A. The metadata for B and C would remain unchanged. This new metadata would be recorded at Dataset
+2) After some time alternate vector mapping of Administrative area A becomes available. The metadata would then be extended for Administrative area A, to describe the new quality date values. These values would supersede those given for the Dataset series, but only for Administrative area A. The metadata for B and C would remain unchanged. This new metadata would be recorded at Dataset
 level.
 
 Then we need a record for each layer table in "A" like this:
@@ -79,7 +78,7 @@ INSERT INTO gpkg_metadata_reference VALUES (
 )
 ----
 
-H.2 3) Eventually further data becomes available for Administrative area A, with a complete re-survey of the road network. Again this implies new metadata for the affected feature types. This metadata would be carried at Feature type level for Administrative area A. All other metadata relating to other feature types remains unaffected. Only the metadata for roads in Administrative area A is modified. This road metadata is recorded at Feature type level.
+3) Eventually further data becomes available for Administrative area A, with a complete re-survey of the road network. Again this implies new metadata for the affected feature types. This metadata would be carried at Feature type level for Administrative area A. All other metadata relating to other feature types remains unaffected. Only the metadata for roads in Administrative area A is modified. This road metadata is recorded at Feature type level.
 
 Then we need a record for each layer table for the roads network, like this:
 
@@ -96,7 +95,7 @@ INSERT INTO gpkg_metadata_reference VALUES (
 )
 ----
 
-H.2 4) An anomaly in the road survey is identified, in that all Overhead clearances for the Administrative area A have been surveyed to the nearest metre. These are re-surveyed to the nearest decimetre.  This re-survey implies new metadata for the affected attribute type ‘Overhead Clearance’. All other metadata for Administrative area A remains unaffected. This ‘Overhead Clearance’ metadata is recorded at Attribute Type level.
+4) An anomaly in the road survey is identified, in that all Overhead clearances for the Administrative area A have been surveyed to the nearest metre. These are re-surveyed to the nearest decimetre.  This re-survey implies new metadata for the affected attribute type ‘Overhead Clearance’. All other metadata for Administrative area A remains unaffected. This ‘Overhead Clearance’ metadata is recorded at Attribute Type level.
 
 Then we need a record for each layer table in the roads network with attribute type 'Overhead Clearance', like this;
 
@@ -113,7 +112,7 @@ INSERT INTO gpkg_metadata_reference VALUES (
 )
 ----
 
-H.2 5) A new bridge is constructed in Administrative area A. This new data is reflected in the geographic data for Administrative area A, and new metadata is required to record this new feature. All other metadata for Administrative area A remains unaffected. This new feature metadata is recorded at Feature instance level.
+5) A new bridge is constructed in Administrative area A. This new data is reflected in the geographic data for Administrative area A, and new metadata is required to record this new feature. All other metadata for Administrative area A remains unaffected. This new feature metadata is recorded at Feature instance level.
 
 Then we need a record for the bridge layer table row for the new bridge, like this:
 
@@ -130,7 +129,7 @@ INSERT INTO gpkg_metadata_reference VALUES (
 )
 ----
 
-H.2  6) The overhead clearance attribute of the new bridge was wrongly recorded, and is modified. Again this new attribute requires new metadata to describe the modification. All other metadata for Administrative area A remains unaffected. This new attribute metadata is recorded at Attribute instance level.
+6) The overhead clearance attribute of the new bridge was wrongly recorded, and is modified. Again this new attribute requires new metadata to describe the modification. All other metadata for Administrative area A remains unaffected. This new attribute metadata is recorded at Attribute instance level.
 
 Then we need a record for the clearance attribute value, like this:
 
@@ -147,7 +146,9 @@ INSERT INTO gpkg_metadata_reference VALUES (
 )
 ----
 
-The second example use case is for a field data collection session.  This use case demonstrates a mechanism to indicate which data in a GeoPackage that was originally loaded with data from one or more services has been collected or updated since the initial load, and therefore MAY need to be uploaded to update the original services (e.g. WFS, WCS, WMTS). 
+===== Hierarchical Metadata Example Two - Field Data Collection
+
+This use case demonstrates a mechanism to indicate which data in a GeoPackage that was originally loaded with data from one or more services has been collected or updated since the initial load, and therefore MAY need to be uploaded to update the original services (e.g. WFS, WCS, WMTS). 
 
 Suppose a user with a mobile handheld device goes out in the field and collects observations of a new "Point of Interest" (POI) feature type, and associated metadata about the field session, the new feature type, some POI instances and some of their attributes (e.g. spatial accuracy, attribute accuracy) that results in the following additional metadata:
 

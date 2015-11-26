@@ -1,15 +1,16 @@
 [[extension_rtree]]
-=== RTree Spatial Index Extension (Normative)
-
-[float]
-==== Extension Title
-
-Rtree Spatial Indexes
+=== RTree Spatial Indexes
 
 [float]
 ==== Introduction
 
+This extension adds a new capability for spatially indexing columns with geometries encoded per clause <<gpb_format>> and <<gpkg_user_geometry_types_extension>>.
+
 The rtree index extension provides a means to encode an rtree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.
+
+:spatial_indexes_impl_foot1: footnote:[If an application process will make many updates, it is often faster to drop the indexes, do the updates, and then recreate the indexes.]
+
+Spatial indexes provide a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.{spatial_indexes_impl_foot1}
 
 [float]
 ==== Extension Author
@@ -43,7 +44,14 @@ This extension uses the rtree implementation provided by the SQLite R*Tree Modul
 
 [float]
 ===== GeoPackage
+[requirement]
+The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.
 
+[requirement]
+A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name “gpkg_rtree_index”, the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
+
+[requirement]
+A GeoPackage SHALL implement spatial indexes on feature table geometry columns using the SQLite Virtual Table RTrees and triggers specified below.
 The tables below contain SQL templates with variables.
 Replace the following template variables with the specified values to create the required SQL statements: +
 <t>: The name of the feature table containing the geometry column +
@@ -189,4 +197,85 @@ Definition of SQL functions
 |ST_MaxY(geom Geometry): real |Returns the maximum Y value of the bounding envelope of a geometry |Update the spatial index on a geometry column in a feature table
 |======
 
+[requirement]
 The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.
+
+[float]
+==== Abstract Test Suite
+
+===== Spatial Indexes Implementation
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/spatial_indexes/implementation+
+|*Test Purpose* |Verify the correct implementation of spatial indexes on feature table geometry columns.
+|*Test Method* |
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. Not testable if result set is empty
+. For each row table_name, column_name from step 1
+.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
+.. Not testable if result set is empty
+.. Fail if returned sql != ‘CREATE VIRTUAL TABLE rtree_’ ’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| USING rtree(id, minx, maxx, miny, maxy)
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tname = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_insert’
+.. Fail if returned sql != result of populating insert triggers template in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND name LIKE ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_update%’
+.. Fail if returned sql != result of populating 4 update triggers templates in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
+.. SELECT sql FROM sqlite_master WHERE type=’trigger’ AND name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_delete’
+.. Fail if returned sql != result of populating delete trigger template in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
+.. Log pass otherwise
+. Pass if logged pass and no fails
+|*Reference* |Clause 3.1.3.1.1 Req 92:
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/spatial_indexes/implementation/sql_functions+
+|*Test Purpose* |Verify the correct implementation of sql functions used in spatial indexes on feature table geometry columns.
+|*Test Method* |
+. Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
+. For each Geometry Test Data Set <gtype_test> data table row for each geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:
+.. SELECT ‘Fail’ FROM <gtype_test> WHERE ST_IsEmpty(geom.) != empty
+.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MinX(geom) != minx
+.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MaxX(geom) != maxx
+.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MinY(geom) != miny
+.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MaxY(geom) != maxy
+..
+. Pass if no ‘Fail’ selected from step 2
+|*Reference* |Clause 3.1.3.1.1 Req 92:
+|*Test Type* |Capability
+|========================================
+
+===== Extensions Name
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/spatial_indexes/extension_name+
+|*Test Purpose* |Verify that the “gpkg_rtree_index” extension name is used to register spatial index extensions.
+|*Test Method* |
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. Not testable if result set is empty
+. For each row table_name, column_name from step 3
+.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
+.. Not testable if returns an empty result set
+.. /opt/extension_mechanism/extensions/data/table_def
+.. Fail if failed
+.. SELECT extension_name from gpkg_extensions WHERE table_name = result_set_table_name AND column_name = result_set_column_name
+.. Log pass if result is “gpkg_rtree_index”
+.. Fail otherwise
+. Pass if logged pass and no fails
+|*Reference* |Clause 3.1.3.1.2 Req 93:
+|*Test Type* |Basic
+|========================================
+
+===== Extensions Row
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/spatial_indexes/extension_row+
+|*Test Purpose* |Verify that spatial index extensions are registered using the “gpkg_rtree_index” name in the gpkg_extensions table.
+|*Test Method* |
+ /reg_ext/features/spatial_indexes/extension_name
+|*Reference* |Clause 3.1.3.1.3 Req 94:
+|*Test Type* |Capability
+|========================================
