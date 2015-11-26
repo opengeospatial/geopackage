@@ -1,13 +1,40 @@
+[[extension_schema]]
 === Schema
 
-==== Schema Introduction
+[float]
+==== Introduction
 
 The schema option provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
 The information provided by this option can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.
 
-==== Data Columns
+[float]
+==== Extension Author
 
-===== Data
+GeoPackage SWG, author_name `gpkg`
+
+[float]
+==== Extension Name or Template
+
+Extension names are constructed from the gpkg_geom_<gname> template where <gname> is the uppercase name of the extension geometry type in Annex D Table 52?
+
+[float]
+==== Extension Type
+
+New Requirement Dependent on Clause <<features>>
+
+[float]
+==== Applicability
+
+This extension may apply to any <<feature_user_tables>>.
+
+[float]
+==== Scope
+
+Read-write
+
+[float]
+==== Requirements
+===== Data Columns
 
 [[schema_data_columns_table_definition]]
 ====== Table Definition
@@ -50,9 +77,7 @@ The `column_name` column value in a `gpkg_data_columns` table row SHALL contain 
 The constraint_name column value in a gpkg_data_columns table MAY be NULL.
 If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
 
-==== Data Column Constraints
-
-===== Data
+===== Data Column Constraints
 
 [[data_column_constraints_table_definition]]
 ====== Table Definition

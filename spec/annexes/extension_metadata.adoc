@@ -1,5 +1,7 @@
+[[extension_metadata]]
 === Metadata
 
+[float]
 ==== Introduction
 
 Two tables in a GeoPackage provide a means of storing metadata in MIME <<21>> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
@@ -8,9 +10,35 @@ These tables are intended to provide the support necessary to implement the hier
 The `gpkg_metadata` table that contains metadata is described in clause <<_metadata_table>>, and the `gpkg_metadata_reference` table that relates `gpkg_metadata` to GeoPackage data is described in clause <<_metadata_reference_table>>.
 There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion footnote:[Informative examples of hierarchical metadata are provided in <<metadata_example_appendix>>] with more than one level, only that if it is, these tables SHALL be used. Such metadata footnote:[An informative example of raster image metadata is provided in <<tiles_example_appendix>>] and data that relates it to GeoPackage contents SHALL NOT be stored in other tables.
 
-==== Metadata Table
+[float]
+==== Extension Author
 
-===== Data
+GeoPackage SWG, author_name `gpkg`
+
+[float]
+==== Extension Name or Template
+
+`gpkg_metadata`
+
+[float]
+==== Extension Type
+
+New Requirement
+
+[float]
+==== Applicability
+
+This extension applies to any content in the GeoPackage.
+
+[float]
+==== Scope
+
+Read-write
+
+[float]
+==== Requirements
+
+===== Metadata Table
 
 [[metadata_table_table_definition]]
 ====== Table Definition
@@ -84,9 +112,7 @@ The initial contents of this table were obtained from the ISO 19115 <<40>>, Anne
 [requirement]
 Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL be one of the name column values from <<metadata_scopes>>.
 
-==== Metadata Reference Table
-
-===== Data
+===== Metadata Reference Table
 
 [[metadata_reference_table_table_definition]]
 ====== Table Definition
