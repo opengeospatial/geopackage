@@ -7,7 +7,7 @@
 This extension of clause <<sql_geometry_types>> defines additional geometry types.
 
 Clause 2.1.4 of the GeoPackage Version 1 Encoding Standard specifies support for the Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeomCollection geometry types in the GeoPackageBinary geometry encoding format specified in clause 2.1.3.
-This extension specifies support for the additional CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, and Surface geometry types in the GeoPackage Binary geometry encoding format using the codes listed in Annex D.
+This extension specifies support for the additional CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, and Surface geometry types in the GeoPackage Binary geometry encoding format using the codes from <<geometry_types_extension>>.
 
 [float]
 ==== Extension Author
@@ -17,7 +17,7 @@ GeoPackage SWG, author_name `gpkg`
 [float]
 ==== Extension Name or Template
 
-Extension names are constructed from the gpkg_geom_<gname> template where <gname> is the uppercase name of the extension geometry type in Annex D Table 52?
+Extension names are constructed from the gpkg_geom_<gname> template where <gname> is the uppercase name of the extension geometry type from <<geometry_types_extension>>.
 
 [float]
 ==== Extension Type
@@ -67,6 +67,7 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 [float]
 ==== Abstract Test Suite
 
+[float]
 ===== GeoPackage Extension Types
 
 [cols="1,5a"]
@@ -108,6 +109,7 @@ viii. Otherwise log pass
 |*Test Type* |Capability
 |========================================
 
+[float]
 ===== Extensions Name
 
 [cols="1,5a"]
@@ -132,6 +134,7 @@ viii. Otherwise log pass
 |*Test Type* |Basic
 |========================================
 
+[float]
 ===== Extensions Row
 
 [cols="1,5a"]

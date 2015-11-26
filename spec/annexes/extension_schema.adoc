@@ -13,9 +13,9 @@ The information provided by this option can be used by applications to, for inst
 GeoPackage SWG, author_name `gpkg`
 
 [float]
-==== Extension Name or Template
+==== Extension Name
 
-Extension names are constructed from the gpkg_geom_<gname> template where <gname> is the uppercase name of the extension geometry type in Annex D Table 52?
+`gpkg_schema`
 
 [float]
 ==== Extension Type
@@ -34,6 +34,8 @@ Read-write
 
 [float]
 ==== Requirements
+
+[float]
 ===== Data Columns
 
 [[schema_data_columns_table_definition]]
@@ -65,6 +67,7 @@ The `gpkg_data_columns` data CAN be used to provide more specific column data ty
 
 See <<gpkg_data_columns_sql>>.
 
+[float]
 ====== Table Data Values
 
 [requirement]
@@ -77,6 +80,7 @@ The `column_name` column value in a `gpkg_data_columns` table row SHALL contain 
 The constraint_name column value in a gpkg_data_columns table MAY be NULL.
 If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
 
+[float]
 ===== Data Column Constraints
 
 [[data_column_constraints_table_definition]]
@@ -108,6 +112,7 @@ _The min and max columns are defined as NUMERIC to be able to contain range valu
 
 See <<gpkg_data_column_constraints_sql>>.
 
+[float]
 ====== Table Data Values
 
 The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<33>>).
@@ -161,9 +166,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 ===== Data Columns
 
 [float]
-====== Data
-
-*Table Definition*
+====== Table Definition
 
 [cols="1,5a"]
 |========================================
@@ -178,7 +181,8 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Type* |Basic
 |========================================
 
-*Data Values*
+[float]
+====== Data Values
 
 [cols="1,5a"]
 |========================================
@@ -230,9 +234,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 ===== Data Column Constraints
 
 [float]
-====== Data
-
-*Table Definition*
+====== Table Definition
 
 [cols="1,5a"]
 |========================================
@@ -247,7 +249,8 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Type* |Basic
 |========================================
 
-*Data Values*
+[float]
+====== Data Values
 
 [cols="1,5a"]
 |========================================
@@ -357,6 +360,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 [float]
 ==== Table Definition SQL
 
+[float]
 ===== gpkg_data_columns
 
 [[gpkg_data_columns_sql]]
@@ -380,6 +384,7 @@ CREATE TABLE gpkg_data_columns (
 );
 ----
 
+[float]
 ===== gpkg_data_column_constraints
 
 [[gpkg_data_column_constraints_sql]]
