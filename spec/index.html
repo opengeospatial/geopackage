@@ -235,6 +235,7 @@ Document language: 	English<br></p>
 <li><a href="#extension_tiles_webp">F.7. Tiles Encoding WebP</a></li>
 <li><a href="#extension_metadata">F.8. Metadata</a></li>
 <li><a href="#extension_schema">F.9. Schema</a></li>
+<li><a href="#extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</a></li>
 </ul>
 </li>
 <li><a href="#geometry_types"> Annex G: Geometry Types (Normative)</a></li>
@@ -594,7 +595,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="sect5">
 <h6 id="gpkg_srs_table_data_values">1.1.2.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">Requirement 11</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">Requirement 11</a>:</p>
+<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">Requirement 11</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">Table Data Values</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">Requirement 11</a>:</p>
 </div>
 <div id="_requirement-11" class="quoteblock">
 <div class="title">Requirement 11</div>
@@ -7868,6 +7869,10 @@ Definitions of those extensions are in the form specified by the template in <a 
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_schema">Schema</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">features</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_crs_wkt">WKT for Coordinate Reference Systems</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">spatial reference systems</p></td>
+</tr>
 </tbody>
 </table>
 
@@ -13443,9 +13448,105 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 )</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>include:extension_crs_wkt.adoc[]</p>
 </div>
+<div class="sect2">
+<h3 id="extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</h3>
+<h4 id="_introduction_13" class="float">Introduction</h4>
+<div class="paragraph">
+<p>The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <a href="#34">[34]</a>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <a href="#32">[32]</a> which has known ambiguities that are being encountered in the field. This extension updates the references to use the new standard.</p>
+</div>
+<h4 id="_extension_author_11" class="float">Extension Author</h4>
+<div class="paragraph">
+<p>GeoPackage SWG, author_name <code>gpkg</code>.</p>
+</div>
+<h4 id="_extension_name_or_template_10" class="float">Extension Name or Template</h4>
+<div class="paragraph">
+<p><code>gpkg_crs_wkt</code></p>
+</div>
+<h4 id="_extension_type_11" class="float">Extension Type</h4>
+<div class="paragraph">
+<p>Extension of Existing Requirement in clause <a href="#gpkg_srs_table_data_values">Table Data Values</a>.</p>
+</div>
+<h4 id="_applicability_11" class="float">Applicability</h4>
+<div class="paragraph">
+<p>Applies to <code>definition</code> column WKT values in the <code>gpkg_spatial_ref_sys</code> table.</p>
+</div>
+<h4 id="_scope_11" class="float">Scope</h4>
+<div class="paragraph">
+<p>Read-write</p>
+</div>
+<div class="paragraph">
+<p><strong>Warning: As <a href="#34">[34]</a> is not reverse compatible with <a href="#32">[32]</a>, it is the responsibility of the producer to ensure that the consumer is capable of supporting this extension before using it.</strong></p>
+</div>
+<h4 id="_requirements_11" class="float">Requirements</h4>
+<div class="paragraph">
+<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL be constructed per the WKT syntax in <a href="#34">[34]</a>. They SHALL NOT be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7.</p>
+</div>
+<h4 id="_abstract_test_suite_11" class="float">Abstract Test Suite</h4>
+<h5 id="spatial_ref_sys_data_values_default" class="float">Table Data Values</h5>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extension_crs_wkt/data_values_default</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the spatial_ref_sys table contains the required default contents.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND</code></p>
+</li>
+<li>
+<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND</code></p>
+</li>
+<li>
+<p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
+DATUM["World Geodetic System 1984",
+  ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
+PRIMEM["Greenwich", 0.0, ANGLEUNIT["degree",0.0174532925199433]],
+CS[ellipsoidal, 2],
+AXIS["latitude", north, ORDER[1]],
+AXIS["longitude", east, ORDER[2]],
+ANGLEUNIT["degree", 0.0174532925199433],
+ID["EPSG", 4326]]</p>
+</li>
+<li>
+<p>Pass if tests 1-3 are met</p>
+</li>
+<li>
+<p>Fail otherwise</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Clause 1.1.2.1.2 Requirement 11:</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
 </div>
 </div>
 </div>
@@ -14010,7 +14111,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-11-26 20:22:32 UTC
+Last updated 2015-11-26 20:26:20 UTC
 </div>
 </div>
 </body>
