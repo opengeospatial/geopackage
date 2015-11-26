@@ -1,49 +1,48 @@
 [[extension_rtree]]
-[appendix]
-== RTree Spatial Index Extension (Normative)
+=== RTree Spatial Index Extension (Normative)
 
 [float]
-=== Extension Title
+==== Extension Title
 
 Rtree Spatial Indexes
 
 [float]
-=== Introduction
+==== Introduction
 
 The rtree index extension provides a means to encode an rtree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.
 
 [float]
-=== Extension Author
+==== Extension Author
 
 GeoPackage SWG, author_name `gpkg`.
 
 [float]
-=== Extension Name or Template
+==== Extension Name or Template
 
 `gpkg_rtree_index`
 
 [float]
-=== Extension Type
+==== Extension Type
 
 New Requirement dependent on clauses <<gpb_format>> and 3.1.2.
 
 [float]
-=== Applicability
+==== Applicability
 
 This extension applies to any column specified in the `gpkg_geometry_columns` table.
 
 [float]
-=== Scope
+==== Scope
 
 Write-only, because it does not change the result of reads, although it may improve their performance.
 
 [float]
-=== Requirements
+==== Requirements
 
 This extension uses the rtree implementation provided by the SQLite R*Tree Module extension documented at <http://www.sqlite.org/rtree.html>.
 
 [float]
-==== GeoPackage
+===== GeoPackage
 
 The tables below contain SQL templates with variables.
 Replace the following template variables with the specified values to create the required SQL statements: +
@@ -52,7 +51,7 @@ Replace the following template variables with the specified values to create the
 <i>: The name of the integer primary key column in <t> as specified in <<requirement_feature_integer_pk>>
 
 [float]
-===== Create Virtual Table
+====== Create Virtual Table
 
 RTree spatial indexes on geometry columns SHALL be created using the SQLite Virtual Table RTree extension.
 An application that creates a spatial index SHALL create it using the following SQL statement template:
@@ -66,7 +65,7 @@ where <t> and <c> are replaced with the names of the feature table and geometry 
 The rtree function id parameter becomes the virtual table 64-bit signed integer primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored as 32-bit floating point numbers) for each dimension that become the virtual table data columns that are populated to create the spatial rtree index.
 
 [float]
-===== Load Spatial Index Values
+====== Load Spatial Index Values
 
 The indexes provided by the SQLite Virtual Table RTree extension are not automatic indices.
 This means the index data structure needs to be manually populated, updated and queried.
@@ -81,7 +80,7 @@ INSERT OR REPLACE INTO rtree_<t>_<c>
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
 [float]
-===== Define Triggers to Maintain Spatial Index Values
+====== Define Triggers to Maintain Spatial Index Values
 
 For each spatial index in a GeoPackage, corresponding insert, update and delete triggers that update the spatial index SHALL be present on the indexed geometry column.
 These spatial index triggers SHALL be defined as follows:
@@ -164,7 +163,7 @@ END;
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
 [float]
-==== GeoPackage SQLite Configuration
+===== GeoPackage SQLite Configuration
 
 Definition of SQLite configuration settings
 
@@ -176,7 +175,7 @@ Definition of SQLite configuration settings
 |======
 
 [float]
-==== GeoPackage SQLite Extension
+===== GeoPackage SQLite Extension
 
 Definition of SQL functions
 

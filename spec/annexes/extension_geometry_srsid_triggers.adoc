@@ -1,49 +1,48 @@
 [[extension_geometry_srsid_triggers]]
-[appendix]
-== Geometry SRS ID Triggers Extension (Normative)
+=== Geometry SRS ID Triggers Extension (Normative)
 
 [float]
-=== Extension Title
+==== Extension Title
 
 Geometry SRS_ID Triggers
 
 [float]
-=== Introduction
+==== Introduction
 
 Geometry SRS_ID triggers prevent the storage of geometries with spatial reference system identifiers that are not specified in the `gpkg_geometry_columns` table in the geometry columns of the specified tables.
 
 [float]
-=== Extension Author
+==== Extension Author
 
 GeoPackage SWG, author_name `gpkg`.
 
 [float]
-=== Extension Name or Template
+==== Extension Name or Template
 
 `gpkg_srs_id_trigger`
 
 [float]
-=== Extension Type
+==== Extension Type
 
 New Requirement dependent on clauses <<gpb_format>> and 3.1.2.
 
 [float]
-=== Applicability
+==== Applicability
 
 This extension applies to any column specified in the gpkg_geometry_columns table.
 
 [float]
-=== Scope
+==== Scope
 
 Write-only
 
 [float]
-=== Requirements
+==== Requirements
 
 The <t> and <c> template parameters in the SRS_ID trigger definition SQL template in the table below are to be replaced with the names of the feature table and geometry column being inserted or updated
 
 [float]
-==== GeoPackage
+===== GeoPackage
 
 [source,sql]
 ----
@@ -67,12 +66,12 @@ END
 ----
 
 [float]
-==== GeoPackage SQLite Configuration
+===== GeoPackage SQLite Configuration
 
 None
 
 [float]
-==== GeoPackage SQLite Extension
+===== GeoPackage SQLite Extension
 
 Definition of SQL functions
 
