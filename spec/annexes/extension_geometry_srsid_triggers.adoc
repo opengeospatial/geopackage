@@ -89,3 +89,74 @@ Definition of SQL functions
 
 [requirement]
 The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex J and/or Annex K when those extensions are also implemented.
+
+[float]
+==== Abstract Test Suite
+
+===== Implementation
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/srs_id_triggers/implementation+
+|*Test Purpose* |Verify that user feature data table srs_id triggers are implemented correctly.
+|*Test Method* |
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. Not testable if result set is empty
+. For each row table_name, column_name from step 1
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsi_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
+.. Not testable if result set is empty
+.. Fail if sql != result of populating the first trigger template in Annex N with <t> as result_set_table_name and <c> as result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsu_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
+.. Fail if sql != result of populating the second trigger template in Annex N with <t> as result_set_table_name and <c> as result_set_column_name
+.. Log pass otherwise
+. Pass if logged pass and no fails
+|*Reference* |Clause 3.1.5.1.1 Req 98:
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/srs_id_triggers/implementation/sql_functions+
+|*Test Purpose* |Verify the correct implementation of sql functions used in srs_id triggers on feature table geometry columns.
+|*Test Method* |
+. Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
+. For each Geometry Test Data Set <gtype_test> data table row for each geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
+.. SELECT ‘Fail’ FROM <gtype_test> WHERE ST_SRID(geom) != srs_id
+. Pass if no ‘Fail’ selected from step 2
+|*Reference* |Clause 3.1.5.1.1 Req 98:
+|*Test Type* |Capability
+|========================================
+
+===== Extensions Name
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/srs_id_triggers/extension_name+
+|*Test Purpose* |Verify that the “gpkg_srs_id_trigger” extension name is used to register srs_id triggers.
+|*Test Method* |
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. Not testable if result set is empty
+. For each row table_name, column_name from step 1
+.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsi_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
+.. Not testable if result set is empty
+.. /opt/extension_mechanism/extensions/data/table_def
+.. Fail if failed
+.. SELECT extension_name from gpkg_extensions WHERE table_name = result_set_table_name AND column_name = result_set_column_name
+.. Pass if result is “gpkg_srs_id_trigger”
+.. Fail otherwise
+|*Reference* |Clause 3.1.5.1.2 Req 99:
+|*Test Type* |Basic
+|========================================
+
+===== Extensions Row
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/features/srs_id_triggers/extension_row+
+|*Test Purpose* |Verify that srs_id triggers are registered using the “gpkg_srs_id_trigger” extension name.
+|*Test Method* |
+ Do test /reg_ext/features/srs_id_triggers/extension_name
+|*Reference* |Clause 3.1.5.1.3 Req 100:
+|*Test Type* |Capability
+|========================================
+

@@ -67,3 +67,42 @@ None
 ===== GeoPackage SQLite Extension
 
 None
+
+[float]
+==== Abstract Test Suite
+
+===== Extensions Name
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/tiles/zoom_levels/data/zoom_other_ext_name+
+|*Test Purpose* |Verify that the “gpkg_zoom_other” extension name is used to register tiles tables with other than factors of two zoom intervals.
+|*Test Method* |
+. SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'
+. Not testable if empty result set
+. For each row table_name from step 1
+.. SELECT zoom_level, pixel_x_size, pixel_y_size FROM gpkg_tile_matrix WHERE table_name = selected table name ORDER BY zoom_level ASC
+.. Not testable if returns empty result set
+.. Not testable if there are not two rows with adjacent zoom levels
+.. Not testable if no pair of rows for adjacent zoom levels have pixel_x_size or pixel_y_size values that differ by other than factors of two
+.. /opt/extension_mechanism/extensions/data/table_def
+.. Fail if failed
+.. SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = \'gpkg_zoom_other'
+.. Fail if returns an empty result set
+.. Log pass otherwise
+. Pass if logged pass and no fails
+|*Reference* |Clause 3.2.1.1.1 Req 101:
+|*Test Type* |Basic
+|========================================
+
+===== Extensions Row
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/tiles/zoom_levels/data/zoom_other_ext_row+
+|*Test Purpose* |Verify that tiles tables with other than factors of two zoom intervals are registered using the “gpkg_zoom_other” extension name.
+|*Test Method* |
+ /reg_ext/tiles/zoom_levels/data/zoom_other_ext_name
+|*Reference* |Clause 3.2.1.1.2 Req 102:
+|*Test Type:* |Capability
+|========================================
