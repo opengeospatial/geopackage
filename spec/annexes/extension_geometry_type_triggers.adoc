@@ -112,7 +112,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 .. Fail if sql != result of populating the second trigger template in Annex M with <t> as result_set_table_name and <c> as result_set_column_name
 .. Log pass otherwise
 . Pass if logged pass and no fails
-|*Reference* |Clause 3.1.4.1.1 Req 95:
+|*Reference* |Annex F.4 Req 79
 |*Test Type* |Capability
 |========================================
 
@@ -127,7 +127,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 .. SELECT ‘Fail’ FROM <gtype_test> WHERE GPKG_IsAssignable(ntype, atype) = 1
 .. SELECT ‘Fail’ FROM <gtype_test> WHERE ST_GeometryType(geom) != atype
 . Pass if no ‘Fail’ selected from step 2
-|*Reference* |Clause 3.1.4.1.1 Req 95:
+|*Reference* |Annex F.4 Req 80
 |*Test Type* |Capability
 |========================================
 
@@ -150,7 +150,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 .. Log pass if result is “gpkg_geometry_type_trigger”
 .. Fail otherwise
 . Pass if logged pass and no fails
-|*Reference* |Clause 3.1.4.1.2 Req 96:
+|*Reference* |Annex F.4 Req 81
 |*Test Type* |Basic
 |========================================
 
@@ -163,6 +163,6 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 |*Test Purpose* |Verify that geometry type triggers are registered using the “gpkg_geometry_type_trigger” extension name.
 |*Test Method* |
  Do test /reg_ext/features/geometry_type_triggers/extension_name
-|*Reference* |Clause 3.1.4.1.3 Req 97:
+|*Reference* |Annex F.4 Req 82
 |*Test Type* |Capability
 |========================================

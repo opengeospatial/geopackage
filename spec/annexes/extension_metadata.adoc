@@ -194,7 +194,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . Fail if returns an empty result set.
 . Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
-|*Reference* |Clause 2.4.2.1.1 Req 68:
+|*Reference* |Annex F.8 Req 93
 |*Test Type* |Basic
 |========================================
 
@@ -211,7 +211,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . For each row returned from step 1
 .. Fail if md_scope value not one of the name column values from Table 15 in clause 2.4.2.1.2
 . Pass if no fails
-|*Reference* |Clause 2.4.2.1.2 Req 69:
+|*Reference* |Annex F.8 Req 94
 |*Test Type:* |Capabilities
 |========================================
 
@@ -230,7 +230,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . Fail if returns an empty result set.
 . Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33.  Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
-|*Reference* |Clause 2.4.3.1.1 Req 70:
+|*Reference* |Annex F.8 Req 95
 |*Test Type* |Basic
 |========================================
 
@@ -247,7 +247,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . SELECT reference_scope FROM gpkg_metadata_reference WHERE reference_scope NOT IN (‘geopackage’,’table’,’column’,’row’,’row/col’)
 . Fail if does not return an empty result set
 . Pass otherwise.
-|*Reference* |Clause 2.4.3.1.2 Req 71:
+|*Reference* |Annex F.8 Req 96
 |*Test Type* |Capability
 |========================================
 
@@ -263,7 +263,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . SELECT table_name FROM metadata_reference WHERE reference_scope != \'geopackage' AND table_name NOT IN (SELECT table_name FROM gpkg_contents)
 . Fail if result set is not empty
 . Pass otherwise.
-|*Reference* |Clause 2.4.3.1.2 Req 72:
+|*Reference* |Annex F.8 Req 97
 |*Test Type* |Capability
 |========================================
 
@@ -283,7 +283,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 .. Fail if the one of the column names in the returned sql Create TABLE statement is not  <column_name>
 .. Log pass otherwise
 . Pass if logged pass and no fails.
-|*Reference* |Clause 2.4.3.1.2 Req 73:
+|*Reference* |Annex F.8 Req 98
 |*Test Type* |Capability
 |========================================
 
@@ -302,7 +302,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 .. Fail if result set is empty
 .. Log pass otherwise
 . Pass if logged pass and no fails.
-|*Reference* |Clause 2.4.3.1.2 Req 74:
+|*Reference* |Annex F.8 Req 99
 |*Test Type* |Capability
 |========================================
 
@@ -317,7 +317,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 .. Fail if format of returned value does not match yyyy-mm-ddThh:mm:ss.hhhZ
 .. Log pass otherwise
 . Pass if logged pass and no fails.
-|*Reference* |Clause 2.4.3.1.2 Req 75:
+|*Reference* |Annex F.8 Req 100
 |*Test Type* |Capability
 |========================================
 
@@ -328,7 +328,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Method* |
 . PRAGMA foreign_key_check(‘geometry_columns’)
 . Fail if returns any rows with a fourth column foreign key index value of 0
-|*Reference* |Clause 2.4.3.1.2 Req 76:
+|*Reference* |Annex F.8 Req 101
 |*Test Type* |Capability
 |========================================
 
@@ -344,7 +344,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . SELECT gmr.md_file_id, gmr.md_parent_id, gm.id FROM gpkg_metadata_reference  AS gmr LEFT OUTER JOIN gpkg_metadata gm ON gmr.md_parent_id =gm.id
 . Fail if any result set gm.id values are NULL
 . Pass otherwise
-|*Reference* |Clause 2.4.3.1.2 Req 77:
+|*Reference* |Annex F.8 Req 102
 |*Test Type* |Capability
 |========================================
 

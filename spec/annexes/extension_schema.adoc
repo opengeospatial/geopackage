@@ -179,7 +179,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 . Fail if returns an empty result set
 . Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C8 Table 30. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
-|*Reference* |Clause 2.3.2.1.1 Req 56:
+|*Reference* |Annex F.9 Req 103
 |*Test Type* |Basic
 |========================================
 
@@ -197,7 +197,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 .. PRAGMA table_info(table_name) 
 .. Fail if gpkg_data_columns.column_name value does not equal a name column value returned by PRAGMA table_info.
 . Pass if no fails.
-|*Reference* |Clause 2.3.2.1.2 Req 58:
+|*Reference* |Annex F.9 Req 104
 |*Test Type* |Capability
 |========================================
 
@@ -212,7 +212,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 .. SELECT constraint_name FROM gpkg_data_column_constraints WHERE constraint_name = cn
 .. Fail if returns an empty result set
 . Pass if no fails
-|*Reference* |Clause 2.3.2.1.2 Req 59:
+|*Reference* |Annex F.9 Req 105
 |*Test Type* |Capability
 |========================================
 
@@ -228,7 +228,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 .. If ct NOT NULL, SELECT constraint_type FROM gpkg_data_column_constraints WHERE constraint_name = cn AND constraint_type = ct
 .. Fail if returns an empty result set
 . Pass if no fails
-|*Reference* |Clause 2.3.2.1.2 Req 59:
+|*Reference* |Annex F.9 Req 106
 |*Test Type* |Capability
 |========================================
 
@@ -247,7 +247,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 . Fail if returns an empty result set
 . Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C Table 31. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
-|*Reference* |Clause 2.3.3.1.1 Req 60:
+|*Reference* |Annex F.9 Req 107
 |*Test Type* |Basic
 |========================================
 
@@ -264,7 +264,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 . For each ct value returned by step 1
 .. Fail if ct NOT IN ("range", "enum", "glob").
 . Pass if no fails.
-|*Reference* |Clause 0 Req 61:
+|*Reference* |Annex F.9 Req 108
 |*Test Type* |Capability
 |========================================
 
@@ -277,7 +277,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 .. SELECT count(*) FROM gpkg_data column_constraints WHERE constraint_name = cn
 .. Fail if count > 1
 . Pass if no fails.
-|*Reference* |Clause 2.3.3.1.2 Req 62:
+|*Reference* |Annex F.9 Req 109
 |*Test Type* |Capability
 |========================================
 
@@ -291,7 +291,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 . For each v value returned by step 1
 .. Fail if v IS NOT NULL
 . Pass if no fails.
-|*Reference* |Clause 2.3.3.1.2 Req 63:
+|*Reference* |Annex F.9 Req 110
 |*Test Type* |Capability
 |========================================
 
@@ -307,7 +307,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 .. Fail if max IS NULL
 .. Fail if min >= max
 . Pass if no fails.
-|*Reference* |Clause 2.3.3.1.2 Req 64:
+|*Reference* |Annex F.9 Req 111
 |*Test Type* |Capability
 |========================================
 
@@ -324,7 +324,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 .. Fail if minIsInclusive is NOT IN (0,1)
 .. Fail if maxIsInclusive is NOT IN (0,1)
 . Pass if no fails.
-|*Reference* |Clause 2.3.3.1.2 Req 65:
+|*Reference* |Annex F.9 Req 112
 |*Test Type* |Capability
 |========================================
 
@@ -341,7 +341,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 .. Fail if minIsInclusive IS NOT NULL
 .. Fail if maxIsInclusive IS NOT NULL
 . Pass if no fails.
-|*Reference* |Clause 2.3.3.1.2 Req 66:
+|*Reference* |Annex F.9 Req 113
 |*Test Type* |Capability
 |========================================
 
@@ -355,7 +355,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 . For each value returned by step 1
 .. Fail if value IS NULL
 . Pass if no fails.
-|*Reference* |Clause 2.3.3.1.2 Req 67:
+|*Reference* |Annex F.9 Req 114
 |*Test Type* |Capability
 |========================================
 
