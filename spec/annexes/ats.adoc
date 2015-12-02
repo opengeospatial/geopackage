@@ -516,7 +516,7 @@ FROM gpkg_geometry_columns WHERE table_name IN
 WHERE type = 'table' AND name = ‘{selected table_ name}’
 .. Pass if declared type of column_name selected in (1) is the geometry_type_name selected in (1)
 ..	Fail otherwise
-|*Reference* |Clause 2.1.6.1.1 Req 30b:
+|*Reference* |Clause 2.1.6.1.1 Req 31:
 |*Test Type* |Capability
 |========================================
 
@@ -535,7 +535,7 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 ... SELECT GPKG_IsAssignable(geometry_type_name, actual_type_name) 
 ... Fail if any returned 0 
 . Pass if no fails
-|*Reference* |Clause 2.1.6.1.2 Req 31:
+|*Reference* |Clause 2.1.6.1.2 Req 32:
 |*Test Type* |Capability
 |========================================
 
@@ -551,7 +551,7 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 .. For each row from step a
 ... Fail if returnvalue not equal to gc_srs_id
 . Pass if no fails
-|*Reference* |Clause 2.1.6.1.2 Req 32:
+|*Reference* |Clause 2.1.6.1.2 Req 33:
 |*Test Type* |Capability
 |========================================
 
@@ -576,7 +576,7 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 .. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”and the name column value is “id” 
 .. Fail if result set does not contain four other rows where the name column values are “zoom_level”,”tile_column”,”tile_row”, and “tile_data”.
 . Pass if no fails.
-|*Reference* |Clause 2.2.2.1.1 Req 33:
+|*Reference* |Clause 2.2.2.1.1 Req 34:
 |*Test Type* |Capability
 |========================================
 
@@ -604,7 +604,7 @@ END;
 .. Not testable  if there are not two rows with adjacent zoom levels
 .. Fail if any pair of rows for adjacent zoom levels have pixel_x_size or pixel_y_size values that differ by other than factors of two
 . Pass if no fails
-|*Reference* |Clause 2.2.3.1.1 Req 34:
+|*Reference* |Clause 2.2.3.1.1 Req 35:
 |*Test Type* |Capability
 |========================================
 
@@ -629,7 +629,7 @@ END;
 .. For each row tile_data from step a
 ... Pass if tile data in MIME type image/png
 . Fail if no passes
-|*Reference* |Clause 2.2.4.1.1 Req 35:
+|*Reference* |Clause 2.2.4.1.1 Req 36:
 |*Test Type* |Capability
 |========================================
 
@@ -656,7 +656,7 @@ END;
 .. For each row tile_data from step a
 ... Pass if tile data in MIME type image/jpeg
 . Fail if no passes
-|*Reference* |Clause 2.2.5.1.1 Req 36:
+|*Reference* |Clause 2.2.5.1.1 Req 37:
 |*Test Type* |Capability
 |========================================
 
@@ -675,7 +675,7 @@ END;
 . Fail if returns an empty result set. 
 . Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <<example_feature_table_sql>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
 . Fail otherwise.
-|*Reference* |Clause 2.2.6.1.1 Req 37:
+|*Reference* |Clause 2.2.6.1.1 Req 38:
 |*Test Type* |Capability
 |========================================
 
@@ -691,7 +691,7 @@ END;
 . SELECT table_name FROM gpkg_tile_matrix_set tms WHERE table_name NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tms.table_name = gc.table_name AND gc.data_type != ‘tiles’)
 . Fail if result set contains any rows
 . Pass otherwise
-|*Reference* |Clause 2.2.6.1.2 Req 38:
+|*Reference* |Clause 2.2.6.1.2 Req 39:
 |*Test Type* |Capability
 |========================================
 
@@ -706,7 +706,7 @@ END;
 .. SELECT sql FROM sqlite_master WHERE type=’table’ AND tbl_name =  '<user_data_tiles_table>'
 .. Fail if returns an empty result set
 . Pass if no fails 
-|*Reference* |Clause 2.2.6.1.2 Req 39:
+|*Reference* |Clause 2.2.6.1.2 Req 40:
 |*Test Type* |Capability
 |========================================
 
@@ -717,7 +717,7 @@ END;
 |*Test Method* |
 . PRAGMA foreign_key_check(‘gpkg_geometry_columns’)
 . Fail if returns any rows with a fourth column foreign key index value of 1 (gpkg_spatial_ref_sys)
-|*Reference* |Clause 2.2.6.1.2 Req 40:
+|*Reference* |Clause 2.2.6.1.2 Req 41:
 |*Test Type* |Capability
 |========================================
 
@@ -734,7 +734,7 @@ END;
 . Fail if returns an empty result set. 
 . Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values, primary, and foreign key constraints match all of those in the contents of Annex C Table 23. 
 . Fail otherwise.
-|*Reference* |Clause 2.2.7.1.1 Req 41:
+|*Reference* |Clause 2.2.7.1.1 Req 42:
 |*Test Type* |Basic
 |========================================
 
@@ -750,7 +750,7 @@ END;
 . SELECT table_name FROM gpkg_tile_matrix tmm WHERE table_name NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tmm.table_name = gc.table_name AND gc.data_type != ‘tiles’)
 . Fail if result set contains any rows
 . Pass otherwise
-|*Reference* |Clause 2.2.7.1.2 Req 42:
+|*Reference* |Clause 2.2.7.1.2 Req 43:
 |*Test Type* |Capability
 |========================================
 
@@ -766,7 +766,7 @@ END;
  LEFT OUTER JOIN <user_data_tiles_table> AS udtt ON udtt.zoom_level =  gtmm.zoom_level AND gtmm.t_table_name = '<user_data_tiles_table>'
 .. Fail if any gtmm_zoom column value in the result set is NULL
 . Pass if no fails 
-|*Reference* |Clause 2.2.7.1.2 Req 43:
+|*Reference* |Clause 2.2.7.1.2 Req 44:
 |*Test Type* |Capability
 |========================================
 
@@ -780,7 +780,7 @@ END;
 . SELECT min(zoom_level) FROM gpkg_tile_matrix_metadata.
 . Fail if less than 0. 
 . Pass otherwise.
-|*Reference* |Clause 2.2.7.1.2 Req 44:
+|*Reference* |Clause 2.2.7.1.2 Req 46:
 |*Test Type* |Capability
 |========================================
 
@@ -794,7 +794,7 @@ END;
 . SELECT min(matrix_width) FROM gpkg_tile_matrix. 
 . Fail if less than 1.
 . Pass otherwise.
-|*Reference:* |Clause 2.2.7.1.2 Req 45:
+|*Reference:* |Clause 2.2.7.1.2 Req 47:
 |*Test Type:* |Capability
 |========================================
 
@@ -808,7 +808,7 @@ END;
 . SELECT min(matrix_height) FROM gpkg_tile_matrix.
 . Fail if less than 1.
 . Pass otherwise.
-|*Reference* |Clause 2.2.7.1.2 Req 46:
+|*Reference* |Clause 2.2.7.1.2 Req 48:
 |*Test Type* |Capability
 |========================================
 
@@ -822,7 +822,7 @@ END;
 . SELECT min(tile_width) FROM gpkg_tile_matrix.
 . Fail if less than 1.
 . Pass otherwise.
-|*Reference* |Clause 2.2.7.1.2 Req 47:
+|*Reference* |Clause 2.2.7.1.2 Req 49:
 |*Test Type* |Capability
 |========================================
 
@@ -836,7 +836,7 @@ END;
 . SELECT min(tile_height) FROM gpkg_tile_matrix.
 . Fail if less than 1.
 . Pass otherwise.
-|*Reference* |Clause 2.2.7.1.2 Req 48:
+|*Reference* |Clause 2.2.7.1.2 Req 50:
 |*Test Type* |Capability
 |========================================
 
@@ -850,7 +850,7 @@ END;
 . SELECT min(pixel_x_size) FROM gpkg_tile_matrix.
 . Fail if less than 0.
 . Pass otherwise.
-|*Reference* |Clause 2.2.7.1.2 Req 49:
+|*Reference* |Clause 2.2.7.1.2 Req 51:
 |*Test Type* |Capability
 |========================================
 
@@ -864,7 +864,7 @@ END;
 . SELECT min(pixel_y_size) FROM gpkg_tile_matrix.
 . Fail if less than 0.
 . Pass otherwise.
-|*Reference* |Clause 2.2.7.1.2 Req 50:
+|*Reference* |Clause 2.2.7.1.2 Req 52:
 |*Test Type* |Capability
 |========================================
 
@@ -881,7 +881,7 @@ END;
 .. Fail if pixel_x_sizes are not sorted in descending order
 .. Fail if pixel_y_sizes are not sorted in descending order
 . Pass if testable and no fails
-|*Reference* |Clause 2.2.7.1.2 Req 51:
+|*Reference* |Clause 2.2.7.1.2 Req 53:
 |*Test Type* |Capability
 |========================================
 
@@ -905,7 +905,7 @@ END;
 .. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”and the name column value is “id” 
 .. Fail if result set does not contain four other rows where the name column values are “zoom_level”,”tile_column”,”tile_row”, and “tile_data”.
 . Pass if no fails
-|*Reference* |Clause 2.2.8.1.1 Req 52:
+|*Reference* |Clause 2.2.8.1.1 Req 54:
 |*Test Type* |Basic
 |========================================
 
@@ -928,7 +928,7 @@ END;
 ... Fail if result set not empty
 ... Log pass otherwise
 . Pass if logged pas and no fails
-|*Reference* |Clause 2.2.8.1.2 Req 53:
+|*Reference* |Clause 2.2.8.1.2 Req 55:
 |*Test Type* |Capability
 |========================================
 
@@ -944,7 +944,7 @@ END;
 .. Fail if any udt_column value in the result set is not NULL
 .. Log pass otherwise
 . Pass if logged pass and no fails
-|*Reference* |Clause 2.2.8.1.2 Req 54:
+|*Reference* |Clause 2.2.8.1.2 Req 56:
 |*Test Type* |Capability
 |========================================
 
@@ -960,7 +960,7 @@ END;
 .. Fail if any udt_row value in the result set is not NULL
 .. Log pass otherwise
 . Pass if logged pass and no fails
-|*Reference* |Clause 2.2.8.1.2 Req 55:
+|*Reference* |Clause 2.2.8.1.2 Req 57:
 |*Test Type* |Capability
 |========================================
 
@@ -978,7 +978,7 @@ END;
 . Fail if returns an empty result set.
 . Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 36. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
-|*Reference* |Clause 2.5.2.1.1 Req 78:
+|*Reference* |Clause 2.3.2.1.1 Req 58:
 |*Test Type* |Basic
 |========================================
 
@@ -1003,7 +1003,7 @@ END;
 . Do test /reg_ext/tiles/tile_encoding_webp/data/tiff_ext_row
 . Do test /reg_ext/tiles/tile_encoding_webp/data/nitf_ext_row
 . Pass if no fails
-|*Reference* |Clause 2.5.2.1.2 Req 79:
+|*Reference* |Clause 2.3.2.1.2 Req 59:
 |*Test Type* |Capability
 |========================================
 
@@ -1019,7 +1019,7 @@ END;
 .. SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
 .. Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).
 . Pass if logged pass and no fails.
-|*Reference* |Clause 2.5.2.1.2 Req 80:
+|*Reference* |Clause 2.3.2.1.2 Req 60:
 |*Test Type* |Capability
 |========================================
 
@@ -1037,7 +1037,7 @@ END;
 .. Fail if gpkg_extensions.column_name value does not equal a name column value returned by PRAGMA table_info.
 .. Log pass otherwise
 . Pass if logged pass and no fails.
-|*Reference* |Clause 2.5.2.1.2 Req 81:
+|*Reference* |Clause 2.3.2.1.2 Req 61:
 |*Test Type* |Capability
 |========================================
 
@@ -1056,7 +1056,7 @@ END;
 .. Fail if <extension> contains characters other than [a-zA-Z0-9_]
 .. Log pass otherwise
 . Pass if logged pass and no fails.
-|*Reference* |Clause 2.5.2.1.2 Req 82:
+|*Reference* |Clause 2.3.2.1.2 Req 62:
 |*Test Type* |Capability
 |========================================
 
@@ -1071,7 +1071,7 @@ END;
 .. Inspect if definition value is not like “Annex %”, or “http%” or mailto:% or “Extension Title%”
 .. Fail if definition value does not contain or reference extension documentation
 . Pass if no fails
-|*Reference* |Clause 2.5.2.1.2 Req 83:
+|*Reference* |Clause 2.3.2.1.2 Req 63:
 |*Test Type* |Capability
 |========================================
 
@@ -1085,6 +1085,6 @@ END;
 . For each row returned from step 1
 .. Fail is value is not “read-write” or “write-only”
 . Pass if no fails
-|*Reference* |Clause 2.5.2.1.2 Req 84:
+|*Reference* |Clause 2.3.2.1.2 Req 64:
 |*Test Type* |Capability
 |========================================
