@@ -177,7 +177,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_columns' 
 . Fail if returns an empty result set
-. Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C8 Table 30. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 42. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Annex F.9 Req 103
 |*Test Type* |Basic
@@ -245,7 +245,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_column_constraints' 
 . Fail if returns an empty result set
-. Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C Table 31. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 43. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Annex F.9 Req 107
 |*Test Type* |Basic

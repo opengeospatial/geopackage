@@ -82,7 +82,7 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 . For each row from step 3
 .. SELECT cn FROM tn;
 .. For each row from step a, log fail if GeoPackageBinary “X” type flag is 1
-.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 43, then
+.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 43, then
 .. Log cn.header values, wkb endianness and geometry type
 ii. If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail
 iii. If cn.flags.E is 1 - 4 and some cn.wkbx is outside of cn.envelope.minx,maxx then log fail
@@ -101,9 +101,9 @@ viii. Otherwise log pass
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/all_types_test_data+
 |*Test Purpose* |Verify that all extended non-linear geometry types and options are stored in valid GeoPackageBinary format encodings.
 |*Test Method* |
-. Open GeoPackage that has feature geometry values of geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
+. Open GeoPackage that has feature geometry values of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
 . /reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data
-. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 43 without and with z and/or m values.
+. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex G without and with z and/or m values.
 . Fail otherwise
 |*Reference* |Annex F.1 Req 66:
 |*Test Type* |Capability
@@ -115,7 +115,7 @@ viii. Otherwise log pass
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/extension_name+
-|*Test Purpose* |Verify that an extension name in the form gpkg_geom_<gname> is defined for each <gname> extension geometry type from Annex E Table 43  used in a GeoPackage.
+|*Test Purpose* |Verify that an extension name in the form gpkg_geom_<gname> is defined for each <gname> extension geometry type from Annex G used in a GeoPackage.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty

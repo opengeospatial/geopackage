@@ -107,9 +107,9 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 . For each row table_name, column_name from step 1
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgti_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if returns an empty result set
-.. Fail if sql != result of populating the first trigger template in Annex M with <t> as result_set_table_name and <c> as result_set_column_name
+.. Fail if sql != result of populating the first trigger template with <t> as result_set_table_name and <c> as result_set_column_name
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgtu_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
-.. Fail if sql != result of populating the second trigger template in Annex M with <t> as result_set_table_name and <c> as result_set_column_name
+.. Fail if sql != result of populating the second trigger template with <t> as result_set_table_name and <c> as result_set_column_name
 .. Log pass otherwise
 . Pass if logged pass and no fails
 |*Reference* |Annex F.4 Req 79
@@ -122,7 +122,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 |*Test Purpose* |Verify the correct implementation of sql functions used in geometry type triggers on feature table geometry columns.
 |*Test Method* |
 . Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
-. For each Geometry Test Data Set <gtype_test> data table row for each assignable (gtype, atype) and non-assignable (ntype, atype) combination of geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
+. For each Geometry Test Data Set <gtype_test> data table row for each assignable (gtype, atype) and non-assignable (ntype, atype) combination of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
 .. SELECT ‘Fail’ FROM <gtype_test> WHERE GPKG_IsAssignable(gtype, atype) =0
 .. SELECT ‘Fail’ FROM <gtype_test> WHERE GPKG_IsAssignable(ntype, atype) = 1
 .. SELECT ‘Fail’ FROM <gtype_test> WHERE ST_GeometryType(geom) != atype
