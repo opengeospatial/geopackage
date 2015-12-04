@@ -218,11 +218,11 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 .. Not testable if result set is empty
 .. Fail if returned sql != ‘CREATE VIRTUAL TABLE rtree_’ ’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| USING rtree(id, minx, maxx, miny, maxy)
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tname = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_insert’
-.. Fail if returned sql != result of populating insert triggers template in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
+.. Fail if returned sql != result of populating insert triggers template using result_set_table_name for <t> and result_set_column_name for <c>
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND name LIKE ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_update%’
-.. Fail if returned sql != result of populating 4 update triggers templates in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
+.. Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for <t> and result_set_column_name for <c>
 .. SELECT sql FROM sqlite_master WHERE type=’trigger’ AND name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_delete’
-.. Fail if returned sql != result of populating delete trigger template in Annex L using result_set_table_name for <t> and result_set_column_name for <c>
+.. Fail if returned sql != result of populating delete trigger template using result_set_table_name for <t> and result_set_column_name for <c>
 .. Log pass otherwise
 . Pass if logged pass and no fails
 |*Reference* |Annex F.3 Req 75

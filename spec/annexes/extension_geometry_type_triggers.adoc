@@ -107,9 +107,9 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 . For each row table_name, column_name from step 1
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgti_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if returns an empty result set
-.. Fail if sql != result of populating the first trigger template in Annex M with <t> as result_set_table_name and <c> as result_set_column_name
+.. Fail if sql != result of populating the first trigger template with <t> as result_set_table_name and <c> as result_set_column_name
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgtu_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
-.. Fail if sql != result of populating the second trigger template in Annex M with <t> as result_set_table_name and <c> as result_set_column_name
+.. Fail if sql != result of populating the second trigger template with <t> as result_set_table_name and <c> as result_set_column_name
 .. Log pass otherwise
 . Pass if logged pass and no fails
 |*Reference* |Annex F.4 Req 79

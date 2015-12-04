@@ -88,7 +88,7 @@ Definition of SQL functions
 |======
 
 [requirement]
-The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex J and/or Annex K when those extensions are also implemented.
+The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex F.1 and/or Annex F.2 when those extensions are also implemented.
 
 [float]
 ==== Abstract Test Suite
@@ -106,9 +106,9 @@ The SQL function on geometries in this SQLite Extension SHALL operate correctly 
 . For each row table_name, column_name from step 1
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsi_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
 .. Not testable if result set is empty
-.. Fail if sql != result of populating the first trigger template in Annex N with <t> as result_set_table_name and <c> as result_set_column_name
+.. Fail if sql != result of populating the first trigger template with <t> as result_set_table_name and <c> as result_set_column_name
 .. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsu_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
-.. Fail if sql != result of populating the second trigger template in Annex N with <t> as result_set_table_name and <c> as result_set_column_name
+.. Fail if sql != result of populating the second trigger template with <t> as result_set_table_name and <c> as result_set_column_name
 .. Log pass otherwise
 . Pass if logged pass and no fails
 |*Reference* |Annex F.5 Req 83
