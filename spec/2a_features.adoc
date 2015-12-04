@@ -37,7 +37,7 @@ This does not affect their representation, and open version of the same classes 
 A brief description of each geometry type is provided below.
 A more detailed description can be found in ISO 13249-3 <<12>>.
 
-:core_geometry_model_foot1: footnote:[GeometryCollection is a generic term for the ST_GeomCollection type defined in [12\], which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMCOLLECTION defined in [10\] and used in Clause 1.1.2.1.1 and Annex E below refers to the SQL BLOB encoding of a GeometryCollection.]
+:core_geometry_model_foot1: footnote:[GeometryCollection is a generic term for the ST_GeomCollection type defined in [12\], which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMCOLLECTION defined in [10\] and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.]
 
 
 * Geometry: the root of the geometry type hierarchy.
@@ -235,7 +235,7 @@ A feature table SHALL have only one geometry column.
 Feature data models <<B23>> from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be transformed into GeoPackage implementations with a separate feature table for each geometry type whose rows have matching integer primary key values that allow them to be joined in a view with the same column definitions as the non-GeoPackage feature data model with multiple geometry columns.
 
 [requirement] 
-The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex E specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.
+The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex G specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.
 
 [[example_feature_table_cols]]
 .EXAMPLE : Sample Feature Table or View Definition

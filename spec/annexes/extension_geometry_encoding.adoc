@@ -92,11 +92,11 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/user_defined-geometry_types/existing_sparse_data+
-|*Test Purpose* |Verify that existing extended geometry types not listed in Annex E are stored in valid ExtendedGeoPackageBinary format encodings.
+|*Test Purpose* |Verify that existing extended geometry types not listed in Annex G are stored in valid ExtendedGeoPackageBinary format encodings.
 |*Test Method* |
 . SELECT table_name FROM gpkg_geometry_columns
 . Not testable if returns an empty result set
-. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE geometry_type_name NOT IN (all geometry types listed in Annex E) AND table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’),
+. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE geometry_type_name NOT IN (all geometry types listed in Annex G) AND table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’),
 . Fail if returns an empty result set
 . For each row from step 3
 .. SELECT cn FROM tn;
@@ -114,7 +114,7 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/user_defined_geometry_types/extension_name+
-|*Test Purpose* |Verify that an extension name in the form <author>_geom_<gname> is defined for each extended geometry type not listed in Annex E used in a GeoPackage.
+|*Test Purpose* |Verify that an extension name in the form <author>_geom_<gname> is defined for each extended geometry type not listed in Annex G used in a GeoPackage.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == \'features'))
 . Not testable if result set is empty

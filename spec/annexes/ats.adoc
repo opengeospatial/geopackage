@@ -324,7 +324,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 . Fail if returns an empty result set
 . For each row from step 3
 .. SELECT cn FROM tn;
-.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 42, then
+.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 42, then
 ... Log cn.header values, wkb endianness and geometry type 
 ... If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail
 ... If cn.flags.E is 1 - 4 and some cn.wkbx is outside of cn.envelope.minx,maxx then log fail
@@ -343,9 +343,9 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 |*Test Case ID* |+/opt/features/geometry_encoding/data/core_types_all_types_test_data+
 |*Test Purpose* |Verify that all basic simple feature geometry types and options are stored in valid GeoPackageBinary format encodings.
 |*Test Method* |
-. Open GeoPackage that has feature geometry values of geometry type inAnnex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
+. Open GeoPackage that has feature geometry values of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
 . /opt/features/geometry_encoding/data/core_types_existing_sparse_data
-. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 41 without and with z and/or m values.
+. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex G without and with z and/or m values.
 . Fail otherwise 
 |*Reference* |Clause 2.1.4.1.1 Req 20:
 |*Test Type* |Capability
@@ -419,7 +419,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 . SELECT DISTINCT geometry_type_name from gpkg_geometry_columns 
 . Not testable  if returns an empty result set
 . For each row from step 1
-.. Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex E
+.. Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex G
 . Pass if no fails.
 |*Reference* |Clause 2.1.5.1.2 Req 25:
 |*Test Type* |Capability
@@ -504,14 +504,14 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/vector_features/data/feature_table_geometry_column_type+
-|*Test Purpose* |Verify that the declared SQL type of a feature table geometry column is the uppercase geometry type name from Annex E specified by the geometry_type_name 
+|*Test Purpose* |Verify that the declared SQL type of a feature table geometry column is the uppercase geometry type name from Annex G specified by the geometry_type_name 
 column for that column_name and table_name in the gpkg_geometry_columns table.
 |*Test Method* |
 . SELECT table_name, column_name, geometry_type_name table_name
 FROM gpkg_geometry_columns WHERE table_name IN 
 (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
 . For each row selected in (1):
-.. Fail if selected geometry_type_name value is not a value from the NAME column in Annex E Table 42 or Table 43.
+.. Fail if selected geometry_type_name value is not a value from the NAME column in Annex G Table 42 or Table 43.
 .. SELECT sql FROM sqlite_master 
 WHERE type = 'table' AND name = ‘{selected table_ name}’
 .. Pass if declared type of column_name selected in (1) is the geometry_type_name selected in (1)
@@ -990,8 +990,8 @@ END;
 |*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the gpkg_extensions table
 |*Test Method* |
 . For each SELECT DISTINCT geometry_type_name FROM geometry_columns
-.. Fail if geometry_type_name IN Annex E Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_<geometry_type_name>
-.. Fail if geometry_type_name NOT IN Annex E Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “_geom_<geometry_type_name>
+.. Fail if geometry_type_name IN Annex G Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_<geometry_type_name>
+.. Fail if geometry_type_name NOT IN Annex G Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “_geom_<geometry_type_name>
 . For each SELECT tbl_name FROM sqlite_master WHERE tbl_name LIKE ‘rtree_%’
 .. Fail if gpkg_extensions does not contain a row where extension_name = “gpkg_rtree_index”
 . For each SELECT tbl_name FROM sqlite_master WHERE name LIKE ‘fgti_%’
