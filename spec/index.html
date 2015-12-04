@@ -1303,7 +1303,7 @@ A feature table SHALL have only one geometry column.
 <div id="_requirement-31" class="quoteblock">
 <div class="title">Requirement 31</div>
 <blockquote>
-The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex E specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.
+The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex G specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.
 </blockquote>
 </div>
 <table id="example_feature_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -2044,8 +2044,8 @@ An <code>extension_name</code> for the “gpkg” author name SHALL be one of th
 </blockquote>
 </div>
 <div class="paragraph">
-<p>Complete examples of how to fill out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a> are provided by Annex L through Annex P.
-The definition column value in a <code>gpkg_extensions</code> row for those extensions SHALL contain the Annex name as a reference.</p>
+<p>Complete examples of how to fill out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a> are provided by Annex F.
+The definition column value in a <code>gpkg_extensions</code> row for those extensions SHALL contain the sub-annex name and as a reference (e.g., F.3 RTree Spatial Indexes).</p>
 </div>
 <div class="paragraph">
 <p>Partial examples of how to fill out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a> are provided by the templates in <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a> and <a href="#extension_geometry_encoding">User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding</a>.
@@ -3237,7 +3237,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <p>SELECT cn FROM tn;</p>
 </li>
 <li>
-<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 42, then</p>
+<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 42, then</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
@@ -3314,13 +3314,13 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open GeoPackage that has feature geometry values of geometry type inAnnex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
+<p>Open GeoPackage that has feature geometry values of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
 </li>
 <li>
 <p>/opt/features/geometry_encoding/data/core_types_existing_sparse_data</p>
 </li>
 <li>
-<p>Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 41 without and with z and/or m values.</p>
+<p>Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex G without and with z and/or m values.</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -3600,7 +3600,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex E</p>
+<p>Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex G</p>
 </li>
 </ol>
 </div>
@@ -3933,7 +3933,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the declared SQL type of a feature table geometry column is the uppercase geometry type name from Annex E specified by the geometry_type_name
+<p>Verify that the declared SQL type of a feature table geometry column is the uppercase geometry type name from Annex G specified by the geometry_type_name
 column for that column_name and table_name in the gpkg_geometry_columns table.</p>
 </div></div></td>
 </tr>
@@ -3951,7 +3951,7 @@ FROM gpkg_geometry_columns WHERE table_name IN
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if selected geometry_type_name value is not a value from the NAME column in Annex E Table 42 or Table 43.</p>
+<p>Fail if selected geometry_type_name value is not a value from the NAME column in Annex G Table 42 or Table 43.</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master
@@ -5709,10 +5709,10 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if geometry_type_name IN Annex E Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_&lt;geometry_type_name&gt;</p>
+<p>Fail if geometry_type_name IN Annex G Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_&lt;geometry_type_name&gt;</p>
 </li>
 <li>
-<p>Fail if geometry_type_name NOT IN Annex E Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “<em>geom</em>&lt;geometry_type_name&gt;</p>
+<p>Fail if geometry_type_name NOT IN Annex G Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “<em>geom</em>&lt;geometry_type_name&gt;</p>
 </li>
 </ol>
 </div>
@@ -5949,7 +5949,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Log pass if extension_name is one of those listed in Annex J or Annex L through Annex P.</p>
+<p>Log pass if extension_name is one of those listed in Annex F.</p>
 </li>
 <li>
 <p>Separate extension_name into &lt;author&gt; and &lt;extension&gt; at the first “_”</p>
@@ -8044,7 +8044,7 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 <p>For each row from step a, log fail if GeoPackageBinary “X” type flag is 1</p>
 </li>
 <li>
-<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex E Table 43, then</p>
+<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 43, then</p>
 </li>
 <li>
 <p>Log cn.header values, wkb endianness and geometry type
@@ -8105,13 +8105,13 @@ viii. Otherwise log pass</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Open GeoPackage that has feature geometry values of geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
+<p>Open GeoPackage that has feature geometry values of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
 </li>
 <li>
 <p>/reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data</p>
 </li>
 <li>
-<p>Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex E Table 43 without and with z and/or m values.</p>
+<p>Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex G without and with z and/or m values.</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -8150,7 +8150,7 @@ viii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that an extension name in the form gpkg_geom_&lt;gname&gt; is defined for each &lt;gname&gt; extension geometry type from Annex E Table 43  used in a GeoPackage.</p>
+<p>Verify that an extension name in the form gpkg_geom_&lt;gname&gt; is defined for each &lt;gname&gt; extension geometry type from Annex G used in a GeoPackage.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8387,7 +8387,7 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that existing extended geometry types not listed in Annex E are stored in valid ExtendedGeoPackageBinary format encodings.</p>
+<p>Verify that existing extended geometry types not listed in Annex G are stored in valid ExtendedGeoPackageBinary format encodings.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8401,7 +8401,7 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE geometry_type_name NOT IN (all geometry types listed in Annex E) AND table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’),</p>
+<p>SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE geometry_type_name NOT IN (all geometry types listed in Annex G) AND table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’),</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -8466,7 +8466,7 @@ SQL functions that operate on GeoPackageBinary geometries as specified in other 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that an extension name in the form &lt;author&gt;_geom_&lt;gname&gt; is defined for each extended geometry type not listed in Annex E used in a GeoPackage.</p>
+<p>Verify that an extension name in the form &lt;author&gt;_geom_&lt;gname&gt; is defined for each extended geometry type not listed in Annex G used in a GeoPackage.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8953,19 +8953,19 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 <p>SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tname = ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name || ‘_insert’</p>
 </li>
 <li>
-<p>Fail if returned sql != result of populating insert triggers template in Annex L using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+<p>Fail if returned sql != result of populating insert triggers template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND name LIKE ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name || ‘_update%’</p>
 </li>
 <li>
-<p>Fail if returned sql != result of populating 4 update triggers templates in Annex L using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+<p>Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master WHERE type=’trigger’ AND name = ‘rtree_’ || result_set_table_name || ‘_’ || result_set_column_name || ‘_delete’</p>
 </li>
 <li>
-<p>Fail if returned sql != result of populating delete trigger template in Annex L using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+<p>Fail if returned sql != result of populating delete trigger template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -9020,7 +9020,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 <p>Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension</p>
 </li>
 <li>
-<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:</p>
+<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -9337,13 +9337,13 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>Fail if sql != result of populating the first trigger template in Annex M with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
+<p>Fail if sql != result of populating the first trigger template with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgtu_’ || result_set_table_name || ‘_’ || result_set_column_name</p>
 </li>
 <li>
-<p>Fail if sql != result of populating the second trigger template in Annex M with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
+<p>Fail if sql != result of populating the second trigger template with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -9398,7 +9398,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 <p>Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension</p>
 </li>
 <li>
-<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each assignable (gtype, atype) and non-assignable (ntype, atype) combination of geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
+<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each assignable (gtype, atype) and non-assignable (ntype, atype) combination of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -9659,7 +9659,7 @@ A GeoPackage SHALL include the SQL insert and update triggers specified in <a hr
 <div id="_requirement-86" class="quoteblock">
 <div class="title">Requirement 86</div>
 <blockquote>
-The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex J and/or Annex K when those extensions are also implemented.
+The SQL function on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by Annex F.1 and/or Annex F.2 when those extensions are also implemented.
 </blockquote>
 </div>
 <h4 id="_abstract_test_suite_6" class="float">Abstract Test Suite</h4>
@@ -9703,13 +9703,13 @@ The SQL function on geometries in this SQLite Extension SHALL operate correctly 
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>Fail if sql != result of populating the first trigger template in Annex N with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
+<p>Fail if sql != result of populating the first trigger template with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
 <p>SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tbl_name = ‘fgsu_’ || result_set_table_name || ‘_’ || result_set_column_name</p>
 </li>
 <li>
-<p>Fail if sql != result of populating the second trigger template in Annex N with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
+<p>Fail if sql != result of populating the second trigger template with &lt;t&gt; as result_set_table_name and &lt;c&gt; as result_set_column_name</p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -9764,7 +9764,7 @@ The SQL function on geometries in this SQLite Extension SHALL operate correctly 
 <p>Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension</p>
 </li>
 <li>
-<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each geometry type in Annex E, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
+<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
@@ -12743,7 +12743,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <p>Fail if returns an empty result set</p>
 </li>
 <li>
-<p>Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C8 Table 30. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 42. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -12987,7 +12987,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <p>Fail if returns an empty result set</p>
 </li>
 <li>
-<p>Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Annex C Table 31. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 43. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -14073,7 +14073,7 @@ For undated references, the latest edition of the normative document referred to
 <a href="#_footnoteref_6">6</a>. The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
 </div>
 <div class="footnote" id="_footnote_7">
-<a href="#_footnoteref_7">7</a>. GeometryCollection is a generic term for the ST_GeomCollection type defined in [12\], which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMCOLLECTION defined in [10\] and used in Clause 1.1.2.1.1 and Annex E below refers to the SQL BLOB encoding of a GeometryCollection.
+<a href="#_footnoteref_7">7</a>. GeometryCollection is a generic term for the ST_GeomCollection type defined in [12\], which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMCOLLECTION defined in [10\] and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.
 </div>
 <div class="footnote" id="_footnote_8">
 <a href="#_footnoteref_8">8</a>. OGC WKB simple feature geometry types specified in <<9>> are a subset of the ISO WKB geometry types specified in <<12>>
@@ -14168,7 +14168,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-12-02 21:53:27 UTC
+Last updated 2015-12-04 23:35:54 UTC
 </div>
 </div>
 </body>
