@@ -180,7 +180,7 @@ The purpose of the `gpkg_contents` table is to provide identifying and descripti
 |Column Name |Type |Description |Null |Default |Key
 |`table_name` |TEXT |The name of the tiles, or feature table |no | |PK
 |`data_type` |TEXT |Type of data stored in the table:. “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage. |no | |
-|`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |
+|`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |UNIQUE |
 |`description` |TEXT |A human-readable description for the table_name content |yes |'' |
 |`last_change` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
 |`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name |yes | |
