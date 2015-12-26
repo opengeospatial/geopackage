@@ -721,60 +721,60 @@ A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a 
 <td class="tableblock halign-left valign-top"><p class="tableblock">UNIQUE</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A human-readable description for the table_name content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">''</p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>last_change</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATETIME</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">timestamp value in ISO 8601 format as defined by the strftime function <em>%Y-%m-%dT%H:%M:%fZ</em> format string applied to the current time</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>strftime('%Y-%m-%dT%H:%M:%fZ', 'now')</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>min_x</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box minimum easting or longitude for all content in table_name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>min_y</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box minimum northing or latitude for all content in table_name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>max_x</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box maximum easting or longitude for all content in table_name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>max_y</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box maximum northing or latitude for all content in table_name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spatial Reference System ID: <code>gpkg_spatial_ref_sys.srs_id</code>; when <code>data_type</code> is features, SHALL also match <code>gpkg_geometry_columns.srs_id</code>; When data_type is tiles, SHALL also match <code>gpkg_tile_matrix_set.srs_id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">FK</p></td>
 </tr>
 </tbody>
 </table>
@@ -12411,7 +12411,7 @@ If present it SHALL be defined per clause 2.3.2.1.1 <a href="#schema_data_column
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A human-readable identifier (e.g. short name) for the column_name content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UNIQUE</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>title</code></p></td>
@@ -13464,7 +13464,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_data_columns (
   table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   column_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  name <span class="predefined-type">TEXT</span>,
+  name <span class="predefined-type">TEXT</span> <span class="directive">UNIQUE</span>,
   title <span class="predefined-type">TEXT</span>,
   description <span class="predefined-type">TEXT</span>,
   mime_type <span class="predefined-type">TEXT</span>,
@@ -14168,7 +14168,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-12-25 22:08:47 UTC
+Last updated 2015-12-26 03:25:37 UTC
 </div>
 </div>
 </body>
