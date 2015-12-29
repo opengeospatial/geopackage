@@ -92,8 +92,8 @@ Values of the `definition` column MAY be NULL. (Extends <<gpkg_srs_table_data_va
 |*Test Case ID* |+/extension_crs_wkt/data_values_default+
 |*Test Purpose* |Verify that the gpkg_spatial_ref_sys table contains the required default contents. Replaces `/base/core/gpkg_spatial_ref_sys/data_values_default`.
 |*Test Method* |
-. `SELECT srs_id, organization, organization_coordsys_id, description_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “Undefined”, AND`
-. `SELECT srs_id, organization, organization_coordsys_id, description_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “Undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, description_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, description_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “undefined”, AND`
 . `SELECT definition_12_163 FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEODCRS["WGS 84",
   DATUM["World Geodetic System 1984",
     ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
