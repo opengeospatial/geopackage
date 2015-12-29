@@ -159,8 +159,8 @@
 |*Test Case ID* |+/base/core/gpkg_spatial_ref_sys/data_values_default+
 |*Test Purpose* |Verify that the spatial_ref_sys table contains the required default contents.
 |*Test Method* |
-. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “Undefined”, AND`
-. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “Undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “undefined”, AND`
 . `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEOGCS ["WGS 84",
  DATUM ["World Geodetic System 1984", 
    SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]], 
