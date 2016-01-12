@@ -145,7 +145,7 @@
 |*Test Method* |
 . `SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_spatial_ref_sys'`
 . Fail if returns an empty result set
-. Pass if column names and column definitions in the returned `CREATE TABLE statement` in the sql column value, including data type, nullability,  and primary key constraints match all of those in the contents of C.1 Table 18. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if column names and column definitions in the returned `CREATE TABLE statement` in the sql column value, including data type, nullability,  and primary key constraints match all of those in the contents of C.1 Table 15. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Clause 1.1.2.1.1 Req 10:
 |*Test Type* |Basic
@@ -159,8 +159,8 @@
 |*Test Case ID* |+/base/core/gpkg_spatial_ref_sys/data_values_default+
 |*Test Purpose* |Verify that the spatial_ref_sys table contains the required default contents.
 |*Test Method* |
-. `SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND`
-. `SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “undefined”, AND`
 . `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEOGCS ["WGS 84",
  DATUM ["World Geodetic System 1984", 
    SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]], 
