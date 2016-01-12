@@ -2618,7 +2618,7 @@ The GeoPackage standard does not place any constraints on application, platform,
 <p>Fail if returns an empty result set</p>
 </li>
 <li>
-<p>Pass if column names and column definitions in the returned <code>CREATE TABLE statement</code> in the sql column value, including data type, nullability,  and primary key constraints match all of those in the contents of C.1 Table 18. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Pass if column names and column definitions in the returned <code>CREATE TABLE statement</code> in the sql column value, including data type, nullability,  and primary key constraints match all of those in the contents of C.1 Table 15. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -2667,10 +2667,10 @@ The GeoPackage standard does not place any constraints on application, platform,
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined”, AND</code></p>
 </li>
 <li>
-<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “undefined”, AND</code></p>
 </li>
 <li>
 <p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEOGCS ["WGS 84",
@@ -7152,6 +7152,15 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.9</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Make "identifier" unique in Table 42, Table 45 <a href="https://github.com/opengeospatial/geopackage/issues/183">https://github.com/opengeospatial/geopackage/issues/183</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2015-12-28</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex A.1.1.2</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Fix column names in ATS tests</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -14276,7 +14285,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-12-27 03:07:02 UTC
+Last updated 2016-01-12 21:33:04 UTC
 </div>
 </div>
 </body>
