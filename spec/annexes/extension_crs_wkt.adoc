@@ -61,7 +61,7 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL have an additional column
 Values of the `definition_12_163` column SHALL be constructed per the WKT syntax in <<34>>. 
 
 [requirement]
-If it is not possible to produce a valid <<32>> definition then the value of the `definition` column MAY be `undefined`. If it is not possible to produce a valid <<34>> definition then the value of the `definition_12_063` column MAY be `undefined`. However, at least one definition column SHALL be defined unless the `srs_id` is `0` or `-1`.
+At least one definition column SHALL be defined with a valid definition unless the value of the `srs_id` column is `0` or `-1`. Both columns SHOULD be defined. If it is not possible to produce a valid <<32>> definition then the value of the `definition` column MAY be `undefined`. If it is not possible to produce a valid <<34>> definition then the value of the `definition_12_063` column MAY be `undefined`. 
 
 [float]
 ==== Abstract Test Suite
