@@ -37,6 +37,7 @@ Read-write
 ===== Table
 [float]
 ====== Table Definition
+[[gpkg_crs_wkt_req_table_definition]]
 [requirement]
 The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL have an additional column called `definition_12_163` as per <<gpkg_spatial_ref_sys_cols_crs_wkt>> and <<gpkg_spatial_ref_sys_crs__12_163wkt_sql>>.
 
@@ -57,7 +58,10 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL have an additional column
 [float]
 ====== Table Data Values
 [requirement]
-Values of the `definition_12_163` column SHALL be constructed per the WKT syntax in <<34>>.
+Values of the `definition_12_163` column SHALL be constructed per the WKT syntax in <<34>>. 
+
+[requirement]
+If it is not possible to produce a valid <<32>> definition then the value of the `definition` column MAY be `undefined`. If it is not possible to produce a valid <<34>> definition then the value of the `definition_12_063` column MAY be `undefined`. However, at least one definition column SHALL be defined unless the `srs_id` is `0` or `-1`.
 
 [float]
 ==== Abstract Test Suite
@@ -85,10 +89,17 @@ Values of the `definition_12_163` column SHALL be constructed per the WKT syntax
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/extension_crs_wkt/data_values_default+
-|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table contains the required default contents. Replaces `/base/core/gpkg_spatial_ref_sys/data_values_default`.
+|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table contains the required default contents. Extends `/base/core/gpkg_spatial_ref_sys/data_values_default`.
 |*Test Method* |
-. `SELECT srs_id, organization, organization_coordsys_id, description_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined”, AND`
-. `SELECT srs_id, organization, organization_coordsys_id, description_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined” “undefined”, AND`
+. `SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0  “undefined” “undefined”, AND`
+. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEOGCS ["WGS 84",
+ DATUM ["World Geodetic System 1984", 
+   SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]], 
+   AUTHORITY["EPSG","6326"]],
+ PRIMEM["Greenwich", 0 , AUTHORITY["EPSG","8901"]], 
+ UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]], 
+ AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components <twin axes> and <to wgs84> and whitespace differences in the returned text)
 . `SELECT definition_12_163 FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEODCRS["WGS 84",
   DATUM["World Geodetic System 1984",
     ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
@@ -98,8 +109,20 @@ Values of the `definition_12_163` column SHALL be constructed per the WKT syntax
   AXIS["longitude", east, ORDER[2]],
   ANGLEUNIT["degree", 0.0174532925199433],
   ID["EPSG", 4326]]
-. Pass if tests 1-3 are met
+. Pass if tests 1-4 are met
 . Fail otherwise
+|*Reference* |Annex F.10 Req 116
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extension_crs_wkt/data_values_undefined+
+|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table contains the required default contents. Replaces `/base/core/gpkg_spatial_ref_sys/data_values_default`.
+|*Test Method* |
+. `SELECT definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)`
+. Fail if both definition values are `undefined`
+. Pass otherwise
 |*Reference* |Annex F.10 Req 117
 |*Test Type* |Capability
 |========================================
