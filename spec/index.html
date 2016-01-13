@@ -595,7 +595,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="sect5">
 <h6 id="gpkg_srs_table_data_values">1.1.2.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">Requirement 11</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">Table Data Values</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">Requirement 11</a>:</p>
+<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">Requirement 11</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">Requirement 11</a>:</p>
 </div>
 <div id="_requirement-11" class="quoteblock">
 <div class="title">Requirement 11</div>
@@ -13633,7 +13633,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <h3 id="extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</h3>
 <h4 id="_introduction_13" class="float">Introduction</h4>
 <div class="paragraph">
-<p>The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <a href="#34">[34]</a>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <a href="#32">[32]</a> which has known ambiguities that are being encountered in the field. This extension updates the references to use the new standard.</p>
+<p>The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <a href="#34">[34]</a>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <a href="#32">[32]</a> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.</p>
 </div>
 <h4 id="_extension_author_11" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -13645,28 +13645,167 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </div>
 <h4 id="_extension_type_11" class="float">Extension Type</h4>
 <div class="paragraph">
-<p>Extension of Existing Requirement in clause <a href="#gpkg_srs_table_data_values">Table Data Values</a>.</p>
+<p>Extension of Existing Requirement in clause <a href="#spatial_ref_sys_data_table_definition">Table Definition</a>.</p>
 </div>
 <h4 id="_applicability_11" class="float">Applicability</h4>
 <div class="paragraph">
-<p>Applies to <code>definition</code> column WKT values in the <code>gpkg_spatial_ref_sys</code> table.</p>
+<p>Applies to the <code>gpkg_spatial_ref_sys</code> table.</p>
 </div>
 <h4 id="_scope_11" class="float">Scope</h4>
 <div class="paragraph">
 <p>Read-write</p>
 </div>
-<div class="paragraph">
-<p><strong>Warning: As <a href="#34">[34]</a> is not reverse compatible with <a href="#32">[32]</a>, it is the responsibility of the producer to ensure that the consumer is capable of supporting this extension before using it.</strong></p>
-</div>
 <h4 id="_requirements_11" class="float">Requirements</h4>
-<div id="_requirement-115" class="quoteblock">
+<h5 id="_table" class="float">Table</h5>
+<h6 id="_table_definition_8" class="float">Table Definition</h6>
+<div id="gpkg_crs_wkt_req_table_definition" class="quoteblock">
 <div class="title">Requirement 115</div>
 <blockquote>
-Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL be constructed per the WKT syntax in <a href="#34">[34]</a>. They SHALL NOT be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7 as per clause 1.1.2.1.1 (<a href="#gpkg_srs_table_data_values">Table Data Values</a>).
+The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additional column called <code>definition_12_163</code> as per <a href="#gpkg_spatial_ref_sys_cols_crs_wkt">Spatial Ref Sys Table Definition</a> and <a href="#gpkg_spatial_ref_sys_crs_wkt_sql">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</a>.
+</blockquote>
+</div>
+<table id="gpkg_spatial_ref_sys_cols_crs_wkt" class="tableblock frame-all grid-all" style="width:100%; ">
+<caption class="title">Table 47. Spatial Ref Sys Table Definition</caption>
+<colgroup>
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;"> 
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Column Name</th>
+<th class="tableblock halign-left valign-top">Column Type</th>
+<th class="tableblock halign-left valign-top">Column Description</th>
+<th class="tableblock halign-left valign-top">Null</th>
+<th class="tableblock halign-left valign-top">Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Human readable name of this SRS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unique identifier for each Spatial Reference System within a GeoPackage</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>organization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Case-insensitive name of the defining organization e.g. EPSG or epsg</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>organization_coordsys_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Numeric ID of the Spatial Reference System assigned by the organization</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#32">[32]</a> Representation of the Spatial Reference System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Human readable description of this SRS</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition_12_163</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#34">[34]</a> Representation of the Spatial Reference System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_table_data_values_11" class="float">Table Data Values</h6>
+<div id="_requirement-116" class="quoteblock">
+<div class="title">Requirement 116</div>
+<blockquote>
+Values of the <code>definition_12_163</code> column SHALL be constructed per the WKT syntax in <a href="#34">[34]</a>.
+</blockquote>
+</div>
+<div id="_requirement-117" class="quoteblock">
+<div class="title">Requirement 117</div>
+<blockquote>
+At least one definition column SHALL be defined with a valid definition unless the value of the <code>srs_id</code> column is <code>0</code> or <code>-1</code>. Both columns SHOULD be defined. If it is not possible to produce a valid <a href="#32">[32]</a> definition then the value of the <code>definition</code> column MAY be <code>undefined</code>. If it is not possible to produce a valid <a href="#34">[34]</a> definition then the value of the <code>definition_12_063</code> column MAY be <code>undefined</code>.
 </blockquote>
 </div>
 <h4 id="_abstract_test_suite_11" class="float">Abstract Test Suite</h4>
-<h5 id="spatial_ref_sys_data_values_default" class="float">Table Data Values</h5>
+<h5 id="_table_definition_9" class="float">Table Definition</h5>
+<div class="paragraph">
+<p><strong>Table Definition</strong></p>
+</div>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extension_crs_wkt/table_def</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the gpkg_spatial_ref_sys table exists and has the correct definition. Extends <code>/base/core/gpkg_spatial_ref_sys/data/table_def</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_spatial_ref_sys'</code></p>
+</li>
+<li>
+<p>Fail if returns an empty result set</p>
+</li>
+<li>
+<p>Pass if column names and column definitions in the returned <code>CREATE TABLE statement</code> in the sql column value, including data type, nullability, and primary key constraints match all of those in the contents of Annex F.10 Table 47. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+</li>
+<li>
+<p>Fail otherwise.</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.10 Req 115</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Basic</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h5 id="_table_data_values_12" class="float">Table Data Values</h5>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -13682,7 +13821,7 @@ Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHAL
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_spatial_ref_sys table contains the required default contents.</p>
+<p>Verify that the gpkg_spatial_ref_sys table contains the required default contents. Extends <code>/base/core/gpkg_spatial_ref_sys/data_values_default</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -13690,13 +13829,22 @@ Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHAL
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = -1 returns -1 “NONE” -1 “Undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined” “undefined”, AND</code></p>
 </li>
 <li>
-<p><code>SELECT srid, auth_name, auth_srid, srtext FROM gpkg_spatial_ref_sys WHERE srid = 0 returns 0 “NONE” 0 “Undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0  “undefined” “undefined”, AND</code></p>
 </li>
 <li>
-<p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
+<p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEOGCS ["WGS 84",
+DATUM ["World Geodetic System 1984",
+  SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]],
+  AUTHORITY["EPSG","6326"]],
+PRIMEM["Greenwich", 0 , AUTHORITY["EPSG","8901"]],
+UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]],
+AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components &lt;twin axes&gt; and &lt;to wgs84&gt; and whitespace differences in the returned text)</p>
+</li>
+<li>
+<p><code>SELECT definition_12_163 FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
 DATUM["World Geodetic System 1984",
   ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
 PRIMEM["Greenwich", 0.0, ANGLEUNIT["degree",0.0174532925199433]],
@@ -13707,7 +13855,7 @@ ANGLEUNIT["degree", 0.0174532925199433],
 ID["EPSG", 4326]]</p>
 </li>
 <li>
-<p>Pass if tests 1-3 are met</p>
+<p>Pass if tests 1-4 are met</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -13718,7 +13866,7 @@ ID["EPSG", 4326]]</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.10 Req 115</p>
+<p>Annex F.10 Req 116</p>
 </div></div></td>
 </tr>
 <tr>
@@ -13730,6 +13878,82 @@ ID["EPSG", 4326]]</p>
 </tbody>
 </table>
 
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extension_crs_wkt/data_values_undefined</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the gpkg_spatial_ref_sys table contains the required default contents. Replaces <code>/base/core/gpkg_spatial_ref_sys/data_values_default</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)</code></p>
+</li>
+<li>
+<p>Fail if both definition values are <code>undefined</code></p>
+</li>
+<li>
+<p>Pass otherwise</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.10 Req 117</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="_table_definition_sql_3" class="float">Table Definition SQL</h4>
+<h5 id="_gpkg_spatial_ref_sys_2" class="float">gpkg_spatial_ref_sys</h5>
+<table id="gpkg_spatial_ref_sys_crs_wkt_sql" class="tableblock frame-all grid-all" style="width:100%; ">
+<caption class="title">Table 48. gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</caption>
+<colgroup>
+<col style="width:%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_spatial_ref_sys (
+  srs_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  srs_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  organization <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  organization_coordsys_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  definition  <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  description <span class="predefined-type">TEXT</span>,
+  definition_12_163 <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
+);</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -13737,7 +13961,7 @@ ID["EPSG", 4326]]</p>
 <h2 id="geometry_types"> Annex G: Geometry Types (Normative)</h2>
 <div class="sectionbody">
 <table id="geometry_types_core" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 47. Geometry Type Codes (Core)</caption>
+<caption class="title">Table 49. Geometry Type Codes (Core)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -13785,7 +14009,7 @@ ID["EPSG", 4326]]</p>
 </table>
 
 <table id="geometry_types_extension" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 48. Geometry Type Codes (Extension)</caption>
+<caption class="title">Table 50. Geometry Type Codes (Extension)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -13855,7 +14079,7 @@ ID["EPSG", 4326]]</p>
 <h2 id="tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 49. Zoom Times Two Example</caption>
+<caption class="title">Table 51. Zoom Times Two Example</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14294,7 +14518,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-01-12 21:40:14 UTC
+Last updated 2016-01-13 03:32:56 UTC
 </div>
 </div>
 </body>
