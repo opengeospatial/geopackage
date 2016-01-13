@@ -49,7 +49,7 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL have an additional column
 |`srs_id` |INTEGER |Unique identifier for each Spatial Reference System within a GeoPackage |no |PK
 |`organization` |TEXT |Case-insensitive name of the defining organization e.g. EPSG or epsg |no |
 |`organization_coordsys_id` |INTEGER |Numeric ID of the Spatial Reference System assigned by the organization |no |
-|`definition` |TEXT |Well-known Text <<32>> Representation of the Spatial Reference System |yes (see below) |
+|`definition` |TEXT |Well-known Text <<32>> Representation of the Spatial Reference System |no |
 |`description` |TEXT |Human readable description of this SRS |yes |
 |`definition_12_163` |TEXT |Well-known Text <<34>> Representation of the Spatial Reference System |no |
 |=======================================================================
@@ -58,11 +58,6 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL have an additional column
 ====== Table Data Values
 [requirement]
 Values of the `definition_12_163` column SHALL be constructed per the WKT syntax in <<34>>.
-
-[requirement]
-Values of the `definition` column MAY be NULL. (Extends <<gpkg_srs_table_data_values>>.)
-
-*Warning: If the `definition` column is NULL, it is the responsibility of the producer to ensure that the consumer is capable of supporting this extension before using it.*
 
 [float]
 ==== Abstract Test Suite
@@ -73,7 +68,7 @@ Values of the `definition` column MAY be NULL. (Extends <<gpkg_srs_table_data_va
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/extension_crs_wkt/table_def+
-|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table exists and has the correct definition. Replaces `/base/core/gpkg_spatial_ref_sys/data/table_def`.
+|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table exists and has the correct definition. Extends `/base/core/gpkg_spatial_ref_sys/data/table_def`.
 |*Test Method* |
 . `SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_spatial_ref_sys'`
 . Fail if returns an empty result set
@@ -128,7 +123,7 @@ CREATE TABLE gpkg_spatial_ref_sys (
   srs_id INTEGER NOT NULL PRIMARY KEY,
   organization TEXT NOT NULL,
   organization_coordsys_id INTEGER NOT NULL,
-  definition  TEXT,
+  definition  TEXT NOT NULL,
   description TEXT,
   definition_12_163 TEXT NOT NULL
 );
