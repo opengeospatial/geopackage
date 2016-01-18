@@ -772,6 +772,24 @@ END;
 
 [cols="1,5a"]
 |========================================
+|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_width_height+
+|*Test Purpose* |Verify that the tile matrix extents in gpkg_tile_matrix_set match the contents of the gpkg_tile_matrix table.
+|*Test Method* |
+. SELECT table_name AS <user_data_tiles_table> from gpkg_contents where data_type = ‘tiles’
+. Not testable if returns an empty result set
+. For each row from step 1
+.. SELECT max_x - min_x from gpkg_tile_matrix_set where table_name = '<user_data_tiles_table>'
+.. SELECT zoom_level, matrix_width * tile_width * pixel_x_size from gpkg_tile_matrix where table_name = '<user_data_tiles_table>'
+.. SELECT max_y - min_y from gpkg_tile_matrix_set where table_name = '<user_data_tiles_table>'
+.. SELECT zoom_level, matrix_height * tile_height * pixel_y_size from gpkg_tile_matrix where table_name = '<user_data_tiles_table>'
+.. Fail if, for any zoom level, the difference for an axis does not equal the product for that axis at that zoom level
+. Pass if no fails 
+|*Reference* |Clause 2.2.7.1.2 Req 45:
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_zoom_level+
 |*Test Purpose* |Verify that zoom level column values in the gpkg_tile_matrix table are not negative.
 |*Test Method* |
