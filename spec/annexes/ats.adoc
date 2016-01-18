@@ -612,16 +612,12 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 |*Test Case ID* |+/opt/tiles/tiles_encoding/data/mime_type_png+
 |*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type image/jpeg by default contains tile data in MIME type image/png.
 |*Test Method* |
-. SELECT CASE 
-WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN 
-(SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp')))
-ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles')
-END;
+. SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'
 . Not testable if returns empty result set
 . For each row tbl_name from step 1
 .. SELECT tile_data FROM tbl_name
 .. For each row tile_data from step a
+... Pass if tile data in MIME type image/jpeg
 ... Pass if tile data in MIME type image/png
 . Fail if no passes
 |*Reference* |Clause 2.2.4.1.1 Req 36:
@@ -629,9 +625,7 @@ END;
 |========================================
 
 ===== Tile Encoding JPEG
-
 ====== Data
-
 *MIME Type JPEG*
 
 [cols="1,5a"]
@@ -639,17 +633,13 @@ END;
 |*Test Case ID* |+/opt/tiles/tiles_encoding/data/mime_type_jpeg+
 |*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type image/png by default contains tile data in MIME type image/jpeg.
 |*Test Method* |
-. SELECT CASE 
-WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN 
-(SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name IN (\'gpkg_webp')))
-ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles')
-END;
+. SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'
 . Not testable if returns empty result set
 . For each row tbl_name from step 1
 .. SELECT tile_data FROM tbl_name
 .. For each row tile_data from step a
 ... Pass if tile data in MIME type image/jpeg
+... Pass if tile data in MIME type image/png
 . Fail if no passes
 |*Reference* |Clause 2.2.5.1.1 Req 37:
 |*Test Type* |Capability
