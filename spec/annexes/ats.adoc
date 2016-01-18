@@ -589,14 +589,9 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/zoom_levels/data/zoom_times_two+
-|*Test Purpose* |Verify that by default zoom level pixel sizes for tile matrix user data tables vary by factors of 2 between adjacent zoom levels in the tile matrix metadata table.
+|*Test Purpose* |Verify that zoom level pixel sizes for tile matrix user data tables vary by factors of 2 between adjacent zoom levels in the tile matrix metadata table.
 |*Test Method* |
-. SELECT CASE 
-WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN 
-(SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name = 'gpkg_zoom_other'))
-ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles')
-END;
+. SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles'
 . Not testable  if returns empty result set
 . For each row table_name from step 1
 .. SELECT zoom_level, pixel_x_size, pixel_y_size FROM gpkg_tile_matrix WHERE table_name = selected table name ORDER BY zoom_level ASC
