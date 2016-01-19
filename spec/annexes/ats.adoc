@@ -615,7 +615,7 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 . SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
 . For each row tbl_name from step 1
 .. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = \'tn' AND column_name = \'tile_data')  
-END
+END;
 ... Not testable unless it returns empty result set
 .. SELECT tile_data FROM tn
 .. For each row tile_data from step a
@@ -638,7 +638,7 @@ END
 . SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
 . For each row tbl_name from step 1
 .. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = \'tn' AND column_name = \'tile_data')  
-END
+END;
 ... Not testable unless it returns empty result set
 .. SELECT tile_data FROM tn
 .. For each row tile_data from step a
