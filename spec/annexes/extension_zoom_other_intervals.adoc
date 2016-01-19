@@ -117,18 +117,11 @@ None
 |*Test Purpose* |Verify that zoom level pixel sizes for tile matrix user data tables vary by factors of 2 between adjacent zoom levels in the tile matrix metadata table only for tile matrix sets that this extension does not apply to.
 |*Test Method* |
 . Override test +/opt/tiles/zoom_levels/data/zoom_times_two+
-. SELECT CASE 
-WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN 
-(SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles' AND table_name NOT IN
- (SELECT table_name from gpkg_extensions WHERE extension_name = 'gpkg_zoom_other'))
-ELSE (SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles')
+. SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
+. For each row tn from step 2
+.. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN (SELECT table_name from gpkg_extensions WHERE extension_name = \'gpkg_zoom_other' AND table_name = \'tn')
 END;
-. Not testable  if returns empty result set
-. For each row table_name from step 1
-.. SELECT zoom_level, pixel_x_size, pixel_y_size FROM gpkg_tile_matrix WHERE table_name = selected table name ORDER BY zoom_level ASC
-.. Not testable  if returns empty result set, or only one row
-.. Not testable  if there are not two rows with adjacent zoom levels
-.. Fail if any pair of rows for adjacent zoom levels have pixel_x_size or pixel_y_size values that differ by other than factors of two
+.. If returns empty result set, execute test +/opt/tiles/zoom_levels/data/zoom_times_two+
 . Pass if no fails
 |*Reference* |Annex F.6 Req 89
 |*Test Type* |Capability
