@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="generator" content="Asciidoctor 0.1.4">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OGC® GeoPackage Encoding Standard with corrigendum</title>
+<title>OGC® GeoPackage Encoding Standard</title>
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.2.1/css/font-awesome.min.css">
 <link rel="stylesheet" href="./asciidoctor-coderay.css">
@@ -13,17 +13,14 @@
 <div id="header">
 </div>
 <div id="content">
-<div class="docwarning hide-on-print">
-<br>This Document is a Corrigendum. A version with tracked changes from the original document is available upon request.<br><br>
-</div>
 <div id="ogcname" class="paragraph">
 <p>Open Geospatial Consortium<br></p>
 </div>
 <div id="ogcheading" class="paragraph">
-<p>External identifier of this OGC® document: <a href="http://www.opengis.net/doc/IS/geopackage/1.0.2">http://www.opengis.net/doc/IS/geopackage/1.0.2</a><br>
+<p>External identifier of this OGC® document: <a href="http://www.opengis.net/doc/IS/geopackage/1.1">http://www.opengis.net/doc/IS/geopackage/1.1</a><br>
 URL for this OGC® document: <a href="http://www.geopackage.org/spec">http://www.geopackage.org/spec</a><br>
 Internal reference number of this OGC® document: OGC 12-128r12<br>
-Version: 1.0.2-SNAPSHOT<br>
+Version: 1.1-SNAPSHOT<br>
 Category: OGC® Encoding Standard<br>
 Editor:   Jeff Yutzler<br>
 Editor Emeritus: Paul Daisey<br>
@@ -34,17 +31,17 @@ Editor Emeritus: Paul Daisey<br>
 <em>Original Version: <a href="http://www.opengis.net/doc/IS/geopackage/1.0">http://www.opengis.net/doc/IS/geopackage/1.0</a></em><br></p>
 </div>
 <div class="sect1">
-<h2 id="_ogc_geopackage_encoding_standard_with_corrigendum">OGC® GeoPackage Encoding Standard with corrigendum</h2>
+<h2 id="_ogc_geopackage_encoding_standard">OGC® GeoPackage Encoding Standard</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Copyright © 2015 Open Geospatial Consortium.<br>
+<p>Copyright © 2016 Open Geospatial Consortium.<br>
 To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/">http://www.opengeospatial.org/legal/</a><br></p>
 </div>
 <div class="paragraph">
 <p><strong>Warning</strong></p>
 </div>
 <div class="paragraph">
-<p>This document is an OGC Member approved international standard. This document is available on a royalty free, non-discriminatory basis. Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation. This is a corrigendum for OGC 12-128r1.</p>
+<p>This document is an OGC Member approved international standard. This document is available on a royalty free, non-discriminatory basis. Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation. This is a technical amendment to OGC 12-128r1.</p>
 </div>
 <div class="paragraph">
 <p>Document type:   	OGC® Publicly Available Standard<br>
@@ -106,7 +103,7 @@ Document language: 	English<br></p>
 <div id="toc" class="toc2">
 <div id="toctitle" class="title">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_ogc_geopackage_encoding_standard_with_corrigendum">OGC® GeoPackage Encoding Standard with corrigendum</a></li>
+<li><a href="#_ogc_geopackage_encoding_standard">OGC® GeoPackage Encoding Standard</a></li>
 <li>
 <ul class="sectlevel1">
 <li><a href="#_license_agreement">License Agreement</a></li>
@@ -333,7 +330,7 @@ The first 16 bytes of a GeoPackage SHALL contain “SQLite format 3” <span cla
 <div id="_requirement-2" class="quoteblock">
 <div class="title">Requirement 2</div>
 <blockquote>
-A GeoPackage SHALL contain 0x4750313032 ("GP102" in ASCII) in the application id field of the SQLite database header to indicate a GeoPackage version 1.0 file. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span>
+A GeoPackage SHALL contain 0x47503131 ("GP11" in ASCII) in the application id field of the SQLite database header to indicate a GeoPackage version 1.1 file. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span>
 </blockquote>
 </div>
 <div class="paragraph">
@@ -7155,21 +7152,21 @@ Request For Comment (RFC).</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2015-12-27</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Bump version number <a href="https://github.com/opengeospatial/geopackage/issues/188">https://github.com/opengeospatial/geopackage/issues/188</a></p>
-</div></div></td>
-</tr>
-<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2015-12-28</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annex A.1.1.2</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Fix column names in ATS tests</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2016-01-20</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R12</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Bump version number <a href="https://github.com/opengeospatial/geopackage/issues/188">https://github.com/opengeospatial/geopackage/issues/188</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -14518,7 +14515,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-01-13 03:32:56 UTC
+Last updated 2016-01-20 16:01:42 UTC
 </div>
 </div>
 </body>
