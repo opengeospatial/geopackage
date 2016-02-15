@@ -4871,77 +4871,6 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/tiles/gpkg_tile_matrix/data/data_values_width_height</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the tile matrix extents in gpkg_tile_matrix_set match the contents of the gpkg_tile_matrix table.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT table_name AS &lt;user_data_tiles_table&gt; from gpkg_contents where data_type = ‘tiles’</p>
-</li>
-<li>
-<p>Not testable if returns an empty result set</p>
-</li>
-<li>
-<p>For each row from step 1</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>SELECT max_x - min_x from gpkg_tile_matrix_set where table_name = <em>&lt;user_data_tiles_table&gt;</em></p>
-</li>
-<li>
-<p>SELECT zoom_level, matrix_width * tile_width * pixel_x_size from gpkg_tile_matrix where table_name = <em>&lt;user_data_tiles_table&gt;</em></p>
-</li>
-<li>
-<p>SELECT max_y - min_y from gpkg_tile_matrix_set where table_name = <em>&lt;user_data_tiles_table&gt;</em></p>
-</li>
-<li>
-<p>SELECT zoom_level, matrix_height * tile_height * pixel_y_size from gpkg_tile_matrix where table_name = <em>&lt;user_data_tiles_table&gt;</em></p>
-</li>
-<li>
-<p>Fail if, for any zoom level, the difference for an axis does not equal the product for that axis at that zoom level</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if no fails</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause 2.2.7.1.2 Req 45:</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Capability</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p><code>/opt/tiles/gpkg_tile_matrix/data/data_values_zoom_level</code></p>
 </div></div></td>
 </tr>
@@ -14696,7 +14625,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-02-15 21:44:35 UTC
+Last updated 2016-02-15 21:48:51 UTC
 </div>
 </div>
 </body>
