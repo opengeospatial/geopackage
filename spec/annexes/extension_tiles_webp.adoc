@@ -99,3 +99,25 @@ None
 |*Reference:* |Annex F.7 Req 91
 |*Test Type* |Capability
 |========================================
+
+[float]
+=====
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/tiles/tiles_encoding_webp/data/mime_type_webp+
+|*Test Purpose* |Verify that a tile matrix user data table that conforms to this extension contains tile data of MIME type image/x-webp.
+|*Test Method* |
+. SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
+. For each row tn from step 2
+.. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = \'tn') 
+END; 
+.. For each row extension_name from step a
+... Not testable if extension_name is not 'gpkg_webp'
+... SELECT tile_data from tn
+.... Pass if tile data in MIME type image/x-webp
+.... Fail if no passes
+|*Reference* |Annex F.7 Req 92
+|*Test Type* |Capability
+|========================================
+
