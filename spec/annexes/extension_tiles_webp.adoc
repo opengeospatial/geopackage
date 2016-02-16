@@ -1,0 +1,123 @@
+[[extension_tiles_webp]]
+=== Tiles Encoding WebP
+
+[float]
+==== Introduction
+
+This extension of clauses <<tile_enc_png>> and <<tile_enc_jpeg>> allows encoding of tile images in WebP format.
+
+PNG and JPEG are the default MIME types for encoding images in tile pyramid user data tables.
+This extension allows the use of `image/x-webp` as an additional encoding type.
+
+[float]
+==== Extension Author
+
+GeoPackage SWG, author_name `gpkg`.
+
+[float]
+==== Extension Name or Template
+
+`gpkg_webp`
+
+[float]
+==== Extension Type
+
+Extension of Existing Requirement in clauses <<tile_enc_png>> and <<tile_enc_jpeg>>.
+
+[float]
+==== Applicability
+
+This extension applies to any table listed in the `gpkg_contents` table with a data_type of `tiles`.
+
+[float]
+==== Scope
+
+Read-write
+
+[float]
+==== Requirements
+
+[float]
+===== GeoPackage
+
+[requirement]
+The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of tile pyramid images in WEBP format as specified in <<extension_tiles_webp>>.
+
+[requirement]
+A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.
+
+[requirement]
+A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <<22>>.
+The MIME type of values of the `tile_data` column in tile pyramid user data tables SHALL be `image/x-webp`.
+
+[float]
+===== GeoPackage SQLite Configuration
+
+None
+
+[float]
+===== GeoPackage SQLite Extension
+
+None
+
+[float]
+==== Abstract Test Suite
+
+[float]
+===== Extensions Name
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
+|*Test Purpose:* |Verify that the “gpkg_webp” extensions name is used to register WEBP tile encoding implementations.
+|*Test Method:* |
+. +SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'+
+. Not testable if empty result set
+. For each row table_name from step 1
+.. Select tile_data FROM row table_name
+.. For each row tile_data from step a
+... Log webp if tile data in MIME type image/webp
+.. Not testable if no logged webps
+.. /opt/extension_mechanism/extensions/data/table_def
+.. Fail if failed
+.. +SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = 'gpkg_webp’+
+.. Fail if returns an empty result set
+.. Log pass otherwise
+. Pass if logged pass and no fails
+|*Reference* |Annex F.7 Req 90
+|*Test Type* |Basic
+|========================================
+
+[float]
+===== Extensions Row
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_row+
+|*Test Purpose:* |Verify that WEBP tile encodings are registered using the “gpkg_webp” extensions name.
+|*Test Method:* |	+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
+|*Reference:* |Annex F.7 Req 91
+|*Test Type* |Capability
+|========================================
+
+[float]
+=====
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/reg_ext/tiles/tiles_encoding_webp/data/mime_type_webp+
+|*Test Purpose* |Verify that a tile matrix user data table that conforms to this extension contains tile data of MIME type image/x-webp.
+|*Test Method* |
+. SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
+. For each row tn from step 2
+.. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = \'tn') 
+END; 
+.. For each row extension_name from step a
+... Not testable if extension_name is not 'gpkg_webp'
+... SELECT tile_data from tn
+.... Pass if tile data in MIME type image/x-webp
+.... Fail if no passes
+|*Reference* |Annex F.7 Req 92
+|*Test Type* |Capability
+|========================================
+
