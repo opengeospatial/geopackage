@@ -64,7 +64,7 @@ The Geopackage SWG currently has the following email lists:
 
 **SWG Chair: Jeff Yutzler**
 
-**SWG Vice Chair: Roy Rathbun**
+**SWG Vice Chair: Thomas Neirynck**
 
 
 Editing and commenting
