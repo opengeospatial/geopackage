@@ -6,14 +6,12 @@ GeoPackage Standard
 GeoPackage is an open, standards-based, platform-independent, portable, self-describing, 
 compact format for transferring geospatial information. The GeoPackage standard 
 describes a set of conventions for storing the following within an SQLite database:
-   * [vector features](spec/2_features.md)
-   * [tile matrix sets of imagery and raster maps at various scales](spec/3_tiles.md)
-   * [schema](spec/4_schema.md)
-   * [metadata](spec/5_metadata.md)
-   * [extensions](spec/8_extensions.md)
+   * [vector features](spec/2a_features.adoc)
+   * [tile matrix sets of imagery and raster maps at various scales](spec/2b_tiles.adoc)
+   * [extensions](spec/annexes/extensions.adoc)
 
-These capabilities are built on a common [base](spec/1_base.md) and an 
-[Extension Mechanism](spec/7_extensions-mechanism.md) is 
+These capabilities are built on a common [base](spec/1_base.adoc) and an 
+[Extension Mechanism](spec/2e_extensions-mechanism.adoc) is 
 described to provide implementors a way to include additional functionality in their GeoPackages.
 
 This OGC® Encoding Standard defines the schema for a GeoPackage, 
