@@ -551,6 +551,13 @@
 					</p>
 					<br>
 					<p class="lead">
+						<a class="btn btn-warning" role="button">Q</a> Why does GeoPackage use a different Well-Known Binary (WKB) encoding than PostGIS or SpatiaLite?
+					</p>
+					<p>
+						<a class="btn btn-info" role="button">A</a> The original OGC/ISO standard for WKB does not contain all of the information we wanted to store. In response, both PostGIS and SpatiaLite developed their own ad hoc extensions. After much deliberation, the Standards Working Group (SWG) agreed not to standardize on either of them. Instead, the SWG decided to add additional information to the header so that standard WKB parsers/marshalers could be used for the bulk of the geometry.
+					</p>
+					<br>
+					<p class="lead">
 						<a class="btn btn-warning" role="button">Q</a> What is the relationship between GeoPackage and MBTiles?
 					</p>
 					<p>
