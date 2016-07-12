@@ -164,6 +164,8 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define
 
 ==== Contents
 
+The `gpkg_contents` table is intended to provide a list of all geospatial contents in a GeoPackage. It provides identifying and descriptive information that an application can display to a user as a menu of geospatial data that is available for access and/or update.
+
 ===== Data
 
 ====== Table Definition
@@ -171,29 +173,22 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define
 [requirement]
 A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_contents_cols>> and <<gpkg_contents_sql>>.
 
-The purpose of the `gpkg_contents` table is to provide identifying and descriptive information that an application can display to a user in a menu of geospatial data that is available for access and/or update.
-
 [[gpkg_contents_cols]]
 .Contents Table or View Definition
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Type |Description |Null |Default |Key
 |`table_name` |TEXT |The name of the tiles, or feature table |no | |PK
-|`data_type` |TEXT |Type of data stored in the table:. “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage. |no | |
+|`data_type` |TEXT |Type of data stored in the table |no | |
 |`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |UNIQUE
 |`description` |TEXT |A human-readable description for the table_name content |yes |'' |
-|`last_change` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
+|`last_change` |DATETIME |timestamp of last change to content, in ISO 8601 format|no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
 |`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name |yes | |
 |`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name |yes | |
 |`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name |yes | |
 |`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name |yes | |
 |`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match `gpkg_tile_matrix_set.srs_id` |yes | |FK
 |=======================================================================
-
-The `gpkg_contents` table is intended to provide a list of all geospatial contents in a GeoPackage.
-The `data_type` specifies the type of content.
-The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content.
-If the `srs_id` column value references a geographic coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references a projected CRS and the min/max x/y values are in the units specified by that CRS.
 
 See <<gpkg_contents_sql>>.
 
@@ -202,9 +197,17 @@ See <<gpkg_contents_sql>>.
 [requirement]
 The `table_name` column value in a `gpkg_contents` table row SHALL contain the name of a SQLite table or view.
 
-:req13_foot1: footnote:[The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
+The `data_type` specifies the type of content contained in the table, for example “features” per clause <<features>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.
+
+The `last_change` SHOULD contain the timestamp of when the content in the referenced table was last updated, in ISO8601 format. Note that since it is not practical to ensure that this value is maintained properly in all cases, this value should be treated as informative.
+
+:req13_foot1: footnote:[The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
+
 [requirement]
-Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. {req13_foot1}
+Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. {req13_foot1}
+
+The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. If the `srs_id` column value references a geographic coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references a projected CRS and the min/max x/y values are in the units specified by that CRS.
 
 [requirement]
 Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
+
