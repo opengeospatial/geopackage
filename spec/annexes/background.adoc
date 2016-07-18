@@ -41,6 +41,12 @@ georectified::
     raster whose pixels have been regularly spaced in a geographic (i.e., latitude / longitude) or projected map coordinate system using ground control points so that any pixel can be geolocated given its grid coordinate and the grid origin, cell spacing, and orientation.
 orthorectified::
     georectified raster that has also been corrected to remove image perspective (camera angle tilt), camera and lens induced distortions, and terrain induced distortions using camera calibration parameters and DEM elevation data to accurately align with real world coordinates, have constant scale, and support direct measurement of distances, angles, and areas.
+tile::
+    a rectangular pictorial representation of geographic data, often part of a set of such elements, covering a spatially contiguous extent and sharing similar information content and graphical styling, which can be uniquely defined by a pair of indices for the column and row along with an identifier for the tile matrix.
+tile matrix::
+    a collection of tiles for a fixed scale
+tile pyramid::
+    a collection of tile matrices defined at different scales
 Valid GeoPackage::
     A GeoPackage that contains features per clause <<_features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of "features" and/or "tiles" describing the user data tables.
 
