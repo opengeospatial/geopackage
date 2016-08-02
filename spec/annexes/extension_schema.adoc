@@ -55,7 +55,7 @@ If present it SHALL be defined per clause 2.3.2.1.1 <<schema_data_columns_table_
 |`column_name` |TEXT |Name of the table column |no |PK
 |`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |UNIQUE
 |`title` |TEXT |A human-readable formal title for the column_name content |yes |
-|`description` |TEXT |A human-readable description for the table_name content |yes |
+|`description` |TEXT |A human-readable description for the column_name content |yes |
 |`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type of column_name if BLOB type, or NULL for other types |yes |
 |`constraint_name` |TEXT |Column value constraint name (lowercase) specified by reference to `gpkg_data_column_constraints.constraint` name |yes |
 |=======================================================================
@@ -108,7 +108,7 @@ The constraint_name column is referenced by the `constraint_name` column in the 
 |`min_is_inclusive` |BOOLEAN |0 (false) if min value is exclusive, or 1 (true) if min value is inclusive |yes |
 |`max` |NUMERIC |Maximum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
 |`max_is_inclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
-|`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes| 
+|`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes|
 |=======================================================================
 _The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
 
@@ -175,7 +175,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/opt/schema/data_columns/data/data_table_def+
 |*Test Purpose* |Verify that the gpkg_data_columns table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_columns' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_columns'
 . Fail if returns an empty result set
 . Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 42. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
@@ -194,7 +194,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 . SELECT table_name, column_name FROM gpkg_data_columns
 . Not testable if returns an empty result set
 . For each row from step 1
-.. PRAGMA table_info(table_name) 
+.. PRAGMA table_info(table_name)
 .. Fail if gpkg_data_columns.column_name value does not equal a name column value returned by PRAGMA table_info.
 . Pass if no fails.
 |*Reference* |Annex F.9 Req 104
@@ -243,7 +243,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/opt/schema/data_column_constraints/data/table_def+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_column_constraints' 
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_column_constraints'
 . Fail if returns an empty result set
 . Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 43. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
