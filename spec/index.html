@@ -1669,7 +1669,7 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>zoom_level</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0 &#8656; <code>zoom_level</code> &#8656; max_level for <code>table_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">0 &lt;= <code>zoom_level</code> &lt;= max_level for <code>table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
@@ -1800,7 +1800,7 @@ The <code>pixel_y_size</code> column value in a <code>gpkg_tile_matrix</code> ta
 <div id="_requirement-53" class="quoteblock">
 <div class="title">Requirement 53</div>
 <blockquote>
-The <code>pixel_x_size</code> and <code>pixel_y_size</code> column values for <code>zoom_level</code> column values in a <code>gpkg_tile_matrix</code> table sorted in ascending order SHALL be sorted in descending order.
+When <code>zoom_level</code> column values in the <code>gpkg_tile_matrix</code> table are sorted in ascending order, the <code>pixel_x_size</code> and <code>pixel_y_size</code> column values in the <code>gpkg_tile_matrix</code> table SHALL appear sorted in descending order.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -1855,7 +1855,7 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>zoom_level</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">min(zoom_level) &#8656; <code>zoom_level</code> &#8656; max(zoom_level) for <code>t_table_name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">min(zoom_level) &lt;= <code>zoom_level</code> &lt;= max(zoom_level) for <code>t_table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UK</p></td>
@@ -1899,19 +1899,19 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 <div id="_requirement-55" class="quoteblock">
 <div class="title">Requirement 55</div>
 <blockquote>
-For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>zoom_level</code> column value in a GeoPackage SHALL be in the range min(tm.zoom_level) &#8656; tp.zoom_level &#8656; max(tm.zoom_level).
+For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>zoom_level</code> column value in a GeoPackage SHALL be in the range min(tm.zoom_level) &lt;= tp.zoom_level &lt;= max(tm.zoom_level).
 </blockquote>
 </div>
 <div id="_requirement-56" class="quoteblock">
 <div class="title">Requirement 56</div>
 <blockquote>
-For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_column</code> column value in a GeoPackage SHALL be in the range 0 &#8656; tp.tile_column &#8656; tm.matrix_width – 1 where the tm and tp <code>zoom_level</code> column values are equal.
+For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_column</code> column value in a GeoPackage SHALL be in the range 0 &lt;= tp.tile_column &lt;= tm.matrix_width – 1 where the tm and tp <code>zoom_level</code> column values are equal.
 </blockquote>
 </div>
 <div id="_requirement-57" class="quoteblock">
 <div class="title">Requirement 57</div>
 <blockquote>
-For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_row</code> column value in a GeoPackage SHALL be in the range 0 &#8656; tp.tile_row &#8656; tm.matrix_height – 1 where the tm and tp <code>zoom_level</code> column values are equal.
+For each distinct <code>table_name</code> from the <code>gpkg_tile_matrix</code> (tm) table, the tile pyramid (tp) user data table <code>tile_row</code> column value in a GeoPackage SHALL be in the range 0 &lt;= tp.tile_row &lt;= tm.matrix_height – 1 where the tm and tp <code>zoom_level</code> column values are equal.
 </blockquote>
 </div>
 <div class="paragraph">
@@ -11728,7 +11728,7 @@ If present it SHALL be defined per clause 2.3.2.1.1 <a href="#schema_data_column
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A human-readable description for the table_name content</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A human-readable description for the column_name content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -12840,7 +12840,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <div id="gpkg_crs_wkt_req_table_definition" class="quoteblock">
 <div class="title">Requirement 102</div>
 <blockquote>
-The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additional column called <code>definition_12_163</code> as per <a href="#gpkg_spatial_ref_sys_cols_crs_wkt">Spatial Ref Sys Table Definition</a> and <a href="#gpkg_spatial_ref_sys_crs_wkt_sql">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</a>.
+The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additional column called <code>definition_12_063</code> as per <a href="#gpkg_spatial_ref_sys_cols_crs_wkt">Spatial Ref Sys Table Definition</a> and <a href="#gpkg_spatial_ref_sys_crs_wkt_sql">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</a>.
 </blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_cols_crs_wkt" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -12905,7 +12905,7 @@ The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additi
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition_12_163</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition_12_063</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#34">[34]</a> Representation of the Spatial Reference System</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
@@ -12918,7 +12918,7 @@ The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additi
 <div id="_requirement-103" class="quoteblock">
 <div class="title">Requirement 103</div>
 <blockquote>
-Values of the <code>definition_12_163</code> column SHALL be constructed per the WKT syntax in <a href="#34">[34]</a>.
+Values of the <code>definition_12_063</code> column SHALL be constructed per the WKT syntax in <a href="#34">[34]</a>.
 </blockquote>
 </div>
 <div id="_requirement-104" class="quoteblock">
@@ -13008,10 +13008,10 @@ At least one definition column SHALL be defined with a valid definition unless t
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined” “undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined” “undefined”, AND</code></p>
 </li>
 <li>
-<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0  “undefined” “undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0  “undefined” “undefined”, AND</code></p>
 </li>
 <li>
 <p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEOGCS ["WGS 84",
@@ -13023,7 +13023,7 @@ UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]],
 AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components &lt;twin axes&gt; and &lt;to wgs84&gt; and whitespace differences in the returned text)</p>
 </li>
 <li>
-<p><code>SELECT definition_12_163 FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
+<p><code>SELECT definition_12_063 FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
 DATUM["World Geodetic System 1984",
   ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
 PRIMEM["Greenwich", 0.0, ANGLEUNIT["degree",0.0174532925199433]],
@@ -13080,7 +13080,7 @@ ID["EPSG", 4326]]</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT definition, definition_12_163 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)</code></p>
+<p><code>SELECT definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)</code></p>
 </li>
 <li>
 <p>Fail if both definition values are <code>undefined</code></p>
@@ -13129,7 +13129,7 @@ ID["EPSG", 4326]]</p>
   organization_coordsys_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   definition  <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   description <span class="predefined-type">TEXT</span>,
-  definition_12_163 <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
+  definition_12_063 <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
 );</code></pre>
 </div>
 </div>
@@ -13697,7 +13697,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-23 20:14:29 UTC
+Last updated 2016-08-30 13:15:32 UTC
 </div>
 </div>
 </body>
