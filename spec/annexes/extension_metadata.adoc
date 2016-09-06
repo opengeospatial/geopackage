@@ -533,7 +533,7 @@ violates constraint: row_id_value must be NULL when reference_scope
 is "geopackage", "table" or "column"')
 WHERE NEW.reference_scope IN ('geopackage','table','column')
 AND NEW.row_id_value IS NOT NULL;
-END;
+END
 
 CREATE TRIGGER 'gpkg_metadata_reference_row_id_value_update'
 BEFORE UPDATE OF 'row_id_value' ON 'gpkg_metadata_reference'
@@ -543,7 +543,7 @@ violates constraint: row_id_value must be NULL when reference_scope
 is "geopackage", "table" or "column"')
 WHERE NEW.reference_scope IN ('geopackage','table','column')
 AND NEW.row_id_value IS NOT NULL;
-END;
+END
 
 CREATE TRIGGER 'gpkg_metadata_reference_timestamp_insert'
 BEFORE INSERT ON 'gpkg_metadata_reference'
