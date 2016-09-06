@@ -50,7 +50,7 @@ A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be def
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<21>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<28>>, ISO 19115-2 <<B6>>, ISO 19139 <<B7>>, Dublin Core <<B8>>, CSDGM <<B10>>, DDMS <<B12>>, NMF/NMIS <<B13>>, etc.
 The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <<B14>> encoded in XMI <<B15>>, GML Application Schemas <<30>>, ISO 19110 feature catalogues <<B18>>, OWL <<B20>> and SKOS <<B21>> taxonomies, etc.
-	
+
 :metadata_table_definition_foot1: footnote:[For example, for ISO 19139 metadata the URI value should be the metadata schema namespace http://www.isotc211.org/2005/gmd]
 
 [[gpkg_metadata_cols]]
@@ -62,7 +62,7 @@ The GeoPackage interpretation of what constitutes “metadata” is a broad one 
 |`md_scope` |TEXT |Case sensitive name of the data scope to which this metadata applies; see <<metadata_scopes>> below |no |‘dataset’ |
 |`md_standard_uri` |TEXT |URI <<23>> reference to the metadata structure definition authority {metadata_table_definition_foot1} |no | |
 |`mime_type` |TEXT |MIME <<21>> encoding of metadata |no |text/xml <<24>> |
-|`metadata` |TEXT |metadata |no |’’| 
+|`metadata` |TEXT |metadata |no |’’|
 |=======================================================================
 
 The md_standard_uri data value provides an identifier for the metadata structure (schema) specified by its definition authority.
@@ -533,14 +533,7 @@ violates constraint: row_id_value must be NULL when reference_scope
 is "geopackage", "table" or "column"')
 WHERE NEW.reference_scope IN ('geopackage','table','column')
 AND NEW.row_id_value IS NOT NULL;
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata_reference
-violates constraint: row_id_value must exist in specified table when
-reference_scope is "row" or "row/col"')
-WHERE NEW.reference_scope IN ('row','row/col')
-AND NOT EXISTS (SELECT rowid
-FROM (SELECT NEW.table_name AS table_name) WHERE rowid =
-NEW.row_id_value);
-END
+END;
 
 CREATE TRIGGER 'gpkg_metadata_reference_row_id_value_update'
 BEFORE UPDATE OF 'row_id_value' ON 'gpkg_metadata_reference'
@@ -550,14 +543,7 @@ violates constraint: row_id_value must be NULL when reference_scope
 is "geopackage", "table" or "column"')
 WHERE NEW.reference_scope IN ('geopackage','table','column')
 AND NEW.row_id_value IS NOT NULL;
-SELECT RAISE(ABORT, 'update on table gpkg_metadata_reference
-violates constraint: row_id_value must exist in specified table when
-reference_scope is "row" or "row/col"')
-WHERE NEW.reference_scope IN ('row','row/col')
-AND NOT EXISTS (SELECT rowid
-FROM (SELECT NEW.table_name AS table_name) WHERE rowid =
-NEW.row_id_value);
-END
+END;
 
 CREATE TRIGGER 'gpkg_metadata_reference_timestamp_insert'
 BEFORE INSERT ON 'gpkg_metadata_reference'
