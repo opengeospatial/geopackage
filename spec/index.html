@@ -10794,13 +10794,6 @@ violates constraint: row_id_value must be NULL when reference_scope
 is &quot;geopackage&quot;, &quot;table&quot; or &quot;column&quot;</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>)
 <span class="keyword">AND</span> NEW.row_id_value <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>;
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata_reference
-violates constraint: row_id_value must exist in specified table when
-reference_scope is &quot;row&quot; or &quot;row/col&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">row</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row/col</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (<span class="class">SELECT</span> rowid
-<span class="keyword">FROM</span> (<span class="class">SELECT</span> NEW.table_name <span class="keyword">AS</span> table_name) <span class="keyword">WHERE</span> rowid =
-NEW.row_id_value);
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_row_id_value_update</span><span class="delimiter">'</span></span>
@@ -10811,13 +10804,6 @@ violates constraint: row_id_value must be NULL when reference_scope
 is &quot;geopackage&quot;, &quot;table&quot; or &quot;column&quot;</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>)
 <span class="keyword">AND</span> NEW.row_id_value <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>;
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata_reference
-violates constraint: row_id_value must exist in specified table when
-reference_scope is &quot;row&quot; or &quot;row/col&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">row</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row/col</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> (<span class="class">SELECT</span> rowid
-<span class="keyword">FROM</span> (<span class="class">SELECT</span> NEW.table_name <span class="keyword">AS</span> table_name) <span class="keyword">WHERE</span> rowid =
-NEW.row_id_value);
 <span class="keyword">END</span>
 
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_timestamp_insert</span><span class="delimiter">'</span></span>
@@ -13697,7 +13683,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-08-30 13:15:32 UTC
+Last updated 2016-09-13 14:28:15 UTC
 </div>
 </div>
 </body>
