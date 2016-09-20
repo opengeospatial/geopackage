@@ -33,7 +33,7 @@ An application that accesses a GeoPackage can query the `gpkg_extensions` table 
 |`table_name` |TEXT |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Unique
 |`column_name` |TEXT |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Unique
 |`extension_name` |TEXT |The case sensitive name of the extension that is required, in the form <author>_<extension_name>. |no |Unique
-|`definition` |TEXT |Permalink or reference to a document that defines the extension |no |
+|`definition` |TEXT |Permalink, URI, or reference to a document that defines the extension |no |
 |`scope` |TEXT |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only' in lowercase. |no |
 |=======================================================================
 
@@ -64,7 +64,7 @@ GeoPackage implementers use their own author names to register other extensions.
 [requirement]
 The definition column value in a `gpkg_extensions` row SHALL contain a permalink, URI <<23>>, or reference to a document defining the extension as per the <<extension_template>>.
 
-Examples of how to fill out the GeoPackage Extension Template in <<extension_template>> are provided in Annex F.
+Examples of how to fill out the GeoPackage Extension Template in <<extension_template>> are provided in Annex F. This column is not unique because an extension may define multiple tables.
 
 [requirement]
 The scope column value in a `gpkg_extensions` row SHALL be lowercase "read-write" for an extension that affects both readers and writers, or "write-only" for an extension that affects only writers.
