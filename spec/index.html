@@ -1994,7 +1994,7 @@ An application that accesses a GeoPackage can query the <code>gpkg_extensions</c
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Definition of the extension in the form specfied by the template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a> or reference thereto.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Permalink, URI, or reference to a document that defines the extension</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -2044,24 +2044,17 @@ An <code>extension_name</code> for the “gpkg” author name SHALL be one of th
 </blockquote>
 </div>
 <div class="paragraph">
-<p>Complete examples of how to fill out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a> are provided by Annex F.
-The definition column value in a <code>gpkg_extensions</code> row for those extensions SHALL contain the sub-annex name and as a reference (e.g., F.3 RTree Spatial Indexes).</p>
-</div>
-<div class="paragraph">
-<p>Partial examples of how to fill out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a> are provided by the templates in <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a> and <a href="#extension_geometry_encoding">User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding</a>.
-Extension definitions created using those template and other extension definitions MAY be provided in the definition column, preferably as ASCII text, or as a reference such as a URI <a href="#23">[23]</a> or email address whereby the definition may be obtained.</p>
+<p>The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC.
+GeoPackage implementers use their own author names to register other extensions.</p>
 </div>
 <div id="_requirement-63" class="quoteblock">
 <div class="title">Requirement 63</div>
 <blockquote>
-The definition column value in a <code>gpkg_extensions</code> row SHALL contain or reference the text that results from documenting an extension by filling out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a>.
+The definition column value in a <code>gpkg_extensions</code> row SHALL contain a permalink, URI <a href="#23">[23]</a>, or reference to a document defining the extension as per the <a href="#extension_template">GeoPackage Extension Template (Informative)</a>.
 </blockquote>
 </div>
 <div class="paragraph">
-<p>Some extensions do not impose any additional requirements on software that accesses a GeoPackage in a read-only fashion.
-An example of this is an extension that defines an SQL trigger that uses a non-standard SQL function defined in a GeoPackage SQLite Extension.
-Triggers are only invoked when data is written to the GeoPackage, so usage of this type of extension can be safely ignored for read-only access.
-This is indicated by a gpkg_extensions.scope column value of “write_only”.</p>
+<p>Examples of how to fill out the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a> are provided in Annex F. This column is not unique because an extension may define multiple tables.</p>
 </div>
 <div id="_requirement-64" class="quoteblock">
 <div class="title">Requirement 64</div>
@@ -2070,9 +2063,10 @@ The scope column value in a <code>gpkg_extensions</code> row SHALL be lowercase 
 </blockquote>
 </div>
 <div class="paragraph">
-<p>The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC.
-Requirements for extension names for the “gpkg” author name are defined in the clauses listed in 14 below.
-GeoPackage implementers use their own author names to register other extensions.</p>
+<p>Some extensions do not impose any additional requirements on software that accesses a GeoPackage in a read-only fashion.
+An example of this is an extension that defines an SQL trigger that uses a non-standard SQL function defined in a GeoPackage SQLite Extension.
+Triggers are only invoked when data is written to the GeoPackage, so usage of this type of extension can be safely ignored for read-only access.
+This is indicated by a gpkg_extensions.scope column value of “write_only”.</p>
 </div>
 </div>
 </div>
@@ -13683,7 +13677,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-09-13 14:28:15 UTC
+Last updated 2016-09-27 14:32:18 UTC
 </div>
 </div>
 </body>
