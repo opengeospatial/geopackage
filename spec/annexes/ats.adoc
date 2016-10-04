@@ -1095,3 +1095,25 @@ END;
 |*Reference* |Clause 2.3.2.1.2 Req 64:
 |*Test Type* |Capability
 |========================================
+
+==== Attributes
+===== Contents
+====== Data
+*Contents Table – Attributes Row*
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/attributes/contents/data/attributes_row+
+|*Test Purpose* |Verify that the gpkg_contents table_name value table exists and is apparently an attributes table for every row with a data_type column value of “attributes”.
+|*Test Method* |
+. SELECT table_name FROM gpkg_contents WHERE data_type = “attributes”
+. Not testable  if returns empty result set
+. For each row from step 1
+.. PRAGMA table_info(table_name) 
+.. Fail if returns an empty result set 
+.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”and the name column value is “id” 
+. Pass if no fails.
+|*Reference* |Clause 2.4.2.1.1 Req 64a
+|*Reference* |Clause 2.4.3.1.1 Req 64b
+|*Test Type* |Capability
+|========================================

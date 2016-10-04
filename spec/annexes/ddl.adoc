@@ -287,3 +287,40 @@ CREATE TABLE gpkg_extensions (
   CONSTRAINT ge_tce UNIQUE (table_name, column_name, extension_name)
 );
 ----
+
+=== sample_attributes_table (Informative)
+
+[[example_attributes_table_sql]]
+.EXAMPLE: Attributes table Create Table SQL (Informative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE sample_attributes (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  text_attribute TEXT,
+  real_attribute REAL,
+  boolean_attribute BOOLEAN,
+  raster_or_photo BLOB
+)
+----
+
+[[example_attributes_table_insert_sql]]
+.EXAMPLE: attributes table Insert Statement (Informative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+INSERT INTO sample_attributes(text_attribute, real_attribute, boolean_attribute, raster_or_photo) VALUES (
+  "place",
+  1,
+  true,
+  "BLOB VALUE"
+)
+----
+
+

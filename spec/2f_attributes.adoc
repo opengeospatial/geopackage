@@ -1,0 +1,41 @@
+[[attributes]]
+=== Attributes
+
+==== Introduction
+
+Non-spatial attribute data represents sets (or tuples or rows) of arbitrary relational values that may or may not be relationally linkable to rows in other attribute, feature or tile tables.
+
+==== Contents
+===== Data
+====== Contents Table - Attributes Row
+.*Requirement 64a*
+
+The gpkg_contents table SHALL contain a row with a data_type column value of “attributes” for each attributes data table or view.
+
+==== Attributes User Data Tables
+
+===== Data
+
+[[attributes_table_definition]]
+====== Table Definition
+
+Non-spatial attribute data is stored in user-defined Attribute tables. Attribute sets are rows in an Attribute table. The attributes are columns in a Attribute table. (A GeoPackage is not required to contain any Attribute data tables. Attribute data tables in a GeoPackage may be empty.)
+
+.*Requirement 64b*
+
+A GeoPackage MAY contain tables or updatable views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL have a column with column type INTEGER and PRIMARY KEY AUTOINCREMENT column constraints per <<gpkg_attributes_example>> and <<example_attributes_table_sql>>.
+
+The integer primary key of an Attribute table allows attribute sets to be linked to row level metadata records in the gpkg_metadata table by rowid <<B5>> values in the gpkg_metadata_reference table as described in clause <<extension_metadata>> below.
+
+[[gpkg_attributes_example]]
+.GeoPackage Attributes Example Table or View Definition
+[cols=",,,,",options="header",]
+|=======================================================================
+|Column Name |Col Type |Column Description |Null |Key
+|`id` |INTEGER |Autoincrement primary key |no |PK
+|`text_attribute` |TEXT |Text attribute of feature |yes |
+|`real_attribute` |REAL |Real attribute of feature |yes | 
+|`boolean_attribute` |BOOLEAN |Boolean attribute of feature |yes |
+|`raster_or_photo` |BLOB |Photo of the area |yes |
+|=======================================================================
+
