@@ -233,34 +233,8 @@ Document language: 	English<br></p>
 <li><a href="#extension_metadata">F.8. Metadata</a></li>
 <li><a href="#extension_schema">F.9. Schema</a></li>
 <li><a href="#extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</a></li>
-<li><a href="#extension_tiled_gridded_elevation_data_png">F.11. Tiled Gridded Elevation Data, PNG Encoding Extension (Normative)</a></li>
-<li>
-<ul class="sectlevel3">
-<li><a href="#_extension_title_2">F.11.1. Extension Title</a></li>
-<li><a href="#_introduction_11">F.11.2. Introduction</a></li>
-<li><a href="#_extension_author_9">F.11.3. Extension Author</a></li>
-<li><a href="#_extension_name_or_template_8">F.11.4. Extension Name or Template</a></li>
-<li><a href="#_extension_type_9">F.11.5. Extension Type</a></li>
-<li><a href="#_applicability_9">F.11.6. Applicability</a></li>
-<li><a href="#_scope_9">F.11.7. Scope</a></li>
-<li><a href="#_requirements_9">F.11.8. Requirements</a></li>
-<li><a href="#_table_definition_sql_4">F.11.9. Table Definition SQL</a></li>
-</ul>
-</li>
-<li><a href="#extension_tiled_gridded_elevation_data_tiff">F.12. Tiled Gridded Elevation Data, TIFF Encoding Extension (Normative)</a></li>
-<li>
-<ul class="sectlevel3">
-<li><a href="#_extension_title_3">F.12.1. Extension Title</a></li>
-<li><a href="#_introduction_12">F.12.2. Introduction</a></li>
-<li><a href="#_extension_author_10">F.12.3. Extension Author</a></li>
-<li><a href="#_extension_name_or_template_9">F.12.4. Extension Name or Template</a></li>
-<li><a href="#_extension_type_10">F.12.5. Extension Type</a></li>
-<li><a href="#_applicability_10">F.12.6. Applicability</a></li>
-<li><a href="#_scope_10">F.12.7. Scope</a></li>
-<li><a href="#_requirements_10">F.12.8. Requirements</a></li>
-<li><a href="#_table_definition_sql_5">F.12.9. Table Definition SQL</a></li>
-</ul>
-</li>
+<li><a href="#extension_tiled_gridded_elevation_data_png">F.11. Tiled Gridded Elevation Data, PNG Encoding</a></li>
+<li><a href="#extension_tiled_gridded_elevation_data_tiff">F.12. Tiled Gridded Elevation Data, TIFF Encoding</a></li>
 </ul>
 </li>
 <li><a href="#geometry_types"> Annex G: Geometry Types (Normative)</a></li>
@@ -8166,11 +8140,11 @@ Definitions of those extensions are in the form specified by the template in <a 
 <td class="tableblock halign-left valign-top"><p class="tableblock">spatial reference systems</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_tiled_gridded_elevation_data_png">Tiled Gridded Elevation Data, PNG Encoding Extension (Normative)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_tiled_gridded_elevation_data_png">Tiled Gridded Elevation Data, PNG Encoding</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tiled gridded elevation data</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_tiled_gridded_elevation_data_tiff">Tiled Gridded Elevation Data, TIFF Encoding Extension (Normative)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_tiled_gridded_elevation_data_tiff">Tiled Gridded Elevation Data, TIFF Encoding</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">tiled gridded elevation data</p></td>
 </tr>
 </tbody>
@@ -13151,15 +13125,12 @@ ID["EPSG", 4326]]</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="extension_tiled_gridded_elevation_data_png">F.11. Tiled Gridded Elevation Data, PNG Encoding Extension (Normative)</h3>
-<div class="sect3">
-<h4 id="_extension_title_2">F.11.1. Extension Title</h4>
+<h3 id="extension_tiled_gridded_elevation_data_png">F.11. Tiled Gridded Elevation Data, PNG Encoding</h3>
+<h4 id="_extension_title_2" class="float">Extension Title</h4>
 <div class="paragraph">
 <p>Tiled Gridded Elevation Data, PNG Encoding</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_introduction_11">F.11.2. Introduction</h4>
+<h4 id="_introduction_11" class="float">Introduction</h4>
 <div class="paragraph">
 <p>The GeoPackage Standards Working Group (SWG) has identified a need for the ability to store 16-bit tiled gridded elevation data in a GeoPackage. This capability will be used to support use cases such as the following:</p>
 </div>
@@ -13209,47 +13180,36 @@ ID["EPSG", 4326]]</p>
 <p>This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG files as the container for the elevation values themselves.
 This capability was designed to be relatively easy to implement and to be suitable for a wide variety of computing environments including the mobile/handheld computing environment<span class="footnote">[<a id="_footnoteref_38" class="footnote" href="#_footnote_38" title="View footnote.">38</a>]</span>.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_extension_author_9">F.11.3. Extension Author</h4>
+<h4 id="_extension_author_9" class="float">Extension Author</h4>
 <div class="paragraph">
 <p>GeoPackage SWG, author_name <code>gpkg</code>.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_extension_name_or_template_8">F.11.4. Extension Name or Template</h4>
+<h4 id="_extension_name_or_template_8" class="float">Extension Name or Template</h4>
 <div class="paragraph">
 <p><code>gpkg_elevation_tiles_png</code></p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_extension_type_9">F.11.5. Extension Type</h4>
+<h4 id="_extension_type_9" class="float">Extension Type</h4>
 <div class="paragraph">
 <p>New requirement dependent on <a href="http://www.geopackage.org/spec/#tiles">Clause 2.2</a>.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_applicability_9">F.11.6. Applicability</h4>
+<h4 id="_applicability_9" class="float">Applicability</h4>
 <div class="paragraph">
 <p>This extension applies to <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a> that are used to hold tiled, gridded elevation data.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_scope_9">F.11.7. Scope</h4>
+<h4 id="_scope_9" class="float">Scope</h4>
 <div class="paragraph">
 <p>read-write</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_requirements_9">F.11.8. Requirements</h4>
-<div class="sect4">
-<h5 id="_table_definitions">F.11.8.1. Table Definitions</h5>
-<div class="sect5">
-<h6 id="coverage_ancillary">F.11.8.1.1. Coverage Ancillary</h6>
-<div class="paragraph">
-<p>[requirement] A GeoPackage that contains tiled gridded elevation data SHALL contain a <code>gpkg_2d_gridded_coverage_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.
+<h4 id="_requirements_9" class="float">Requirements</h4>
+<h5 id="_table_definitions" class="float">Table Definitions</h5>
+<h6 id="coverage_ancillary" class="float">Coverage Ancillary</h6>
+<div id="_requirement-105" class="quoteblock">
+<div class="title">Requirement 105</div>
+<blockquote>
+A GeoPackage that contains tiled gridded elevation data SHALL contain a <code>gpkg_2d_gridded_coverage_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.
 Subsequent extensions or custom implementations MAY add additional columns to this table.
-Clients SHALL ignore additional columns that are unrecognized.</p>
+Clients SHALL ignore additional columns that are unrecognized.
+</blockquote>
 </div>
 <table id="gpkg_2d_gridded_coverage_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 49. Coverage Ancillary Table Definition</caption>
@@ -13340,13 +13300,14 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-</div>
-<div class="sect5">
-<h6 id="_tile_ancillary">F.11.8.1.2. Tile Ancillary</h6>
-<div class="paragraph">
-<p>[requirement] A GeoPackage that contains tiled gridded elevation data SHALL contain a <code>gpkg_2d_gridded_tile_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_tile_ancillary_table">Tile Ancillary Table Definition</a>.
+<h6 id="_tile_ancillary" class="float">Tile Ancillary</h6>
+<div id="_requirement-106" class="quoteblock">
+<div class="title">Requirement 106</div>
+<blockquote>
+A GeoPackage that contains tiled gridded elevation data SHALL contain a <code>gpkg_2d_gridded_tile_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_tile_ancillary_table">Tile Ancillary Table Definition</a>.
 Subsequent extensions or custom implementations MAY add additional columns to this table.
-Clients SHALL ignore additional columns that are unrecognized.</p>
+Clients SHALL ignore additional columns that are unrecognized.
+</blockquote>
 </div>
 <table id="gpkg_2d_gridded_tile_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 50. Tile Ancillary Table Definition</caption>
@@ -13444,13 +13405,13 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-<div class="paragraph">
-<p>[requirement] The <code>min</code>, <code>max</code>, and <code>mean</code> values SHALL be natural, i.e., not scaled or offset. Similarly, the <code>std_dev</code> SHALL be calculated based on the natural values.</p>
+<div id="_requirement-107" class="quoteblock">
+<div class="title">Requirement 107</div>
+<blockquote>
+The <code>min</code>, <code>max</code>, and <code>mean</code> values SHALL be natural, i.e., not scaled or offset. Similarly, the <code>std_dev</code> SHALL be calculated based on the natural values.
+</blockquote>
 </div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_using_the_scale_and_offset_values">F.11.8.2. Using the scale and offset values</h5>
+<h5 id="_using_the_scale_and_offset_values" class="float">Using the scale and offset values</h5>
 <div class="paragraph">
 <p>[requirement] Integer elevation values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scope the scale and offset apply to can be both the entire coverage and the individual tile.</p>
 </div>
@@ -13475,11 +13436,8 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <pre>elevationInUnitOfMeasure = (SomeElevationCoverage.tile_data-&gt;pngpixels[i] * gpkg_2d_gridded_tile_ancillary.scale + gpkg_2d_gridded_tile_ancillary.offset) * gpkg_2d_gridded_coverage_ancillary.scale + gpkg_2d_gridded_coverage_ancillary.offset;</pre>
 </div>
 </div>
-</div>
-<div class="sect4">
-<h5 id="_table_values">F.11.8.3. Table Values</h5>
-<div class="sect5">
-<h6 id="__code_gpkg_spatial_ref_sys_code">F.11.8.3.1. <code>gpkg_spatial_ref_sys</code></h6>
+<h5 id="_table_values" class="float">Table Values</h5>
+<h6 id="__code_gpkg_spatial_ref_sys_code" class="float"><code>gpkg_spatial_ref_sys</code></h6>
 <div class="paragraph">
 <p>[requirement] GeoPackages complying with this extension SHALL have a row in the <code>gpkg_spatial_ref_sys</code> table as described in <a href="#gpkg_spatial_ref_sys_record">Spatial Ref Sys Table Record</a>:</p>
 </div>
@@ -13515,20 +13473,22 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-<div class="paragraph">
-<p>[requirement] The <code>geopackage_spatial_ref_sys</code> table in a GeoPackage SHALL contain records to define all spatial reference systems used by tiled gridded elevation data in a GeoPackage. The spatial reference system SHALL be used to define the vertical datum, reference geoid, and units of measure for the tiled gridded elevation data.</p>
+<div id="_requirement-108" class="quoteblock">
+<div class="title">Requirement 108</div>
+<blockquote>
+The <code>geopackage_spatial_ref_sys</code> table in a GeoPackage SHALL contain records to define all spatial reference systems used by tiled gridded elevation data in a GeoPackage. The spatial reference system SHALL be used to define the vertical datum, reference geoid, and units of measure for the tiled gridded elevation data.
+</blockquote>
 </div>
-</div>
-<div class="sect5">
-<h6 id="__code_gpkg_contents_code">F.11.8.3.2. <code>gpkg_contents</code></h6>
+<h6 id="__code_gpkg_contents_code" class="float"><code>gpkg_contents</code></h6>
 <div class="paragraph">
 <p>[requirement] (extends <a href="http://www.geopackage.org/spec/#_requirement-34">GPKG-34</a>) The <a href="http://www.geopackage.org/spec/#_contents"><code>gpkg_contents</code></a> table SHALL contain a row with a <code>data_type</code> column value of <code>2d-gridded-coverage</code> for each tile pyramid containing tiled gridded elevation data. The <code>srs_id</code> column value for that row SHOULD reference an SRS that has a vertical datum<span class="footnote">[<a id="_footnoteref_45" class="footnote" href="#_footnote_45" title="View footnote.">45</a>]</span>.</p>
 </div>
-</div>
-<div class="sect5">
-<h6 id="__code_gpkg_extensions_code">F.11.8.3.3. <code>gpkg_extensions</code></h6>
-<div class="paragraph">
-<p>[requirement] GeoPackages complying with this extension SHALL have rows in the <code>gpkg_extensions</code> table as described in <a href="#gpkg_extensions_records">Extensions Table Record</a>:</p>
+<h6 id="__code_gpkg_extensions_code" class="float"><code>gpkg_extensions</code></h6>
+<div id="_requirement-109" class="quoteblock">
+<div class="title">Requirement 109</div>
+<blockquote>
+GeoPackages complying with this extension SHALL have rows in the <code>gpkg_extensions</code> table as described in <a href="#gpkg_extensions_records">Extensions Table Record</a>:
+</blockquote>
 </div>
 <table id="gpkg_extensions_records" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 52. Extensions Table Record</caption>
@@ -13573,41 +13533,46 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-</div>
-<div class="sect5">
-<h6 id="__code_gpkg_2d_gridded_coverage_ancillary_code">F.11.8.3.4. <code>gpkg_2d_gridded_coverage_ancillary</code></h6>
+<h6 id="__code_gpkg_2d_gridded_coverage_ancillary_code" class="float"><code>gpkg_2d_gridded_coverage_ancillary</code></h6>
 <div class="paragraph">
 <p>The following requirements refer to the <code>gpkg_2d_gridded_coverage_ancillary</code> table as per <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.</p>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.</p>
+<div id="_requirement-110" class="quoteblock">
+<div class="title">Requirement 110</div>
+<blockquote>
+Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>datatype</code> column SHALL be <em>integer</em>.</p>
+<div id="_requirement-111" class="quoteblock">
+<div class="title">Requirement 111</div>
+<blockquote>
+Values of the <code>datatype</code> column SHALL be <em>integer</em>.
+</blockquote>
 </div>
-</div>
-<div class="sect5">
-<h6 id="__code_gpkg_2d_gridded_tile_ancillary_code">F.11.8.3.5. <code>gpkg_2d_gridded_tile_ancillary</code></h6>
+<h6 id="__code_gpkg_2d_gridded_tile_ancillary_code" class="float"><code>gpkg_2d_gridded_tile_ancillary</code></h6>
 <div class="paragraph">
 <p>The following requirements refer to the <code>gpkg_2d_gridded_tile_ancillary</code> table as per <a href="#gpkg_2d_gridded_tile_ancillary_table">Tile Ancillary Table Definition</a>.</p>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a>.</p>
+<div id="_requirement-112" class="quoteblock">
+<div class="title">Requirement 112</div>
+<blockquote>
+Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a>.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.</p>
+<div id="_requirement-113" class="quoteblock">
+<div class="title">Requirement 113</div>
+<blockquote>
+Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.
+</blockquote>
 </div>
+<h6 id="_tile_pyramid_user_data_tables" class="float">Tile Pyramid User Data Tables</h6>
+<div id="_requirement-114" class="quoteblock">
+<div class="title">Requirement 114</div>
+<blockquote>
+The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").
+</blockquote>
 </div>
-<div class="sect5">
-<h6 id="_tile_pyramid_user_data_tables">F.11.8.3.6. Tile Pyramid User Data Tables</h6>
-<div class="paragraph">
-<p>[requirement] The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_table_definition_sql_4">F.11.9. Table Definition SQL</h4>
+<h4 id="_table_definition_sql_4" class="float">Table Definition SQL</h4>
 <table id="gpkg_coverage_ancillary_sql" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 53. Coverage Ancillary Table Definition SQL</caption>
 <colgroup>
@@ -13663,17 +13628,13 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect2">
-<h3 id="extension_tiled_gridded_elevation_data_tiff">F.12. Tiled Gridded Elevation Data, TIFF Encoding Extension (Normative)</h3>
-<div class="sect3">
-<h4 id="_extension_title_3">F.12.1. Extension Title</h4>
+<h3 id="extension_tiled_gridded_elevation_data_tiff">F.12. Tiled Gridded Elevation Data, TIFF Encoding</h3>
+<h4 id="_extension_title_3" class="float">Extension Title</h4>
 <div class="paragraph">
 <p>Tiled Gridded Elevation Data, TIFF Encoding</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_introduction_12">F.12.2. Introduction</h4>
+<h4 id="_introduction_12" class="float">Introduction</h4>
 <div class="paragraph">
 <p>The GeoPackage Standards Working Group (SWG) has identified a need for the ability to store 32-bit tiled gridded elevation data in a GeoPackage.</p>
 </div>
@@ -13739,56 +13700,45 @@ The TIFF files are constrained as follows:</p>
 </li>
 </ul>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_extension_author_10">F.12.3. Extension Author</h4>
+<h4 id="_extension_author_10" class="float">Extension Author</h4>
 <div class="paragraph">
 <p>GeoPackage SWG, author_name <code>gpkg</code>.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_extension_name_or_template_9">F.12.4. Extension Name or Template</h4>
+<h4 id="_extension_name_or_template_9" class="float">Extension Name or Template</h4>
 <div class="paragraph">
 <p><code>gpkg_elevation_tiles_tiff</code></p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_extension_type_10">F.12.5. Extension Type</h4>
+<h4 id="_extension_type_10" class="float">Extension Type</h4>
 <div class="paragraph">
 <p>Extension of Existing Requirement in Clauses <a href="http://www.geopackage.org/spec/#tile_enc_png">2.2.4</a> and <a href="http://www.geopackage.org/spec/#tile_enc_jpeg">2.2.5</a>.
 New Requirement Dependent on <a href="#35">[35]</a>.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_applicability_10">F.12.6. Applicability</h4>
+<h4 id="_applicability_10" class="float">Applicability</h4>
 <div class="paragraph">
 <p>This extension applies to <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a> that are used to hold tiled, gridded elevation data.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_scope_10">F.12.7. Scope</h4>
+<h4 id="_scope_10" class="float">Scope</h4>
 <div class="paragraph">
 <p>read-write</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_requirements_10">F.12.8. Requirements</h4>
-<div class="sect4">
-<h5 id="_mime_type">F.12.8.1. MIME Type</h5>
-<div class="paragraph">
-<p>[requirement] (extends <a href="http://www.geopackage.org/spec/#_requirement-35">GPKG-35</a>,  <a href="http://www.geopackage.org/spec/#_requirement-36">GPKG-36</a>)
+<h4 id="_requirements_10" class="float">Requirements</h4>
+<h5 id="_mime_type" class="float">MIME Type</h5>
+<div id="_requirement-115" class="quoteblock">
+<div class="title">Requirement 115</div>
+<blockquote>
+(extends <a href="http://www.geopackage.org/spec/#_requirement-35">GPKG-35</a>,  <a href="http://www.geopackage.org/spec/#_requirement-36">GPKG-36</a>)
 A GeoPackage that contains a <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> MAY store BLOBs in the <code>tile_data</code> column in MIME type <code>image/tiff</code>.
-The content of the data table SHALL NOT be raster tiles as per the core specification and SHALL be described by an extension such as <a href="#tiled_gridded_elevation_data">[tiled_gridded_elevation_data]</a>.</p>
+</blockquote>
 </div>
-</div>
-<div class="sect4">
-<h5 id="_table_values_2">F.12.8.2. Table Values</h5>
-<div class="sect5">
-<h6 id="coverage_ancillary_tiff">F.12.8.2.1. Coverage Ancillary</h6>
-<div id="gpkg_2d_gridded_coverage_ancillary_table_tiff" class="paragraph">
-<p>[requirement] A GeoPackage that contains tiled gridded elevation TIFF data SHALL contain a <code>gpkg_2d_gridded_coverage_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.
+<h5 id="_table_values_2" class="float">Table Values</h5>
+<h6 id="coverage_ancillary_tiff" class="float">Coverage Ancillary</h6>
+<div id="gpkg_2d_gridded_coverage_ancillary_table_tiff" class="quoteblock">
+<div class="title">Requirement 116</div>
+<blockquote>
+A GeoPackage that contains tiled gridded elevation TIFF data SHALL contain a <code>gpkg_2d_gridded_coverage_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.
 Subsequent extensions or custom implementations MAY add additional columns to this table.
-Clients SHALL ignore additional columns that are unrecognized.</p>
+Clients SHALL ignore additional columns that are unrecognized.
+</blockquote>
 </div>
 <table id="gpkg_2d_gridded_coverage_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 55. Coverage Ancillary Table Definition</caption>
@@ -13842,7 +13792,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>precision</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">REAL<span class="footnote">[<a id="_footnoteref_46" class="footnote" href="#_footnote_46" title="View footnote.">46</a>]</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The smallest value that has meaning for this dataset</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
@@ -13851,7 +13801,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data_null</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">REAL<span class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnote_47" title="View footnote.">47</a>]</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The value that indicates NULL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -13861,13 +13811,14 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-</div>
-<div class="sect5">
-<h6 id="_tile_ancillary_2">F.12.8.2.2. Tile Ancillary</h6>
-<div class="paragraph">
-<p>[requirement] A GeoPackage that contains tiled gridded elevation data SHALL contain a <code>gpkg_2d_gridded_tile_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_tile_ancillary_table">Tile Ancillary Table Definition</a>.
+<h6 id="_tile_ancillary_2" class="float">Tile Ancillary</h6>
+<div id="_requirement-117" class="quoteblock">
+<div class="title">Requirement 117</div>
+<blockquote>
+A GeoPackage that contains tiled gridded elevation data SHALL contain a <code>gpkg_2d_gridded_tile_ancillary</code> table or view as per <a href="#gpkg_2d_gridded_tile_ancillary_table">Tile Ancillary Table Definition</a>.
 Subsequent extensions or custom implementations MAY add additional columns to this table.
-Clients SHALL ignore additional columns that are unrecognized.</p>
+Clients SHALL ignore additional columns that are unrecognized.
+</blockquote>
 </div>
 <table id="gpkg_2d_gridded_tile_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 56. Tile Ancillary Table Definition</caption>
@@ -13904,7 +13855,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>unique</em><span class="footnote">[<a id="_footnoteref_48" class="footnote" href="#_footnote_48" title="View footnote.">48</a>]</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>unique</em><span class="footnote">[<a id="_footnoteref_46" class="footnote" href="#_footnote_46" title="View footnote.">46</a>]</span></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>tpudt_id</code></p></td>
@@ -13912,11 +13863,11 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Foreign key to <code>id</code> in <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>unique</em><span class="footnote">[<a id="_footnoteref_49" class="footnote" href="#_footnote_49" title="View footnote.">49</a>]</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>unique</em><span class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnote_47" title="View footnote.">47</a>]</span></p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>min</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">REAL<span class="footnote">[<a id="_footnoteref_50" class="footnote" href="#_footnote_50" title="View footnote.">50</a>]</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Minimum value of this tile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -13924,7 +13875,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>max</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">REAL<span class="footnote">[<a id="_footnoteref_51" class="footnote" href="#_footnote_51" title="View footnote.">51</a>]</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Maximum value of this tile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -13949,17 +13900,19 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-<div class="paragraph">
-<p>[requirement] The <code>min</code>, <code>max</code>, and <code>mean</code> values SHALL be natural. Similarly, the <code>std_dev</code> SHALL be calculated based on the natural values.</p>
+<div id="_requirement-118" class="quoteblock">
+<div class="title">Requirement 118</div>
+<blockquote>
+The <code>min</code>, <code>max</code>, and <code>mean</code> values SHALL be natural. Similarly, the <code>std_dev</code> SHALL be calculated based on the natural values.
+</blockquote>
 </div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="_table_values_3">F.12.8.3. Table Values</h5>
-<div class="sect5">
-<h6 id="__code_gpkg_spatial_ref_sys_code_2">F.12.8.3.1. <code>gpkg_spatial_ref_sys</code></h6>
-<div class="paragraph">
-<p>[requirement] GeoPackages complying with this extension SHALL have a row in the <code>gpkg_spatial_ref_sys</code> table as described in <a href="#gpkg_spatial_ref_sys_record">Spatial Ref Sys Table Record</a>:</p>
+<h5 id="_table_values_3" class="float">Table Values</h5>
+<h6 id="__code_gpkg_spatial_ref_sys_code_2" class="float"><code>gpkg_spatial_ref_sys</code></h6>
+<div id="_requirement-119" class="quoteblock">
+<div class="title">Requirement 119</div>
+<blockquote>
+GeoPackages complying with this extension SHALL have a row in the <code>gpkg_spatial_ref_sys</code> table as described in <a href="#gpkg_spatial_ref_sys_record">Spatial Ref Sys Table Record</a>:
+</blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_record" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 57. Spatial Ref Sys Table Record</caption>
@@ -13993,26 +13946,32 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-<div class="paragraph">
-<p>[requirement] The <code>geopackage_spatial_ref_sys</code> table in a GeoPackage SHALL contain records to define all spatial reference systems used by tiled gridded elevation data in a GeoPackage. The spatial reference system SHALL be used to define the vertical datum, reference geoid, and units of measure for the tiled gridded elevation data.</p>
+<div id="_requirement-120" class="quoteblock">
+<div class="title">Requirement 120</div>
+<blockquote>
+The <code>geopackage_spatial_ref_sys</code> table in a GeoPackage SHALL contain records to define all spatial reference systems used by tiled gridded elevation data in a GeoPackage. The spatial reference system SHALL be used to define the vertical datum, reference geoid, and units of measure for the tiled gridded elevation data.
+</blockquote>
 </div>
+<h6 id="__code_gpkg_contents_code_2" class="float"><code>gpkg_contents</code></h6>
+<div id="_requirement-121" class="quoteblock">
+<div class="title">Requirement 121</div>
+<blockquote>
+(extends <a href="http://www.geopackage.org/spec/#_requirement-34">GPKG-34</a>) The <a href="http://www.geopackage.org/spec/#_contents"><code>gpkg_contents</code></a> table SHALL contain a row with a <code>data_type</code> column value of <code>2d-gridded-coverage</code> for each tile pyramid containing tiled gridded elevation data. The <code>srs_id</code> column value for that row SHOULD reference an SRS that has a vertical datum<span class="footnote">[<a id="_footnoteref_48" class="footnote" href="#_footnote_48" title="View footnote.">48</a>]</span>.
+</blockquote>
 </div>
-<div class="sect5">
-<h6 id="__code_gpkg_contents_code_2">F.12.8.3.2. <code>gpkg_contents</code></h6>
-<div class="paragraph">
-<p>[requirement] (extends <a href="http://www.geopackage.org/spec/#_requirement-34">GPKG-34</a>) The <a href="http://www.geopackage.org/spec/#_contents"><code>gpkg_contents</code></a> table SHALL contain a row with a <code>data_type</code> column value of <code>2d-gridded-coverage</code> for each tile pyramid containing tiled gridded elevation data. The <code>srs_id</code> column value for that row SHOULD reference an SRS that has a vertical datum<span class="footnote">[<a id="_footnoteref_52" class="footnote" href="#_footnote_52" title="View footnote.">52</a>]</span>.</p>
+<h6 id="_tile_pyramid_user_data_tables_2" class="float">Tile Pyramid User Data Tables</h6>
+<div id="_requirement-122" class="quoteblock">
+<div class="title">Requirement 122</div>
+<blockquote>
+(extends <a href="http://www.geopackage.org/spec/#_requirement-36">GPKG-36</a>, <a href="http://www.geopackage.org/spec/#_requirement-37">GPKG-37</a>) For tile pyramids containing 32-bit gridded elevation data, the <code>tile_data</code> BLOB in the tile pyramid user data table SHALL be of MIME type <code>image/tiff</code> as described in <a href="#tiff_encoding">Requirement 129</a>.
+</blockquote>
 </div>
-</div>
-<div class="sect5">
-<h6 id="_tile_pyramid_user_data_tables_2">F.12.8.3.3. Tile Pyramid User Data Tables</h6>
-<div class="paragraph">
-<p>[requirement] (extends <a href="http://www.geopackage.org/spec/#_requirement-36">GPKG-36</a>, <a href="http://www.geopackage.org/spec/#_requirement-37">GPKG-37</a>) For tile pyramids containing 32-bit gridded elevation data, the <code>tile_data</code> BLOB in the tile pyramid user data table SHALL be of MIME type <code>image/tiff</code> as described in <a href="#tiff_encoding">[tiff_encoding]</a>.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="__code_gpkg_extensions_code_2">F.12.8.3.4. <code>gpkg_extensions</code></h6>
-<div class="paragraph">
-<p>[requirement] GeoPackages complying with this extension SHALL have a row in the <code>gpkg_extensions</code> table for each  as described in <a href="#gpkg_extensions_records">Extensions Table Record</a>:</p>
+<h6 id="__code_gpkg_extensions_code_2" class="float"><code>gpkg_extensions</code></h6>
+<div id="_requirement-123" class="quoteblock">
+<div class="title">Requirement 123</div>
+<blockquote>
+GeoPackages complying with this extension SHALL have a row in the <code>gpkg_extensions</code> table for each as described in <a href="#gpkg_extensions_records">Extensions Table Record</a>:
+</blockquote>
 </div>
 <table id="gpkg_extensions_records" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 58. Extensions Table Record</caption>
@@ -14057,41 +14016,46 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-</div>
-<div class="sect5">
-<h6 id="__code_gpkg_2d_gridded_coverage_ancillary_code_2">F.12.8.3.5. <code>gpkg_2d_gridded_coverage_ancillary</code></h6>
+<h6 id="__code_gpkg_2d_gridded_coverage_ancillary_code_2" class="float"><code>gpkg_2d_gridded_coverage_ancillary</code></h6>
 <div class="paragraph">
 <p>The following requirements refer to the <code>gpkg_2d_gridded_coverage_ancillary</code> table as per <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.</p>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.</p>
+<div id="_requirement-124" class="quoteblock">
+<div class="title">Requirement 124</div>
+<blockquote>
+Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>datatype</code> column SHALL be <em>float</em>.</p>
+<div id="_requirement-125" class="quoteblock">
+<div class="title">Requirement 125</div>
+<blockquote>
+Values of the <code>datatype</code> column SHALL be <em>float</em>.
+</blockquote>
 </div>
-</div>
-<div class="sect5">
-<h6 id="__code_gpkg_2d_gridded_tile_ancillary_code_2">F.12.8.3.6. <code>gpkg_2d_gridded_tile_ancillary</code></h6>
+<h6 id="__code_gpkg_2d_gridded_tile_ancillary_code_2" class="float"><code>gpkg_2d_gridded_tile_ancillary</code></h6>
 <div class="paragraph">
 <p>The following requirements refer to the <code>gpkg_2d_gridded_tile_ancillary</code> table as per <a href="#gpkg_2d_gridded_tile_ancillary_table">Tile Ancillary Table Definition</a>.</p>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a>.</p>
+<div id="_requirement-126" class="quoteblock">
+<div class="title">Requirement 126</div>
+<blockquote>
+Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a>.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.</p>
+<div id="_requirement-127" class="quoteblock">
+<div class="title">Requirement 127</div>
+<blockquote>
+Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.
+</blockquote>
 </div>
+<h6 id="_tile_pyramid_user_data_tables_3" class="float">Tile Pyramid User Data Tables</h6>
+<div id="_requirement-128" class="quoteblock">
+<div class="title">Requirement 128</div>
+<blockquote>
+The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/tiff</code> and the data SHALL be 32-bit floating point.
+</blockquote>
 </div>
-<div class="sect5">
-<h6 id="_tile_pyramid_user_data_tables_3">F.12.8.3.7. Tile Pyramid User Data Tables</h6>
-<div class="paragraph">
-<p>[requirement] The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/tiff</code> and the data SHALL be 32-bit floating point.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_table_definition_sql_5">F.12.9. Table Definition SQL</h4>
+<h4 id="_table_definition_sql_5" class="float">Table Definition SQL</h4>
 <table id="gpkg_coverage_ancillary_sql" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 59. Coverage Ancillary Table Definition SQL</caption>
 <colgroup>
@@ -14142,24 +14106,36 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
   <span class="directive">UNIQUE</span> (tpudt_name, tpudt_id));</code></pre>
 </div>
 </div>
-<div class="sect4">
-<h5 id="_tiff_encoding">F.12.9.1. TIFF Encoding</h5>
-<div id="tiff_encoding" class="paragraph">
-<p>[requirement] (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have one sample per pixel.</p>
+<h5 id="_tiff_encoding" class="float">TIFF Encoding</h5>
+<div id="tiff_encoding" class="quoteblock">
+<div class="title">Requirement 129</div>
+<blockquote>
+(constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have one sample per pixel.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.</p>
+<div id="_requirement-130" class="quoteblock">
+<div class="title">Requirement 130</div>
+<blockquote>
+(constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<a href="#35">[35]</a> Section 13. Client applications SHALL support this option.</p>
+<div id="_requirement-131" class="quoteblock">
+<div class="title">Requirement 131</div>
+<blockquote>
+A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<a href="#35">[35]</a> Section 13. Client applications SHALL support this option.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL NOT contain multiple images per TIFF file.</p>
+<div id="_requirement-132" class="quoteblock">
+<div class="title">Requirement 132</div>
+<blockquote>
+(constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL NOT contain multiple images per TIFF file.
+</blockquote>
 </div>
-<div class="paragraph">
-<p>[requirement] (constrains TIFF<a href="#35">[35]</a> Section 15) A TIFF file storing tiled gridded elevation data SHALL NOT contain internal tiles as per TIFF Section 15.</p>
-</div>
-</div>
+<div id="_requirement-133" class="quoteblock">
+<div class="title">Requirement 133</div>
+<blockquote>
+(constrains TIFF<a href="#35">[35]</a> Section 15) A TIFF file storing tiled gridded elevation data SHALL NOT contain internal tiles as per TIFF Section 15.
+</blockquote>
 </div>
 </div>
 </div>
@@ -14750,30 +14726,18 @@ For undated references, the latest edition of the normative document referred to
 <a href="#_footnoteref_45">45</a>. Ideally the vertical datum for each pyramid of elevation will be specified. However, it is impractical to mandate this for a number of reasons, including the difficulty in testing whether a specific SRS has a valid vertical datum.
 </div>
 <div class="footnote" id="_footnote_46">
-<a href="#_footnoteref_46">46</a>. This is a REAL to support extensions that use non-integer data.
+<a href="#_footnoteref_46">46</a>. These two values are designed to be jointly unique so that they refer to a single row in a single table.
 </div>
 <div class="footnote" id="_footnote_47">
-<a href="#_footnoteref_47">47</a>. This is a REAL to support extensions that use non-integer data.
+<a href="#_footnoteref_47">47</a>. These two values are designed to be jointly unique so that they refer to a single row in a single table.
 </div>
 <div class="footnote" id="_footnote_48">
-<a href="#_footnoteref_48">48</a>. These two values are designed to be jointly unique so that they refer to a single row in a single table.
-</div>
-<div class="footnote" id="_footnote_49">
-<a href="#_footnoteref_49">49</a>. These two values are designed to be jointly unique so that they refer to a single row in a single table.
-</div>
-<div class="footnote" id="_footnote_50">
-<a href="#_footnoteref_50">50</a>. This is a REAL to support extensions that use non-integer data.
-</div>
-<div class="footnote" id="_footnote_51">
-<a href="#_footnoteref_51">51</a>. This is a REAL to support extensions that use non-integer data.
-</div>
-<div class="footnote" id="_footnote_52">
-<a href="#_footnoteref_52">52</a>. Ideally the vertical datum for each pyramid of elevation will be specified. However, it is impractical to mandate this for a number of reasons, including the difficulty in testing whether a specific SRS has a valid vertical datum.
+<a href="#_footnoteref_48">48</a>. Ideally the vertical datum for each pyramid of elevation will be specified. However, it is impractical to mandate this for a number of reasons, including the difficulty in testing whether a specific SRS has a valid vertical datum.
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-04 02:52:54 UTC
+Last updated 2016-10-04 03:23:46 UTC
 </div>
 </div>
 </body>
