@@ -7573,19 +7573,8 @@ columns:</p>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_gpkg_spatial_ref_sys">C.1. gpkg_spatial_ref_sys</h3>
-<table id="gpkg_spatial_ref_sys_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 16. gpkg_spatial_ref_sys Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_spatial_ref_sys_sql" class="listingblock">
+<div class="title">gpkg_spatial_ref_sys Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_spatial_ref_sys (
   srs_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -7597,19 +7586,8 @@ columns:</p>
 );</code></pre>
 </div>
 </div>
-<table id="sqlmm_gpkg_spatial_ref_sys_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 17. SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="sqlmm_gpkg_spatial_ref_sys_sql" class="listingblock">
+<div class="title">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> st_spatial_ref_sys <span class="keyword">AS</span>
   <span class="class">SELECT</span>
@@ -7622,19 +7600,8 @@ columns:</p>
   <span class="keyword">FROM</span> gpkg_spatial_ref_sys;</code></pre>
 </div>
 </div>
-<table id="sfsql_gpkg_spatial_ref_sys_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 18. SF/SQL View of gpkg_spatial_ref_sys Definition SQL (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="sfsql_gpkg_spatial_ref_sys_sql" class="listingblock">
+<div class="title">SF/SQL View of gpkg_spatial_ref_sys Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> spatial_ref_sys <span class="keyword">AS</span>
   <span class="class">SELECT</span>
@@ -7648,19 +7615,8 @@ columns:</p>
 </div>
 <div class="sect2">
 <h3 id="_gpkg_contents">C.2. gpkg_contents</h3>
-<table id="gpkg_contents_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 19. gpkg_contents Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_contents_sql" class="listingblock">
+<div class="title">gpkg_contents Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_contents (
   table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
@@ -7680,19 +7636,8 @@ columns:</p>
 </div>
 <div class="sect2">
 <h3 id="_gpkg_geometry_columns">C.3. gpkg_geometry_columns</h3>
-<table id="gpkg_geometry_columns_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 20. gpkg_geometry_columns Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_geometry_columns_sql" class="listingblock">
+<div class="title">gpkg_geometry_columns Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_geometry_columns (
   table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -7708,19 +7653,8 @@ columns:</p>
 );</code></pre>
 </div>
 </div>
-<table id="sqlmm_gpkg_geometry_columns_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 21. SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="sqlmm_gpkg_geometry_columns_sql" class="listingblock">
+<div class="title">SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> st_geometry_columns <span class="keyword">AS</span>
   <span class="class">SELECT</span>
@@ -7733,19 +7667,8 @@ columns:</p>
   <span class="keyword">WHERE</span> g.srs_id = s.srs_id;</code></pre>
 </div>
 </div>
-<table id="sfsql_gpkg_geometry_columns_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 22. SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="sfsql_gpkg_geometry_columns_sql" class="listingblock">
+<div class="title">SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">VIEW</span> geometry_columns <span class="keyword">AS</span>
   <span class="class">SELECT</span>
@@ -7772,19 +7695,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 </div>
 <div class="sect2">
 <h3 id="_sample_feature_table_informative">C.4. sample_feature_table (Informative)</h3>
-<table id="example_feature_table_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 23. sample_feature_table Table Definition SQL (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="example_feature_table_sql" class="listingblock">
+<div class="title">sample_feature_table Table Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_feature_table (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -7799,19 +7711,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 </div>
 <div class="sect2">
 <h3 id="_gpkg_tile_matrix_set">C.5. gpkg_tile_matrix_set</h3>
-<table id="gpkg_tile_matrix_set_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 24. gpkg_tile_matrix_set Table Creation SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_tile_matrix_set_sql" class="listingblock">
+<div class="title">gpkg_tile_matrix_set Table Creation SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_tile_matrix_set (
   table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
@@ -7828,19 +7729,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 </div>
 <div class="sect2">
 <h3 id="_gpkg_tile_matrix">C.6. gpkg_tile_matrix</h3>
-<table id="gpkg_tile_matrix_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 25. gpkg_tile_matrix Table Creation SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_tile_matrix_sql" class="listingblock">
+<div class="title">gpkg_tile_matrix Table Creation SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_tile_matrix (
   table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -7856,19 +7746,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 );</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 26. EXAMPLE: gpkg_tile_matrix Insert Statement (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
 <div class="listingblock">
+<div class="title">EXAMPLE: gpkg_tile_matrix Insert Statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> gpkg_tile_matrix <span class="keyword">VALUES</span> (
   <span class="string"><span class="delimiter">&quot;</span><span class="content">sample_tile_pyramid</span><span class="delimiter">&quot;</span></span>,
@@ -7885,19 +7764,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 </div>
 <div class="sect2">
 <h3 id="_sample_tile_pyramid_informative">C.7. sample_tile_pyramid (Informative)</h3>
-<table id="example_tiles_table_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 27. EXAMPLE: tiles table Create Table SQL (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="example_tiles_table_sql" class="listingblock">
+<div class="title">EXAMPLE: tiles table Create Table SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_tile_pyramid (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -7909,19 +7777,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 )</code></pre>
 </div>
 </div>
-<table id="example_tiles_table_insert_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 28. EXAMPLE: tiles table Insert Statement (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="example_tiles_table_insert_sql" class="listingblock">
+<div class="title">EXAMPLE: tiles table Insert Statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> sample_matrix_pyramid <span class="keyword">VALUES</span> (
   <span class="integer">1</span>,
@@ -7935,19 +7792,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 </div>
 <div class="sect2">
 <h3 id="_gpkg_extensions">C.8. gpkg_extensions</h3>
-<table id="gpkg_extensions_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 29. gpkg_extensions Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_extensions_sql" class="listingblock">
+<div class="title">gpkg_extensions Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_extensions (
   table_name <span class="predefined-type">TEXT</span>,
@@ -7962,19 +7808,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 </div>
 <div class="sect2">
 <h3 id="_sample_attributes_table_informative">C.9. sample_attributes_table (Informative)</h3>
-<table id="example_attributes_table_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 30. EXAMPLE: Attributes table Create Table SQL (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="example_attributes_table_sql" class="listingblock">
+<div class="title">EXAMPLE: Attributes table Create Table SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_attributes (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -7985,19 +7820,8 @@ Implementer must provide code4name(geometry_type_name) SQL function
 )</code></pre>
 </div>
 </div>
-<table id="example_attributes_table_insert_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 31. EXAMPLE: attributes table Insert Statement (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="example_attributes_table_insert_sql" class="listingblock">
+<div class="title">EXAMPLE: attributes table Insert Statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> sample_attributes(text_attribute, real_attribute, boolean_attribute, raster_or_photo) <span class="keyword">VALUES</span> (
   <span class="string"><span class="delimiter">&quot;</span><span class="content">place</span><span class="delimiter">&quot;</span></span>,
@@ -8016,7 +7840,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="sect2">
 <h3 id="_gpkg_tile_matrix_2">D.1. gpkg_tile_matrix</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 32. gpkg_tile_matrix Trigger Definition SQL</caption>
+<caption class="title">Table 16. gpkg_tile_matrix Trigger Definition SQL</caption>
 <colgroup>
 <col style="width:%;"> 
 </colgroup>
@@ -8104,7 +7928,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="sect2">
 <h3 id="_sample_feature_table">D.2. sample_feature_table</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 33. EXAMPLE: features table Trigger Definition SQL</caption>
+<caption class="title">Table 17. EXAMPLE: features table Trigger Definition SQL</caption>
 <colgroup>
 <col style="width:%;"> 
 </colgroup>
@@ -8142,7 +7966,7 @@ must be &gt; 0</span><span class="delimiter">'</span></span>)
 <div class="sect2">
 <h3 id="_sample_tile_pyramid">D.3. sample_tile_pyramid</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 34. tiles table Trigger Definition SQL</caption>
+<caption class="title">Table 18. tiles table Trigger Definition SQL</caption>
 <colgroup>
 <col style="width:%;"> 
 </colgroup>
@@ -9886,7 +9710,7 @@ A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be def
 The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <a href="#B14">[B14]</a> encoded in XMI <a href="#B15">[B15]</a>, GML Application Schemas <a href="#30">[30]</a>, ISO 19110 feature catalogues <a href="#B18">[B18]</a>, OWL <a href="#B20">[B20]</a> and SKOS <a href="#B21">[B21]</a> taxonomies, etc.</p>
 </div>
 <table id="gpkg_metadata_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 35. Metadata Table Definition</caption>
+<caption class="title">Table 19. Metadata Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -9963,7 +9787,7 @@ The list of valid scope names and their definitions is provided in <a href="#met
 The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnote_28" title="View footnote.">28</a>]</span> for use in the GeoPackage specification by addition of entries with “NA” as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
 </div>
 <table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 36. Metadata Scopes</caption>
+<caption class="title">Table 20. Metadata Scopes</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -10094,7 +9918,7 @@ A GeoPackage that contains a <code>gpkg_metadata</code> table SHALL contain a <c
 The <code>gpkg_metadata_reference</code> table is not required to contain any rows.</p>
 </div>
 <table id="gpkg_metadata_reference_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 37. Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</caption>
+<caption class="title">Table 21. Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -10833,19 +10657,8 @@ Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> c
 
 <h4 id="_table_definition_sql" class="float">Table Definition SQL</h4>
 <h5 id="_gpkg_metadata" class="float">gpkg_metadata</h5>
-<table id="gpkg_metadata_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 38. gpkg_metadata Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_metadata_sql" class="listingblock">
+<div class="title">gpkg_metadata Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
   id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -10857,19 +10670,8 @@ Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> c
 </div>
 </div>
 <h5 id="_gpkg_metadata_reference" class="float">gpkg_metadata_reference</h5>
-<table id="gpkg_metadata_reference_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 39. gpkg_metadata_reference Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_metadata_reference_sql" class="listingblock">
+<div class="title">gpkg_metadata_reference Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata_reference (
   reference_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -10884,19 +10686,8 @@ Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> c
 );</code></pre>
 </div>
 </div>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 40. Example: gpkg_metadata_reference SQL insert statement (Informative)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
 <div class="listingblock">
+<div class="title">Example: gpkg_metadata_reference SQL insert statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">INSERT</span> <span class="class">INTO</span> gpkg_metadata_reference <span class="keyword">VALUES</span> (
   <span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,
@@ -10911,19 +10702,8 @@ Every <code>gpkg_metadata_reference</code> table row <code>md_parent_id</code> c
 </div>
 <h4 id="_trigger_definition_sql_informative_2" class="float">Trigger Definition SQL (Informative)</h4>
 <h5 id="_metadata" class="float">metadata</h5>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 41. metadata Trigger Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
 <div class="listingblock">
+<div class="title">metadata Trigger Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_md_scope_insert</span><span class="delimiter">'</span></span>
 <span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata</span><span class="delimiter">'</span></span>
@@ -10959,19 +10739,8 @@ nonGeographicDataset | dimensionGroup</span><span class="delimiter">'</span></sp
 </div>
 </div>
 <h5 id="_metadata_reference" class="float">metadata_reference</h5>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 42. gpkg_metadata_reference Trigger Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
 <div class="listingblock">
+<div class="title">gpkg_metadata_reference Trigger Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_reference_scope_insert</span><span class="delimiter">'</span></span>
 <span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
@@ -11517,7 +11286,7 @@ level.</p>
 <p>So here is the data after both examples:</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 43. xml_metadata</caption>
+<caption class="title">Table 22. xml_metadata</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11651,7 +11420,7 @@ level.</p>
 </table>
 
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 44. gpkg_metadata_reference</caption>
+<caption class="title">Table 23. gpkg_metadata_reference</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11908,7 +11677,7 @@ If present it SHALL be defined per clause 2.3.2.1.1 <a href="#schema_data_column
 </blockquote>
 </div>
 <table id="gpkg_data_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 45. Data Columns Table or View Definition</caption>
+<caption class="title">Table 24. Data Columns Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -12019,7 +11788,7 @@ If present it SHALL be defined per clause 2.3.3.1.1 <a href="#data_column_constr
 The constraint_name column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a>.</p>
 </div>
 <table id="gpkg_data_column_constraints_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 46. Data Column Constraints Table or View Definition</caption>
+<caption class="title">Table 25. Data Column Constraints Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -12109,7 +11878,7 @@ The case sensitive value column contains an enumerated legal value for constrain
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 47. Sample Data Column Constraints</caption>
+<caption class="title">Table 26. Sample Data Column Constraints</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -12981,19 +12750,8 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 
 <h4 id="_table_definition_sql_2" class="float">Table Definition SQL</h4>
 <h5 id="_gpkg_data_columns" class="float">gpkg_data_columns</h5>
-<table id="gpkg_data_columns_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 48. gpkg_data_columns Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_data_columns_sql" class="listingblock">
+<div class="title">gpkg_data_columns Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_data_columns (
   table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -13009,19 +12767,8 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </div>
 </div>
 <h5 id="_gpkg_data_column_constraints" class="float">gpkg_data_column_constraints</h5>
-<table id="gpkg_data_column_constraints_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 49. gpkg_data_columns Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_data_column_constraints_sql" class="listingblock">
+<div class="title">gpkg_data_columns Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_data_column_constraints (
   constraint_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -13073,7 +12820,7 @@ The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additi
 </blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_cols_crs_wkt" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 50. Spatial Ref Sys Table Definition</caption>
+<caption class="title">Table 27. Spatial Ref Sys Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13337,19 +13084,8 @@ ID["EPSG", 4326]]</p>
 
 <h4 id="_table_definition_sql_3" class="float">Table Definition SQL</h4>
 <h5 id="_gpkg_spatial_ref_sys_2" class="float">gpkg_spatial_ref_sys</h5>
-<table id="gpkg_spatial_ref_sys_crs_wkt_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 51. gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_spatial_ref_sys_crs_wkt_sql" class="listingblock">
+<div class="title">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_spatial_ref_sys (
   srs_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -13451,7 +13187,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 </blockquote>
 </div>
 <table id="gpkg_2d_gridded_coverage_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 52. Coverage Ancillary Table Definition</caption>
+<caption class="title">Table 28. Coverage Ancillary Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13549,7 +13285,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 </blockquote>
 </div>
 <table id="gpkg_2d_gridded_tile_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 53. Tile Ancillary Table Definition</caption>
+<caption class="title">Table 29. Tile Ancillary Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13681,7 +13417,7 @@ The <code>min</code>, <code>max</code>, and <code>mean</code> values SHALL be na
 <p>[requirement] GeoPackages complying with this extension SHALL have a row in the <code>gpkg_spatial_ref_sys</code> table as described in <a href="#gpkg_spatial_ref_sys_record">Spatial Ref Sys Table Record</a>:</p>
 </div>
 <table id="gpkg_spatial_ref_sys_record" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 54. Spatial Ref Sys Table Record</caption>
+<caption class="title">Table 30. Spatial Ref Sys Table Record</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13730,7 +13466,7 @@ GeoPackages complying with this extension SHALL have rows in the <code>gpkg_exte
 </blockquote>
 </div>
 <table id="gpkg_extensions_records" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 55. Extensions Table Record</caption>
+<caption class="title">Table 31. Extensions Table Record</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13812,19 +13548,8 @@ The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#
 </blockquote>
 </div>
 <h4 id="_table_definition_sql_4" class="float">Table Definition SQL</h4>
-<table id="gpkg_coverage_ancillary_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 56. Coverage Ancillary Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_coverage_ancillary_sql" class="listingblock">
+<div class="title">Coverage Ancillary Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_2d_gridded_coverage_ancillary</span><span class="delimiter">'</span></span> (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -13838,19 +13563,8 @@ The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#
   <span class="keyword">CHECK</span> (datatype <span class="keyword">in</span> (<span class="string"><span class="delimiter">'</span><span class="content">integer</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">float</span><span class="delimiter">'</span></span>)));</code></pre>
 </div>
 </div>
-<table id="gpkg_tile_ancillary_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 57. Tile Ancillary Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_tile_ancillary_sql" class="listingblock">
+<div class="title">Tile Ancillary Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_2d_gridded_tile_ancillary (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -13980,7 +13694,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 </blockquote>
 </div>
 <table id="gpkg_2d_gridded_coverage_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 58. Coverage Ancillary Table Definition</caption>
+<caption class="title">Table 32. Coverage Ancillary Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14060,7 +13774,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 </blockquote>
 </div>
 <table id="gpkg_2d_gridded_tile_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 59. Tile Ancillary Table Definition</caption>
+<caption class="title">Table 33. Tile Ancillary Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14154,7 +13868,7 @@ GeoPackages complying with this extension SHALL have a row in the <code>gpkg_spa
 </blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_record" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 60. Spatial Ref Sys Table Record</caption>
+<caption class="title">Table 34. Spatial Ref Sys Table Record</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14213,7 +13927,7 @@ GeoPackages complying with this extension SHALL have a row in the <code>gpkg_ext
 </blockquote>
 </div>
 <table id="gpkg_extensions_records" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 61. Extensions Table Record</caption>
+<caption class="title">Table 35. Extensions Table Record</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14295,19 +14009,8 @@ The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#
 </blockquote>
 </div>
 <h4 id="_table_definition_sql_5" class="float">Table Definition SQL</h4>
-<table id="gpkg_coverage_ancillary_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 62. Coverage Ancillary Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_coverage_ancillary_sql" class="listingblock">
+<div class="title">Coverage Ancillary Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_2d_gridded_coverage_ancillary</span><span class="delimiter">'</span></span> (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -14319,19 +14022,8 @@ The <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#
   <span class="keyword">CHECK</span> (datatype <span class="keyword">in</span> (<span class="string"><span class="delimiter">'</span><span class="content">integer</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">float</span><span class="delimiter">'</span></span>)));</code></pre>
 </div>
 </div>
-<table id="gpkg_tile_ancillary_sql" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 63. Tile Ancillary Table Definition SQL</caption>
-<colgroup>
-<col style="width:%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-</tr>
-</tbody>
-</table>
-
-<div class="listingblock">
+<div id="gpkg_tile_ancillary_sql" class="listingblock">
+<div class="title">Tile Ancillary Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_2d_gridded_tile_ancillary (
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
@@ -14383,7 +14075,7 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 <h2 id="geometry_types"> Annex G: Geometry Types (Normative)</h2>
 <div class="sectionbody">
 <table id="geometry_types_core" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 64. Geometry Type Codes (Core)</caption>
+<caption class="title">Table 36. Geometry Type Codes (Core)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -14431,7 +14123,7 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 </table>
 
 <table id="geometry_types_extension" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 65. Geometry Type Codes (Extension)</caption>
+<caption class="title">Table 37. Geometry Type Codes (Extension)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -14501,7 +14193,7 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 <h2 id="tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 66. Zoom Times Two Example</caption>
+<caption class="title">Table 38. Zoom Times Two Example</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14976,7 +14668,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-05 19:53:38 UTC
+Last updated 2016-10-18 02:14:40 UTC
 </div>
 </div>
 </body>
