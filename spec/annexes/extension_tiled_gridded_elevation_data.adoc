@@ -74,7 +74,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 |Column Name |Column Type |Column Description |Null |Default |Key|Constraint
 |`id`|INTEGER |Autoincrement primary key|no||PK|
 |`tile_matrix_set_name`|TEXT|Foreign key to `table_name` in http://www.geopackage.org/spec/#tile_matrix_set_data_table_definition[`gpkg_tile_matrix_set`]|no||FK|UNIQUE
-|`datatype`|TEXT  |'integer' or 'float'|no|||
+|`datatype`|TEXT  |_integer_ or _float_|no|_integer_||
 |`scale`|REAL|Scale as a multiple relative to the unit of measure|yes|1||
 |`offset`|REAL|The offset to the 0 value|yes|0||
 |`precision`|REAL{real_value}|The smallest value that has meaning for this dataset|yes|1||
@@ -95,8 +95,8 @@ Clients SHALL ignore additional columns that are unrecognized.
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Default |Key
 |`id`|INTEGER |Autoincrement primary key|no||PK
-|`tpudt_name`|TEXT  |Name of http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||_unique_{jointly_unique}
-|`tpudt_id`|INTEGER |Foreign key to `id` in http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||_unique_{jointly_unique}
+|`tpudt_name`|TEXT  |Name of http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||UNIQUE{jointly_unique}
+|`tpudt_id`|INTEGER |Foreign key to `id` in http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||UNIQUE{jointly_unique}
 |`scale`|REAL|Scale as a multiple relative to the unit of measure|yes|1|
 |`offset`|REAL|The offset to the 0 value|yes|0|
 |`min`|REAL{real_value}|Minimum value of this tile|yes||
@@ -109,7 +109,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 ===== Table Values
 
 [float]
-====== `gpkg_spatial_ref_sys`
+====== gpkg_spatial_ref_sys
 [requirement] 
 GeoPackages complying with this extension SHALL have a row in the `gpkg_spatial_ref_sys` table as described in <<gpkg_spatial_ref_sys_record>>:
 
@@ -125,15 +125,15 @@ GeoPackages complying with this extension SHALL have a row in the `gpkg_spatial_
 The `geopackage_spatial_ref_sys` table in a GeoPackage SHALL contain records to define all spatial reference systems used by tiled gridded elevation data in a GeoPackage. The spatial reference system SHALL be used to define the vertical datum, reference geoid, and units of measure for the tiled gridded elevation data.
 
 [float]
-====== `gpkg_contents`
+====== gpkg_contents
 :vertical_datum: footnote:[Ideally the vertical datum for each pyramid of elevation will be specified. However, it is impractical to mandate this for a number of reasons, including the difficulty in testing whether a specific SRS has a valid vertical datum.]
 [requirement] 
-(extends http://www.geopackage.org/spec/#_requirement-34[GPKG-34]) The http://www.geopackage.org/spec/#_contents[`gpkg_contents`] table SHALL contain a row with a `data_type` column value of `2d-gridded-coverage` for each tile pyramid containing tiled gridded elevation data. The `srs_id` column value for that row SHOULD reference an SRS that has a vertical datum{vertical_datum}.
+(extends http://www.geopackage.org/spec/#_requirement-34[GPKG-34]) The http://www.geopackage.org/spec/#_contents[`gpkg_contents`] table SHALL contain a row with a `data_type` column value of '2d-gridded-coverage' for each tile pyramid containing tiled gridded elevation data. The `srs_id` column value for that row SHOULD reference an SRS that has a vertical datum{vertical_datum}.
 
 [float]
-====== `gpkg_extensions`
+====== gpkg_extensions
 [requirement]
-GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<gpkg_extensions_records>>:
+GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<gpkg_extensions_records>>. A null `column_name` in the tile pyramid user data table SHALL indicate 16-bit data (PNG encoding) and a `column_name` of _tile_data_ SHALL indicate 32-bit data (TIFF encoding <<tiff_encoding>>).
 
 [[gpkg_extensions_records]]
 .Extensions Table Record
@@ -142,21 +142,22 @@ GeoPackages complying with this extension SHALL have rows in the `gpkg_extension
 |`table_name`|`column_name`|`extension_name`|`definition`|`scope`
 |gpkg_2d_gridded_coverage_ancillary|null|`gpkg_elevation_tiles`|http://www.geopackage.org/spec/#extension_tiled_gridded_elevation_data|`read-write`
 |gpkg_2d_gridded_tile_ancillary|null|`gpkg_elevation_tiles`|http://www.geopackage.org/spec/#extension_tiled_gridded_elevation_data|`read-write`
-|name of actual http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table] containing unsigned integer data|`tile_data`|`gpkg_elevation_tiles`|http://www.geopackage.org/spec/#extension_tiled_gridded_elevation_data|`read-write`
+|name of actual http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table] containing unsigned integer data|null|`gpkg_elevation_tiles`|http://www.geopackage.org/spec/#extension_tiled_gridded_elevation_data|`read-write`
+|name of actual http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table] containing floating point data|`tile_data`|`gpkg_elevation_tiles`|http://www.geopackage.org/spec/#extension_tiled_gridded_elevation_data|`read-write`
 |=======================================================================
 
 [float]
-====== `gpkg_2d_gridded_coverage_ancillary`
+====== gpkg_2d_gridded_coverage_ancillary
 The following requirements refer to the `gpkg_2d_gridded_coverage_ancillary` table as per <<gpkg_2d_gridded_coverage_ancillary_table>>.
 
 [requirement] 
 Values of the `tile_matrix_set_name` column SHALL reference values in the `gpkg_tile_matrix_set` `table_name` column.
 
 [requirement] 
-Values of the `datatype` column SHALL be 'integer' or 'float'.
+Values of the `datatype` column SHALL be _integer_ or _float_.
 
 [float]
-====== `gpkg_2d_gridded_tile_ancillary`
+====== gpkg_2d_gridded_tile_ancillary
 The following requirements refer to the `gpkg_2d_gridded_tile_ancillary` table as per <<gpkg_2d_gridded_tile_ancillary_table>>.
 
 [requirement] 
@@ -171,7 +172,7 @@ The `min`, `max`, and `mean` values SHALL be natural, i.e., not scaled or offset
 [float]
 ====== Using the Scale and Offset Values
 [requirement] 
-Integer elevation values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scope the scale and offset apply to can be both the entire coverage and the individual tile.
+Integer elevation values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scale and offset MAY be applied to the entire coverage and/or the individual tile. The scale and offset do not apply to the `data_null` value as defined in <<gpkg_2d_gridded_coverage_ancillary_table>>.
 
 Actual elevation values SHALL be calculated by:
 
@@ -188,11 +189,10 @@ Floating point elevation values SHALL NOT have a scale and offset applied. The `
 [float]
 ====== Tile Pyramid User Data Tables
 [requirement] 
-For data where the `datatype` column of the corresponding row in the `gpkg_2d_gridded_coverage_ancillary` table is 'integer', the `tile_data` BLOB in the http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table] containing tiled, gridded elevation data SHALL be of MIME type `image/png` and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").
+For data where the `datatype` column of the corresponding row in the `gpkg_2d_gridded_coverage_ancillary` table is _integer_, the `tile_data` BLOB in the http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table] containing tiled, gridded elevation data SHALL be of MIME type `image/png` and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").
 
 [requirement] 
-For data where the `datatype` column of the corresponding row in the `gpkg_2d_gridded_coverage_ancillary` table is 'float', the `tile_data` BLOB in the http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table] containing tiled, gridded elevation data SHALL be of MIME type `image/tiff` and the data SHALL be 32-bit floating point.
-
+For data where the `datatype` column of the corresponding row in the `gpkg_2d_gridded_coverage_ancillary` table is _float_, the `tile_data` BLOB in the http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table] containing tiled, gridded elevation data SHALL be of MIME type `image/tiff` and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<<tiff_encoding>>).
 
 [float]
 ==== Table Definition SQL
@@ -236,6 +236,9 @@ CREATE TABLE gpkg_2d_gridded_tile_ancillary (
 [float]
 ===== TIFF Encoding
 [[tiff_encoding]]
+[requirement]
+A TIFF file used for storing tiled gridded elevation data SHALL conform to the TIFF specification <<35>>.
+
 [requirement] 
 (constrains TIFF<<35>> Section 2) A TIFF file storing tiled gridded elevation data SHALL have one sample per pixel.
 
@@ -243,7 +246,9 @@ CREATE TABLE gpkg_2d_gridded_tile_ancillary (
 (constrains TIFF<<35>> Section 2) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.
 
 [requirement] 
-A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<<35>> Section 13. Client applications SHALL support this option.
+A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<<35>> Section 13. 
+
+Client applications that support the TIFF encoding are expected to support this option.
 
 [requirement] 
 (constrains TIFF<<35>> Section 2) A TIFF file storing tiled gridded elevation data SHALL NOT contain multiple images per TIFF file.
