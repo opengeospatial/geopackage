@@ -9,7 +9,7 @@ Tiled Gridded Elevation Data
 [float]
 ==== Introduction
 
-The GeoPackage Standards Working Group (SWG) has identified a need for the ability to store 16-bit tiled gridded elevation data in a GeoPackage. This capability will be used to support use cases such as the following:
+The GeoPackage Standards Working Group (SWG) has developed the ability to store 16-bit and 32-bit tiled gridded elevation data in a GeoPackage. This capability will be used to support use cases such as the following:
 
 * Visualization
 **  2D (hillshade, color relief, slope)
@@ -23,8 +23,9 @@ The GeoPackage Standards Working Group (SWG) has identified a need for the abili
 **  Augmented reality training
 
 :elevation_precision: footnote:[We acknowledge that this approach will not support certain applications that require a high degree of precision and/or accuracy (e.g., targeting).]
-This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG and TIFF files as the container for the elevation values themselves.
 This capability was designed to be relatively easy to implement and to be suitable for a wide variety of computing environments including the mobile/handheld computing environment{elevation_precision}.
+
+This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG (16-bit) and TIFF (32-bit) files as the container for the elevation values themselves. It is the data producer's responsibility to ensure that the intended recipient is able to read GeoPackages with the elevation encoding (PNG or TIFF) being used.
 
 [float]
 ==== Extension Author
@@ -154,7 +155,7 @@ The following requirements refer to the `gpkg_2d_gridded_coverage_ancillary` tab
 Values of the `tile_matrix_set_name` column SHALL reference values in the `gpkg_tile_matrix_set` `table_name` column.
 
 [requirement] 
-Values of the `datatype` column SHALL be _integer_ or _float_.
+Values of the `datatype` column MAY be _integer_ or _float_.
 
 [float]
 ====== gpkg_2d_gridded_tile_ancillary
