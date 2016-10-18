@@ -12568,7 +12568,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints minIsInclusive and maxIsInclusive  column values are NOT NULL and either 0 or 1 for rows with a constraint_type value of "range".</p>
+<p>Verify that the gpkg_data_column_constraints min_is_inclusive and max_is_inclusive  column values are NOT NULL and either 0 or 1 for rows with a constraint_type value of "range".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12576,7 +12576,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT minIsInclusive, maxIsInclusive FROM gpkg_data column_constraints WHERE constraint_type = ‘range’</p>
+<p>SELECT min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type = ‘range’</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12586,16 +12586,16 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if minIsInclusive IS NULL</p>
+<p>Fail if min_is_inclusive IS NULL</p>
 </li>
 <li>
-<p>Fail if maxIsInclusive IS NULL</p>
+<p>Fail if max_is_inclusive IS NULL</p>
 </li>
 <li>
-<p>Fail if minIsInclusive is NOT IN (0,1)</p>
+<p>Fail if min_is_inclusive is NOT IN (0,1)</p>
 </li>
 <li>
-<p>Fail if maxIsInclusive is NOT IN (0,1)</p>
+<p>Fail if max_is_inclusive is NOT IN (0,1)</p>
 </li>
 </ol>
 </div>
@@ -12636,7 +12636,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints min, max, minIsInclusive and maxIsInclusive column values are NULL for rows with a constraint_type value of "enum" or “glob”.</p>
+<p>Verify that the gpkg_data_column_constraints min, max, min_is_inclusive and max_is_inclusive column values are NULL for rows with a constraint_type value of "enum" or “glob”.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12644,7 +12644,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT min, max, minIsInclusive, maxIsInclusive FROM gpkg_data column_constraints WHERE constraint_type  IN (‘enum’,’glob)</p>
+<p>SELECT min, max, min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type  IN (‘enum’,’glob)</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12660,10 +12660,10 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <p>Fail if max IS NOT NULL</p>
 </li>
 <li>
-<p>Fail if minIsInclusive IS NOT NULL</p>
+<p>Fail if min_is_inclusive IS NOT NULL</p>
 </li>
 <li>
-<p>Fail if maxIsInclusive IS NOT NULL</p>
+<p>Fail if max_is_inclusive IS NOT NULL</p>
 </li>
 </ol>
 </div>
@@ -14668,7 +14668,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-18 02:14:40 UTC
+Last updated 2016-10-18 03:08:43 UTC
 </div>
 </div>
 </body>
