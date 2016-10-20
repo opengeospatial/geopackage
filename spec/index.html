@@ -341,7 +341,7 @@ The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#
 <div id="_requirement-2" class="quoteblock">
 <div class="title">Requirement 2</div>
 <blockquote>
-A GeoPackage SHALL contain an appropriate value in the application ID field of the SQLite database header to indicate that it is a GeoPackage. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span> The value SHALL have a prefix of 0x4750 ("GP" in ASCII). A value of 0x47503131 ("GP11" in ASCII) SHALL indicate a GeoPackage version 1.1 file. <span class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</span>
+A GeoPackage SHALL contain an appropriate value in the application ID field of the SQLite database header to indicate that it is a GeoPackage. <span class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</span> The value SHALL have a prefix of 0x4750 ("GP" in ASCII). A value of 0x47503132 ("GP12" in ASCII) SHALL indicate a GeoPackage version 1.2 file. <span class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnote_4" title="View footnote.">4</a>]</span>
 </blockquote>
 </div>
 <div class="paragraph">
@@ -14283,10 +14283,10 @@ For undated references, the latest edition of the normative document referred to
 <a href="#_footnoteref_2">2</a>. SQLite is in the public domain (see <a href="http://www.sqlite.org/copyright.html)">http://www.sqlite.org/copyright.html)</a>
 </div>
 <div class="footnote" id="_footnote_3">
-<a href="#_footnoteref_3">3</a>. With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196437809;" SQL statement, where 1196437809 is the 32-bit integer value of 0x47503131. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x31, 0x31 at offset 68 in the SQLite database file (see <a href="http://www.sqlite.org/fileformat2.html#database_header">http://www.sqlite.org/fileformat2.html#database_header</a> for details).
+<a href="#_footnoteref_3">3</a>. With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196437810;" SQL statement, where 1196437810 is the 32-bit integer value of 0x47503132. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x31, 0x32 at offset 68 in the SQLite database file (see <a href="http://www.sqlite.org/fileformat2.html#database_header">http://www.sqlite.org/fileformat2.html#database_header</a> for details).
 </div>
 <div class="footnote" id="_footnote_4">
-<a href="#_footnoteref_4">4</a>. Applications should be aware of the possibility that newer versions of GeoPackage may be published and that the application may have a higher suffix than "11".
+<a href="#_footnoteref_4">4</a>. Applications should be aware of the possibility that newer versions of GeoPackage may be published and that the application may have a higher suffix than "12".
 </div>
 <div class="footnote" id="_footnote_5">
 <a href="#_footnoteref_5">5</a>. The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.
@@ -14417,7 +14417,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-10-20 03:16:44 UTC
+Last updated 2016-10-20 03:32:16 UTC
 </div>
 </div>
 </body>
