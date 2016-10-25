@@ -103,7 +103,7 @@ See <<gpkg_tile_matrix_set_sql>>.
 The minimum bounding box defined in the gpkg_tile_matrix_set table or view for a tile pyramid user data table SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated based on the column values for the user data table in the gpkg_tile_matrix table or view.  For example, because GeoPackages use the upper left tile origin convention defined in clause <<clause_tile_matrix_table_data_values>> below, the gpkg_tile_matrix_set (min_x, max_y) ordinate is the upper-left corner of tile (0,0) for all zoom levels in a table_name tile pyramid user data table.
 
 [requirement]
-Values of the `gpkg_tile_matrix_set` `table_name` column SHALL reference values in th gpkg_contents table_name column for rows with a data type of "tiles".
+Values of the `gpkg_tile_matrix_set` `table_name` column SHALL reference values in the gpkg_contents table_name column for rows with a data type of "tiles".
 
 [requirement]
 The gpkg_tile_matrix_set table or view SHALL contain one row record for each tile pyramid user data table.
