@@ -68,7 +68,7 @@
 |*Test Case ID* |+/base/core/container/data/table_data_types+
 |*Test Purpose* |Verify that the data types of GeoPackage columns include only the types specified by <<table_column_data_types>>.
 |*Test Method* |
-. `SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’`
+. `SELECT table_name FROM gpkg_contents`
 . Not testable if returns empty set
 . For each row table name from step 1
 .. PRAGMA table_info(table_name)
