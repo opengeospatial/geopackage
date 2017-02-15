@@ -475,12 +475,14 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 |*Test Case ID* |+/opt/features/vector_features/data/feature_table_integer_primary_key+
 |*Test Purpose* |Verify that every vector features user data table has an integer primary key.
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WERE data_type = ‘features’
-. Not testable  if returns an empty result set
+. SELECT table_name FROM gpkg_contents WHERE data_type = 'features'
+. Not testable if returns an empty result set
 . For each row from step 1
 .. PRAGMA table_info(table_name) 
 .. Fail if returns an empty result set
-.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”
+.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"
+.. SELECT COUNT(*) - COUNT(DISTINCT id) from table_name
+.. Fail if result is nonzero
 . Pass if no fails.
 |*Reference* |Clause 2.1.6.1.1 Req 29:
 |*Test Type* |Basic
