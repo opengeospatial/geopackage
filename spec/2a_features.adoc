@@ -169,15 +169,15 @@ identifies the geometry columns and geometry types in tables that contain user d
 
 [[gpkg_geometry_columns_cols]]
 .Geometry Columns Table or View Definition
-[cols=",,,",options="header",]
+[cols=",,,,",options="header",]
 |=======================================================================
-|Column Name |Type |Description |Key
-|`table_name` |TEXT |Name of the table containing the geometry column |PK, FK
-|`column_name` |TEXT |Name of a column in the feature table that is a Geometry Column |PK
-|`geometry_type_name` |TEXT |Name from <<geometry_types_core>> or <<geometry_types_extension>> in <<geometry_types>> |
-|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id` |FK
-|`z` |TINYINT |0: z values prohibited; 1: z values mandatory; 2: z values optional |
-|`m` |TINYINT |0: m values prohibited; 1: m values mandatory; 2: m values optional |
+|Column Name |Type |Description |Null |Key
+|`table_name` |TEXT |Name of the table containing the geometry column |no |PK, FK
+|`column_name` |TEXT |Name of a column in the feature table that is a Geometry Column |no |PK
+|`geometry_type_name` |TEXT |Name from <<geometry_types_core>> or <<geometry_types_extension>> in <<geometry_types>> |no |
+|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id` |no |FK
+|`z` |TINYINT |0: z values prohibited; 1: z values mandatory; 2: z values optional |no |
+|`m` |TINYINT |0: m values prohibited; 1: m values mandatory; 2: m values optional |no |
 |=======================================================================
 
 The FK on `gpkg_geometry_columns.srs_id` references the PK on `gpkg_spatial_ref_sys.srs_id` to ensure that geometry columns are only defined in feature tables for defined spatial reference systems.

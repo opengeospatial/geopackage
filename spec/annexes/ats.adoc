@@ -362,10 +362,10 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 |*Test Case ID* |+/opt/features/geometry_columns/data/table_def+
 |*Test Purpose* |Verify that the gpkg_geometry_columns table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_geometry_columns' 
+. PRAGMA table_info('gpkg_geometry_columns') 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.4Table 20. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
-. Fail otherwise.
+. Fail if the columns described in <<gpkg_geometry_columns_cols>> are missing or have non-matching definitions. Column order and other column definitions in the returned sql are irrelevant. Primary key constraints are as per <<gpkg_geometry_columns_sql>>.
+. Pass otherwise.
 |*Reference* |Clause 2.1.5.1.1 Req 21:
 |*Test Type* |Basic
 |========================================
@@ -390,8 +390,8 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_table_name+
 |*Test Purpose* |Verify that the table_name column values in the gpkg_geometry_columns table are valid.
 |*Test Method* | 
-. PRAGMA foreign_key_check(‘geometry_columns’)
-. Fail if returns any rows with a fourth column foreign key index value of 1 (gpkg_contents)
+. PRAGMA foreign_key_list('gpkg_geometry_columns');
+. Fail if there is no row designating `table_name` as a foreign key to `table_name` in `gpkg_contents`
 |*Reference* |Clause 2.1.5.1.2 Req 23:
 |*Test Type* |Capability
 |========================================
