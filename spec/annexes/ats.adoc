@@ -262,6 +262,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 |========================================
 
 ==== Features
+Note: Some of these tests require a spatial engine or custom code beyond simple SQL. These tests are marked with a *.
 
 ===== Simple Features SQL Introduction
 
@@ -530,10 +531,10 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 . SELECT table_name AS tn, column_name AS cn, geometry_type_name AS gt_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’)
 . Not testable if returns an empty result set
 . For each row from step 1
-.. SELECT DISTINCT ST_GeometryType(cn) FROM tn
+.. *Select the set of geometry types in use for the values in cn
 .. For each row actual_type_name from step a
-... SELECT GPKG_IsAssignable(geometry_type_name, actual_type_name) 
-... Fail if any returned 0 
+... *Determine if each geometry type is assignable to the actual_type_name
+... Fail if any are not assignable
 . Pass if no fails
 |*Reference* |Clause 2.1.6.1.2 Req 32:
 |*Test Type* |Capability
@@ -547,9 +548,9 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 . SELECT table_name AS tn, column_name AS cn, srs_id AS gc_srs_id FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents where data_type = ‘features’)
 . Not testable if returns an empty result set
 . For each row from step 1
-.. SELECT DISTINCT st_srid(cn) FROM tn
+.. *Select the set of SRIDs in use for the values in cn
 .. For each row from step a
-... Fail if returnvalue not equal to gc_srs_id
+... *Fail if any SRID is not equal to gc_srs_id
 . Pass if no fails
 |*Reference* |Clause 2.1.6.1.2 Req 33:
 |*Test Type* |Capability
