@@ -205,7 +205,7 @@ For data where the `datatype` column of the corresponding row in the `gpkg_2d_gr
 CREATE TABLE 'gpkg_2d_gridded_coverage_ancillary' (
   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   tile_matrix_set_name TEXT NOT NULL UNIQUE,
-  datatype TEXT NOT NULL DEFAULT 'integer',
+  datatype TEXT NOT NULL DEFAULT integer,
   scale REAL DEFAULT 1.0,
   offset REAL DEFAULT 0.0,
   precision REAL DEFAULT 1.0,
