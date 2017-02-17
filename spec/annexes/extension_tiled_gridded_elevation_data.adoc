@@ -72,14 +72,14 @@ Clients SHALL ignore additional columns that are unrecognized.
 .Coverage Ancillary Table Definition
 [cols=",,,,,,",options="header",]
 |=======================================================================
-|Column Name |Column Type |Column Description |Null |Default |Key|Constraint
-|`id`|INTEGER |Autoincrement primary key|no||PK|
-|`tile_matrix_set_name`|TEXT|Foreign key to `table_name` in http://www.geopackage.org/spec/#tile_matrix_set_data_table_definition[`gpkg_tile_matrix_set`]|no||FK|UNIQUE
-|`datatype`|TEXT  |_integer_ or _float_|no|_integer_||
-|`scale`|REAL|Scale as a multiple relative to the unit of measure|yes|1||
-|`offset`|REAL|The offset to the 0 value|yes|0||
-|`precision`|REAL{real_value}|The smallest value that has meaning for this dataset|yes|1||
-|`data_null`|REAL{real_value}|The value that indicates NULL|yes|||
+|Column Name |Column Type |Column Description |Not Null |Default |Key|Constraint
+|`id`|INTEGER |Autoincrement primary key|true||PK|
+|`tile_matrix_set_name`|TEXT|Foreign key to `table_name` in http://www.geopackage.org/spec/#tile_matrix_set_data_table_definition[`gpkg_tile_matrix_set`]|true||FK|UNIQUE
+|`datatype`|TEXT  |_integer_ or _float_|true|_integer_||
+|`scale`|REAL|Scale as a multiple relative to the unit of measure|false|1||
+|`offset`|REAL|The offset to the 0 value|false|0||
+|`precision`|REAL{real_value}|The smallest value that has meaning for this dataset|false|1||
+|`data_null`|REAL{real_value}|The value that indicates NULL|false|||
 |=======================================================================
 
 [float]
@@ -94,16 +94,16 @@ Clients SHALL ignore additional columns that are unrecognized.
 .Tile Ancillary Table Definition
 [cols=",,,,,",options="header",]
 |=======================================================================
-|Column Name |Column Type |Column Description |Null |Default |Key
-|`id`|INTEGER |Autoincrement primary key|no||PK
-|`tpudt_name`|TEXT  |Name of http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||UNIQUE{jointly_unique}
-|`tpudt_id`|INTEGER |Foreign key to `id` in http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||UNIQUE{jointly_unique}
-|`scale`|REAL|Scale as a multiple relative to the unit of measure|yes|1|
-|`offset`|REAL|The offset to the 0 value|yes|0|
-|`min`|REAL{real_value}|Minimum value of this tile|yes||
-|`max`|REAL{real_value}|Maximum value of this tile|yes||
-|`mean`|REAL|The arithmetic mean of values in this tile|yes||
-|`std_dev`|REAL|The standard deviation of values in this tile|yes||
+|Column Name |Column Type |Column Description |Not Null |Default |Key
+|`id`|INTEGER |Autoincrement primary key|true||PK
+|`tpudt_name`|TEXT  |Name of http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|true||UNIQUE{jointly_unique}
+|`tpudt_id`|INTEGER |Foreign key to `id` in http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|true||UNIQUE{jointly_unique}
+|`scale`|REAL|Scale as a multiple relative to the unit of measure|false|1|
+|`offset`|REAL|The offset to the 0 value|false|0|
+|`min`|REAL{real_value}|Minimum value of this tile|false||
+|`max`|REAL{real_value}|Maximum value of this tile|false||
+|`mean`|REAL|The arithmetic mean of values in this tile|false||
+|`std_dev`|REAL|The standard deviation of values in this tile|false||
 |=======================================================================
 
 [float]
