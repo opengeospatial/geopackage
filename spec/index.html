@@ -1173,6 +1173,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <col style="width:%;">
 <col style="width:%;">
 <col style="width:%;">
+<col style="width:%;">
 <col style="width:%;"> 
 </colgroup>
 <thead>
@@ -1180,6 +1181,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <th class="tableblock halign-left valign-top">Column Name</th>
 <th class="tableblock halign-left valign-top">Type</th>
 <th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Null</th>
 <th class="tableblock halign-left valign-top">Key</th>
 </tr>
 </thead>
@@ -1188,36 +1190,42 @@ identifies the geometry columns and geometry types in tables that contain user d
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the table containing the geometry column</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK, FK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>column_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of a column in the feature table that is a Geometry Column</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>geometry_type_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name from <a href="#geometry_types_core">Geometry Type Codes (Core)</a> or <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a> in <a href="#geometry_types">Geometry Types (Normative)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Spatial Reference System ID: <code>gpkg_spatial_ref_sys.srs_id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>z</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TINYINT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0: z values prohibited; 1: z values mandatory; 2: z values optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>m</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TINYINT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0: m values prohibited; 1: m values mandatory; 2: m values optional</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -3414,16 +3422,16 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_geometry_columns'</p>
+<p>PRAGMA table_info(<em>gpkg_geometry_columns</em>)</p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
 </li>
 <li>
-<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.4Table 20. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Fail if the columns described in <a href="#gpkg_geometry_columns_cols">[gpkg_geometry_columns_cols]</a> are missing or have non-matching definitions. Column order and other column definitions in the returned sql are irrelevant. Primary key constraints are as per <a href="#gpkg_geometry_columns_sql">[gpkg_geometry_columns_sql]</a>.</p>
 </li>
 <li>
-<p>Fail otherwise.</p>
+<p>Pass otherwise.</p>
 </li>
 </ol>
 </div></div></td>
@@ -3521,10 +3529,10 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>PRAGMA foreign_key_check(‘geometry_columns’)</p>
+<p>PRAGMA foreign_key_list(<em>gpkg_geometry_columns</em>);</p>
 </li>
 <li>
-<p>Fail if returns any rows with a fourth column foreign key index value of 1 (gpkg_contents)</p>
+<p>Fail if there is no row designating <code>table_name</code> as a foreign key to <code>table_name</code> in <code>gpkg_contents</code></p>
 </li>
 </ol>
 </div></div></td>
@@ -14402,7 +14410,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-02-27 18:04:20 UTC
+Last updated 2017-02-27 18:05:33 UTC
 </div>
 </div>
 </body>
