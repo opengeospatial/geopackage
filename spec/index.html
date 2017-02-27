@@ -3260,7 +3260,10 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <p>Fail if gc.flags.GeopackageBinary type != 0</p>
 </li>
 <li>
-<p>Fail if ST_IsEmpty(cn value) = 1 and gc.flags.envelope != 0 and envelope values are not NaN</p>
+<p>Fail if cn.flags.E is 5-7</p>
+</li>
+<li>
+<p>*Fail if the geometry is empty but the envelope is not empty (gc.flags.envelope != 0 and envelope values are not NaN)</p>
 </li>
 </ol>
 </div>
@@ -3347,22 +3350,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <p>Log cn.header values, wkb endianness and geometry type</p>
 </li>
 <li>
-<p>If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail</p>
-</li>
-<li>
-<p>If cn.flags.E is 1 - 4 and some cn.wkbx is outside of cn.envelope.minx,maxx then log fail</p>
-</li>
-<li>
-<p>If cn.flags.E is 1 - 4 and some gc.wkby is outside of cn.envelope.miny,maxy then log fail</p>
-</li>
-<li>
-<p>If cn.flags.E is 2,4 and some gc.wkb.z is outside of cnenvelope.minz,maxz then log fail</p>
-</li>
-<li>
-<p>If cn.flags.E is 3,4 and some gc.wkb.m is outside of cn.envelope.minm,maxm then log fail</p>
-</li>
-<li>
-<p>If cn.flags.E is 5-7 then log fail</p>
+<p>*If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail</p>
 </li>
 <li>
 <p>Otherwise log pass</p>
@@ -3375,58 +3363,6 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 </li>
 <li>
 <p>Pass if log contanins pass and no fails</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause 2.1.4.1.1 Req 20:</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Capability</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/features/geometry_encoding/data/core_types_all_types_test_data</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that all basic simple feature geometry types and options are stored in valid GeoPackageBinary format encodings.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open GeoPackage that has feature geometry values of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
-</li>
-<li>
-<p>/opt/features/geometry_encoding/data/core_types_existing_sparse_data</p>
-</li>
-<li>
-<p>Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex G without and with z and/or m values.</p>
-</li>
-<li>
-<p>Fail otherwise</p>
 </li>
 </ol>
 </div></div></td>
@@ -14466,7 +14402,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-02-27 18:01:23 UTC
+Last updated 2017-02-27 18:04:20 UTC
 </div>
 </div>
 </body>
