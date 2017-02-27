@@ -659,11 +659,11 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/data_values_table_name+
-|*Test Purpose* |Verify that values of the gpkg_tile_matrix_set table_name column reference values in the gpkg_contents table_name column for rows with a data type of “tiles”.
+|*Test Purpose* |Verify that values of the gpkg_tile_matrix_set table_name column reference values in the gpkg_contents table_name column.
 |*Test Method* |
 . SELECT table_name FROM gpkg_tile_matrix_set
 . Not testable if returns an empty result set
-. SELECT table_name FROM gpkg_tile_matrix_set tms WHERE table_name NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tms.table_name = gc.table_name AND gc.data_type != ‘tiles’)
+. SELECT table_name FROM gpkg_tile_matrix_set tms WHERE table_name NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tms.table_name = gc.table_name)
 . Fail if result set contains any rows
 . Pass otherwise
 |*Reference* |Clause 2.2.6.1.2 Req 39:
@@ -718,11 +718,11 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_table_name+
-|*Test Purpose* |Verify that values of the gpkg_tile_matrix table_name column reference values in the gpkg_contents table_name column for rows with a data type of “tiles”.
+|*Test Purpose* |Verify that values of the gpkg_tile_matrix table_name column reference values in the gpkg_contents table_name column.
 |*Test Method* |
 . SELECT table_name FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
-. SELECT table_name FROM gpkg_tile_matrix tmm WHERE table_name NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tmm.table_name = gc.table_name AND gc.data_type != ‘tiles’)
+. SELECT table_name FROM gpkg_tile_matrix tmm WHERE table_name NOT IN (SELECT table_name FROM gpkg_contents gc WHERE tmm.table_name = gc.table_name)
 . Fail if result set contains any rows
 . Pass otherwise
 |*Reference* |Clause 2.2.7.1.2 Req 43:
