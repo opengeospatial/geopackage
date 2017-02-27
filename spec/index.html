@@ -3917,10 +3917,10 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name FROM gpkg_contents WERE data_type = ‘features’</p>
+<p>SELECT table_name FROM gpkg_contents WHERE data_type = <em>features</em></p>
 </li>
 <li>
-<p>Not testable  if returns an empty result set</p>
+<p>Not testable if returns an empty result set</p>
 </li>
 <li>
 <p>For each row from step 1</p>
@@ -3933,7 +3933,13 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <p>Fail if returns an empty result set</p>
 </li>
 <li>
-<p>Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”</p>
+<p>Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"</p>
+</li>
+<li>
+<p>SELECT COUNT(*) - COUNT(DISTINCT id) from table_name</p>
+</li>
+<li>
+<p>Fail if result is nonzero</p>
 </li>
 </ol>
 </div>
@@ -7926,7 +7932,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="title">sample_feature_table Table Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_feature_table (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   geometry GEOMETRY,
   text_attribute <span class="predefined-type">TEXT</span>,
   real_attribute REAL,
@@ -14460,7 +14466,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-02-27 18:00:08 UTC
+Last updated 2017-02-27 18:01:23 UTC
 </div>
 </div>
 </body>
