@@ -15,7 +15,7 @@ Direct use means the ability to access and update data in a “native” format 
 A *GeoPackage* is a platform-independent SQLite <<5>> database file that contains GeoPackage data and metadata tables shown in <<geopackage_tables_figure>> below, with specified definitions, integrity assertions, format limitations and content constraints.
 The allowable content of a GeoPackage is entirely defined in this standard.
 
-An *Extended GeoPackage* is a *GeoPackage* that contains any additional data elements (tables or columns) or SQL constructs (data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.
+An *Extended GeoPackage* is a *GeoPackage* that contains any additional data elements (tables or columns) or SQL constructs (views, data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.
 
 A *GeoPackage* MAY be “empty” (contain user data table(s) for vector features, non-spatial attributes, and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
 GeoPackage metadata CAN describe GeoPackage data contents and identify external data synchronization sources and targets.

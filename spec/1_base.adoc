@@ -14,11 +14,11 @@ The SQLite software library provides a self-contained, single-file, cross-platfo
 The GeoPackage standard defines a SQL database schema designed for use with the SQLite software library.
 Using SQLite as the basis for GeoPackage simplifies production, distribution and use of GeoPackages and assists in guaranteeing the integrity of the data they contain.
 
-“Self-contained” means that container software requires very minimal support from external libraries or from the operating system.
-“Single-file” means that a container not currently opened by any software application consists of a single file in a file system supported by a computing platform operating system.
-“Cross-platform” means that a container file MAY be created and loaded with data on one computing platform, and used and updated on another, even if they use different operating systems, file systems, and byte order (endian) conventions.
-“Serverless” means that the RDBMS container is implemented without any intermediary server process, and accessed directly by application software.
-“Transactional” means that RDBMS transactions guarantee that all changes to data in the container are Atomic, Consistent, Isolated, and Durable (ACID) despite program crashes, operating system crashes, and power failures.
+"Self-contained" means that container software requires very minimal support from external libraries or from the operating system.
+"Single-file" means that a container not currently opened by any software application consists of a single file in a file system supported by a computing platform operating system.
+"Cross-platform" means that a container file MAY be created and loaded with data on one computing platform, and used and updated on another, even if they use different operating systems, file systems, and byte order (endian) conventions.
+"Serverless" means that the RDBMS container is implemented without any intermediary server process, and accessed directly by application software.
+"Transactional" means that RDBMS transactions guarantee that all changes to data in the container are Atomic, Consistent, Isolated, and Durable (ACID) despite program crashes, operating system crashes, and power failures.
 
 ===== Data
 
@@ -31,7 +31,7 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 
 [requirement]
 A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] <<5>> database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format] <<6>> <<7>>.
-The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <<B4>> string “SQLite format 3” {req1_foot1}. {req1_foot2}
+The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <<B4>> string "SQLite format 3" {req1_foot1}. {req1_foot2}
 
 [requirement]
 A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. {req2_foot1} A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.2 this value is 0x000027D8 (the hexadecimal value for 10200). {req2_foot2}
@@ -43,16 +43,16 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 ====== File Extension Name
 
 [requirement]
-A GeoPackage SHALL have the file extension name “.gpkg”.
+A GeoPackage SHALL have the file extension name ".gpkg".
 
-[line-through]#It is RECOMMENDED that Extended GeoPackages use the file extension “.gpkx”, but this is NOT a GeoPackage requirement.#
+[line-through]#It is RECOMMENDED that Extended GeoPackages use the file extension ".gpkx", but this is NOT a GeoPackage requirement.#
 
 ====== File Contents
 
 [requirement]
-A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the “gpkg” author name specified in this encoding standard.
+A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the "gpkg" author name specified in this encoding standard.
 
-In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
+In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (views, data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
 SQLite databases that use constructs from the GeoPackage standard but extend those constructs to contain elements not specified in the core GeoPackage standard are referred to as Extended GeoPackages throughout this standard.
 
 [requirement]
@@ -81,7 +81,7 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 :req4_foot1: footnote:[The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.]
 
 [requirement]
-The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file. {req4_foot1} 
+The SQLite PRAGMA integrity_check SQL command SHALL return "ok" for a GeoPackage file. {req4_foot1} 
 
 [requirement]
 The SQLite PRAGMA foreign_key_check SQL with no parameter value SHALL return an empty result set indicating no invalid foreign key values for a GeoPackage file.
@@ -175,7 +175,7 @@ The `gpkg_contents` table is intended to provide a list of all geospatial conten
 A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_contents_cols>> and <<gpkg_contents_sql>>.
 
 [[gpkg_contents_cols]]
-.Contents Table or View Definition
+.Contents Table Definition
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Type |Description |Null |Default |Key
@@ -198,7 +198,7 @@ See <<gpkg_contents_sql>>.
 [requirement]
 The `table_name` column value in a `gpkg_contents` table row SHALL contain the name of a SQLite table or view.
 
-The `data_type` specifies the type of content contained in the table, for example “features” per clause <<features>>, “attributes” per clause <<attributes>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.
+The `data_type` specifies the type of content contained in the table, for example "features" per clause <<features>>, "attributes" per clause <<attributes>>, "tiles" per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.
 
 The `last_change` SHOULD contain the timestamp of when the content in the referenced table was last updated, in ISO8601 format. Note that since it is not practical to ensure that this value is maintained properly in all cases, this value should be treated as informative.
 
