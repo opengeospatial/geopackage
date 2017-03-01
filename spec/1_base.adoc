@@ -97,7 +97,7 @@ A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage content
 
 ====== Every GPKG SQLite Configuration
 
-The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile  time options that SHALL or SHALL NOT be used.
+The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage standard depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile time options that SHALL or SHALL NOT be used.
 
 [requirement]
 Every GeoPackage SQLite Configuration SHALL have the SQLite library compile time options specified in clause 1.1.1.2.2 table <<every_gpkg_sqlite_config_table>>.
@@ -125,7 +125,7 @@ A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL 
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
 
 The `gpkg_spatial_ref_sys` table includes the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
-Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) specifications.
+Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) standards.
 
 [[gpkg_spatial_ref_sys_cols]]
 .Spatial Ref Sys Table Definition
