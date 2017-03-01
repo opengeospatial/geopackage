@@ -174,7 +174,7 @@ The `min`, `max`, and `mean` values SHALL be natural, i.e., not scaled or offset
 [requirement] 
 Integer elevation values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scale and offset MAY be applied to the entire coverage and/or the individual tile. The scale and offset do not apply to the `data_null` value as defined in <<gpkg_2d_gridded_coverage_ancillary_table>>.
 
-Actual elevation values SHALL be calculated by:
+Actual elevation values are to be calculated by:
 
 * first multiplying the stored value by the `gpkg_2d_gridded_tile_ancillary_table.scale` value and then adding the `gpkg_2d_gridded_tile_ancillary_table.offset`,
 * followed by multiplying that value by the `gpkg_2d_gridded_coverage_ancillary.scale` value and then adding the `gpkg_2d_gridded_coverage_ancillary.offset`.
