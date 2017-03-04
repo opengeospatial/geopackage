@@ -216,8 +216,7 @@
 |*Test Case ID* |+/base/core/contents/data/data_values_table_name+
 |*Test Purpose* |Verify that the `table_name` column values in the `gpkg_contents` table are valid.
 |*Test Method* |
-. SELECT DISTINCT gc.table_name AS gc_table, sm.tbl_name 
-FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = sm.tbl_name
+. SELECT DISTINCT table_name FROM gpkg_contents WHERE table_name NOT IN (SELECT name FROM sqlite_master)
 . Not testable if returns an empty result set.
 . Fail if any gpkg_contents.table_name value is NULL 
 . Pass otherwise.
