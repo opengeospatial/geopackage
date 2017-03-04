@@ -185,8 +185,8 @@
 |*Test Case ID* |+/base/core/spatial_ref_sys/data_values_required+
 |*Test Purpose* |Verify that the `spatial_ref_sys` table contains rows to define all `srs_id` values used by features and tiles in a GeoPackage.
 |*Test Method* |
-. SELECT DISTINCT gc.srs_id AS gc_srid, srs.srs_name, srs.srs_id, srs.organization, srs.organization_coordsys_id, srs.definition FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id
-. Pass if no returned srs values are NULL.
+. SELECT DISTINCT gc.srs_id, srs.srs_id FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id WHERE gc.data_type IN ('tiles', 'features')
+. Pass if no returned srs.srs_id values are NULL.
 . Fail otherwise
 |*Reference* |Clause Clause 1.1.2.1.2 Req 12:
 |*Test Type* |Capability
