@@ -255,10 +255,8 @@
 |*Test Case ID* |+/opt/valid_geopackage+
 |*Test Purpose* |Verify that a GeoPackage contains a features or tiles table and `gpkg_contents` table row describing it.
 |*Test Method* |
-. Execute test /opt/features/contents/data/features_row
-. Pass if test passed
-. Execute test /opt/tiles/contents/data/tiles_row
-. Pass if test passed
+. SELECT COUNT(*) FROM gpkg_contents WHERE data_type IN ('tiles', 'features')
+. Pass if result > 0
 . Fail otherwise
 |*Reference* |Clause 2 Req 17:
 |*Test Type* |Capability
