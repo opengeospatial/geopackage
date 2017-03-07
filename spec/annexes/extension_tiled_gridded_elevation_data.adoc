@@ -76,8 +76,8 @@ Clients SHALL ignore additional columns that are unrecognized.
 |`id`|INTEGER |Autoincrement primary key|no||PK|
 |`tile_matrix_set_name`|TEXT|Foreign key to `table_name` in http://www.geopackage.org/spec/#tile_matrix_set_data_table_definition[`gpkg_tile_matrix_set`]|no||FK|UNIQUE
 |`datatype`|TEXT  |_integer_ or _float_|no|_integer_||
-|`scale`|REAL|Scale as a multiple relative to the unit of measure|yes|1||
-|`offset`|REAL|The offset to the 0 value|yes|0||
+|`scale`|REAL|Scale as a multiple relative to the unit of measure|no|1||
+|`offset`|REAL|The offset to the 0 value|no|0||
 |`precision`|REAL{real_value}|The smallest value that has meaning for this dataset|yes|1||
 |`data_null`|REAL{real_value}|The value that indicates NULL|yes|||
 |=======================================================================
@@ -95,7 +95,7 @@ In pseudo-code, this conversion would look like:
 
     elevationInUnitOfMeasure = (SomeElevationCoverage.tile_data->pngpixels[i] * gpkg_2d_gridded_tile_ancillary.scale + gpkg_2d_gridded_tile_ancillary.offset) * gpkg_2d_gridded_coverage_ancillary.scale + gpkg_2d_gridded_coverage_ancillary.offset;
 
-Note: _integer_ and _float_ refer to the values stored in the tiles. If _integer_ values have a real scale or offset applied to them, then the resulting values will be real. Scale and offset do not apply to tiles of datatype _float_.
+Note: _integer_ and _float_ refer to the values stored in the tiles. If _integer_ values have a real scale or offset applied to them, then the resulting values will be real. The `scale` and `offset` do not apply to tiles of datatype _float_.
 
 [float]
 ====== Tile Ancillary
@@ -113,15 +113,15 @@ Clients SHALL ignore additional columns that are unrecognized.
 |`id`|INTEGER |Autoincrement primary key|no||PK
 |`tpudt_name`|TEXT  |Name of http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||UNIQUE{jointly_unique}
 |`tpudt_id`|INTEGER |Foreign key to `id` in http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data table]|no||UNIQUE{jointly_unique}
-|`scale`|REAL|Scale as a multiple relative to the unit of measure|yes|1|
-|`offset`|REAL|The offset to the 0 value|yes|0|
+|`scale`|REAL|Scale as a multiple relative to the unit of measure|no|1|
+|`offset`|REAL|The offset to the 0 value|no|0|
 |`min`|REAL{real_value}|Minimum value of this tile|yes||
 |`max`|REAL{real_value}|Maximum value of this tile|yes||
 |`mean`|REAL|The arithmetic mean of values in this tile|yes||
 |`std_dev`|REAL|The standard deviation of values in this tile|yes||
 |=======================================================================
 
-The `min`, `max`, and `mean` values are natural, i.e., not scaled or offset. Similarly, the `std_dev` is calculated based on the natural values.
+The `min`, `max`, and `mean` values are natural, i.e., not scaled or offset. Similarly, the `std_dev` is calculated based on the natural values. The `scale` and `offset` do not apply to tiles of datatype _float_.
 
 [float]
 ===== Table Values
@@ -171,14 +171,14 @@ The following requirements refer to the `gpkg_2d_gridded_coverage_ancillary` tab
 Values of the `tile_matrix_set_name` column SHALL reference values in the `gpkg_tile_matrix_set` `table_name` column.
 
 [requirement] 
-Values of the `datatype` column MAY be _integer_ or _float_. When the `datatype` is _float_, the `scale` and `offset` values SHALL be null.
+Values of the `datatype` column MAY be _integer_ or _float_. When the `datatype` is _float_, the `scale` and `offset` values SHALL be set to the defaults.
 
 [float]
 ====== gpkg_2d_gridded_tile_ancillary
 The following requirements refer to the `gpkg_2d_gridded_tile_ancillary` table as per <<gpkg_2d_gridded_tile_ancillary_table>>.
 
 [requirement] 
-Values of the `tpudt_name` column SHALL reference existing http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data tables].
+Values of the `tpudt_name` column SHALL reference existing http://www.geopackage.org/spec/#tiles_user_tables[tile pyramid user data tables] and rows in `gpkg_2d_gridded_coverage_ancillary`. When the `datatype` of the corresponding `gpkg_2d_gridded_coverage_ancillary` row is _float_, the `scale` and `offset` values SHALL be set to the defaults.
 
 [requirement] 
 Values of the `tpudt_id` column SHALL reference values in `id` column of the table referenced in `tpudt_name`.
