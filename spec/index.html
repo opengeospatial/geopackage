@@ -475,40 +475,14 @@ A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage content
 <div class="sect5">
 <h6 id="_every_gpkg_sqlite_configuration">1.1.1.2.2. Every GPKG SQLite Configuration</h6>
 <div class="paragraph">
-<p>The <a href="http://www.sqlite.org/download.html">SQLite</a> <a href="#8">[8]</a> library has many <a href="http://www.sqlite.org/compile.html">compile time</a> and <a href="http://www.sqlite.org/pragma.html">run time</a> options that MAY be used to configure SQLite for different uses. Certain elements of the GeoPackage specification depend on the availability of SQLite functionality at runtime. This clause specifies the set of compile  time options that SHALL or SHALL NOT be used.</p>
+<p>The <a href="http://www.sqlite.org/download.html">SQLite</a> <a href="#8">[8]</a> library has many <a href="http://www.sqlite.org/compile.html">compile time</a> and <a href="http://www.sqlite.org/pragma.html">run time</a> options that MAY be used to configure SQLite for different uses. Use of <a href="http://www.sqlite.org/compile.html#omitfeatures">SQLITE_OMIT options</a> is not recommended because certain elements of the GeoPackage standard depend on the availability of SQLite functionality at runtime.</p>
 </div>
 <div id="_requirement-9" class="quoteblock">
 <div class="title">Requirement 9</div>
 <blockquote>
-Every GeoPackage SQLite Configuration SHALL have the SQLite library compile time options specified in clause 1.1.1.2.2 table <a href="#every_gpkg_sqlite_config_table">Every GeoPackage SQLite Configuration</a>.
+<span class="line-through">Every GeoPackage SQLite Configuration SHALL have the SQLite library compile time options specified in clause 1.1.1.2.2 table <a href="#every_gpkg_sqlite_config_table">[every_gpkg_sqlite_config_table]</a>.</span>
 </blockquote>
 </div>
-<table id="every_gpkg_sqlite_config_table" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 2. Every GeoPackage SQLite Configuration</caption>
-<colgroup>
-<col style="width:%;">
-<col style="width:%;">
-<col style="width:%;">
-<col style="width:%;"> 
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Setting</th>
-<th class="tableblock halign-left valign-top">Option</th>
-<th class="tableblock halign-left valign-top">Shall / Not</th>
-<th class="tableblock halign-left valign-top">Discussion</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">compile</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SQLITE_OMIT_*</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Not</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SHALL NOT include any OMIT options from <a href="http://www.sqlite.org/compile.html#omitfeatures">http://www.sqlite.org/compile.html#omitfeatures</a>.</p></td>
-</tr>
-</tbody>
-</table>
-
 </div>
 </div>
 </div>
@@ -533,7 +507,7 @@ The coordinate reference system definitions it contains are referenced by the Ge
 Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) specifications.</p>
 </div>
 <table id="gpkg_spatial_ref_sys_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 3. Spatial Ref Sys Table Definition</caption>
+<caption class="title">Table 2. Spatial Ref Sys Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -612,7 +586,7 @@ The <code>gpkg_spatial_ref_sys</code> table SHALL contain at a minimum the recor
 </blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_records" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 4. Spatial Ref Sys Table Records</caption>
+<caption class="title">Table 3. Spatial Ref Sys Table Records</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -684,7 +658,7 @@ A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a 
 </blockquote>
 </div>
 <table id="gpkg_contents_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 5. Contents Table or View Definition</caption>
+<caption class="title">Table 4. Contents Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1013,7 +987,7 @@ StandardGeoPackageBinary {
 </table>
 </div>
 <table id="flags_layout" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 6. bit layout of GeoPackageBinary flags byte</caption>
+<caption class="title">Table 5. bit layout of GeoPackageBinary flags byte</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1168,7 +1142,7 @@ A GeoPackage with a <code>gpkg_contents</code> table row with a “features” <
 identifies the geometry columns and geometry types in tables that contain user data representing features.</p>
 </div>
 <table id="gpkg_geometry_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 7. Geometry Columns Table or View Definition</caption>
+<caption class="title">Table 6. Geometry Columns Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1326,7 +1300,7 @@ The declared SQL type of the geometry column in a vector feature user data table
 </blockquote>
 </div>
 <table id="example_feature_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 8. EXAMPLE : Sample Feature Table or View Definition</caption>
+<caption class="title">Table 7. EXAMPLE : Sample Feature Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1542,7 +1516,7 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>g
 </blockquote>
 </div>
 <table id="gpkg_tile_matrix_set_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 9. Tile Matrix Set Table or View Definition</caption>
+<caption class="title">Table 8. Tile Matrix Set Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1660,7 +1634,7 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>
 </blockquote>
 </div>
 <table id="gpkg_tile_matrix_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 10. Tile Matrix Metadata Table or View Definition</caption>
+<caption class="title">Table 9. Tile Matrix Metadata Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1843,7 +1817,7 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 </blockquote>
 </div>
 <table id="example_tiles_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 11. Tiles Table or View Definition</caption>
+<caption class="title">Table 10. Tiles Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1971,7 +1945,7 @@ If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extension
 An application that accesses a GeoPackage can query the <code>gpkg_extensions</code> table instead of the contents of all the user data tables to determine if it has the required capabilities to read or write to tables with extensions, and to “fail fast” and return an error message if it does not.</p>
 </div>
 <table id="gpkg_extensions_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 12. GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</caption>
+<caption class="title">Table 11. GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -2129,7 +2103,7 @@ This is indicated by a gpkg_extensions.scope column value of “write_only”.</
 <p>The integer primary key of an Attribute table allows attribute sets to be linked to row level metadata records in the gpkg_metadata table by rowid <a href="#B5">[B5]</a> values in the gpkg_metadata_reference table as described in clause <a href="#extension_metadata">Metadata</a> below.</p>
 </div>
 <table id="gpkg_attributes_example" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 13. GeoPackage Attributes Example Table or View Definition</caption>
+<caption class="title">Table 12. GeoPackage Attributes Example Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -2621,71 +2595,6 @@ The GeoPackage standard does not place any constraints on application, platform,
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Capability</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<div class="paragraph">
-<p><strong>Every GPKG SQLite Configuration</strong></p>
-</div>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/base/core/container/api/every_gpkg_sqlite_config</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that a GeoPackage SQLite Extension has the Every GeoPackage SQLite Configuration compile and run time options.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>For each "SQLITE_OMIT_*" &lt;option&gt; listed at <a href="http://www.sqlite.org/compile.html#omitfeatures">http://www.sqlite.org/compile.html#omitfeatures</a></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p><code>SELECT sqlite_compileoption_used(<em>SQLITE_OMIT_&lt;option&gt;</em>)</code></p>
-</li>
-<li>
-<p>Fail if returns 1</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>PRAGMA foreign_keys</p>
-</li>
-<li>
-<p>Fail if returns 0</p>
-</li>
-<li>
-<p>Pass otherwise</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Clause 1.1.1.2.2 Req 9:</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Basic</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -6594,7 +6503,7 @@ Request For Comment (RFC).</p>
 <p>All questions regarding this document should be directed to the editor or the contributors:</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 14. Document contributors</caption>
+<caption class="title">Table 13. Document contributors</caption>
 <colgroup>
 <col style="width:20%;">
 <col style="width:40%;">
@@ -6909,7 +6818,7 @@ Request For Comment (RFC).</p>
 <div class="sect2">
 <h3 id="_revision_history_informative">B.6. Revision History (Informative)</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 15. Revision History</caption>
+<caption class="title">Table 14. Revision History</caption>
 <colgroup>
 <col style="width:16%;">
 <col style="width:8%;">
@@ -8020,7 +7929,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="sect2">
 <h3 id="_gpkg_tile_matrix_2">D.1. gpkg_tile_matrix</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 16. gpkg_tile_matrix Trigger Definition SQL</caption>
+<caption class="title">Table 15. gpkg_tile_matrix Trigger Definition SQL</caption>
 <colgroup>
 <col style="width:%;"> 
 </colgroup>
@@ -8108,7 +8017,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="sect2">
 <h3 id="_sample_feature_table">D.2. sample_feature_table</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 17. EXAMPLE: features table Trigger Definition SQL</caption>
+<caption class="title">Table 16. EXAMPLE: features table Trigger Definition SQL</caption>
 <colgroup>
 <col style="width:%;"> 
 </colgroup>
@@ -8146,7 +8055,7 @@ must be &gt; 0</span><span class="delimiter">'</span></span>)
 <div class="sect2">
 <h3 id="_sample_tile_pyramid">D.3. sample_tile_pyramid</h3>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 18. tiles table Trigger Definition SQL</caption>
+<caption class="title">Table 17. tiles table Trigger Definition SQL</caption>
 <colgroup>
 <col style="width:%;"> 
 </colgroup>
@@ -9886,7 +9795,7 @@ A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be def
 The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <a href="#B14">[B14]</a> encoded in XMI <a href="#B15">[B15]</a>, GML Application Schemas <a href="#30">[30]</a>, ISO 19110 feature catalogues <a href="#B18">[B18]</a>, OWL <a href="#B20">[B20]</a> and SKOS <a href="#B21">[B21]</a> taxonomies, etc.</p>
 </div>
 <table id="gpkg_metadata_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 19. Metadata Table Definition</caption>
+<caption class="title">Table 18. Metadata Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -9963,7 +9872,7 @@ The list of valid scope names and their definitions is provided in <a href="#met
 The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</span> for use in the GeoPackage specification by addition of entries with “NA” as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
 </div>
 <table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 20. Metadata Scopes</caption>
+<caption class="title">Table 19. Metadata Scopes</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -10094,7 +10003,7 @@ A GeoPackage that contains a <code>gpkg_metadata</code> table SHALL contain a <c
 The <code>gpkg_metadata_reference</code> table is not required to contain any rows.</p>
 </div>
 <table id="gpkg_metadata_reference_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 21. Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</caption>
+<caption class="title">Table 20. Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11462,7 +11371,7 @@ level.</p>
 <p>So here is the data after both examples:</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 22. xml_metadata</caption>
+<caption class="title">Table 21. xml_metadata</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11596,7 +11505,7 @@ level.</p>
 </table>
 
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 23. gpkg_metadata_reference</caption>
+<caption class="title">Table 22. gpkg_metadata_reference</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11853,7 +11762,7 @@ If present it SHALL be defined per clause 2.3.2.1.1 <a href="#schema_data_column
 </blockquote>
 </div>
 <table id="gpkg_data_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 24. Data Columns Table or View Definition</caption>
+<caption class="title">Table 23. Data Columns Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11964,7 +11873,7 @@ If present it SHALL be defined per clause 2.3.3.1.1 <a href="#data_column_constr
 The constraint_name column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a>.</p>
 </div>
 <table id="gpkg_data_column_constraints_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 25. Data Column Constraints Table or View Definition</caption>
+<caption class="title">Table 24. Data Column Constraints Table or View Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -12054,7 +11963,7 @@ The case sensitive value column contains an enumerated legal value for constrain
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 26. Sample Data Column Constraints</caption>
+<caption class="title">Table 25. Sample Data Column Constraints</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -12996,7 +12905,7 @@ The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additi
 </blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_cols_crs_wkt" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 27. Spatial Ref Sys Table Definition</caption>
+<caption class="title">Table 26. Spatial Ref Sys Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13365,7 +13274,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 </blockquote>
 </div>
 <table id="gpkg_2d_gridded_coverage_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 28. Coverage Ancillary Table Definition</caption>
+<caption class="title">Table 27. Coverage Ancillary Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13463,7 +13372,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 </blockquote>
 </div>
 <table id="gpkg_2d_gridded_tile_ancillary_table" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 29. Tile Ancillary Table Definition</caption>
+<caption class="title">Table 28. Tile Ancillary Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13567,7 +13476,7 @@ GeoPackages complying with this extension SHALL have a row in the <code>gpkg_spa
 </blockquote>
 </div>
 <table id="gpkg_spatial_ref_sys_record" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 30. Spatial Ref Sys Table Record</caption>
+<caption class="title">Table 29. Spatial Ref Sys Table Record</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13619,7 +13528,7 @@ GeoPackages complying with this extension SHALL have rows in the <code>gpkg_exte
 </blockquote>
 </div>
 <table id="gpkg_extensions_records" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 31. Extensions Table Record</caption>
+<caption class="title">Table 30. Extensions Table Record</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13826,7 +13735,7 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 <h2 id="geometry_types"> Annex G: Geometry Types (Normative)</h2>
 <div class="sectionbody">
 <table id="geometry_types_core" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 32. Geometry Type Codes (Core)</caption>
+<caption class="title">Table 31. Geometry Type Codes (Core)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -13874,7 +13783,7 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 </table>
 
 <table id="geometry_types_extension" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 33. Geometry Type Codes (Extension)</caption>
+<caption class="title">Table 32. Geometry Type Codes (Extension)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -13944,7 +13853,7 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 <h2 id="tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 34. Zoom Times Two Example</caption>
+<caption class="title">Table 33. Zoom Times Two Example</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14419,7 +14328,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-03 03:27:50 UTC
+Last updated 2017-03-07 04:10:44 UTC
 </div>
 </div>
 </body>
