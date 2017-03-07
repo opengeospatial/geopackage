@@ -116,24 +116,6 @@
 |*Test Type* |Capability
 |========================================
 
-*Every GPKG SQLite Configuration*
-
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/base/core/container/api/every_gpkg_sqlite_config+
-|*Test Purpose* |Verify that a GeoPackage SQLite Extension has the Every GeoPackage SQLite Configuration compile and run time options.
-|*Test Method* 
-|
-. For each "SQLITE_OMIT_*" <option> listed at http://www.sqlite.org/compile.html#omitfeatures
-.. +SELECT sqlite_compileoption_used('SQLITE_OMIT_<option>')+
-.. Fail if returns 1
-. PRAGMA foreign_keys
-. Fail if returns 0
-. Pass otherwise 
-|*Reference* |Clause 1.1.1.2.2 Req 9:
-|*Test Type* |Basic
-|========================================
-
 ===== Spatial Reference Systems
 ====== Data
 *Table Definition*
