@@ -2247,8 +2247,34 @@ The GeoPackage standard does not place any constraints on application, platform,
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Pass if the application id field of the SQLite database header starts with "GP" in ASCII and ends with an ASCII value of "11" or greater.</p>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Retrieve the bytes at the application id of the SQLite database header</p>
+</li>
+<li>
+<p>If the string is "GP10" in ASCII, fall back to the tests for GeoPackage 1.0.</p>
+</li>
+<li>
+<p>If the string is "GP11" in ASCII, fall back to the tests for GeoPackage 1.1.</p>
+</li>
+<li>
+<p>If the string is "GPKG" in ASCII</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>PRAGMA user_version</p>
+</li>
+<li>
+<p>Fail if the integer representation of the user_version string is less than 10200.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Fail if the string is not one of those values</p>
+</li>
+</ol>
 </div></div></td>
 </tr>
 <tr>
@@ -2426,9 +2452,6 @@ The GeoPackage standard does not place any constraints on application, platform,
 <ol class="loweralpha" type="a">
 <li>
 <p>PRAGMA table_info(table_name)</p>
-</li>
-<li>
-<p>Fail if returns empty set</p>
 </li>
 <li>
 <p>For each row type column value</p>
@@ -2748,10 +2771,10 @@ AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal pla
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT gc.srs_id AS gc_srid, srs.srs_name, srs.srs_id, srs.organization, srs.organization_coordsys_id, srs.definition FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id</p>
+<p>SELECT DISTINCT gc.srs_id, srs.srs_id FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id WHERE gc.data_type IN (<em>tiles</em>, <em>features</em>)</p>
 </li>
 <li>
-<p>Pass if no returned srs values are NULL.</p>
+<p>Pass if no returned srs.srs_id values are NULL.</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -2861,14 +2884,10 @@ AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal pla
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT gc.table_name AS gc_table, sm.tbl_name
-FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = sm.tbl_name</p>
+<p>SELECT DISTINCT table_name FROM gpkg_contents WHERE table_name NOT IN (SELECT name FROM sqlite_master)</p>
 </li>
 <li>
-<p>Not testable if returns an empty result set.</p>
-</li>
-<li>
-<p>Fail if any gpkg_contents.table_name value is NULL</p>
+<p>Fail if there are any results</p>
 </li>
 <li>
 <p>Pass otherwise.</p>
@@ -2926,14 +2945,11 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <li>
 <p>Fail if format of returned value does not match yyyy-mm-ddThh:mm:ss.hhhZ</p>
 </li>
-<li>
-<p>Log pass otherwise</p>
-</li>
 </ol>
 </div>
 </li>
 <li>
-<p>Pass if logged pass and no fails.</p>
+<p>Pass if no fails.</p>
 </li>
 </ol>
 </div></div></td>
@@ -3028,16 +3044,10 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Execute test /opt/features/contents/data/features_row</p>
+<p>SELECT COUNT(*) FROM gpkg_contents WHERE data_type IN (<em>tiles</em>, <em>features</em>)</p>
 </li>
 <li>
-<p>Pass if test passed</p>
-</li>
-<li>
-<p>Execute test /opt/tiles/contents/data/tiles_row</p>
-</li>
-<li>
-<p>Pass if test passed</p>
+<p>Pass if result &gt; 0</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -14328,7 +14338,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-07 04:10:44 UTC
+Last updated 2017-03-13 16:00:17 UTC
 </div>
 </div>
 </body>
