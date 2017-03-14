@@ -199,7 +199,7 @@ The `last_change` SHOULD contain the timestamp of when the content in the refere
 [requirement]
 Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. {req13_foot1}
 
-The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. If the `srs_id` column value references a geographic coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references a projected CRS and the min/max x/y values are in the units specified by that CRS.
+The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. The values are in the units specified by that CRS.
 
 [requirement]
 Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
