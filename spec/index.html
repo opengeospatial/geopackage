@@ -13338,7 +13338,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>scale</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scale as a multiple relative to the unit of measure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -13347,7 +13347,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>offset</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The offset to the 0 value</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -13373,6 +13373,34 @@ Clients SHALL ignore additional columns that are unrecognized.
 </tbody>
 </table>
 
+<h6 id="_using_the_scale_and_offset_values" class="float">Using the Scale and Offset Values</h6>
+<div class="paragraph">
+<p>Integer elevation values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scale and offset MAY be applied to the entire coverage and/or the individual tile. The scale and offset do not apply to the <code>data_null</code> value as defined in <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.</p>
+</div>
+<div class="paragraph">
+<p>Actual elevation values are be calculated by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>first multiplying the stored value by the <code>gpkg_2d_gridded_tile_ancillary_table.scale</code> value and then adding the <code>gpkg_2d_gridded_tile_ancillary_table.offset</code>,</p>
+</li>
+<li>
+<p>followed by multiplying that value by the <code>gpkg_2d_gridded_coverage_ancillary.scale</code> value and then adding the <code>gpkg_2d_gridded_coverage_ancillary.offset</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In pseudo-code, this conversion would look like:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>elevationInUnitOfMeasure = (SomeElevationCoverage.tile_data-&gt;pngpixels[i] * gpkg_2d_gridded_tile_ancillary.scale + gpkg_2d_gridded_tile_ancillary.offset) * gpkg_2d_gridded_coverage_ancillary.scale + gpkg_2d_gridded_coverage_ancillary.offset;</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note: <em>integer</em> and <em>float</em> refer to the values stored in the tiles. If <em>integer</em> values have a real scale or offset applied to them, then the resulting values will be real. The <code>scale</code> and <code>offset</code> do not apply to tiles of datatype <em>float</em>.</p>
+</div>
 <h6 id="_tile_ancillary" class="float">Tile Ancillary</h6>
 <div id="_requirement-106" class="quoteblock">
 <div class="title">Requirement 106</div>
@@ -13431,7 +13459,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>scale</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Scale as a multiple relative to the unit of measure</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -13439,7 +13467,7 @@ Clients SHALL ignore additional columns that are unrecognized.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>offset</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The offset to the 0 value</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -13478,6 +13506,9 @@ Clients SHALL ignore additional columns that are unrecognized.
 </tbody>
 </table>
 
+<div class="paragraph">
+<p>The <code>min</code>, <code>max</code>, and <code>mean</code> values are natural, i.e., not scaled or offset. Similarly, the <code>std_dev</code> is calculated based on the natural values. The <code>scale</code> and <code>offset</code> do not apply to tiles of datatype <em>float</em>.</p>
+</div>
 <h5 id="_table_values" class="float">Table Values</h5>
 <h6 id="_gpkg_spatial_ref_sys_3" class="float">gpkg_spatial_ref_sys</h6>
 <div id="_requirement-107" class="quoteblock">
@@ -13594,7 +13625,7 @@ Values of the <code>tile_matrix_set_name</code> column SHALL reference values in
 <div id="_requirement-112" class="quoteblock">
 <div class="title">Requirement 112</div>
 <blockquote>
-Values of the <code>datatype</code> column MAY be <em>integer</em> or <em>float</em>.
+Values of the <code>datatype</code> column MAY be <em>integer</em> or <em>float</em>. When the <code>datatype</code> is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.
 </blockquote>
 </div>
 <h6 id="_gpkg_2d_gridded_tile_ancillary" class="float">gpkg_2d_gridded_tile_ancillary</h6>
@@ -13604,7 +13635,7 @@ Values of the <code>datatype</code> column MAY be <em>integer</em> or <em>float<
 <div id="_requirement-113" class="quoteblock">
 <div class="title">Requirement 113</div>
 <blockquote>
-Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a>.
+Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a> and rows in <code>gpkg_2d_gridded_coverage_ancillary</code>. When the <code>datatype</code> of the corresponding <code>gpkg_2d_gridded_coverage_ancillary</code> row is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.
 </blockquote>
 </div>
 <div id="_requirement-114" class="quoteblock">
@@ -13613,57 +13644,17 @@ Values of the <code>tpudt_name</code> column SHALL reference existing <a href="h
 Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.
 </blockquote>
 </div>
+<h6 id="_tile_pyramid_user_data_tables" class="float">Tile Pyramid User Data Tables</h6>
 <div id="_requirement-115" class="quoteblock">
 <div class="title">Requirement 115</div>
-<blockquote>
-The <code>min</code>, <code>max</code>, and <code>mean</code> values SHALL be natural, i.e., not scaled or offset. Similarly, the <code>std_dev</code> SHALL be calculated based on the natural values.
-</blockquote>
-</div>
-<h6 id="_using_the_scale_and_offset_values" class="float">Using the Scale and Offset Values</h6>
-<div id="_requirement-116" class="quoteblock">
-<div class="title">Requirement 116</div>
-<blockquote>
-Integer elevation values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scale and offset MAY be applied to the entire coverage and/or the individual tile. The scale and offset do not apply to the <code>data_null</code> value as defined in <a href="#gpkg_2d_gridded_coverage_ancillary_table">Coverage Ancillary Table Definition</a>.
-</blockquote>
-</div>
-<div class="paragraph">
-<p>Actual elevation values SHALL be calculated by:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>first multiplying the stored value by the <code>gpkg_2d_gridded_tile_ancillary_table.scale</code> value and then adding the <code>gpkg_2d_gridded_tile_ancillary_table.offset</code>,</p>
-</li>
-<li>
-<p>followed by multiplying that value by the <code>gpkg_2d_gridded_coverage_ancillary.scale</code> value and then adding the <code>gpkg_2d_gridded_coverage_ancillary.offset</code>.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>In pseudo-code, this conversion would look like:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>elevationInUnitOfMeasure = (SomeElevationCoverage.tile_data-&gt;pngpixels[i] * gpkg_2d_gridded_tile_ancillary.scale + gpkg_2d_gridded_tile_ancillary.offset) * gpkg_2d_gridded_coverage_ancillary.scale + gpkg_2d_gridded_coverage_ancillary.offset;</pre>
-</div>
-</div>
-<div id="_requirement-117" class="quoteblock">
-<div class="title">Requirement 117</div>
-<blockquote>
-Floating point elevation values SHALL NOT have a scale and offset applied. The <code>scale</code> and <code>offset</code> values SHALL be null.
-</blockquote>
-</div>
-<h6 id="_tile_pyramid_user_data_tables" class="float">Tile Pyramid User Data Tables</h6>
-<div id="_requirement-118" class="quoteblock">
-<div class="title">Requirement 118</div>
 <blockquote>
 For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>integer</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").
 </blockquote>
 </div>
-<div id="_requirement-119" class="quoteblock">
-<div class="title">Requirement 119</div>
+<div id="_requirement-116" class="quoteblock">
+<div class="title">Requirement 116</div>
 <blockquote>
-For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">Requirement 120</a>).
+For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">Requirement 117</a>).
 </blockquote>
 </div>
 <h4 id="_table_definition_sql_4" class="float">Table Definition SQL</h4>
@@ -13674,8 +13665,8 @@ For data where the <code>datatype</code> column of the corresponding row in the 
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   tile_matrix_set_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">UNIQUE</span>,
   datatype <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">integer</span><span class="delimiter">'</span></span>,
-  scale REAL <span class="directive">DEFAULT</span> <span class="float">1.0</span>,
-  offset REAL <span class="directive">DEFAULT</span> <span class="float">0.0</span>,
+  scale REAL <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="float">1.0</span>,
+  offset REAL <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="float">0.0</span>,
   precision REAL <span class="directive">DEFAULT</span> <span class="float">1.0</span>,
   data_null REAL,
   <span class="type">CONSTRAINT</span> fk_g2dgtct_name <span class="directive">FOREIGN</span> <span class="type">KEY</span>(<span class="string"><span class="delimiter">'</span><span class="content">tile_matrix_set_name</span><span class="delimiter">'</span></span>) <span class="keyword">REFERENCES</span> gpkg_tile_matrix_set ( table_name )
@@ -13689,8 +13680,8 @@ For data where the <code>datatype</code> column of the corresponding row in the 
   id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   tpudt_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tpudt_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  scale REAL <span class="directive">DEFAULT</span> <span class="float">1.0</span>,
-  offset REAL <span class="directive">DEFAULT</span> <span class="float">0.0</span>,
+  scale REAL <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="float">1.0</span>,
+  offset REAL <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="float">0.0</span>,
   <span class="predefined">min</span> REAL <span class="directive">DEFAULT</span> <span class="predefined-constant">NULL</span>,
   <span class="predefined">max</span> REAL <span class="directive">DEFAULT</span> <span class="predefined-constant">NULL</span>,
   mean REAL <span class="directive">DEFAULT</span> <span class="predefined-constant">NULL</span>,
@@ -13701,25 +13692,25 @@ For data where the <code>datatype</code> column of the corresponding row in the 
 </div>
 <h5 id="_tiff_encoding" class="float">TIFF Encoding</h5>
 <div id="tiff_encoding" class="quoteblock">
-<div class="title">Requirement 120</div>
+<div class="title">Requirement 117</div>
 <blockquote>
 A TIFF file used for storing tiled gridded elevation data SHALL conform to the TIFF specification <a href="#35">[35]</a>.
 </blockquote>
 </div>
-<div id="_requirement-121" class="quoteblock">
-<div class="title">Requirement 121</div>
+<div id="_requirement-118" class="quoteblock">
+<div class="title">Requirement 118</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have one sample per pixel.
 </blockquote>
 </div>
-<div id="_requirement-122" class="quoteblock">
-<div class="title">Requirement 122</div>
+<div id="_requirement-119" class="quoteblock">
+<div class="title">Requirement 119</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.
 </blockquote>
 </div>
-<div id="_requirement-123" class="quoteblock">
-<div class="title">Requirement 123</div>
+<div id="_requirement-120" class="quoteblock">
+<div class="title">Requirement 120</div>
 <blockquote>
 A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<a href="#35">[35]</a> Section 13.
 </blockquote>
@@ -13727,14 +13718,14 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 <div class="paragraph">
 <p>Client applications that support the TIFF encoding are expected to support this option.</p>
 </div>
-<div id="_requirement-124" class="quoteblock">
-<div class="title">Requirement 124</div>
+<div id="_requirement-121" class="quoteblock">
+<div class="title">Requirement 121</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL NOT contain multiple images per TIFF file.
 </blockquote>
 </div>
-<div id="_requirement-125" class="quoteblock">
-<div class="title">Requirement 125</div>
+<div id="_requirement-122" class="quoteblock">
+<div class="title">Requirement 122</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 15) A TIFF file storing tiled gridded elevation data SHALL NOT contain internal tiles as per TIFF Section 15.
 </blockquote>
@@ -14339,7 +14330,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-13 16:02:05 UTC
+Last updated 2017-03-14 01:21:00 UTC
 </div>
 </div>
 </body>
