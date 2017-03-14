@@ -131,6 +131,8 @@ The `min`, `max`, and `mean` values are natural, i.e., not scaled or offset. Sim
 [requirement] 
 GeoPackages complying with this extension SHALL have a row in the `gpkg_spatial_ref_sys` table as described in <<gpkg_spatial_ref_sys_record>>:
 
+Because of limitations in expressing 3D coordinate reference systems in Well-known Text <<32>>, it is recommended that GeoPackages complying with this extension also comply with <<extension_crs_wkt>>.
+
 [[gpkg_spatial_ref_sys_record]]
 .Spatial Ref Sys Table Record
 [cols=",,,,",options="header",]
