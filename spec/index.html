@@ -13619,11 +13619,17 @@ GeoPackages complying with this extension SHALL have rows in the <code>gpkg_exte
 <div id="_requirement-111" class="quoteblock">
 <div class="title">Requirement 111</div>
 <blockquote>
-Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.
+For each row in <code>gpkg_contents</code> with a <code>data_type</code> column value of <em>2d-gridded-coverage</em>, there SHALL be a row in <code>gpkg_2d_gridded_coverage_ancillary</code>. Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column.
 </blockquote>
 </div>
 <div id="_requirement-112" class="quoteblock">
 <div class="title">Requirement 112</div>
+<blockquote>
+Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.
+</blockquote>
+</div>
+<div id="_requirement-113" class="quoteblock">
+<div class="title">Requirement 113</div>
 <blockquote>
 Values of the <code>datatype</code> column MAY be <em>integer</em> or <em>float</em>. When the <code>datatype</code> is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.
 </blockquote>
@@ -13632,29 +13638,35 @@ Values of the <code>datatype</code> column MAY be <em>integer</em> or <em>float<
 <div class="paragraph">
 <p>The following requirements refer to the <code>gpkg_2d_gridded_tile_ancillary</code> table as per <a href="#gpkg_2d_gridded_tile_ancillary_table">Tile Ancillary Table Definition</a>.</p>
 </div>
-<div id="_requirement-113" class="quoteblock">
-<div class="title">Requirement 113</div>
-<blockquote>
-Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a> and rows in <code>gpkg_2d_gridded_coverage_ancillary</code>. When the <code>datatype</code> of the corresponding <code>gpkg_2d_gridded_coverage_ancillary</code> row is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.
-</blockquote>
-</div>
 <div id="_requirement-114" class="quoteblock">
 <div class="title">Requirement 114</div>
 <blockquote>
-Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.
+For each row in a tile pyramid user data table corresponding to tiled, gridded elevation data, there SHALL be a row in <code>gpkg_2d_gridded_tile_ancillary</code>.
 </blockquote>
 </div>
-<h6 id="_tile_pyramid_user_data_tables" class="float">Tile Pyramid User Data Tables</h6>
 <div id="_requirement-115" class="quoteblock">
 <div class="title">Requirement 115</div>
 <blockquote>
-For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>integer</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").
+Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a> and rows in <code>gpkg_2d_gridded_coverage_ancillary</code>. When the <code>datatype</code> of the corresponding <code>gpkg_2d_gridded_coverage_ancillary</code> row is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.
 </blockquote>
 </div>
 <div id="_requirement-116" class="quoteblock">
 <div class="title">Requirement 116</div>
 <blockquote>
-For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">Requirement 117</a>).
+Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.
+</blockquote>
+</div>
+<h6 id="_tile_pyramid_user_data_tables" class="float">Tile Pyramid User Data Tables</h6>
+<div id="_requirement-117" class="quoteblock">
+<div class="title">Requirement 117</div>
+<blockquote>
+For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>integer</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").
+</blockquote>
+</div>
+<div id="_requirement-118" class="quoteblock">
+<div class="title">Requirement 118</div>
+<blockquote>
+For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">Requirement 119</a>).
 </blockquote>
 </div>
 <h4 id="_table_definition_sql_4" class="float">Table Definition SQL</h4>
@@ -13692,25 +13704,25 @@ For data where the <code>datatype</code> column of the corresponding row in the 
 </div>
 <h5 id="_tiff_encoding" class="float">TIFF Encoding</h5>
 <div id="tiff_encoding" class="quoteblock">
-<div class="title">Requirement 117</div>
+<div class="title">Requirement 119</div>
 <blockquote>
 A TIFF file used for storing tiled gridded elevation data SHALL conform to the TIFF specification <a href="#35">[35]</a>.
 </blockquote>
 </div>
-<div id="_requirement-118" class="quoteblock">
-<div class="title">Requirement 118</div>
+<div id="_requirement-120" class="quoteblock">
+<div class="title">Requirement 120</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have one sample per pixel.
 </blockquote>
 </div>
-<div id="_requirement-119" class="quoteblock">
-<div class="title">Requirement 119</div>
+<div id="_requirement-121" class="quoteblock">
+<div class="title">Requirement 121</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.
 </blockquote>
 </div>
-<div id="_requirement-120" class="quoteblock">
-<div class="title">Requirement 120</div>
+<div id="_requirement-122" class="quoteblock">
+<div class="title">Requirement 122</div>
 <blockquote>
 A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<a href="#35">[35]</a> Section 13.
 </blockquote>
@@ -13718,14 +13730,14 @@ A TIFF file storing tiled gridded elevation data MAY use the LZW compression opt
 <div class="paragraph">
 <p>Client applications that support the TIFF encoding are expected to support this option.</p>
 </div>
-<div id="_requirement-121" class="quoteblock">
-<div class="title">Requirement 121</div>
+<div id="_requirement-123" class="quoteblock">
+<div class="title">Requirement 123</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL NOT contain multiple images per TIFF file.
 </blockquote>
 </div>
-<div id="_requirement-122" class="quoteblock">
-<div class="title">Requirement 122</div>
+<div id="_requirement-124" class="quoteblock">
+<div class="title">Requirement 124</div>
 <blockquote>
 (constrains TIFF<a href="#35">[35]</a> Section 15) A TIFF file storing tiled gridded elevation data SHALL NOT contain internal tiles as per TIFF Section 15.
 </blockquote>
@@ -14330,7 +14342,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-14 01:21:00 UTC
+Last updated 2017-03-14 01:51:52 UTC
 </div>
 </div>
 </body>
