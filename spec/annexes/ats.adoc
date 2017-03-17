@@ -15,8 +15,8 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |++/base/core/container/data/file_format++
-|*Test Purpose* |Verify that the Geopackage is an SQLite version_3 database
-|*Test Method* |Pass if the first 16 bytes of the file contain “SQLite format 3” in ASCII.
+|*Test Purpose* |Verify that the GeoPackage is an SQLite version_3 database
+|*Test Method* |Pass if the first 16 bytes of the file contain "SQLite format 3" in ASCII.
 |*Reference* |Clause 1.1.1.1.1 Req 1:
 |*Test Type* |Basic
 |========================================
@@ -25,7 +25,14 @@
 |========================================
 |*Test Case ID* |++/base/core/container/data/file_format/application_id++
 |*Test Purpose* |Verify that the SQLite database header application id field indicates GeoPackage version 1.0
-|*Test Method* |Pass if the application id field of the SQLite database header starts with “GP” in ASCII and ends with an ASCII value of "11" or greater.
+|*Test Method* 
+| . Retrieve the bytes at the application id of the SQLite database header 
+. If the string is "GP10" in ASCII, fall back to the tests for GeoPackage 1.0.
+. If the string is "GP11" in ASCII, fall back to the tests for GeoPackage 1.1.
+. If the string is "GPKG" in ASCII
+.. PRAGMA user_version
+.. Fail if the integer representation of the user_version string is less than 10200.
+. Fail if the string is not one of those values
 |*Reference* |Clause 1.1.1.1.1 Req 2:
 |*Test Type* |Basic
 |========================================
@@ -35,8 +42,8 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |++/base/core/container/data/file_extension_name++
-|*Test Purpose* |Verify that the geopackage extension is ".gpkg"
-|*Test Method* |Pass if the geopackage file extension is ".gpkg"
+|*Test Purpose* |Verify that the GeoPackage extension is ".gpkg"
+|*Test Method* |Pass if the GeoPackage file extension is ".gpkg"
 |*Reference* |Clause 1.1.1.1.2 Req 3:
 |*Test Type* |Basic
 |========================================
@@ -46,18 +53,18 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/container/data/file_contents+
-|*Test Purpose* |Verify that the Geopackage only contains specified contents
+|*Test Purpose* |Verify that the GeoPackage only contains specified contents
 |*Test Method* 
 | . For each gpkg_* table_name
 .. PRAGMA table_info(table_name)
 .. Continue if returns an empty result set
-.. Fail if column definitions returned by PRAGMA table_info do not match column definitions for the table in Annex C.
+.. Fail if column definitions returned by "PRAGMA table_info" do not match column definitions for the table in Annex C.
 . Do test /opt/features/vector_features/data/feature_table_integer_primary_key
 . Do test /opt/features/vector/features/data/feature_table_one_geometry_column
 . Do test /opt/tiles/contents/data/tiles_row
 . SELECT extension_name FROM gpkg_contents
 . For each row from #4
-.. Fail if the substring before the first “_” is not “gpkg”
+.. Fail if the substring before the first "_" is not "gpkg"
 . Pass if no fails
 |*Reference* |Clause 1.1.1.1.3 Req 4:
 |*Test Type* |Basic
@@ -72,7 +79,6 @@
 . Not testable if returns empty set
 . For each row table name from step 1
 .. PRAGMA table_info(table_name)
-.. Fail if returns empty set
 .. For each row type column value
 ... Fail if value is not one of the data type names specified by <<table_column_data_types>>
 . Pass if no fails
@@ -85,8 +91,8 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/container/data/file_integrity+
-|*Test Purpose* |Verify that the geopackage  passes the SQLite integrity check.
-|*Test Method* |Pass if PRAGMA integrity_check returns “ok"
+|*Test Purpose* |Verify that the GeoPackage passes the SQLite integrity check.
+|*Test Method* |Pass if "PRAGMA integrity_check" returns "ok"
 |*Reference* |Clause <<_file_integrity>> Req 6:
 |*Test Type* |Capability
 |========================================
@@ -94,8 +100,8 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/container/data/foreign_key_integrity+
-|*Test Purpose* |Verify that the geopackage passes the SQLite foreign_key_check.
-|*Test Method* |Pass if PRAGMA foreign_key_check() with no parameter value returns an empty result set
+|*Test Purpose* |Verify that the GeoPackage passes the SQLite foreign_key_check.
+|*Test Method* |Pass if "PRAGMA foreign_key_check" (with no parameter value) returns an empty result set
 |*Reference* |Clause <<_file_integrity>> Req 7:
 |*Test Type* |Capability
 |========================================
@@ -109,29 +115,11 @@
 |*Test Case ID* |+/base/core/container/api/sql+
 |*Test Purpose* |Test that the GeoPackage SQLite Extension provides the SQLite SQL API interface.
 |*Test Method* 
-|. sqlite3_exec(‘SELECT * FROM sqlite_master;) 
+|. sqlite3_exec('SELECT * FROM sqlite_master;) 
 . Fail if returns an SQL error.
 . Pass otherwise 
 |*Reference* |Clause 1.1.1.2.1 Req 8:
 |*Test Type* |Capability
-|========================================
-
-*Every GPKG SQLite Configuration*
-
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/base/core/container/api/every_gpkg_sqlite_config+
-|*Test Purpose* |Verify that a GeoPackage SQLite Extension has the Every GeoPackage SQLite Configuration compile and run time options.
-|*Test Method* 
-|
-. For each “SQLITE_OMIT_*” <option> listed at http://www.sqlite.org/compile.html#omitfeatures
-.. +SELECT sqlite_compileoption_used('SQLITE_OMIT_<option>')+
-.. Fail if returns 1
-. PRAGMA foreign_keys
-. Fail if returns 0
-. Pass otherwise 
-|*Reference* |Clause 1.1.1.2.2 Req 9:
-|*Test Type* |Basic
 |========================================
 
 ===== Spatial Reference Systems
@@ -141,11 +129,11 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/gpkg_spatial_ref_sys/data/table_def+
-|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table exists and has the correct definition.
+|*Test Purpose* |Verify that the `gpkg_spatial_ref_sys` table exists and has the correct definition.
 |*Test Method* |
 . `SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_spatial_ref_sys'`
 . Fail if returns an empty result set
-. Pass if column names and column definitions in the returned `CREATE TABLE statement` in the sql column value, including data type, nullability,  and primary key constraints match all of those in the contents of C.1 Table 15. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if column names and column definitions in the returned `CREATE TABLE statement` in the sql column value, including data type, nullability, and primary key constraints match all of those in the contents of C.1 Table 15. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Clause 1.1.2.1.1 Req 10:
 |*Test Type* |Basic
@@ -157,17 +145,12 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/gpkg_spatial_ref_sys/data_values_default+
-|*Test Purpose* |Verify that the spatial_ref_sys table contains the required default contents.
+|*Test Purpose* |Verify that the `spatial_ref_sys` table contains the required default contents.
 |*Test Method* |
-. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined”, AND`
-. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0 “undefined”, AND`
-. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326` returns GEOGCS ["WGS 84",
- DATUM ["World Geodetic System 1984", 
-   SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]], 
-   AUTHORITY["EPSG","6326"]],
- PRIMEM["Greenwich", 0 , AUTHORITY["EPSG","8901"]], 
- UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]], 
- AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components <twin axes> and <to wgs84> and whitespace differences in the returned text)
+. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 "NONE" -1 "undefined", AND`
+. `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 "NONE" 0 "undefined", AND`
+. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326` 
+.. Confirm that this is a valid CRS
 . Pass if tests 1-3 are met
 . Fail otherwise
 |*Reference* |Clause 1.1.2.1.2 Requirement 11:
@@ -177,10 +160,10 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/spatial_ref_sys/data_values_required+
-|*Test Purpose* |Verify that the spatial_ref_sys table contains rows to define all srs_id values used by features and tiles in a GeoPackage.
+|*Test Purpose* |Verify that the `spatial_ref_sys` table contains rows to define all `srs_id` values used by features and tiles in a GeoPackage.
 |*Test Method* |
-. SELECT DISTINCT gc.srs_id AS gc_srid, srs.srs_name, srs.srs_id, srs.organization, srs.organization_coordsys_id, srs.definition FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id
-. Pass if no returned srs values are NULL.
+. SELECT DISTINCT gc.srs_id, srs.srs_id FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id WHERE gc.data_type IN ('tiles', 'features')
+. Pass if no returned srs.srs_id values are NULL.
 . Fail otherwise
 |*Reference* |Clause Clause 1.1.2.1.2 Req 12:
 |*Test Type* |Capability
@@ -193,9 +176,9 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/contents/data/table_def+
-|*Test Purpose* |Verify that the gpkg_contents table exists and has the correct definition.
+|*Test Purpose* |Verify that the `gpkg_contents` table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_contents' 
+. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_contents' 
 . Fail if returns an empty result set. 
 . Pass if the column names and column definitions in the returned CREATE TABLE statement, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of C.2 Table <<gpkg_contents_sql>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail Otherwise
@@ -208,12 +191,10 @@
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/contents/data/data_values_table_name+
-|*Test Purpose* |Verify that the table_name column values in the gpkg_contents table are valid.
+|*Test Purpose* |Verify that the `table_name` column values in the `gpkg_contents` table are valid.
 |*Test Method* |
-. SELECT DISTINCT gc.table_name AS gc_table, sm.tbl_name 
-FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = sm.tbl_name
-. Not testable if returns an empty result set.
-. Fail if any gpkg_contents.table_name value is NULL 
+. SELECT DISTINCT table_name FROM gpkg_contents WHERE table_name NOT IN (SELECT name FROM sqlite_master)
+. Fail if there are any results
 . Pass otherwise.
 |*Reference* |Clause 1.1.3.1.2 Req 14:
 |*Test Type* |Capability
@@ -222,14 +203,13 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/contents/data/data_values_last_change+
-|*Test Purpose* |Verify that the gpkg_contents table last_change column values are in ISO 8601 [29]format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.
+|*Test Purpose* |Verify that the `gpkg_contents` table `last_change` column values are in ISO 8601 [29]format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ("zulu") suffix indicating UTC.
 |*Test Method* |
 . SELECT last_change from gpkg_contents.
 . Not testable if returns an empty result set.
 . For each row from step 1
 .. Fail if format of returned value does not match yyyy-mm-ddThh:mm:ss.hhhZ
-.. Log pass otherwise
-. Pass if logged pass and no fails.
+. Pass if no fails.
 |*Reference* |Clause 1.1.3.1.2 Req 15:
 |*Test Type* |Capability
 |========================================
@@ -237,9 +217,9 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/base/core/contents/data/data_values_srs_id+
-|*Test Purpose* |Verify that the gpkg_contents table srs_id column values reference gpkg_spatial_ref_sys srs_id column values.
+|*Test Purpose* |Verify that the `gpkg_contents` table `srs_id` column values reference `gpkg_spatial_ref_sys` `srs_id` column values.
 |*Test Method* |
-. PRAGMA foreign_key_check(‘gpkg_contents’)
+. PRAGMA foreign_key_check('gpkg_contents')
 . Fail if does not return an empty result set
 |*Reference* |Clause 1.1.3.1.2 Req 16:
 |*Test Type* |Capability
@@ -250,12 +230,10 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/valid_geopackage+
-|*Test Purpose* |Verify that a GeoPackage contains a features or tiles table and gpkg_contents table row describing it.
+|*Test Purpose* |Verify that a GeoPackage contains a features or tiles table and `gpkg_contents` table row describing it.
 |*Test Method* |
-. Execute test /opt/features/contents/data/features_row
-. Pass if test passed
-. Execute test /opt/tiles/contents/data/tiles_row
-. Pass if test passed
+. SELECT COUNT(*) FROM gpkg_contents WHERE data_type IN ('tiles', 'features')
+. Pass if result > 0
 . Fail otherwise
 |*Reference* |Clause 2 Req 17:
 |*Test Type* |Capability
@@ -275,7 +253,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/contents/data/features_row+
-|*Test Purpose* |Verify that the gpkg_contents table_name value table exists, and is apparently a feature table for every row with a data_type column value of “features”
+|*Test Purpose* |Verify that the `gpkg_contents` table_name value table exists, and is apparently a feature table for every row with a `data_type` column value of "features"
 |*Test Method* |
 . Execute test /opt/features/vector_features/data/feature_table_integer_primary_key
 |*Reference* |Clause 2.1.2.1.1 Req 18:
@@ -293,13 +271,13 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 |*Test Case ID* |+/opt/features/geometry_encoding/data/blob+
 |*Test Purpose* |Verify that geometries stored in feature table geometry columns are encoded in the StandardGeoPackageBinary format.
 |*Test Method* |
-. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’)
+. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
 . Not testable if returns an empty result set
 . For each row from step 1
 .. SELECT cn FROM tn
 .. Not testable if none found
 .. For each cn value from step a
-... Fail if the first two bytes of each gc are not “GP”
+... Fail if the first two bytes of each gc are not "GP"
 ... Fail if gc.version_number is not 0
 ... Fail if gc.flags.GeopackageBinary type != 0
 ... Fail if cn.flags.E is 5-7
@@ -322,7 +300,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 |*Test Method* |
 . SELECT table_name FROM gpkg_geometry_columns
 . Not testable if returns an empty result set
-. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’), 
+. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = 'features'), 
 . Fail if returns an empty result set
 . For each row from step 3
 .. SELECT cn FROM tn;
@@ -344,7 +322,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/table_def+
-|*Test Purpose* |Verify that the gpkg_geometry_columns table exists and has the correct definition.
+|*Test Purpose* |Verify that the `gpkg_geometry_columns` table exists and has the correct definition.
 |*Test Method* |
 . PRAGMA table_info('gpkg_geometry_columns') 
 . Fail if returns an empty result set. 
@@ -359,7 +337,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_geometry_columns+
-|*Test Purpose* |Verify that gpkg_geometry_columns contains one row record for each geometry column in each vector feature user data table.
+|*Test Purpose* |Verify that `gpkg_geometry_columns` contains one row record for each geometry column in each vector feature user data table.
 |*Test Method* |
 . SELECT table_name FROM gpkg_contents WHERE data_type = \'features'
 . Not testable  if returns an empty result set
@@ -372,7 +350,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_table_name+
-|*Test Purpose* |Verify that the table_name column values in the gpkg_geometry_columns table are valid.
+|*Test Purpose* |Verify that the `table_name` column values in the `gpkg_geometry_columns` table are valid.
 |*Test Method* | 
 . PRAGMA foreign_key_list('gpkg_geometry_columns');
 . Fail if there is no row designating `table_name` as a foreign key to `table_name` in `gpkg_contents`
@@ -383,7 +361,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_column_name+
-|*Test Purpose* |Verify that the column_name column values in the gpkg_geometry_columns table are valid.
+|*Test Purpose* |Verify that the `column_name` column values in the `gpkg_geometry_columns` table are valid.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_geometry_columns
 . Not testable  if returns an empty result set
@@ -398,7 +376,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_geometry_type_name+
-|*Test Purpose* |Verify that the geometry_type_name column values in the gpkg_geometry_columns table are valid.
+|*Test Purpose* |Verify that the `geometry_type_name` column values in the `gpkg_geometry_columns` table are valid.
 |*Test Method* |
 . SELECT DISTINCT geometry_type_name from gpkg_geometry_columns 
 . Not testable  if returns an empty result set
@@ -412,9 +390,9 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_srs_id+
-|*Test Purpose* |Verify that the gpkg_geometry_columns table srs_id column values are valid.
+|*Test Purpose* |Verify that the `gpkg_geometry_columns` table `srs_id` column values are valid.
 |*Test Method* |
-. PRAGMA foreign_key_check(‘gpkg_geometry_columns’)
+. PRAGMA foreign_key_check('gpkg_geometry_columns')
 . Fail if returns any rows with a fourth column foreign key index value of 0
 |*Reference* |Clause 2.1.5.1.2 Req 26:
 |*Test Type* |Capability
@@ -423,7 +401,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_z+
-|*Test Purpose* |Verify that the gpkg_geometry_columns table z column values are valid.
+|*Test Purpose* |Verify that the `gpkg_geometry_columns` table `z` column values are valid.
 |*Test Method* |
 . SELECT z FROM gpkg_geometry_columns
 . Not testable if returns an empty result set
@@ -437,7 +415,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_m+
-|*Test Purpose* |Verify that the gpkg_geometry_columns table m column values are valid.
+|*Test Purpose* |Verify that the `gpkg_geometry_columns` table `m` column values are valid.
 |*Test Method* |
 . SELECT m FROM gpkg_geometry_columns
 . Not testable if returns an empty result set
@@ -477,7 +455,7 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 |*Test Case ID* |+/opt/features/vector_features/data/feature_table_one_geometry_column+
 |*Test Purpose* |Verify that every vector features user data table has one geometry column. 
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WERE data_type = ‘features’
+. SELECT table_name FROM gpkg_contents WERE data_type = 'features'
 . Not testable if returns an empty result set
 . For each row table name from step 1
 .. SELECT column_name from gpkg_geometry_columns where table_name = row table name 
@@ -490,8 +468,8 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/vector_features/data/feature_table_geometry_column_type+
-|*Test Purpose* |Verify that the declared SQL type of a feature table geometry column is the uppercase geometry type name from Annex G specified by the geometry_type_name 
-column for that column_name and table_name in the gpkg_geometry_columns table.
+|*Test Purpose* |Verify that the declared SQL type of a feature table geometry column is the uppercase geometry type name from Annex G specified by the `geometry_type_name` 
+column for that `column_name` and `table_name` in the `gpkg_geometry_columns` table.
 |*Test Method* |
 . SELECT table_name, column_name, geometry_type_name table_name
 FROM gpkg_geometry_columns WHERE table_name IN 
@@ -499,7 +477,7 @@ FROM gpkg_geometry_columns WHERE table_name IN
 . For each row selected in (1):
 .. Fail if selected geometry_type_name value is not a value from the NAME column in Annex G Table 42 or Table 43.
 .. SELECT sql FROM sqlite_master 
-WHERE type = 'table' AND name = ‘{selected table_ name}’
+WHERE type = 'table' AND name = '{selected table_ name}'
 .. Pass if declared type of column_name selected in (1) is the geometry_type_name selected in (1)
 ..	Fail otherwise
 |*Reference* |Clause 2.1.6.1.1 Req 31:
@@ -511,9 +489,9 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/vector_features/data/data_values_geometry_type+
-|*Test Purpose* |Verify that the geometry type of feature geometries are of the type or are assignable for the geometry type specified by the gpkg_geometry columns table geometry_type_name column value.
+|*Test Purpose* |Verify that the geometry type of feature geometries are of the type or are assignable for the geometry type specified by the `gpkg_geometry` columns table `geometry_type_name` column value.
 |*Test Method* |
-. SELECT table_name AS tn, column_name AS cn, geometry_type_name AS gt_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’)
+. SELECT table_name AS tn, column_name AS cn, geometry_type_name AS gt_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
 . Not testable if returns an empty result set
 . For each row from step 1
 .. *Select the set of geometry types in use for the values in cn
@@ -528,9 +506,9 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/vector_features/data/data_value_geometry_srs_id+
-|*Test Purpose* |Verify the the srs_id of feature geometries are the srs_id specified for the gpkg_geometry_columns table srs_id column value.
+|*Test Purpose* |Verify the the srs_id of feature geometries are the srs_id specified for the `gpkg_geometry_columns` table `srs_id` column value.
 |*Test Method* |
-. SELECT table_name AS tn, column_name AS cn, srs_id AS gc_srs_id FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents where data_type = ‘features’)
+. SELECT table_name AS tn, column_name AS cn, srs_id AS gc_srs_id FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents where data_type = 'features')
 . Not testable if returns an empty result set
 . For each row from step 1
 .. *Select the set of SRIDs in use for the values in cn
@@ -552,15 +530,15 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/contents/data/tiles_row+
-|*Test Purpose* |Verify that the gpkg_contents table_name value table exists and is apparently a tiles table for every row with a data_type column value of “tiles”.
+|*Test Purpose* |Verify that the `gpkg_contents` `table_name` value table exists and is apparently a tiles table for every row with a `data_type` column value of "tiles".
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WHERE data_type = “tiles”
+. SELECT table_name FROM gpkg_contents WHERE data_type = "tiles"
 . Not testable  if returns empty result set
 . For each row from step 1
 .. PRAGMA table_info(table_name) 
 .. Fail if returns an empty result set 
-.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”and the name column value is “id” 
-.. Fail if result set does not contain four other rows where the name column values are “zoom_level”,”tile_column”,”tile_row”, and “tile_data”.
+.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"and the name column value is "id" 
+.. Fail if result set does not contain four other rows where the name column values are "zoom_level","tile_column","tile_row", and "tile_data".
 . Pass if no fails.
 |*Reference* |Clause 2.2.2.1.1 Req 34:
 |*Test Type* |Capability
@@ -596,7 +574,7 @@ WHERE type = 'table' AND name = ‘{selected table_ name}’
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/tiles_encoding/data/mime_type_png+
-|*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type image/jpeg by default contains tile data in MIME type image/png.
+|*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type "image/jpeg" by default contains tile data in MIME type "image/png".
 |*Test Method* |
 . SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
 . For each row tbl_name from step 1
@@ -619,11 +597,11 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/tiles_encoding/data/mime_type_jpeg+
-|*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type image/png by default contains tile data in MIME type image/jpeg.
+|*Test Purpose* |Verify that a tile matrix user data table that contains tile data that is not MIME type "image/png" by default contains tile data in MIME type "image/jpeg".
 |*Test Method* |
-. SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
+. SELECT table_name AS tn FROM gpkg_contents WHERE data_type = 'tiles'
 . For each row tbl_name from step 1
-.. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = \'tn' AND column_name = \'tile_data')  
+.. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = 'tn' AND column_name = 'tile_data')  
 END;
 ... Not testable unless it returns empty result set
 .. SELECT tile_data FROM tn
@@ -644,11 +622,11 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/table_def+
-|*Test Purpose* |Verify that the gpkg_tile_matrix_set table exists and has the correct definition.
+|*Test Purpose* |Verify that the `gpkg_tile_matrix_set` table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_tile_matrix_set' 
+. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_tile_matrix_set' 
 . Fail if returns an empty result set. 
-. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value,, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <<example_feature_table_sql>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
+. Pass if the column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <<example_feature_table_sql>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant. 
 . Fail otherwise.
 |*Reference* |Clause 2.2.6.1.1 Req 38:
 |*Test Type* |Capability
@@ -659,7 +637,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/data_values_table_name+
-|*Test Purpose* |Verify that values of the gpkg_tile_matrix_set table_name column reference values in the gpkg_contents table_name column.
+|*Test Purpose* |Verify that values of the `gpkg_tile_matrix_set` `table_name` column reference values in the `gpkg_contents` `table_name` column.
 |*Test Method* |
 . SELECT table_name FROM gpkg_tile_matrix_set
 . Not testable if returns an empty result set
@@ -673,12 +651,12 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/data_values_row_record+
-|*Test Purpose* |Verify that the gpkg_tile_matrix_set table contains a row record for each tile pyramid  user data table .
+|*Test Purpose* |Verify that the `gpkg_tile_matrix_set` table contains a row record for each tile pyramid user data table.
 |*Test Method* |
-. SELECT table_name AS <user_data_tiles_table> from gpkg_contents where data_type = ‘tiles’
+. SELECT table_name AS <user_data_tiles_table> from gpkg_contents where data_type = 'tiles'
 . Not testable if returns an empty result set
 . For each row from step 1
-.. SELECT sql FROM sqlite_master WHERE type=’table’ AND tbl_name =  '<user_data_tiles_table>'
+.. SELECT sql FROM sqlite_master WHERE type='table' AND tbl_name = '<user_data_tiles_table>'
 .. Fail if returns an empty result set
 . Pass if no fails 
 |*Reference* |Clause 2.2.6.1.2 Req 40:
@@ -688,9 +666,9 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/data_values_srs_id+
-|*Test Purpose* |Verify that the gpkg_tile_matrix_set table srs_id column values reference gpkg_spatial_ref_sys srs_id column values.
+|*Test Purpose* |Verify that the `gpkg_tile_matrix_set` table `srs_id` column values reference `gpkg_spatial_ref_sys` `srs_id` column values.
 |*Test Method* |
-. PRAGMA foreign_key_check(‘gpkg_geometry_columns’)
+. PRAGMA foreign_key_check('gpkg_geometry_columns')
 . Fail if returns any rows with a fourth column foreign key index value of 1 (gpkg_spatial_ref_sys)
 |*Reference* |Clause 2.2.6.1.2 Req 41:
 |*Test Type* |Capability
@@ -703,7 +681,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/table_def+
-|*Test Purpose* |Verify that the gpkg_tile_matrix table exists and has the correct definition.
+|*Test Purpose* |Verify that the `gpkg_tile_matrix` table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_tile_matrix' 
 . Fail if returns an empty result set. 
@@ -718,7 +696,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_table_name+
-|*Test Purpose* |Verify that values of the gpkg_tile_matrix table_name column reference values in the gpkg_contents table_name column.
+|*Test Purpose* |Verify that values of the `gpkg_tile_matrix` `table_name` column reference values in the `gpkg_contents` `table_name` column.
 |*Test Method* |
 . SELECT table_name FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -732,9 +710,9 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_zoom_level_rows+
-|*Test Purpose* |Verify that the gpkg_tile_matrix table contains a row record for each zoom level that contains one or more tiles in each tile pyramid  user data table.
+|*Test Purpose* |Verify that the `gpkg_tile_matrix` table contains a row record for each zoom level that contains one or more tiles in each tile pyramid user data table.
 |*Test Method* |
-. SELECT table_name AS <user_data_tiles_table> from gpkg_contents where data_type = ‘tiles’
+. SELECT table_name AS <user_data_tiles_table> from gpkg_contents where data_type = 'tiles'
 . Not testable if returns an empty result set
 . For each row from step 1
 .. SELECT DISTINCT gtmm.zoom_level AS gtmm_zoom, udt.zoom_level AS udtt_zoom FROM gpkg_tile_matrix AS gtmm 
@@ -748,9 +726,9 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_width_height+
-|*Test Purpose* |Verify that the tile matrix extents in gpkg_tile_matrix_set match the contents of the gpkg_tile_matrix table.
+|*Test Purpose* |Verify that the tile matrix extents in `gpkg_tile_matrix_set` match the contents of the `gpkg_tile_matrix` table.
 |*Test Method* |
-. SELECT table_name AS <user_data_tiles_table> from gpkg_contents where data_type = ‘tiles’
+. SELECT table_name AS <user_data_tiles_table> from gpkg_contents where data_type = 'tiles'
 . Not testable if returns an empty result set
 . For each row from step 1
 .. SELECT max_x - min_x from gpkg_tile_matrix_set where table_name = '<user_data_tiles_table>'
@@ -766,7 +744,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_zoom_level+
-|*Test Purpose* |Verify that zoom level column values in the gpkg_tile_matrix table are not negative.
+|*Test Purpose* |Verify that zoom level column values in the `gpkg_tile_matrix` table are not negative.
 |*Test Method* |
 . SELECT zoom_level FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -780,7 +758,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_matrix_width+
-|*Test Purpose* |Verify that the matrix_width values in the gpkg_tile_matrix table are valid.
+|*Test Purpose* |Verify that the `matrix_width` values in the `gpkg_tile_matrix` table are valid.
 |*Test Method* |
 . SELECT matrix_width FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -794,7 +772,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_matrix_height+
-|*Test Purpose* |Verify that the matrix_height values in the gpkg_tile_matrix table are valid.
+|*Test Purpose* |Verify that the `matrix_height` values in the `gpkg_tile_matrix` table are valid.
 |*Test Method* |
 . SELECT matrix_height FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -808,7 +786,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_tile_width+
-|*Test Purpose* |Verify that the tile_width values in the gpkg_tile_matrix table are valid.
+|*Test Purpose* |Verify that the `tile_width` values in the `gpkg_tile_matrix` table are valid.
 |*Test Method* |
 . SELECT tile_width FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -822,7 +800,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_tile_height+
-|*Test Purpose* |Verify that the tile_height values in the gpkg_tile_matrix table are valid.
+|*Test Purpose* |Verify that the `tile_height` values in the `gpkg_tile_matrix` table are valid.
 |*Test Method* |
 . SELECT tile_height FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -836,7 +814,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_pixel_x_size+
-|*Test Purpose* |Verify that the pixel_x_size values in the gpkg_tile_matrix table are valid.
+|*Test Purpose* |Verify that the `pixel_x_size` values in the `gpkg_tile_matrix` table are valid.
 |*Test Method* |
 . SELECT pixel_x_size FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -850,7 +828,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_pixel_y_size+
-|*Test Purpose* |Verify that the pixel_y_size values in the gpkg_tile_matrix table are valid.
+|*Test Purpose* |Verify that the `pixel_y_size` values in the `gpkg_tile_matrix` table are valid.
 |*Test Method* |
 . SELECT pixel_y_size FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -864,9 +842,9 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_pixel_size_sort+
-|*Test Purpose* |Verify that the pixel_x_size and pixel_y_size column values for zoom level column values in a gpkg_tile_matrix table sorted in ascending order are sorted in descending order, showing that lower zoom levels are zoomed “out”.
+|*Test Purpose* |Verify that the `pixel_x_size` and `pixel_y_size` column values for zoom level column values in a `gpkg_tile_matrix` table sorted in ascending order are sorted in descending order, showing that lower zoom levels are zoomed "out".
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WHERE data_type = ‘tiles’
+. SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles'
 . Not testable if returns empty result set
 . For each row table_name from step 1
 .. SELECT zoom_level, pixel_x_size, pixel_y_size from gpkg_tile_matrix WHERE table_name = row table name ORDER BY zoom_level ASC
@@ -889,14 +867,14 @@ END;
 |*Test Case ID* |+/opt/tiles/tile_pyramid/data/table_def+
 |*Test Purpose* |Verify that multiple tile pyramids are stored in different tiles tables with unique names containing the required columns.
 |*Test Method* |
-. SELECT COUNT(table_name) FROM gpkg_contents WERE data_type = “tiles”
+. SELECT COUNT(table_name) FROM gpkg_contents WERE data_type = "tiles"
 . Not testable if less than 1
-. SELECT table_name FROM gpkg_contents WHERE data_type = “tiles”
+. SELECT table_name FROM gpkg_contents WHERE data_type = "tiles"
 . For each row from step 3
 .. PRAGMA table_info(table_name)
 .. Fail if returns an empty result set 
-.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”and the name column value is “id” 
-.. Fail if result set does not contain four other rows where the name column values are “zoom_level”,”tile_column”,”tile_row”, and “tile_data”.
+.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"and the name column value is "id" 
+.. Fail if result set does not contain four other rows where the name column values are "zoom_level","tile_column","tile_row", and "tile_data".
 . Pass if no fails
 |*Reference* |Clause 2.2.8.1.1 Req 54:
 |*Test Type* |Basic
@@ -907,7 +885,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/tile_pyramid/data/data_values_zoom_levels+
-|*Test Purpose* |Verify that the zoom level column values in each tile pyramid user data table are within the range of zoom levels defined by rows in the gpkg_tile_matrix table.
+|*Test Purpose* |Verify that the zoom level column values in each tile pyramid user data table are within the range of zoom levels defined by rows in the `gpkg_tile_matrix` table.
 |*Test Method* |
 . SELECT DISTINCT table_name AS <user_data_tiles_table> FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -928,7 +906,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/tile_pyramid/data/data_values_tile_column+
-|*Test Purpose* |Verify that the tile_column column values for each zoom level value in each tile pyramid user data table are within the range of columns defined by rows in the gpkg_tile_matrix table.
+|*Test Purpose* |Verify that the `tile_column` column values for each zoom level value in each tile pyramid user data table are within the range of columns defined by rows in the `gpkg_tile_matrix` table.
 |*Test Method* |
 . SELECT DISTINCT table_name AS <user_data_tiles_table> FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
@@ -944,12 +922,12 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/tile_pyramid_data/data_values_tile_row+
-|*Test Purpose* |Verify that the tile_row column values for each zoom level value in each tile pyramid user data table are within the range of rows defined by rows in the gpkg_tile_matrix table.
+|*Test Purpose* |Verify that the `tile_row` column values for each zoom level value in each tile pyramid user data table are within the range of rows defined by rows in the `gpkg_tile_matrix` table.
 |*Test Method* |
 . SELECT DISTINCT table_name AS <user_data_tiles_table> FROM gpkg_tile_matrix
 . Not testable if returns an empty result set
 . For each row <user_data_tiles_table> from step 1
-.. SELECT DISTINCT gtmm.zoom_level AS gtmm_zoom, gtmm.matrix_height AS gtmm_height, udt.zoom_level AS udt_zoom, udt.tile_row AS udt_row FROM gpkg_tile_matrix AS gtmm LEFT OUTER JOIN <user_data_tiles_table>  AS udt ON udt.zoom_level = gtmm.zoom_level AND gtmm.t_table_name = ‘<user_data_tiles_table> ' AND (udt_row < 0 OR udt_row > (gtmm_height - 1))
+.. SELECT DISTINCT gtmm.zoom_level AS gtmm_zoom, gtmm.matrix_height AS gtmm_height, udt.zoom_level AS udt_zoom, udt.tile_row AS udt_row FROM gpkg_tile_matrix AS gtmm LEFT OUTER JOIN <user_data_tiles_table>  AS udt ON udt.zoom_level = gtmm.zoom_level AND gtmm.t_table_name = '<user_data_tiles_table> ' AND (udt_row < 0 OR udt_row > (gtmm_height - 1))
 .. Fail if any udt_row value in the result set is not NULL
 .. Log pass otherwise
 . Pass if logged pass and no fails
@@ -965,9 +943,9 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_mechanism/extensions/data/table_def+
-|*Test Purpose* |Verify that a gpkg_extensions table exists and has the correct definition.
+|*Test Purpose* |Verify that a `gpkg_extensions` table exists and has the correct definition.
 |*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_extensions'
+. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_extensions'
 . Fail if returns an empty result set.
 . Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 36. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
@@ -980,17 +958,17 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_for_extensions+
-|*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the gpkg_extensions table
+|*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the `gpkg_extensions` table
 |*Test Method* |
 . For each SELECT DISTINCT geometry_type_name FROM geometry_columns
 .. Fail if geometry_type_name IN Annex G Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_<geometry_type_name>
-.. Fail if geometry_type_name NOT IN Annex G Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with “gpkg” and the extension_name ends with “_geom_<geometry_type_name>
-. For each SELECT tbl_name FROM sqlite_master WHERE tbl_name LIKE ‘rtree_%’
-.. Fail if gpkg_extensions does not contain a row where extension_name = “gpkg_rtree_index”
-. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE ‘fgti_%’
-.. Fail if gpkg_extensions does not contain a row where extension_name = “gpkg_geometry_type_trigger”
-. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE ‘fgsi_%’
-.. Fail if gpkg_extensions does not contain a row where extension_name = “gpkg_srs_id_trigger”
+.. Fail if geometry_type_name NOT IN Annex G Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with "gpkg" and the extension_name ends with "_geom_<geometry_type_name>
+. For each SELECT tbl_name FROM sqlite_master WHERE tbl_name LIKE 'rtree_%'
+.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_rtree_index"
+. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE 'fgti_%'
+.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_geometry_type_trigger"
+. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE 'fgsi_%'
+.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_srs_id_trigger"
 . Do test / reg_ext/tiles/zoom_levels/data/zoom_other_ext_row
 . Do test /reg_ext/tiles/tile_encoding_webp/data/webp_ext_row
 . Do test /reg_ext/tiles/tile_encoding_webp/data/tiff_ext_row
@@ -1003,7 +981,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_table_name+
-|*Test Purpose* |Verify that the table_name column values in the gpkg_extensions table are valid.
+|*Test Purpose* |Verify that the `table_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_extensions
 . Not testable if returns an empty result set
@@ -1019,7 +997,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_column_name+
-|*Test Purpose* |Verify that the column_name column values in the gpkg_extensions table are valid.
+|*Test Purpose* |Verify that the `column_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_extensions
 . Not testable if returns an empty result set
@@ -1037,14 +1015,14 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_extension_name+
-|*Test Purpose* |Verify that the extension_name column values in the gpkg_extensions table are valid.
+|*Test Purpose* |Verify that the `extension_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT extension_name FROM gpkg_extensions
 . Not testable if returns an empty result set
 . For each row returned from step 1
 .. Log pass if extension_name is one of those listed in Annex F.
-.. Separate extension_name into <author> and <extension> at the first “_”
-.. Fail if <author> is “gpkg”
+.. Separate extension_name into <author> and <extension> at the first "_"
+.. Fail if <author> is "gpkg"
 .. Fail if <author> contains characters other than [a-zA-Z0-9]
 .. Fail if <extension> contains characters other than [a-zA-Z0-9_]
 .. Log pass otherwise
@@ -1056,12 +1034,12 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_definition+
-|*Test Purpose* |Verify that the definition column value contains or references extension documentation
+|*Test Purpose* |Verify that the `definition` column value contains or references extension documentation
 |*Test Method* |
 . SELECT definition FROM gpkg_extensions
 . Not testable if returns an empty result set
 . For each row returned from step 1
-.. Inspect if definition value is not like “Annex %”, or “http%” or mailto:% or “Extension Title%”
+.. Inspect if definition value is not like "Annex %", or "http%" or mailto:% or "Extension Title%"
 .. Fail if definition value does not contain or reference extension documentation
 . Pass if no fails
 |*Reference* |Clause 2.3.2.1.2 Req 63:
@@ -1071,12 +1049,12 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_scope+
-|*Test Purpose* |Verify that the scope column value is “read-write” or “write-only”
+|*Test Purpose* |Verify that the `scope` column value is "read-write" or "write-only"
 |*Test Method* |
 . SELECT scope FROM gpkg_extensions
 . Not testable if returns an empty result set
 . For each row returned from step 1
-.. Fail is value is not “read-write” or “write-only”
+.. Fail is value is not "read-write" or "write-only"
 . Pass if no fails
 |*Reference* |Clause 2.3.2.1.2 Req 64:
 |*Test Type* |Capability
@@ -1090,14 +1068,14 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/attributes/contents/data/attributes_row+
-|*Test Purpose* |Verify that the gpkg_contents table_name value table exists and is apparently an attributes table for every row with a data_type column value of “attributes”.
+|*Test Purpose* |Verify that the `gpkg_contents` `table_name` value table exists and is apparently an attributes table for every row with a `data_type` column value of "attributes".
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WHERE data_type = “attributes”
-. Not testable  if returns empty result set
+. SELECT table_name FROM gpkg_contents WHERE data_type = "attributes"
+. Not testable if returns empty result set
 . For each row from step 1
 .. PRAGMA table_info(table_name) 
 .. Fail if returns an empty result set 
-.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is “INTEGER”and the name column value is “id” 
+.. Fail if result set does not contain one row where the `pk` column value is 1 and the `notnull` column value is 1 and the `type` column value is "INTEGER" and the `name` column value is "id" 
 . Pass if no fails.
 |*Reference* |Clause 2.4.2.1.1 Req 64a
 |*Reference* |Clause 2.4.3.1.1 Req 64b
