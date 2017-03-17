@@ -25,7 +25,14 @@
 |========================================
 |*Test Case ID* |++/base/core/container/data/file_format/application_id++
 |*Test Purpose* |Verify that the SQLite database header application id field indicates GeoPackage version 1.0
-|*Test Method* |Pass if the application id field of the SQLite database header starts with "GP" in ASCII and ends with an ASCII value of "11" or greater.
+|*Test Method* 
+| . Retrieve the bytes at the application id of the SQLite database header 
+. If the string is "GP10" in ASCII, fall back to the tests for GeoPackage 1.0.
+. If the string is "GP11" in ASCII, fall back to the tests for GeoPackage 1.1.
+. If the string is "GPKG" in ASCII
+.. PRAGMA user_version
+.. Fail if the integer representation of the user_version string is less than 10200.
+. Fail if the string is not one of those values
 |*Reference* |Clause 1.1.1.1.1 Req 2:
 |*Test Type* |Basic
 |========================================
@@ -72,7 +79,6 @@
 . Not testable if returns empty set
 . For each row table name from step 1
 .. PRAGMA table_info(table_name)
-.. Fail if returns empty set
 .. For each row type column value
 ... Fail if value is not one of the data type names specified by <<table_column_data_types>>
 . Pass if no fails
@@ -143,13 +149,8 @@
 |*Test Method* |
 . `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 "NONE" -1 "undefined", AND`
 . `SELECT srs_id, organization, organization_coordsys_id, description FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 "NONE" 0 "undefined", AND`
-. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326` returns GEOGCS ["WGS 84",
- DATUM ["World Geodetic System 1984", 
-   SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]], 
-   AUTHORITY["EPSG","6326"]],
- PRIMEM["Greenwich", 0 , AUTHORITY["EPSG","8901"]], 
- UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]], 
- AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components <twin axes> and <to wgs84> and whitespace differences in the returned text)
+. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326` 
+.. Confirm that this is a valid CRS
 . Pass if tests 1-3 are met
 . Fail otherwise
 |*Reference* |Clause 1.1.2.1.2 Requirement 11:
@@ -161,8 +162,8 @@
 |*Test Case ID* |+/base/core/spatial_ref_sys/data_values_required+
 |*Test Purpose* |Verify that the `spatial_ref_sys` table contains rows to define all `srs_id` values used by features and tiles in a GeoPackage.
 |*Test Method* |
-. SELECT DISTINCT gc.srs_id AS gc_srid, srs.srs_name, srs.srs_id, srs.organization, srs.organization_coordsys_id, srs.definition FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id
-. Pass if no returned srs values are NULL.
+. SELECT DISTINCT gc.srs_id, srs.srs_id FROM gpkg_contents AS gc LEFT OUTER JOIN gpkg_spatial_ref_sys AS srs ON srs.srs_id = gc.srs_id WHERE gc.data_type IN ('tiles', 'features')
+. Pass if no returned srs.srs_id values are NULL.
 . Fail otherwise
 |*Reference* |Clause Clause 1.1.2.1.2 Req 12:
 |*Test Type* |Capability
@@ -192,10 +193,8 @@
 |*Test Case ID* |+/base/core/contents/data/data_values_table_name+
 |*Test Purpose* |Verify that the `table_name` column values in the `gpkg_contents` table are valid.
 |*Test Method* |
-. SELECT DISTINCT gc.table_name AS gc_table, sm.tbl_name 
-FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = sm.tbl_name
-. Not testable if returns an empty result set.
-. Fail if any gpkg_contents.table_name value is NULL 
+. SELECT DISTINCT table_name FROM gpkg_contents WHERE table_name NOT IN (SELECT name FROM sqlite_master)
+. Fail if there are any results
 . Pass otherwise.
 |*Reference* |Clause 1.1.3.1.2 Req 14:
 |*Test Type* |Capability
@@ -210,8 +209,7 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 . Not testable if returns an empty result set.
 . For each row from step 1
 .. Fail if format of returned value does not match yyyy-mm-ddThh:mm:ss.hhhZ
-.. Log pass otherwise
-. Pass if logged pass and no fails.
+. Pass if no fails.
 |*Reference* |Clause 1.1.3.1.2 Req 15:
 |*Test Type* |Capability
 |========================================
@@ -234,10 +232,8 @@ FROM gpkg_contents AS ge LEFT OUTER JOIN sqlite_master AS sm ON gc.table_name = 
 |*Test Case ID* |+/opt/valid_geopackage+
 |*Test Purpose* |Verify that a GeoPackage contains a features or tiles table and `gpkg_contents` table row describing it.
 |*Test Method* |
-. Execute test /opt/features/contents/data/features_row
-. Pass if test passed
-. Execute test /opt/tiles/contents/data/tiles_row
-. Pass if test passed
+. SELECT COUNT(*) FROM gpkg_contents WHERE data_type IN ('tiles', 'features')
+. Pass if result > 0
 . Fail otherwise
 |*Reference* |Clause 2 Req 17:
 |*Test Type* |Capability
