@@ -42,9 +42,13 @@ Read-write
 [float]
 ====== Table Definition
 
-[requirement]
+[[r103]]
+[caption=""]
+.Requirement 103
+====
 A GeoPackage MAY contain a table or updateable view named `gpkg_data_columns`.
 If present it SHALL be defined per clause 2.3.2.1.1 <<schema_data_columns_table_definition>>, <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
+====
 
 [[gpkg_data_columns_cols]]
 .Data Columns Table or View Definition
@@ -71,15 +75,27 @@ See <<gpkg_data_columns_sql>>.
 [float]
 ====== Table Data Values
 
-[requirement]
+[[r104]]
+[caption=""]
+.Requirement 104
+====
 Values of the `gpkg_data_columns` table `table_name` column value SHALL reference values in the `gpkg_contents` `table_name` column.
+====
 
-[requirement]
+[[r105]]
+[caption=""]
+.Requirement 105
+====
 The `column_name` column value in a `gpkg_data_columns` table row SHALL contain the name of a column in the SQLite table or view identified by the `table_name` column value.
+====
 
-[requirement]
+[[r106]]
+[caption=""]
+.Requirement 106
+====
 The constraint_name column value in a gpkg_data_columns table MAY be NULL.
 If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
+====
 
 [float]
 ===== Data Column Constraints
@@ -88,7 +104,10 @@ If it is not NULL, it SHALL contain a constraint_name column value (which SHALL 
 [float]
 ====== Table Definition
 
-[requirement]
+[[r107]]
+[caption=""]
+.Requirement 107
+====
 A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
 If present it SHALL be defined per clause 2.3.3.1.1 <<data_column_constraints_table_definition>>, <<gpkg_data_column_constraints_cols>> and <<gpkg_data_column_constraints_sql>>.
 
@@ -134,32 +153,60 @@ These restrictions MAY be enforced by SQL triggers or by code in applications th
 |sampleGlob| glob| [1-2][0-9][0-9][0-9]| NULL| NULL| NULL| NULL
 |=======================================================================
 
-[requirement]
+[[r108]]
+[caption=""]
+.Requirement 108
+====
 The `gpkg_data_column_constraints` table MAY be empty.
 If it contains data, the lowercase `constraint_type` column values SHALL be one of "range", "enum", or "glob".
+====
 
-[requirement]
+[[r109]]
+[caption=""]
+.Requirement 109
+====
 gpkg_data_column_constraint constraint_name values for rows with constraint_type values of 'range' and 'glob' SHALL be unique.
+====
 
-[requirement]
+[[r110]]
+[caption=""]
+.Requirement 110
+====
 The `gpkg_data_column_constraints` table MAY be empty.
 If it contains rows with constraint_type column values of "range", the `value` column values for those rows SHALL be NULL.
+====
 
-[requirement]
+[[r111]]
+[caption=""]
+.Requirement 111
+====
 The `gpkg_data_column_constraints` table MAY be empty.
 If it contains rows with `constraint_type` column values of "range", the `min` column values for those rows SHALL be NOT NULL and less than the `max` column value which shall be NOT NULL.
+====
 
-[requirement]
+[[r112]]
+[caption=""]
+.Requirement 112
+====
 The `gpkg_data_column_constraints` table MAY be empty.
 If it contains rows with `constraint_type` column values of "range", the `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be 0 or 1.
+====
 
-[requirement]
+[[r113]]
+[caption=""]
+.Requirement 113
+====
 The `gpkg_data_column_constraints` table MAY be empty.
 If it contains rows with `constraint_type` column values of "enum" or "glob", the `min`, `max`, `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be NULL.
+====
 
-[requirement]
+[[r114]]
+[caption=""]
+.Requirement 114
+====
 The `gpkg_data_column_constraints` table MAY be empty.
 If it contains rows with `constraint_type` column values of "enum" or "glob", the `value` column SHALL NOT be NULL.
+====
 
 [float]
 ==== Abstract Test Suite
