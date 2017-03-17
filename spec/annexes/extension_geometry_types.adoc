@@ -40,18 +40,34 @@ Read-write
 [float]
 ===== GeoPackage
 
-[requirement]
+[[r65]]
+[caption=""]
+.Requirement 65
+====
 A GeoPackage MAY store feature table geometries with the extended non-linear geometry types (CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in <<geometry_types>>.
+====
 
-[requirement]
+[[r66]]
+[caption=""]
+.Requirement 66
+====
 The GeoPackageBinary geometry encoding format specified in clause <<gpb_format>> SHALL be used to encode non-linear geometry types using the type codes in <<geometry_types>> table <<geometry_types_extension>>.
+====
 
-[requirement]
+[[r67]]
+[caption=""]
+.Requirement 67
+====
 [[extension_geometry_types_extensions_name]]
 An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_<gname>” template where <gname> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage.
+====
 
-[requirement]
+[[r68]]
+[caption=""]
+.Requirement 68
+====
 A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per the previous requirement <<extension_geometry_types_extensions_name>>.
+====
 
 [float]
 ===== GeoPackage SQLite Configuration
@@ -61,8 +77,12 @@ None
 [float]
 ===== GeoPackage SQLite Extension
 
-[requirement]
+[[r69]]
+[caption=""]
+.Requirement 69
+====
 [line-through]#SQL functions that operate on GeoPackageBinary geometries as specified in other extensions SHALL operate correctly on the non-linear geometries specified in this extension#.
+====
 
 [float]
 ==== Abstract Test Suite
