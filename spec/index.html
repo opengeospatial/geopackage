@@ -13123,7 +13123,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <div class="title">Requirement 115</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL have an additional column called <code>definition_12_063</code> as per <a href="#gpkg_spatial_ref_sys_cols_crs_wkt">Spatial Ref Sys Table Definition</a> and <a href="#gpkg_spatial_ref_sys_crs_wkt_sql">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</a>.</p>
+<p>For GeoPackages conforming to this extension, the <code>gpkg_spatial_ref_sys</code> table SHALL have an additional column called <code>definition_12_063</code> as per <a href="#gpkg_spatial_ref_sys_cols_crs_wkt">Spatial Ref Sys Table Definition</a> and <a href="#gpkg_spatial_ref_sys_crs_wkt_sql">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</a>.</p>
 </div>
 </div>
 </div>
@@ -13214,6 +13214,9 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <p>At least one definition column SHALL be defined with a valid definition unless the value of the <code>srs_id</code> column is <code>0</code> or <code>-1</code>. Both columns SHOULD be defined. If it is not possible to produce a valid <a href="#32">[32]</a> definition then the value of the <code>definition</code> column MAY be <code>undefined</code>. If it is not possible to produce a valid <a href="#34">[34]</a> definition then the value of the <code>definition_12_063</code> column MAY be <code>undefined</code>.</p>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>If, for a particular row, both the <code>definition</code> and <code>definition_12_063</code> columns are populated, the value in the <code>definition_12_063</code> column takes priority.</p>
 </div>
 <h4 id="_abstract_test_suite_8" class="float">Abstract Test Suite</h4>
 <h5 id="_table_definition_9" class="float">Table Definition</h5>
@@ -14598,7 +14601,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-17 20:06:21 UTC
+Last updated 2017-03-17 21:39:42 UTC
 </div>
 </div>
 </body>
