@@ -51,7 +51,7 @@ The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extensio
 [caption=""]
 .Requirement 91
 ====
-A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.
+A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, "tile_data" column_name values and extension_name column values of "gpkg_webp".
 ====
 
 [[r92]]
@@ -81,7 +81,7 @@ None
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
-|*Test Purpose:* |Verify that the “gpkg_webp” extensions name is used to register WEBP tile encoding implementations.
+|*Test Purpose:* |Verify that the "gpkg_webp" extensions name is used to register WEBP tile encoding implementations.
 |*Test Method:* |
 . +SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'+
 . Not testable if empty result set
@@ -106,7 +106,7 @@ None
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_row+
-|*Test Purpose:* |Verify that WEBP tile encodings are registered using the “gpkg_webp” extensions name.
+|*Test Purpose:* |Verify that WEBP tile encodings are registered using the "gpkg_webp" extensions name.
 |*Test Method:* |	+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
 |*Reference:* |Annex F.7 Req 91
 |*Test Type* |Capability

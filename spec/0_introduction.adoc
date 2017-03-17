@@ -10,14 +10,14 @@ This standard is intended to facilitate widespread adoption and use of GeoPackag
 An application that accesses a GPKG will make use of the GPKG capabilities it requires; few if any such applications will make use of all GPKG capabilities.
 
 This OGC® Encoding Standard defines GeoPackages for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales.
-Direct use means the ability to access and update data in a “native” format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.
+Direct use means the ability to access and update data in a "native" format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.
 
 A *GeoPackage* is a platform-independent SQLite <<5>> database file that contains GeoPackage data and metadata tables shown in <<geopackage_tables_figure>> below, with specified definitions, integrity assertions, format limitations and content constraints.
 The allowable content of a GeoPackage is entirely defined in this standard.
 
 An *Extended GeoPackage* is a *GeoPackage* that contains any additional data elements (tables or columns) or SQL constructs (views, data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.
 
-A *GeoPackage* MAY be “empty” (contain user data table(s) for vector features, non-spatial attributes, and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
+A *GeoPackage* MAY be "empty" (contain user data table(s) for vector features, non-spatial attributes, and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
 GeoPackage metadata CAN describe GeoPackage data contents and identify external data synchronization sources and targets.
 A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers to maintain indexes and enforce content constraints.
 

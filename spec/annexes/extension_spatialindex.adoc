@@ -48,14 +48,14 @@ This extension uses the rtree implementation provided by the SQLite R*Tree Modul
 [caption=""]
 .Requirement 75
 ====
-The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.
+The "gpkg_rtree_index" extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.
 ====
 
 [[r76]]
 [caption=""]
 .Requirement 76
 ====
-A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name “gpkg_rtree_index”, the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
+A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name "gpkg_rtree_index", the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
 ====
 
 [[r77]]
@@ -268,7 +268,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/features/spatial_indexes/extension_name+
-|*Test Purpose* |Verify that the “gpkg_rtree_index” extension name is used to register spatial index extensions.
+|*Test Purpose* |Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
 . Not testable if result set is empty
@@ -278,7 +278,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
 .. SELECT extension_name from gpkg_extensions WHERE table_name = result_set_table_name AND column_name = result_set_column_name
-.. Log pass if result is “gpkg_rtree_index”
+.. Log pass if result is "gpkg_rtree_index"
 .. Fail otherwise
 . Pass if logged pass and no fails
 |*Reference* |Annex F.3 Req 77
@@ -291,7 +291,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/features/spatial_indexes/extension_row+
-|*Test Purpose* |Verify that spatial index extensions are registered using the “gpkg_rtree_index” name in the gpkg_extensions table.
+|*Test Purpose* |Verify that spatial index extensions are registered using the "gpkg_rtree_index" name in the gpkg_extensions table.
 |*Test Method* |
  /reg_ext/features/spatial_indexes/extension_name
 |*Reference* |Annex F.3 Req 78
