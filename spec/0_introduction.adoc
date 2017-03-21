@@ -1,16 +1,20 @@
 [preface]
 == Introduction
 
-Mobile device users who require map/geospatial application services and operate in disconnected or limited network connectivity environments are challenged by limited storage capacity and the lack of open format geospatial data to support these applications.
-The current situation is that each map/geospatial application requires its own potentially proprietary geospatial data store.
-These separate application-specific data stores may contain the same geospatial data, wasting the limited storage available, and requiring custom applications for data translation, replication, and synchronization to enable different map/geospatial applications to share the same world view. In addition, many existing geospatial data stores are platform-specific, which means that users with different platforms must translate data to share it.
+A *GeoPackage* is an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information.
+It is a platform-independent SQLite <<5>> database file that contains the GeoPackage data and metadata tables shown in <<geopackage_tables_figure>> below.
 
-An open, standards-based, application-independent, platform-independent, portable, interoperable, self-describing, GeoPackage (GPKG) data container, API and manifest are needed to overcome these challenges and to effectively support multiple map/geospatial applications such as fixed product distribution, local data collection, and geospatially enabled analytics.
+The GeoPackage Encoding Standard (this document) describes a set of conventions for storing the following within an SQLite database:
+
+* vector features
+* tile matrix sets of imagery and raster maps at various scales
+* extensions
+
+These conventions include table definitions, integrity assertions, format limitations, and content constraints. The required and supported content of a GeoPackage is entirely defined in the standard. These capabilities are built on a common base and the extension mechanism provides implementors a way to include additional functionality in their GeoPackages.
+
+Since a GeoPackage is a database container, it supports direct use. This means that the data in a GeoPackage can be accessed and updated in a "native" storage format without intermediate format translations. GeoPackages that comply with the requirements in the standard and do not implement vendor-specific extensions are interoperable across all enterprise and personal computing environments. GeoPackages are particularly useful on mobile devices such as cell phones and tablets in communications environments where there is limited connectivity and bandwidth.Mobile device users who require map/geospatial application services and operate in disconnected or limited network connectivity environments are challenged by limited storage capacity and the lack of open format geospatial data to support these applications.
+
 This standard is intended to facilitate widespread adoption and use of GeoPackages by both COTS and open-source software applications on enterprise production platforms as well as mobile hand-held devices <<B1>> <<B2>>, given that mobile hand held devices do not yet have the processing power or battery life to effectively tackle difficult geospatial product production and analysis tasks.
-An application that accesses a GPKG will make use of the GPKG capabilities it requires; few if any such applications will make use of all GPKG capabilities.
-
-A *GeoPackage* is a platform-independent SQLite <<5>> database file that contains GeoPackage data and metadata tables shown in <<geopackage_tables_figure>> below, with specified definitions, integrity assertions, format limitations and content constraints.
-The allowable content of a GeoPackage is entirely defined in this standard.
 
 An *Extended GeoPackage* is a *GeoPackage* that contains any additional data elements (tables or columns) or SQL constructs (data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.
 
