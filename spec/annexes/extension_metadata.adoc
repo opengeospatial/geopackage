@@ -53,7 +53,7 @@ A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be def
 ====
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<21>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<28>>, ISO 19115-2 <<B6>>, ISO 19139 <<B7>>, Dublin Core <<B8>>, CSDGM <<B10>>, DDMS <<B12>>, NMF/NMIS <<B13>>, etc.
-The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <<B14>> encoded in XMI <<B15>>, GML Application Schemas <<30>>, ISO 19110 feature catalogues <<B18>>, OWL <<B20>> and SKOS <<B21>> taxonomies, etc.
+The GeoPackage interpretation of what constitutes "metadata" is a broad one that includes UML models <<B14>> encoded in XMI <<B15>>, GML Application Schemas <<30>>, ISO 19110 feature catalogues <<B18>>, OWL <<B20>> and SKOS <<B21>> taxonomies, etc.
 
 :metadata_table_definition_foot1: footnote:[For example, for ISO 19139 metadata the URI value should be the metadata schema namespace http://www.isotc211.org/2005/gmd]
 
@@ -79,13 +79,13 @@ See <<gpkg_metadata_sql>>.
 
 The `md_scope` column in the `gpkg_metadata` table is the name of the applicable scope for the contents of the metadata column for a given row.
 The list of valid scope names and their definitions is provided in <<metadata_scopes>> below.
-The initial contents of this table were obtained from the ISO 19115 <<40>>, Annex B B.5.25 MD_ScopeCode code list, which was extended footnote:[The scope codes in <<metadata_scopes>> include a very wide set of descriptive information types as “metadata” to describe data.] for use in the GeoPackage specification by addition of entries with “NA” as the scope code column in <<gpkg_metadata_cols>>.
+The initial contents of this table were obtained from the ISO 19115 <<40>>, Annex B B.5.25 MD_ScopeCode code list, which was extended footnote:[The scope codes in <<metadata_scopes>> include a very wide set of descriptive information types as "metadata" to describe data.] for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <<gpkg_metadata_cols>>.
 
 
 :table_metadata_scopes_foot1: footnote:[ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.]
-:table_metadata_scopes_foot2: footnote:[The “catalog” md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.]
-:table_metadata_scopes_foot3: footnote:[The “schema” md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.]
-:table_metadata_scopes_foot4: footnote:[The “taxonomy” md_scope MAY be used for taxonomy or knowledge system (B41)(B42) “linked data” information stored as XML metadata that is linked to features stored in a GeoPackage.]
+:table_metadata_scopes_foot2: footnote:[The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.]
+:table_metadata_scopes_foot3: footnote:[The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.]
+:table_metadata_scopes_foot4: footnote:[The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.]
 
 [float]
 [[metadata_scopes]]
