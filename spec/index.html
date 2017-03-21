@@ -272,17 +272,17 @@ An application that accesses a GPKG will make use of the GPKG capabilities it re
 </div>
 <div class="paragraph">
 <p>This OGC® Encoding Standard defines GeoPackages for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales.
-Direct use means the ability to access and update data in a “native” format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.</p>
+Direct use means the ability to access and update data in a "native" format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.</p>
 </div>
 <div class="paragraph">
 <p>A <strong>GeoPackage</strong> is a platform-independent SQLite <a href="#5">[5]</a> database file that contains GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">GeoPackage Tables Overview</a> below, with specified definitions, integrity assertions, format limitations and content constraints.
 The allowable content of a GeoPackage is entirely defined in this standard.</p>
 </div>
 <div class="paragraph">
-<p>An <strong>Extended GeoPackage</strong> is a <strong>GeoPackage</strong> that contains any additional data elements (tables or columns) or SQL constructs (data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.</p>
+<p>An <strong>Extended GeoPackage</strong> is a <strong>GeoPackage</strong> that contains any additional data elements (tables or columns) or SQL constructs (views, data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.</p>
 </div>
 <div class="paragraph">
-<p>A <strong>GeoPackage</strong> MAY be “empty” (contain user data table(s) for vector features, non-spatial attributes, and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
+<p>A <strong>GeoPackage</strong> MAY be "empty" (contain user data table(s) for vector features, non-spatial attributes, and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
 GeoPackage metadata CAN describe GeoPackage data contents and identify external data synchronization sources and targets.
 A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers to maintain indexes and enforce content constraints.</p>
 </div>
@@ -321,11 +321,11 @@ The GeoPackage standard defines a SQL database schema designed for use with the 
 Using SQLite as the basis for GeoPackage simplifies production, distribution and use of GeoPackages and assists in guaranteeing the integrity of the data they contain.</p>
 </div>
 <div class="paragraph">
-<p>“Self-contained” means that container software requires very minimal support from external libraries or from the operating system.
-“Single-file” means that a container not currently opened by any software application consists of a single file in a file system supported by a computing platform operating system.
-“Cross-platform” means that a container file MAY be created and loaded with data on one computing platform, and used and updated on another, even if they use different operating systems, file systems, and byte order (endian) conventions.
-“Serverless” means that the RDBMS container is implemented without any intermediary server process, and accessed directly by application software.
-“Transactional” means that RDBMS transactions guarantee that all changes to data in the container are Atomic, Consistent, Isolated, and Durable (ACID) despite program crashes, operating system crashes, and power failures.</p>
+<p>"Self-contained" means that container software requires very minimal support from external libraries or from the operating system.
+"Single-file" means that a container not currently opened by any software application consists of a single file in a file system supported by a computing platform operating system.
+"Cross-platform" means that a container file MAY be created and loaded with data on one computing platform, and used and updated on another, even if they use different operating systems, file systems, and byte order (endian) conventions.
+"Serverless" means that the RDBMS container is implemented without any intermediary server process, and accessed directly by application software.
+"Transactional" means that RDBMS transactions guarantee that all changes to data in the container are Atomic, Consistent, Isolated, and Durable (ACID) despite program crashes, operating system crashes, and power failures.</p>
 </div>
 <div class="sect4">
 <h5 id="_data">1.1.1.1. Data</h5>
@@ -336,7 +336,7 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage SHALL be a <a href="http://www.sqlite.org/">SQLite</a> <a href="#5">[5]</a> database file using <a href="http://sqlite.org/fileformat2.html">version 3 of the SQLite file format</a> <a href="#6">[6]</a> <a href="#7">[7]</a>.
-The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#B4">[B4]</a> string “SQLite format 3” <span class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</span>. <span class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</span></p>
+The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#B4">[B4]</a> string "SQLite format 3" <span class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</span>. <span class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</span></p>
 </div>
 </div>
 </div>
@@ -360,12 +360,12 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 <div class="title">Requirement 3</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL have the file extension name “.gpkg”.</p>
+<p>A GeoPackage SHALL have the file extension name ".gpkg".</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p><span class="line-through">It is RECOMMENDED that Extended GeoPackages use the file extension “.gpkx”, but this is NOT a GeoPackage requirement.</span></p>
+<p><span class="line-through">It is RECOMMENDED that Extended GeoPackages use the file extension ".gpkx", but this is NOT a GeoPackage requirement.</span></p>
 </div>
 </div>
 <div class="sect5">
@@ -374,12 +374,12 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 <div class="title">Requirement 4</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the “gpkg” author name specified in this encoding standard.</p>
+<p>A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the "gpkg" author name specified in this encoding standard.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
+<p>In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (views, data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
 SQLite databases that use constructs from the GeoPackage standard but extend those constructs to contain elements not specified in the core GeoPackage standard are referred to as Extended GeoPackages throughout this standard.</p>
 </div>
 <div id="r5" class="exampleblock">
@@ -461,7 +461,7 @@ SQLite databases that use constructs from the GeoPackage standard but extend tho
 <div class="title">Requirement 6</div>
 <div class="content">
 <div class="paragraph">
-<p>The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file. <span class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</span></p>
+<p>The SQLite PRAGMA integrity_check SQL command SHALL return "ok" for a GeoPackage file. <span class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnote_5" title="View footnote.">5</a>]</span></p>
 </div>
 </div>
 </div>
@@ -679,12 +679,12 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="title">Requirement 13</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a href="#gpkg_contents_cols">Contents Table or View Definition</a> and <a href="#gpkg_contents_sql">gpkg_contents Table Definition SQL</a>.</p>
+<p>A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a href="#gpkg_contents_cols">Contents Table Definition</a> and <a href="#gpkg_contents_sql">gpkg_contents Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
 <table id="gpkg_contents_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 4. Contents Table or View Definition</caption>
+<caption class="title">Table 4. Contents Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -802,7 +802,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>data_type</code> specifies the type of content contained in the table, for example “features” per clause <a href="#features">Features</a>, “attributes” per clause <a href="#attributes">Attributes</a>, “tiles” per clause <a href="#tiles">Tiles</a>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.</p>
+<p>The <code>data_type</code> specifies the type of content contained in the table, for example "features" per clause <a href="#features">Features</a>, "attributes" per clause <a href="#attributes">Attributes</a>, "tiles" per clause <a href="#tiles">Tiles</a>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.</p>
 </div>
 <div class="paragraph">
 <p>The <code>last_change</code> SHOULD contain the timestamp of when the content in the referenced table was last updated, in ISO8601 format. Note that since it is not practical to ensure that this value is maintained properly in all cases, this value should be treated as informative.</p>
@@ -861,7 +861,7 @@ The first component of the SQL schema for vector features in a GeoPackage is the
 Other components are defined below.</p>
 </div>
 <div class="paragraph">
-<p>In a GeoPackage, “simple” features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) <a href="#12">[12]</a> geometry model shown in <a href="#core_geometry_model_figure">Core Geometry Model</a> below.</p>
+<p>In a GeoPackage, "simple" features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) <a href="#12">[12]</a> geometry model shown in <a href="#core_geometry_model_figure">Core Geometry Model</a> below.</p>
 </div>
 <div id="core_geometry_model_figure" class="imageblock">
 <div class="content">
@@ -958,7 +958,7 @@ Each ring is defined by a Curve instance.</p>
 <div class="title">Requirement 18</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_contents</code> table SHALL contain a row with a lowercase <code>data_type</code> column value of “features” for each vector features user data table or view.</p>
+<p>The <code>gpkg_contents</code> table SHALL contain a row with a lowercase <code>data_type</code> column value of "features" for each vector features user data table or view.</p>
 </div>
 </div>
 </div>
@@ -1175,7 +1175,7 @@ GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000
 <div class="title">Requirement 21</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage with a <code>gpkg_contents</code> table row with a “features” <code>data_type</code> SHALL contain a <code>gpkg_geometry_columns</code> table or updateable view per <a href="#gpkg_geometry_columns_cols">Geometry Columns Table or View Definition</a> and <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
+<p>A GeoPackage with a <code>gpkg_contents</code> table row with a "features" <code>data_type</code> SHALL contain a <code>gpkg_geometry_columns</code> table per <a href="#gpkg_geometry_columns_cols">Geometry Columns Table Definition</a> and <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -1184,7 +1184,7 @@ GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000
 identifies the geometry columns and geometry types in tables that contain user data representing features.</p>
 </div>
 <table id="gpkg_geometry_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 6. Geometry Columns Table or View Definition</caption>
+<caption class="title">Table 6. Geometry Columns Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1251,7 +1251,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <p>The FK on <code>gpkg_geometry_columns.srs_id</code> references the PK on <code>gpkg_spatial_ref_sys.srs_id</code> to ensure that geometry columns are only defined in feature tables for defined spatial reference systems.</p>
 </div>
 <div class="paragraph">
-<p>Views of this table or view MAY be used to provide compatibility with the SQL/MM <a href="#12">[12]</a> <a href="#sqlmm_gpkg_geometry_columns_sql">SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</a> and OGC Simple Features SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> <a href="#sfsql_gpkg_geometry_columns_sql">SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</a> specifications.</p>
+<p>Views of this table MAY be used to provide compatibility with the SQL/MM <a href="#12">[12]</a> <a href="#sqlmm_gpkg_geometry_columns_sql">SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</a> and OGC Simple Features SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> <a href="#sfsql_gpkg_geometry_columns_sql">SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</a> specifications.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
@@ -1263,7 +1263,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <div class="title">Requirement 22</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_geometry_columns</code> table or updateable view SHALL contain one row record for the geometry column in each vector feature data table (clause <a href="#feature_user_tables">Vector Feature User Data Tables</a>) in a GeoPackage.</p>
+<p>The <code>gpkg_geometry_columns</code> table SHALL contain one row record for the geometry column in each vector feature data table (clause <a href="#feature_user_tables">Vector Feature User Data Tables</a>) in a GeoPackage.</p>
 </div>
 </div>
 </div>
@@ -1492,9 +1492,9 @@ If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry typ
 </div>
 <div class="paragraph">
 <p>A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container.
-<span class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</span> “Tile pyramid” refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself.
-“Tile matrix” refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level.
-“Tile matrix set” refers to the definition of a tile pyramid’s tiling structure.</p>
+<span class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</span> "Tile pyramid" refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself.
+"Tile matrix" refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level.
+"Tile matrix set" refers to the definition of a tile pyramid’s tiling structure.</p>
 </div>
 <div class="paragraph">
 <p>The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.</p>
@@ -1510,7 +1510,7 @@ If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry typ
 <div class="title">Requirement 34</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_contents</code> table SHALL contain a row with a <code>data_type</code> column value of “tiles” for each tile pyramid user data table or view.</p>
+<p>The <code>gpkg_contents</code> table SHALL contain a row with a <code>data_type</code> column value of "tiles" for each tile pyramid user data table or view.</p>
 </div>
 </div>
 </div>
@@ -1521,7 +1521,7 @@ If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry typ
 <h4 id="zoom_levels">2.2.3. Zoom Levels</h4>
 <div class="paragraph">
 <p>In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify tile matrix layers in a tile matrix set that contain tiles of decreasing spatial extent and finer spatial resolution.
-Adjacent zoom levels immediately preceed or follow each other and differ by a value of 1.
+Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
 Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
 In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.
@@ -1587,12 +1587,12 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 <div class="title">Requirement 38</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>gpkg_tile_matrix_set</code> table or view per <a href="#tile_matrix_set_data_table_definition">Table Definition</a>, <a href="#gpkg_tile_matrix_set_cols">Tile Matrix Set Table or View Definition</a> and <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.</p>
+<p>A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>gpkg_tile_matrix_set</code> table per <a href="#tile_matrix_set_data_table_definition">Table Definition</a>, <a href="#gpkg_tile_matrix_set_cols">Tile Matrix Set Table Definition</a> and <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.</p>
 </div>
 </div>
 </div>
 <table id="gpkg_tile_matrix_set_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 8. Tile Matrix Set Table or View Definition</caption>
+<caption class="title">Table 8. Tile Matrix Set Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1664,7 +1664,7 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 </table>
 
 <div class="paragraph">
-<p>The gpkg_tile_matrix_set table or updateable view defines the spatial reference system (srs_id) and the maximum bounding box (min_x, min_y, max_x, max_y) for all possible tiles in a tile pyramid user data table.
+<p>The gpkg_tile_matrix_set table defines the spatial reference system (srs_id) and the maximum bounding box (min_x, min_y, max_x, max_y) for all possible tiles in a tile pyramid user data table.
 All tiles present in the tile pyramid SHALL fall within this bounding box. However, the bounding box MAY be larger than the minimum bounding rectangle around the actual tiles in that pyramid.</p>
 </div>
 <div class="paragraph">
@@ -1674,7 +1674,7 @@ All tiles present in the tile pyramid SHALL fall within this bounding box. Howev
 <div class="sect5">
 <h6 id="clause_tile_matrix_set_table_data_values">2.2.6.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>The minimum bounding box defined in the gpkg_tile_matrix_set table or view for a tile pyramid user data table SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated based on the column values for the user data table in the gpkg_tile_matrix table or view.  For example, because GeoPackages use the upper left tile origin convention defined in clause <a href="#clause_tile_matrix_table_data_values">Table Data Values</a> below, the gpkg_tile_matrix_set (min_x, max_y) ordinate is the upper-left corner of tile (0,0) for all zoom levels in a table_name tile pyramid user data table.</p>
+<p>The minimum bounding box defined in the gpkg_tile_matrix_set table for a tile pyramid user data table SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated based on the column values for the user data table in the gpkg_tile_matrix table.  For example, because GeoPackages use the upper left tile origin convention defined in clause <a href="#clause_tile_matrix_table_data_values">Table Data Values</a> below, the gpkg_tile_matrix_set (min_x, max_y) ordinate is the upper-left corner of tile (0,0) for all zoom levels in a table_name tile pyramid user data table.</p>
 </div>
 <div id="r39" class="exampleblock">
 <div class="title">Requirement 39</div>
@@ -1688,7 +1688,7 @@ All tiles present in the tile pyramid SHALL fall within this bounding box. Howev
 <div class="title">Requirement 40</div>
 <div class="content">
 <div class="paragraph">
-<p>The gpkg_tile_matrix_set table or view SHALL contain one row record for each tile pyramid user data table.</p>
+<p>The gpkg_tile_matrix_set table SHALL contain one row record for each tile pyramid user data table.</p>
 </div>
 </div>
 </div>
@@ -1713,12 +1713,12 @@ All tiles present in the tile pyramid SHALL fall within this bounding box. Howev
 <div class="title">Requirement 42</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrix</code> table or view per clause 2.2.7.1.1 <a href="#tile_matrix_data_table_definition">Table Definition</a>, Table <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table or View Definition</a> and Table <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>.</p>
+<p>A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrix</code> table per clause 2.2.7.1.1 <a href="#tile_matrix_data_table_definition">Table Definition</a>, Table <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table Definition</a> and Table <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>.</p>
 </div>
 </div>
 </div>
 <table id="gpkg_tile_matrix_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 9. Tile Matrix Metadata Table or View Definition</caption>
+<caption class="title">Table 9. Tile Matrix Metadata Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1796,7 +1796,7 @@ All tiles present in the tile pyramid SHALL fall within this bounding box. Howev
 </table>
 
 <div class="paragraph">
-<p>The <code>gpkg_tile_matrix</code> table or updateable view documents the structure of the tile matrix at each zoom level in each tiles table.
+<p>The <code>gpkg_tile_matrix</code> table documents the structure of the tile matrix at each zoom level in each tiles table.
 It allows GeoPackages to contain rectangular as well as square tiles (e.g. for better representation of polar regions).
 It allows tile pyramids with zoom levels that differ in resolution by factors of 2, irregular intervals, or regular intervals other than factors of 2.</p>
 </div>
@@ -1818,7 +1818,7 @@ It allows tile pyramids with zoom levels that differ in resolution by factors of
 <div class="title">Requirement 44</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_tile_matrix</code> table or view SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.</p>
+<p>The <code>gpkg_tile_matrix</code> table SHALL contain one row record for each zoom level that contains one or more tiles in each tile pyramid user data table or view.</p>
 </div>
 </div>
 </div>
@@ -1832,10 +1832,10 @@ Similarly, height of a tile matrix (the difference between <code>min_y</code> an
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>gpkg_tile_matrix</code> table or view MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.</p>
+<p>The <code>gpkg_tile_matrix</code> table MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.</p>
 </div>
 <div class="paragraph">
-<p>GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale “whole world” zoom level view <span class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</span>, as specified by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.
+<p>GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale "whole world" zoom level view <span class="footnote">[<a id="_footnoteref_20" class="footnote" href="#_footnote_20" title="View footnote.">20</a>]</span>, as specified by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.
 The tile coordinate (0,0) always refers to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.</p>
 </div>
 <div id="r46" class="exampleblock">
@@ -2037,7 +2037,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 </div>
 <div class="paragraph">
 <p>GeoPackage extensions are identified by a name of the form &lt;author&gt;_&lt;extension name&gt; where &lt;author&gt; indicates the person or organization that developed and maintains the extension.
-The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC and used in GeoPackages.
+The author value "gpkg" is reserved for GeoPackage extensions that are developed and maintained by OGC and used in GeoPackages.
 Implementers use their own author names to register other extensions<span class="footnote">[<a id="_footnoteref_26" class="footnote" href="#_footnote_26" title="View footnote.">26</a>]</span> used in Extended GeoPackages.</p>
 </div>
 </div>
@@ -2058,7 +2058,7 @@ If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extension
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_extensions</code> table or updateable view in a GeoPackage is used to indicate that a particular extension applies to a GeoPackage, a table in a GeoPackage or a column of a table in a GeoPackage.
-An application that accesses a GeoPackage can query the <code>gpkg_extensions</code> table instead of the contents of all the user data tables to determine if it has the required capabilities to read or write to tables with extensions, and to “fail fast” and return an error message if it does not.</p>
+An application that accesses a GeoPackage can query the <code>gpkg_extensions</code> table instead of the contents of all the user data tables to determine if it has the required capabilities to read or write to tables with extensions, and to "fail fast" and return an error message if it does not.</p>
 </div>
 <table id="gpkg_extensions_cols" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 11. GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</caption>
@@ -2156,12 +2156,12 @@ They SHALL NOT be NULL for rows where the <code>column_name</code> value is not 
 <p>Each <code>extension_name</code> column value in a <code>gpkg_extensions</code> row SHALL be a unique case sensitive value of the form &lt;author&gt;_&lt;extension_name&gt; where &lt;author&gt; indicates the person or organization that developed and
 maintains the extension. The valid character set for &lt;author&gt; SHALL be [a-zA-Z0-9].
 The valid character set for &lt;extension_name&gt; SHALL be [a-zA-Z0-9_].
-An <code>extension_name</code> for the “gpkg” author name SHALL be one of those defined in this encoding standard or in an OGC document (e.g. Best Practices Document or Encoding Standard) that extends it.</p>
+An <code>extension_name</code> for the "gpkg" author name SHALL be one of those defined in this encoding standard or in an OGC document (e.g. Best Practices Document or Encoding Standard) that extends it.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The author value “gpkg” is reserved for GeoPackage extensions that are developed and maintained by OGC.
+<p>The author value "gpkg" is reserved for GeoPackage extensions that are developed and maintained by OGC.
 GeoPackage implementers use their own author names to register other extensions.</p>
 </div>
 <div id="r63" class="exampleblock">
@@ -2187,7 +2187,7 @@ GeoPackage implementers use their own author names to register other extensions.
 <p>Some extensions do not impose any additional requirements on software that accesses a GeoPackage in a read-only fashion.
 An example of this is an extension that defines an SQL trigger that uses a non-standard SQL function defined in a GeoPackage SQLite Extension.
 Triggers are only invoked when data is written to the GeoPackage, so usage of this type of extension can be safely ignored for read-only access.
-This is indicated by a gpkg_extensions.scope column value of “write_only”.</p>
+This is indicated by a gpkg_extensions.scope column value of "write_only".</p>
 </div>
 </div>
 </div>
@@ -2211,7 +2211,7 @@ This is indicated by a gpkg_extensions.scope column value of “write_only”.</
 <div class="title">Requirement 118</div>
 <div class="content">
 <div class="paragraph">
-<p>The gpkg_contents table SHALL contain a row with a data_type column value of “attributes” for each attributes data table or view.</p>
+<p>The gpkg_contents table SHALL contain a row with a data_type column value of "attributes" for each attributes data table or view.</p>
 </div>
 </div>
 </div>
@@ -6989,7 +6989,7 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.1.2.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove “at a minimum” after “includes” in 2nd paragraph, 1st sentence; conflicts with Clause 1</p>
+<p>Remove "at a minimum" after "includes" in 2nd paragraph, 1st sentence; conflicts with Clause 1</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7052,7 +7052,7 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annex B, B.5</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change all "@" to “&lt;at&gt;”</p>
+<p>Change all "@" to "&lt;at&gt;"</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7097,7 +7097,7 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.1.5.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Add “and geometry types” to 1st paragraph 1st sentence</p>
+<p>Add "and geometry types" to 1st paragraph 1st sentence</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7133,7 +7133,7 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.2.2</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove “and run” from clause and Req 9</p>
+<p>Remove "and run" from clause and Req 9</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7151,7 +7151,7 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annex A, A.2.2.7.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Change step 2 to “Not testable if less than 1”</p>
+<p>Change step 2 to "Not testable if less than 1"</p>
 </div></div></td>
 </tr>
 <tr>
@@ -7187,7 +7187,7 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Paul Daisey</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annex C, C.7, Table 29</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Remove spurious “)” from tile_data column definition</p>
+<p>Remove spurious ")" from tile_data column definition</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8497,7 +8497,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 67</div>
 <div class="content">
 <div id="extension_geometry_types_extensions_name" class="paragraph">
-<p>An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_&lt;gname&gt;” template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage.</p>
+<p>An extension name to specify a feature geometry extension type SHALL be defined for the "gpkg" author name using the "gpkg_geom_&lt;gname&gt;" template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage.</p>
 </div>
 </div>
 </div>
@@ -8566,7 +8566,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <p>SELECT cn FROM tn;</p>
 </li>
 <li>
-<p>For each row from step a, log fail if GeoPackageBinary “X” type flag is 1</p>
+<p>For each row from step a, log fail if GeoPackageBinary "X" type flag is 1</p>
 </li>
 <li>
 <p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 43, then</p>
@@ -8700,7 +8700,7 @@ viii. Otherwise log pass</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>If the first two bytes of each geometry column value are “GP”, then</p>
+<p>If the first two bytes of each geometry column value are "GP", then</p>
 <div class="olist upperalpha">
 <ol class="upperalpha" type="A">
 <li>
@@ -8854,7 +8854,7 @@ viii. Otherwise log pass</p>
 <div class="title">Requirement 75</div>
 <div class="content">
 <div class="paragraph">
-<p>The “gpkg_rtree_index” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.</p>
+<p>The "gpkg_rtree_index" extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.</p>
 </div>
 </div>
 </div>
@@ -8862,7 +8862,7 @@ viii. Otherwise log pass</p>
 <div class="title">Requirement 76</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name “gpkg_rtree_index”, the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.</p>
+<p>A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name "gpkg_rtree_index", the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.</p>
 </div>
 </div>
 </div>
@@ -9253,7 +9253,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the “gpkg_rtree_index” extension name is used to register spatial index extensions.</p>
+<p>Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9286,7 +9286,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 <p>SELECT extension_name from gpkg_extensions WHERE table_name = result_set_table_name AND column_name = result_set_column_name</p>
 </li>
 <li>
-<p>Log pass if result is “gpkg_rtree_index”</p>
+<p>Log pass if result is "gpkg_rtree_index"</p>
 </li>
 <li>
 <p>Fail otherwise</p>
@@ -9331,7 +9331,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that spatial index extensions are registered using the “gpkg_rtree_index” name in the gpkg_extensions table.</p>
+<p>Verify that spatial index extensions are registered using the "gpkg_rtree_index" name in the gpkg_extensions table.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9433,7 +9433,7 @@ See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventi
 <div class="title">Requirement 87</div>
 <div class="content">
 <div class="paragraph">
-<p>The “gpkg_zoom_other” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of other zoom intervals on a tile pyramid user data table as specified in <a href="#extension_zoom_other_intervals">Zoom Other Intervals</a>.</p>
+<p>The "gpkg_zoom_other" extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of other zoom intervals on a tile pyramid user data table as specified in <a href="#extension_zoom_other_intervals">Zoom Other Intervals</a>.</p>
 </div>
 </div>
 </div>
@@ -9441,7 +9441,7 @@ See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventi
 <div class="title">Requirement 88</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name “gpkg_zoom_other”, the table_name of the table with other zoom intervals, and the “tile_data” column_name.</p>
+<p>A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name "gpkg_zoom_other", the table_name of the table with other zoom intervals, and the "tile_data" column_name.</p>
 </div>
 </div>
 </div>
@@ -9481,7 +9481,7 @@ See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventi
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the “gpkg_zoom_other” extension name is used to register tiles tables with other than factors of two zoom intervals.</p>
+<p>Verify that the "gpkg_zoom_other" extension name is used to register tiles tables with other than factors of two zoom intervals.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9565,7 +9565,7 @@ See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventi
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that tiles tables with other than factors of two zoom intervals are registered using the “gpkg_zoom_other” extension name.</p>
+<p>Verify that tiles tables with other than factors of two zoom intervals are registered using the "gpkg_zoom_other" extension name.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9698,7 +9698,7 @@ This extension allows the use of <code>image/x-webp</code> as an additional enco
 <div class="title">Requirement 91</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.</p>
+<p>A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, "tile_data" column_name values and extension_name column values of "gpkg_webp".</p>
 </div>
 </div>
 </div>
@@ -9736,7 +9736,7 @@ The MIME type of values of the <code>tile_data</code> column in tile pyramid use
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the “gpkg_webp” extensions name is used to register WEBP tile encoding implementations.</p>
+<p>Verify that the "gpkg_webp" extensions name is used to register WEBP tile encoding implementations.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9824,7 +9824,7 @@ The MIME type of values of the <code>tile_data</code> column in tile pyramid use
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that WEBP tile encodings are registered using the “gpkg_webp” extensions name.</p>
+<p>Verify that WEBP tile encodings are registered using the "gpkg_webp" extensions name.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9971,7 +9971,7 @@ There is no GeoPackage requirement that such metadata be provided or that define
 </div>
 <div class="paragraph">
 <p>The first component of GeoPackage metadata is the <code>gpkg_metadata</code> table that MAY contain metadata in MIME <a href="#21">[21]</a> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <a href="#28">[28]</a>, ISO 19115-2 <a href="#B6">[B6]</a>, ISO 19139 <a href="#B7">[B7]</a>, Dublin Core <a href="#B8">[B8]</a>, CSDGM <a href="#B10">[B10]</a>, DDMS <a href="#B12">[B12]</a>, NMF/NMIS <a href="#B13">[B13]</a>, etc.
-The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <a href="#B14">[B14]</a> encoded in XMI <a href="#B15">[B15]</a>, GML Application Schemas <a href="#30">[30]</a>, ISO 19110 feature catalogues <a href="#B18">[B18]</a>, OWL <a href="#B20">[B20]</a> and SKOS <a href="#B21">[B21]</a> taxonomies, etc.</p>
+The GeoPackage interpretation of what constitutes "metadata" is a broad one that includes UML models <a href="#B14">[B14]</a> encoded in XMI <a href="#B15">[B15]</a>, GML Application Schemas <a href="#30">[30]</a>, ISO 19110 feature catalogues <a href="#B18">[B18]</a>, OWL <a href="#B20">[B20]</a> and SKOS <a href="#B21">[B21]</a> taxonomies, etc.</p>
 </div>
 <table id="gpkg_metadata_cols" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 18. Metadata Table Definition</caption>
@@ -10048,7 +10048,7 @@ The structure (schema) information could be in whatever encoding is used by the 
 <div class="paragraph">
 <p>The <code>md_scope</code> column in the <code>gpkg_metadata</code> table is the name of the applicable scope for the contents of the metadata column for a given row.
 The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">Metadata Scopes</a> below.
-The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</span> for use in the GeoPackage specification by addition of entries with “NA” as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
+The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</span> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
 </div>
 <table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 19. Metadata Scopes</caption>
@@ -12942,7 +12942,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints min, max, min_is_inclusive and max_is_inclusive column values are NULL for rows with a constraint_type value of "enum" or “glob”.</p>
+<p>Verify that the gpkg_data_column_constraints min, max, min_is_inclusive and max_is_inclusive column values are NULL for rows with a constraint_type value of "enum" or "glob".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -13010,7 +13010,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints value column values are NOT NULL for rows with a constraint_type value of "enum" or “glob”.</p>
+<p>Verify that the gpkg_data_column_constraints value column values are NOT NULL for rows with a constraint_type value of "enum" or "glob".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -13299,13 +13299,13 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 “NONE” -1 “undefined” “undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 "NONE" -1 "undefined" "undefined", AND</code></p>
 </li>
 <li>
-<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 “NONE” 0  “undefined” “undefined”, AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 "NONE" 0  "undefined" "undefined", AND</code></p>
 </li>
 <li>
-<p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEOGCS ["WGS 84",
+<p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326</code> returns GEOGCS ["WGS 84",
 DATUM ["World Geodetic System 1984",
   SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]],
   AUTHORITY["EPSG","6326"]],
@@ -13314,7 +13314,7 @@ UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]],
 AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components &lt;twin axes&gt; and &lt;to wgs84&gt; and whitespace differences in the returned text)</p>
 </li>
 <li>
-<p><code>SELECT definition_12_063 FROM gpkg_spatial_ref_sys WHERE organization IN (“epsg”,”EPSG”) AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
+<p><code>SELECT definition_12_063 FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
 DATUM["World Geodetic System 1984",
   ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
 PRIMEM["Greenwich", 0.0, ANGLEUNIT["degree",0.0174532925199433]],
@@ -14545,19 +14545,19 @@ For undated references, the latest edition of the normative document referred to
 <a href="#_footnoteref_30">30</a>. For example, for ISO 19139 metadata the URI value should be the metadata schema namespace <a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a>
 </div>
 <div class="footnote" id="_footnote_31">
-<a href="#_footnoteref_31">31</a>. The scope codes in &lt;&lt;metadata_scopes&gt;&gt; include a very wide set of descriptive information types as “metadata” to describe data.
+<a href="#_footnoteref_31">31</a>. The scope codes in &lt;&lt;metadata_scopes&gt;&gt; include a very wide set of descriptive information types as "metadata" to describe data.
 </div>
 <div class="footnote" id="_footnote_32">
 <a href="#_footnoteref_32">32</a>. ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.
 </div>
 <div class="footnote" id="_footnote_33">
-<a href="#_footnoteref_33">33</a>. The “catalog” md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.
+<a href="#_footnoteref_33">33</a>. The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.
 </div>
 <div class="footnote" id="_footnote_34">
-<a href="#_footnoteref_34">34</a>. The “schema” md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.
+<a href="#_footnoteref_34">34</a>. The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.
 </div>
 <div class="footnote" id="_footnote_35">
-<a href="#_footnoteref_35">35</a>. The “taxonomy” md_scope MAY be used for taxonomy or knowledge system (B41)(B42) “linked data” information stored as XML metadata that is linked to features stored in a GeoPackage.
+<a href="#_footnoteref_35">35</a>. The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.
 </div>
 <div class="footnote" id="_footnote_36">
 <a href="#_footnoteref_36">36</a>. In SQLite, the rowid value is always equal to the value of a single-column primary key on an integer column [B30\] and is not changed by a database reorganization performed by the VACUUM SQL command.
@@ -14601,7 +14601,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-17 21:39:42 UTC
+Last updated 2017-03-21 18:55:32 UTC
 </div>
 </div>
 </body>
