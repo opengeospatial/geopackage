@@ -29,12 +29,20 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 :req2_foot1: footnote:[With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196444487;" SQL statement, where 1196444487 is the 32-bit integer value of 0x47504B47. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x4B, 0x47 at offset 68 in the SQLite database file (see http://www.sqlite.org/fileformat2.html#database_header for details).]
 :req2_foot2: footnote:[Older GeoPackages use a different versioning mechanism. Instead of using the user_version, they have an application ID of "GP10" (for GeoPackage 1.0 and 1.0.1) or "GP11" (for GeoPackage 1.1).]
 
-[requirement]
+[[r1]]
+[caption=""]
+.Requirement 1
+====
 A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] <<5>> database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format] <<6>> <<7>>.
 The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <<B4>> string “SQLite format 3” {req1_foot1}. {req1_foot2}
+====
 
-[requirement]
+[[r2]]
+[caption=""]
+.Requirement 2
+====
 A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. {req2_foot1} A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.2 this value is 0x000027D8 (the hexadecimal value for 10200). {req2_foot2}
+====
 
 The maximum size of a GeoPackage file is about 140TB.
 In practice a lower size limit MAY be imposed by the filesystem to which the file is written.
@@ -42,21 +50,33 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 
 ====== File Extension Name
 
-[requirement]
+[[r3]]
+[caption=""]
+.Requirement 3
+====
 A GeoPackage SHALL have the file extension name “.gpkg”.
+====
 
 [line-through]#It is RECOMMENDED that Extended GeoPackages use the file extension “.gpkx”, but this is NOT a GeoPackage requirement.#
 
 ====== File Contents
 
-[requirement]
+[[r4]]
+[caption=""]
+.Requirement 4
+====
 A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the “gpkg” author name specified in this encoding standard.
+====
 
 In order to guarantee maximum interoperability between applications, GeoPackages should not contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
 SQLite databases that use constructs from the GeoPackage standard but extend those constructs to contain elements not specified in the core GeoPackage standard are referred to as Extended GeoPackages throughout this standard.
 
-[requirement]
+[[r5]]
+[caption=""]
+.Requirement 5
+====
 The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <<table_column_data_types>>.
+====
 
 [[table_column_data_types]]
 .GeoPackage Data Types
@@ -80,11 +100,19 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 ====== File Integrity
 :req4_foot1: footnote:[The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.]
 
-[requirement]
+[[r6]]
+[caption=""]
+.Requirement 6
+====
 The SQLite PRAGMA integrity_check SQL command SHALL return “ok” for a GeoPackage file. {req4_foot1} 
+====
 
-[requirement]
+[[r7]]
+[caption=""]
+.Requirement 7
+====
 The SQLite PRAGMA foreign_key_check SQL with no parameter value SHALL return an empty result set indicating no invalid foreign key values for a GeoPackage file.
+====
 
 ===== API
 
@@ -92,15 +120,23 @@ The SQLite PRAGMA foreign_key_check SQL with no parameter value SHALL return an 
 ====== Structured Query Language (SQL)
 :req4_foot2: footnote:[New applications should use the latest available SQLite version software <<8>>]
 
-[requirement]
+[[r8]]
+[caption=""]
+.Requirement 8
+====
 A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<6>> software APIs. {req4_foot2}
+====
 
 ====== Every GPKG SQLite Configuration
 
 The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://www.sqlite.org/compile.html[compile time] and http://www.sqlite.org/pragma.html[run time] options that MAY be used to configure SQLite for different uses. Use of http://www.sqlite.org/compile.html#omitfeatures[SQLITE_OMIT options] is not recommended because certain elements of the GeoPackage standard depend on the availability of SQLite functionality at runtime.
 
-[requirement]
+[[r9]]
+[caption=""]
+.Requirement 9
+====
 [line-through]#Every GeoPackage SQLite Configuration SHALL have the SQLite library compile time options specified in clause 1.1.1.2.2 table <<every_gpkg_sqlite_config_table>>.#
+====
 
 [[spatial_ref_sys]]
 ==== Spatial Reference Systems
@@ -110,8 +146,12 @@ The http://www.sqlite.org/download.html[SQLite] <<8>> library has many http://ww
 [[spatial_ref_sys_data_table_definition]]
 ====== Table Definition
 
-[requirement]
+[[r10]]
+[caption=""]
+.Requirement 10
+====
 A GeoPackage SHALL include a `gpkg_spatial_ref_sys` table per clause 1.1.2.1.1 <<spatial_ref_sys_data_table_definition>>, Table <<gpkg_spatial_ref_sys_cols>> and Table <<gpkg_spatial_ref_sys_sql>>.
+====
 
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
@@ -139,8 +179,12 @@ See <<gpkg_spatial_ref_sys_sql>>.
 
 Definition column WKT values in the `gpkg_spatial_ref_sys` table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <<_requirement-11>>. Values are constructed per the EBNF syntax in <<32>> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <<13>><<14>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<_requirement-11>>:
 
-[requirement]
+[[r11]]
+[caption=""]
+.Requirement 11
+====
 The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed in <<gpkg_spatial_ref_sys_records>>. The record with an `srs_id` of 4326 SHALL correspond to http://www.google.com/search?as_q=WGS-84[WGS-84] <<15>> as defined by  http://www.epsg.org/Geodetic.html[EPSG] <<B3>> in http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] <<13>><<14>>. The record with an `srs_id` of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an `srs_id` of 0 SHALL be used for undefined geographic coordinate reference systems.
+====
 
 [[gpkg_spatial_ref_sys_records]]
 .Spatial Ref Sys Table Records
@@ -152,8 +196,12 @@ The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed i
 |any|0|`NONE`|0|`undefined`|any
 |=======================================================================
 
-[requirement]
+[[r12]]
+[caption=""]
+.Requirement 12
+====
 The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
+====
 
 ==== Contents
 
@@ -163,8 +211,12 @@ The `gpkg_contents` table is intended to provide a list of all geospatial conten
 
 ====== Table Definition
 
-[requirement]
+[[r13]]
+[caption=""]
+.Requirement 13
+====
 A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_contents_cols>> and <<gpkg_contents_sql>>.
+====
 
 [[gpkg_contents_cols]]
 .Contents Table or View Definition
@@ -187,8 +239,12 @@ See <<gpkg_contents_sql>>.
 
 ====== Table Data Values
 
-[requirement]
+[[r14]]
+[caption=""]
+.Requirement 14
+====
 The `table_name` column value in a `gpkg_contents` table row SHALL contain the name of a SQLite table or view.
+====
 
 The `data_type` specifies the type of content contained in the table, for example “features” per clause <<features>>, “attributes” per clause <<attributes>>, “tiles” per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.
 
@@ -196,11 +252,18 @@ The `last_change` SHOULD contain the timestamp of when the content in the refere
 
 :req13_foot1: footnote:[The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
 
-[requirement]
+[[r15]]
+[caption=""]
+.Requirement 15
+====
 Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. {req13_foot1}
+====
 
 The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. The values are in the units specified by that CRS.
 
-[requirement]
+[[r16]]
+[caption=""]
+.Requirement 16
+====
 Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
-
+====

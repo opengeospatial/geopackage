@@ -45,8 +45,12 @@ Read-write
 [float]
 ====== Table Definition
 
-[requirement]
+[[r93]]
+[caption=""]
+.Requirement 93
+====
 A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clause 2.4.2.1.1 <<metadata_table_table_definition>>, <<gpkg_metadata_cols>> and <<gpkg_metadata_sql>>.
+====
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<21>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<28>>, ISO 19115-2 <<B6>>, ISO 19139 <<B7>>, Dublin Core <<B8>>, CSDGM <<B10>>, DDMS <<B12>>, NMF/NMIS <<B13>>, etc.
 The GeoPackage interpretation of what constitutes “metadata” is a broad one that includes UML models <<B14>> encoded in XMI <<B15>>, GML Application Schemas <<30>>, ISO 19110 feature catalogues <<B18>>, OWL <<B20>> and SKOS <<B21>> taxonomies, etc.
@@ -110,8 +114,12 @@ The initial contents of this table were obtained from the ISO 19115 <<40>>, Anne
 |dimensionGroup |008 |Information applies to a dimension group
 |=======================================================================
 
-[requirement]
+[[r94]]
+[caption=""]
+.Requirement 94
+====
 Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL be one of the name column values from <<metadata_scopes>>.
+====
 
 [float]
 ===== Metadata Reference Table
@@ -120,8 +128,12 @@ Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL
 [float]
 ====== Table Definition
 
-[requirement]
+[[r95]]
+[caption=""]
+.Requirement 95
+====
 A GeoPackage that contains a `gpkg_metadata` table SHALL contain a `gpkg_metadata_reference` table per clause 2.4.3.1.1 <<metadata_reference_table_table_definition>>, <<gpkg_metadata_reference_cols>> and <<gpkg_metadata_reference_sql>>.
+====
 
 The second component of GeoPackage metadata is the `gpkg_metadata_reference` table that links metadata in the `gpkg_metadata` table to data in the feature, and tiles tables defined in clauses 2.1.6 and 2.2.7.
 The `gpkg_metadata_reference` table is not required to contain any rows.
@@ -151,30 +163,58 @@ See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 [float]
 ====== Table Data Values
 
-[requirement]
+[[r96]]
+[caption=""]
+.Requirement 96
+====
 Every `gpkg_metadata_reference` table reference scope column value SHALL be one of ‘geopackage’, ‘table’, ‘column’, ’row’, ’row/col’ in lowercase.
+====
 
-[requirement]
+[[r97]]
+[caption=""]
+.Requirement 97
+====
 Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’ SHALL have a `table_name` column value that is NULL.
 Every other `gpkg_metadata_reference` table row SHALL have a `table_name` column value that references a value in the `gpkg_contents` `table_name` column.
+====
 
-[requirement]
+[[r98]]
+[caption=""]
+.Requirement 98
+====
 Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’,‘table’ or ‘row’ SHALL have a `column_name` column value that is NULL.
 Every other `gpkg_metadata_reference` table row SHALL have a `column_name` column value that contains the name of a column in the SQLite table or view identified by the `table_name` column value.
+====
 
-[requirement]
+[[r99]]
+[caption=""]
+.Requirement 99
+====
 Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’, ‘table’ or ‘column’ SHALL have a `row_id_value` column value that is NULL.
 Every other `gpkg_metadata_reference` table row SHALL have a `row_id_value` column value that contains the ROWID of a row in the SQLite table or view identified by the `table_name` column value.
+====
 
 :req_75_foot1: footnote:[The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
-[requirement]
+[[r100]]
+[caption=""]
+.Requirement 100
+====
 Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.{req_75_foot1}
+====
 
-[requirement]
+[[r101]]
+[caption=""]
+.Requirement 101
+====
 Every `gpkg_metadata_reference` table row `md_file_id` column value SHALL be an id column value from the `gpkg_metadata` table.
+====
 
-[requirement]
+[[r102]]
+[caption=""]
+.Requirement 102
+====
 Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NOT NULL SHALL be an id column value from the `gpkg_metadata` table that is not equal to the `md_file_id` column value for that row.
+====
 
 [float]
 ==== Abstract Test Suite

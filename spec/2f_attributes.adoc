@@ -8,9 +8,12 @@ Non-spatial attribute data represents sets (or tuples or rows) of arbitrary rela
 ==== Contents
 ===== Data
 ====== Contents Table - Attributes Row
-.*Requirement 64a*
-
-The `gpkg_contents` table SHALL contain a row with a data_type column value of "attributes" for each attributes data table or view.
+[[r118]]
+[caption=""]
+.Requirement 118
+====
+The gpkg_contents table SHALL contain a row with a data_type column value of "attributes" for each attributes data table or view.
+====
 
 ==== Attributes User Data Tables
 
@@ -21,9 +24,12 @@ The `gpkg_contents` table SHALL contain a row with a data_type column value of "
 
 Non-spatial attribute data is stored in user-defined Attribute tables. Attribute sets are rows in an Attribute table. The attributes are columns in a Attribute table. (A GeoPackage is not required to contain any Attribute data tables. Attribute data tables in a GeoPackage may be empty.)
 
-.*Requirement 64b*
-
+[[r119]]
+[caption=""]
+.Requirement 119
+====
 A GeoPackage MAY contain tables or updatable views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL have a column with column type INTEGER and PRIMARY KEY AUTOINCREMENT column constraints per <<gpkg_attributes_example>> and <<example_attributes_table_sql>>.
+====
 
 The integer primary key of an Attribute table allows attribute sets to be linked to row level metadata records in the gpkg_metadata table by rowid <<B5>> values in the gpkg_metadata_reference table as described in clause <<extension_metadata>> below.
 
