@@ -63,10 +63,10 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Default |Key
 |`id` |INTEGER |Metadata primary key |no | |PK
-|`md_scope` |TEXT |Case sensitive name of the data scope to which this metadata applies; see <<metadata_scopes>> below |no |‘dataset’ |
+|`md_scope` |TEXT |Case sensitive name of the data scope to which this metadata applies; see <<metadata_scopes>> below |no |'dataset' |
 |`md_standard_uri` |TEXT |URI <<23>> reference to the metadata structure definition authority {metadata_table_definition_foot1} |no | any |
-|`mime_type` |TEXT |MIME <<21>> encoding of metadata |no |text/xml <<24>> |
-|`metadata` |TEXT |metadata |no |’’|
+|`mime_type` |TEXT |MIME <<21>> encoding of metadata |no |'text/xml' <<24>> |
+|`metadata` |TEXT |metadata |no |''|
 |=======================================================================
 
 The md_standard_uri data value provides an identifier for the metadata structure (schema) specified by its definition authority.
@@ -145,10 +145,10 @@ The `gpkg_metadata_reference` table is not required to contain any rows.
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Default |Key
-|`reference_scope` |TEXT |Lowercase metadata reference scope; one of ‘geopackage’, ‘table’,‘column’, ’row’, ’row/col’ |no | |
-|`table_name` |TEXT |Name of the table to which this metadata reference applies, or NULL for reference_scope of ‘geopackage’. |yes | |
-|`column_name` |TEXT |Name of the column to which this metadata reference applies; NULL for `reference_scope` of ‘geopackage’,‘table’ or ‘row’, or the name of a column in the `table_name` table for `reference_scope` of ‘column’ or ‘row/col’ |yes | |
-|`row_id_value` {gpkg_metadata_reference_cols_foot1} |INTEGER |NULL for `reference_scope` of ‘geopackage’, ‘table’ or ‘column’, or the rowed of a row record in the `table_name` table for `reference_scope` of ‘row’ or ‘row/col’ |yes | |
+|`reference_scope` |TEXT |Lowercase metadata reference scope; one of 'geopackage', 'table','column', 'row', 'row/col' |no | |
+|`table_name` |TEXT |Name of the table to which this metadata reference applies, or NULL for reference_scope of 'geopackage'. |yes | |
+|`column_name` |TEXT |Name of the column to which this metadata reference applies; NULL for `reference_scope` of 'geopackage','table' or 'row', or the name of a column in the `table_name` table for `reference_scope` of 'column' or 'row/col' |yes | |
+|`row_id_value` {gpkg_metadata_reference_cols_foot1} |INTEGER |NULL for `reference_scope` of 'geopackage', 'table' or 'column', or the rowed of a row record in the `table_name` table for `reference_scope` of 'row' or 'row/col' |yes | |
 |`timestamp` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function \'%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |strftime(\'%Y-%m-%dT%H:%M:%fZ', \'now') |
 |`md_file_id` |INTEGER |`gpkg_metadata` table id column value for the metadata to which this `gpkg_metadata_reference` applies |no | |FK
 |`md_parent_id` |INTEGER |`gpkg_metadata` table id column value for the hierarchical parent `gpkg_metadata` for the `gpkg_metadata` to which this `gpkg_metadata_reference` applies, or NULL if `md_file_id` forms the root of a metadata hierarchy |yes | |FK
@@ -167,14 +167,14 @@ See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 [caption=""]
 .Requirement 96
 ====
-Every `gpkg_metadata_reference` table reference scope column value SHALL be one of ‘geopackage’, ‘table’, ‘column’, ’row’, ’row/col’ in lowercase.
+Every `gpkg_metadata_reference` table reference scope column value SHALL be one of 'geopackage', 'table', 'column', 'row', 'row/col' in lowercase.
 ====
 
 [[r97]]
 [caption=""]
 .Requirement 97
 ====
-Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’ SHALL have a `table_name` column value that is NULL.
+Every `gpkg_metadata_reference` table row with a `reference_scope` column value of 'geopackage' SHALL have a `table_name` column value that is NULL.
 Every other `gpkg_metadata_reference` table row SHALL have a `table_name` column value that references a value in the `gpkg_contents` `table_name` column.
 ====
 
@@ -182,7 +182,7 @@ Every other `gpkg_metadata_reference` table row SHALL have a `table_name` column
 [caption=""]
 .Requirement 98
 ====
-Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’,‘table’ or ‘row’ SHALL have a `column_name` column value that is NULL.
+Every `gpkg_metadata_reference` table row with a `reference_scope` column value of 'geopackage','table' or 'row' SHALL have a `column_name` column value that is NULL.
 Every other `gpkg_metadata_reference` table row SHALL have a `column_name` column value that contains the name of a column in the SQLite table or view identified by the `table_name` column value.
 ====
 
@@ -190,7 +190,7 @@ Every other `gpkg_metadata_reference` table row SHALL have a `column_name` colum
 [caption=""]
 .Requirement 99
 ====
-Every `gpkg_metadata_reference` table row with a `reference_scope` column value of ‘geopackage’, ‘table’ or ‘column’ SHALL have a `row_id_value` column value that is NULL.
+Every `gpkg_metadata_reference` table row with a `reference_scope` column value of 'geopackage', 'table' or 'column' SHALL have a `row_id_value` column value that is NULL.
 Every other `gpkg_metadata_reference` table row SHALL have a `row_id_value` column value that contains the ROWID of a row in the SQLite table or view identified by the `table_name` column value.
 ====
 
@@ -199,7 +199,7 @@ Every other `gpkg_metadata_reference` table row SHALL have a `row_id_value` colu
 [caption=""]
 .Requirement 100
 ====
-Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a ‘Z’ (‘zulu’) suffix indicating UTC.{req_75_foot1}
+Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC.{req_75_foot1}
 ====
 
 [[r101]]
@@ -284,7 +284,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Method* |
 . SELECT reference_scope FROM gpkg_metadata_reference
 . Not testable if returns an empty result set
-. SELECT reference_scope FROM gpkg_metadata_reference WHERE reference_scope NOT IN (‘geopackage’,’table’,’column’,’row’,’row/col’)
+. SELECT reference_scope FROM gpkg_metadata_reference WHERE reference_scope NOT IN ('geopackage','table','column','row','row/col')
 . Fail if does not return an empty result set
 . Pass otherwise.
 |*Reference* |Annex F.8 Req 96
@@ -294,7 +294,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_table_name+
-|*Test Purpose* |Verify that gpkg_metadata_reference table_name column values are NULL for rows with reference_scope values of ‘geopackage’, and reference gpkg_contents table_name values for all other reference_scope values.
+|*Test Purpose* |Verify that gpkg_metadata_reference table_name column values are NULL for rows with reference_scope values of 'geopackage', and reference gpkg_contents table_name values for all other reference_scope values.
 |*Test Method* |
 . SELECT table_name FROM gpkg_metadata_reference
 . Not testable if returns an empty result set
@@ -310,13 +310,13 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_column_name+
-|*Test Purpose* |Verify that gpkg_metadata_reference column_name column values are NULL for rows with reference scope values of ‘geopackage’, ‘table’, or ‘row’, and contain the name of a column in table_name table for other reference scope values.
+|*Test Purpose* |Verify that gpkg_metadata_reference column_name column values are NULL for rows with reference scope values of 'geopackage', 'table', or 'row', and contain the name of a column in table_name table for other reference scope values.
 |*Test Method* |
 . SELECT column_name FROM gpkg_metadata_reference
 . Not testable if returns an empty result set
-. SELECT column_name FROM gpkg_metadata_reference WHERE reference_scope IN ('geopackage', ‘table’, ‘row’)
+. SELECT column_name FROM gpkg_metadata_reference WHERE reference_scope IN ('geopackage', 'table', 'row')
 . Fail if result set contains any non-NULL values
-. SELECT <table_name>, <column_name> FROM metadata_reference WHERE reference_scope NOT IN ('geopackage', ‘table’, ‘row’)
+. SELECT <table_name>, <column_name> FROM metadata_reference WHERE reference_scope NOT IN ('geopackage', 'table', 'row')
 . For each row from step 5
 .. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'<table_name>'
 .. Fail if returns an empty result set.
@@ -330,13 +330,13 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_row_id_value+
-|*Test Purpose* |Verify that gpkg_metadata_reference row_id_value column values are NULL for rows with reference scope values of ‘geopackage’, ‘table’, or ‘row’, and contain the ROWID of a row in the table_name for other reference scope values.
+|*Test Purpose* |Verify that gpkg_metadata_reference row_id_value column values are NULL for rows with reference scope values of 'geopackage', 'table', or 'row', and contain the ROWID of a row in the table_name for other reference scope values.
 |*Test Method* |
 . SELECT row_id_value FROM gpkg_metadata_reference
 . Not testable if returns an empty result set
-. SELECT row_id_value FROM gpkg_metadata_reference WHERE reference_scope IN ('geopackage', ‘table’, ‘row’)
+. SELECT row_id_value FROM gpkg_metadata_reference WHERE reference_scope IN ('geopackage', 'table', 'row')
 . Fail if result set contains any non-NULL values
-. For each SELECT <table_name>, <row_id_value> FROM gpkg_metadata_reference WHERE reference_scope NOT IN ('geopackage', ‘table’, ‘row’)
+. For each SELECT <table_name>, <row_id_value> FROM gpkg_metadata_reference WHERE reference_scope NOT IN ('geopackage', 'table', 'row')
 . For each row from step 5
 .. SELECT * FROM <table_name> WHERE ROWID = <row_id_value>
 .. Fail if result set is empty
@@ -366,7 +366,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_md_file_id+
 |*Test Purpose* |Verify that every gpkg_metadata_reference table row md_file_id column value references a gpkg_metadata id column value.
 |*Test Method* |
-. PRAGMA foreign_key_check(‘geometry_columns’)
+. PRAGMA foreign_key_check('geometry_columns')
 . Fail if returns any rows with a fourth column foreign key index value of 0
 |*Reference* |Annex F.8 Req 101
 |*Test Type* |Capability
