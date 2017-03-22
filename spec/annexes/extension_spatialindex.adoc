@@ -227,17 +227,17 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 |*Test Case ID* |+/reg_ext/features/spatial_indexes/implementation+
 |*Test Purpose* |Verify the correct implementation of spatial indexes on feature table geometry columns.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == 'features'))
 . Not testable if result set is empty
 . For each row table_name, column_name from step 1
-.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE tbl_name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name
 .. Not testable if result set is empty
-.. Fail if returned sql != ‘CREATE VIRTUAL TABLE rtree_’ ’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| USING rtree(id, minx, maxx, miny, maxy)
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND tname = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_insert’
+.. Fail if returned sql != 'CREATE VIRTUAL TABLE rtree_' ' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| USING rtree(id, minx, maxx, miny, maxy)
+.. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND tname = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_insert'
 .. Fail if returned sql != result of populating insert triggers template using result_set_table_name for <t> and result_set_column_name for <c>
-.. SELECT sql FROM sqlite_master WHERE type = ‘trigger’ AND name LIKE ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_update%’
+.. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_update%'
 .. Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for <t> and result_set_column_name for <c>
-.. SELECT sql FROM sqlite_master WHERE type=’trigger’ AND name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name \|\| ‘_delete’
+.. SELECT sql FROM sqlite_master WHERE type='trigger' AND name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_delete'
 .. Fail if returned sql != result of populating delete trigger template using result_set_table_name for <t> and result_set_column_name for <c>
 .. Log pass otherwise
 . Pass if logged pass and no fails
@@ -252,13 +252,13 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 |*Test Method* |
 . Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
 . For each Geometry Test Data Set <gtype_test> data table row for each geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:
-.. SELECT ‘Fail’ FROM <gtype_test> WHERE ST_IsEmpty(geom.) != empty
-.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MinX(geom) != minx
-.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MaxX(geom) != maxx
-.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MinY(geom) != miny
-.. SELECT ‘Fail’ FROM <gtype_test>  WHERE ST_MaxY(geom) != maxy
+.. SELECT 'Fail' FROM <gtype_test> WHERE ST_IsEmpty(geom.) != empty
+.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MinX(geom) != minx
+.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MaxX(geom) != maxx
+.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MinY(geom) != miny
+.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MaxY(geom) != maxy
 ..
-. Pass if no ‘Fail’ selected from step 2
+. Pass if no 'Fail' selected from step 2
 |*Reference* |Annex F.3 Req 76
 |*Test Type* |Capability
 |========================================
@@ -271,10 +271,10 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 |*Test Case ID* |+/reg_ext/features/spatial_indexes/extension_name+
 |*Test Purpose* |Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == 'features'))
 . Not testable if result set is empty
 . For each row table_name, column_name from step 3
-.. SELECT sql FROM sqlite_master WHERE tbl_name = ‘rtree_’ \|\| result_set_table_name \|\| ‘_’ \|\| result_set_column_name
+.. SELECT sql FROM sqlite_master WHERE tbl_name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name
 .. Not testable if returns an empty result set
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
