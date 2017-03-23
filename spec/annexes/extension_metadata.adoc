@@ -49,7 +49,7 @@ Read-write
 [caption=""]
 .Requirement 93
 ====
-A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clause 2.4.2.1.1 <<metadata_table_table_definition>>, <<gpkg_metadata_cols>> and <<gpkg_metadata_sql>>.
+A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clauses <<metadata_table_table_definition>>, <<gpkg_metadata_cols>>, and <<gpkg_metadata_sql>>.
 ====
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<21>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<28>>, ISO 19115-2 <<B6>>, ISO 19139 <<B7>>, Dublin Core <<B8>>, CSDGM <<B10>>, DDMS <<B12>>, NMF/NMIS <<B13>>, etc.
@@ -132,7 +132,7 @@ Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL
 [caption=""]
 .Requirement 95
 ====
-A GeoPackage that contains a `gpkg_metadata` table SHALL contain a `gpkg_metadata_reference` table per clause 2.4.3.1.1 <<metadata_reference_table_table_definition>>, <<gpkg_metadata_reference_cols>> and <<gpkg_metadata_reference_sql>>.
+A GeoPackage that contains a `gpkg_metadata` table SHALL contain a `gpkg_metadata_reference` table per clauses <<metadata_reference_table_table_definition>>, <<gpkg_metadata_reference_cols>>, and <<gpkg_metadata_reference_sql>>.
 ====
 
 The second component of GeoPackage metadata is the `gpkg_metadata_reference` table that links metadata in the `gpkg_metadata` table to data in the feature, and tiles tables defined in clauses 2.1.6 and 2.2.7.
@@ -244,12 +244,12 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/metadata/metadata/data/data_values_md_scope+
-|*Test Purpose* |Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from Table 15 in clause 2.4.2.1.2.
+|*Test Purpose* |Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from <<metadata_scopes>>.
 |*Test Method* |
 . SELECT md_scope FROM gpkg_metadata
 . Not testable if returns an empty result set
 . For each row returned from step 1
-.. Fail if md_scope value not one of the name column values from Table 15 in clause 2.4.2.1.2
+.. Fail if md_scope value not one of the name column values from <<metadata_scopes>>.
 . Pass if no fails
 |*Reference* |Annex F.8 Req 94
 |*Test Type:* |Capabilities
