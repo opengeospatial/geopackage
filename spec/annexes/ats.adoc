@@ -947,7 +947,7 @@ END;
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_extensions'
 . Fail if returns an empty result set.
-. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 36. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <<extensions_table_definition>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Clause 2.3.2.1.1 Req 58:
 |*Test Type* |Basic
