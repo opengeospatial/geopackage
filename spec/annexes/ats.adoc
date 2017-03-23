@@ -981,15 +981,16 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_table_name+
-|*Test Purpose* |Verify that the `table_name` column values in the `gpkg_extensions` table are valid.
+|*Test Purpose* |Verify that the `table_name` and `column_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_extensions
 . Not testable if returns an empty result set
 . For each row from step one
 .. Fail if table_name value is NULL and column_name value is not NULL.
-.. SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
-.. Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).
-. Pass if logged pass and no fails.
+.. SELECT count(column_name) FROM table_name
+... Fail if query is invalid, suggesting an invalid column name
+. SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
+.. Fail if any ge.table_name != sm.tbl_name (MAY both be NULL).
 |*Reference* |Clause 2.3.2.1.2 Req 60:
 |*Test Type* |Capability
 |========================================
