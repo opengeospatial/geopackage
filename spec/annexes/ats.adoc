@@ -957,7 +957,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_for_extensions+
+|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_for_extensions+
 |*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the `gpkg_extensions` table
 |*Test Method* |
 . For each SELECT DISTINCT geometry_type_name FROM geometry_columns
@@ -980,15 +980,14 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_table_name+
-|*Test Purpose* |Verify that the `table_name` and `column_name` column values in the `gpkg_extensions` table are valid.
+|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_table_name+
+|*Test Purpose* |Verify that the `table_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_extensions
 . Not testable if returns an empty result set
 . For each row from step one
+.. Skip if column_name is NULL
 .. Fail if table_name value is NULL and column_name value is not NULL.
-.. SELECT count(column_name) FROM table_name
-... Fail if query is invalid, suggesting an invalid column name
 . SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
 .. Fail if any ge.table_name != sm.tbl_name (MAY both be NULL).
 |*Reference* |Clause 2.3.2.1.2 Req 60:
@@ -997,16 +996,14 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_column_name+
+|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_column_name+
 |*Test Purpose* |Verify that the `column_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_extensions
-. Not testable if returns an empty result set
-. SELECT table_name, column_name FROM gpkg_extensions WHERE table_name IS NOT NULL AND column_name IS NOT NULL
+. SELECT table_name, column_name FROM gpkg_extensions WHERE column_name IS NOT NULL
 . Pass if returns an empty result set
 . For each row from step 3
-.. PRAGMA table_info(table_name)
-.. Fail if gpkg_extensions.column_name value does not equal a name column value returned by PRAGMA table_info.
+.. SELECT count(column_name) FROM table_name
+... Fail if query is invalid, suggesting an invalid column name
 .. Log pass otherwise
 . Pass if logged pass and no fails.
 |*Reference* |Clause 2.3.2.1.2 Req 61:
