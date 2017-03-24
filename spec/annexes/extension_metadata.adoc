@@ -39,17 +39,17 @@ Read-write
 ==== Requirements
 
 [float]
-===== Metadata Table
+===== Table Definitions
 
 [[metadata_table_table_definition]]
 [float]
-====== Table Definition
+====== Metadata Table
 
 [[r93]]
 [caption=""]
 .Requirement 93
 ====
-A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clauses <<metadata_table_table_definition>>, <<gpkg_metadata_cols>>, and <<gpkg_metadata_sql>>.
+A GeoPackage A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clauses <<metadata_table_table_definition>>, <<gpkg_metadata_cols>>, and <<gpkg_metadata_sql>>.
 ====
 
 The first component of GeoPackage metadata is the `gpkg_metadata` table that MAY contain metadata in MIME <<21>> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <<28>>, ISO 19115-2 <<B6>>, ISO 19139 <<B7>>, Dublin Core <<B8>>, CSDGM <<B10>>, DDMS <<B12>>, NMF/NMIS <<B13>>, etc.
@@ -74,59 +74,9 @@ The structure (schema) information could be in whatever encoding is used by the 
 
 See <<gpkg_metadata_sql>>.
 
-[float]
-====== Table Data Values
-
-The `md_scope` column in the `gpkg_metadata` table is the name of the applicable scope for the contents of the metadata column for a given row.
-The list of valid scope names and their definitions is provided in <<metadata_scopes>> below.
-The initial contents of this table were obtained from the ISO 19115 <<40>>, Annex B B.5.25 MD_ScopeCode code list, which was extended footnote:[The scope codes in <<metadata_scopes>> include a very wide set of descriptive information types as "metadata" to describe data.] for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <<gpkg_metadata_cols>>.
-
-
-:table_metadata_scopes_foot1: footnote:[ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.]
-:table_metadata_scopes_foot2: footnote:[The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.]
-:table_metadata_scopes_foot3: footnote:[The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.]
-:table_metadata_scopes_foot4: footnote:[The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.]
-
-[float]
-[[metadata_scopes]]
-.Metadata Scopes
-[cols=",,",options="header",]
-|=======================================================================
-|Name (md_scope) |Scope Code |Definition
-|undefined |NA |Metadata information scope is undefined
-|fieldSession |012 |Information applies to the field session
-|collectionSession |004 |Information applies to the collection session
-|series |006 |Information applies to the (dataset) series {table_metadata_scopes_foot1}
-|dataset |005 |Information applies to the (geographic feature) dataset
-|featureType |010 |Information applies to a feature type (class)
-|feature |009 |Information applies to a feature (instance)
-|attributeType |002 |Information applies to the attribute class
-|attribute |001 |Information applies to the characteristic of a feature (instance)
-|tile |016 |Information applies to a tile, a spatial subset of geographic data
-|model |015 |Information applies to a copy or imitation of an existing or hypothetical object
-|catalog |NA |Metadata applies to a feature catalog {table_metadata_scopes_foot2}
-|schema |NA |Metadata applies to an application schema {table_metadata_scopes_foot3}
-|taxonomy |NA |Metadata applies to a taxonomy or knowledge system {table_metadata_scopes_foot4}
-|software |013 |Information applies to a computer program or routine
-|service |014 |Information applies to a capability which a service provider entity makes available to a service user entity through a set of interfaces that define a behaviour, such as a use case
-|collectionHardware |003 |Information applies to the collection hardware class
-|nonGeographicDataset |007 |Information applies to non-geographic data
-|dimensionGroup |008 |Information applies to a dimension group
-|=======================================================================
-
-[[r94]]
-[caption=""]
-.Requirement 94
-====
-Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL be one of the name column values from <<metadata_scopes>>.
-====
-
-[float]
-===== Metadata Reference Table
-
 [[metadata_reference_table_table_definition]]
 [float]
-====== Table Definition
+====== Metadata Reference Table
 
 [[r95]]
 [caption=""]
@@ -161,7 +111,62 @@ Every row in `gpkg_metadata_reference` that has null value as `md_parent_id` for
 See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 
 [float]
-====== Table Data Values
+===== Table Data Values
+====== gpkg_extensions
+[[r140]]
+[caption=""]
+.Requirement 140
+====
+GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_metadata" SHALL comply with this extension. The row SHALL have a `scope` of "read-write".
+====
+
+====== gpkg_metadata
+The `md_scope` column in the `gpkg_metadata` table is the name of the applicable scope for the contents of the metadata column for a given row.
+The list of valid scope names and their definitions is provided in <<metadata_scopes>> below.
+The initial contents of this table were obtained from the ISO 19115 <<40>>, Annex B B.5.25 MD_ScopeCode code list, which was extended footnote:[The scope codes in <<metadata_scopes>> include a very wide set of descriptive information types as "metadata" to describe data.] for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <<gpkg_metadata_cols>>.
+
+
+:table_metadata_scopes_foot1: footnote:[ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.]
+:table_metadata_scopes_foot2: footnote:[The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.]
+:table_metadata_scopes_foot3: footnote:[The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.]
+:table_metadata_scopes_foot4: footnote:[The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.]
+
+[float]
+[[metadata_scopes]]
+.Metadata Scopes
+[cols=",,",options="header",]
+|=======================================================================
+|Name (md_scope) |Scope Code |Definition
+|undefined |NA |Metadata information scope is undefined
+|fieldSession |012 |Information applies to the field session
+|collectionSession |004 |Information applies to the collection session
+|series |006 |Information applies to the (dataset) series {table_metadata_scopes_foot1}
+|dataset |005 |Information applies to the (geographic feature) dataset
+|featureType |010 |Information applies to a feature type (class)
+|feature |009 |Information applies to a feature (instance)
+|attributeType |002 |Information applies to the attribute class
+|attribute |001 |Information applies to the characteristic of a feature (instance)
+|tile |016 |Information applies to a tile, a spatial subset of geographic data
+|model |015 |Information applies to a copy or imitation of an existing or hypothetical object
+|catalog |NA |Metadata applies to a feature catalog {table_metadata_scopes_foot2}
+|schema |NA |Metadata applies to an application schema {table_metadata_scopes_foot3}
+|taxonomy |NA |Metadata applies to a taxonomy or knowledge system {table_metadata_scopes_foot4}
+|software |013 |Information applies to a computer program or routine
+|service |014 |Information applies to a capability which a service provider entity makes available to a service user entity through a set of interfaces that define a behavior, such as a use case
+|collectionHardware |003 |Information applies to the collection hardware class
+|nonGeographicDataset |007 |Information applies to non-geographic data
+|dimensionGroup |008 |Information applies to a dimension group
+|=======================================================================
+
+[[r94]]
+[caption=""]
+.Requirement 94
+====
+Each `md_scope` column value in a `gpkg_metadata` table or updateable view SHALL be one of the name column values from <<metadata_scopes>>.
+====
+
+[float]
+====== gpkg_metadata_reference
 
 [[r96]]
 [caption=""]
@@ -220,10 +225,10 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 ==== Abstract Test Suite
 
 [float]
-===== Metadata Table
+===== Table Definition
 
 [float]
-====== Table Definition
+====== Metadata Table
 
 [cols="1,5a"]
 |========================================
@@ -239,7 +244,43 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |========================================
 
 [float]
-====== Table Data Values
+====== Metadata Reference Table
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/metadata/metadata_reference/data/table_def+
+|*Test Purpose* |Verify that the gpkg_metadata_reference table exists and has the correct definition.
+|*Test Method* |
+. SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata_reference'
+. Fail if returns an empty result set.
+. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33.  Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Fail otherwise.
+|*Reference* |Annex F.8 Req 95
+|*Test Type* |Basic
+|========================================
+
+[float]
+===== Table Data Values
+
+[float]
+====== gpkg_extensions
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/metadata/extensions/data_values_scope+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Method* |
+. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
+. Not testable if returns an empty result set
+. For each row returned from step 1
+.. Fail if scope is not "read-write".
+. Pass if no fails
+|*Reference* |Annex F.8 Req 140
+|*Test Type:* |Capabilities
+|========================================
+
+[float]
+====== gpkg_metadata
 
 [cols="1,5a"]
 |========================================
@@ -256,26 +297,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |========================================
 
 [float]
-===== Metadata Reference Table
-
-[float]
-====== Table Definition
-
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/table_def+
-|*Test Purpose* |Verify that the gpkg_metadata_reference table exists and has the correct definition.
-|*Test Method* |
-. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_metadata_reference'
-. Fail if returns an empty result set.
-. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33.  Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
-. Fail otherwise.
-|*Reference* |Annex F.8 Req 95
-|*Test Type* |Basic
-|========================================
-
-[float]
-====== Data Values
+====== gpkg_metadata_reference
 
 [cols="1,5a"]
 |========================================
