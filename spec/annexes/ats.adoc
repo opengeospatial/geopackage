@@ -960,20 +960,7 @@ END;
 |*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_for_extensions+
 |*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the `gpkg_extensions` table
 |*Test Method* |
-. For each SELECT DISTINCT geometry_type_name FROM geometry_columns
-.. Fail if geometry_type_name IN Annex G Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_<geometry_type_name>
-.. Fail if geometry_type_name NOT IN Annex G Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with "gpkg" and the extension_name ends with "_geom_<geometry_type_name>
-. For each SELECT tbl_name FROM sqlite_master WHERE tbl_name LIKE 'rtree_%'
-.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_rtree_index"
-. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE 'fgti_%'
-.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_geometry_type_trigger"
-. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE 'fgsi_%'
-.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_srs_id_trigger"
-. Do test / reg_ext/tiles/zoom_levels/data/zoom_other_ext_row
-. Do test /reg_ext/tiles/tile_encoding_webp/data/webp_ext_row
-. Do test /reg_ext/tiles/tile_encoding_webp/data/tiff_ext_row
-. Do test /reg_ext/tiles/tile_encoding_webp/data/nitf_ext_row
-. Pass if no fails
+. Manual inspection
 |*Reference* |Clause 2.3.2.1.2 Req 59:
 |*Test Type* |Capability
 |========================================
