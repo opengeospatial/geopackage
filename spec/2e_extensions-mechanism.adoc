@@ -57,8 +57,7 @@ The absence of a gpkg_extensions table or the absence of rows in the gpkg_extens
 [caption=""]
 .Requirement 60
 ====
-Values of the `gpkg_extensions` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column or be NULL.
-They SHALL NOT be NULL for rows where the `column_name` value is not NULL.
+Values of the `gpkg_extensions` `table_name` column MAY reference values in the `gpkg_contents` `table_name`, reference new tables required by that extension, or be NULL (to indicate an extension that require no new tables).
 ====
 
 [[r61]]
