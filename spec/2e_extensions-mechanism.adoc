@@ -1,3 +1,4 @@
+[[extension_mechanism]]
 === Extension Mechanism
 
 ==== Introduction
@@ -23,7 +24,7 @@ Implementers use their own author names to register other extensions{extension_m
 .Requirement 58
 ====
 A GeoPackage MAY contain a table or updateable view named gpkg_extensions.
-If present this table SHALL be defined per clause 2.3.2.1.1 <<extensions_table_definition>>, <<gpkg_extensions_cols>> and <<gpkg_extensions_sql>>. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.
+If present this table SHALL be defined per clause 2.3.2.1.1 <<extensions_table_definition>>, <<gpkg_extensions_cols>> and <<gpkg_extensions_sql>>.
 ====
 
 The `gpkg_extensions` table or updateable view in a GeoPackage is used to indicate that a particular extension applies to a GeoPackage, a table in a GeoPackage or a column of a table in a GeoPackage.
@@ -49,8 +50,8 @@ See <<gpkg_extensions_sql>>.
 [caption=""]
 .Requirement 59
 ====
-Every extension of a GeoPackage SHALL be registered in a corresponding row in the gpkg_extensions table.
-The absence of a gpkg_extensions table or the absence of rows in the gpkg_extensions table SHALL both indicate the absence of extensions to a GeoPackage.
+In an Extended GeoPackage, every extension SHALL be registered in a corresponding row in the `gpkg_extensions` table. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.
+Either the absence of a `gpkg_extensions` table or the absence of rows in the `gpkg_extensions` table SHALL indicate that the file is a GeoPackage (as opposed to an Extended GeoPackage).
 ====
 
 [[r60]]
