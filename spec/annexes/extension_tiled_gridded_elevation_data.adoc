@@ -264,7 +264,7 @@ For data where the `datatype` column of the corresponding row in the `gpkg_2d_gr
 [source,sql]
 ----
 CREATE TABLE 'gpkg_2d_gridded_coverage_ancillary' (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   tile_matrix_set_name TEXT NOT NULL UNIQUE,
   datatype TEXT NOT NULL DEFAULT 'integer',
   scale REAL NOT NULL DEFAULT 1.0,
@@ -281,7 +281,7 @@ CREATE TABLE 'gpkg_2d_gridded_coverage_ancillary' (
 [source,sql]
 ----
 CREATE TABLE gpkg_2d_gridded_tile_ancillary (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   tpudt_name TEXT NOT NULL,
   tpudt_id INTEGER NOT NULL,
   scale REAL NOT NULL DEFAULT 1.0,
