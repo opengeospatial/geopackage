@@ -1,0 +1,30 @@
+[preface]
+== Introduction
+
+Mobile device users who require map/geospatial application services and operate in disconnected or limited network connectivity environments are challenged by limited storage capacity and the lack of open format geospatial data to support these applications.
+The current situation is that each map/geospatial application requires its own potentially proprietary geospatial data store.
+These separate application-specific data stores may contain the same geospatial data, wasting the limited storage available, and requiring custom applications for data translation, replication, and synchronization to enable different map/geospatial applications to share the same world view. In addition, many existing geospatial data stores are platform-specific, which means that users with different platforms must translate data to share it.
+
+An open, standards-based, application-independent, platform-independent, portable, interoperable, self-describing, GeoPackage (GPKG) data container, API and manifest are needed to overcome these challenges and to effectively support multiple map/geospatial applications such as fixed product distribution, local data collection, and geospatially enabled analytics.
+This standard is intended to facilitate widespread adoption and use of GeoPackages by both COTS and open-source software applications on enterprise production platforms as well as mobile hand-held devices <<B1>> <<B2>>, given that mobile hand held devices do not yet have the processing power or battery life to effectively tackle difficult geospatial product production and analysis tasks.
+An application that accesses a GPKG will make use of the GPKG capabilities it requires; few if any such applications will make use of all GPKG capabilities.
+
+This OGC® Encoding Standard defines GeoPackages for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales.
+Direct use means the ability to access and update data in a “native” format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.
+
+A *GeoPackage* is a platform-independent SQLite <<5>> database file that contains GeoPackage data and metadata tables shown in <<geopackage_tables_figure>> below, with specified definitions, integrity assertions, format limitations and content constraints.
+The allowable content of a GeoPackage is entirely defined in this specification.
+
+An *Extended GeoPackage* is a *GeoPackage* that contains any additional data elements (tables or columns) or SQL constructs (data types, functions, indexes, constraints or triggers) that are not specified in this encoding standard.
+
+A *GeoPackage* MAY be “empty” (contain user data table(s) for vector features and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
+GeoPackage metadata CAN describe GeoPackage data contents and identify external data synchronization sources and targets.
+A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers to maintain indexes and enforce content constraints.
+
+A *GeoPackage SQLite Configuration* consists of the SQLite 3 software library and a set of compile- and runtime configurations options.
+
+A *GeoPackage SQLite Extension* is a SQLite loadable extension that MAY provide SQL functions <<12>> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <<1>> <<2>> <<3>> <<4>> access to a GeoPackage file. This standard does not address the issues listed in the <<_potential_future_work>> clause in <<background_and_context>>, which MAY be addressed in a subsequent version of this specification or by other specifications.
+
+[[geopackage_tables_figure]]
+.GeoPackage Tables Overview
+image::geopackage-overview.png[GeoPackage Tables]

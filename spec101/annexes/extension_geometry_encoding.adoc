@@ -1,0 +1,74 @@
+[[extension_geometry_encoding]]
+[appendix]
+== User-Defined Geometry Types Encoding Extension Template (Normative)
+
+[float]
+=== Extension Title
+
+User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding
+
+[float]
+=== Introduction
+
+This extension specifies a standard way to implement user defined extensions of the GeoPackageBinary geometry encoding format to encode geometry types not specified in clauses <<sql_geometry_types>> and 3.1.1 and listed in <<geometry_types>>.
+It is intended to be a bridge to enable use of geometry types like EllipiticalCurve in Extended GeoPackages until standard encodings of such types are developed and published for the Well Known Binary (WKB) format.
+
+[float]
+=== Extension Author
+
+Name of implementer, author_name NOT `gpkg`.
+
+[float]
+=== Extension Name or Template
+
+Extension names are constructed from the <author_name>_geom_<gname> template where <gname> is the uppercase name of an extension geometry type NOT in <<geometry_types>>.
+
+[float]
+=== Extension Type
+
+Extension of Existing Requirement in clauses <<gpb_format>>, <<sql_geometry_types>> and 3.1.1.
+
+[float]
+=== Applicability
+
+This extension applies to any column specified in the gpkg_geometry_columns table.
+
+[float]
+=== Scope
+
+Read-write
+
+[float]
+=== Requirements
+
+This extension specifies use of an ExtendedGeoPackageBinary encoding format for geometry types not listed in <<geometry_types>>, and use of the extension name in uppercase for the `geometry_type_name` column value in the `gpkg_geometry_columns` table.
+
+[float]
+==== GeoPackage
+
+One of the reserved bits in the GeoPackageBinary header is used to indicate the presence of the ExtendedGeopackageBinary encoding format.
+In the extension case a four byte sequence follows the GPB header to disambiguate various extensions.
+This extension_code SHOULD identify the implementer of the extension and/or the particular geometry type extension, and SHOULD be unique.
+The actual extension geometry body is not specified, but SHALL be described in the extension document.
+
+----
+ExtendedGeoPackageBinary {
+  GeoPackageBinaryHeader header; <1>
+  byte[4] extension_code;        <2>
+  byte[] extension_specific;     <3>
+}
+----
+
+<1> The X bit in the header flags field must be set to 1.
+<2> To indicate different extensions or vendors. 0x47504B47 (GPKG in ASCII) is reserved.
+<3> Extension specific contents
+
+[float]
+==== GeoPackage SQLite Configuration
+
+None
+
+[float]
+==== GeoPackage SQLite Extension
+
+SQL functions that operate on GeoPackageBinary geometries as specified in other extensions SHALL operate correctly on user-defined geometry types encoded in the ExtendedGeopackageBinary format as specified in this extension.

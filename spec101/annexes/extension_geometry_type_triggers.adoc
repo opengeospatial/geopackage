@@ -1,0 +1,86 @@
+[[extension_geometry_type_triggers]]
+[appendix]
+== Geometry Type Triggers Extension (Normative)
+
+[float]
+=== Extension Title
+
+Geometry Type Triggers
+
+[float]
+=== Introduction
+
+Geometry type triggers prevent the storage of geometries of types that are not assignable from the geometry types specified in the gpkg_geometry_columns table in the geometry columns of the specified tables.
+
+[float]
+=== Extension Author
+
+GeoPackage SWG, author_name `gpkg`.
+
+[float]
+=== Extension Name or Template
+
+`gpkg_geometry_type_trigger`
+
+[float]
+=== Extension Type
+
+New Requirement dependent on clauses <<gpb_format>> and 3.1.2.
+
+[float]
+=== Applicability
+
+This extension applies to any column specified in the gpkg_geometry_columns table.
+
+[float]
+=== Scope
+
+Write-only
+
+[float]
+=== Requirements
+
+The <t> and <c> template parameters in the geometry type trigger definition SQL template in the table below are to be replaced with the names of the feature table and geometry column being inserted or updated.
+
+[float]
+==== GeoPackage
+
+[source,sql]
+----
+CREATE TRIGGER fgti_<t>_<c> BEFORE INSERT ON '<t>' FOR EACH ROW
+BEGIN
+  SELECT RAISE (ABORT, 'insert on <t> violates constraint: ST_GeometryType(<c>) is not assignable from gpkg_geometry_columns.geometry_type_name value')
+  WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
+         WHERE Lower(table_name) = Lower('<t>')
+	         AND Lower(column_name) = Lower('<c>')
+	         AND gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.<c>)) = 0;
+END
+
+CREATE TRIGGER fgtu_<t>_<c> BEFORE UPDATE OF '<c>' ON '<t>' FOR EACH ROW
+BEGIN
+  SELECT RAISE (ABORT, 'update of <c> on <t> violates constraint: ST_GeometryType(<c>) is not assignable from gpkg_geometry_columns.geometry_type_name value')
+  WHERE (SELECT geometry_type_name FROM gpkg_geometry_columns
+         WHERE Lower(table_name) = Lower('<t>')
+	         AND Lower(column_name) = Lower('<c>')
+	         AND gpkg_IsAssignable(geometry_type_name, ST_GeometryType(NEW.<c>)) = 0;
+END
+----
+
+[float]
+==== GeoPackage SQLite Configuration
+
+None
+
+[float]
+==== GeoPackage SQLite Extension
+
+Definition of SQL functions
+
+[cols=",,,",options="header"]
+|======
+|SQL Function |Description |Use
+|ST_GeometryType(geom. Geometry) : TEXT |Returns the WKB geometry type name of a Geometry |Check that the geometry type matches what’s specified in gpkg_geometry_columns.geometry_type_name
+|GPKG_IsAssignable(expected_type_name TEXT, actual_type_name TEXT): INTEGER |Returns 1 if a value of type expected_type_name is the same or a super type of type actual_type_name. Returns 0 otherwise. |Determine if the expected geometry type is the same as or a super type of the actual geometry type.
+|======
+
+The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.

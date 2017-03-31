@@ -1,0 +1,411 @@
+[[extension_schema]]
+=== Schema
+
+[float]
+==== Introduction
+
+The schema option provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
+The information provided by this option can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.
+
+[float]
+==== Extension Author
+
+GeoPackage SWG, author_name `gpkg`
+
+[float]
+==== Extension Name
+
+`gpkg_schema`
+
+[float]
+==== Extension Type
+
+New Requirement Dependent on Clause <<features>>
+
+[float]
+==== Applicability
+
+This extension may apply to any <<feature_user_tables>>.
+
+[float]
+==== Scope
+
+Read-write
+
+[float]
+==== Requirements
+
+[float]
+===== Data Columns
+
+[[schema_data_columns_table_definition]]
+[float]
+====== Table Definition
+
+[requirement]
+A GeoPackage MAY contain a table or updateable view named `gpkg_data_columns`.
+If present it SHALL be defined per clause 2.3.2.1.1 <<schema_data_columns_table_definition>>, <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
+
+[[gpkg_data_columns_cols]]
+.Data Columns Table or View Definition
+[cols=",,,,",options="header",]
+|=======================================================================
+|Column Name |Column Type |Column Description |Null |Key
+|`table_name` |TEXT |Name of the tiles or feature table |no |PK
+|`column_name` |TEXT |Name of the table column |no |PK
+|`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |UNIQUE
+|`title` |TEXT |A human-readable formal title for the column_name content |yes |
+|`description` |TEXT |A human-readable description for the table_name content |yes |
+|`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type of column_name if BLOB type, or NULL for other types |yes |
+|`constraint_name` |TEXT |Column value constraint name (lowercase) specified by reference to `gpkg_data_column_constraints.constraint` name |yes |
+|=======================================================================
+
+:data_cols_foot1: footnote:[A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.]
+:data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses 2.2.4, 2.2.5, and 3.2.2 as feature attributes, but they are not required to do so.]
+
+GeoPackage applications MAY {data_cols_foot1} use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type {data_cols_foot2} information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
+The `gpkg_data_columns` data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
+
+See <<gpkg_data_columns_sql>>.
+
+[float]
+====== Table Data Values
+
+[requirement]
+Values of the `gpkg_data_columns` table `table_name` column value SHALL reference values in the `gpkg_contents` `table_name` column.
+
+[requirement]
+The `column_name` column value in a `gpkg_data_columns` table row SHALL contain the name of a column in the SQLite table or view identified by the `table_name` column value.
+
+[requirement]
+The constraint_name column value in a gpkg_data_columns table MAY be NULL.
+If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
+
+[float]
+===== Data Column Constraints
+
+[[data_column_constraints_table_definition]]
+[float]
+====== Table Definition
+
+[requirement]
+A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
+If present it SHALL be defined per clause 2.3.3.1.1 <<data_column_constraints_table_definition>>, <<gpkg_data_column_constraints_cols>> and <<gpkg_data_column_constraints_sql>>.
+
+The `gpkg_data_column_constraints` table contains data to specify restrictions on basic data type column values.
+The constraint_name column is referenced by the `constraint_name` column in the `gpkg_data_columns` table defined in <<gpkg_data_columns_cols>>.
+
+
+[[gpkg_data_column_constraints_cols]]
+.Data Column Constraints Table or View Definition
+[cols=",,,,",options="header",]
+|=======================================================================
+|Column Name |Column Type |Column Description |Null |Key
+|`constraint_name` |TEXT |Name of constraint (lowercase)|no |Unique
+|`constraint_type` |TEXT |Type name of constraint: 'range' \| 'enum' \| 'glob' |no |Unique
+|`value` |TEXT |Specified case sensitive value for 'enum' or 'glob' or NULL for 'range' constraint_type |yes |Unique
+|`min` |NUMERIC |Minimum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
+|`min_is_inclusive` |BOOLEAN |0 (false) if min value is exclusive, or 1 (true) if min value is inclusive |yes |
+|`max` |NUMERIC |Maximum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
+|`max_is_inclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
+|`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes| 
+|=======================================================================
+_The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
+
+See <<gpkg_data_column_constraints_sql>>.
+
+[float]
+====== Table Data Values
+
+The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<33>>).
+The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.
+
+.Sample Data Column Constraints
+[cols=",,,,,,,",options="header",]
+|=======================================================================
+|constraint_name| constraint_type| value| min| min_is_inclusive| max| max_is_inclusive
+|sampleRange| range| NULL| 1| true| 10| true
+|sampleEnum| enum| 1| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 3| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 5| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 7| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 9| NULL| NULL| NULL| NULL
+|sampleGlob| glob| [1-2][0-9][0-9][0-9]| NULL| NULL| NULL| NULL
+|=======================================================================
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains data, the lowercase `constraint_type` column values SHALL be one of "range", "enum", or "glob".
+
+[requirement]
+gpkg_data_column_constraint constraint_name values for rows with constraint_type values of 'range' and 'glob' SHALL be unique.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with constraint_type column values of "range", the `value` column values for those rows SHALL be NULL.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "range", the `min` column values for those rows SHALL be NOT NULL and less than the `max` column value which shall be NOT NULL.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "range", the `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be 0 or 1.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "enum" or "glob", the `min`, `max`, `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be NULL.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "enum" or "glob", the `value` column SHALL NOT be NULL.
+
+[float]
+==== Abstract Test Suite
+
+[float]
+===== Data Columns
+
+[float]
+====== Table Definition
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_columns/data/data_table_def+
+|*Test Purpose* |Verify that the gpkg_data_columns table exists and has the correct definition.
+|*Test Method* |
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_columns' 
+. Fail if returns an empty result set
+. Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 42. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Fail otherwise.
+|*Reference* |Annex F.9 Req 103
+|*Test Type* |Basic
+|========================================
+
+[float]
+====== Data Values
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_columns/data/data_values_column_name+
+|*Test Purpose* |Verify that for each gpkg_data_columns row, the column_name value is the name of a column in the table_name table.
+|*Test Method* |
+. SELECT table_name, column_name FROM gpkg_data_columns
+. Not testable if returns an empty result set
+. For each row from step 1
+.. PRAGMA table_info(table_name) 
+.. Fail if gpkg_data_columns.column_name value does not equal a name column value returned by PRAGMA table_info.
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 104
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_columns/data/data_values_constraint_name+
+|*Test Purpose* |Verify that for each gpkg_data_columns row, the constraint_name value is either NULL or a constraint_name column value from the gpkg_data_column_constraints table.
+|*Test Method* |
+. SELECT constraint_name AS cn FROM gpkg_data_columns
+. Not testable if returns an empty result set
+. For each NOT NULL cn value from step 1
+.. SELECT constraint_name FROM gpkg_data_column_constraints WHERE constraint_name = cn
+.. Fail if returns an empty result set
+. Pass if no fails
+|*Reference* |Annex F.9 Req 105
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_columns/data/data_values_constraint_type+
+|*Test Purpose* |Verify that for each gpkg_data_columns row, if the constraint_name value is NOT NULL then the constraint_type column value contains a constraint_type column value from the gpkg_data_column_constraints table for a row with a matching constraint_name value.
+|*Test Method* |
+. SELECT constraint_name AS cn, constraint_type AS ct FROM gpkg_data_columns
+. Not testable if returns an empty result set
+. For each NOT NULL cn value from step 1
+.. Fail if ct is NULL
+.. If ct NOT NULL, SELECT constraint_type FROM gpkg_data_column_constraints WHERE constraint_name = cn AND constraint_type = ct
+.. Fail if returns an empty result set
+. Pass if no fails
+|*Reference* |Annex F.9 Req 106
+|*Test Type* |Capability
+|========================================
+
+[float]
+===== Data Column Constraints
+
+[float]
+====== Table Definition
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_column_constraints/data/table_def+
+|*Test Purpose* |Verify that the gpkg_data_column_constraints table exists and has the correct definition.
+|*Test Method* |
+. SELECT sql FROM sqlite_master WHERE type = \'table' AND tbl_name = \'gpkg_data_column_constraints' 
+. Fail if returns an empty result set
+. Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 43. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Fail otherwise.
+|*Reference* |Annex F.9 Req 107
+|*Test Type* |Basic
+|========================================
+
+[float]
+====== Data Values
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_constraint_type+
+|*Test Purpose* |Verify that the gpkg_data_column_constraints constraint_type column values are one of "range", "enum", or "glob".
+|*Test Method* |
+. SELECT constraint_type AS ct FROM gpkg_data column_constraints
+. Not testable if returns an empty result set
+. For each ct value returned by step 1
+.. Fail if ct NOT IN ("range", "enum", "glob").
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 108
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_constraint_names_unique+
+|*Test Purpose* |Verify that the gpkg_data_column_constraints constraint_name column values for constraint_type values  of "range", or "glob" are unique.
+|*Test Method* |
+. For each SELECT DISTINCT constraint_name AS cn FROM gpkg_data_column_constraints  WHERE constraint_type IN (‘range’, ‘glob’)
+.. SELECT count(*) FROM gpkg_data column_constraints WHERE constraint_name = cn
+.. Fail if count > 1
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 109
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_value_for_range+
+|*Test Purpose* |Verify that the gpkg_data_column_constraints value column values are NULL for rows with a constraint_type value of "range".
+|*Test Method* |
+. SELECT constraint_type AS ct, value AS v FROM gpkg_data column_constraints WHERE constraint_type = ‘range’
+. Not testable if returns an empty result set
+. For each v value returned by step 1
+.. Fail if v IS NOT NULL
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 110
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_min_max_for_range+
+|*Test Purpose* |Verify that the gpkg_data_column_constraints min column values are NOT NULL and less than the max column values for rows with a constraint_type value of "range".
+|*Test Method* |
+. SELECT min, max FROM gpkg_data column_constraints WHERE constraint_type = ‘range’
+. Not testable if returns an empty result set
+. For each set of min and max values returned by step 1
+.. Fail if min IS NULL
+.. Fail if max IS NULL
+.. Fail if min >= max
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 111
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_inclusive_for_range+
+|*Test Purpose* |Verify that the gpkg_data_column_constraints minIsInclusive and maxIsInclusive  column values are NOT NULL and either 0 or 1 for rows with a constraint_type value of "range".
+|*Test Method* |
+. SELECT minIsInclusive, maxIsInclusive FROM gpkg_data column_constraints WHERE constraint_type = ‘range’
+. Not testable if returns an empty result set
+. For each set of values returned by step 1
+.. Fail if minIsInclusive IS NULL
+.. Fail if maxIsInclusive IS NULL
+.. Fail if minIsInclusive is NOT IN (0,1)
+.. Fail if maxIsInclusive is NOT IN (0,1)
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 112
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID:* |+/opt/schema/data_column_constraints/data/data_values_min_max_inclusive_for_enum_glob+
+|*Test Purpose:* |Verify that the gpkg_data_column_constraints min, max, minIsInclusive and maxIsInclusive column values are NULL for rows with a constraint_type value of "enum" or “glob”.
+|*Test Method:* |
+. SELECT min, max, minIsInclusive, maxIsInclusive FROM gpkg_data column_constraints WHERE constraint_type  IN (‘enum’,’glob)
+. Not testable if returns an empty result set
+. For each set of values returned by step 1
+.. Fail if min IS NOT NULL
+.. Fail if max IS NOT NULL
+.. Fail if minIsInclusive IS NOT NULL
+.. Fail if maxIsInclusive IS NOT NULL
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 113
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID:* |+/opt/schema/data_column_constraints/data/data_values_value_for_enum_glob+
+|*Test Purpose:* |Verify that the gpkg_data_column_constraints value column values are NOT NULL for rows with a constraint_type value of "enum" or “glob”.
+|*Test Method:* |
+. SELECT value FROM gpkg_data column_constraints WHERE constraint_type  IN (‘enum’,’glob)
+. Not testable if returns an empty result set
+. For each value returned by step 1
+.. Fail if value IS NULL
+. Pass if no fails.
+|*Reference* |Annex F.9 Req 114
+|*Test Type* |Capability
+|========================================
+
+[float]
+==== Table Definition SQL
+
+[float]
+===== gpkg_data_columns
+
+[[gpkg_data_columns_sql]]
+.gpkg_data_columns Table Definition SQL
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE gpkg_data_columns (
+  table_name TEXT NOT NULL,
+  column_name TEXT NOT NULL,
+  name TEXT UNIQUE,
+  title TEXT,
+  description TEXT,
+  mime_type TEXT,
+  constraint_name TEXT,
+  CONSTRAINT pk_gdc PRIMARY KEY (table_name, column_name),
+  CONSTRAINT fk_gdc_tn FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name)
+);
+----
+
+[float]
+===== gpkg_data_column_constraints
+
+[[gpkg_data_column_constraints_sql]]
+.gpkg_data_columns Table Definition SQL
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE gpkg_data_column_constraints (
+  constraint_name TEXT NOT NULL,
+  constraint_type TEXT NOT NULL, // 'range' | 'enum' | 'glob'
+  value TEXT,
+  min NUMERIC,
+  min_is_inclusive BOOLEAN, // 0 = false, 1 = true
+  max NUMERIC,
+  max_is_inclusive BOOLEAN, // 0 = false, 1 = true
+  description TEXT,
+  CONSTRAINT gdcc_ntv UNIQUE (constraint_name, constraint_type, value)
+)
+----

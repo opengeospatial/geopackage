@@ -1,0 +1,172 @@
+[appendix]
+== Trigger Definition SQL (Informative)
+
+=== gpkg_tile_matrix
+
+.gpkg_tile_matrix Trigger Definition SQL
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TRIGGER 'gpkg_tile_matrix_zoom_level_insert'
+BEFORE INSERT ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0')
+WHERE (NEW.zoom_level < 0);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_zoom_level_update'
+BEFORE UPDATE of zoom_level ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0')
+WHERE (NEW.zoom_level < 0);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_matrix_width_insert'
+BEFORE INSERT ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: matrix_width cannot be less than 1')
+WHERE (NEW.matrix_width < 1);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_matrix_width_update'
+BEFORE UPDATE OF matrix_width ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: matrix_width cannot be less than 1')
+WHERE (NEW.matrix_width < 1);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_matrix_height_insert'
+BEFORE INSERT ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: matrix_height cannot be less than 1')
+WHERE (NEW.matrix_height < 1);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_matrix_height_update'
+BEFORE UPDATE OF matrix_height ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: matrix_height cannot be less than 1')
+WHERE (NEW.matrix_height < 1);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_pixel_x_size_insert'
+BEFORE INSERT ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: pixel_x_size must be greater than 0')
+WHERE NOT (NEW.pixel_x_size > 0);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_pixel_x_size_update'
+BEFORE UPDATE OF pixel_x_size ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: pixel_x_size must be greater than 0')
+WHERE NOT (NEW.pixel_x_size > 0);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_pixel_y_size_insert'
+BEFORE INSERT ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: pixel_y_size must be greater than 0')
+WHERE NOT (NEW.pixel_y_size > 0);
+END
+
+CREATE TRIGGER 'gpkg_tile_matrix_pixel_y_size_update'
+BEFORE UPDATE OF pixel_y_size ON 'gpkg_tile_matrix'
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''gpkg_tile_matrix'' violates constraint: pixel_y_size must be greater than 0')
+WHERE NOT (NEW.pixel_y_size > 0);
+END
+----
+
+
+=== sample_feature_table
+
+.EXAMPLE: features table Trigger Definition SQL
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TRIGGER "sample_feature_table_real_insert"
+BEFORE INSERT ON "sample_feature_table"
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''sample_feature_table''
+violates constraint: real_attribute must be greater than 0')
+WHERE NOT (NEW.real_attribute > 0);
+END
+
+CREATE TRIGGER "sample_feature_table_real_update"
+BEFORE UPDATE OF "real_attribute" ON "sample_feature_table"
+FOR EACH ROW BEGIN
+SELECT RAISE (ABORT, 'update of ''real_attribute'' on table
+''sample_feature_table'' violates constraint: real_attribute value
+must be > 0')
+WHERE NOT (NEW.real_attribute > 0);
+END
+----
+
+where <t> and <c> are replaced with the names of the feature table and geometry column being inserted or updated.
+
+=== sample_tile_pyramid
+
+.tiles table Trigger Definition SQL
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TRIGGER "sample_tile_pyramid_zoom_insert"
+BEFORE INSERT ON "sample_tile_pyramid"
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''sample_tile_pyramid'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix')
+WHERE NOT (NEW.zoom_level IN (SELECT zoom_level FROM gpkg_tile_matrix WHERE table_name = 'sample_tile_pyramid')) ;
+END
+
+CREATE TRIGGER "sample_tile_pyramid_zoom_update"
+BEFORE UPDATE OF zoom_level ON "sample_tile_pyramid"
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''sample_tile_pyramid'' violates constraint: zoom_level not specified for table in gpkg_tile_matrix')
+WHERE NOT (NEW.zoom_level IN (SELECT zoom_level FROM gpkg_tile_matrix WHERE table_name = 'sample_tile_pyramid')) ;
+END
+
+CREATE TRIGGER "sample_tile_pyramid_tile_column_insert"
+BEFORE INSERT ON "sample_tile_pyramid"
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''sample_tile_pyramid'' violates constraint: tile_column cannot be < 0')
+WHERE (NEW.tile_column < 0) ;
+SELECT RAISE(ABORT, 'insert on table ''sample_tile_pyramid'' violates constraint: tile_column must by < matrix_width specified for table and zoom level in gpkg_tile_matrix')
+WHERE NOT (NEW.tile_column < (SELECT matrix_width FROM gpkg_tile_matrix WHERE table_name = 'sample_tile_pyramid' AND zoom_level = NEW.zoom_level));
+END
+
+CREATE TRIGGER "sample_tile_pyramid_tile_column_update"
+BEFORE UPDATE OF tile_column ON "sample_tile_pyramid"
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''sample_tile_pyramid'' violates constraint: tile_column cannot be < 0')
+WHERE (NEW.tile_column < 0) ;
+SELECT RAISE(ABORT, 'update on table ''sample_tile_pyramid'' violates constraint: tile_column must by < matrix_width specified for table and zoom level in gpkg_tile_matrix')
+WHERE NOT (NEW.tile_column < (SELECT matrix_width FROM gpkg_tile_matrix WHERE table_name = 'sample_tile_pyramid' AND zoom_level = NEW.zoom_level));
+END
+
+CREATE TRIGGER "sample_tile_pyramid_tile_row_insert"
+BEFORE INSERT ON "sample_tile_pyramid"
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'insert on table ''sample_tile_pyramid'' violates constraint: tile_row cannot be < 0')
+WHERE (NEW.tile_row < 0) ;
+SELECT RAISE(ABORT, 'insert on table ''sample_tile_pyramid'' violates constraint: tile_row must by < matrix_height specified for table and zoom level in gpkg_tile_matrix')
+WHERE NOT (NEW.tile_row < (SELECT matrix_height FROM gpkg_tile_matrix WHERE table_name = 'sample_tile_pyramid' AND zoom_level = NEW.zoom_level));
+END
+
+CREATE TRIGGER "sample_tile_pyramid_tile_row_update"
+BEFORE UPDATE OF tile_row ON "sample_tile_pyramid"
+FOR EACH ROW BEGIN
+SELECT RAISE(ABORT, 'update on table ''sample_tile_pyramid'' violates constraint: tile_row cannot be < 0')
+WHERE (NEW.tile_row < 0) ;
+SELECT RAISE(ABORT, 'update on table ''sample_tile_pyramid'' violates constraint: tile_row must by < matrix_height specified for table and zoom level in gpkg_tile_matrix')
+WHERE NOT (NEW.tile_row < (SELECT matrix_height FROM gpkg_tile_matrix WHERE table_name = 'sample_tile_pyramid' AND zoom_level = NEW.zoom_level));
+END
+----

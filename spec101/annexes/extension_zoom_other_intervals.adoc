@@ -1,0 +1,64 @@
+[[extension_zoom_other_intervals]]
+[appendix]
+== Zoom Other Intervals Extension (Normative)
+
+[float]
+=== Extension Title
+
+Zoom Other Intervals
+
+[float]
+=== Introduction
+
+In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify tile matrix layers in a tile matrix set that contain tiles of decreasing spatial extent and finer spatial resolution.
+Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
+Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
+Pixel sizes MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
+In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <<tiles_factor2_example_appendix>>.
+
+This extension enables use of "zoom other intervals" conventions with different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
+See WMTS <<16>> Annex E for additional examples of both conventions.
+
+
+[float]
+=== Extension Author
+
+GeoPackage SWG, author_name `gpkg`
+
+[float]
+=== Extension Name or Template
+
+`gpkg_zoom_other`
+
+[float]
+=== Extension Type
+
+Extension of Existing Requirement in clause 2.2.3.
+
+[float]
+=== Applicability
+
+This extension applies to any table listed in the `gpkg_contents` table with a data_type of `tiles`.
+
+[float]
+=== Scope
+
+Read-write
+
+[float]
+=== Requirements
+
+[float]
+==== GeoPackage
+
+The `pixel_x_size` and / or `pixel_y_size` column values in the `gpkg_tile_matrix` table vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels for a particular tile matrix set pyramid table.
+
+[float]
+==== GeoPackage SQLite Configuration
+
+None
+
+[float]
+==== GeoPackage SQLite Extension
+
+None
