@@ -1,0 +1,130 @@
+=== Schema
+
+==== Schema Introduction
+
+The schema option provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
+The information provided by this option can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.
+
+==== Data Columns
+
+===== Data
+
+[[schema_data_columns_table_definition]]
+====== Table Definition
+
+[requirement]
+A GeoPackage MAY contain a table or updateable view named `gpkg_data_columns`.
+If present it SHALL be defined per clause 2.3.2.1.1 <<schema_data_columns_table_definition>>, <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
+
+[[gpkg_data_columns_cols]]
+.Data Columns Table or View Definition
+[cols=",,,,",options="header",]
+|=======================================================================
+|Column Name |Column Type |Column Description |Null |Key
+|`table_name` |TEXT |Name of the tiles or feature table |no |PK
+|`column_name` |TEXT |Name of the table column |no |PK
+|`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |
+|`title` |TEXT |A human-readable formal title for the column_name content |yes |
+|`description` |TEXT |A human-readable description for the table_name content |yes |
+|`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type of column_name if BLOB type, or NULL for other types |yes |
+|`constraint_name` |TEXT |Case sensitive column value constraint name specified by reference to  gpkg_data_column_constraints.constraint name |yes |
+|=======================================================================
+
+:data_cols_foot1: footnote:[A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.]
+:data_cols_foot2: footnote:[GeoPackages MAY contain MIME types other than the raster image types specified in clauses 2.2.4, 2.2.5, and 3.2.2 as feature attributes, but they are not required to do so.]
+
+GeoPackage applications MAY {data_cols_foot1} use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type {data_cols_foot2} information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
+The `gpkg_data_columns` data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
+
+See <<gpkg_data_columns_sql>>.
+
+====== Table Data Values
+
+[requirement]
+Values of the `gpkg_data_columns` table `table_name` column value SHALL reference values in the `gpkg_contents` `table_name` column.
+
+[requirement]
+The `column_name` column value in a `gpkg_data_columns` table row SHALL contain the name of a column in the SQLite table or view identified by the `table_name` column value.
+
+[requirement]
+The constraint_name column value in a gpkg_data_columns table MAY be NULL.
+If it is not NULL, it SHALL contain a case sensitive constraint_name column value from the gpkg_data_column_constraints table.
+
+==== Data Column Constraints
+
+===== Data
+
+[[data_column_constraints_table_definition]]
+====== Table Definition
+
+[requirement]
+A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
+If present it SHALL be defined per clause 2.3.3.1.1 <<data_column_constraints_table_definition>>, <<gpkg_data_column_constraints_cols>> and <<gpkg_data_column_constraints_sql>>.
+
+The `gpkg_data_column_constraints` table contains data to specify restrictions on basic data type column values.
+The constraint_name column is referenced by the `constraint_name` column in the `gpkg_data_columns` table defined in <<gpkg_data_columns_cols>>.
+
+
+[[gpkg_data_column_constraints_cols]]
+.Data Column Constraints Table or View Definition
+[cols=",,,,",options="header",]
+|=======================================================================
+|Column Name |Column Type |Column Description |Null |Key
+|`constraint_name` |TEXT |Case sensitive name of constraint |no |Unique
+|`constraint_type` |TEXT |Lowercase type name of constraint: 'range' \| 'enum' \| 'glob' |no |Unique
+|`value` |TEXT |Specified case sensitive value for 'enum' or 'glob' or NULL for 'range' constraint_type |yes |Unique
+|`min` |NUMERIC |Minimum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
+|`minIsInclusive` |BOOLEAN |0 (false) if min value is exclusive, or 1 (true) if min value is inclusive |yes |
+|`max` |NUMERIC |Maximum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
+|`maxIsInclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
+|`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes| 
+|=======================================================================
+_The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
+
+See <<gpkg_data_column_constraints_sql>>.
+
+====== Table Data Values
+
+The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (text pattern match).
+The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The minIsInclusive and maxIsInclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.
+
+.Sample Data Column Constraints
+[cols=",,,,,,,",options="header",]
+|=======================================================================
+|constraint_name| constraint_type| value| min| minIsInclusive| max| maxIsInclusive
+|sampleRange| range| NULL| 1| true| 10| true
+|sampleEnum| enum| 1| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 3| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 5| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 7| NULL| NULL| NULL| NULL
+|sampleEnum| enum| 9| NULL| NULL| NULL| NULL
+|sampleGlob| glob| [1-2][0-9][0-9][0-9]| NULL| NULL| NULL| NULL
+|=======================================================================
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains data, the lowercase `constraint_type` column values SHALL be one of "range", "enum", or "glob".
+
+[requirement]
+gpkg_data_column_constraint constraint_name values for rows with constraint_type values of 'range' and 'glob' SHALL be unique.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with constraint_type column values of "range", the `value` column values for those rows SHALL be NULL.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "range", the `min` column values for those rows SHALL be NOT NULL and less than the `max` column value which shall be NOT NULL.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "range", the `minIsInclusive` and `maxIsInclusive` column values for those rows SHALL be 0 or 1.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "enum" or "glob", the `min`, `max`, `minIsInclusive` and `maxIsInclusive` column values for those rows SHALL be NULL.
+
+[requirement]
+The `gpkg_data_column_constraints` table MAY be empty.
+If it contains rows with `constraint_type` column values of "enum" or "glob", the `value` column SHALL NOT be NULL.

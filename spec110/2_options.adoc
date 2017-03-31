@@ -1,0 +1,10 @@
+== Options
+
+The optional capabilities specified in this clause depend on the required capabilities specified in clause <<_base>> above.
+Each subclause of this clause defines an indivisible module of functionality that can be used in GeoPackages. These modules are referred to as options.
+GeoPackages MAY use one or more options defined in this section.
+GeoPackages MAY omit the tables for options that are not used.
+As a minimum, a GeoPackage SHALL contain one user data table as defined by the Features or Tiles options in clauses <<features>> and <<tiles>> respectively.
+
+[requirement]
+A GeoPackage SHALL contain features per clause <<features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with lowercase `data_type` column values of “features” and/or “tiles” describing the user data tables.

@@ -1,0 +1,57 @@
+[[extension_geometry_types]]
+[appendix]
+== GeoPackage Geometry Types Extension Template (Normative)
+
+[float]
+=== Extension Title
+
+GeoPackage Non-Linear Geometry Types
+
+[float]
+=== Introduction
+
+Clause 2.1.4 of the GeoPackage Version 1 Encoding Standard specifies support for the Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeomCollection geometry types in the GeoPackageBinary geometry encoding format specified in clause 2.1.3.
+This extension specifies support for the additional CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, and Surface geometry types in the GeoPackage Binary geometry encoding format using the codes listed in Annex D.
+
+[float]
+=== Extension Author
+
+GeoPackage SWG, author_name `gpkg`
+
+[float]
+=== Extension Name or Template
+
+Extension names are constructed from the gpkg_geom_<gname> template where <gname> is the uppercase name of the extension geometry type in Annex D Table 52?
+
+[float]
+=== Extension Type
+
+Extension of Existing Requirement in clause <<sql_geometry_types>>
+
+[float]
+=== Applicability
+
+This extension applies to any column specified in the `gpkg_geometry_columns` table.
+
+[float]
+=== Scope
+
+Read-write
+
+[float]
+=== Requirements
+
+[float]
+==== GeoPackage
+
+The GeoPackageBinary geometry encoding format specified in clause <<gpb_format>> SHALL be used to encode non-linear geometry types using the type codes in <<geometry_types>> table <<geometry_types_extension>>.
+
+[float]
+==== GeoPackage SQLite Configuration
+
+None
+
+[float]
+==== GeoPackage SQLite Extension
+
+SQL functions that operate on GeoPackageBinary geometries as specified in other extensions SHALL operate correctly on the non-linear geometries specified in this extension.

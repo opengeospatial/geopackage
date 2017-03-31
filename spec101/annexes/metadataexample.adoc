@@ -1,0 +1,351 @@
+[[metadata_example_appendix]]
+[appendix]
+== Hierarchical Metadata Example (Informative)
+
+The first example use case is from ISO19115 H.2.
+Suppose we have this metadata:
+
+[source,sql]
+----
+CREATE TABLE gpkg_metadata (
+  id INTEGER NOT NULL PRIMARY KEY,
+  md_scope TEXT NOT NULL DEFAULT 'undefined',
+  md_standard_uri TEXT NOT NULL, 
+  metadata TEXT NOT NULL
+)
+----
+
+[cols=",,,,",options="header"]
+|======
+|id |md_scope |md_standard_uri |metadata
+|0 |undefined |http://www.isotc211.org/2005/gmd |TEXT
+|3 |series |http://www.isotc211.org/2005/gmd |TEXT
+|4 |dataset |http://www.isotc211.org/2005/gmd |TEXT
+|5 |featureType |http://www.isotc211.org/2005/gmd |TEXT
+|6 |feature |http://www.isotc211.org/2005/gmd |TEXT
+|7 |attributeType |http://www.isotc211.org/2005/gmd |TEXT
+|8 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|======
+
+and this reference table definition:
+
+[source,sql]
+----
+CREATE TABLE gpkg_metadata_reference (
+  reference_scope TEXT NOT NULL,  
+  table_name TEXT,
+  column_name TEXT,
+  row_id_value INTEGER,
+  timestamp TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
+  md_file_id INTEGER NOT NULL,
+  md_parent_id INTEGER,
+  CONSTRAINT crmr_mfi_fk FOREIGN KEY (md_file_id) REFERENCES gpkg_metadata(id),
+  CONSTRAINT crmr_mpi_fk FOREIGN KEY (md_parent_id) REFERENCES gpkg_metadata(id)
+)
+----
+
+H.2   1) Consider a geographic data provider generating vector mapping data for three Administrative areas(A, B and C).  ... The metadata could be carried exclusively at Dataset Series level.
+
+Then we need a record for each layer table for the three admin areas, like this:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'table', /* reference type */
+'roads', /* table name */
+'undefined', /* column_name */
+-1, /* row_id_value  */
+(datetime('now')),
+3,  /* md_file_id  */
+0  /* md_parent_id  */
+)
+----
+
+H.2 2) After some time alternate vector mapping of Administrative area A becomes available. The metadata would then be extended for Administrative area A, to describe the new quality date values. These values would supersede those given for the Dataset series, but only for Administrative area A. The metadata for B and C would remain unchanged. This new metadata would be recorded at Dataset
+level.
+
+Then we need a record for each layer table in "A" like this:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'table', /* reference type */
+'roads', /* table name */
+'undefined', /* column_name */
+-1, /* row_id_value  */
+(datetime('now')),
+ 4,  /* md_file_id  */
+3  /* md_parent_id  */
+)
+----
+
+H.2 3) Eventually further data becomes available for Administrative area A, with a complete re-survey of the road network. Again this implies new metadata for the affected feature types. This metadata would be carried at Feature type level for Administrative area A. All other metadata relating to other feature types remains unaffected. Only the metadata for roads in Administrative area A is modified. This road metadata is recorded at Feature type level.
+
+Then we need a record for each layer table for the roads network, like this:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'table', /* reference type */
+'roads', /* table name */
+'undefined', /* column_name */
+-1, /* row_id_value  */
+(datetime('now')),
+5,  /* md_file_id  */
+4  /* md_parent_id  */
+)
+----
+
+H.2 4) An anomaly in the road survey is identified, in that all Overhead clearances for the Administrative area A have been surveyed to the nearest metre. These are re-surveyed to the nearest decimetre.  This re-survey implies new metadata for the affected attribute type ‘Overhead Clearance’. All other metadata for Administrative area A remains unaffected. This ‘Overhead Clearance’ metadata is recorded at Attribute Type level.
+
+Then we need a record for each layer table in the roads network with attribute type 'Overhead Clearance', like this;
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'column', /* reference type */
+'roads', /* table name */
+'overhead_clearance', /* column_name */
+-1, /* row_id_value  */
+(datetime('now')),
+7,  /* md_file_id  */
+4  /* md_parent_id  */
+)
+----
+
+H.2 5) A new bridge is constructed in Administrative area A. This new data is reflected in the geographic data for Administrative area A, and new metadata is required to record this new feature. All other metadata for Administrative area A remains unaffected. This new feature metadata is recorded at Feature instance level.
+
+Then we need a record for the bridge layer table row for the new bridge, like this:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'row', /* reference type */
+'bridge', /* table name */
+'undefined', /* column_name */
+987, /* row_id_value  */
+(datetime('now')),
+6,  /* md_file_id  */
+4  /* md_parent_id  */
+)
+----
+
+H.2  6) The overhead clearance attribute of the new bridge was wrongly recorded, and is modified. Again this new attribute requires new metadata to describe the modification. All other metadata for Administrative area A remains unaffected. This new attribute metadata is recorded at Attribute instance level.
+
+Then we need a record for the clearance attribute value, like this:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'row/col', /* reference type */
+'bridge', /* table name */
+'overhead_clearance', /* column_name */
+987, /* row_id_value  */
+(datetime('now')),
+8,  /* md_file_id  */
+4  /* md_parent_id  */
+)
+----
+
+The second example use case is for a field data collection session.  This use case demonstrates a mechanism to indicate which data in a GeoPackage that was originally loaded with data from one or more services has been collected or updated since the initial load, and therefore MAY need to be uploaded to update the original services (e.g. WFS, WCS, WMTS). 
+
+Suppose a user with a mobile handheld device goes out in the field and collects observations of a new "Point of Interest" (POI) feature type, and associated metadata about the field session, the new feature type, some POI instances and some of their attributes (e.g. spatial accuracy, attribute accuracy) that results in the following additional metadata:
+
+[cols=",,,,",options="header"]
+|======
+|id|md_scope|md_standard_uri|metadata
+|1 |fieldSession |http://schemas.opengis.net/iso/19139/ |TEXT
+|10 |featureType |http://schemas.opengis.net/iso/19139/ |TEXT
+|11 |feature |http://schemas.opengis.net/iso/19139/ |TEXT
+|12 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|13 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|14 |feature |http://schemas.opengis.net/iso/19139/ |TEXT
+|15 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|16 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|17 |feature |http://schemas.opengis.net/iso/19139/ |TEXT
+|18 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|19 |attribute |http://schemas.opengis.net/iso/19139/ |TEXT
+|======
+
+(This example assumes that the field session data is still considered "raw" and won't be considered a data set or part of a data series until it has been verified and cleaned, but if that is wrong then additional series and data set metadata could be added.)
+
+Then we need a gpkg_metadata_reference record for the field session for the new POI table, whose md_parent_id is undefined:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'table', /* reference type */
+'poi', /* table name */
+'undefined', /* column_name */
+-1, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+1,  /* md_file_id  */
+0  /* md_parent_id  */
+)
+----
+
+Then we need a gpkg_metadata_reference record for the feature type for the new POI table, whose md_parent_id is that of the field session:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'table', /* reference type */
+'poi', /* table name */
+'undefined', /* column_name */
+-1, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+10,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+----
+
+Then we need gpkg_metadata_reference records for the poi feature instance rows, whose md_parent_id is that of the field session:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'row', /* reference type */
+'poi', /* table name */
+'undefined', /* column_name */
+1, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+11,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+
+INSERT INTO gpkg_metadata_reference VALUES (
+'row', /* reference type */
+'poi', /* table name */
+'undefined', /* column_name */
+2, /* row_id_value  */
+14,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+
+INSERT INTO gpkg_metadata_reference VALUES (
+'row', /* reference type */
+'poi', /* table name */
+'undefined', /* column_name */
+3, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+17,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+----
+
+And finally we need gpkg_metadata_reference records for the poi attribute instance metadata , whose md_parent_id is that of the field session:
+
+[source,sql]
+----
+INSERT INTO gpkg_metadata_reference VALUES (
+'row/col', /* reference type */
+'poi', /* table name */
+'point', /* column_name */
+1, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+12,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+
+INSERT INTO gpkg_metadata_reference VALUES (
+'row/col', /* reference type */
+'poi', /* table name */
+'point', /* column_name */
+2, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+15,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+
+INSERT INTO gpkg_metadata_reference VALUES (
+'row/col', /* reference type */
+'poi', /* table name */
+'point', /* column_name */
+3, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+18,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+
+INSERT INTO gpkg_metadata_reference VALUES (
+'row/col', /* reference type */
+'poi', /* table name */
+'category', /* column_name */
+1, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+13,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+
+INSERT INTO gpkg_metadata_reference VALUES (
+'row/col', /* reference type */
+'poi', /* table name */
+'category', /* column_name */
+2, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+16,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+
+INSERT INTO gpkg_metadata_reference VALUES (
+'row/col', /* reference type */
+'poi', /* table name */
+'category', /* column_name */
+3, /* row_id_value  */
+(strftime(‘%Y-%m-%dT%H:%M:%fZ’,’now’)),
+19,  /* md_file_id  */
+1  /* md_parent_id  */
+)
+----
+
+As long as all metadata collected in the field session either directly (as above) or indirectly (suppose there were a data set level metadata_reference record intermediary) refers to the field session metadata via md_parent_id values, then this chain of metadata references identifies the newly collected information, as Joan requested, in addition to the metadata.
+
+So here is the data after both examples:
+
+.xml_metadata
+[cols=",,,,",options="header"]
+|======
+|id|md_scope|md_standard_uri|metadata
+|0|undefined|http://www.isotc211.org/2005/gmd |TEXT
+|1 |fieldSession |http://www.isotc211.org/2005/gmd |TEXT
+|2 |collectionSession |http://www.isotc211.org/2005/gmd |TEXT
+|3 |series  |http://www.isotc211.org/2005/gmd |TEXT
+|4 |dataset |http://www.isotc211.org/2005/gmd |TEXT
+|5 |featureType |http://www.isotc211.org/2005/gmd |TEXT
+|6 |feature  |http://www.isotc211.org/2005/gmd |TEXT
+|7 |attributeType |http://www.isotc211.org/2005/gmd |TEXT
+|8 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|10 |featureType |http://www.isotc211.org/2005/gmd |TEXT
+|11 |feature |http://www.isotc211.org/2005/gmd |TEXT
+|12 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|13 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|14 |feature |http://www.isotc211.org/2005/gmd |TEXT
+|15 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|16 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|17 |feature |http://www.isotc211.org/2005/gmd |TEXT
+|18 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|19 |attribute |http://www.isotc211.org/2005/gmd |TEXT
+|======
+
+.gpkg_metadata_reference
+[cols=",,,,,,,",options="header"]
+|======
+|reference_type |table_name |column_name |row_id_value |timestamp |md_file_id |md_parent_id
+|table |roads |undefined |0 |ts |3 |0
+|table |roads |undefined |0 |ts |4 |3
+|table |roads |undefined |0 |ts |5 |4
+|column |roads |overhead_clearance |0 |ts |7 |4
+|row |bridge |undefined |987 |ts |6 |4
+|row/col |bridge |overhead_clearance |987 |ts |8 |4
+|table |poi |undefined |0 |ts |1 |0
+|row |poi |undefined |0 |ts |10 |1
+|row |poi |undefined |1 |ts |11 |1
+|row |poi |undefined |2 |ts |14 |1
+|row/col |poi |undefined |3 |ts |17 |1
+|row/col |poi |point |1 |ts |12 |1
+|row/col |poi |point |2 |ts |15 |1
+|row/col |poi |point |3 |ts |18 |1
+|row/col |poi |category |1 |ts |13 |1
+|row/col |poi |category |2 |ts |16 |1
+|row/col |poi |category |3 |ts |19 |1
+|======
