@@ -8004,7 +8004,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="title">EXAMPLE: tiles table Create Table SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_tile_pyramid (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   zoom_level <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tile_column <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tile_row <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -8048,7 +8048,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="title">EXAMPLE: Attributes table Create Table SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_attributes (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   text_attribute <span class="predefined-type">TEXT</span>,
   real_attribute REAL,
   boolean_attribute <span class="predefined-type">BOOLEAN</span>,
@@ -13924,7 +13924,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Coverage Ancillary Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_2d_gridded_coverage_ancillary</span><span class="delimiter">'</span></span> (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tile_matrix_set_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">UNIQUE</span>,
   datatype <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">integer</span><span class="delimiter">'</span></span>,
   scale REAL <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="float">1.0</span>,
@@ -13939,7 +13939,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Tile Ancillary Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_2d_gridded_tile_ancillary (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tpudt_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tpudt_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   scale REAL <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="float">1.0</span>,
@@ -14604,7 +14604,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-28 01:52:00 UTC
+Last updated 2017-03-31 02:57:57 UTC
 </div>
 </div>
 </body>
