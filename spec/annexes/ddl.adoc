@@ -205,7 +205,7 @@ INSERT INTO gpkg_tile_matrix VALUES (
 [source,sql]
 ----
 CREATE TABLE sample_tile_pyramid (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   zoom_level INTEGER NOT NULL,
   tile_column INTEGER NOT NULL,
   tile_row INTEGER NOT NULL,
@@ -254,7 +254,7 @@ CREATE TABLE gpkg_extensions (
 [source,sql]
 ----
 CREATE TABLE sample_attributes (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   text_attribute TEXT,
   real_attribute REAL,
   boolean_attribute BOOLEAN,
