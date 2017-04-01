@@ -87,10 +87,10 @@ If, for a particular row, both the `definition` and `definition_12_063` columns 
 |*Test Case ID* |+/extension_crs_wkt/table_def+
 |*Test Purpose* |Verify that the gpkg_spatial_ref_sys table exists and has the correct definition. Extends `/base/core/gpkg_spatial_ref_sys/data/table_def`.
 |*Test Method* |
-. `SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_spatial_ref_sys'`
+. `PRAGMA table_info('gpkg_spatial_ref_sys')`
 . Fail if returns an empty result set
-. Pass if column names and column definitions in the returned `CREATE TABLE statement` in the sql column value, including data type, nullability, and primary key constraints match all of those in the contents of Annex F.10 Table 47. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
-. Fail otherwise.
+. Fail if result set does not include a column named 'definition_12_063' or if the column is not of `type` 'TEXT', `notnull` 1, and `dflt_value` 'undefined'.
+. Pass if no failures.
 |*Reference* |Annex F.10 Req 115
 |*Test Type* |Basic
 |========================================
@@ -119,12 +119,13 @@ If, for a particular row, both the `definition` and `definition_12_063` columns 
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/extension_crs_wkt/data_values_undefined+
-|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table contains the required default contents. Replaces `/base/core/gpkg_spatial_ref_sys/data_values_default`.
+|*Test Case ID* |+/extension_crs_wkt/data_values_required+
+|*Test Purpose* |Verify that the spatial_ref_sys table contains rows to define all srs_id values used by features and tiles in a GeoPackage. Extends `/base/core/gpkg_spatial_ref_sys/data_values_default`.
 |*Test Method* |
 . `SELECT definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)`
-. Fail if both definition values are `undefined`
-. Pass otherwise
+. For each result
+.. Fail if both definition values are 'undefined'
+. Pass if no failures
 |*Reference* |Annex F.10 Req 117
 |*Test Type* |Capability
 |========================================
