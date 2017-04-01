@@ -120,7 +120,7 @@ If, for a particular row, both the `definition` and `definition_12_063` columns 
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/extension_crs_wkt/data_values_required+
-|*Test Purpose* |Verify that the spatial_ref_sys table contains rows to define all srs_id values used by features and tiles in a GeoPackage. Extends `/base/core/gpkg_spatial_ref_sys/data_values_default`.
+|*Test Purpose* |Verify that the spatial_ref_sys table contains rows to define all srs_id values used by features and tiles in a GeoPackage. Extends `/base/core/gpkg_spatial_ref_sys/data_values_required`.
 |*Test Method* |
 . `SELECT definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)`
 . For each result
