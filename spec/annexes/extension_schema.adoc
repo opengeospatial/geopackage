@@ -124,9 +124,9 @@ The constraint_name column is referenced by the `constraint_name` column in the 
 |`constraint_name` |TEXT |Name of constraint (lowercase)|no |Unique
 |`constraint_type` |TEXT |Type name of constraint: 'range' \| 'enum' \| 'glob' |no |Unique
 |`value` |TEXT |Specified case sensitive value for 'enum' or 'glob' or NULL for 'range' constraint_type |yes |Unique
-|`min` |NUMERIC |Minimum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
+|`min` |NUMERIC |Minimum value for 'range' or NULL for 'enum' or 'glob' constraint_type |yes |
 |`min_is_inclusive` |BOOLEAN |0 (false) if min value is exclusive, or 1 (true) if min value is inclusive |yes |
-|`max` |NUMERIC |Maximum value for ‘range’ or NULL for ‘enum’ or ‘glob’ constraint_type |yes |
+|`max` |NUMERIC |Maximum value for 'range' or NULL for 'enum' or 'glob' constraint_type |yes |
 |`max_is_inclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
 |`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes|
 |=======================================================================
@@ -321,7 +321,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_constraint_names_unique+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints constraint_name column values for constraint_type values  of "range", or "glob" are unique.
 |*Test Method* |
-. For each SELECT DISTINCT constraint_name AS cn FROM gpkg_data_column_constraints  WHERE constraint_type IN (‘range’, ‘glob’)
+. For each SELECT DISTINCT constraint_name AS cn FROM gpkg_data_column_constraints  WHERE constraint_type IN ('range', 'glob')
 .. SELECT count(*) FROM gpkg_data column_constraints WHERE constraint_name = cn
 .. Fail if count > 1
 . Pass if no fails.
@@ -334,7 +334,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_value_for_range+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints value column values are NULL for rows with a constraint_type value of "range".
 |*Test Method* |
-. SELECT constraint_type AS ct, value AS v FROM gpkg_data column_constraints WHERE constraint_type = ‘range’
+. SELECT constraint_type AS ct, value AS v FROM gpkg_data column_constraints WHERE constraint_type = 'range'
 . Not testable if returns an empty result set
 . For each v value returned by step 1
 .. Fail if v IS NOT NULL
@@ -348,7 +348,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_min_max_for_range+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints min column values are NOT NULL and less than the max column values for rows with a constraint_type value of "range".
 |*Test Method* |
-. SELECT min, max FROM gpkg_data column_constraints WHERE constraint_type = ‘range’
+. SELECT min, max FROM gpkg_data column_constraints WHERE constraint_type = 'range'
 . Not testable if returns an empty result set
 . For each set of min and max values returned by step 1
 .. Fail if min IS NULL
@@ -364,7 +364,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/opt/schema/data_column_constraints/data/data_values_inclusive_for_range+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints min_is_inclusive and max_is_inclusive  column values are NOT NULL and either 0 or 1 for rows with a constraint_type value of "range".
 |*Test Method* |
-. SELECT min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type = ‘range’
+. SELECT min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type = 'range'
 . Not testable if returns an empty result set
 . For each set of values returned by step 1
 .. Fail if min_is_inclusive IS NULL
@@ -379,9 +379,9 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 [cols="1,5a"]
 |========================================
 |*Test Case ID:* |+/opt/schema/data_column_constraints/data/data_values_min_max_inclusive_for_enum_glob+
-|*Test Purpose:* |Verify that the gpkg_data_column_constraints min, max, min_is_inclusive and max_is_inclusive column values are NULL for rows with a constraint_type value of "enum" or “glob”.
+|*Test Purpose:* |Verify that the gpkg_data_column_constraints min, max, min_is_inclusive and max_is_inclusive column values are NULL for rows with a constraint_type value of "enum" or "glob".
 |*Test Method:* |
-. SELECT min, max, min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type  IN (‘enum’,’glob)
+. SELECT min, max, min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type  IN ('enum','glob)
 . Not testable if returns an empty result set
 . For each set of values returned by step 1
 .. Fail if min IS NOT NULL
@@ -396,9 +396,9 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 [cols="1,5a"]
 |========================================
 |*Test Case ID:* |+/opt/schema/data_column_constraints/data/data_values_value_for_enum_glob+
-|*Test Purpose:* |Verify that the gpkg_data_column_constraints value column values are NOT NULL for rows with a constraint_type value of "enum" or “glob”.
+|*Test Purpose:* |Verify that the gpkg_data_column_constraints value column values are NOT NULL for rows with a constraint_type value of "enum" or "glob".
 |*Test Method:* |
-. SELECT value FROM gpkg_data column_constraints WHERE constraint_type  IN (‘enum’,’glob)
+. SELECT value FROM gpkg_data column_constraints WHERE constraint_type  IN ('enum','glob)
 . Not testable if returns an empty result set
 . For each value returned by step 1
 .. Fail if value IS NULL

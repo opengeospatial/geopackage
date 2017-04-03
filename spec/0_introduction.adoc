@@ -16,9 +16,9 @@ Since a GeoPackage is a database container, it supports direct use. This means t
 
 This standard is intended to facilitate widespread adoption and use of GeoPackages by both COTS and open-source software applications on enterprise production platforms as well as mobile hand-held devices <<B1>> <<B2>>, given that mobile hand held devices do not yet have the processing power or battery life to effectively tackle difficult geospatial product production and analysis tasks.
 
-An *Extended GeoPackage* is a *GeoPackage* that contains any additional data elements (tables or columns) or SQL constructs (data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.
+An *Extended GeoPackage* is a *GeoPackage* that contains any additional data elements (tables or columns) or SQL constructs (views, data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.
 
-A *GeoPackage* MAY be “empty” (contain user data table(s) for vector features, non-spatial attributes, and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
+A *GeoPackage* MAY be "empty" (contain user data table(s) for vector features, non-spatial attributes, and/or tile matrix pyramids with no row record content) or contain one or many vector feature type records and /or one or many tile matrix pyramid tile images.
 GeoPackage metadata CAN describe GeoPackage data contents and identify external data synchronization sources and targets.
 A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers to maintain indexes and enforce content constraints.
 

@@ -59,7 +59,7 @@ The GeoPackageBinary geometry encoding format specified in clause <<gpb_format>>
 .Requirement 67
 ====
 [[extension_geometry_types_extensions_name]]
-An extension name to specify a feature geometry extension type SHALL be defined for the “gpkg” author name using the “gpkg_geom_<gname>” template where <gname> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage.
+An extension name to specify a feature geometry extension type SHALL be defined for the "gpkg" author name using the "gpkg_geom_<gname>" template where <gname> is the uppercase name of the extension geometry type from <<geometry_types>> used in a GeoPackage.
 ====
 
 [[r68]]
@@ -97,11 +97,11 @@ None
 |*Test Method* |
 . SELECT table_name FROM gpkg_geometry_columns
 . Not testable if returns an empty result set
-. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = ‘features’),
+. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = 'features'),
 . Fail if returns an empty result set
 . For each row from step 3
 .. SELECT cn FROM tn;
-.. For each row from step a, log fail if GeoPackageBinary “X” type flag is 1
+.. For each row from step a, log fail if GeoPackageBinary "X" type flag is 1
 .. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 43, then
 .. Log cn.header values, wkb endianness and geometry type
 ii. If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail
@@ -137,12 +137,12 @@ viii. Otherwise log pass
 |*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/extension_name+
 |*Test Purpose* |Verify that an extension name in the form gpkg_geom_<gname> is defined for each <gname> extension geometry type from Annex G used in a GeoPackage.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == ‘features'))
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == 'features'))
 . Not testable if result set is empty
 . For each row result set table_name, column_name from step 3
 .. SELECT result_set_column_name FROM result_set_table_name
 .. For each geometry column value from step a
-... If the first two bytes of each geometry column value are “GP”, then
+... If the first two bytes of each geometry column value are "GP", then
 .... /opt/extension_mechanism/extensions/data/table_def
 .... Fail if failed
 .... SELECT ST_GeometryType(geometry column value) AS <gtype>;

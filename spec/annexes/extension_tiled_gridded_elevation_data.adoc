@@ -25,7 +25,7 @@ This extension provides the ability to store 16-bit and 32-bit tiled gridded ele
 :elevation_precision: footnote:[We acknowledge that this approach will not support certain applications that require a high degree of precision and/or accuracy (e.g., targeting).]
 This capability was designed to be relatively easy to implement and to be suitable for a wide variety of computing environments including the mobile/handheld computing environment{elevation_precision}.
 
-This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG (16-bit) and TIFF (32-bit) files as the container for the elevation values themselves. It is the data producer's responsibility to ensure that the intended recipient is able to read GeoPackages with the elevation encoding (PNG or TIFF) being used.
+This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG (16-bit) and TIFF (32-bit) files as the container for the elevation values themselves. It is the data producer's responsibility to ensure that the intended recipient is able to read GeoPackages with the elevation encoding (PNG or TIFF) being used. By default, the elevation values are assumed to be pixel-is-area. Communities of interest may agree to use an alternative pixel encoding (such as pixel-is-point) but specifying the pixel encoding is outside of the scope of this document.
 
 [float]
 ==== Extension Author
@@ -143,6 +143,8 @@ The `min`, `max`, and `mean` values are natural, i.e., not scaled or offset. Sim
 GeoPackages complying with this extension SHALL have a row in the `gpkg_spatial_ref_sys` table as described in <<gpkg_spatial_ref_sys_record>>:
 ====
 
+Because of limitations in expressing 3D coordinate reference systems in Well-known Text <<32>>, it is recommended that GeoPackages complying with this extension also comply with <<extension_crs_wkt>>.
+
 [[gpkg_spatial_ref_sys_record]]
 .Spatial Ref Sys Table Record
 [cols=",,,,",options="header",]
@@ -172,7 +174,7 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define
 ====== gpkg_extensions
 [[r125]]
 [caption=""]
-.Requirement 124
+.Requirement 125
 ====
 GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<gpkg_extensions_records>>.
 ====
@@ -262,7 +264,7 @@ For data where the `datatype` column of the corresponding row in the `gpkg_2d_gr
 [source,sql]
 ----
 CREATE TABLE 'gpkg_2d_gridded_coverage_ancillary' (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   tile_matrix_set_name TEXT NOT NULL UNIQUE,
   datatype TEXT NOT NULL DEFAULT 'integer',
   scale REAL NOT NULL DEFAULT 1.0,
@@ -279,7 +281,7 @@ CREATE TABLE 'gpkg_2d_gridded_coverage_ancillary' (
 [source,sql]
 ----
 CREATE TABLE gpkg_2d_gridded_tile_ancillary (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   tpudt_name TEXT NOT NULL,
   tpudt_id INTEGER NOT NULL,
   scale REAL NOT NULL DEFAULT 1.0,
@@ -297,7 +299,7 @@ CREATE TABLE gpkg_2d_gridded_tile_ancillary (
 [[tiff_encoding]]
 [[r134]]
 [caption=""]
-.Requirement 135
+.Requirement 134
 ====
 A TIFF file used for storing tiled gridded elevation data SHALL conform to the TIFF specification <<35>>.
 ====
