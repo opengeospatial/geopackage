@@ -36,11 +36,11 @@ Read-write
 ==== Requirements
 
 [float]
-===== Data Columns
+===== Table Definitions
 
 [[schema_data_columns_table_definition]]
 [float]
-====== Table Definition
+====== Data Columns
 
 [[r103]]
 [caption=""]
@@ -72,37 +72,9 @@ The `gpkg_data_columns` data CAN be used to provide more specific column data ty
 
 See <<gpkg_data_columns_sql>>.
 
-[float]
-====== Table Data Values
-
-[[r104]]
-[caption=""]
-.Requirement 104
-====
-Values of the `gpkg_data_columns` table `table_name` column value SHALL reference values in the `gpkg_contents` `table_name` column.
-====
-
-[[r105]]
-[caption=""]
-.Requirement 105
-====
-The `column_name` column value in a `gpkg_data_columns` table row SHALL contain the name of a column in the SQLite table or view identified by the `table_name` column value.
-====
-
-[[r106]]
-[caption=""]
-.Requirement 106
-====
-The constraint_name column value in a gpkg_data_columns table MAY be NULL.
-If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
-====
-
-[float]
-===== Data Column Constraints
-
 [[data_column_constraints_table_definition]]
 [float]
-====== Table Definition
+====== Data Column Constraints
 
 [[r107]]
 [caption=""]
@@ -135,7 +107,43 @@ _The min and max columns are defined as NUMERIC to be able to contain range valu
 See <<gpkg_data_column_constraints_sql>>.
 
 [float]
-====== Table Data Values
+===== Table Data Values
+
+====== gpkg_extensions
+[[r141]]
+[caption=""]
+.Requirement 141
+====
+GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_schema" SHALL comply with this extension. The row SHALL have a `scope` of "read-write".
+====
+
+[float]
+====== Data Columns
+
+[[r104]]
+[caption=""]
+.Requirement 104
+====
+Values of the `gpkg_data_columns` table `table_name` column value SHALL reference values in the `gpkg_contents` `table_name` column.
+====
+
+[[r105]]
+[caption=""]
+.Requirement 105
+====
+The `column_name` column value in a `gpkg_data_columns` table row SHALL contain the name of a column in the SQLite table or view identified by the `table_name` column value.
+====
+
+[[r106]]
+[caption=""]
+.Requirement 106
+====
+The constraint_name column value in a gpkg_data_columns table MAY be NULL.
+If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
+====
+
+[float]
+====== Data Column Constraints
 
 The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<33>>).
 The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
@@ -213,10 +221,10 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 ==== Abstract Test Suite
 
 [float]
-===== Data Columns
+===== Table Definition
 
 [float]
-====== Table Definition
+====== Data Columns
 
 [cols="1,5a"]
 |========================================
@@ -232,7 +240,40 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |========================================
 
 [float]
-====== Data Values
+===== Data Column Constraints
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/schema/data_column_constraints/table_def+
+|*Test Purpose* |Verify that the gpkg_data_column_constraints table exists and has the correct definition.
+|*Test Method* |
+. PRAGMA table_info(gpkg_data_column_constraints)
+. Fail if returns an empty result set
+. Fail if column names and column definitions in the returned table_info do not match those of Table 23, including data type, nullability, default values. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if no failures.
+|*Reference* |Annex F.9 Req 107
+|*Test Type* |Basic
+|========================================
+
+[float]
+===== Data Values
+
+[float]
+====== gpkg_extensions
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/metadata/extensions/data_values_scope+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Method* |
+. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
+. Not testable if returns an empty result set
+. For each row returned from step 1
+.. Fail if scope is not "read-write".
+. Pass if no fails
+|*Reference* |Annex F.8 Req 140
+|*Test Type:* |Capabilities
+|========================================
 
 [cols="1,5a"]
 |========================================
@@ -280,26 +321,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |========================================
 
 [float]
-===== Data Column Constraints
-
-[float]
-====== Table Definition
-
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/extensions/schema/data_column_constraints/table_def+
-|*Test Purpose* |Verify that the gpkg_data_column_constraints table exists and has the correct definition.
-|*Test Method* |
-. PRAGMA table_info(gpkg_data_column_constraints)
-. Fail if returns an empty result set
-. Fail if column names and column definitions in the returned table_info do not match those of Table 23, including data type, nullability, default values. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
-. Pass if no failures.
-|*Reference* |Annex F.9 Req 107
-|*Test Type* |Basic
-|========================================
-
-[float]
-====== Data Values
+====== Data Column Constraints
 
 [cols="1,5a"]
 |========================================
