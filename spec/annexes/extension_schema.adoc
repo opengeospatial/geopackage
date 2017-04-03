@@ -294,11 +294,11 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/extensions/schema/data_columns/column_name+
 |*Test Purpose* |Verify that for each gpkg_data_columns row, the column_name matches a column in the table or view identified by the table_name column value.
 |*Test Method* |
-. SELECT constraint_name AS cn FROM gpkg_data_columns
+. SELECT table_name, column_name FROM gpkg_data_columns
 . Not testable if returns an empty result set
-. For each NOT NULL cn value from step 1
-.. SELECT constraint_name FROM gpkg_data_column_constraints WHERE constraint_name = cn
-.. Fail if returns an empty result set
+. For each row from step 1
+.. PRAGMA table_info(table_name)
+.. Fail if table_name does not contain a column matching column_name
 . Pass if no fails
 |*Reference* |Annex F.9 Req 105
 |*Test Type* |Capability
