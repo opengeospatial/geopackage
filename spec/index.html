@@ -244,6 +244,12 @@ Document language: 	English<br></p>
 <li><a href="#extension_zoom_other_intervals">F.6. Zoom Other Intervals</a></li>
 <li><a href="#extension_tiles_webp">F.7. Tiles Encoding WebP</a></li>
 <li><a href="#extension_metadata">F.8. Metadata</a></li>
+<li>
+<ul class="sectlevel5">
+<li><a href="#_gpkg_extensions_2">F.8.1. gpkg_extensions</a></li>
+<li><a href="#_gpkg_metadata">F.8.2. gpkg_metadata</a></li>
+</ul>
+</li>
 <li><a href="#extension_schema">F.9. Schema</a></li>
 <li><a href="#extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</a></li>
 <li><a href="#extension_tiled_gridded_elevation_data">F.11. Tiled Gridded Elevation Data</a></li>
@@ -2062,7 +2068,7 @@ Implementers use their own author names to register other extensions<span class=
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage MAY contain a table or updateable view named gpkg_extensions.
-If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extensions_table_definition">Table Definition</a>, <a href="#gpkg_extensions_cols">GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</a> and <a href="#gpkg_extensions_sql">gpkg_extensions Table Definition SQL</a>. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.</p>
+If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extensions_table_definition">Table Definition</a>, <a href="#gpkg_extensions_cols">GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</a>, and <a href="#gpkg_extensions_sql">gpkg_extensions Table Definition SQL</a>. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.</p>
 </div>
 </div>
 </div>
@@ -5831,7 +5837,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <p>Fail if returns an empty result set.</p>
 </li>
 <li>
-<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 36. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <a href="#extensions_table_definition">[extensions_table_definition]</a>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -5866,7 +5872,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_metchanism/extensions/data/data_values_for_extensions</code></p>
+<p><code>/opt/extension_mechanism/extensions/data/data_values_for_extensions</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -5964,7 +5970,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_metchanism/extensions/data/data_values_table_name</code></p>
+<p><code>/opt/extension_mechanism/extensions/data/data_values_table_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -5988,19 +5994,23 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
+<p>Skip if column_name is NULL</p>
+</li>
+<li>
 <p>Fail if table_name value is NULL and column_name value is not NULL.</p>
-</li>
-<li>
-<p>SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name</p>
-</li>
-<li>
-<p>Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Pass if logged pass and no fails.</p>
+<p>SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if any ge.table_name != sm.tbl_name (MAY both be NULL).</p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div></div></td>
@@ -6029,7 +6039,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_metchanism/extensions/data/data_values_column_name</code></p>
+<p><code>/opt/extension_mechanism/extensions/data/data_values_column_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6043,13 +6053,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name, column_name FROM gpkg_extensions</p>
-</li>
-<li>
-<p>Not testable if returns an empty result set</p>
-</li>
-<li>
-<p>SELECT table_name, column_name FROM gpkg_extensions WHERE table_name IS NOT NULL AND column_name IS NOT NULL</p>
+<p>SELECT table_name, column_name FROM gpkg_extensions WHERE column_name IS NOT NULL</p>
 </li>
 <li>
 <p>Pass if returns an empty result set</p>
@@ -6059,10 +6063,14 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>PRAGMA table_info(table_name)</p>
-</li>
+<p>SELECT count(column_name) FROM table_name</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
 <li>
-<p>Fail if gpkg_extensions.column_name value does not equal a name column value returned by PRAGMA table_info.</p>
+<p>Fail if query is invalid, suggesting an invalid column name</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -9944,13 +9952,13 @@ There is no GeoPackage requirement that such metadata be provided or that define
 <p>Read-write</p>
 </div>
 <h4 id="_requirements_6" class="float">Requirements</h4>
-<h5 id="_metadata_table" class="float">Metadata Table</h5>
-<h6 id="metadata_table_table_definition" class="float">Table Definition</h6>
+<h5 id="_table_definitions" class="float">Table Definitions</h5>
+<h6 id="metadata_table_table_definition" class="float">Metadata Table</h6>
 <div id="r93" class="exampleblock">
 <div class="title">Requirement 93</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clause 2.4.2.1.1 <a href="#metadata_table_table_definition">Table Definition</a>, <a href="#gpkg_metadata_cols">Metadata Table Definition</a> and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
+<p>A GeoPackage A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clauses <a href="#metadata_table_table_definition">Metadata Table</a>, <a href="#gpkg_metadata_cols">Metadata Table Definition</a>, and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -10000,7 +10008,7 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">URI <a href="#23">[23]</a> reference to the metadata structure definition authority <span class="footnote">[<a id="_footnoteref_30" class="footnote" href="#_footnote_30" title="View footnote.">30</a>]</span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">any</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -10008,7 +10016,7 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MIME <a href="#21">[21]</a> encoding of metadata</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">text/xml <a href="#24">[24]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>text/xml</em> <a href="#24">[24]</a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -10029,140 +10037,12 @@ The structure (schema) information could be in whatever encoding is used by the 
 <div class="paragraph">
 <p>See <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_6" class="float">Table Data Values</h6>
-<div class="paragraph">
-<p>The <code>md_scope</code> column in the <code>gpkg_metadata</code> table is the name of the applicable scope for the contents of the metadata column for a given row.
-The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">Metadata Scopes</a> below.
-The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</span> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
-</div>
-<table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 19. Metadata Scopes</caption>
-<colgroup>
-<col style="width:%;">
-<col style="width:%;">
-<col style="width:%;"> 
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name (md_scope)</th>
-<th class="tableblock halign-left valign-top">Scope Code</th>
-<th class="tableblock halign-left valign-top">Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">undefined</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata information scope is undefined</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSession</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">012</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the field session</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">collectionSession</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">004</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the collection session</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">series</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">006</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the (dataset) series <span class="footnote">[<a id="_footnoteref_32" class="footnote" href="#_footnote_32" title="View footnote.">32</a>]</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">dataset</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">005</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the (geographic feature) dataset</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">featureType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">010</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a feature type (class)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">feature</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">009</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a feature (instance)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">attributeType</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">002</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the attribute class</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">001</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the characteristic of a feature (instance)</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">tile</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">016</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a tile, a spatial subset of geographic data</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">model</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">015</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a copy or imitation of an existing or hypothetical object</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">catalog</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata applies to a feature catalog <span class="footnote">[<a id="_footnoteref_33" class="footnote" href="#_footnote_33" title="View footnote.">33</a>]</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">schema</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata applies to an application schema <span class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnote_34" title="View footnote.">34</a>]</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">taxonomy</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata applies to a taxonomy or knowledge system <span class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnote_35" title="View footnote.">35</a>]</span></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">software</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">013</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a computer program or routine</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">service</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">014</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a capability which a service provider entity makes available to a service user entity through a set of interfaces that define a behaviour, such as a use case</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">collectionHardware</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">003</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the collection hardware class</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">nonGeographicDataset</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">007</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to non-geographic data</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">dimensionGroup</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">008</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a dimension group</p></td>
-</tr>
-</tbody>
-</table>
-
-<div id="r94" class="exampleblock">
-<div class="title">Requirement 94</div>
-<div class="content">
-<div class="paragraph">
-<p>Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table or updateable view SHALL be one of the name column values from <a href="#metadata_scopes">Metadata Scopes</a>.</p>
-</div>
-</div>
-</div>
-<h5 id="_metadata_reference_table" class="float">Metadata Reference Table</h5>
-<h6 id="metadata_reference_table_table_definition" class="float">Table Definition</h6>
+<h6 id="metadata_reference_table_table_definition" class="float">Metadata Reference Table</h6>
 <div id="r95" class="exampleblock">
 <div class="title">Requirement 95</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a <code>gpkg_metadata</code> table SHALL contain a <code>gpkg_metadata_reference</code> table per clause 2.4.3.1.1 <a href="#metadata_reference_table_table_definition">Table Definition</a>, <a href="#gpkg_metadata_reference_cols">Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</a> and <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.</p>
+<p>A GeoPackage that contains a <code>gpkg_metadata</code> table SHALL contain a <code>gpkg_metadata_reference</code> table per clauses <a href="#metadata_reference_table_table_definition">Metadata Reference Table</a>, <a href="#gpkg_metadata_reference_cols">Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</a>, and <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -10171,7 +10051,7 @@ The initial contents of this table were obtained from the ISO 19115 <a href="#40
 The <code>gpkg_metadata_reference</code> table is not required to contain any rows.</p>
 </div>
 <table id="gpkg_metadata_reference_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 20. Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</caption>
+<caption class="title">Table 19. Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -10216,7 +10096,7 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>row_id_value</code> <span class="footnote">[<a id="_footnoteref_36" class="footnote" href="#_footnote_36" title="View footnote.">36</a>]</span></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>row_id_value</code> <span class="footnote">[<a id="_footnoteref_31" class="footnote" href="#_footnote_31" title="View footnote.">31</a>]</span></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">NULL for <code>reference_scope</code> of <em>geopackage</em>, <em>table</em> or <em>column</em>, or the rowed of a row record in the <code>table_name</code> table for <code>reference_scope</code> of <em>row</em> or <em>row/col</em></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
@@ -10251,12 +10131,152 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
 </table>
 
 <div class="paragraph">
-<p>Every row in <code>gpkg_metadata_reference</code> that has null value as <code>md_parent_id</code> forms the root of a metadata hierarchy.<span class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnote_37" title="View footnote.">37</a>]</span></p>
+<p>Every row in <code>gpkg_metadata_reference</code> that has null value as <code>md_parent_id</code> forms the root of a metadata hierarchy.<span class="footnote">[<a id="_footnoteref_32" class="footnote" href="#_footnote_32" title="View footnote.">32</a>]</span></p>
 </div>
 <div class="paragraph">
 <p>See <a href="#table_definition_sql">Table Definition SQL (Normative)</a> clause <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_7" class="float">Table Data Values</h6>
+<h5 id="_table_data_values_6" class="float">Table Data Values</h5>
+<div class="sect5">
+<h6 id="_gpkg_extensions_2">F.8.1. gpkg_extensions</h6>
+<div id="r140" class="exampleblock">
+<div class="title">Requirement 140</div>
+<div class="content">
+<div class="paragraph">
+<p>GeoPackages with a row in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_metadata" SHALL comply with this extension. The row SHALL have a <code>scope</code> of "read-write".</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_gpkg_metadata">F.8.2. gpkg_metadata</h6>
+<div class="paragraph">
+<p>The <code>md_scope</code> column in the <code>gpkg_metadata</code> table is the name of the applicable scope for the contents of the metadata column for a given row.
+The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">Metadata Scopes</a> below.
+The initial contents of this table were obtained from the ISO 19115 <a href="#40">[40]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <span class="footnote">[<a id="_footnoteref_33" class="footnote" href="#_footnote_33" title="View footnote.">33</a>]</span> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
+</div>
+<table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
+<caption class="title">Table 20. Metadata Scopes</caption>
+<colgroup>
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;"> 
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name (md_scope)</th>
+<th class="tableblock halign-left valign-top">Scope Code</th>
+<th class="tableblock halign-left valign-top">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">undefined</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata information scope is undefined</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fieldSession</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">012</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the field session</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collectionSession</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">004</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the collection session</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">series</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">006</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the (dataset) series <span class="footnote">[<a id="_footnoteref_34" class="footnote" href="#_footnote_34" title="View footnote.">34</a>]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dataset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">005</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the (geographic feature) dataset</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">featureType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">010</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a feature type (class)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">feature</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">009</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a feature (instance)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attributeType</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">002</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the attribute class</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">attribute</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">001</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the characteristic of a feature (instance)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">016</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a tile, a spatial subset of geographic data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">model</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">015</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a copy or imitation of an existing or hypothetical object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">catalog</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata applies to a feature catalog <span class="footnote">[<a id="_footnoteref_35" class="footnote" href="#_footnote_35" title="View footnote.">35</a>]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata applies to an application schema <span class="footnote">[<a id="_footnoteref_36" class="footnote" href="#_footnote_36" title="View footnote.">36</a>]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">taxonomy</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Metadata applies to a taxonomy or knowledge system <span class="footnote">[<a id="_footnoteref_37" class="footnote" href="#_footnote_37" title="View footnote.">37</a>]</span></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">software</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">013</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a computer program or routine</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">014</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a capability which a service provider entity makes available to a service user entity through a set of interfaces that define a behavior, such as a use case</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">collectionHardware</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">003</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to the collection hardware class</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">nonGeographicDataset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">007</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to non-geographic data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">dimensionGroup</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">008</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a dimension group</p></td>
+</tr>
+</tbody>
+</table>
+
+<div id="r94" class="exampleblock">
+<div class="title">Requirement 94</div>
+<div class="content">
+<div class="paragraph">
+<p>Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table or updateable view SHALL be one of the name column values from <a href="#metadata_scopes">Metadata Scopes</a>.</p>
+</div>
+</div>
+</div>
+<h6 id="_gpkg_metadata_reference" class="float">gpkg_metadata_reference</h6>
 <div id="r96" class="exampleblock">
 <div class="title">Requirement 96</div>
 <div class="content">
@@ -10317,8 +10337,8 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </div>
 </div>
 <h4 id="_abstract_test_suite_6" class="float">Abstract Test Suite</h4>
-<h5 id="_metadata_table_2" class="float">Metadata Table</h5>
-<h6 id="_table_definition_4" class="float">Table Definition</h6>
+<h5 id="_table_definition_4" class="float">Table Definition</h5>
+<h6 id="_metadata_table" class="float">Metadata Table</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -10328,7 +10348,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata/data/table_def</code></p>
+<p><code>/extensions/metadata/metadata/table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10342,13 +10362,13 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata'</p>
+<p>PRAGMA TABLE_INFO(gpkg_metadata)</p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
 </li>
 <li>
-<p>Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 33. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Pass if the column names, types, nullability, default values, and primary, foreign and unique key constraints match all of those in the contents of Table 18. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
 <p>Fail otherwise.</p>
@@ -10371,7 +10391,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tbody>
 </table>
 
-<h6 id="_table_data_values_8" class="float">Table Data Values</h6>
+<h6 id="_metadata_reference_table" class="float">Metadata Reference Table</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -10381,68 +10401,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata/data/data_values_md_scope</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from Table 15 in clause 2.4.2.1.2.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT md_scope FROM gpkg_metadata</p>
-</li>
-<li>
-<p>Not testable if returns an empty result set</p>
-</li>
-<li>
-<p>For each row returned from step 1</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if md_scope value not one of the name column values from Table 15 in clause 2.4.2.1.2</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if no fails</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.8 Req 94</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Capabilities</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<h5 id="_metadata_reference_table_2" class="float">Metadata Reference Table</h5>
-<h6 id="_table_definition_5" class="float">Table Definition</h6>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/table_def</code></p>
+<p><code>/extensions/metadata/metadata_reference/table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10456,7 +10415,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata_reference'</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>table</em> AND tbl_name = <em>gpkg_metadata_reference</em></p>
 </li>
 <li>
 <p>Fail if returns an empty result set.</p>
@@ -10485,7 +10444,8 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tbody>
 </table>
 
-<h6 id="_data_values" class="float">Data Values</h6>
+<h5 id="_table_data_values_7" class="float">Table Data Values</h5>
+<h6 id="_gpkg_extensions_3" class="float">gpkg_extensions</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -10495,7 +10455,127 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/data_values_reference_scope</code></p>
+<p><code>/extensions/metadata/extensions/data_values_scope</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the gpkg_extensions table has the required row.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_metadata</em>;</p>
+</li>
+<li>
+<p>Not testable if returns an empty result set</p>
+</li>
+<li>
+<p>For each row returned from step 1</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if scope is not "read-write".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.8 Req 140</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capabilities</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_gpkg_metadata_2" class="float">gpkg_metadata</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/metadata/metadata/data_values_md_scope</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from <a href="#metadata_scopes">[metadata_scopes]</a>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT md_scope FROM gpkg_metadata</p>
+</li>
+<li>
+<p>Not testable if returns an empty result set</p>
+</li>
+<li>
+<p>For each row returned from step 1</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if md_scope value not one of the name column values from <a href="#metadata_scopes">[metadata_scopes]</a>.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.8 Req 94</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capabilities</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_gpkg_metadata_reference_2" class="float">gpkg_metadata_reference</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/metadata/metadata_reference/reference_scope</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10550,7 +10630,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/data_values_table_name</code></p>
+<p><code>/extensions/metadata/metadata_reference/table_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10611,7 +10691,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/data_values_column_name</code></p>
+<p><code>/extensions/metadata/metadata_reference/column_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10688,7 +10768,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/data_values_row_id_value</code></p>
+<p><code>/extensions/metadata/metadata_reference/row_id_value</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10762,7 +10842,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/data_values_timestamp</code></p>
+<p><code>/extensions/metadata/metadata_reference/timestamp</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10824,7 +10904,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/data_values_md_file_id</code></p>
+<p><code>/extensions/metadata/metadata_reference/md_file_id</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10870,7 +10950,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/metadata/metadata_reference/data/data_values_md_parent_id</code></p>
+<p><code>/extensions/metadata/metadata_reference/md_parent_id</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -10923,7 +11003,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </table>
 
 <h4 id="_table_definition_sql" class="float">Table Definition SQL</h4>
-<h5 id="_gpkg_metadata" class="float">gpkg_metadata</h5>
+<h5 id="_gpkg_metadata_3" class="float">gpkg_metadata</h5>
 <div id="gpkg_metadata_sql" class="listingblock">
 <div class="title">gpkg_metadata Table Definition SQL</div>
 <div class="content">
@@ -10936,7 +11016,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 );</code></pre>
 </div>
 </div>
-<h5 id="_gpkg_metadata_reference" class="float">gpkg_metadata_reference</h5>
+<h5 id="_gpkg_metadata_reference_3" class="float">gpkg_metadata_reference</h5>
 <div id="gpkg_metadata_reference_sql" class="listingblock">
 <div class="title">gpkg_metadata_reference Table Definition SQL</div>
 <div class="content">
@@ -11906,6 +11986,7 @@ An example of the data items in such a model is shown in the following table.</p
 </ul>
 </div>
 </div>
+</div>
 <div class="sect2">
 <h3 id="extension_schema">F.9. Schema</h3>
 <h4 id="_introduction_10" class="float">Introduction</h4>
@@ -12023,7 +12104,7 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
 <div class="paragraph">
 <p>See <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_9" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_8" class="float">Table Data Values</h6>
 <div id="r104" class="exampleblock">
 <div class="title">Requirement 104</div>
 <div class="content">
@@ -12148,7 +12229,7 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <div class="paragraph">
 <p>See <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_10" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_9" class="float">Table Data Values</h6>
 <div class="paragraph">
 <p>The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
 The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
@@ -12307,7 +12388,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </div>
 <h4 id="_abstract_test_suite_7" class="float">Abstract Test Suite</h4>
 <h5 id="_data_columns_2" class="float">Data Columns</h5>
-<h6 id="_table_definition_6" class="float">Table Definition</h6>
+<h6 id="_table_definition_5" class="float">Table Definition</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -12360,7 +12441,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h6 id="_data_values_2" class="float">Data Values</h6>
+<h6 id="_data_values" class="float">Data Values</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -12551,7 +12632,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </table>
 
 <h5 id="_data_column_constraints_2" class="float">Data Column Constraints</h5>
-<h6 id="_table_definition_7" class="float">Table Definition</h6>
+<h6 id="_table_definition_6" class="float">Table Definition</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -12604,7 +12685,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h6 id="_data_values_3" class="float">Data Values</h6>
+<h6 id="_data_values_2" class="float">Data Values</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -13103,7 +13184,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </div>
 <h4 id="_requirements_8" class="float">Requirements</h4>
 <h5 id="_table" class="float">Table</h5>
-<h6 id="_table_definition_8" class="float">Table Definition</h6>
+<h6 id="_table_definition_7" class="float">Table Definition</h6>
 <div id="r115" class="exampleblock">
 <div class="title">Requirement 115</div>
 <div class="content">
@@ -13183,7 +13264,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h6 id="_table_data_values_11" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_10" class="float">Table Data Values</h6>
 <div id="r116" class="exampleblock">
 <div class="title">Requirement 116</div>
 <div class="content">
@@ -13204,7 +13285,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <p>If, for a particular row, both the <code>definition</code> and <code>definition_12_063</code> columns are populated, the value in the <code>definition_12_063</code> column takes priority.</p>
 </div>
 <h4 id="_abstract_test_suite_8" class="float">Abstract Test Suite</h4>
-<h5 id="_table_definition_9" class="float">Table Definition</h5>
+<h5 id="_table_definition_8" class="float">Table Definition</h5>
 <div class="paragraph">
 <p><strong>Table Definition</strong></p>
 </div>
@@ -13260,7 +13341,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h5 id="_table_data_values_12" class="float">Table Data Values</h5>
+<h5 id="_table_data_values_11" class="float">Table Data Values</h5>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -13478,7 +13559,7 @@ ID["EPSG", 4326]]</p>
 <p>read-write</p>
 </div>
 <h4 id="_requirements_9" class="float">Requirements</h4>
-<h5 id="_table_definitions" class="float">Table Definitions</h5>
+<h5 id="_table_definitions_2" class="float">Table Definitions</h5>
 <h6 id="coverage_ancillary" class="float">Coverage Ancillary</h6>
 <div id="r120" class="exampleblock">
 <div class="title">Requirement 120</div>
@@ -13779,7 +13860,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
-<h6 id="_gpkg_extensions_2" class="float">gpkg_extensions</h6>
+<h6 id="_gpkg_extensions_4" class="float">gpkg_extensions</h6>
 <div id="r125" class="exampleblock">
 <div class="title">Requirement 125</div>
 <div class="content">
@@ -14533,25 +14614,25 @@ For undated references, the latest edition of the normative document referred to
 <a href="#_footnoteref_30">30</a>. For example, for ISO 19139 metadata the URI value should be the metadata schema namespace <a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a>
 </div>
 <div class="footnote" id="_footnote_31">
-<a href="#_footnoteref_31">31</a>. The scope codes in &lt;&lt;metadata_scopes&gt;&gt; include a very wide set of descriptive information types as "metadata" to describe data.
+<a href="#_footnoteref_31">31</a>. In SQLite, the rowid value is always equal to the value of a single-column primary key on an integer column [B30\] and is not changed by a database reorganization performed by the VACUUM SQL command.
 </div>
 <div class="footnote" id="_footnote_32">
-<a href="#_footnoteref_32">32</a>. ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.
+<a href="#_footnoteref_32">32</a>. Such a metadata hierarchy MAY have only one level of defined metadata
 </div>
 <div class="footnote" id="_footnote_33">
-<a href="#_footnoteref_33">33</a>. The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.
+<a href="#_footnoteref_33">33</a>. The scope codes in &lt;&lt;metadata_scopes&gt;&gt; include a very wide set of descriptive information types as "metadata" to describe data.
 </div>
 <div class="footnote" id="_footnote_34">
-<a href="#_footnoteref_34">34</a>. The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.
+<a href="#_footnoteref_34">34</a>. ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.
 </div>
 <div class="footnote" id="_footnote_35">
-<a href="#_footnoteref_35">35</a>. The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.
+<a href="#_footnoteref_35">35</a>. The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.
 </div>
 <div class="footnote" id="_footnote_36">
-<a href="#_footnoteref_36">36</a>. In SQLite, the rowid value is always equal to the value of a single-column primary key on an integer column [B30\] and is not changed by a database reorganization performed by the VACUUM SQL command.
+<a href="#_footnoteref_36">36</a>. The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.
 </div>
 <div class="footnote" id="_footnote_37">
-<a href="#_footnoteref_37">37</a>. Such a metadata hierarchy MAY have only one level of defined metadata
+<a href="#_footnoteref_37">37</a>. The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.
 </div>
 <div class="footnote" id="_footnote_38">
 <a href="#_footnoteref_38">38</a>. The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
@@ -14589,7 +14670,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-03 19:05:04 UTC
+Last updated 2017-04-03 19:16:06 UTC
 </div>
 </div>
 </body>
