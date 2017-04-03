@@ -232,7 +232,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata/data/table_def+
+|*Test Case ID* |+/extensions/metadata/metadata/table_def+
 |*Test Purpose* |Verify that the gpkg_metadata table exists and has the correct definition.
 |*Test Method* |
 . PRAGMA TABLE_INFO(gpkg_metadata)
@@ -248,7 +248,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/table_def+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/table_def+
 |*Test Purpose* |Verify that the gpkg_metadata_reference table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_metadata_reference'
@@ -267,7 +267,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/extensions/data_values_scope+
+|*Test Case ID* |+/extensions/metadata/extensions/data_values_scope+
 |*Test Purpose* |Verify that the gpkg_extensions table has the required row.
 |*Test Method* |
 . SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
@@ -284,7 +284,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata/data/data_values_md_scope+
+|*Test Case ID* |+/extensions/metadata/metadata/data_values_md_scope+
 |*Test Purpose* |Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from <<metadata_scopes>>.
 |*Test Method* |
 . SELECT md_scope FROM gpkg_metadata
@@ -301,7 +301,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_reference_scope+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/reference_scope+
 |*Test Purpose* |Verify that gpkg_metadata_reference table reference_scope column values are valid.
 |*Test Method* |
 . SELECT reference_scope FROM gpkg_metadata_reference
@@ -315,7 +315,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_table_name+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/table_name+
 |*Test Purpose* |Verify that gpkg_metadata_reference table_name column values are NULL for rows with reference_scope values of 'geopackage', and reference gpkg_contents table_name values for all other reference_scope values.
 |*Test Method* |
 . SELECT table_name FROM gpkg_metadata_reference
@@ -331,7 +331,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_column_name+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/column_name+
 |*Test Purpose* |Verify that gpkg_metadata_reference column_name column values are NULL for rows with reference scope values of 'geopackage', 'table', or 'row', and contain the name of a column in table_name table for other reference scope values.
 |*Test Method* |
 . SELECT column_name FROM gpkg_metadata_reference
@@ -351,7 +351,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_row_id_value+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/row_id_value+
 |*Test Purpose* |Verify that gpkg_metadata_reference row_id_value column values are NULL for rows with reference scope values of 'geopackage', 'table', or 'row', and contain the ROWID of a row in the table_name for other reference scope values.
 |*Test Method* |
 . SELECT row_id_value FROM gpkg_metadata_reference
@@ -370,7 +370,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_timestamp+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/timestamp+
 |*Test Purpose* |Verify that every gpkg_metadata_reference table row timestamp column value is in ISO 8601 UTC format.
 |*Test Method* |
 . SELECT timestamp from gpkg_metadata_reference.
@@ -385,7 +385,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_md_file_id+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/md_file_id+
 |*Test Purpose* |Verify that every gpkg_metadata_reference table row md_file_id column value references a gpkg_metadata id column value.
 |*Test Method* |
 . PRAGMA foreign_key_check('geometry_columns')
@@ -396,7 +396,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/metadata/metadata_reference/data/data_values_md_parent_id+
+|*Test Case ID* |+/extensions/metadata/metadata_reference/md_parent_id+
 |*Test Purpose* |Verify that every gpkg_metadata_reference table row md_parent_id column value that is not null is an id column value from the gpkg_metadata_table that is not equal to the md_file_id column value for that row.
 |*Test Method* |
 . SELECT md_file_id FROM gpkg_metadata_reference
