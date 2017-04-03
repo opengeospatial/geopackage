@@ -4278,32 +4278,7 @@ WHERE type = <em>table</em> AND name = <em>{selected table_ name}</em></p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name FROM gpkg_contents WHERE data_type = "tiles"</p>
-</li>
-<li>
-<p>Not testable  if returns empty result set</p>
-</li>
-<li>
-<p>For each row from step 1</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>PRAGMA table_info(table_name)</p>
-</li>
-<li>
-<p>Fail if returns an empty result set</p>
-</li>
-<li>
-<p>Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"and the name column value is "id"</p>
-</li>
-<li>
-<p>Fail if result set does not contain four other rows where the name column values are "zoom_level","tile_column","tile_row", and "tile_data".</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if no fails.</p>
+<p>Execute test /opt/tiles/tile_pyramid/data/table_def</p>
 </li>
 </ol>
 </div></div></td>
@@ -14607,7 +14582,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-31 19:28:58 UTC
+Last updated 2017-04-03 14:18:55 UTC
 </div>
 </div>
 </body>
