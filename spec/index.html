@@ -264,22 +264,33 @@ Document language: 	English<br></p>
 <h2 id="_introduction">Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Mobile device users who require map/geospatial application services and operate in disconnected or limited network connectivity environments are challenged by limited storage capacity and the lack of open format geospatial data to support these applications.
-The current situation is that each map/geospatial application requires its own potentially proprietary geospatial data store.
-These separate application-specific data stores may contain the same geospatial data, wasting the limited storage available, and requiring custom applications for data translation, replication, and synchronization to enable different map/geospatial applications to share the same world view. In addition, many existing geospatial data stores are platform-specific, which means that users with different platforms must translate data to share it.</p>
+<p>A <strong>GeoPackage</strong> is an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information.
+It is a platform-independent SQLite <a href="#5">[5]</a> database file that contains the GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">GeoPackage Tables Overview</a> below.</p>
 </div>
 <div class="paragraph">
-<p>An open, standards-based, application-independent, platform-independent, portable, interoperable, self-describing, GeoPackage (GPKG) data container, API and manifest are needed to overcome these challenges and to effectively support multiple map/geospatial applications such as fixed product distribution, local data collection, and geospatially enabled analytics.
-This standard is intended to facilitate widespread adoption and use of GeoPackages by both COTS and open-source software applications on enterprise production platforms as well as mobile hand-held devices <a href="#B1">[B1]</a> <a href="#B2">[B2]</a>, given that mobile hand held devices do not yet have the processing power or battery life to effectively tackle difficult geospatial product production and analysis tasks.
-An application that accesses a GPKG will make use of the GPKG capabilities it requires; few if any such applications will make use of all GPKG capabilities.</p>
+<p>The GeoPackage Encoding Standard (this document) describes a set of conventions for storing the following within an SQLite database:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>vector features</p>
+</li>
+<li>
+<p>tile matrix sets of imagery and raster maps at various scales</p>
+</li>
+<li>
+<p>extensions</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>This OGC® Encoding Standard defines GeoPackages for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales.
-Direct use means the ability to access and update data in a "native" format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.</p>
+<p>These conventions include table definitions, integrity assertions, format limitations, and content constraints. The required and supported content of a GeoPackage is entirely defined in the standard. These capabilities are built on a common base and the extension mechanism provides implementors a way to include additional functionality in their GeoPackages.</p>
 </div>
 <div class="paragraph">
-<p>A <strong>GeoPackage</strong> is a platform-independent SQLite <a href="#5">[5]</a> database file that contains GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">GeoPackage Tables Overview</a> below, with specified definitions, integrity assertions, format limitations and content constraints.
-The allowable content of a GeoPackage is entirely defined in this standard.</p>
+<p>Since a GeoPackage is a database container, it supports direct use. This means that the data in a GeoPackage can be accessed and updated in a "native" storage format without intermediate format translations. GeoPackages that comply with the requirements in the standard and do not implement vendor-specific extensions are interoperable across all enterprise and personal computing environments. GeoPackages are particularly useful on mobile devices such as cell phones and tablets in communications environments where there is limited connectivity and bandwidth.Mobile device users who require map/geospatial application services and operate in disconnected or limited network connectivity environments are challenged by limited storage capacity and the lack of open format geospatial data to support these applications.</p>
+</div>
+<div class="paragraph">
+<p>This standard is intended to facilitate widespread adoption and use of GeoPackages by both COTS and open-source software applications on enterprise production platforms as well as mobile hand-held devices <a href="#B1">[B1]</a> <a href="#B2">[B2]</a>, given that mobile hand held devices do not yet have the processing power or battery life to effectively tackle difficult geospatial product production and analysis tasks.</p>
 </div>
 <div class="paragraph">
 <p>An <strong>Extended GeoPackage</strong> is a <strong>GeoPackage</strong> that contains any additional data elements (tables or columns) or SQL constructs (views, data types, functions, indexes, constraints or triggers) that are not automatically maintained within the SQLite data file or that result in a change in behavior not specified in this encoding standard.</p>
@@ -382,7 +393,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 </div>
 </div>
 <div class="paragraph">
-<p>In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (views, data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
+<p>In order to guarantee maximum interoperability between applications, GeoPackages should not contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
 SQLite databases that use constructs from the GeoPackage standard but extend those constructs to contain elements not specified in the core GeoPackage standard are referred to as Extended GeoPackages throughout this standard.</p>
 </div>
 <div id="r5" class="exampleblock">
@@ -527,7 +538,7 @@ The coordinate reference system definitions it contains are referenced by the Ge
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_spatial_ref_sys</code> table includes the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> below containing data that defines spatial reference systems.
-Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) specifications.</p>
+Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) standards.</p>
 </div>
 <table id="gpkg_spatial_ref_sys_cols" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 2. Spatial Ref Sys Table Definition</caption>
@@ -600,7 +611,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="sect5">
 <h6 id="gpkg_srs_table_data_values">1.1.2.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <a href="#_requirement-11">[_requirement-11]</a>. Values SHALL be constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">[_requirement-11]</a>:</p>
+<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <a href="#_requirement-11">[_requirement-11]</a>. Values are constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#_requirement-11">[_requirement-11]</a>:</p>
 </div>
 <div id="r11" class="exampleblock">
 <div class="title">Requirement 11</div>
@@ -819,7 +830,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 </div>
 </div>
 <div class="paragraph">
-<p>The bounding box (<code>min_x</code>, <code>min_y</code>, <code>max_x</code>, <code>max_y</code>) provides an informative bounding box (not necessarily minimum bounding box) of the content. If the <code>srs_id</code> column value references a geographic coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references a projected CRS and the min/max x/y values are in the units specified by that CRS.</p>
+<p>The bounding box (<code>min_x</code>, <code>min_y</code>, <code>max_x</code>, <code>max_y</code>) provides an informative bounding box (not necessarily minimum bounding box) of the content. The values are in the units specified by that CRS.</p>
 </div>
 <div id="r16" class="exampleblock">
 <div class="title">Requirement 16</div>
@@ -843,7 +854,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 Each subclause of this clause defines an indivisible module of functionality that can be used in GeoPackages. These modules are referred to as options.
 GeoPackages MAY use one or more options defined in this section.
 GeoPackages MAY omit the tables for options that are not used.
-As a minimum, a GeoPackage SHALL contain one user data table as defined by the Features or Tiles options in clauses <a href="#features">Features</a> and <a href="#tiles">Tiles</a> respectively.</p>
+As a minimum, a GeoPackage contains at least one user data table as defined by the Features or Tiles options in clauses <a href="#features">Features</a> and <a href="#tiles">Tiles</a> respectively.</p>
 </div>
 <div id="r17" class="exampleblock">
 <div class="title">Requirement 17</div>
@@ -890,10 +901,6 @@ For example: A map might have a point identifying the position of a mountain pea
 <p>Geometries MAY include m coordinate values.
 The m coordinate value allows the application environment to associate some measure with the point values.
 For example: A stream network may be modeled as multilinestring value with the m coordinate values measuring the distance from the mouth of stream.</p>
-</div>
-<div class="paragraph">
-<p>All geometry types described in this standard are defined so that instances of Geometry are topologically closed, i.e. all represented geometries include their boundary as point sets.
-This does not affect their representation, and open version of the same classes MAY be used in other circumstances, such as topological representations.</p>
 </div>
 <div class="paragraph">
 <p>A brief description of each geometry type is provided below.
@@ -1488,7 +1495,7 @@ If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry typ
 <p>There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain. In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata.</p>
 </div>
 <div class="paragraph">
-<p>The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways. First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions. Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images. Applications that store GeoPackage tile data, which are presumed to have this information available, SHALL store sufficient metadata to enable its intended use.</p>
+<p>The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways. First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions. Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images. Applications that store GeoPackage tile data, which are presumed to have this information available, should store sufficient metadata to enable its intended use.</p>
 </div>
 <div class="paragraph">
 <p>The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose coupling to enable widespread implementation.</p>
@@ -9914,7 +9921,7 @@ These tables are intended to provide the support necessary to implement the hier
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_metadata</code> table that contains metadata is described in clause <a href="#_metadata_table">Metadata Table</a>, and the <code>gpkg_metadata_reference</code> table that relates <code>gpkg_metadata</code> to GeoPackage data is described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a>.
-There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion <span class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnote_28" title="View footnote.">28</a>]</span> with more than one level, only that if it is, these tables SHALL be used. Such metadata <span class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnote_29" title="View footnote.">29</a>]</span> and data that relates it to GeoPackage contents SHALL NOT be stored in other tables.</p>
+There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion <span class="footnote">[<a id="_footnoteref_28" class="footnote" href="#_footnote_28" title="View footnote.">28</a>]</span>. This extension simply provides a mechanism for storing this information. If this extension is used, uch metadata <span class="footnote">[<a id="_footnoteref_29" class="footnote" href="#_footnote_29" title="View footnote.">29</a>]</span> and data that relates it to GeoPackage contents should not be stored in other tables.</p>
 </div>
 <h4 id="_extension_author_6" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -13400,7 +13407,7 @@ ID["EPSG", 4326]]</p>
 </div>
 <h4 id="_introduction_12" class="float">Introduction</h4>
 <div class="paragraph">
-<p>The GeoPackage Standards Working Group (SWG) has developed the ability to store 16-bit and 32-bit tiled gridded elevation data in a GeoPackage. This capability will be used to support use cases such as the following:</p>
+<p>This extension provides the ability to store 16-bit and 32-bit tiled gridded elevation data in a GeoPackage. This capability will be used to support use cases such as the following:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -14582,7 +14589,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-03 14:18:55 UTC
+Last updated 2017-04-03 19:05:04 UTC
 </div>
 </div>
 </body>
