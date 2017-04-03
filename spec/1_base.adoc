@@ -68,7 +68,7 @@ A GeoPackage SHALL have the file extension name ".gpkg".
 A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the "gpkg" author name specified in this encoding standard.
 ====
 
-In order to guarantee maximum interoperability between applications, GeoPackages SHALL NOT contain data elements (tables or columns), SQL constructs (views, data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
+In order to guarantee maximum interoperability between applications, GeoPackages should not contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
 SQLite databases that use constructs from the GeoPackage standard but extend those constructs to contain elements not specified in the core GeoPackage standard are referred to as Extended GeoPackages throughout this standard.
 
 [[r5]]
@@ -157,7 +157,7 @@ A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL 
 The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
 
 The `gpkg_spatial_ref_sys` table includes the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
-Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) specifications.
+Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) standards.
 
 [[gpkg_spatial_ref_sys_cols]]
 .Spatial Ref Sys Table Definition
@@ -177,7 +177,7 @@ See <<gpkg_spatial_ref_sys_sql>>.
 [[gpkg_srs_table_data_values]]
 ====== Table Data Values
 
-Definition column WKT values in the `gpkg_spatial_ref_sys` table SHALL define the Spatial Reference Systems used by feature geometries and tile images, unless these SRS are unknown and therefore undefined as specified in <<_requirement-11>>. Values SHALL be constructed per the EBNF syntax in <<32>> clause 7. EBNF name and number values MAY be obtained from any specified authority, e.g. <<13>><<14>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<_requirement-11>>:
+Definition column WKT values in the `gpkg_spatial_ref_sys` table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <<_requirement-11>>. Values are constructed per the EBNF syntax in <<32>> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <<13>><<14>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<_requirement-11>>:
 
 [[r11]]
 [caption=""]
@@ -259,7 +259,7 @@ The `last_change` SHOULD contain the timestamp of when the content in the refere
 Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. {req13_foot1}
 ====
 
-The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. If the `srs_id` column value references a geographic coordinate reference system (CRS), then the min/max x/y values are in decimal degrees; otherwise, the srs_id references a projected CRS and the min/max x/y values are in the units specified by that CRS.
+The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. The values are in the units specified by that CRS.
 
 [[r16]]
 [caption=""]
