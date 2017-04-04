@@ -2100,21 +2100,21 @@ An application that accesses a GeoPackage can query the <code>gpkg_extensions</c
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jointly Unique</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>column_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the column that requires the extension. When NULL, the extension is required for the entire table.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jointly Unique</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>extension_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The case sensitive name of the extension that is required, in the form &lt;author&gt;_&lt;extension_name&gt;.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jointly Unique</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
@@ -2152,8 +2152,7 @@ The absence of a gpkg_extensions table or the absence of rows in the gpkg_extens
 <div class="title">Requirement 60</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>gpkg_extensions</code> <code>table_name</code> column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column or be NULL.
-They SHALL NOT be NULL for rows where the <code>column_name</code> value is not NULL.</p>
+<p>Values of the <code>gpkg_extensions</code> <code>table_name</code> column MAY reference values in the <code>gpkg_contents</code> <code>table_name</code>, reference new tables required by that extension, or be NULL (to indicate an extension that require no new tables).</p>
 </div>
 </div>
 </div>
@@ -5886,62 +5885,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>For each SELECT DISTINCT geometry_type_name FROM geometry_columns</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if geometry_type_name IN Annex G Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_&lt;geometry_type_name&gt;</p>
-</li>
-<li>
-<p>Fail if geometry_type_name NOT IN Annex G Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with "gpkg" and the extension_name ends with "<em>geom</em>&lt;geometry_type_name&gt;</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>For each SELECT tbl_name FROM sqlite_master WHERE tbl_name LIKE <em>rtree_%</em></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_rtree_index"</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>For each SELECT tbl_name FROM sqlite_master WHERE name LIKE <em>fgti_%</em></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_geometry_type_trigger"</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>For each SELECT tbl_name FROM sqlite_master WHERE name LIKE <em>fgsi_%</em></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_srs_id_trigger"</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Do test / reg_ext/tiles/zoom_levels/data/zoom_other_ext_row</p>
-</li>
-<li>
-<p>Do test /reg_ext/tiles/tile_encoding_webp/data/webp_ext_row</p>
-</li>
-<li>
-<p>Do test /reg_ext/tiles/tile_encoding_webp/data/tiff_ext_row</p>
-</li>
-<li>
-<p>Do test /reg_ext/tiles/tile_encoding_webp/data/nitf_ext_row</p>
-</li>
-<li>
-<p>Pass if no fails</p>
+<p>Manual inspection</p>
 </li>
 </ol>
 </div></div></td>
@@ -5984,33 +5928,29 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name, column_name FROM gpkg_extensions</p>
+<p>SELECT table_name FROM gpkg_extensions;</p>
 </li>
 <li>
-<p>Not testable if returns an empty result set</p>
+<p>Not testable if table does not exist or query returns an empty result set.</p>
 </li>
 <li>
 <p>For each row from step one</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Skip if column_name is NULL</p>
+<p>Continue if table_name value is NULL.</p>
 </li>
 <li>
-<p>Fail if table_name value is NULL and column_name value is not NULL.</p>
+<p>SELECT COUNT(*) FROM sqlite_master WHERE tbl_name = <em>table_name</em>;</p>
+</li>
+<li>
+<p>Fail if count = 0.</p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if any ge.table_name != sm.tbl_name (MAY both be NULL).</p>
-</li>
-</ol>
-</div>
+<p>Pass if no fails.</p>
 </li>
 </ol>
 </div></div></td>
@@ -6268,7 +6208,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail is value is not "read-write" or "write-only"</p>
+<p>Fail if value is not "read-write" or "write-only"</p>
 </li>
 </ol>
 </div>
@@ -14700,7 +14640,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-04 16:40:56 UTC
+Last updated 2017-04-04 17:01:40 UTC
 </div>
 </div>
 </body>
