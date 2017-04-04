@@ -532,14 +532,7 @@ WHERE type = 'table' AND name = '{selected table_ name}'
 |*Test Case ID* |+/opt/tiles/contents/data/tiles_row+
 |*Test Purpose* |Verify that the `gpkg_contents` `table_name` value table exists and is apparently a tiles table for every row with a `data_type` column value of "tiles".
 |*Test Method* |
-. SELECT table_name FROM gpkg_contents WHERE data_type = "tiles"
-. Not testable  if returns empty result set
-. For each row from step 1
-.. PRAGMA table_info(table_name) 
-.. Fail if returns an empty result set 
-.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"and the name column value is "id" 
-.. Fail if result set does not contain four other rows where the name column values are "zoom_level","tile_column","tile_row", and "tile_data".
-. Pass if no fails.
+. Execute test /opt/tiles/tile_pyramid/data/table_def
 |*Reference* |Clause 2.2.2.1.1 Req 34:
 |*Test Type* |Capability
 |========================================
@@ -947,7 +940,7 @@ END;
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_extensions'
 . Fail if returns an empty result set.
-. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 36. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+. Pass if the column names and column definitions in the returned Create TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of <<extensions_table_definition>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
 . Fail otherwise.
 |*Reference* |Clause 2.3.2.1.1 Req 58:
 |*Test Type* |Basic
@@ -957,55 +950,40 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_for_extensions+
+|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_for_extensions+
 |*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the `gpkg_extensions` table
 |*Test Method* |
-. For each SELECT DISTINCT geometry_type_name FROM geometry_columns
-.. Fail if geometry_type_name IN Annex G Table 43 and gpkg_extensions does not contain a row where extension_name = gpkg_geom_<geometry_type_name>
-.. Fail if geometry_type_name NOT IN Annex G Table 42 or Table 43 and gpkg_extensions does not contain a row where the extension_name does not begin with "gpkg" and the extension_name ends with "_geom_<geometry_type_name>
-. For each SELECT tbl_name FROM sqlite_master WHERE tbl_name LIKE 'rtree_%'
-.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_rtree_index"
-. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE 'fgti_%'
-.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_geometry_type_trigger"
-. For each SELECT tbl_name FROM sqlite_master WHERE name LIKE 'fgsi_%'
-.. Fail if gpkg_extensions does not contain a row where extension_name = "gpkg_srs_id_trigger"
-. Do test / reg_ext/tiles/zoom_levels/data/zoom_other_ext_row
-. Do test /reg_ext/tiles/tile_encoding_webp/data/webp_ext_row
-. Do test /reg_ext/tiles/tile_encoding_webp/data/tiff_ext_row
-. Do test /reg_ext/tiles/tile_encoding_webp/data/nitf_ext_row
-. Pass if no fails
+. Manual inspection
 |*Reference* |Clause 2.3.2.1.2 Req 59:
 |*Test Type* |Capability
 |========================================
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_table_name+
+|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_table_name+
 |*Test Purpose* |Verify that the `table_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_extensions
-. Not testable if returns an empty result set
+. SELECT table_name FROM gpkg_extensions;
+. Not testable if table does not exist or query returns an empty result set.
 . For each row from step one
-.. Fail if table_name value is NULL and column_name value is not NULL.
-.. SELECT DISTINCT ge.table_name AS ge_table, sm.tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON ge.table_name = sm.tbl_name
-.. Log pass if every row ge.table_name = sm.tbl_name (MAY both be NULL).
-. Pass if logged pass and no fails.
+.. Continue if table_name value is NULL.
+.. SELECT COUNT(*) FROM sqlite_master WHERE tbl_name = 'table_name';
+.. Fail if count = 0.
+. Pass if no fails.
 |*Reference* |Clause 2.3.2.1.2 Req 60:
 |*Test Type* |Capability
 |========================================
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_metchanism/extensions/data/data_values_column_name+
+|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_column_name+
 |*Test Purpose* |Verify that the `column_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_extensions
-. Not testable if returns an empty result set
-. SELECT table_name, column_name FROM gpkg_extensions WHERE table_name IS NOT NULL AND column_name IS NOT NULL
+. SELECT table_name, column_name FROM gpkg_extensions WHERE column_name IS NOT NULL
 . Pass if returns an empty result set
 . For each row from step 3
-.. PRAGMA table_info(table_name)
-.. Fail if gpkg_extensions.column_name value does not equal a name column value returned by PRAGMA table_info.
+.. SELECT count(column_name) FROM table_name
+... Fail if query is invalid, suggesting an invalid column name
 .. Log pass otherwise
 . Pass if logged pass and no fails.
 |*Reference* |Clause 2.3.2.1.2 Req 61:
@@ -1054,7 +1032,7 @@ END;
 . SELECT scope FROM gpkg_extensions
 . Not testable if returns an empty result set
 . For each row returned from step 1
-.. Fail is value is not "read-write" or "write-only"
+.. Fail if value is not "read-write" or "write-only"
 . Pass if no fails
 |*Reference* |Clause 2.3.2.1.2 Req 64:
 |*Test Type* |Capability
