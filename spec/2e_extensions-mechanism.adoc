@@ -34,9 +34,9 @@ An application that accesses a GeoPackage can query the `gpkg_extensions` table 
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Key
-|`table_name` |TEXT |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Unique
-|`column_name` |TEXT |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Unique
-|`extension_name` |TEXT |The case sensitive name of the extension that is required, in the form <author>_<extension_name>. |no |Unique
+|`table_name` |TEXT |Name of the table that requires the extension. When NULL, the extension is required for the entire GeoPackage. SHALL NOT be NULL when the column_name is not NULL. |yes |Jointly Unique
+|`column_name` |TEXT |Name of the column that requires the extension. When NULL, the extension is required for the entire table. |yes |Jointly Unique
+|`extension_name` |TEXT |The case sensitive name of the extension that is required, in the form <author>_<extension_name>. |no |Jointly Unique
 |`definition` |TEXT |Permalink, URI, or reference to a document that defines the extension |no |
 |`scope` |TEXT |Indicates scope of extension effects on readers / writers: 'read-write' or 'write-only' in lowercase. |no |
 |=======================================================================
@@ -57,8 +57,7 @@ The absence of a gpkg_extensions table or the absence of rows in the gpkg_extens
 [caption=""]
 .Requirement 60
 ====
-Values of the `gpkg_extensions` `table_name` column SHALL reference values in the `gpkg_contents` `table_name` column or be NULL.
-They SHALL NOT be NULL for rows where the `column_name` value is not NULL.
+Values of the `gpkg_extensions` `table_name` column MAY reference values in the `gpkg_contents` `table_name`, reference new tables required by that extension, or be NULL (to indicate an extension that requires no new tables).
 ====
 
 [[r61]]
