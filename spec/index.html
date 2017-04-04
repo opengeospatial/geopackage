@@ -13200,6 +13200,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <col style="width:%;">
 <col style="width:%;">
 <col style="width:%;">
+<col style="width:%;">
 <col style="width:%;"> 
 </colgroup>
 <thead>
@@ -13207,7 +13208,8 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <th class="tableblock halign-left valign-top">Column Name</th>
 <th class="tableblock halign-left valign-top">Column Type</th>
 <th class="tableblock halign-left valign-top">Column Description</th>
-<th class="tableblock halign-left valign-top">Null</th>
+<th class="tableblock halign-left valign-top">Not Null</th>
+<th class="tableblock halign-left valign-top">Default</th>
 <th class="tableblock halign-left valign-top">Key</th>
 </tr>
 </thead>
@@ -13216,49 +13218,56 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Human readable name of this SRS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>srs_id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unique identifier for each Spatial Reference System within a GeoPackage</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>organization</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Case-insensitive name of the defining organization e.g. EPSG or epsg</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>organization_coordsys_id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Numeric ID of the Spatial Reference System assigned by the organization</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#32">[32]</a> Representation of the Spatial Reference System</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>undefined</em></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Human readable description of this SRS</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition_12_063</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#34">[34]</a> Representation of the Spatial Reference System</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>undefined</em></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -13312,16 +13321,16 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_spatial_ref_sys'</code></p>
+<p><code>PRAGMA table_info('gpkg_spatial_ref_sys')</code></p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
 </li>
 <li>
-<p>Pass if column names and column definitions in the returned <code>CREATE TABLE statement</code> in the sql column value, including data type, nullability, and primary key constraints match all of those in the contents of Annex F.10 Table 47. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Fail if result set does not include a column named <em>definition_12_063</em> or if the column is not of <code>type</code> <em>TEXT</em>, <code>notnull</code> 1, and <code>dflt_value</code> <em>undefined</em>.</p>
 </li>
 <li>
-<p>Fail otherwise.</p>
+<p>Pass if no failures.</p>
 </li>
 </ol>
 </div></div></td>
@@ -13365,30 +13374,44 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = -1 returns -1 "NONE" -1 "undefined" "undefined", AND</code></p>
+<p><code>SELECT organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = -1</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Confirm that this returns "NONE" -1 "undefined" "undefined"</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
-<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = 0 returns 0 "NONE" 0  "undefined" "undefined", AND</code></p>
+<p><code>SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = 0</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Confirm that this returns "NONE" 0 "undefined" "undefined"</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
-<p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326</code> returns GEOGCS ["WGS 84",
-DATUM ["World Geodetic System 1984",
-  SPHEROID["WGS 84", 6378137, 298.257223563 , AUTHORITY["EPSG","7030"]],
-  AUTHORITY["EPSG","6326"]],
-PRIMEM["Greenwich", 0 , AUTHORITY["EPSG","8901"]],
-UNIT["degree", 0.017453292519943278, AUTHORITY["EPSG","9102"]],
-AUTHORITY["EPSG","4326"] (rounding the UNIT conversion factors to 16 decimal places, and ignoring any optional EBNF components &lt;twin axes&gt; and &lt;to wgs84&gt; and whitespace differences in the returned text)</p>
+<p><code>SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Confirm that this is a valid CRS</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
-<p><code>SELECT definition_12_063 FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326</code> returns GEODCRS["WGS 84",
-DATUM["World Geodetic System 1984",
-  ELLIPSOID["WGS 84",6378137, 298.257223563, LENGTHUNIT["metre", 1.0]]],
-PRIMEM["Greenwich", 0.0, ANGLEUNIT["degree",0.0174532925199433]],
-CS[ellipsoidal, 2],
-AXIS["latitude", north, ORDER[1]],
-AXIS["longitude", east, ORDER[2]],
-ANGLEUNIT["degree", 0.0174532925199433],
-ID["EPSG", 4326]]</p>
+<p><code>SELECT definition_12_063 FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326</code></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Confirm that this is a valid 12-063 CRS</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p>Pass if tests 1-4 are met</p>
@@ -13423,13 +13446,13 @@ ID["EPSG", 4326]]</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/extension_crs_wkt/data_values_undefined</code></p>
+<p><code>/extension_crs_wkt/data_values_required</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_spatial_ref_sys table contains the required default contents. Replaces <code>/base/core/gpkg_spatial_ref_sys/data_values_default</code>.</p>
+<p>Verify that the spatial_ref_sys table contains rows to define all srs_id values used by features and tiles in a GeoPackage. Extends <code>/base/core/gpkg_spatial_ref_sys/data_values_required</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -13440,10 +13463,17 @@ ID["EPSG", 4326]]</p>
 <p><code>SELECT definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)</code></p>
 </li>
 <li>
-<p>Fail if both definition values are <code>undefined</code></p>
+<p>For each result</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if both definition values are <em>undefined</em></p>
+</li>
+</ol>
+</div>
 </li>
 <li>
-<p>Pass otherwise</p>
+<p>Pass if no failures</p>
 </li>
 </ol>
 </div></div></td>
@@ -13473,9 +13503,9 @@ ID["EPSG", 4326]]</p>
   srs_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
   organization <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   organization_coordsys_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  definition  <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  definition  <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>,
   description <span class="predefined-type">TEXT</span>,
-  definition_12_063 <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
+  definition_12_063 <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>
 );</code></pre>
 </div>
 </div>
@@ -14670,7 +14700,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-03 19:16:06 UTC
+Last updated 2017-04-04 16:40:56 UTC
 </div>
 </div>
 </body>
