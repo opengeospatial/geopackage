@@ -174,7 +174,7 @@ If it contains data, the lowercase `constraint_type` column values SHALL be one 
 [caption=""]
 .Requirement 109
 ====
-gpkg_data_column_constraint constraint_name values for rows with constraint_type values of 'range' and 'glob' SHALL be unique.
+The `gpkg_data_column_constraint` `constraint_name` values for rows with `constraint_type` values of "range" and "glob" SHALL be unique.
 ====
 
 [[r110]]
@@ -182,39 +182,35 @@ gpkg_data_column_constraint constraint_name values for rows with constraint_type
 .Requirement 110
 ====
 The `gpkg_data_column_constraints` table MAY be empty.
-If it contains rows with constraint_type column values of "range", the `value` column values for those rows SHALL be NULL.
+If it contains rows with `constraint_type` column values of "range", the `value` column values for those rows SHALL be NULL.
 ====
 
 [[r111]]
 [caption=""]
 .Requirement 111
 ====
-The `gpkg_data_column_constraints` table MAY be empty.
-If it contains rows with `constraint_type` column values of "range", the `min` column values for those rows SHALL be NOT NULL and less than the `max` column value which shall be NOT NULL.
+If the `gpkg_data_column_constraints` table contains rows with `constraint_type` column values of "range", the `min` column values for those rows SHALL be NOT NULL and less than the `max` column value which shall be NOT NULL.
 ====
 
 [[r112]]
 [caption=""]
 .Requirement 112
 ====
-The `gpkg_data_column_constraints` table MAY be empty.
-If it contains rows with `constraint_type` column values of "range", the `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be 0 or 1.
+If the `gpkg_data_column_constraints` table contains rows with `constraint_type` column values of "range", the `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be 0 or 1.
 ====
 
 [[r113]]
 [caption=""]
 .Requirement 113
 ====
-The `gpkg_data_column_constraints` table MAY be empty.
-If it contains rows with `constraint_type` column values of "enum" or "glob", the `min`, `max`, `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be NULL.
+If the `gpkg_data_column_constraints` table contains rows with `constraint_type` column values of "enum" or "glob", the `min`, `max`, `min_is_inclusive` and `max_is_inclusive` column values for those rows SHALL be NULL.
 ====
 
 [[r114]]
 [caption=""]
 .Requirement 114
 ====
-The `gpkg_data_column_constraints` table MAY be empty.
-If it contains rows with `constraint_type` column values of "enum" or "glob", the `value` column SHALL NOT be NULL.
+If the `gpkg_data_column_constraints` table contains rows with `constraint_type` column values of "enum" or "glob", the `value` column SHALL NOT be NULL.
 ====
 
 [float]
@@ -271,7 +267,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 . For each row returned from step 1
 .. Fail if scope is not "read-write".
 . Pass if no fails
-|*Reference* |Annex F.8 Req 140
+|*Reference* |Annex F.9 Req 141
 |*Test Type:* |Capabilities
 |========================================
 
@@ -328,7 +324,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/extensions/schema/data_column_constraints/constraint_type+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints constraint_type column values are one of "range", "enum", or "glob".
 |*Test Method* |
-. SELECT constraint_type FROM gpkg_data_column_constraints
+. SELECT DISTINCT constraint_type FROM gpkg_data_column_constraints
 . Not testable if returns an empty result set
 . For each constraint_type value returned by step 1
 .. Fail if constraint_type NOT IN ("range", "enum", "glob").
@@ -342,7 +338,8 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/extensions/schema/data_column_constraints/constraint_names_unique+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints constraint_name column values for constraint_type values  of "range", or "glob" are unique.
 |*Test Method* |
-. For each SELECT DISTINCT constraint_name AS cn FROM gpkg_data_column_constraints  WHERE constraint_type IN ('range', 'glob')
+. SELECT DISTINCT constraint_name FROM gpkg_data_column_constraints  WHERE constraint_type IN ('range', 'glob')
+.. For each returned constraint_name cn
 .. SELECT count(*) FROM gpkg_data column_constraints WHERE constraint_name = cn
 .. Fail if count > 1
 . Pass if no fails.
@@ -355,10 +352,10 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/extensions/schema/data_column_constraints/value_for_range+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints value column values are NULL for rows with a constraint_type value of "range".
 |*Test Method* |
-. SELECT constraint_type AS ct, value AS v FROM gpkg_data column_constraints WHERE constraint_type = 'range'
+. SELECT constraint_name, value FROM gpkg_data_column_constraints WHERE constraint_type = 'range'
 . Not testable if returns an empty result set
-. For each v value returned by step 1
-.. Fail if v IS NOT NULL
+. For each value returned by step 1
+.. Fail if value IS NOT NULL
 . Pass if no fails.
 |*Reference* |Annex F.9 Req 110
 |*Test Type* |Capability
@@ -369,7 +366,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/extensions/schema/data_column_constraints/min_max_for_range+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints min column values are NOT NULL and less than the max column values for rows with a constraint_type value of "range".
 |*Test Method* |
-. SELECT min, max FROM gpkg_data column_constraints WHERE constraint_type = 'range'
+. SELECT constraint_name, min, max FROM gpkg_data_column_constraints WHERE constraint_type = 'range'
 . Not testable if returns an empty result set
 . For each set of min and max values returned by step 1
 .. Fail if min IS NULL
@@ -385,7 +382,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID* |+/extensions/schema/data_column_constraints/inclusive_for_range+
 |*Test Purpose* |Verify that the gpkg_data_column_constraints min_is_inclusive and max_is_inclusive  column values are NOT NULL and either 0 or 1 for rows with a constraint_type value of "range".
 |*Test Method* |
-. SELECT min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type = 'range'
+. SELECT constraint_name, min_is_inclusive, max_is_inclusive FROM gpkg_data_column_constraints WHERE constraint_type = 'range'
 . Not testable if returns an empty result set
 . For each set of values returned by step 1
 .. Fail if min_is_inclusive IS NULL
@@ -402,7 +399,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID:* |+/extensions/schema/data_column_constraints/min_max_inclusive_for_enum_glob+
 |*Test Purpose:* |Verify that the gpkg_data_column_constraints min, max, min_is_inclusive and max_is_inclusive column values are NULL for rows with a constraint_type value of "enum" or "glob".
 |*Test Method:* |
-. SELECT min, max, min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type  IN ('enum','glob)
+. SELECT constraint_name, min, max, min_is_inclusive, max_is_inclusive FROM gpkg_data_column_constraints WHERE constraint_type IN ('enum','glob')
 . Not testable if returns an empty result set
 . For each set of values returned by step 1
 .. Fail if min IS NOT NULL
@@ -419,7 +416,7 @@ If it contains rows with `constraint_type` column values of "enum" or "glob", th
 |*Test Case ID:* |+/extensions/schema/data_column_constraints/value_for_enum_glob+
 |*Test Purpose:* |Verify that the gpkg_data_column_constraints value column values are NOT NULL for rows with a constraint_type value of "enum" or "glob".
 |*Test Method:* |
-. SELECT value FROM gpkg_data column_constraints WHERE constraint_type  IN ('enum','glob)
+. SELECT value FROM gpkg_data_column_constraints WHERE constraint_type IN ('enum','glob')
 . Not testable if returns an empty result set
 . For each value returned by step 1
 .. Fail if value IS NULL
