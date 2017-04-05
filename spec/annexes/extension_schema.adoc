@@ -259,10 +259,10 @@ If the `gpkg_data_column_constraints` table contains rows with `constraint_type`
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/extensions/metadata/extensions/data_values_scope+
+|*Test Case ID* |+/extensions/schema/extensions/data_values_scope+
 |*Test Purpose* |Verify that the gpkg_extensions table has the required row.
 |*Test Method* |
-. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
+. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
 . Not testable if returns an empty result set
 . For each row returned from step 1
 .. Fail if scope is not "read-write".
