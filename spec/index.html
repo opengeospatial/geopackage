@@ -245,6 +245,11 @@ Document language: 	English<br></p>
 <li><a href="#extension_tiles_webp">F.7. Tiles Encoding WebP</a></li>
 <li><a href="#extension_metadata">F.8. Metadata</a></li>
 <li><a href="#extension_schema">F.9. Schema</a></li>
+<li>
+<ul class="sectlevel5">
+<li><a href="#_gpkg_extensions_4">F.9.1. gpkg_extensions</a></li>
+</ul>
+</li>
 <li><a href="#extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</a></li>
 <li><a href="#extension_tiled_gridded_elevation_data">F.11. Tiled Gridded Elevation Data</a></li>
 </ul>
@@ -11945,14 +11950,14 @@ The information provided by this option can be used by applications to, for inst
 <p>Read-write</p>
 </div>
 <h4 id="_requirements_7" class="float">Requirements</h4>
-<h5 id="_data_columns" class="float">Data Columns</h5>
-<h6 id="schema_data_columns_table_definition" class="float">Table Definition</h6>
+<h5 id="_table_definitions_2" class="float">Table Definitions</h5>
+<h6 id="schema_data_columns_table_definition" class="float">Data Columns</h6>
 <div id="r103" class="exampleblock">
 <div class="title">Requirement 103</div>
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage MAY contain a table or updateable view named <code>gpkg_data_columns</code>.
-If present it SHALL be defined per clause 2.3.2.1.1 <a href="#schema_data_columns_table_definition">Table Definition</a>, <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -12034,40 +12039,13 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
 <div class="paragraph">
 <p>See <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_8" class="float">Table Data Values</h6>
-<div id="r104" class="exampleblock">
-<div class="title">Requirement 104</div>
-<div class="content">
-<div class="paragraph">
-<p>Values of the <code>gpkg_data_columns</code> table <code>table_name</code> column value SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column.</p>
-</div>
-</div>
-</div>
-<div id="r105" class="exampleblock">
-<div class="title">Requirement 105</div>
-<div class="content">
-<div class="paragraph">
-<p>The <code>column_name</code> column value in a <code>gpkg_data_columns</code> table row SHALL contain the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.</p>
-</div>
-</div>
-</div>
-<div id="r106" class="exampleblock">
-<div class="title">Requirement 106</div>
-<div class="content">
-<div class="paragraph">
-<p>The constraint_name column value in a gpkg_data_columns table MAY be NULL.
-If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.</p>
-</div>
-</div>
-</div>
-<h5 id="_data_column_constraints" class="float">Data Column Constraints</h5>
-<h6 id="data_column_constraints_table_definition" class="float">Table Definition</h6>
+<h6 id="data_column_constraints_table_definition" class="float">Data Column Constraints</h6>
 <div id="r107" class="exampleblock">
 <div class="title">Requirement 107</div>
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
-If present it SHALL be defined per clause 2.3.3.1.1 <a href="#data_column_constraints_table_definition">Table Definition</a>, <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table or View Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table or View Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -12159,7 +12137,44 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <div class="paragraph">
 <p>See <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
-<h6 id="_table_data_values_9" class="float">Table Data Values</h6>
+<h5 id="_table_data_values_8" class="float">Table Data Values</h5>
+<div class="sect5">
+<h6 id="_gpkg_extensions_4">F.9.1. gpkg_extensions</h6>
+<div id="r141" class="exampleblock">
+<div class="title">Requirement 141</div>
+<div class="content">
+<div class="paragraph">
+<p>GeoPackages with a row in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_schema" SHALL comply with this extension. The row SHALL have a <code>scope</code> of "read-write".</p>
+</div>
+</div>
+</div>
+<h6 id="_data_columns" class="float">Data Columns</h6>
+<div id="r104" class="exampleblock">
+<div class="title">Requirement 104</div>
+<div class="content">
+<div class="paragraph">
+<p>Values of the <code>gpkg_data_columns</code> table <code>table_name</code> column value SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column.</p>
+</div>
+</div>
+</div>
+<div id="r105" class="exampleblock">
+<div class="title">Requirement 105</div>
+<div class="content">
+<div class="paragraph">
+<p>The <code>column_name</code> column value in a <code>gpkg_data_columns</code> table row SHALL contain the name of a column in the SQLite table or view identified by the <code>table_name</code> column value.</p>
+</div>
+</div>
+</div>
+<div id="r106" class="exampleblock">
+<div class="title">Requirement 106</div>
+<div class="content">
+<div class="paragraph">
+<p>The constraint_name column value in a gpkg_data_columns table MAY be NULL.
+If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.</p>
+</div>
+</div>
+</div>
+<h6 id="_data_column_constraints" class="float">Data Column Constraints</h6>
 <div class="paragraph">
 <p>The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
 The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
@@ -12267,7 +12282,7 @@ If it contains data, the lowercase <code>constraint_type</code> column values SH
 <div class="title">Requirement 109</div>
 <div class="content">
 <div class="paragraph">
-<p>gpkg_data_column_constraint constraint_name values for rows with constraint_type values of <em>range</em> and <em>glob</em> SHALL be unique.</p>
+<p>The <code>gpkg_data_column_constraint</code> <code>constraint_name</code> values for rows with <code>constraint_type</code> values of "range" and "glob" SHALL be unique.</p>
 </div>
 </div>
 </div>
@@ -12276,7 +12291,7 @@ If it contains data, the lowercase <code>constraint_type</code> column values SH
 <div class="content">
 <div class="paragraph">
 <p>The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with constraint_type column values of "range", the <code>value</code> column values for those rows SHALL be NULL.</p>
+If it contains rows with <code>constraint_type</code> column values of "range", the <code>value</code> column values for those rows SHALL be NULL.</p>
 </div>
 </div>
 </div>
@@ -12284,8 +12299,7 @@ If it contains rows with constraint_type column values of "range", the <code>val
 <div class="title">Requirement 111</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "range", the <code>min</code> column values for those rows SHALL be NOT NULL and less than the <code>max</code> column value which shall be NOT NULL.</p>
+<p>If the <code>gpkg_data_column_constraints</code> table contains rows with <code>constraint_type</code> column values of "range", the <code>min</code> column values for those rows SHALL be NOT NULL and less than the <code>max</code> column value which shall be NOT NULL.</p>
 </div>
 </div>
 </div>
@@ -12293,8 +12307,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="title">Requirement 112</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "range", the <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values for those rows SHALL be 0 or 1.</p>
+<p>If the <code>gpkg_data_column_constraints</code> table contains rows with <code>constraint_type</code> column values of "range", the <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values for those rows SHALL be 0 or 1.</p>
 </div>
 </div>
 </div>
@@ -12302,8 +12315,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="title">Requirement 113</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values for those rows SHALL be NULL.</p>
+<p>If the <code>gpkg_data_column_constraints</code> table contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>min</code>, <code>max</code>, <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values for those rows SHALL be NULL.</p>
 </div>
 </div>
 </div>
@@ -12311,14 +12323,13 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <div class="title">Requirement 114</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_data_column_constraints</code> table MAY be empty.
-If it contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>value</code> column SHALL NOT be NULL.</p>
+<p>If the <code>gpkg_data_column_constraints</code> table contains rows with <code>constraint_type</code> column values of "enum" or "glob", the <code>value</code> column SHALL NOT be NULL.</p>
 </div>
 </div>
 </div>
 <h4 id="_abstract_test_suite_7" class="float">Abstract Test Suite</h4>
-<h5 id="_data_columns_2" class="float">Data Columns</h5>
-<h6 id="_table_definition_5" class="float">Table Definition</h6>
+<h5 id="_table_definition_5" class="float">Table Definition</h5>
+<h6 id="_data_columns_2" class="float">Data Columns</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -12328,7 +12339,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_columns/data/data_table_def</code></p>
+<p><code>/extensions/schema/data_columns/table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12342,16 +12353,16 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_data_columns'</p>
+<p>PRAGMA table_info(gpkg_data_columns)</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
 </li>
 <li>
-<p>Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 42. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p>Fail if column names and column definitions in the returned table_info do not match those of Table 23, including data type, nullability, default values. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 </li>
 <li>
-<p>Fail otherwise.</p>
+<p>Pass if no failures.</p>
 </li>
 </ol>
 </div></div></td>
@@ -12371,7 +12382,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h6 id="_data_values" class="float">Data Values</h6>
+<h5 id="_data_column_constraints_2" class="float">Data Column Constraints</h5>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -12381,13 +12392,13 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_columns/data/data_values_column_name</code></p>
+<p><code>/extensions/schema/data_column_constraints/table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that for each gpkg_data_columns row, the column_name value is the name of a column in the table_name table.</p>
+<p>Verify that the gpkg_data_column_constraints table exists and has the correct definition.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12395,7 +12406,120 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name, column_name FROM gpkg_data_columns</p>
+<p>PRAGMA table_info(gpkg_data_column_constraints)</p>
+</li>
+<li>
+<p>Fail if returns an empty result set</p>
+</li>
+<li>
+<p>Fail if column names and column definitions in the returned table_info do not match those of Table 23, including data type, nullability, default values. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+</li>
+<li>
+<p>Pass if no failures.</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.9 Req 107</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Basic</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h5 id="_data_values" class="float">Data Values</h5>
+<h6 id="_gpkg_extensions_5" class="float">gpkg_extensions</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/schema/extensions/data_values_scope</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the gpkg_extensions table has the required row.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_schema</em>;</p>
+</li>
+<li>
+<p>Not testable if returns an empty result set</p>
+</li>
+<li>
+<p>For each row returned from step 1</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if scope is not "read-write".</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.9 Req 141</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capabilities</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/schema/data_columns/table_name</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that for each gpkg_data_columns row, the table_name value matches a row in gpkg_contents.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT DISTINCT gdc.table_name AS gdc_table, gc.table_name AS gc_table FROM gpkg_data_columns AS gdc LEFT OUTER JOIN gpkg_contents AS gc ON gdc.table_name = gc.tbl_name;</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12405,10 +12529,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>PRAGMA table_info(table_name)</p>
-</li>
-<li>
-<p>Fail if gpkg_data_columns.column_name value does not equal a name column value returned by PRAGMA table_info.</p>
+<p>Fail if gc_table is NULL.</p>
 </li>
 </ol>
 </div>
@@ -12443,13 +12564,13 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_columns/data/data_values_constraint_name</code></p>
+<p><code>/extensions/schema/data_columns/column_name</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that for each gpkg_data_columns row, the constraint_name value is either NULL or a constraint_name column value from the gpkg_data_column_constraints table.</p>
+<p>Verify that for each gpkg_data_columns row, the column_name matches a column in the table or view identified by the table_name column value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12457,20 +12578,20 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT constraint_name AS cn FROM gpkg_data_columns</p>
+<p>SELECT table_name, column_name FROM gpkg_data_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each NOT NULL cn value from step 1</p>
+<p>For each row from step 1</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>SELECT constraint_name FROM gpkg_data_column_constraints WHERE constraint_name = cn</p>
+<p>PRAGMA table_info(table_name)</p>
 </li>
 <li>
-<p>Fail if returns an empty result set</p>
+<p>Fail if table_name does not contain a column matching column_name</p>
 </li>
 </ol>
 </div>
@@ -12505,7 +12626,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_columns/data/data_values_constraint_type</code></p>
+<p><code>/extensions/schema/data_columns/constraint_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12561,8 +12682,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h5 id="_data_column_constraints_2" class="float">Data Column Constraints</h5>
-<h6 id="_table_definition_6" class="float">Table Definition</h6>
+<h6 id="_data_column_constraints_3" class="float">Data Column Constraints</h6>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -12572,60 +12692,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/table_def</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints table exists and has the correct definition.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_data_column_constraints'</p>
-</li>
-<li>
-<p>Fail if returns an empty result set</p>
-</li>
-<li>
-<p>Pass if column names and column definitions in the returned CREATE TABLE statement in the sql column value, including data type, nullability, default values and primary, foreign and unique key constraints match all of those in the contents of Table 43. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
-</li>
-<li>
-<p>Fail otherwise.</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.9 Req 107</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Basic</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<h6 id="_data_values_2" class="float">Data Values</h6>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/data_values_constraint_type</code></p>
+<p><code>/extensions/schema/data_column_constraints/constraint_type</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12639,17 +12706,17 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT constraint_type AS ct FROM gpkg_data column_constraints</p>
+<p>SELECT DISTINCT constraint_type FROM gpkg_data_column_constraints</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each ct value returned by step 1</p>
+<p>For each constraint_type value returned by step 1</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if ct NOT IN ("range", "enum", "glob").</p>
+<p>Fail if constraint_type NOT IN ("range", "enum", "glob").</p>
 </li>
 </ol>
 </div>
@@ -12684,7 +12751,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/data_values_constraint_names_unique</code></p>
+<p><code>/extensions/schema/data_column_constraints/constraint_names_unique</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12698,9 +12765,12 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>For each SELECT DISTINCT constraint_name AS cn FROM gpkg_data_column_constraints  WHERE constraint_type IN (<em>range</em>, <em>glob</em>)</p>
+<p>SELECT DISTINCT constraint_name FROM gpkg_data_column_constraints  WHERE constraint_type IN (<em>range</em>, <em>glob</em>)</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
+<li>
+<p>For each returned constraint_name cn</p>
+</li>
 <li>
 <p>SELECT count(*) FROM gpkg_data column_constraints WHERE constraint_name = cn</p>
 </li>
@@ -12740,7 +12810,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/data_values_value_for_range</code></p>
+<p><code>/extensions/schema/data_column_constraints/value_for_range</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12754,17 +12824,17 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT constraint_type AS ct, value AS v FROM gpkg_data column_constraints WHERE constraint_type = <em>range</em></p>
+<p>SELECT constraint_name, value FROM gpkg_data_column_constraints WHERE constraint_type = <em>range</em></p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
 </li>
 <li>
-<p>For each v value returned by step 1</p>
+<p>For each value returned by step 1</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if v IS NOT NULL</p>
+<p>Fail if value IS NOT NULL</p>
 </li>
 </ol>
 </div>
@@ -12799,7 +12869,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/data_values_min_max_for_range</code></p>
+<p><code>/extensions/schema/data_column_constraints/min_max_for_range</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12813,7 +12883,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT min, max FROM gpkg_data column_constraints WHERE constraint_type = <em>range</em></p>
+<p>SELECT constraint_name, min, max FROM gpkg_data_column_constraints WHERE constraint_type = <em>range</em></p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12864,7 +12934,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/data_values_inclusive_for_range</code></p>
+<p><code>/extensions/schema/data_column_constraints/inclusive_for_range</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12878,7 +12948,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type = <em>range</em></p>
+<p>SELECT constraint_name, min_is_inclusive, max_is_inclusive FROM gpkg_data_column_constraints WHERE constraint_type = <em>range</em></p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12932,7 +13002,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/data_values_min_max_inclusive_for_enum_glob</code></p>
+<p><code>/extensions/schema/data_column_constraints/min_max_inclusive_for_enum_glob</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -12946,7 +13016,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT min, max, min_is_inclusive, max_is_inclusive FROM gpkg_data column_constraints WHERE constraint_type  IN (<em>enum</em>,'glob)</p>
+<p>SELECT constraint_name, min, max, min_is_inclusive, max_is_inclusive FROM gpkg_data_column_constraints WHERE constraint_type IN (<em>enum</em>,<em>glob</em>)</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -13000,7 +13070,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/schema/data_column_constraints/data/data_values_value_for_enum_glob</code></p>
+<p><code>/extensions/schema/data_column_constraints/value_for_enum_glob</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -13014,7 +13084,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT value FROM gpkg_data column_constraints WHERE constraint_type  IN (<em>enum</em>,'glob)</p>
+<p>SELECT value FROM gpkg_data_column_constraints WHERE constraint_type IN (<em>enum</em>,<em>glob</em>)</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -13086,6 +13156,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </div>
 </div>
 </div>
+</div>
 <div class="sect2">
 <h3 id="extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</h3>
 <h4 id="_introduction_11" class="float">Introduction</h4>
@@ -13114,7 +13185,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </div>
 <h4 id="_requirements_8" class="float">Requirements</h4>
 <h5 id="_table" class="float">Table</h5>
-<h6 id="_table_definition_7" class="float">Table Definition</h6>
+<h6 id="_table_definition_6" class="float">Table Definition</h6>
 <div id="r115" class="exampleblock">
 <div class="title">Requirement 115</div>
 <div class="content">
@@ -13203,7 +13274,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h6 id="_table_data_values_10" class="float">Table Data Values</h6>
+<h6 id="_table_data_values_9" class="float">Table Data Values</h6>
 <div id="r116" class="exampleblock">
 <div class="title">Requirement 116</div>
 <div class="content">
@@ -13224,7 +13295,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <p>If, for a particular row, both the <code>definition</code> and <code>definition_12_063</code> columns are populated, the value in the <code>definition_12_063</code> column takes priority.</p>
 </div>
 <h4 id="_abstract_test_suite_8" class="float">Abstract Test Suite</h4>
-<h5 id="_table_definition_8" class="float">Table Definition</h5>
+<h5 id="_table_definition_7" class="float">Table Definition</h5>
 <div class="paragraph">
 <p><strong>Table Definition</strong></p>
 </div>
@@ -13280,7 +13351,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 </tbody>
 </table>
 
-<h5 id="_table_data_values_11" class="float">Table Data Values</h5>
+<h5 id="_table_data_values_10" class="float">Table Data Values</h5>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -13519,7 +13590,7 @@ If it contains rows with <code>constraint_type</code> column values of "enum" or
 <p>read-write</p>
 </div>
 <h4 id="_requirements_9" class="float">Requirements</h4>
-<h5 id="_table_definitions_2" class="float">Table Definitions</h5>
+<h5 id="_table_definitions_3" class="float">Table Definitions</h5>
 <h6 id="coverage_ancillary" class="float">Coverage Ancillary</h6>
 <div id="r120" class="exampleblock">
 <div class="title">Requirement 120</div>
@@ -13820,7 +13891,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
-<h6 id="_gpkg_extensions_4" class="float">gpkg_extensions</h6>
+<h6 id="_gpkg_extensions_6" class="float">gpkg_extensions</h6>
 <div id="r125" class="exampleblock">
 <div class="title">Requirement 125</div>
 <div class="content">
@@ -14630,7 +14701,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-04 18:10:15 UTC
+Last updated 2017-04-11 02:39:38 UTC
 </div>
 </div>
 </body>
