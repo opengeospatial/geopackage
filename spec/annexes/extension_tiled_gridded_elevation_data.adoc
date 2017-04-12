@@ -25,7 +25,7 @@ This extension provides the ability to store 16-bit and 32-bit tiled gridded ele
 :elevation_precision: footnote:[We acknowledge that this approach will not support certain applications that require a high degree of precision and/or accuracy (e.g., targeting).]
 This capability was designed to be relatively easy to implement and to be suitable for a wide variety of computing environments including the mobile/handheld computing environment{elevation_precision}.
 
-This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG (16-bit) and TIFF (32-bit) files as the container for the elevation values themselves. It is the data producer's responsibility to ensure that the intended recipient is able to read GeoPackages with the elevation encoding (PNG or TIFF) being used. By default, the elevation values are assumed to be pixel-is-area. Communities of interest may agree to use an alternative pixel encoding (such as pixel-is-point) but specifying the pixel encoding is outside of the scope of this document.
+This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG (16-bit) and TIFF (32-bit) files as the container for the elevation values themselves. It is the data producer's responsibility to ensure that the intended recipient is able to read GeoPackages with the elevation encoding (PNG or TIFF) being used. By default, the elevation values are assumed to be average elevation for pixel-is-area. Communities of interest may agree to use an alternative pixel encoding (such as pixel-is-point) but specifying the pixel encoding is outside of the scope of this document.
 
 [float]
 ==== Extension Author
@@ -222,7 +222,7 @@ The following requirements refer to the `gpkg_2d_gridded_tile_ancillary` table a
 [caption=""]
 .Requirement 129
 ====
-For each row in a tile pyramid user data table corresponding to tiled, gridded elevation data, there SHALL be a row in `gpkg_2d_gridded_tile_ancillary`. 
+For each row in a tile pyramid user data table corresponding to tiled, gridded elevation data, there SHALL be a row in `gpkg_2d_gridded_tile_ancillary`.
 ====
 
 [[r130]]
@@ -296,6 +296,24 @@ CREATE TABLE gpkg_2d_gridded_tile_ancillary (
 
 [float]
 ===== TIFF Encoding
+
+Because of the variance in possible TIFF encodings for a tile, the encoding has been constrained for the sake of interoperability and best practice.
+
+TIFF-encoding a tile as a single-band image using one 32-bit floating point component per pixel implies a number of constraints. These are listed below.
+
+Each TIFF encoded tile SHALL be a baseline TIFF as defined in the Part 1 of TIFF<<35>>. The only  allowed encoding extensions are :
+
+* By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF<<35>>.
+* LZW compression MAY be used as defined in Section 13: LZW Compression TIFF<<35>>.
+
+In addition to conforming to the baseline and listed conventions, tiles encoded as TIFF are expected to conform to the following implied or dictated constraints :
+
+* By setting TAG 277 (SamplesPerPixel) to be 1, the producer indicates that there is a single sample per pixel.
+* There is only one band per TIFF tile i.e. for any pixel in the TIFF tile, there SHALL be only one component.
+* All 65536 pixels in the tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.
+* Other TIFF tags are derived from the other constraints in this extension e.g. TAG 258 (BitsPerSample), if included SHALL be 32.
+* No multi-image/tiling extensions defined in TIFF<<35>> shall be used.
+
 [[tiff_encoding]]
 [[r134]]
 [caption=""]
@@ -315,14 +333,14 @@ A TIFF file used for storing tiled gridded elevation data SHALL conform to the T
 [caption=""]
 .Requirement 136
 ====
-(constrains TIFF<<35>> Section 2) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.
+(constrains TIFF<<35>> Section 19) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.
 ====
 
 [[r137]]
 [caption=""]
 .Requirement 137
 ====
-A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<<35>> Section 13. 
+A TIFF file storing tiled gridded elevation data MAY use the LZW compression option as per TIFF<<35>> Section 13.
 ====
 
 Client applications that support the TIFF encoding are expected to support this option.
