@@ -44,14 +44,14 @@ Read-write
 [caption=""]
 .Requirement 90
 ====
-The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of tile pyramid images in WEBP format as specified in <<extension_tiles_webp>>.
+GeoPackages with one or more rows in the `gpkg_extensions` table with an `extension_name` of "gpkg_webp" SHALL comply with this extension.
 ====
 
 [[r91]]
 [caption=""]
 .Requirement 91
 ====
-A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, "tile_data" column_name values and extension_name column values of "gpkg_webp".
+A GeoPackage that contains tile pyramid user data tables with `tile_data` columns that contain images in WebP format SHALL contain a `gpkg_extensions` table that contains row records with `table_name` values for each such table, `column_name` values of "tile_data", `extension_name` column values of "gpkg_webp", and `scope` column values of "read-write".
 ====
 
 [[r92]]
@@ -80,22 +80,11 @@ None
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
+|*Test Case ID* |+/extensions/tile_encoding_webp/data/webp_ext_name+
 |*Test Purpose:* |Verify that the "gpkg_webp" extensions name is used to register WEBP tile encoding implementations.
 |*Test Method:* |
-. +SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'+
-. Not testable if empty result set
-. For each row table_name from step 1
-.. Select tile_data FROM row table_name
-.. For each row tile_data from step a
-... Log webp if tile data in MIME type image/webp
-.. Not testable if no logged webps
-.. /opt/extension_mechanism/extensions/data/table_def
-.. Fail if failed
-.. +SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = 'gpkg_webp'+
-.. Fail if returns an empty result set
-.. Log pass otherwise
-. Pass if logged pass and no fails
+. SELECT COUNT(*) FROM gpkg_extensions WHERE extension_name = 'gpkg_webp';
+. Extension not in use if count is empty
 |*Reference* |Annex F.7 Req 90
 |*Test Type* |Basic
 |========================================
@@ -105,9 +94,15 @@ None
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_row+
-|*Test Purpose:* |Verify that WEBP tile encodings are registered using the "gpkg_webp" extensions name.
-|*Test Method:* |	+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
+|*Test Case ID* |+/extensions/tile_encoding_webp/data/webp_ext_row+
+|*Test Purpose:* |Verify that this extension is registered using proper rows in the `gpkg_extensions` table.
+|*Test Method:* |	
+. /opt/extension_mechanism/data/data_values_table_name will test whether the `table_name` values are valid.
+. SELECT column_name, scope FROM gpkg_extensions where extension_name = 'gpkg_webp';
+. For each row table_name from step 1
+.. Fail if `column_name` is not "tile_data"
+.. Fail if `scope` is not "read-write"
+. Pass if no fails
 |*Reference:* |Annex F.7 Req 91
 |*Test Type* |Capability
 |========================================
@@ -117,18 +112,13 @@ None
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/tiles/tiles_encoding_webp/data/mime_type_webp+
-|*Test Purpose* |Verify that a tile matrix user data table that conforms to this extension contains tile data of MIME type image/x-webp.
+|*Test Case ID* |+/extensions/tiles_encoding_webp/data/mime_type_webp+
+|*Test Purpose* |Verify that a tile matrix user data table that conforms to this extension contains a valid image type, including images of MIME type image/x-webp.
 |*Test Method* |
-. SELECT table_name AS tn FROM gpkg_contents WHERE data_type = \'tiles'
-. For each row tn from step 2
-.. WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = \'gpkg_extensions') = \'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = \'tn')
-END;
-.. For each row extension_name from step a
-... Not testable if extension_name is not 'gpkg_webp'
-... SELECT tile_data from tn
-.... Pass if tile data in MIME type image/x-webp
-.... Fail if no passes
+. SELECT table_name FROM gpkg_extensions WHERE extension_name = 'gpkg_webp'
+. For each table_name from step 1
+.. Run test /opt/tiles/tiles_encoding/data/mime_type_jpeg step 2 but allow an extra MIME type (step 2c) of "image/x-webp"
+. Pass if no fails
 |*Reference* |Annex F.7 Req 92
 |*Test Type* |Capability
 |========================================
