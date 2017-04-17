@@ -8807,7 +8807,7 @@ viii. Otherwise log pass</p>
 <div class="title">Requirement 75</div>
 <div class="content">
 <div class="paragraph">
-<p>The "gpkg_rtree_index" extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.</p>
+<p>The "gpkg_rtree_index" extension name SHALL be used as a <code>gpkg_extensions</code> table <code>extension_name</code> column value to specify implementation of spatial indexes on a geometry column.</p>
 </div>
 </div>
 </div>
@@ -8815,7 +8815,7 @@ viii. Otherwise log pass</p>
 <div class="title">Requirement 76</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name "gpkg_rtree_index", the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.</p>
+<p>A GeoPackage that implements spatial indexes SHALL have a <code>gpkg_extensions</code> table that contains a row for each spatially indexed column with <code>extension_name</code> "gpkg_rtree_index", the <code>table_name</code> of the table with a spatially indexed column,  the <code>column_name</code> of the spatially indexed column, and a <code>scope</code> of "read-only".</p>
 </div>
 </div>
 </div>
@@ -9029,11 +9029,120 @@ These spatial index triggers SHALL be defined as follows:</p>
 <div class="title">Requirement 78</div>
 <div class="content">
 <div class="paragraph">
-<p>The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <a href="#extension_geometry_encoding">User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding</a> and/or <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a> when those extensions are also implemented.</p>
+<p><span class="line-through">The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <a href="#extension_geometry_encoding">User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding</a> and/or <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a> when those extensions are also implemented.</span></p>
 </div>
 </div>
 </div>
 <h4 id="_abstract_test_suite_3" class="float">Abstract Test Suite</h4>
+<h5 id="_extension_name" class="float">Extension Name</h5>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/rtree/extension_name</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that spatial index extensions are registered using the "gpkg_rtree_index" name in the gpkg_extensions table.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT COUNT(*) FROM gpkg_extensions WHERE extension_name = <em>gpkg_rtree_index</em>;</p>
+</li>
+<li>
+<p>Extension not testable if count = 0</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.3 Req 75</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h5 id="_extensions_row_2" class="float">Extensions Row</h5>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/rtree/extension_row</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT ge.table_name AS getn, ge.column_name AS gecn, ge.scope AS ges, ggc.column_name AS ggccn
+FROM gpkg_extensions ge LEFT OUTER JOIN gpkg_geometry_columns ggc
+ON ge.table_name = ggc.table_name WHERE extension_name = <em>gpkg_rtree_index</em></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Not testable if result set is empty</p>
+</li>
+<li>
+<p>Fail if any ggccn is NULL</p>
+</li>
+<li>
+<p>Fail if any ges is not <em>write-only</em></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass otherwise</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.3 Req 76</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Basic</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
 <h5 id="_implementation" class="float">Implementation</h5>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
@@ -9058,7 +9167,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == <em>features</em>))</p>
+<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_extensions WHERE extension_name == <em>gpkg_rtree_index</em>)</p>
 </li>
 <li>
 <p>Not testable if result set is empty</p>
@@ -9069,39 +9178,49 @@ These spatial index triggers SHALL be defined as follows:</p>
 <ol class="loweralpha" type="a">
 <li>
 <p>SELECT sql FROM sqlite_master WHERE tbl_name = <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
-</li>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
 <li>
-<p>Not testable if result set is empty</p>
-</li>
-<li>
-<p>Fail if returned sql != <em>CREATE VIRTUAL TABLE rtree_</em> ' || result_set_table_name || <em>_</em> || result_set_column_name || USING rtree(id, minx, maxx, miny, maxy)</p>
-</li>
-<li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND tname = <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_insert</em></p>
-</li>
-<li>
-<p>Fail if returned sql != result of populating insert triggers template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
-</li>
-<li>
-<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND name LIKE <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_update%</em></p>
-</li>
-<li>
-<p>Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
-</li>
-<li>
-<p>SELECT sql FROM sqlite_master WHERE type=<em>trigger</em> AND name = <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_delete</em></p>
-</li>
-<li>
-<p>Fail if returned sql != result of populating delete trigger template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
-</li>
-<li>
-<p>Log pass otherwise</p>
+<p>Fail if returned sql != <em>CREATE VIRTUAL TABLE "rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name ||<em>" USING rtree(id, minx, maxx, miny, maxy)</em></p>
 </li>
 </ol>
 </div>
 </li>
 <li>
-<p>Pass if logged pass and no fails</p>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND name = <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_insert</em></p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Fail if returned sql != result of populating insert triggers template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>SELECT sql FROM sqlite_master WHERE type = <em>trigger</em> AND name LIKE <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_update%</em> ORDER BY name ASC</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>SELECT sql FROM sqlite_master WHERE type=<em>trigger</em> AND name = <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name || <em>_delete</em></p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Fail if returned sql != result of populating delete trigger template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
 </li>
 </ol>
 </div></div></td>
@@ -9109,7 +9228,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.3 Req 75</p>
+<p>Annex F.3 Req 77</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9163,8 +9282,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 <p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt;  WHERE ST_MinY(geom) != miny</p>
 </li>
 <li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt;  WHERE ST_MaxY(geom) != maxy
-..</p>
+<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt;  WHERE ST_MaxY(geom) != maxy</p>
 </li>
 </ol>
 </div>
@@ -9173,124 +9291,6 @@ These spatial index triggers SHALL be defined as follows:</p>
 <p>Pass if no <em>Fail</em> selected from step 2</p>
 </li>
 </ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.3 Req 76</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Capability</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<h5 id="_extensions_name_2" class="float">Extensions Name</h5>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/spatial_indexes/extension_name</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == <em>features</em>))</p>
-</li>
-<li>
-<p>Not testable if result set is empty</p>
-</li>
-<li>
-<p>For each row table_name, column_name from step 3</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>SELECT sql FROM sqlite_master WHERE tbl_name = <em>rtree_</em> || result_set_table_name || <em>_</em> || result_set_column_name</p>
-</li>
-<li>
-<p>Not testable if returns an empty result set</p>
-</li>
-<li>
-<p>/opt/extension_mechanism/extensions/data/table_def</p>
-</li>
-<li>
-<p>Fail if failed</p>
-</li>
-<li>
-<p>SELECT extension_name from gpkg_extensions WHERE table_name = result_set_table_name AND column_name = result_set_column_name</p>
-</li>
-<li>
-<p>Log pass if result is "gpkg_rtree_index"</p>
-</li>
-<li>
-<p>Fail otherwise</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if logged pass and no fails</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.3 Req 77</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Basic</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<h5 id="_extensions_row_2" class="float">Extensions Row</h5>
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/spatial_indexes/extension_row</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that spatial index extensions are registered using the "gpkg_rtree_index" name in the gpkg_extensions table.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/reg_ext/features/spatial_indexes/extension_name</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9418,7 +9418,7 @@ See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventi
 <p>None</p>
 </div>
 <h4 id="_abstract_test_suite_4" class="float">Abstract Test Suite</h4>
-<h5 id="_extensions_name_3" class="float">Extensions Name</h5>
+<h5 id="_extensions_name_2" class="float">Extensions Name</h5>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -9673,7 +9673,7 @@ The <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> of values of the
 <p>None</p>
 </div>
 <h4 id="_abstract_test_suite_5" class="float">Abstract Test Suite</h4>
-<h5 id="_extensions_name_4" class="float">Extensions Name</h5>
+<h5 id="_extensions_name_3" class="float">Extensions Name</h5>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -11915,7 +11915,7 @@ The information provided by this option can be used by applications to, for inst
 <div class="paragraph">
 <p>GeoPackage SWG, author_name <code>gpkg</code></p>
 </div>
-<h4 id="_extension_name" class="float">Extension Name</h4>
+<h4 id="_extension_name_2" class="float">Extension Name</h4>
 <div class="paragraph">
 <p><code>gpkg_schema</code></p>
 </div>
@@ -14678,7 +14678,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-17 16:31:10 UTC
+Last updated 2017-04-17 16:31:58 UTC
 </div>
 </div>
 </body>
