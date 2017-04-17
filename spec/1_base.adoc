@@ -65,17 +65,16 @@ A GeoPackage SHALL have the file extension name ".gpkg".
 [caption=""]
 .Requirement 4
 ====
-A GeoPackage SHALL only contain data elements, SQL constructs and GeoPackage extensions with the "gpkg" author name specified in this encoding standard.
+A GeoPackage SHALL only contain the data elements (tables, columns, or values) and SQL constructs (views, constraints, or triggers) specified in the core of this encoding standard (<<features>>, <<tiles>>, and <<attributes>>). Extended GeoPackages MAY contain additional data elements and SQL constructs as specified through the <<extension_mechanism>>.
 ====
 
-In order to guarantee maximum interoperability between applications, GeoPackages should not contain data elements (tables or columns), SQL constructs (data types, indexes, constraints or triggers) or extensions that are not specified in this encoding standard.
-SQLite databases that use constructs from the GeoPackage standard but extend those constructs to contain elements not specified in the core GeoPackage standard are referred to as Extended GeoPackages throughout this standard.
+The *GeoPackage* designation is designed to provide maximum interoperability between applications. In an *Extended GeoPackage*, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. However, some extensions may have an adverse affect on applications that are not expecting them. Developers are encouraged to consider the possibility of extensions when designing their applications.
 
 [[r5]]
 [caption=""]
 .Requirement 5
 ====
-The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <<table_column_data_types>>.
+The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <<table_column_data_types>>. Extended GeoPackages MAY contain additional data types as specified through the <<extension_mechanism>>.
 ====
 
 [[table_column_data_types]]

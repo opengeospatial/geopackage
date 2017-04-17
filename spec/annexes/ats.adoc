@@ -55,16 +55,12 @@
 |*Test Case ID* |+/base/core/container/data/file_contents+
 |*Test Purpose* |Verify that the GeoPackage only contains specified contents
 |*Test Method* 
-| . For each gpkg_* table_name
+| . SELECT COUNT(*) from gpkg_extensions;
+. Not testable if table exists and count > 0
+. For each gpkg_* table_name
 .. PRAGMA table_info(table_name)
 .. Continue if returns an empty result set
 .. Fail if column definitions returned by "PRAGMA table_info" do not match column definitions for the table in Annex C.
-. Do test /opt/features/vector_features/data/feature_table_integer_primary_key
-. Do test /opt/features/vector/features/data/feature_table_one_geometry_column
-. Do test /opt/tiles/contents/data/tiles_row
-. SELECT extension_name FROM gpkg_contents
-. For each row from #4
-.. Fail if the substring before the first "_" is not "gpkg"
 . Pass if no fails
 |*Reference* |Clause 1.1.1.1.3 Req 4:
 |*Test Type* |Basic
