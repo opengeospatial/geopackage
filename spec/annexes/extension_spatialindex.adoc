@@ -48,14 +48,14 @@ This extension uses the rtree implementation provided by the SQLite R*Tree Modul
 [caption=""]
 .Requirement 75
 ====
-The "gpkg_rtree_index" extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of spatial indexes on a geometry column.
+The "gpkg_rtree_index" extension name SHALL be used as a `gpkg_extensions` table `extension_name` column value to specify implementation of spatial indexes on a geometry column.
 ====
 
 [[r76]]
 [caption=""]
 .Requirement 76
 ====
-A GeoPackage that implements spatial indexes SHALL have a gpkg_extensions table that contains a row for each spatially indexed column with extension_name "gpkg_rtree_index", the table_name of the table with a spatially indexed column, and the column_name of the spatially indexed column.
+A GeoPackage that implements spatial indexes SHALL have a `gpkg_extensions` table that contains a row for each spatially indexed column with `extension_name` "gpkg_rtree_index", the `table_name` of the table with a spatially indexed column,  the `column_name` of the spatially indexed column, and a `scope` of "read-only".
 ====
 
 [[r77]]
@@ -213,11 +213,43 @@ Definition of SQL functions
 [caption=""]
 .Requirement 78
 ====
-The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.
+[line-through]#The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.#
 ====
 
 [float]
 ==== Abstract Test Suite
+
+[float]
+===== Extension Name
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/rtree/extension_name+
+|*Test Purpose* |Verify that spatial index extensions are registered using the "gpkg_rtree_index" name in the gpkg_extensions table.
+|*Test Method* |
+. SELECT COUNT(*) FROM gpkg_extensions WHERE extension_name = 'gpkg_rtree_index';
+. Extension not testable if count = 0
+|*Reference* |Annex F.3 Req 75
+|*Test Type* |Capability
+|========================================
+
+[float]
+===== Extensions Row
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/rtree/extension_row+
+|*Test Purpose* |Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.
+|*Test Method* |
+. SELECT ge.table_name AS getn, ge.column_name AS gecn, ge.scope AS ges, ggc.column_name AS ggccn 
+FROM gpkg_extensions ge LEFT OUTER JOIN gpkg_geometry_columns ggc 
+ON ge.table_name = ggc.table_name WHERE extension_name = 'gpkg_rtree_index'
+.. Not testable if result set is empty
+.. Fail if any ggccn is NULL
+.. Fail if any ges is not 'write-only'
+. Pass otherwise
+|*Reference* |Annex F.3 Req 76
+|*Test Type* |Basic
+|========================================
 
 [float]
 ===== Implementation
@@ -227,21 +259,19 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 |*Test Case ID* |+/reg_ext/features/spatial_indexes/implementation+
 |*Test Purpose* |Verify the correct implementation of spatial indexes on feature table geometry columns.
 |*Test Method* |
-. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == 'features'))
+. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_extensions WHERE extension_name == 'gpkg_rtree_index')
 . Not testable if result set is empty
 . For each row table_name, column_name from step 1
 .. SELECT sql FROM sqlite_master WHERE tbl_name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name
-.. Not testable if result set is empty
-.. Fail if returned sql != 'CREATE VIRTUAL TABLE rtree_' ' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| USING rtree(id, minx, maxx, miny, maxy)
-.. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND tname = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_insert'
-.. Fail if returned sql != result of populating insert triggers template using result_set_table_name for <t> and result_set_column_name for <c>
-.. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_update%'
-.. Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for <t> and result_set_column_name for <c>
+... Fail if returned sql != 'CREATE VIRTUAL TABLE "rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\|'" USING rtree(id, minx, maxx, miny, maxy)'
+.. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_insert'
+... Fail if returned sql != result of populating insert triggers template using result_set_table_name for <t> and result_set_column_name for <c>
+.. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_update%' ORDER BY name ASC
+... Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for <t> and result_set_column_name for <c>
 .. SELECT sql FROM sqlite_master WHERE type='trigger' AND name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_delete'
-.. Fail if returned sql != result of populating delete trigger template using result_set_table_name for <t> and result_set_column_name for <c>
-.. Log pass otherwise
-. Pass if logged pass and no fails
-|*Reference* |Annex F.3 Req 75
+... Fail if returned sql != result of populating delete trigger template using result_set_table_name for <t> and result_set_column_name for <c>
+. Pass if no fails
+|*Reference* |Annex F.3 Req 77
 |*Test Type* |Capability
 |========================================
 
@@ -257,44 +287,7 @@ The SQL functions on geometries in this SQLite Extension SHALL operate correctly
 .. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MaxX(geom) != maxx
 .. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MinY(geom) != miny
 .. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MaxY(geom) != maxy
-..
 . Pass if no 'Fail' selected from step 2
-|*Reference* |Annex F.3 Req 76
-|*Test Type* |Capability
-|========================================
-
-[float]
-===== Extensions Name
-
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/reg_ext/features/spatial_indexes/extension_name+
-|*Test Purpose* |Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.
-|*Test Method* |
-. SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == 'features'))
-. Not testable if result set is empty
-. For each row table_name, column_name from step 3
-.. SELECT sql FROM sqlite_master WHERE tbl_name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name
-.. Not testable if returns an empty result set
-.. /opt/extension_mechanism/extensions/data/table_def
-.. Fail if failed
-.. SELECT extension_name from gpkg_extensions WHERE table_name = result_set_table_name AND column_name = result_set_column_name
-.. Log pass if result is "gpkg_rtree_index"
-.. Fail otherwise
-. Pass if logged pass and no fails
-|*Reference* |Annex F.3 Req 77
-|*Test Type* |Basic
-|========================================
-
-[float]
-===== Extensions Row
-
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/reg_ext/features/spatial_indexes/extension_row+
-|*Test Purpose* |Verify that spatial index extensions are registered using the "gpkg_rtree_index" name in the gpkg_extensions table.
-|*Test Method* |
- /reg_ext/features/spatial_indexes/extension_name
 |*Reference* |Annex F.3 Req 78
 |*Test Type* |Capability
 |========================================
