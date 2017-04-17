@@ -929,7 +929,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/table_def+
+|*Test Case ID* |+/opt/extension_mechanism/data/table_def+
 |*Test Purpose* |Verify that a `gpkg_extensions` table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_extensions'
@@ -944,7 +944,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_for_extensions+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_for_extensions+
 |*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the `gpkg_extensions` table
 |*Test Method* |
 . Manual inspection
@@ -954,7 +954,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_table_name+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_table_name+
 |*Test Purpose* |Verify that the `table_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name FROM gpkg_extensions;
@@ -970,7 +970,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_column_name+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_column_name+
 |*Test Purpose* |Verify that the `column_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_extensions WHERE column_name IS NOT NULL
@@ -986,7 +986,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_extension_name+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_extension_name+
 |*Test Purpose* |Verify that the `extension_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT extension_name FROM gpkg_extensions
@@ -1005,7 +1005,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_definition+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_definition+
 |*Test Purpose* |Verify that the `definition` column value contains or references extension documentation
 |*Test Method* |
 . SELECT definition FROM gpkg_extensions
@@ -1020,7 +1020,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_scope+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_scope+
 |*Test Purpose* |Verify that the `scope` column value is "read-write" or "write-only"
 |*Test Method* |
 . SELECT scope FROM gpkg_extensions
