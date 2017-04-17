@@ -46,14 +46,26 @@ Read-write
 [float]
 ===== GeoPackage
 
-[requirement]
-The “gpkg_zoom_other” extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of other zoom intervals on a tile pyramid user data table as specified in <<extension_zoom_other_intervals>>.
+[[r87]]
+[caption=""]
+.Requirement 87
+====
+The "gpkg_zoom_other" extension name SHALL be used as a gpkg_extensions table extension name column value to specify implementation of other zoom intervals on a tile pyramid user data table as specified in <<extension_zoom_other_intervals>>.
+====
 
-[requirement]
-A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name “gpkg_zoom_other”, the table_name of the table with other zoom intervals, and the “tile_data” column_name.
+[[r88]]
+[caption=""]
+.Requirement 88
+====
+A GeoPackage that implements other zoom intervals SHALL have a gpkg_extensions table that contains a row for each tile pyramid user data table with other zoom intervals with extension_name "gpkg_zoom_other", the table_name of the table with other zoom intervals, and the "tile_data" column_name.
+====
 
-[requirement]
-Tile pyramid user data tables MAY have pixel sizes that vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels. Extends <<req_zoom_times_two>>. 
+[[r89]]
+[caption=""]
+.Requirement 89
+====
+Tile pyramid user data tables MAY have pixel sizes that vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels. Extends <<r35>>. 
+====
 
 The `pixel_x_size` and / or `pixel_y_size` column values in the `gpkg_tile_matrix` table vary by irregular intervals or by regular intervals other than a factor of two (the default) between adjacent zoom levels for a particular tile matrix set pyramid table.
 
@@ -76,7 +88,7 @@ None
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/tiles/zoom_levels/data/zoom_other_ext_name+
-|*Test Purpose* |Verify that the “gpkg_zoom_other” extension name is used to register tiles tables with other than factors of two zoom intervals.
+|*Test Purpose* |Verify that the "gpkg_zoom_other" extension name is used to register tiles tables with other than factors of two zoom intervals.
 |*Test Method* |
 . SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'
 . Not testable if empty result set
@@ -101,7 +113,7 @@ None
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/tiles/zoom_levels/data/zoom_other_ext_row+
-|*Test Purpose* |Verify that tiles tables with other than factors of two zoom intervals are registered using the “gpkg_zoom_other” extension name.
+|*Test Purpose* |Verify that tiles tables with other than factors of two zoom intervals are registered using the "gpkg_zoom_other" extension name.
 |*Test Method* |
  /reg_ext/tiles/zoom_levels/data/zoom_other_ext_name
 |*Reference* |Annex F.6 Req 88

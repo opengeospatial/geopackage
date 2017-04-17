@@ -40,15 +40,27 @@ Read-write
 [float]
 ===== GeoPackage
 
-[requirement]
+[[r90]]
+[caption=""]
+.Requirement 90
+====
 The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of tile pyramid images in WEBP format as specified in <<extension_tiles_webp>>.
+====
 
-[requirement]
-A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, “tile_data” column_name values and extension_name column values of “gpkg_webp”.
+[[r91]]
+[caption=""]
+.Requirement 91
+====
+A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, "tile_data" column_name values and extension_name column values of "gpkg_webp".
+====
 
-[requirement]
+[[r92]]
+[caption=""]
+.Requirement 92
+====
 A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <<22>>.
 The MIME type of values of the `tile_data` column in tile pyramid user data tables SHALL be `image/x-webp`.
+====
 
 [float]
 ===== GeoPackage SQLite Configuration
@@ -69,7 +81,7 @@ None
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
-|*Test Purpose:* |Verify that the “gpkg_webp” extensions name is used to register WEBP tile encoding implementations.
+|*Test Purpose:* |Verify that the "gpkg_webp" extensions name is used to register WEBP tile encoding implementations.
 |*Test Method:* |
 . +SELECT table_name FROM gpkg_contents WHERE data_type = \'tiles'+
 . Not testable if empty result set
@@ -80,7 +92,7 @@ None
 .. Not testable if no logged webps
 .. /opt/extension_mechanism/extensions/data/table_def
 .. Fail if failed
-.. +SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = 'gpkg_webp’+
+.. +SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = 'gpkg_webp'+
 .. Fail if returns an empty result set
 .. Log pass otherwise
 . Pass if logged pass and no fails
@@ -94,7 +106,7 @@ None
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_row+
-|*Test Purpose:* |Verify that WEBP tile encodings are registered using the “gpkg_webp” extensions name.
+|*Test Purpose:* |Verify that WEBP tile encodings are registered using the "gpkg_webp" extensions name.
 |*Test Method:* |	+/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name+
 |*Reference:* |Annex F.7 Req 91
 |*Test Type* |Capability
