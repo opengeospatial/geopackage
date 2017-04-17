@@ -1504,22 +1504,13 @@ If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry typ
 <div class="sect3">
 <h4 id="_tile_matrix_introduction">2.2.1. Tile Matrix Introduction</h4>
 <div class="paragraph">
-<p>There are a wide variety of commercial and open source conventions for storing, indexing, accessing and describing tiles in tile pyramids. Unfortunately, no applicable existing consensus, national or international specifications have standardized practices in this domain. In addition, various image file formats have different representational capabilities, and include different self-descriptive metadata.</p>
+<p>The Tiles option specifies a mechanism for storing raster data in tile pyramids. "Tile pyramid" refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself. "Tile" refers to an individual raster image such as a PNG or JPEG that covers a specific geographic area. "Tile matrix" refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level<span class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</span>. "Tile matrix set" refers to the definition of a tile pyramid&#8217;s tiling structure. This mechanism is based on the model for tile matrix sets described in Section 6 of <a id="16"></a>[16].</p>
 </div>
 <div class="paragraph">
-<p>The tile store data / metadata model and convention described below support direct use of tiles in a GeoPackage in two ways. First, they specify how existing application MAY create SQL Views of the data /metadata model on top of existing application tables that that follow different interface conventions. Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images. Applications that store GeoPackage tile data, which are presumed to have this information available, should store sufficient metadata to enable its intended use.</p>
+<p>The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose coupling to enable widespread implementation. A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container. The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.</p>
 </div>
 <div class="paragraph">
-<p>The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose coupling to enable widespread implementation.</p>
-</div>
-<div class="paragraph">
-<p>A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container.
-<span class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnote_14" title="View footnote.">14</a>]</span> "Tile pyramid" refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself.
-"Tile matrix" refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level.
-"Tile matrix set" refers to the definition of a tile pyramid&#8217;s tiling structure.</p>
-</div>
-<div class="paragraph">
-<p>The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.</p>
+<p>The tile store data / metadata model and conventions described below support direct use of tiles in a GeoPackage in two ways. First, they specify how existing application MAY create SQL Views of the data / metadata model on top of existing application tables that that follow different interface conventions. Second, they include and expose enough metadata information at both the dataset and record level to allow applications that use GeoPackage data to discover its characteristics without having to parse all of the stored images. Applications that store GeoPackage tile data, which are presumed to have this information available, should store sufficient metadata to enable its intended use.</p>
 </div>
 </div>
 <div class="sect3">
@@ -14746,7 +14737,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-17 19:47:51 UTC
+Last updated 2017-04-17 20:22:08 UTC
 </div>
 </div>
 </body>
