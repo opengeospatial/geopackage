@@ -296,23 +296,17 @@ CREATE TABLE gpkg_2d_gridded_tile_ancillary (
 
 [float]
 ===== TIFF Encoding
+Because of the wide range of possible TIFF encodings, the TIFF encoding for an elevation tile has been constrained for the sake of interoperability and best practice. Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of TIFF<<35>>. The only allowed encoding extensions are:
 
-Because of the variance in possible TIFF encodings for a tile, the encoding has been constrained for the sake of interoperability and best practice.
+* IEEE floating point (see <<r136>>)
+* LZW compression (see <<r137>>)
 
-TIFF-encoding a tile as a single-band image using one 32-bit floating point component per pixel implies a number of constraints. These are listed below.
+Tiles are encoded as a single-band image using one 32-bit floating point component per pixel. This implies a number of constraints which are listed below:
 
-Each TIFF encoded tile SHALL be a baseline TIFF as defined in the Part 1 of TIFF<<35>>. The only  allowed encoding extensions are :
-
-* By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF<<35>>.
-* LZW compression MAY be used as defined in Section 13: LZW Compression TIFF<<35>>.
-
-In addition to conforming to the baseline and listed conventions, tiles encoded as TIFF are expected to conform to the following implied or dictated constraints :
-
-* By setting TAG 277 (SamplesPerPixel) to be 1, the producer indicates that there is a single sample per pixel.
-* There is only one band per TIFF tile i.e. for any pixel in the TIFF tile, there SHALL be only one component.
-* All 65536 pixels in the tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.
-* Other TIFF tags are derived from the other constraints in this extension e.g. TAG 258 (BitsPerSample), if included SHALL be 32.
-* No multi-image/tiling extensions defined in TIFF<<35>> shall be used.
+* There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component  (see <<r135>>).
+* All pixels in the tile SHALL be set with a valid component value (see <<r143>>).
+* Other TIFF tags are derived from the other constraints in this extension. 
+* No multi-image/tiling extensions defined in TIFF<<35>> shall be used (see <<r138>>, <<r139>>).
 
 [[tiff_encoding]]
 [[r134]]
@@ -329,12 +323,16 @@ A TIFF file used for storing tiled gridded elevation data SHALL conform to the T
 (constrains TIFF<<35>> Section 2) A TIFF file storing tiled gridded elevation data SHALL have one sample per pixel.
 ====
 
+By setting TAG 277 (SamplesPerPixel) to be 1, the producer indicates that there is a single sample per pixel.
+
 [[r136]]
 [caption=""]
 .Requirement 136
 ====
 (constrains TIFF<<35>> Section 19) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.
 ====
+
+By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF<<35>>. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
 
 [[r137]]
 [caption=""]
@@ -357,4 +355,11 @@ Client applications that support the TIFF encoding are expected to support this 
 .Requirement 139
 ====
 (constrains TIFF<<35>> Section 15) A TIFF file storing tiled gridded elevation data SHALL NOT contain internal tiles as per TIFF Section 15.
+====
+
+[[r139]]
+[caption=""]
+.Requirement 143
+====
+All pixels in an elevation tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.
 ====
