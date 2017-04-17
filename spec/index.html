@@ -5815,7 +5815,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_mechanism/extensions/data/table_def</code></p>
+<p><code>/opt/extension_mechanism/data/table_def</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -5870,7 +5870,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_mechanism/extensions/data/data_values_for_extensions</code></p>
+<p><code>/opt/extension_mechanism/data/data_values_for_extensions</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -5913,7 +5913,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_mechanism/extensions/data/data_values_table_name</code></p>
+<p><code>/opt/extension_mechanism/data/data_values_table_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -5978,7 +5978,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_mechanism/extensions/data/data_values_column_name</code></p>
+<p><code>/opt/extension_mechanism/data/data_values_column_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6047,7 +6047,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_mechanism/extensions/data/data_values_extension_name</code></p>
+<p><code>/opt/extension_mechanism/data/data_values_extension_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6121,7 +6121,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_mechanism/extensions/data/data_values_definition</code></p>
+<p><code>/opt/extension_mechanism/data/data_values_definition</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -6183,7 +6183,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/opt/extension_mechanism/extensions/data/data_values_scope</code></p>
+<p><code>/opt/extension_mechanism/data/data_values_scope</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -9643,7 +9643,7 @@ This extension allows the use of <code>image/x-webp</code> as an additional enco
 <div class="title">Requirement 90</div>
 <div class="content">
 <div class="paragraph">
-<p>The "gpkg_webp" extension name SHALL be used as a gpkg_extensions table extension name column value to specify storage of tile pyramid images in WEBP format as specified in <a href="#extension_tiles_webp">Tiles Encoding WebP</a>.</p>
+<p>GeoPackages with one or more rows in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_webp" SHALL comply with this extension.</p>
 </div>
 </div>
 </div>
@@ -9651,7 +9651,7 @@ This extension allows the use of <code>image/x-webp</code> as an additional enco
 <div class="title">Requirement 91</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains tile pyramid user data tables with tile_data columns that contain images in WEBP format SHALL contain a gpkg_extensions table that contains row records with table_name values for each such table, "tile_data" column_name values and extension_name column values of "gpkg_webp".</p>
+<p>A GeoPackage that contains tile pyramid user data tables with <code>tile_data</code> columns that contain images in WebP format SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code> values for each such table, <code>column_name</code> values of "tile_data", <code>extension_name</code> column values of "gpkg_webp", and <code>scope</code> column values of "read-write".</p>
 </div>
 </div>
 </div>
@@ -9659,8 +9659,8 @@ This extension allows the use of <code>image/x-webp</code> as an additional enco
 <div class="title">Requirement 92</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in MIME type image/x-webp <a href="#22">[22]</a>.
-The MIME type of values of the <code>tile_data</code> column in tile pyramid user data tables SHALL be <code>image/x-webp</code>.</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r36">GPKG-36</a> and <a href="http://www.geopackage.org/spec/#r37">GPKG-37</a>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> image/x-webp <a href="#22">[22]</a>.
+The <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> of values of the <code>tile_data</code> column in tile pyramid user data tables SHALL be <code>image/x-webp</code>.</p>
 </div>
 </div>
 </div>
@@ -9683,7 +9683,7 @@ The MIME type of values of the <code>tile_data</code> column in tile pyramid use
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name</code></p>
+<p><code>/extensions/tile_encoding_webp/data/webp_ext_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -9697,51 +9697,10 @@ The MIME type of values of the <code>tile_data</code> column in tile pyramid use
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = 'tiles'</code></p>
+<p>SELECT COUNT(*) FROM gpkg_extensions WHERE extension_name = <em>gpkg_webp</em>;</p>
 </li>
 <li>
-<p>Not testable if empty result set</p>
-</li>
-<li>
-<p>For each row table_name from step 1</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Select tile_data FROM row table_name</p>
-</li>
-<li>
-<p>For each row tile_data from step a</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Log webp if tile data in MIME type image/webp</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Not testable if no logged webps</p>
-</li>
-<li>
-<p>/opt/extension_mechanism/extensions/data/table_def</p>
-</li>
-<li>
-<p>Fail if failed</p>
-</li>
-<li>
-<p><code>SELECT * FROM gpkg_extensions WHERE table_name = selected table name AND extension_name = <em>gpkg_webp</em></code></p>
-</li>
-<li>
-<p>Fail if returns an empty result set</p>
-</li>
-<li>
-<p>Log pass otherwise</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if logged pass and no fails</p>
+<p>Extension not in use if count is empty</p>
 </li>
 </ol>
 </div></div></td>
@@ -9771,19 +9730,42 @@ The MIME type of values of the <code>tile_data</code> column in tile pyramid use
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/tiles/tile_encoding_webp/data/webp_ext_row</code></p>
+<p><code>/extensions/tile_encoding_webp/data/webp_ext_row</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that WEBP tile encodings are registered using the "gpkg_webp" extensions name.</p>
+<p>Verify that this extension is registered using proper rows in the <code>gpkg_extensions</code> table.</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/tiles/tile_encoding_webp/data/webp_ext_name</code></p>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>/opt/extension_mechanism/data/data_values_table_name will test whether the <code>table_name</code> values are valid.</p>
+</li>
+<li>
+<p>SELECT column_name, scope FROM gpkg_extensions where extension_name = <em>gpkg_webp</em>;</p>
+</li>
+<li>
+<p>For each row table_name from step 1</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if <code>column_name</code> is not "tile_data"</p>
+</li>
+<li>
+<p>Fail if <code>scope</code> is not "read-write"</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
 </div></div></td>
 </tr>
 <tr>
@@ -9811,13 +9793,13 @@ The MIME type of values of the <code>tile_data</code> column in tile pyramid use
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/tiles/tiles_encoding_webp/data/mime_type_webp</code></p>
+<p><code>/extensions/tiles_encoding_webp/data/mime_type_webp</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that a tile matrix user data table that conforms to this extension contains tile data of MIME type image/x-webp.</p>
+<p>Verify that a tile matrix user data table that conforms to this extension contains a valid image type, including images of MIME type image/x-webp.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9825,41 +9807,20 @@ The MIME type of values of the <code>tile_data</code> column in tile pyramid use
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name AS tn FROM gpkg_contents WHERE data_type = 'tiles'</p>
+<p>SELECT table_name FROM gpkg_extensions WHERE extension_name = <em>gpkg_webp</em></p>
 </li>
 <li>
-<p>For each row tn from step 2</p>
+<p>For each table_name from step 1</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>WHEN (SELECT tbl_name FROM sqlite_master WHERE tbl_name = 'gpkg_extensions') = 'gpkg_extensions' THEN (SELECT extension_name FROM gpkg_extensions WHERE table_name = 'tn')
-END;</p>
-</li>
-<li>
-<p>For each row extension_name from step a</p>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>Not testable if extension_name is not <em>gpkg_webp</em></p>
-</li>
-<li>
-<p>SELECT tile_data from tn</p>
-<div class="olist upperalpha">
-<ol class="upperalpha" type="A">
-<li>
-<p>Pass if tile data in MIME type image/x-webp</p>
-</li>
-<li>
-<p>Fail if no passes</p>
+<p>Run test /opt/tiles/tiles_encoding/data/mime_type_jpeg step 2 but allow an extra MIME type (step 2c) of "image/x-webp"</p>
 </li>
 </ol>
 </div>
 </li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
+<li>
+<p>Pass if no fails</p>
 </li>
 </ol>
 </div></div></td>
@@ -13906,7 +13867,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 124</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="http://www.geopackage.org/spec/#_requirement-34">GPKG-34</a>) The <a href="http://www.geopackage.org/spec/#_contents"><code>gpkg_contents</code></a> table SHALL contain a row with a <code>data_type</code> column value of <em>2d-gridded-coverage</em> for each tile pyramid containing tiled gridded elevation data. The <code>srs_id</code> column value for that row SHOULD reference an SRS that has a vertical datum<span class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnote_47" title="View footnote.">47</a>]</span>.</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r34">GPKG-34</a>) The <a href="http://www.geopackage.org/spec/#_contents"><code>gpkg_contents</code></a> table SHALL contain a row with a <code>data_type</code> column value of <em>2d-gridded-coverage</em> for each tile pyramid containing tiled gridded elevation data. The <code>srs_id</code> column value for that row SHOULD reference an SRS that has a vertical datum<span class="footnote">[<a id="_footnoteref_47" class="footnote" href="#_footnote_47" title="View footnote.">47</a>]</span>.</p>
 </div>
 </div>
 </div>
@@ -14023,7 +13984,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 132</div>
 <div class="content">
 <div class="paragraph">
-<p>For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>integer</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").</p>
+<p>For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>integer</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale").</p>
 </div>
 </div>
 </div>
@@ -14031,7 +13992,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 133</div>
 <div class="content">
 <div class="paragraph">
-<p>For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of MIME type <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">[tiff_encoding]</a>).</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r36">GPKG-36</a> and <a href="http://www.geopackage.org/spec/#r37">GPKG-37</a>) For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">[tiff_encoding]</a>).</p>
 </div>
 </div>
 </div>
@@ -14717,7 +14678,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-17 16:30:14 UTC
+Last updated 2017-04-17 16:31:10 UTC
 </div>
 </div>
 </body>
