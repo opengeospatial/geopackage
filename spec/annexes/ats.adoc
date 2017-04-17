@@ -375,9 +375,9 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 |*Test Purpose* |Verify that the `geometry_type_name` column values in the `gpkg_geometry_columns` table are valid.
 |*Test Method* |
 . SELECT DISTINCT geometry_type_name from gpkg_geometry_columns 
-. Not testable  if returns an empty result set
+. Not testable if returns an empty result set
 . For each row from step 1
-.. Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex G
+.. Fail if a returned geometry_type_name value is not in Table 31 in Annex G
 . Pass if no fails.
 |*Reference* |Clause 2.1.5.1.2 Req 25:
 |*Test Type* |Capability
@@ -471,11 +471,9 @@ column for that `column_name` and `table_name` in the `gpkg_geometry_columns` ta
 FROM gpkg_geometry_columns WHERE table_name IN 
 (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
 . For each row selected in (1):
-.. Fail if selected geometry_type_name value is not a value from the NAME column in Annex G Table 42 or Table 43.
-.. SELECT sql FROM sqlite_master 
-WHERE type = 'table' AND name = '{selected table_ name}'
-.. Pass if declared type of column_name selected in (1) is the geometry_type_name selected in (1)
-..	Fail otherwise
+.. PRAGMA table_info('{selected table_name}')
+.. Fail if declared type of column_name selected in (1) is not the geometry_type_name selected in (1)
+.	Pass if no fails
 |*Reference* |Clause 2.1.6.1.1 Req 31:
 |*Test Type* |Capability
 |========================================

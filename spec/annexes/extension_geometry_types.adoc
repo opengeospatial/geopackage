@@ -44,7 +44,7 @@ Read-write
 [caption=""]
 .Requirement 65
 ====
-A GeoPackage MAY store feature table geometries with the extended non-linear geometry types (CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in <<geometry_types>>.
+(extends http://www.geopackage.org/spec/#r25[GPKG-25]) The `geometry_type_name` value in a `gpkg_geometry_columns` row MAY be one of the uppercase extended non-linear geometry type names specified in <<geometry_types>>.
 ====
 
 [[r66]]
@@ -66,7 +66,7 @@ An extension name to specify a feature geometry extension type SHALL be defined 
 [caption=""]
 .Requirement 68
 ====
-A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per the previous requirement <<extension_geometry_types_extensions_name>>.
+A GeoPackage that contains a `gpkg_geometry_columns` table or updateable view with row records that specify extension `geometry_type_name` column values SHALL contain a `gpkg_extensions` table that contains row records with `table_name` and `column_name` values from the `gpkg_geometry_columns` row records that identify extension type uses, and `extension_name` column values for each of those geometry types constructed per the previous requirement <<extension_geometry_types_extensions_name>>.
 ====
 
 [float]
@@ -92,8 +92,18 @@ None
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/existing_sparse_data+
-|*Test Purpose* |Verify that existing extended non-linear geometry types are stored in valid StandardGeoPackageBinary format encodings.
+|*Test Case ID* |+/extensions/geometry_types/data_values_geometry_type_name+
+|*Test Purpose* |Verify that only allowed geometry types (including extended non-linear geometry types) are in use.
+|*Test Method* |
+. Run test /opt/features/geometry_columns/data/data_values_geometry_type_name, but the values in 3a may also include the values from Table 32 in Annex G.
+|*Reference* |Annex F.1 Req 65:
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/geometry_types/all_types_test_data+
+|*Test Purpose* |Verify that geometries non-linear geometry types are stored in valid GeoPackageBinary format encodings.
 |*Test Method* |
 . SELECT table_name FROM gpkg_geometry_columns
 . Not testable if returns an empty result set
@@ -112,19 +122,7 @@ vi. If cn.flags.E is 3,4 and some gc.wkb.m is outside of cn.envelope.minm,maxm t
 vii. If cn.flags.E is 5-7 then log fail
 viii. Otherwise log pass
 . Log pass if log contains pass and no fails
-|*Reference* |Annex F.1 Req 65:
-|*Test Type* |Capability
-|========================================
 
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/all_types_test_data+
-|*Test Purpose* |Verify that all extended non-linear geometry types and options are stored in valid GeoPackageBinary format encodings.
-|*Test Method* |
-. Open GeoPackage that has feature geometry values of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:
-. /reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data
-. Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex G without and with z and/or m values.
-. Fail otherwise
 |*Reference* |Annex F.1 Req 66:
 |*Test Type* |Capability
 |========================================
@@ -134,7 +132,7 @@ viii. Otherwise log pass
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/extension_name+
+|*Test Case ID* |+/extensions/geometry_types/extension_name+
 |*Test Purpose* |Verify that an extension name in the form gpkg_geom_<gname> is defined for each <gname> extension geometry type from Annex G used in a GeoPackage.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type  == 'features'))
@@ -159,10 +157,16 @@ viii. Otherwise log pass
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/features/geometry_encoding/data/geopackage_extension_types/extension_row+
+|*Test Case ID* |+/extensions/geometry_types/extension_row+
 |*Test Purpose* |Verify that the gpkg_extensions table contains a row with an extension_name in the form gpkg_geom_<gname> for each table_name and column_name in the gpkg_geometry_columns table with a <gname> geometry_type_name.
 |*Test Method* |
- /reg_ext/features/geometry_encoding/data/extension_name
+. SELECT table_name, column_name, geometry_type_name FROM gpkg_geometry_columns
+. Not testable if no results
+. For each result
+.. If geometry_type_name is an extended geometry type
+... SELECT extension_name FROM gpkg_extensions WHERE table_name = '{table_name}' AND column_name = '{column_name}"
+... Fail if result set does not contain a row with an extension_name of gpkg_geom_{geometry_type_name}
+. Pass if no fails
 |*Reference* |Annex F.1 Req 68:
 |*Test Type* |Capability
 |========================================
