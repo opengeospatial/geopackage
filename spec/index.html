@@ -418,51 +418,51 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BOOLEAN</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A boolean value representing true or false. Stored as SQLite INTEGER with value 0 for false or 1 for true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A boolean value representing true or false. Stored as SQLite INTEGER with value 0 for false or 1 for true.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TINYINT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">8-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-128, 127]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">8-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-128, 127].</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SMALLINT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">16-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-32768, 32767]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-32768, 32767].</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MEDIUMINT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-2147483648, 2147483647]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-2147483648, 2147483647].</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INT, INTEGER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-9223372036854775808, 9223372036854775807]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit signed two&#8217;s complement integer. Stored as SQLite INTEGER with values in the range [-9223372036854775808, 9223372036854775807].</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">FLOAT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit IEEE floating point number. Stored as SQLite REAL limited to values that can be represented as a 4-byte IEEE floating point number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">32-bit IEEE floating point number. Stored as SQLite REAL limited to values that can be represented as a 4-byte IEEE floating point number.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE, REAL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit IEEE floating point number. Stored as SQLite REAL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">64-bit IEEE floating point number. Stored as SQLite REAL.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT{(maxchar_count)}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length string encoded in either UTF-8 or UTF-16, determined by PRAGMA encoding; see <a href="http://www.sqlite.org/pragma.html#pragma_encoding">http://www.sqlite.org/pragma.html#pragma_encoding</a>. The optional maxchar_count defines the maximum number of characters in the string. If not specified, the length is unbounded. The count is provided for informational purposes, and applications MAY choose to truncate longer strings if encountered. When present, it is best practice for applications to adhere to the character count. Stored as SQLite TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length string encoded in either UTF-8 or UTF-16, determined by PRAGMA encoding; see <a href="http://www.sqlite.org/pragma.html#pragma_encoding">http://www.sqlite.org/pragma.html#pragma_encoding</a>. The optional maxchar_count defines the maximum number of characters in the string. If not specified, the length is unbounded. The count is provided for informational purposes, and applications MAY choose to truncate longer strings if encountered. When present, it is best practice for applications to adhere to the character count. Stored as SQLite TEXT.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BLOB{(max_size)}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length binary data. The optional max_size defines the maximum number of bytes in the blob. If not specified, the length is unbounded. The size is provided for informational purposes. When present, it is best practice for applications adhere to the maximum blob size. Stored as SQLite BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable length binary data. The optional max_size defines the maximum number of bytes in the blob. If not specified, the length is unbounded. The size is provided for informational purposes. When present, it is best practice for applications adhere to the maximum blob size. Stored as SQLite BLOB.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;geometry_type_name&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#_geometry_encoding">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the geometry types listed in <a href="#geometry_types">Geometry Types (Normative)</a> encoded per clause 2.1.3 or a user-defined geometry type encoded per clause 3.1.2 and <a href="#extension_geometry_encoding">User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#gpb_format">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the core geometry types listed in <a href="#geometry_types">Geometry Types (Normative)</a> encoded per clause 2.1.3 or a geometry type encoded per an extension such as <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISO-8601 date string in the form YYYY-MM-DD encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISO-8601 date string in the form YYYY-MM-DD encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATETIME</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISO-8601 date/time string in the form YYYY-MM-DDTHH:MM:SS.SSSZ with T separator character and Z suffix for coordinated universal time (UTC) encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISO-8601 date/time string in the form YYYY-MM-DDTHH:MM:SS.SSSZ with T separator character and Z suffix for coordinated universal time (UTC) encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1366,7 +1366,7 @@ Every such feature table or view in a GeoPackage SHALL have a column with column
 <div class="title">Requirement 31</div>
 <div class="content">
 <div class="paragraph">
-<p>The declared SQL type of the geometry column in a vector feature user data table SHALL be the uppercase geometry type name from Annex G specified by the geometry_type_name column for that column_name and table_name in the gpkg_geometry_columns table.</p>
+<p>The declared SQL type of the geometry column in a vector feature user data table SHALL be specified by the <code>geometry_type_name</code> column for that <code>column_name</code> and <code>table_name</code> in the <code>gpkg_geometry_columns</code> table.</p>
 </div>
 </div>
 </div>
@@ -3717,14 +3717,14 @@ The GeoPackage standard does not place any constraints on application, platform,
 <p>SELECT DISTINCT geometry_type_name from gpkg_geometry_columns</p>
 </li>
 <li>
-<p>Not testable  if returns an empty result set</p>
+<p>Not testable if returns an empty result set</p>
 </li>
 <li>
 <p>For each row from step 1</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex G</p>
+<p>Fail if a returned geometry_type_name value is not in Table 31 in Annex G</p>
 </li>
 </ol>
 </div>
@@ -4081,20 +4081,16 @@ FROM gpkg_geometry_columns WHERE table_name IN
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if selected geometry_type_name value is not a value from the NAME column in Annex G Table 42 or Table 43.</p>
+<p>PRAGMA table_info(<em>{selected table_name}</em>)</p>
 </li>
 <li>
-<p>SELECT sql FROM sqlite_master
-WHERE type = <em>table</em> AND name = <em>{selected table_ name}</em></p>
-</li>
-<li>
-<p>Pass if declared type of column_name selected in (1) is the geometry_type_name selected in (1)</p>
-</li>
-<li>
-<p>Fail otherwise</p>
+<p>Fail if declared type of column_name selected in (1) is not the geometry_type_name selected in (1)</p>
 </li>
 </ol>
 </div>
+</li>
+<li>
+<p>Pass if no fails</p>
 </li>
 </ol>
 </div></div></td>
@@ -8417,7 +8413,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 65</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY store feature table geometries with the extended non-linear geometry types (CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, Surface) in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r25">GPKG-25</a>) The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row MAY be one of the uppercase extended non-linear geometry type names specified in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
 </div>
 </div>
 </div>
@@ -8441,7 +8437,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 68</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a gpkg_geometry_columns table or updateable view with row records that specify extension geometry_type_name column values SHALL contain a gpkg_extensions table that contains row records with table_name and column_name values from the gpkg_geometry_columns row records that identify extension type uses, and extension_name column values for each of those geometry types constructed per the previous requirement <a href="#extension_geometry_types_extensions_name">[extension_geometry_types_extensions_name]</a>.</p>
+<p>A GeoPackage that contains a <code>gpkg_geometry_columns</code> table or updateable view with row records that specify extension <code>geometry_type_name</code> column values SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code> and <code>column_name</code> values from the <code>gpkg_geometry_columns</code> row records that identify extension type uses, and <code>extension_name</code> column values for each of those geometry types constructed per the previous requirement <a href="#extension_geometry_types_extensions_name">[extension_geometry_types_extensions_name]</a>.</p>
 </div>
 </div>
 </div>
@@ -8469,13 +8465,56 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/geometry_encoding/data/geopackage_extension_types/existing_sparse_data</code></p>
+<p><code>/extensions/geometry_types/data_values_geometry_type_name</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that existing extended non-linear geometry types are stored in valid StandardGeoPackageBinary format encodings.</p>
+<p>Verify that only allowed geometry types (including extended non-linear geometry types) are in use.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Run test /opt/features/geometry_columns/data/data_values_geometry_type_name, but the values in 3a may also include the values from Table 32 in Annex G.</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.1 Req 65:</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/geometry_types/all_types_test_data</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that geometries non-linear geometry types are stored in valid GeoPackageBinary format encodings.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8531,58 +8570,6 @@ viii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.1 Req 65:</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Capability</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/geometry_encoding/data/geopackage_extension_types/all_types_test_data</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that all extended non-linear geometry types and options are stored in valid GeoPackageBinary format encodings.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open GeoPackage that has feature geometry values of geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values, without and with z and / or m values, in both big and little endian encodings:</p>
-</li>
-<li>
-<p>/reg_ext/features/geometry_encoding/data/extension_types_existing_sparse_data</p>
-</li>
-<li>
-<p>Pass if log contains pass record for big and little endian GP headers containing big and little endian WKBs for 0-1 envelope contents indicator codes for every geometry type value from Annex G without and with z and/or m values.</p>
-</li>
-<li>
-<p>Fail otherwise</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Annex F.1 Req 66:</p>
 </div></div></td>
 </tr>
@@ -8605,7 +8592,7 @@ viii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/geometry_encoding/data/geopackage_extension_types/extension_name</code></p>
+<p><code>/extensions/geometry_types/extension_name</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -8701,7 +8688,7 @@ viii. Otherwise log pass</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/geometry_encoding/data/geopackage_extension_types/extension_row</code></p>
+<p><code>/extensions/geometry_types/extension_row</code></p>
 </div></div></td>
 </tr>
 <tr>
@@ -8712,8 +8699,38 @@ viii. Otherwise log pass</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>/reg_ext/features/geometry_encoding/data/extension_name</p>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT table_name, column_name, geometry_type_name FROM gpkg_geometry_columns</p>
+</li>
+<li>
+<p>Not testable if no results</p>
+</li>
+<li>
+<p>For each result</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>If geometry_type_name is an extended geometry type</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>SELECT extension_name FROM gpkg_extensions WHERE table_name = <em>{table_name}</em> AND column_name = '{column_name}"</p>
+</li>
+<li>
+<p>Fail if result set does not contain a row with an extension_name of gpkg_geom_{geometry_type_name}</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
 </div></div></td>
 </tr>
 <tr>
@@ -14700,7 +14717,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-17 16:29:14 UTC
+Last updated 2017-04-17 16:30:14 UTC
 </div>
 </div>
 </body>
