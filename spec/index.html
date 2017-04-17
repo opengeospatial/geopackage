@@ -13547,7 +13547,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <p>This capability was designed to be relatively easy to implement and to be suitable for a wide variety of computing environments including the mobile/handheld computing environment<span class="footnote">[<a id="_footnoteref_40" class="footnote" href="#_footnote_40" title="View footnote.">40</a>]</span>.</p>
 </div>
 <div class="paragraph">
-<p>This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG (16-bit) and TIFF (32-bit) files as the container for the elevation values themselves. It is the data producer&#8217;s responsibility to ensure that the intended recipient is able to read GeoPackages with the elevation encoding (PNG or TIFF) being used. By default, the elevation values are assumed to be pixel-is-area. Communities of interest may agree to use an alternative pixel encoding (such as pixel-is-point) but specifying the pixel encoding is outside of the scope of this document.</p>
+<p>This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles using PNG (16-bit) and TIFF (32-bit) files as the container for the elevation values themselves. It is the data producer&#8217;s responsibility to ensure that the intended recipient is able to read GeoPackages with the elevation encoding (PNG or TIFF) being used. By default, the elevation values are assumed to be average elevation for pixel-is-area. Communities of interest may agree to use an alternative pixel encoding (such as pixel-is-point) but specifying the pixel encoding is outside of the scope of this document.</p>
 </div>
 <h4 id="_extension_author_9" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -14030,6 +14030,38 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 <h5 id="_tiff_encoding" class="float">TIFF Encoding</h5>
+<div class="paragraph">
+<p>Because of the wide range of possible TIFF encodings, the TIFF encoding for an elevation tile has been constrained for the sake of interoperability and best practice. Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of TIFF<a href="#35">[35]</a>. The only allowed encoding extensions are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>IEEE floating point (see <a href="#r136">Requirement 136</a>)</p>
+</li>
+<li>
+<p>LZW compression (see <a href="#r137">Requirement 137</a>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Tiles are encoded as a single-band image using one 32-bit floating point component per pixel. This implies a number of constraints which are listed below:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component  (see <a href="#r135">Requirement 135</a>).</p>
+</li>
+<li>
+<p>All pixels in the tile SHALL be set with a valid component value (see <a href="#r143">[r143]</a>).</p>
+</li>
+<li>
+<p>Other TIFF tags are derived from the other constraints in this extension.</p>
+</li>
+<li>
+<p>No multi-image/tiling extensions defined in TIFF<a href="#35">[35]</a> shall be used (see <a href="#r138">Requirement 138</a>, <a href="#r139">Requirement 143</a>).</p>
+</li>
+</ul>
+</div>
 <div id="r134" class="exampleblock">
 <div class="title">Requirement 134</div>
 <div class="content">
@@ -14046,13 +14078,19 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>By setting TAG 277 (SamplesPerPixel) to be 1, the producer indicates that there is a single sample per pixel.</p>
+</div>
 <div id="r136" class="exampleblock">
 <div class="title">Requirement 136</div>
 <div class="content">
 <div class="paragraph">
-<p>(constrains TIFF<a href="#35">[35]</a> Section 2) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.</p>
+<p>(constrains TIFF<a href="#35">[35]</a> Section 19) A TIFF file storing tiled gridded elevation data SHALL have the 32-bit floating (FLOAT – 11) data type.</p>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF<a href="#35">[35]</a>. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.</p>
 </div>
 <div id="r137" class="exampleblock">
 <div class="title">Requirement 137</div>
@@ -14078,6 +14116,14 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="content">
 <div class="paragraph">
 <p>(constrains TIFF<a href="#35">[35]</a> Section 15) A TIFF file storing tiled gridded elevation data SHALL NOT contain internal tiles as per TIFF Section 15.</p>
+</div>
+</div>
+</div>
+<div id="r139" class="exampleblock">
+<div class="title">Requirement 143</div>
+<div class="content">
+<div class="paragraph">
+<p>All pixels in an elevation tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.</p>
 </div>
 </div>
 </div>
@@ -14382,7 +14428,7 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="15"></a>[15] MIL_STD_2401 DoD World Geodetic System 84 (WGS84), 11 January 1994</p>
 </li>
 <li>
-<p><a id="16"></a>[16] OGC 07-057r7 OpenGIS® Web Map Tile Service Implementation Standard ersion 1.0.0 2010-04-06 (WMTS) <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">http://portal.opengeospatial.org/files/?artifact_id=35326</a></p>
+<p><a id="16"></a>[16] OGC 07-057r7 OpenGIS® Web Map Tile Service Implementation Standard Version 1.0.0 2010-04-06 (WMTS) <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">http://portal.opengeospatial.org/files/?artifact_id=35326</a></p>
 </li>
 <li>
 <p><a id="17"></a>[17] ITU-T Recommendation T.81 (09/92) with Corrigendum (JPEG)</p>
@@ -14439,7 +14485,7 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="34"></a>[34] OGC® 12-063r5 Geographic information - Well-known text representation of coordinate reference systems <a href="http://docs.opengeospatial.org/is/12-063r5/12-063r5.html">http://docs.opengeospatial.org/is/12-063r5/12-063r5.html</a></p>
 </li>
 <li>
-<p><a id="35"></a>[35] <a href="http://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf">http://partners.adobe.com/public/developer/en/tiff/TIFF6.pdf</a></p>
+<p><a id="35"></a>[35] TIFF &#8482;  Revision 6.0 Final — June 3, 1992 <a href="ftp://download.osgeo.org/libtiff/doc/TIFF6.pdf">ftp://download.osgeo.org/libtiff/doc/TIFF6.pdf</a>, ©1986-1988, 1992 by Adobe® Systems Incorporated</p>
 </li>
 </ul>
 </div>
@@ -14524,6 +14570,9 @@ For undated references, the latest edition of the normative document referred to
 </li>
 <li>
 <p><a id="B25"></a>[B25] <a href="http://sqlite.org/src4/doc/trunk/www/design.wiki">http://sqlite.org/src4/doc/trunk/www/design.wiki</a></p>
+</li>
+<li>
+<p><a id="B26"></a>[B26] OGC® 16-094r3 GeoPackage Elevation Extension Interoperability Experiment Engineering Report, Draft Revision 3, 21 June 2016</p>
 </li>
 </ul>
 </div>
@@ -14678,7 +14727,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-17 16:31:58 UTC
+Last updated 2017-04-17 18:44:03 UTC
 </div>
 </div>
 </body>
