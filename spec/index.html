@@ -393,7 +393,20 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 </div>
 </div>
 <div class="paragraph">
-<p>The <strong>GeoPackage</strong> designation is designed to provide maximum interoperability between applications. In an <strong>Extended GeoPackage</strong>, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. However, some extensions may have an adverse affect on applications that are not expecting them. Developers are encouraged to consider the possibility of extensions when designing their applications.</p>
+<p>The <strong>GeoPackage</strong> designation is designed to provide maximum interoperability between applications. In an <strong>Extended GeoPackage</strong>, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. Developers are encouraged to consider the implications of extensions when designing their applications. Best practices include the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Designing in a way that anticipates the presence of unexpected extensions, e.g., gracefully handling unexpected columns, values, or encodings.</p>
+</li>
+<li>
+<p>Using the <a href="#extension_rtree">RTree Spatial Indexes</a> extension for GeoPackages containing a non-trivial amount of vector data.</p>
+</li>
+<li>
+<p>Using the <a href="#crs_wkt">[crs_wkt]</a> extension, which is strongly recommended due to inherent weaknesses in the original standard for encoding coordinate reference systems.</p>
+</li>
+</ul>
 </div>
 <div id="r5" class="exampleblock">
 <div class="title">Requirement 5</div>
@@ -2042,13 +2055,19 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div class="sect3">
 <h4 id="_introduction_2">2.3.1. Introduction</h4>
 <div class="paragraph">
-<p>A GeoPackage extension is a set of one or more requirements clauses that either profiles / extends existing requirements clauses in the GeoPackage standard or adds new requirements clauses. Existing requirement clause extension examples include additional geometry types, additional SQL geometry functions, and additional tile image formats. New requirement clause extension examples include spatial indexes, triggers, additional tables, other BLOB column encodings, and other SQL functions. Files that use one or more extensions are by definition Extended GeoPackages.</p>
+<p>A GeoPackage extension is a set of one or more requirements clauses that either profiles / extends existing requirements clauses in the GeoPackage standard or adds new requirements clauses. Existing requirement clause extension examples include additional geometry types, additional SQL geometry functions, and additional tile image formats. New requirement clause extension examples include spatial indexes, triggers, additional tables, other BLOB column encodings, and other SQL functions. Files that use one or more extensions are by definition Extended GeoPackages. Extensions that have been already approved by OGC are presented in <a href="#registered_extensions">Registered Extensions (Normative)</a>. However, additional extensions MAY be approved by OGC outside of the release cycle of this document.</p>
 </div>
 <div class="paragraph">
-<p>GeoPackage extensions are documented using the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a>. Extensions are identified by a name of the form &lt;author&gt;_&lt;extension name&gt; where &lt;author&gt; indicates the person or organization that developed and maintains the extension. The author value "gpkg" is reserved for extensions that are developed, maintained, and approved by OGC. Extensions that have been already approved by OGC are presented in <a href="#registered_extensions">Registered Extensions (Normative)</a>. However, additional extensions MAY be approved by OGC outside of the release cycle of this document.</p>
+<p>We acknowledge that there are use cases not covered by this standard. Implementers are welcome to use the extension mechanism defined here to develop their own extensions. The extension mechanism provides advantages including discoverability (the extensions in use can be discovered by scanning a single table) and uniformity (declaring that an extension is in use indicates that a defined set of requirements are being met). However, this is a decision that should be made carefully as custom extensions do introduce interoperability risks.</p>
 </div>
 <div class="paragraph">
-<p>Implementers are welcome to use the extension mechanism to develop their own extensions. Implementers must use their own author names to register other extensions used in Extended GeoPackages. <span class="underline">OGC is unable to endorse extensions developed externally. Therefore an Extended GeoPackage containing extensions not developed by OGC will fail <a href="#r4">Requirement 4</a>.</span> However, a community of interest MAY waive that requirement in its own GeoPackage profile, with the caveat that it must bear the responsibility of endorsing the new extension(s).</p>
+<p><span class="underline">OGC is unable to endorse extensions developed externally. Therefore an Extended GeoPackage containing extensions not developed by OGC will fail <a href="#r4">Requirement 4</a>.</span> However, a community of interest MAY waive that requirement in its own GeoPackage profile, with the caveat that it must bear the responsibility of endorsing the new extension(s).</p>
+</div>
+<div class="paragraph">
+<p>Implementers that are interested in developing their own extensions are encouraged to contact OGC to ensure that the extensions are developed in accordance with OGC policies and in a way that minimizes risks to interoperability. OGC will consider adopting externally developed extensions that address a clear use case, have a sound technical approach, and have a commitment to implementation by multiple implementers.</p>
+</div>
+<div class="paragraph">
+<p>GeoPackage extensions are documented using the GeoPackage Extension Template in <a href="#extension_template">GeoPackage Extension Template (Informative)</a>. Extensions are identified by a name of the form &lt;author&gt;_&lt;extension name&gt; where &lt;author&gt; indicates the person or organization that developed and maintains the extension. The author value "gpkg" is reserved for extensions that are developed, maintained, and approved by OGC. Implementers must use their own author names to register other extensions used in Extended GeoPackages.</p>
 </div>
 </div>
 <div class="sect3">
@@ -14727,7 +14746,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-17 18:44:03 UTC
+Last updated 2017-04-17 19:47:51 UTC
 </div>
 </div>
 </body>
