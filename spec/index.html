@@ -249,6 +249,10 @@ Document language: 	English<br></p>
 <li><a href="#extension_tiled_gridded_elevation_data">F.11. Tiled Gridded Elevation Data</a></li>
 </ul>
 </li>
+<li><a href="#geometry_types"> Annex G: Geometry Types (Normative)</a></li>
+<li><a href="#tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</a></li>
+<li><a href="#_normative_references_normative"> Annex I: Normative References (Normative)</a></li>
+<li><a href="#_bibliography_informative"> Annex J: Bibliography (Informative)</a></li>
 </ul>
 </li>
 </ul>
@@ -463,7 +467,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;geometry_type_name&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#gpb_format">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the core geometry types listed in <a href="#geometry_types">[geometry_types]</a> encoded per clause 2.1.3 or a geometry type encoded per an extension such as <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#gpb_format">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the core geometry types listed in <a href="#geometry_types">Geometry Types (Normative)</a> encoded per clause 2.1.3 or a geometry type encoded per an extension such as <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
@@ -1176,7 +1180,7 @@ GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000
 <div class="title">Requirement 20</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeomCollection) in <a href="#geometry_types">[geometry_types]</a> <a href="#geometry_types_core">Geometry Type Codes (Core)</a> in the GeoPackageBinary geometry encoding format.</p>
+<p>A GeoPackage SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeomCollection) in <a href="#geometry_types">Geometry Types (Normative)</a> <a href="#geometry_types_core">Geometry Type Codes (Core)</a> in the GeoPackageBinary geometry encoding format.</p>
 </div>
 </div>
 </div>
@@ -1237,7 +1241,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>geometry_type_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name from <a href="#geometry_types_core">Geometry Type Codes (Core)</a> or <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a> in <a href="#geometry_types">[geometry_types]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name from <a href="#geometry_types_core">Geometry Type Codes (Core)</a> or <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a> in <a href="#geometry_types">Geometry Types (Normative)</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -1305,7 +1309,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <div class="title">Requirement 25</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be one of the uppercase geometry type names specified in <a href="#geometry_types">[geometry_types]</a>.</p>
+<p>The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be one of the uppercase geometry type names specified in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
 </div>
 </div>
 </div>
@@ -1461,7 +1465,7 @@ Every such feature table or view in a GeoPackage SHALL have a column with column
 <p>A feature geometry is stored in a geometry column specified by the <code>geometry_column</code> value for the feature table in the <code>gpkg_geometry_columns</code> table defined in clause <a href="#_geometry_columns">Geometry Columns</a> above.</p>
 </div>
 <div class="paragraph">
-<p>The geometry type of a feature geometry column specified in the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column is a name from <a href="#geometry_types">[geometry_types]</a>.</p>
+<p>The geometry type of a feature geometry column specified in the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column is a name from <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
 </div>
 <div id="r32" class="exampleblock">
 <div class="title">Requirement 32</div>
@@ -1472,7 +1476,7 @@ Every such feature table or view in a GeoPackage SHALL have a column with column
 </div>
 </div>
 <div class="paragraph">
-<p>Geometry subtypes are assignable as defined in <a href="#geometry_types">[geometry_types]</a> and shown in part in <a href="#core_geometry_model_figure">Core Geometry Model</a>.
+<p>Geometry subtypes are assignable as defined in <a href="#geometry_types">Geometry Types (Normative)</a> and shown in part in <a href="#core_geometry_model_figure">Core Geometry Model</a>.
 For example, if the <code>geometry_type_name</code> value in the <code>gpkg_geometry_columns</code> table is for a geometry type like POINT that has no subtypes, then the feature table geometry column MAY only contain geometries of that type.
 If the geometry <code>type_name</code> value in the <code>gpkg_geometry_columns</code> table is for a geometry type like GEOMCOLLECTION that has subtypes, then the feature table geometry column MAY only contain geometries of that type or any of its direct or indirect subtypes.
 If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry type hierarchy) then the feature table geometry column MAY contain geometries of any geometry type.</p>
@@ -1533,7 +1537,7 @@ If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry typ
 Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
 Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
-In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">[tiles_factor2_example_appendix]</a>.
+In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.
 Other "zoom other intervals" conventions use different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
 See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional examples of both conventions.</p>
 </div>
@@ -8419,7 +8423,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 65</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="http://www.geopackage.org/spec/#r25">GPKG-25</a>) The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row MAY be one of the uppercase extended non-linear geometry type names specified in <a href="#geometry_types">[geometry_types]</a>.</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r25">GPKG-25</a>) The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row MAY be one of the uppercase extended non-linear geometry type names specified in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
 </div>
 </div>
 </div>
@@ -8427,7 +8431,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 66</div>
 <div class="content">
 <div class="paragraph">
-<p>The GeoPackageBinary geometry encoding format specified in clause <a href="#gpb_format">Geometry Encoding</a> SHALL be used to encode non-linear geometry types using the type codes in <a href="#geometry_types">[geometry_types]</a> table <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a>.</p>
+<p>The GeoPackageBinary geometry encoding format specified in clause <a href="#gpb_format">Geometry Encoding</a> SHALL be used to encode non-linear geometry types using the type codes in <a href="#geometry_types">Geometry Types (Normative)</a> table <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a>.</p>
 </div>
 </div>
 </div>
@@ -8435,7 +8439,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 67</div>
 <div class="content">
 <div id="extension_geometry_types_extensions_name" class="paragraph">
-<p>An extension name to specify a feature geometry extension type SHALL be defined for the "gpkg" author name using the "gpkg_geom_&lt;gname&gt;" template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">[geometry_types]</a> used in a GeoPackage.</p>
+<p>An extension name to specify a feature geometry extension type SHALL be defined for the "gpkg" author name using the "gpkg_geom_&lt;gname&gt;" template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage.</p>
 </div>
 </div>
 </div>
@@ -9360,7 +9364,7 @@ ON ge.table_name = ggc.table_name WHERE extension_name = <em>gpkg_rtree_index</e
 Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
 Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
 Pixel sizes MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
-In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">[tiles_factor2_example_appendix]</a>.</p>
+In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.</p>
 </div>
 <div class="paragraph">
 <p>This extension enables use of "zoom other intervals" conventions with different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
@@ -14125,6 +14129,14 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
+<div id="r139" class="exampleblock">
+<div class="title">Requirement 143</div>
+<div class="content">
+<div class="paragraph">
+<p>All pixels in an elevation tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.</p>
+</div>
+</div>
+</div>
 <h4 id="_abstract_test_suite_9" class="float">Abstract Test Suite</h4>
 <h5 id="_table_definitions_4" class="float">Table Definitions</h5>
 <h6 id="_coverage_ancillary" class="float">Coverage Ancillary</h6>
@@ -14833,7 +14845,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.11 Req 132, 133, 134-139</p>
+<p>Annex F.11 Req 132, 133, 134-139, 143</p>
 </div></div></td>
 </tr>
 <tr>
@@ -14845,19 +14857,12 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-<div class="exampleblock">
-<div class="content">
-<div id="r139" class="exampleblock">
-<div class="title">Requirement 143</div>
-<div class="content">
-<div class="paragraph">
-<p>All pixels in an elevation tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.</p>
 </div>
 </div>
 </div>
-<div id="geometry_types" class="paragraph">
-<p>== Geometry Types (Normative)</p>
-</div>
+<div class="sect1">
+<h2 id="geometry_types"> Annex G: Geometry Types (Normative)</h2>
+<div class="sectionbody">
 <table id="geometry_types_core" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 31. Geometry Type Codes (Core)</caption>
 <colgroup>
@@ -14971,9 +14976,11 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="paragraph">
 <p>MULTISURFACE subtype is MULTIPOLYGON.</p>
 </div>
-<div id="tiles_factor2_example_appendix" class="paragraph">
-<p>== Tiles Zoom Times Two Example (Informative)</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 33. Zoom Times Two Example</caption>
 <colgroup>
@@ -15092,9 +15099,11 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
-<div class="paragraph">
-<p>== Normative References (Normative)</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_normative_references_normative"> Annex I: Normative References (Normative)</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The following normative documents contain provisions which, through reference in this text, constitute provisions of OGC 12-128.
 For dated references, subsequent amendments to, or revisions of, any of these publications do not apply.
@@ -15210,9 +15219,11 @@ For undated references, the latest edition of the normative document referred to
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>== Bibliography (Informative)</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_bibliography_informative"> Annex J: Bibliography (Informative)</h2>
+<div class="sectionbody">
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
@@ -15294,9 +15305,6 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="B26"></a>[B26] OGC® 16-094r3 GeoPackage Elevation Extension Interoperability Experiment Engineering Report, Draft Revision 3, 21 June 2016</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -15449,7 +15457,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-19 03:09:01 UTC
+Last updated 2017-04-19 03:37:45 UTC
 </div>
 </div>
 </body>
