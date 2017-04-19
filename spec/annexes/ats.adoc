@@ -55,16 +55,12 @@
 |*Test Case ID* |+/base/core/container/data/file_contents+
 |*Test Purpose* |Verify that the GeoPackage only contains specified contents
 |*Test Method* 
-| . For each gpkg_* table_name
+| . SELECT COUNT(*) from gpkg_extensions;
+. Not testable if table exists and count > 0
+. For each gpkg_* table_name
 .. PRAGMA table_info(table_name)
 .. Continue if returns an empty result set
 .. Fail if column definitions returned by "PRAGMA table_info" do not match column definitions for the table in Annex C.
-. Do test /opt/features/vector_features/data/feature_table_integer_primary_key
-. Do test /opt/features/vector/features/data/feature_table_one_geometry_column
-. Do test /opt/tiles/contents/data/tiles_row
-. SELECT extension_name FROM gpkg_contents
-. For each row from #4
-.. Fail if the substring before the first "_" is not "gpkg"
 . Pass if no fails
 |*Reference* |Clause 1.1.1.1.3 Req 4:
 |*Test Type* |Basic
@@ -379,9 +375,9 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 |*Test Purpose* |Verify that the `geometry_type_name` column values in the `gpkg_geometry_columns` table are valid.
 |*Test Method* |
 . SELECT DISTINCT geometry_type_name from gpkg_geometry_columns 
-. Not testable  if returns an empty result set
+. Not testable if returns an empty result set
 . For each row from step 1
-.. Fail if a returned geometry_type_name value is not in Table 42 or Table 43 in Annex G
+.. Fail if a returned geometry_type_name value is not in Table 31 in Annex G
 . Pass if no fails.
 |*Reference* |Clause 2.1.5.1.2 Req 25:
 |*Test Type* |Capability
@@ -475,11 +471,9 @@ column for that `column_name` and `table_name` in the `gpkg_geometry_columns` ta
 FROM gpkg_geometry_columns WHERE table_name IN 
 (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
 . For each row selected in (1):
-.. Fail if selected geometry_type_name value is not a value from the NAME column in Annex G Table 42 or Table 43.
-.. SELECT sql FROM sqlite_master 
-WHERE type = 'table' AND name = '{selected table_ name}'
-.. Pass if declared type of column_name selected in (1) is the geometry_type_name selected in (1)
-..	Fail otherwise
+.. PRAGMA table_info('{selected table_name}')
+.. Fail if declared type of column_name selected in (1) is not the geometry_type_name selected in (1)
+.	Pass if no fails
 |*Reference* |Clause 2.1.6.1.1 Req 31:
 |*Test Type* |Capability
 |========================================
@@ -935,7 +929,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/table_def+
+|*Test Case ID* |+/opt/extension_mechanism/data/table_def+
 |*Test Purpose* |Verify that a `gpkg_extensions` table exists and has the correct definition.
 |*Test Method* |
 . SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'gpkg_extensions'
@@ -950,7 +944,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_for_extensions+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_for_extensions+
 |*Test Purpose* |Verify that every extension of a GeoPackage is registered in a row in the `gpkg_extensions` table
 |*Test Method* |
 . Manual inspection
@@ -960,7 +954,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_table_name+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_table_name+
 |*Test Purpose* |Verify that the `table_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name FROM gpkg_extensions;
@@ -976,7 +970,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_column_name+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_column_name+
 |*Test Purpose* |Verify that the `column_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT table_name, column_name FROM gpkg_extensions WHERE column_name IS NOT NULL
@@ -992,7 +986,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_extension_name+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_extension_name+
 |*Test Purpose* |Verify that the `extension_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
 . SELECT extension_name FROM gpkg_extensions
@@ -1011,7 +1005,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_definition+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_definition+
 |*Test Purpose* |Verify that the `definition` column value contains or references extension documentation
 |*Test Method* |
 . SELECT definition FROM gpkg_extensions
@@ -1026,7 +1020,7 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/extension_mechanism/extensions/data/data_values_scope+
+|*Test Case ID* |+/opt/extension_mechanism/data/data_values_scope+
 |*Test Purpose* |Verify that the `scope` column value is "read-write" or "write-only"
 |*Test Method* |
 . SELECT scope FROM gpkg_extensions
