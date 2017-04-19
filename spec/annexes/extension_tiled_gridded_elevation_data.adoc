@@ -357,6 +357,13 @@ Client applications that support the TIFF encoding are expected to support this 
 (constrains TIFF<<35>> Section 15) A TIFF file storing tiled gridded elevation data SHALL NOT contain internal tiles as per TIFF Section 15.
 ====
 
+[[r139]]
+[caption=""]
+.Requirement 143
+====
+All pixels in an elevation tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.
+====
+
 [float]
 ==== Abstract Test Suite
 
@@ -555,14 +562,6 @@ Client applications that support the TIFF encoding are expected to support this 
 ... If datatype is float, fail if tile_data is not a valid TIFF image as per requirements 134-139
 ... If datatype is integer, fail if tile_data is not a valid PNG image
 . Pass if no fails 
-|*Reference:* |Annex F.11 Req 132, 133, 134-139
+|*Reference:* |Annex F.11 Req 132, 133, 134-139, 143
 |*Test Type* |Capability
 |========================================
-
-=======
-[[r139]]
-[caption=""]
-.Requirement 143
-====
-All pixels in an elevation tile SHALL be set with a valid component value. The mechanisms defined in this extension SHALL be used to indicate a missing value for a pixel.
-====
