@@ -249,10 +249,6 @@ Document language: 	English<br></p>
 <li><a href="#extension_tiled_gridded_elevation_data">F.11. Tiled Gridded Elevation Data</a></li>
 </ul>
 </li>
-<li><a href="#geometry_types"> Annex G: Geometry Types (Normative)</a></li>
-<li><a href="#tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</a></li>
-<li><a href="#_normative_references_normative"> Annex I: Normative References (Normative)</a></li>
-<li><a href="#_bibliography_informative"> Annex J: Bibliography (Informative)</a></li>
 </ul>
 </li>
 </ul>
@@ -467,7 +463,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">&lt;geometry_type_name&gt;</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#gpb_format">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the core geometry types listed in <a href="#geometry_types">Geometry Types (Normative)</a> encoded per clause 2.1.3 or a geometry type encoded per an extension such as <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Geometry encoded as per clause <a href="#gpb_format">Geometry Encoding</a>. &lt;geometry type_name&gt; is one of the core geometry types listed in <a href="#geometry_types">[geometry_types]</a> encoded per clause 2.1.3 or a geometry type encoded per an extension such as <a href="#extension_geometry_types">GeoPackage Non-Linear Geometry Types</a>. Geometry Types XY, XYZ, XYM and XYZM geometries use the same data type. Stored as SQLite BLOB.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
@@ -1180,7 +1176,7 @@ GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000
 <div class="title">Requirement 20</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeomCollection) in <a href="#geometry_types">Geometry Types (Normative)</a> <a href="#geometry_types_core">Geometry Type Codes (Core)</a> in the GeoPackageBinary geometry encoding format.</p>
+<p>A GeoPackage SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeomCollection) in <a href="#geometry_types">[geometry_types]</a> <a href="#geometry_types_core">Geometry Type Codes (Core)</a> in the GeoPackageBinary geometry encoding format.</p>
 </div>
 </div>
 </div>
@@ -1241,7 +1237,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>geometry_type_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name from <a href="#geometry_types_core">Geometry Type Codes (Core)</a> or <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a> in <a href="#geometry_types">Geometry Types (Normative)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name from <a href="#geometry_types_core">Geometry Type Codes (Core)</a> or <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a> in <a href="#geometry_types">[geometry_types]</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -1309,7 +1305,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <div class="title">Requirement 25</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be one of the uppercase geometry type names specified in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
+<p>The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row SHALL be one of the uppercase geometry type names specified in <a href="#geometry_types">[geometry_types]</a>.</p>
 </div>
 </div>
 </div>
@@ -1465,7 +1461,7 @@ Every such feature table or view in a GeoPackage SHALL have a column with column
 <p>A feature geometry is stored in a geometry column specified by the <code>geometry_column</code> value for the feature table in the <code>gpkg_geometry_columns</code> table defined in clause <a href="#_geometry_columns">Geometry Columns</a> above.</p>
 </div>
 <div class="paragraph">
-<p>The geometry type of a feature geometry column specified in the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column is a name from <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
+<p>The geometry type of a feature geometry column specified in the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> column is a name from <a href="#geometry_types">[geometry_types]</a>.</p>
 </div>
 <div id="r32" class="exampleblock">
 <div class="title">Requirement 32</div>
@@ -1476,7 +1472,7 @@ Every such feature table or view in a GeoPackage SHALL have a column with column
 </div>
 </div>
 <div class="paragraph">
-<p>Geometry subtypes are assignable as defined in <a href="#geometry_types">Geometry Types (Normative)</a> and shown in part in <a href="#core_geometry_model_figure">Core Geometry Model</a>.
+<p>Geometry subtypes are assignable as defined in <a href="#geometry_types">[geometry_types]</a> and shown in part in <a href="#core_geometry_model_figure">Core Geometry Model</a>.
 For example, if the <code>geometry_type_name</code> value in the <code>gpkg_geometry_columns</code> table is for a geometry type like POINT that has no subtypes, then the feature table geometry column MAY only contain geometries of that type.
 If the geometry <code>type_name</code> value in the <code>gpkg_geometry_columns</code> table is for a geometry type like GEOMCOLLECTION that has subtypes, then the feature table geometry column MAY only contain geometries of that type or any of its direct or indirect subtypes.
 If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry type hierarchy) then the feature table geometry column MAY contain geometries of any geometry type.</p>
@@ -1537,7 +1533,7 @@ If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry typ
 Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
 Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
-In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.
+In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">[tiles_factor2_example_appendix]</a>.
 Other "zoom other intervals" conventions use different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
 See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional examples of both conventions.</p>
 </div>
@@ -8423,7 +8419,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 65</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="http://www.geopackage.org/spec/#r25">GPKG-25</a>) The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row MAY be one of the uppercase extended non-linear geometry type names specified in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r25">GPKG-25</a>) The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row MAY be one of the uppercase extended non-linear geometry type names specified in <a href="#geometry_types">[geometry_types]</a>.</p>
 </div>
 </div>
 </div>
@@ -8431,7 +8427,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 66</div>
 <div class="content">
 <div class="paragraph">
-<p>The GeoPackageBinary geometry encoding format specified in clause <a href="#gpb_format">Geometry Encoding</a> SHALL be used to encode non-linear geometry types using the type codes in <a href="#geometry_types">Geometry Types (Normative)</a> table <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a>.</p>
+<p>The GeoPackageBinary geometry encoding format specified in clause <a href="#gpb_format">Geometry Encoding</a> SHALL be used to encode non-linear geometry types using the type codes in <a href="#geometry_types">[geometry_types]</a> table <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a>.</p>
 </div>
 </div>
 </div>
@@ -8439,7 +8435,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 67</div>
 <div class="content">
 <div id="extension_geometry_types_extensions_name" class="paragraph">
-<p>An extension name to specify a feature geometry extension type SHALL be defined for the "gpkg" author name using the "gpkg_geom_&lt;gname&gt;" template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">Geometry Types (Normative)</a> used in a GeoPackage.</p>
+<p>An extension name to specify a feature geometry extension type SHALL be defined for the "gpkg" author name using the "gpkg_geom_&lt;gname&gt;" template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types">[geometry_types]</a> used in a GeoPackage.</p>
 </div>
 </div>
 </div>
@@ -9364,7 +9360,7 @@ ON ge.table_name = ggc.table_name WHERE extension_name = <em>gpkg_rtree_index</e
 Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
 Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
 Pixel sizes MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
-In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.</p>
+In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_factor2_example_appendix">[tiles_factor2_example_appendix]</a>.</p>
 </div>
 <div class="paragraph">
 <p>This extension enables use of "zoom other intervals" conventions with different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
@@ -13949,7 +13945,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 127</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.</p>
+<p>Values of the <code>gpkg_2d_gridded_coverage_ancillary</code> <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column.</p>
 </div>
 </div>
 </div>
@@ -13957,7 +13953,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 128</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>datatype</code> column MAY be <em>integer</em> or <em>float</em>. When the <code>datatype</code> is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.</p>
+<p>Values of the <code>gpkg_2d_gridded_coverage_ancillary</code> <code>datatype</code> column MAY be <em>integer</em> or <em>float</em>. When the <code>datatype</code> is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.</p>
 </div>
 </div>
 </div>
@@ -13977,7 +13973,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 130</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a> and rows in <code>gpkg_2d_gridded_coverage_ancillary</code>. When the <code>datatype</code> of the corresponding <code>gpkg_2d_gridded_coverage_ancillary</code> row is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.</p>
+<p>Values of the <code>gpkg_2d_gridded_tile_ancillary</code> <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data tables</a> and rows in <code>gpkg_2d_gridded_coverage_ancillary</code>. When the <code>datatype</code> of the corresponding <code>gpkg_2d_gridded_coverage_ancillary</code> row is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults.</p>
 </div>
 </div>
 </div>
@@ -13985,7 +13981,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 131</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.</p>
+<p>Values of the <code>gpkg_2d_gridded_tile_ancillary</code> <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>.</p>
 </div>
 </div>
 </div>
@@ -14002,7 +13998,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="title">Requirement 133</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="http://www.geopackage.org/spec/#r36">GPKG-36</a> and <a href="http://www.geopackage.org/spec/#r37">GPKG-37</a>) For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">[tiff_encoding]</a>).</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r36">GPKG-36</a> and <a href="http://www.geopackage.org/spec/#r37">GPKG-37</a>) For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid user data table</a> containing tiled, gridded elevation data SHALL be of <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="#tiff_encoding">TIFF Encoding</a>).</p>
 </div>
 </div>
 </div>
@@ -14039,7 +14035,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
   <span class="directive">UNIQUE</span> (tpudt_name, tpudt_id));</code></pre>
 </div>
 </div>
-<h5 id="_tiff_encoding" class="float">TIFF Encoding</h5>
+<h5 id="tiff_encoding" class="float">TIFF Encoding</h5>
 <div class="paragraph">
 <p>Because of the wide range of possible TIFF encodings, the TIFF encoding for an elevation tile has been constrained for the sake of interoperability and best practice. Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of TIFF<a href="#35">[35]</a>. The only allowed encoding extensions are:</p>
 </div>
@@ -14129,6 +14125,728 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
+<h4 id="_abstract_test_suite_9" class="float">Abstract Test Suite</h4>
+<h5 id="_table_definitions_4" class="float">Table Definitions</h5>
+<h6 id="_coverage_ancillary" class="float">Coverage Ancillary</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_def/gpkg_2d_gridded_coverage_ancillary</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the "gpkg_2d_gridded_coverage_ancillary" table has the proper definition.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>PRAGMA table_info(gpkg_2d_gridded_coverage_ancillary)</code></p>
+</li>
+<li>
+<p>Fail if table does not have all of the columns specified in Table 27</p>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 120</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Basic</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_tile_ancillary_2" class="float">Tile Ancillary</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_def/gpkg_2d_gridded_tile_ancillary</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the "gpkg_2d_gridded_tile_ancillary" table has the proper definition.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>PRAGMA table_info(gpkg_2d_gridded_tile_ancillary)</code></p>
+</li>
+<li>
+<p>Fail if table does not have all of the columns specified in Table 28</p>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 121</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Basic</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h5 id="_table_values_2" class="float">Table Values</h5>
+<h6 id="_spatial_reference" class="float">Spatial Reference</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_val/gpkg_spatial_ref_sys/rows</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the "gpkg_spatial_ref_sys" table has the required rows.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT COUNT(*) FROM gpkg_spatial_ref_sys WHERE organization_coordsys_id = 4979 AND (organization = <em>EPSG</em> OR organization = <em>epsg</em>)</code></p>
+</li>
+<li>
+<p>Fail if count is zero</p>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 122</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Basic</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_val/gpkg_spatial_ref_sys/refs</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that all elevation data uses an SRS that is defined in gpkg_spatial_ref_sys</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><code>SELECT COUNT(*) FROM gpkg_tile_matrix_set WHERE table_name = <em>{table_name}</em></code></p>
+</li>
+<li>
+<p>Fail if count is not 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 123</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_contents_9" class="float">Contents</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_val/gpkg_spatial_ref_sys</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that all elevation data uses an SRS that is defined in gpkg_spatial_ref_sys</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>Not testable if result set is empty</p>
+</li>
+<li>
+<p>Manually inspect that all elevation data is accounted for in the result set</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 124</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_extensions_3" class="float">Extensions</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_val/gpkg_extensions</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that all required rows are present in gpkg_extensions</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name, column_name, extension_name, definition, scope from gpkg_extensions";</code></p>
+</li>
+<li>
+<p>Verify that the required rows in Table 30 for table_name gpkg_2d_gridded_coverage_ancillary and gpkg_2d_gridded_tile_ancillary are present.</p>
+</li>
+<li>
+<p>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>SELECT column_name, definition, scope from gpkg_extensions WHERE extension_name = <em>gpkg_elevation_tiles</em> AND table_name = <em>{table_name}</em></p>
+</li>
+<li>
+<p>Fail if no rows found</p>
+</li>
+<li>
+<p>Fail if the results do not match the entry in Table 30 for a user defined table</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 125</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_coverage_ancillary_2" class="float">Coverage Ancillary</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_ref/gpkg_contents/gpkg_2d_gridded_coverage_ancillary</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that all required rows are present in gpkg_2d_gridded_coverage_ancillary</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>SELECT COUNT(*) FROM gpkg_2d_gridded_coverage_ancillary WHERE tile_matrix_set_name =  <em>{table_name}</em></p>
+</li>
+<li>
+<p>Fail if count is not 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 126</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_ref/gpkg_2d_gridded_coverage_ancillary/gpkg_tile_matrix_set</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that gpkg_2d_gridded_coverage_ancillary references gpkg_tile_matrix_set</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT tile_matrix_set_name FROM <em>gpkg_2d_gridded_coverage_ancillary</em>;</code></p>
+</li>
+<li>
+<p>For each tile_matrix_set_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>SELECT count(*) FROM gpkg_tile_matrix_set WHERE table_name = <em>{tile_matrix_set_name}</em></p>
+</li>
+<li>
+<p>Fail if count is not 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 127</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_val/gpkg_2d_gridded_coverage_ancillary</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that gpkg_2d_gridded_coverage_ancillary contains valid column values</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT datatype, scale, offset FROM <em>gpkg_2d_gridded_coverage_ancillary</em> WHERE tile_matrix_set_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>);</code></p>
+</li>
+<li>
+<p>For each result in 1</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Fail if datatype is not "integer" or "float"</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and scale is not 1.0</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and offset is not 0.0</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 128</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_tile_ancillary_3" class="float">Tile Ancillary</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_ref/tpudt/gpkg_2d_gridded_tile_ancillary</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that all required rows are present in gpkg_2d_gridded_tile_ancillary</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>SELECT {table_name}.id as tid, gpkg_2d_gridded_tile_ancillary.tpudt_id as taid from elev_png LEFT OUTER JOIN gpkg_2d_gridded_tile_ancillary ON {table_name}.id = gpkg_2d_gridded_tile_ancillary.tpudt_id AND gpkg_2d_gridded_tile_ancillary.tpudt_name = <em>{table_name}</em></p>
+</li>
+<li>
+<p>For each row</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>Fail if taid is null</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 129, 131</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_val/gpkg_2d_gridded_tile_ancillary</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that all required rows in gpkg_2d_gridded_tile_ancillary have valid values</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT tpudt_name, scale, offset FROM gpkg_2d_gridded_tile_ancillary;</code></p>
+</li>
+<li>
+<p>For each row</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>PRAGMA table_info({tpudt_name})</p>
+</li>
+<li>
+<p>Fail if tpudt_name is not a table or view</p>
+</li>
+<li>
+<p>SELECT datatype from gpkg_2d_gridded_coverage_ancillary WHERE tile_matrix_set_name = <em>{tpudt_name}</em></p>
+</li>
+<li>
+<p>Fail if no rows found</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and scale is not 1.0</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and offset is not 0.0</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 130</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<h6 id="_tile_pyramid_user_data_table" class="float">Tile Pyramid User Data Table</h6>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/elevation/table_val/tpudt</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that all rows in tile pyramid user data tables have valid values</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>SELECT t.datatype AS datatype, u.id AS id, u.tile_data AS tile_data FROM gpkg_2d_gridded_coverage_ancillary t, {table_name} u WHERE t.tile_matrix_set_name = <em>table_name</em>;</p>
+</li>
+<li>
+<p>For each row</p>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>If datatype is float, fail if tile_data is not a valid TIFF image as per requirements 134-139</p>
+</li>
+<li>
+<p>If datatype is integer, fail if tile_data is not a valid PNG image</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.11 Req 132, 133, 134-139</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
+<div class="exampleblock">
+<div class="content">
 <div id="r139" class="exampleblock">
 <div class="title">Requirement 143</div>
 <div class="content">
@@ -14137,12 +14855,9 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
+<div id="geometry_types" class="paragraph">
+<p>== Geometry Types (Normative)</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="geometry_types"> Annex G: Geometry Types (Normative)</h2>
-<div class="sectionbody">
 <table id="geometry_types_core" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 31. Geometry Type Codes (Core)</caption>
 <colgroup>
@@ -14256,11 +14971,9 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <div class="paragraph">
 <p>MULTISURFACE subtype is MULTIPOLYGON.</p>
 </div>
+<div id="tiles_factor2_example_appendix" class="paragraph">
+<p>== Tiles Zoom Times Two Example (Informative)</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</h2>
-<div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 33. Zoom Times Two Example</caption>
 <colgroup>
@@ -14379,11 +15092,9 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </tbody>
 </table>
 
+<div class="paragraph">
+<p>== Normative References (Normative)</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_normative_references_normative"> Annex I: Normative References (Normative)</h2>
-<div class="sectionbody">
 <div class="paragraph">
 <p>The following normative documents contain provisions which, through reference in this text, constitute provisions of OGC 12-128.
 For dated references, subsequent amendments to, or revisions of, any of these publications do not apply.
@@ -14499,11 +15210,9 @@ For undated references, the latest edition of the normative document referred to
 </li>
 </ul>
 </div>
+<div class="paragraph">
+<p>== Bibliography (Informative)</p>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_bibliography_informative"> Annex J: Bibliography (Informative)</h2>
-<div class="sectionbody">
 <div class="ulist bibliography">
 <ul class="bibliography">
 <li>
@@ -14585,6 +15294,9 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="B26"></a>[B26] OGC® 16-094r3 GeoPackage Elevation Extension Interoperability Experiment Engineering Report, Draft Revision 3, 21 June 2016</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -14737,7 +15449,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-04-17 20:39:32 UTC
+Last updated 2017-04-19 03:09:01 UTC
 </div>
 </div>
 </body>
