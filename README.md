@@ -8,6 +8,7 @@ compact format for transferring geospatial information. The GeoPackage standard
 describes a set of conventions for storing the following within an SQLite database:
    * [vector features](spec/2a_features.adoc)
    * [tile matrix sets of imagery and raster maps at various scales](spec/2b_tiles.adoc)
+   * [attributes (non-spatial data)](spec/2f_attributes.adoc)
    * [extensions](spec/annexes/extensions.adoc)
 
 These capabilities are built on a common [base](spec/1_base.adoc) and an 
