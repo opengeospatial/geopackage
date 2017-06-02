@@ -58,9 +58,11 @@ A GeoPackage that contains tile pyramid user data tables with `tile_data` column
 [caption=""]
 .Requirement 92
 ====
-(extends http://www.geopackage.org/spec/#r36[GPKG-36] and http://www.geopackage.org/spec/#r37[GPKG-37]) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in http://www.ietf.org/rfc/rfc2046.txt[MIME type] image/x-webp <<22>>.
-The http://www.ietf.org/rfc/rfc2046.txt[MIME type] of values of the `tile_data` column in tile pyramid user data tables SHALL be `image/x-webp`.
+(extends http://www.geopackage.org/spec/#r36[GPKG-36] and http://www.geopackage.org/spec/#r37[GPKG-37]) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<<22>>. Files complying with the WebP format SHALL have the http://www.ietf.org/rfc/rfc2046.txt[MIME type] `image/x-webp`.
 ====
+
+[NOTE]
+Requirements 36 and 37 allow a tile pyramid user data table to contain PNG or JPG tiles. This requirement allows for WebP tiles as well.
 
 [float]
 ===== GeoPackage SQLite Configuration

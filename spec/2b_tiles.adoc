@@ -55,6 +55,7 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 ====== MIME Type PNG
 
 :png_req_foot1: footnote:[See <<extension_tiles_webp>> regarding use of the WebP alternative tile MIME type as a registered extension.]
+
 [[r36]]
 [caption=""]
 .Requirement 36
@@ -75,6 +76,11 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 .Requirement 37
 ====
 In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not http://www.iana.org/assignments/media-types/index.html[MIME type] http://libpng.org/pub/png/[image/png] <<20>><<21>>, by default SHALL store that tile data in http://www.ietf.org/rfc/rfc2046.txt[MIME type] http://www.jpeg.org/public/jfif.pdf[image/jpeg] <<17>><<18>><<19>>. {jpg_req_foot1}
+====
+
+[NOTE]
+====
+Requirements 36 and 37 in combination allow a tile pyramid user data table to contain PNG or JPG tiles. They may be mixed and matched within the same table.
 ====
 
 ==== Tile Matrix Set
