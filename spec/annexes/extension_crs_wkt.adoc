@@ -34,9 +34,9 @@ Read-write
 [float]
 ==== Requirements
 [float]
-===== Table
+===== Table Definition
 [float]
-====== Table Definition
+====== gpkg_spatial_ref_sys
 [[r115]]
 [caption=""]
 .Requirement 115
@@ -59,7 +59,19 @@ For GeoPackages conforming to this extension, the `gpkg_spatial_ref_sys` table S
 |=======================================================================
 
 [float]
-====== Table Data Values
+===== Table Data Values
+
+[float]
+====== gpkg_extensions
+[[r145]]
+[caption=""]
+.Requirement 145
+====
+GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_crs_wkt" SHALL comply with this extension. The row SHALL have a `scope` of "read-write".
+====
+
+[float]
+====== gpkg_spatial_ref_sys
 [[r116]]
 [caption=""]
 .Requirement 116
