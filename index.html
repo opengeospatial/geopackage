@@ -501,6 +501,13 @@
 					</p>
 					<br>
 					<p class="lead">
+						<a class="btn btn-warning" role="button">Q</a> How do you define the extents for your tile pyramid?
+					</p>
+					<p>
+						<a class="btn btn-info" role="button">A</a> There are two places for the extents. The first, in gpkg_contents, is designed to declare the extents of the <i>content</i>. This one will often be used by applications to define the default view of the tiles. (That means that if a GeoPackage indicates global extents in gpkg_contents, an app is likely to open up the whole world even though it is probably not what the user wants.) The second is in gpkg_tile_matrix_set. It defines the extents of the tile pyramid and is used to calculate the boundaries of each tile in the tile matrix set.
+					</p>
+					<br>
+					<p class="lead">
 						<a class="btn btn-warning" role="button">Q</a> Can you mix JPG and PNG files within the same tile pyramid?
 					</p>
 					<p>
