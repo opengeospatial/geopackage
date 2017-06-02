@@ -262,7 +262,7 @@ The `last_change` SHOULD contain the timestamp of when the content in the refere
 Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. {req13_foot1}
 ====
 
-The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box (not necessarily minimum bounding box) of the content. The values are in the units specified by that CRS.
+The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box of the content. Applications may use this bounding box as the extents of a default view but there are no requirements that this bounding box be exact or represent the minimum bounding box of the content. The values are in the units specified by that CRS.
 
 [[r16]]
 [caption=""]

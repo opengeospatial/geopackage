@@ -84,6 +84,8 @@ In a GeoPackage that contains a tile pyramid user data table that contains tile 
 [[tile_matrix_set_data_table_definition]]
 ====== Table Definition
 
+The gpkg_tile_matrix_set table defines the spatial reference system (srs_id) and the maximum bounding box (min_x, min_y, max_x, max_y) for all possible tiles in a tile pyramid user data table.
+
 [[r38]]
 [caption=""]
 .Requirement 38
@@ -98,21 +100,27 @@ A GeoPackage that contains a tile pyramid user data table SHALL contain  `gpkg_t
 |Column Name |Column Type |Column Description |Null |Default |Key
 |`table_name` |TEXT |Tile Pyramid User Data Table Name |no | | PK, FK
 |`srs_id` |INTEGER | Spatial Reference System ID: gpkg_spatial_ref_sys.srs_id |no |  |FK
-|`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name |no | |
-|`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name |no | |
-|`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name |no | |
-|`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name |no | |
+|`min_x` |DOUBLE |Bounding box minimum easting or longitude for the tile matrix set |no | |
+|`min_y` |DOUBLE |Bounding box minimum northing or latitude for the tile matrix set |no | |
+|`max_x` |DOUBLE |Bounding box maximum easting or longitude for the tile matrix set |no | |
+|`max_y` |DOUBLE |Bounding box maximum northing or latitude for the tile matrix set |no | |
 |=======================================================================
-
-The gpkg_tile_matrix_set table defines the spatial reference system (srs_id) and the maximum bounding box (min_x, min_y, max_x, max_y) for all possible tiles in a tile pyramid user data table.
-All tiles present in the tile pyramid SHALL fall within this bounding box. However, the bounding box MAY be larger than the minimum bounding rectangle around the actual tiles in that pyramid.
 
 See <<gpkg_tile_matrix_set_sql>>.
 
 [[clause_tile_matrix_set_table_data_values]]
 ====== Table Data Values
 
-The minimum bounding box defined in the gpkg_tile_matrix_set table for a tile pyramid user data table SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated based on the column values for the user data table in the gpkg_tile_matrix table.  For example, because GeoPackages use the upper left tile origin convention defined in clause <<clause_tile_matrix_table_data_values>> below, the gpkg_tile_matrix_set (min_x, max_y) ordinate is the upper-left corner of tile (0,0) for all zoom levels in a table_name tile pyramid user data table.
+[[r142]]
+[caption=""]
+.Requirement 142
+====
+The bounding box defined by `min_x`, `max_x`, `min_y`, and `max_y` SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid MAY be calculated from those values. All tiles present in the tile pyramid SHALL fall within this bounding box.
+====
+
+Since GeoPackages use the upper left tile origin convention defined in clause <<clause_tile_matrix_table_data_values>> below, the gpkg_tile_matrix_set (`min_x`, `max_y`) ordinate is the upper-left corner of tile (0,0) for all zoom levels in a `table_name` tile pyramid user data table.
+
+A bounding box MAY be larger than the minimum bounding rectangle around the actual tiles in that pyramid. This allows tile matrix pyramids to be sparsely populated or even empty.
 
 :tileref_req_foot1: footnote:[The "tiles" stipulation was removed because it prevented the use of the tile matrix mechanism by extensions for other data types.]
 
