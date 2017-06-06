@@ -1590,6 +1590,20 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 </div>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Requirements 36 and 37 in combination allow a tile pyramid user data table to contain PNG or JPG tiles. They may be mixed and matched within the same table.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>
@@ -9852,10 +9866,21 @@ This extension allows the use of <code>image/x-webp</code> as an additional enco
 <div class="title">Requirement 92</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="http://www.geopackage.org/spec/#r36">GPKG-36</a> and <a href="http://www.geopackage.org/spec/#r37">GPKG-37</a>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> image/x-webp <a href="#22">[22]</a>.
-The <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> of values of the <code>tile_data</code> column in tile pyramid user data tables SHALL be <code>image/x-webp</code>.</p>
+<p>(extends <a href="http://www.geopackage.org/spec/#r36">GPKG-36</a> and <a href="http://www.geopackage.org/spec/#r37">GPKG-37</a>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<a href="#22">[22]</a>. Files complying with the WebP format SHALL have the <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/x-webp</code>.</p>
 </div>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+Requirements 36 and 37 allow a tile pyramid user data table to contain PNG or JPG tiles. This requirement allows for WebP tiles as well.
+</td>
+</tr>
+</table>
 </div>
 <h5 id="_geopackage_sqlite_configuration_5" class="float">GeoPackage SQLite Configuration</h5>
 <div class="paragraph">
@@ -15664,7 +15689,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-06 17:37:11 UTC
+Last updated 2017-06-06 17:37:38 UTC
 </div>
 </div>
 </body>
