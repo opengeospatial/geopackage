@@ -13357,8 +13357,8 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <p>Read-write</p>
 </div>
 <h4 id="_requirements_8" class="float">Requirements</h4>
-<h5 id="_table" class="float">Table</h5>
-<h6 id="_table_definition_6" class="float">Table Definition</h6>
+<h5 id="_table_definition_6" class="float">Table Definition</h5>
+<h6 id="_gpkg_spatial_ref_sys_2" class="float">gpkg_spatial_ref_sys</h6>
 <div id="r115" class="exampleblock">
 <div class="title">Requirement 115</div>
 <div class="content">
@@ -13447,7 +13447,17 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 </tbody>
 </table>
 
-<h6 id="_table_data_values_9" class="float">Table Data Values</h6>
+<h5 id="_table_data_values_9" class="float">Table Data Values</h5>
+<h6 id="_gpkg_extensions_6" class="float">gpkg_extensions</h6>
+<div id="r145" class="exampleblock">
+<div class="title">Requirement 145</div>
+<div class="content">
+<div class="paragraph">
+<p>GeoPackages with a row in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_crs_wkt" SHALL comply with this extension. The row SHALL have a <code>scope</code> of "read-write".</p>
+</div>
+</div>
+</div>
+<h6 id="_gpkg_spatial_ref_sys_3" class="float">gpkg_spatial_ref_sys</h6>
 <div id="r116" class="exampleblock">
 <div class="title">Requirement 116</div>
 <div class="content">
@@ -13668,7 +13678,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 </table>
 
 <h4 id="_table_definition_sql_3" class="float">Table Definition SQL</h4>
-<h5 id="_gpkg_spatial_ref_sys_2" class="float">gpkg_spatial_ref_sys</h5>
+<h5 id="_gpkg_spatial_ref_sys_4" class="float">gpkg_spatial_ref_sys</h5>
 <div id="gpkg_spatial_ref_sys_crs_wkt_sql" class="listingblock">
 <div class="title">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</div>
 <div class="content">
@@ -14017,7 +14027,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 <p>The <code>min</code>, <code>max</code>, and <code>mean</code> values are natural, i.e., not scaled or offset. Similarly, the <code>std_dev</code> is calculated based on the natural values. The <code>scale</code> and <code>offset</code> do not apply to tiles of datatype <em>float</em>.</p>
 </div>
 <h5 id="_table_values" class="float">Table Values</h5>
-<h6 id="_gpkg_spatial_ref_sys_3" class="float">gpkg_spatial_ref_sys</h6>
+<h6 id="_gpkg_spatial_ref_sys_5" class="float">gpkg_spatial_ref_sys</h6>
 <div id="r122" class="exampleblock">
 <div class="title">Requirement 122</div>
 <div class="content">
@@ -14078,7 +14088,7 @@ Clients SHALL ignore additional columns that are unrecognized.</p>
 </div>
 </div>
 </div>
-<h6 id="_gpkg_extensions_6" class="float">gpkg_extensions</h6>
+<h6 id="_gpkg_extensions_7" class="float">gpkg_extensions</h6>
 <div id="r125" class="exampleblock">
 <div class="title">Requirement 125</div>
 <div class="content">
@@ -15654,7 +15664,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-05-15 01:28:26 UTC
+Last updated 2017-06-06 17:37:11 UTC
 </div>
 </div>
 </body>
