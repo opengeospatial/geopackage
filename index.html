@@ -500,7 +500,7 @@
 					</p>
 					<br>
 					<p class="lead">
-						<a class="btn btn-warning" role="button">Q</a> How do you define the extents for your tile pyramid?
+						<a class="btn btn-warning" role="button">Q</a> How do you define the spatial extents for your tile pyramid?
 					</p>
 					<p>
 						<a class="btn btn-info" role="button">A</a> There are two places for the extents. The first, in gpkg_contents, is designed to declare the extents of the <i>content</i>. This one will often be used by applications to define the default view of the tiles. (That means that if a GeoPackage indicates global extents in gpkg_contents, an app is likely to open up the whole world even though it is probably not what the user wants.) The second is in gpkg_tile_matrix_set. It defines the extents of the tile pyramid and is used to calculate the boundaries of each tile in the tile matrix set.
@@ -511,6 +511,13 @@
 					</p>
 					<p>
 						<a class="btn btn-info" role="button">A</a> Yes. This technique is particularly useful at edges or holes of your tile pyramid. While JPG tiles are preferred for imagery due to their increased compression, they do not support transparency. It is common to use PNG tiles in the relatively small number of tiles that do not have complete coverage so that you can use its transparency capability.
+					</p>
+					<br>
+					<p class="lead">
+						<a class="btn btn-warning" role="button">Q</a> What security capabilities does GeoPackage support?
+					</p>
+					<p>
+						<a class="btn btn-info" role="button">A</a> As a file encoding, GeoPackage has no explicit security capabilities. However, some organizations have had success with the <a href="https://www.sqlite.org/see/doc/trunk/www/readme.wiki">SQLite Security Extension (SEE)</a>.
 					</p>
 					<br>
 					<p class="lead">
