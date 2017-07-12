@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+    <title>Sticky Footer Navbar Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="sticky-footer-navbar.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>    <![endif]-->
+  </head>
+  <body>
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>GeoPackage Extensions</h1>
+      </div>
+      <p class="lead"><a href="http://ngageoint.github.io/GeoPackage/docs/extensions/feature-tile-link.html">Feature Tile Link</a> - This extension creates a link between a feature and tile table. A tile table containing tiles that represent or were generated from features can be linked to the feature table. The link enables feature queries when dealing with tiles representing features.
+	</p>
+  <p class="lead"><a href="http://ngageoint.github.io/GeoPackage/docs/extensions/geometry-index.html">Geometry Index</a> - This extension defines a SQLite version agnostic way to index user feature table geometries by their bounding envelopes for fast ranged searches. Mobile implementations, including Android and iOS, use earlier versions of SQLite and can not rely on the R*Tree Module implementation. Each geometry in a feature table is indexed by it's geometry id and x, y, z, and m value ranges. The geometry index can be queried for fast retrieval of only geometries overlapping a desired envelope bounds.
+</p>
+<p class="lead"><a href="http://www.gdal.org/geopackage_aspatial.html">Aspatial Support (Legacy)</a> - Support for aspatial data (ie. SQLite tables/views without a geometry column), potentially with associated metadata. This was used in GDAL 2.0 and GDAL 2.1, before the introduction of the 'attributes' data_type of GeoPackage v1.2. Starting with GDAL 2.2, 'attributes' will be used by default instead.
+</p>
+<p class="lead"><a href="https://github.com/opengeospatial/geopackage-elevation/blob/master/spec/index.adoc">Tiled Gridded Elevation Data Extension (Draft)</a> - Defines the rules for encoding and storing 16-bit and 32-bit tiled regular grid coverages composed of regular gridded data, such as elevation. This extension is currently under revision and this document is scheduled to be updated in August 2017.
+</p>
+<p class="lead"><a href="http://www.geopackage.org/spec110/#extension_geometry_encoding">User Defined Geometry Types (Deprecated)</a> - Enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage. Removed from GeoPackage 1.2 due to interoperability reasons.
+</p>
+<p class="lead"><a href="http://www.geopackage.org/spec110/#extension_geometry_type_triggers">Geometry Type Triggers (Deprecated)</a> - Geometry type triggers prevent the storage of geometries of types that are not assignable from the geometry types specified in the gpkg_geometry_columns table in the geometry columns of the specified tables. Removed from GeoPackage 1.2 due to interoperability reasons.
+</p>
+<p class="lead"><a href="http://www.geopackage.org/spec110/#extension_geometry_srsid_triggers">Geometry SRS ID Triggers (Deprecated)</a> - Geometry SRS_ID triggers prevent the storage of geometries with spatial reference system identifiers that are not specified in the gpkg_geometry_columns table in the geometry columns of the specified tables. Removed from GeoPackage 1.2 due to interoperability reasons.
+</p>
+		<div class="footer">
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-12 column text-center">
+						<p>
+							<small>Copyright 2017 Open Geospatial Consortium. Some rights reserved.</small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="../../dist/js/bootstrap.min.js"></script>
+    
+  </body>
+</html>
