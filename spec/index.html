@@ -2379,6 +2379,9 @@ This is indicated by a gpkg_extensions.scope column value of "write_only".</p>
 <p>Security considerations for implementations utilizing GeoPackages are in the domain of the implementing application, deployment platform, operating system and networking environment.
 The GeoPackage standard does not place any constraints on application, platform, operating system level or network security.</p>
 </div>
+<div class="paragraph">
+<p>Since GeoPackage is dependent on SQLite, implementors should monitor for security alerts related to SQLite.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -7868,6 +7871,15 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.2.8.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>removing improper defaults <a href="https://github.com/opengeospatial/geopackage/issues/358">https://github.com/opengeospatial/geopackage/issues/358</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-07-18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R14</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>adding new security consideration related to SQLite</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -14341,7 +14353,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-08 19:04:44 UTC
+Last updated 2017-07-18 17:50:51 UTC
 </div>
 </div>
 </body>
