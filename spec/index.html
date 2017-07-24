@@ -9064,7 +9064,7 @@ viii. Otherwise log pass</p>
 <div class="title">Requirement 76</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that implements spatial indexes SHALL have a <code>gpkg_extensions</code> table that contains a row for each spatially indexed column with <code>extension_name</code> "gpkg_rtree_index", the <code>table_name</code> of the table with a spatially indexed column,  the <code>column_name</code> of the spatially indexed column, and a <code>scope</code> of "read-only".</p>
+<p>A GeoPackage that implements spatial indexes SHALL have a <code>gpkg_extensions</code> table that contains a row for each spatially indexed column with <code>extension_name</code> "gpkg_rtree_index", the <code>table_name</code> of the table with a spatially indexed column, the <code>column_name</code> of the spatially indexed column, and a <code>scope</code> of "write-only".</p>
 </div>
 </div>
 </div>
@@ -9354,19 +9354,20 @@ These spatial index triggers SHALL be defined as follows:</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT ge.table_name AS getn, ge.column_name AS gecn, ge.scope AS ges, ggc.column_name AS ggccn
-FROM gpkg_extensions ge LEFT OUTER JOIN gpkg_geometry_columns ggc
-ON ge.table_name = ggc.table_name WHERE extension_name = <em>gpkg_rtree_index</em></p>
+<p>SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_rtree_index</em></p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
 <p>Not testable if result set is empty</p>
 </li>
 <li>
-<p>Fail if any ggccn is NULL</p>
+<p>Fail if any column_name is NULL</p>
 </li>
 <li>
-<p>Fail if any ges is not <em>write-only</em></p>
+<p>Fail if any scope is not <em>write-only</em></p>
+</li>
+<li>
+<p>Fail if any column_name is not a column in table_name</p>
 </li>
 </ol>
 </div>
@@ -14353,7 +14354,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-18 17:50:51 UTC
+Last updated 2017-07-24 18:24:22 UTC
 </div>
 </div>
 </body>
