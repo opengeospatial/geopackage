@@ -55,7 +55,7 @@ The "gpkg_rtree_index" extension name SHALL be used as a `gpkg_extensions` table
 [caption=""]
 .Requirement 76
 ====
-A GeoPackage that implements spatial indexes SHALL have a `gpkg_extensions` table that contains a row for each spatially indexed column with `extension_name` "gpkg_rtree_index", the `table_name` of the table with a spatially indexed column,  the `column_name` of the spatially indexed column, and a `scope` of "read-only".
+A GeoPackage that implements spatial indexes SHALL have a `gpkg_extensions` table that contains a row for each spatially indexed column with `extension_name` "gpkg_rtree_index", the `table_name` of the table with a spatially indexed column, the `column_name` of the spatially indexed column, and a `scope` of "write-only".
 ====
 
 [[r77]]
@@ -240,13 +240,12 @@ Definition of SQL functions
 |*Test Case ID* |+/extensions/rtree/extension_row+
 |*Test Purpose* |Verify that the "gpkg_rtree_index" extension name is used to register spatial index extensions.
 |*Test Method* |
-. SELECT ge.table_name AS getn, ge.column_name AS gecn, ge.scope AS ges, ggc.column_name AS ggccn 
-FROM gpkg_extensions ge LEFT OUTER JOIN gpkg_geometry_columns ggc 
-ON ge.table_name = ggc.table_name WHERE extension_name = 'gpkg_rtree_index'
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_rtree_index'
 .. Not testable if result set is empty
-.. Fail if any ggccn is NULL
-.. Fail if any ges is not 'write-only'
-. Pass otherwise
+.. Fail if any column_name is NULL
+.. Fail if any scope is not 'write-only'
+.. Fail if any column_name is not a column in table_name
+. Pass otherwise 
 |*Reference* |Annex F.3 Req 76
 |*Test Type* |Basic
 |========================================
