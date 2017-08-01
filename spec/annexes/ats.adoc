@@ -957,12 +957,11 @@ END;
 |*Test Case ID* |+/opt/extension_mechanism/data/data_values_table_name+
 |*Test Purpose* |Verify that the `table_name` column values in the `gpkg_extensions` table are valid.
 |*Test Method* |
-. SELECT table_name FROM gpkg_extensions;
+. SELECT lower(table_name) AS table_name, column_name FROM gpkg_extensions;
 . Not testable if table does not exist or query returns an empty result set.
 . For each row from step one
-.. Continue if table_name value is NULL.
-.. SELECT COUNT(*) FROM sqlite_master WHERE tbl_name = 'table_name';
-.. Fail if count = 0.
+.. "SELECT DISTINCT lower(ge.table_name) AS ge_table, lower(sm.tbl_name) AS tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON lower(ge.table_name) = lower(sm.tbl_name);
+.. Fail if `ge_table` and `tbl_name` are not equal (or both null).
 . Pass if no fails.
 |*Reference* |Clause 2.3.2.1.2 Req 60:
 |*Test Type* |Capability
