@@ -2187,6 +2187,20 @@ Either the absence of a <code>gpkg_extensions</code> table or the absence of row
 </div>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Implementers should be aware of the fact that SQLite table names are not case sensitive and that table names in <code>sqlite_master</code> and <code>gpkg_extensions</code> may not have the same case. When searching for table name references, it is recommended to transform table names to lower case with the <code>lower()</code> function. See the Abstract Test Suite for an example.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <div id="r61" class="exampleblock">
 <div class="title">Requirement 61</div>
 <div class="content">
@@ -5967,7 +5981,7 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT table_name FROM gpkg_extensions;</p>
+<p>SELECT lower(table_name) AS table_name, column_name FROM gpkg_extensions;</p>
 </li>
 <li>
 <p>Not testable if table does not exist or query returns an empty result set.</p>
@@ -5977,13 +5991,10 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Continue if table_name value is NULL.</p>
+<p>"SELECT DISTINCT lower(ge.table_name) AS ge_table, lower(sm.tbl_name) AS tbl_name FROM gpkg_extensions AS ge LEFT OUTER JOIN sqlite_master AS sm ON lower(ge.table_name) = lower(sm.tbl_name);</p>
 </li>
 <li>
-<p>SELECT COUNT(*) FROM sqlite_master WHERE tbl_name = <em>table_name</em>;</p>
-</li>
-<li>
-<p>Fail if count = 0.</p>
+<p>Fail if <code>ge_table</code> and <code>tbl_name</code> are not equal (or both null).</p>
 </li>
 </ol>
 </div>
@@ -7880,6 +7891,15 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>adding new security consideration related to SQLite</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-08-01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R14</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.3.2.1.2, Annex A.2.3.1.1</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>adding explanatory text regarding table name case sensitivity; updating corresponding ATS test</p>
 </div></div></td>
 </tr>
 </tbody>
@@ -14354,7 +14374,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-07-24 18:24:22 UTC
+Last updated 2017-08-01 20:35:55 UTC
 </div>
 </div>
 </body>
