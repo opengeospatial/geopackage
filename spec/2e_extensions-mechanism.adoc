@@ -62,6 +62,11 @@ Either the absence of a `gpkg_extensions` table or the absence of rows in the `g
 Values of the `gpkg_extensions` `table_name` column MAY reference values in the `gpkg_contents` `table_name`, reference new tables required by that extension, or be NULL (to indicate an extension that requires no new tables).
 ====
 
+[NOTE]
+====
+Implementers should be aware of the fact that SQLite table names are not case sensitive and that table names in `sqlite_master` and `gpkg_extensions` may not have the same case. When searching for table name references, it is recommended to transform table names to lower case with the `lower()` function. See the Abstract Test Suite for an example.
+====
+
 [[r61]]
 [caption=""]
 .Requirement 61
