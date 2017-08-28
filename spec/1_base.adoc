@@ -70,7 +70,7 @@ A GeoPackage SHALL only contain the data elements (tables, columns, or values) a
 
 The *GeoPackage* designation is designed to provide maximum interoperability between applications. In an *Extended GeoPackage*, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. Developers are encouraged to consider the implications of extensions when designing their applications. Best practices include the following:
 
-* Designing in a way that anticipates the presence of unexpected extensions, e.g., gracefully handling unexpected columns, values, or encodings. 
+* Designing in a way that anticipates the presence of unexpected extensions, e.g., gracefully handling unexpected columns, values, or encodings.
 * Using the <<extension_rtree>> extension for GeoPackages containing a non-trivial amount of vector data.
 * Using the <<extension_crs_wkt>> extension, which is strongly recommended due to inherent weaknesses in the original standard for encoding coordinate reference systems.
 
@@ -83,7 +83,7 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 
 [[table_column_data_types]]
 .GeoPackage Data Types
-[cols=",,,,,",options="header"]
+[cols=",",options="header"]
 |=======================================================================
 |Data Type            | Size and Description
 |BOOLEAN              | A boolean value representing true or false. Stored as SQLite INTEGER with value 0 for false or 1 for true.
@@ -107,7 +107,7 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 [caption=""]
 .Requirement 6
 ====
-The SQLite PRAGMA integrity_check SQL command SHALL return "ok" for a GeoPackage file. {req4_foot1} 
+The SQLite PRAGMA integrity_check SQL command SHALL return "ok" for a GeoPackage file. {req4_foot1}
 ====
 
 [[r7]]
@@ -164,7 +164,7 @@ Views of this table MAY be used to provide compatibility with the http://www.iso
 
 [[gpkg_spatial_ref_sys_cols]]
 .Spatial Ref Sys Table Definition
-[cols=",,,",options="header",]
+[cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
 |`srs_name` |TEXT |Human readable name of this SRS |no |
@@ -191,10 +191,10 @@ The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed i
 
 [[gpkg_spatial_ref_sys_records]]
 .Spatial Ref Sys Table Records
-[cols=",,,",options="header",]
+[cols=",,,,,",options="header",]
 |=======================================================================
 |`srs_name`|`srs_id`|`organization`|`organization_coordsys_id`|`definition`|`description`
-|any|4326|`EPSG` or `epsg`|4326|any|any 
+|any|4326|`EPSG` or `epsg`|4326|any|any
 |any|-1|`NONE`|-1|`undefined`|any
 |any|0|`NONE`|0|`undefined`|any
 |=======================================================================
