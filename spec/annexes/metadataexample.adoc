@@ -1,7 +1,7 @@
 [[metadata_example_appendix]]
 [float]
 ===== Hierarchical Metadata Example One - ISO19115.
- 
+
 Suppose we have this metadata:
 
 [source,sql]
@@ -9,12 +9,12 @@ Suppose we have this metadata:
 CREATE TABLE gpkg_metadata (
   id INTEGER NOT NULL PRIMARY KEY,
   md_scope TEXT NOT NULL DEFAULT 'undefined',
-  md_standard_uri TEXT NOT NULL, 
+  md_standard_uri TEXT NOT NULL,
   metadata TEXT NOT NULL
 )
 ----
 
-[cols=",,,,",options="header"]
+[cols=",,,",options="header"]
 |======
 |id |md_scope |md_standard_uri |metadata
 |0 |undefined |http://www.isotc211.org/2005/gmd |TEXT
@@ -31,7 +31,7 @@ and this reference table definition:
 [source,sql]
 ----
 CREATE TABLE gpkg_metadata_reference (
-  reference_scope TEXT NOT NULL,  
+  reference_scope TEXT NOT NULL,
   table_name TEXT,
   column_name TEXT,
   row_id_value INTEGER,
@@ -149,11 +149,11 @@ INSERT INTO gpkg_metadata_reference VALUES (
 [float]
 ===== Hierarchical Metadata Example Two - Field Data Collection
 
-This use case demonstrates a mechanism to indicate which data in a GeoPackage that was originally loaded with data from one or more services has been collected or updated since the initial load, and therefore MAY need to be uploaded to update the original services (e.g. WFS, WCS, WMTS). 
+This use case demonstrates a mechanism to indicate which data in a GeoPackage that was originally loaded with data from one or more services has been collected or updated since the initial load, and therefore MAY need to be uploaded to update the original services (e.g. WFS, WCS, WMTS).
 
 Suppose a user with a mobile handheld device goes out in the field and collects observations of a new "Point of Interest" (POI) feature type, and associated metadata about the field session, the new feature type, some POI instances and some of their attributes (e.g. spatial accuracy, attribute accuracy) that results in the following additional metadata:
 
-[cols=",,,,",options="header"]
+[cols=",,,",options="header"]
 |======
 |id|md_scope|md_standard_uri|metadata
 |1 |fieldSession |http://schemas.opengis.net/iso/19139/ |TEXT
@@ -305,7 +305,7 @@ As long as all metadata collected in the field session either directly (as above
 So here is the data after both examples:
 
 .xml_metadata
-[cols=",,,,",options="header"]
+[cols=",,,",options="header"]
 |======
 |id|md_scope|md_standard_uri|metadata
 |0|undefined|http://www.isotc211.org/2005/gmd |TEXT
@@ -330,7 +330,7 @@ So here is the data after both examples:
 |======
 
 .gpkg_metadata_reference
-[cols=",,,,,,,",options="header"]
+[cols=",,,,,,",options="header"]
 |======
 |reference_type |table_name |column_name |row_id_value |timestamp |md_file_id |md_parent_id
 |table |roads |undefined |0 |ts |3 |0
