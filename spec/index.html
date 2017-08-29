@@ -245,6 +245,7 @@ Document language: 	English<br></p>
 <li><a href="#tiles_factor2_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</a></li>
 <li><a href="#_normative_references_normative"> Annex I: Normative References (Normative)</a></li>
 <li><a href="#_bibliography_informative"> Annex J: Bibliography (Informative)</a></li>
+<li><a href="#_endnotes"> Annex K: Endnotes</a></li>
 </ul>
 </li>
 </ul>
@@ -14263,6 +14264,132 @@ For undated references, the latest edition of the normative document referred to
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_endnotes"> Annex K: Endnotes</h2>
+<div class="sectionbody">
+<div class="ulist bibliography">
+<ul class="bibliography">
+<li>
+<p><a id="K1"></a>[K1] SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this standard was written. See Future Work clause in Annex B.</p>
+</li>
+<li>
+<p><a id="K2"></a>[K2] SQLite is in the public domain (see <a href="http://www.sqlite.org/copyright.html)">http://www.sqlite.org/copyright.html)</a></p>
+</li>
+<li>
+<p><a id="K3"></a>[K3] With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196444487;" SQL statement, where 1196444487 is the 32-bit integer value of 0x47504B47. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x4B, 0x47 at offset 68 in the SQLite database file (see <a href="http://www.sqlite.org/fileformat2.html#database_header">http://www.sqlite.org/fileformat2.html#database_header</a> for details).</p>
+</li>
+<li>
+<p><a id="K4"></a>[K4] Older GeoPackages use a different versioning mechanism. Instead of using the user_version, they have an application ID of "GP10" (for GeoPackage 1.0 and 1.0.1) or "GP11" (for GeoPackage 1.1).</p>
+</li>
+<li>
+<p><a id="K5"></a>[K5] The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.</p>
+</li>
+<li>
+<p><a id="K6"></a>[K6] New applications should use the latest available SQLite version software <a href="#8">[8]</a></p>
+</li>
+<li>
+<p><a id="K7"></a>[K7] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime(<em>%Y-%m-%dT%H:%M:%fZ</em>,<em>now</em>)).</p>
+</li>
+<li>
+<p><a id="K8"></a>[K8] GeometryCollection is a generic term for the ST_GeomCollection type defined in <a href="#12">[12]</a>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMCOLLECTION defined in <a href="#10">[10]</a> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.</p>
+</li>
+<li>
+<p><a id="K9"></a>[K9] OGC WKB simple feature geometry types specified in <a href="#9">[9]</a> are a subset of the ISO WKB geometry types specified in <a href="#12">[12]</a></p>
+</li>
+<li>
+<p><a id="K10"></a>[K10] WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.</p>
+</li>
+<li>
+<p><a id="K11"></a>[K11] The axis order in WKB is always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation and m is optional measure.</p>
+</li>
+<li>
+<p><a id="K12"></a>[K12] A GeoPackage is not required to contain any feature data tables. Feature data tables in a GeoPackage MAY be empty.</p>
+</li>
+<li>
+<p><a id="K13"></a>[K13] GeoPackage applications MAY use SQL triggers or tests in application code to meet this requirement</p>
+</li>
+<li>
+<p><a id="K14"></a>[K14] Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles COULD be used for transparency where there is no data on the tile edges, and image/jpeg format tiles COULD be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.</p>
+</li>
+<li>
+<p><a id="K15"></a>[K15] See Zoom Other Intervals for use of other zoom levels as a registered extensions.</p>
+</li>
+<li>
+<p><a id="K16"></a>[K16] See Tiles Encoding WebP regarding use of the WebP alternative tile MIME type as a registered extension.</p>
+</li>
+<li>
+<p><a id="K17"></a>[K17] See Tiles Encoding WebP regarding use of the WebP alternative tile MIME type as a registered extension.</p>
+</li>
+<li>
+<p><a id="K18"></a>[K18] The "tiles" stipulation was removed because it prevented the use of the tile matrix mechanism by extensions for other data types.</p>
+</li>
+<li>
+<p><a id="K19"></a>[K19] The "tiles" stipulation was removed because it prevented the use of the tile matrix mechanism by extensions for other data types.</p>
+</li>
+<li>
+<p><a id="K20"></a>[K20] GeoPackage applications MAY query the gpkg_tile_matrix table or the tile pyramid user data table to determine the minimum and maximum zoom levels for a given tile pyramid table.</p>
+</li>
+<li>
+<p><a id="K21"></a>[K21] GeoPackage applications MAY query a tile pyramid user data table to determine which tiles are available at each zoom level.</p>
+</li>
+<li>
+<p><a id="K22"></a>[K22] GeoPackage applications that insert, update, or delete tile pyramid user data table tiles row records are responsible for maintaining the corresponding descriptive contents of the gpkg_tile_matrix_metadata table.</p>
+</li>
+<li>
+<p><a id="K23"></a>[K23] The <code>gpkg_tile_matrix_set</code> table contains coordinates that define a bounding box as the exact stated spatial extent for all tiles in a tile (matrix set) table. If the geographic extent of the image data contained in tiles at a particular zoom level is within but not equal to this bounding box, then the non-image area of matrix edge tiles must be padded with no-data values, preferably transparent ones.</p>
+</li>
+<li>
+<p><a id="K24"></a>[K24] A GeoPackage is not required to contain any tile pyramid user data tables. Tile pyramid user data tables in a GeoPackage MAY be empty.</p>
+</li>
+<li>
+<p><a id="K25"></a>[K25] The zoom_level / tile_column / tile_row unique key is automatically indexed, and allows tiles to be selected and accessed by "z, x, y", a common convention used by some implementations. This table / view definition MAY also allow tiles to be selected based on a spatially indexed bounding box in a separate metadata table.</p>
+</li>
+<li>
+<p><a id="K26"></a>[K26] If an application process will make many updates, it is often faster to drop the indexes, do the updates, and then recreate the indexes.</p>
+</li>
+<li>
+<p><a id="K27"></a>[K27] Informative examples of hierarchical metadata are provided in Hierarchical Metadata Example One - ISO19115.</p>
+</li>
+<li>
+<p><a id="K28"></a>[K28] An informative example of raster image metadata is provided in <a href="#tiles_example_appendix">[tiles_example_appendix]</a></p>
+</li>
+<li>
+<p><a id="K29"></a>[K29] For example, for ISO 19139 metadata the URI value should be the metadata schema namespace <a href="http://www.isotc211.org/2005/gmd">http://www.isotc211.org/2005/gmd</a></p>
+</li>
+<li>
+<p><a id="K30"></a>[K30] In SQLite, the rowid value is always equal to the value of a single-column primary key on an integer column [B30] and is not changed by a database reorganization performed by the VACUUM SQL command.</p>
+</li>
+<li>
+<p><a id="K31"></a>[K31] Such a metadata hierarchy MAY have only one level of defined metadata</p>
+</li>
+<li>
+<p><a id="K32"></a>[K32] The scope codes in Metadata Scopes include a very wide set of descriptive information types as "metadata" to describe data.</p>
+</li>
+<li>
+<p><a id="K33"></a>[K33] ISO 19139 format metadata (B32) is recommended for general-purpose description of geospatial data at the series and dataset metadata scopes.</p>
+</li>
+<li>
+<p><a id="K34"></a>[K34] The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.</p>
+</li>
+<li>
+<p><a id="K35"></a>[K35] The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.</p>
+</li>
+<li>
+<p><a id="K36"></a>[K36] The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.</p>
+</li>
+<li>
+<p><a id="K37"></a>[K37] The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime(<em>%Y-%m-%dT%H:%M:%fZ</em>,<em>now</em>)).</p>
+</li>
+<li>
+<p><a id="K38"></a>[K38] A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.</p>
+</li>
+<li>
+<p><a id="K39"></a>[K39] GeoPackages MAY contain MIME types other than the raster image types specified in clauses 2.2.4, 2.2.5, and 3.2.2 as feature attributes, but they are not required to do so.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -14388,7 +14515,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-08-29 17:16:53 UTC
+Last updated 2017-08-29 17:18:30 UTC
 </div>
 </div>
 </body>
