@@ -34,8 +34,6 @@ For example: A stream network may be modeled as multilinestring value with the m
 A brief description of each geometry type is provided below.
 A more detailed description can be found in ISO 13249-3 <<12>>.
 
-:core_geometry_model_foot1: footnote:[GeometryCollection is a generic term for the ST_GeomCollection type defined in [12\], which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMCOLLECTION defined in [10\] and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.]
-
 
 * Geometry: the root of the geometry type hierarchy.
 * Point: a single location in space.
@@ -52,7 +50,7 @@ A more detailed description can be found in ISO 13249-3 <<12>>.
 * CurvePolygon: A planar surface defined by an exterior ring and zero or more interior ring.
   Each ring is defined by a Curve instance.
 * Polygon: A restricted form of CurvePolygon where each ring is defined as a simple, closed LineString.
-* GeometryCollection: A collection of zero or more Geometry instances. {core_geometry_model_foot1}
+* GeometryCollection: A collection of zero or more Geometry instances. ^<<K8>>^
 * MultiSurface: A restricted form of GeometryCollection where each Geometry in the collection must be of type Surface.
 * MultiPolygon: A restricted form of MultiSurface where each Surface in the collection must be of type Polygon.
 * MultiCurve: A restricted form of GeometryCollection where each Geometry in the collection must be of type Curve.
@@ -87,9 +85,6 @@ The `gpkg_contents` table SHALL contain a row with a lowercase `data_type` colum
 A GeoPackage SHALL store feature table geometries with or without optional elevation (Z) and/or measure (M) values in SQL BLOBs using the Standard GeoPackageBinary format specified in table <<gpb_spec>> and clause <<gpb_data_blob_format>>.
 ====
 
-:geopackage_binary_foot1: footnote:[OGC WKB simple feature geometry types specified in <<9>> are a subset of the ISO WKB geometry types specified in <<12>>]
-:geopackage_binary_foot2: footnote:[WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.]
-:geopackage_binary_foot3: footnote:[The axis order in WKB is always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation and m is optional measure.]
 
 .GeoPackage SQL Geometry Binary Format
 [[gpb_spec]]
@@ -113,7 +108,7 @@ StandardGeoPackageBinary {
 <3> see <<flags_layout>>
 <4> see flags envelope contents indicator code below
 <5> The X bit in the header flags field must be set to 0.
-<6> per  OGC 06-103r4 <<9>>  {geopackage_binary_foot1}{geopackage_binary_foot2}{geopackage_binary_foot3}
+<6> per  OGC 06-103r4 <<9>>  ^<<K9>>^ ^<<K10>>^ ^<<K11>>^
 
 [[flags_layout]]
 .bit layout of GeoPackageBinary flags byte
@@ -256,12 +251,10 @@ The m value in a `gpkg_geometry_columns` table row SHALL be one of 0, 1, or 2.
 
 ====== Table Definition
 
-:features_data_table_foot2: footnote:[A GeoPackage is not required to contain any feature data tables. Feature data tables in a GeoPackage MAY be empty.]
-
 The third component of the SQL schema for vector features in a GeoPackage described in clause <<sfsql_intro>> above are tables that contain user data representing features.
 Feature attributes are columns in a feature table, including geometries.
 Features are rows in a feature table.
-{features_data_table_foot2}
+^<<K12>>^
 
 [[r29]]
 [caption=""]
@@ -310,12 +303,11 @@ A feature geometry is stored in a geometry column specified by the `geometry_col
 
 The geometry type of a feature geometry column specified in the `gpkg_geometry_columns` table `geometry_type_name` column is a name from <<geometry_types>>.
 
-:geom_type_req_foot1: footnote:[GeoPackage applications MAY use SQL triggers or tests in application code to meet this requirement]
 [[r32]]
 [caption=""]
 .Requirement 32
 ====
-Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the `gpkg_geometry_columns` table `geometry_type_name` uppercase column value {geom_type_req_foot1}.
+Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the `gpkg_geometry_columns` table `geometry_type_name` uppercase column value ^<<K13>>^
 ====
 
 Geometry subtypes are assignable as defined in <<geometry_types>> and shown in part in <<core_geometry_model_figure>>.

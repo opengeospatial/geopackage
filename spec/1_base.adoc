@@ -24,24 +24,19 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 
 ====== File Format
 
-:req1_foot1: footnote:[SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this standard was written. See Future Work clause in Annex B.]
-:req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html)]
-:req2_foot1: footnote:[With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196444487;" SQL statement, where 1196444487 is the 32-bit integer value of 0x47504B47. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x4B, 0x47 at offset 68 in the SQLite database file (see http://www.sqlite.org/fileformat2.html#database_header for details).]
-:req2_foot2: footnote:[Older GeoPackages use a different versioning mechanism. Instead of using the user_version, they have an application ID of "GP10" (for GeoPackage 1.0 and 1.0.1) or "GP11" (for GeoPackage 1.1).]
-
 [[r1]]
 [caption=""]
 .Requirement 1
 ====
 A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] <<5>> database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format] <<6>> <<7>>.
-The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <<B4>> string "SQLite format 3" {req1_foot1}. {req1_foot2}
+The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <<B4>> string "SQLite format 3" ^<<K1>>^ ^<<K2>>^
 ====
 
 [[r2]]
 [caption=""]
 .Requirement 2
 ====
-A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. {req2_foot1} A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.2 this value is 0x000027D8 (the hexadecimal value for 10200). {req2_foot2}
+A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. ^<<K3>>^ A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.2 this value is 0x000027D8 (the hexadecimal value for 10200). ^<<K4>>^
 ====
 
 The maximum size of a GeoPackage file is about 140TB.
@@ -101,13 +96,12 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 |=======================================================================
 
 ====== File Integrity
-:req4_foot1: footnote:[The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.]
 
 [[r6]]
 [caption=""]
 .Requirement 6
 ====
-The SQLite PRAGMA integrity_check SQL command SHALL return "ok" for a GeoPackage file. {req4_foot1}
+The SQLite PRAGMA integrity_check SQL command SHALL return "ok" for a GeoPackage file. ^<<K5>>^
 ====
 
 [[r7]]
@@ -121,13 +115,12 @@ The SQLite PRAGMA foreign_key_check SQL with no parameter value SHALL return an 
 
 [[api_sql]]
 ====== Structured Query Language (SQL)
-:req4_foot2: footnote:[New applications should use the latest available SQLite version software <<8>>]
 
 [[r8]]
 [caption=""]
 .Requirement 8
 ====
-A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<6>> software APIs. {req4_foot2}
+A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via http://www.sqlite.org/download.html[SQLite version 3] <<6>> software APIs. ^<<K6>>^
 ====
 
 ====== Every GPKG SQLite Configuration
@@ -253,13 +246,11 @@ The `data_type` specifies the type of content contained in the table, for exampl
 
 The `last_change` SHOULD contain the timestamp of when the content in the referenced table was last updated, in ISO8601 format. Note that since it is not practical to ensure that this value is maintained properly in all cases, this value should be treated as informative.
 
-:req13_foot1: footnote:[The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).]
-
 [[r15]]
 [caption=""]
 .Requirement 15
 ====
-Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. {req13_foot1}
+Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. ^<<K7>>^
 ====
 
 The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box of the content. Applications may use this bounding box as the extents of a default view but there are no requirements that this bounding box be exact or represent the minimum bounding box of the content. The values are in the units specified by that CRS.
