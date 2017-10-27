@@ -95,7 +95,7 @@ None
 |*Test Case ID* |+/extensions/geometry_types/data_values_geometry_type_name+
 |*Test Purpose* |Verify that only allowed geometry types (including extended non-linear geometry types) are in use.
 |*Test Method* |
-. Run test /opt/features/geometry_columns/data/data_values_geometry_type_name, but the values in 3a may also include the values from Table 32 in Annex G.
+. Run test /opt/features/geometry_columns/data/data_values_geometry_type_name, but the values in 3a may also include the values from Table 28 in Annex G.
 |*Reference* |Annex F.1 Req 65:
 |*Test Type* |Capability
 |========================================
@@ -112,7 +112,7 @@ None
 . For each row from step 3
 .. SELECT cn FROM tn;
 .. For each row from step a, log fail if GeoPackageBinary "X" type flag is 1
-.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 43, then
+.. For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 28, then
 .. Log cn.header values, wkb endianness and geometry type
 ii. If cn.wkb is not correctly encoded per ISO 13249-3 clause 5.1.46 then log fail
 iii. If cn.flags.E is 1 - 4 and some cn.wkbx is outside of cn.envelope.minx,maxx then log fail
