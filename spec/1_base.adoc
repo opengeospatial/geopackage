@@ -28,6 +28,7 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 :req1_foot2: footnote:[SQLite is in the public domain (see http://www.sqlite.org/copyright.html)]
 :req2_foot1: footnote:[With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196444487;" SQL statement, where 1196444487 is the 32-bit integer value of 0x47504B47. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x4B, 0x47 at offset 68 in the SQLite database file (see http://www.sqlite.org/fileformat2.html#database_header for details).]
 :req2_foot2: footnote:[Older GeoPackages use a different versioning mechanism. Instead of using the user_version, they have an application ID of "GP10" (for GeoPackage 1.0 and 1.0.1) or "GP11" (for GeoPackage 1.1).]
+:req2_foot3: footnote:[For more information on maximum database size, see Section 14 of https://www.sqlite.org/limits.html.]
 
 [[r1]]
 [caption=""]
@@ -44,7 +45,7 @@ The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <<B4>> str
 A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. {req2_foot1} A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.2 this value is 0x000027D8 (the hexadecimal value for 10200). {req2_foot2}
 ====
 
-The maximum size of a GeoPackage file is about 140TB.
+The maximum size of a GeoPackage file is about 140TB{req2_foot3}.
 In practice a lower size limit MAY be imposed by the filesystem to which the file is written.
 Many mobile devices require external memory cards to be formatted using the FAT32 file system which imposes a maximum size limit of 4GB.
 
