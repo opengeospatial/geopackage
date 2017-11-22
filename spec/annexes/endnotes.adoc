@@ -18,7 +18,7 @@
 - [[[K14]]] Images of multiple MIME types MAY be stored in given table. For example, in a tiles table, image/png format tiles COULD be used for transparency where there is no data on the tile edges, and image/jpeg format tiles COULD be used for storage efficiency where there is image data for all pixels. Images of multiple bit depths of the same MIME type MAY also be stored in a given table, for example image/png tiles in both 8 and 24 bit depths.
 - [[[K15]]] See Zoom Other Intervals for use of other zoom levels as a registered extensions.
 - [[[K16]]] See Tiles Encoding WebP regarding use of the WebP alternative tile MIME type as a registered extension.
-- [[[K17]]] See Tiles Encoding WebP regarding use of the WebP alternative tile MIME type as a registered extension.
+- [[[K17]]] Note that SQLite ignores certain column properties (those pertaining to insert, update, or delete operations) when those columns are part of a view. Therefore it is not possible to enforce rules such as NOT NULL or PRIMARY KEY for those columns. When using views, the producer is responsible for ensuring that the underlying tables are populated properly.
 - [[[K18]]] The "tiles" stipulation was removed because it prevented the use of the tile matrix mechanism by extensions for other data types.
 - [[[K19]]] The "tiles" stipulation was removed because it prevented the use of the tile matrix mechanism by extensions for other data types.
 - [[[K20]]] GeoPackage applications MAY query the gpkg_tile_matrix table or the tile pyramid user data table to determine the minimum and maximum zoom levels for a given tile pyramid table.
