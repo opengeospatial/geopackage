@@ -6,6 +6,7 @@
 - [[[K2]]] SQLite is in the public domain (see http://www.sqlite.org/copyright.html) 
 - [[[K3]]] With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196444487;" SQL statement, where 1196444487 is the 32-bit integer value of 0x47504B47. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x4B, 0x47 at offset 68 in the SQLite database file (see http://www.sqlite.org/fileformat2.html#database_header for details). 
 - [[[K4]]] Older GeoPackages use a different versioning mechanism. Instead of using the user_version, they have an application ID of "GP10" (for GeoPackage 1.0 and 1.0.1) or "GP11" (for GeoPackage 1.1).
+- [[[K4a]]] For more information on maximum database size, see Section 14 of https://www.sqlite.org/limits.html. 
 - [[[K5]]] The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.
 - [[[K6]]] New applications should use the latest available SQLite version software <<8>>
 - [[[K7]]] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
