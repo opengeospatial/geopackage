@@ -372,7 +372,7 @@ The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#
 </div>
 </div>
 <div class="paragraph">
-<p>The maximum size of a GeoPackage file is about 140TB.
+<p>The maximum size of a GeoPackage file is about 140TB <sup><a href="#K4a">[K4a]</a></sup>.
 In practice a lower size limit MAY be imposed by the filesystem to which the file is written.
 Many mobile devices require external memory cards to be formatted using the FAT32 file system which imposes a maximum size limit of 4GB.</p>
 </div>
@@ -3784,7 +3784,7 @@ The GeoPackage standard does not place any constraints on application, platform,
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if a returned geometry_type_name value is not in Table 31 in Annex G</p>
+<p>Fail if a returned geometry_type_name value is not in Table 28 in Annex G</p>
 </li>
 </ol>
 </div>
@@ -8760,7 +8760,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Run test /opt/features/geometry_columns/data/data_values_geometry_type_name, but the values in 3a may also include the values from Table 32 in Annex G.</p>
+<p>Run test /opt/features/geometry_columns/data/data_values_geometry_type_name, but the values in 3a may also include the values from Table 28 in Annex G.</p>
 </li>
 </ol>
 </div></div></td>
@@ -8825,7 +8825,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <p>For each row from step a, log fail if GeoPackageBinary "X" type flag is 1</p>
 </li>
 <li>
-<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 43, then</p>
+<p>For each row from step a, if bytes 2-5 of cn.wkb as uint32 in endianness of gc.wkb byte 1of cn from #1 are a geometry type value from Annex G Table 28, then</p>
 </li>
 <li>
 <p>Log cn.header values, wkb endianness and geometry type
@@ -11408,10 +11408,11 @@ violates constraint: timestamp must be a valid time in ISO 8601
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay"><code class="sql language-sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
-  id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
-  md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>,
+  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
   md_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  metadata <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
+  mime_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">text/xml</span><span class="delimiter">'</span></span>,
+  metadata <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>
 )</code></pre>
 </div>
 </div>
@@ -14279,6 +14280,9 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="K4"></a>[K4] Older GeoPackages use a different versioning mechanism. Instead of using the user_version, they have an application ID of "GP10" (for GeoPackage 1.0 and 1.0.1) or "GP11" (for GeoPackage 1.1).</p>
 </li>
 <li>
+<p><a id="K4a"></a>[K4a] For more information on maximum database size, see Section 14 of <a href="https://www.sqlite.org/limits.html">https://www.sqlite.org/limits.html</a>.</p>
+</li>
+<li>
 <p><a id="K5"></a>[K5] The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.</p>
 </li>
 <li>
@@ -14392,7 +14396,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-22 17:33:01 UTC
+Last updated 2017-11-22 17:35:23 UTC
 </div>
 </div>
 </body>
