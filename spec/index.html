@@ -1365,8 +1365,8 @@ Features are rows in a feature table.
 <div class="title">Requirement 29</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain tables or updateable views containing vector features.
-Every such feature table or view in a GeoPackage SHALL have a column with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View Definition</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.</p>
+<p>A GeoPackage MAY contain tables or views<sup><a href="#K17">[K17]</a></sup> containing vector features.
+Every such feature table or view in a GeoPackage SHALL be structured consistently with <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View<sup><a href="#K17">[K17]</a></sup> Definition</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.</p>
 </div>
 </div>
 </div>
@@ -1393,7 +1393,7 @@ Every such feature table or view in a GeoPackage SHALL have a column with column
 </div>
 </div>
 <table id="example_feature_table_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 7. EXAMPLE : Sample Feature Table or View Definition</caption>
+<caption class="title">Table 7. EXAMPLE : Sample Feature Table or View<sup><a href="#K17">[K17]</a></sup> Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -1592,7 +1592,7 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 <div class="title">Requirement 37</div>
 <div class="content">
 <div class="paragraph">
-<p>In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>. <sup><a href="#K17">[K17]</a></sup></p>
+<p>In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>. <sup><a href="#K16">[K16]</a></sup></p>
 </div>
 </div>
 </div>
@@ -1966,7 +1966,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div class="title">Requirement 54</div>
 <div class="content">
 <div class="paragraph">
-<p>Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or updateable view with a unique name that SHALL have a column named "id" with column type INTEGER and <em>PRIMARY KEY AUTOINCREMENT</em> column constraints per Clause 2.2.8.1.1 <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Tiles Table or View Definition</a> and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>.</p>
+<p>Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or view<sup><a href="#K17">[K17]</a></sup> with a unique name that SHALL be structured consistently with <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Tiles Table or View Definition</a>, and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>.</p>
 </div>
 </div>
 </div>
@@ -2104,17 +2104,17 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div class="title">Requirement 58</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain a table or updateable view named gpkg_extensions.
-If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extensions_table_definition">Table Definition</a>, <a href="#gpkg_extensions_cols">GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</a>, and <a href="#gpkg_extensions_sql">gpkg_extensions Table Definition SQL</a>. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.</p>
+<p>A GeoPackage MAY contain a table named <code>gpkg_extensions</code>.
+If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extensions_table_definition">Table Definition</a>, <a href="#gpkg_extensions_cols">GeoPackage Extensions Table Definition (Table Name: gpkg_extensions)</a>, and <a href="#gpkg_extensions_sql">gpkg_extensions Table Definition SQL</a>. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>gpkg_extensions</code> table or updateable view in a GeoPackage is used to indicate that a particular extension applies to a GeoPackage, a table in a GeoPackage, or a column of a table in a GeoPackage.
+<p>The <code>gpkg_extensions</code> table in a GeoPackage is used to indicate that a particular extension applies to a GeoPackage, a table in a GeoPackage, or a column of a table in a GeoPackage.
 An application that accesses a GeoPackage can query the <code>gpkg_extensions</code> table instead of the contents of all the user data tables to determine if it has the required capabilities to read or write to tables with extensions, and to "fail fast" and return an error message if it does not.</p>
 </div>
 <table id="gpkg_extensions_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 11. GeoPackage Extensions Table or View Definition (Table or View Name: gpkg_extensions)</caption>
+<caption class="title">Table 11. GeoPackage Extensions Table Definition (Table Name: gpkg_extensions)</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -8718,7 +8718,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 68</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a <code>gpkg_geometry_columns</code> table or updateable view with row records that specify extension <code>geometry_type_name</code> column values SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code> and <code>column_name</code> values from the <code>gpkg_geometry_columns</code> row records that identify extension type uses, and <code>extension_name</code> column values for each of those geometry types constructed per the previous requirement <a href="#extension_geometry_types_extensions_name">[extension_geometry_types_extensions_name]</a>.</p>
+<p>A GeoPackage that contains a <code>gpkg_geometry_columns</code> table or view with row records that specify extension <code>geometry_type_name</code> column values SHALL contain a <code>gpkg_extensions</code> table that contains row records with <code>table_name</code> and <code>column_name</code> values from the <code>gpkg_geometry_columns</code> row records that identify extension type uses, and <code>extension_name</code> column values for each of those geometry types constructed per the previous requirement <a href="#extension_geometry_types_extensions_name">[extension_geometry_types_extensions_name]</a>.</p>
 </div>
 </div>
 </div>
@@ -10172,7 +10172,7 @@ There is no GeoPackage requirement that such metadata be provided or that define
 <div class="title">Requirement 93</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage A GeoPackage MAY contain a table named gpkg_metadata. If present it SHALL be defined per clauses <a href="#metadata_table_table_definition">Metadata Table</a>, <a href="#gpkg_metadata_cols">Metadata Table Definition</a>, and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
+<p>A GeoPackage A GeoPackage MAY contain a table named <code>gpkg_metadata</code>. If present it SHALL be defined per clauses <a href="#metadata_table_table_definition">Metadata Table</a>, <a href="#gpkg_metadata_cols">Metadata Table Definition</a>, and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -10483,7 +10483,7 @@ The initial contents of this table were obtained from the ISO 19115 <a href="#28
 <div class="title">Requirement 94</div>
 <div class="content">
 <div class="paragraph">
-<p>Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table or updateable view SHALL be one of the name column values from <a href="#metadata_scopes">Metadata Scopes</a>.</p>
+<p>Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table SHALL be one of the name column values from <a href="#metadata_scopes">Metadata Scopes</a>.</p>
 </div>
 </div>
 </div>
@@ -12232,13 +12232,13 @@ The information provided by this option can be used by applications to, for inst
 <div class="title">Requirement 103</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain a table or updateable view named <code>gpkg_data_columns</code>.
-If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+<p>A GeoPackage MAY contain a table named <code>gpkg_data_columns</code>.
+If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Columns Table Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
 <table id="gpkg_data_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 23. Data Columns Table or View Definition</caption>
+<caption class="title">Table 23. Data Columns Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -12320,17 +12320,17 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
 <div class="title">Requirement 107</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
-If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table or View Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+<p>A GeoPackage MAY contain a table named <code>gpkg_data_column_constraints</code>.
+If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_data_column_constraints</code> table contains data to specify restrictions on basic data type column values.
-The constraint_name column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table or View Definition</a>.</p>
+The constraint_name column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table Definition</a>.</p>
 </div>
 <table id="gpkg_data_column_constraints_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 24. Data Column Constraints Table or View Definition</caption>
+<caption class="title">Table 24. Data Column Constraints Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -14319,7 +14319,7 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="K16"></a>[K16] See Tiles Encoding WebP regarding use of the WebP alternative tile MIME type as a registered extension.</p>
 </li>
 <li>
-<p><a id="K17"></a>[K17] See Tiles Encoding WebP regarding use of the WebP alternative tile MIME type as a registered extension.</p>
+<p><a id="K17"></a>[K17] Note that SQLite ignores certain column properties (those pertaining to insert, update, or delete operations) when those columns are part of a view. Therefore it is not possible to enforce rules such as NOT NULL or PRIMARY KEY for those columns. When using views, the producer is responsible for ensuring that the underlying tables are populated properly.</p>
 </li>
 <li>
 <p><a id="K18"></a>[K18] The "tiles" stipulation was removed because it prevented the use of the tile matrix mechanism by extensions for other data types.</p>
@@ -14396,7 +14396,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-11-22 17:35:23 UTC
+Last updated 2017-12-18 19:02:16 UTC
 </div>
 </div>
 </body>
