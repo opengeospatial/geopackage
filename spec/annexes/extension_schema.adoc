@@ -46,12 +46,12 @@ Read-write
 [caption=""]
 .Requirement 103
 ====
-A GeoPackage MAY contain a table or updateable view named `gpkg_data_columns`.
+A GeoPackage MAY contain a table named `gpkg_data_columns`.
 If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_columns_sql>>.
 ====
 
 [[gpkg_data_columns_cols]]
-.Data Columns Table or View Definition
+.Data Columns Table Definition
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
@@ -77,7 +77,7 @@ See <<gpkg_data_columns_sql>>.
 [caption=""]
 .Requirement 107
 ====
-A GeoPackage MAY contain a table or updateable view named gpkg_data_column_constraints.
+A GeoPackage MAY contain a table named `gpkg_data_column_constraints`.
 If present it SHALL be defined per <<gpkg_data_column_constraints_cols>> and <<gpkg_data_column_constraints_sql>>.
 ====
 
@@ -86,7 +86,7 @@ The constraint_name column is referenced by the `constraint_name` column in the 
 
 
 [[gpkg_data_column_constraints_cols]]
-.Data Column Constraints Table or View Definition
+.Data Column Constraints Table Definition
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
