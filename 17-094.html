@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -430,6 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 </head>
 <body class="book">
+<div style=" opacity:0.5; z-index:99; color:red; font-size: 6em; width: 100px; height: 100px; position: fixed; top:0; bottom: 0; left: 0; right: 0; margin: auto; ">DRAFT</div>
 <div id="header">
 <h1>OGC GeoPackage Related Tables Extension (DRAFT)</h1>
 </div>
@@ -452,16 +452,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Submission Date: &lt;yyyy-mm-dd&gt;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date:   &lt;yyyy-mm-dd&gt;</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date:   &lt;yyyy-mm-dd&gt;</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date:   &lt;yyyy-mm-dd&gt;</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date:   &lt;yyyy-mm-dd&gt;</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC&#174; document: <a href="http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}" class="bare">http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}</a></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-094</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-094</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 0.1</p></td>
@@ -470,7 +470,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Encoding Standard</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Editor:   Jeff Yutzler</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Editor:   Jeff Yutzler</p></td>
 </tr>
 </tbody>
 </table>
@@ -522,16 +522,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document type:   	OGC® Standard</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document type:   	OGC® Standard</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document subtype:   	if applicable</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document subtype:   	if applicable</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Draft</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Draft</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: 	English</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: 	English</p></td>
 </tr>
 </tbody>
 </table>
@@ -1317,11 +1317,11 @@ Ensure that there is a conformance class for each requirements class and a test 
 <div class="sectionbody">
 <div class="paragraph">
 <p>This example illustrates support for many-to-many relationships but the concept may be used in a degenerative way to support one-to-many or many-to-one relationships.
-The content of the <code>gpkgext_relations</code> includes a <a href="#features_to_media">features_to_media table</a> that relates the <a href="#features">features table values</a> and <a href="#media">media table values</a> using their respective <code>id</code> columns.</p>
+The content of the <code>gpkgext_relations</code> includes a <a href="#features_to_media">features_to_attributes table</a> that relates the <a href="#features">features table values</a> and <a href="#media">[media]</a> using their respective <code>id</code> columns.</p>
 </div>
 <div class="paragraph">
 <p>In this example, there are four features (ID 1, 2, 3 and 4) and three PNG media items (ID 17, 18, and 19).
-Using the <a href="#features_to_media">features_to_media table</a>,</p>
+Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1352,12 +1352,12 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">primary_table_name</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">primary_column</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">base_table_name</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">base_column</th>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">attribute_table_name</th>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">attribute_column</th>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">relation_name</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">mapping_table</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">mapping_table_name</th>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">cardinality</th>
 </tr>
 </thead>
@@ -1404,8 +1404,8 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </tr>
 </tbody>
 </table>
-<table id="media" class="tableblock frame-all grid-all" style="width: 80%;">
-<caption class="title">Table 7. media table values</caption>
+<table id="attributes" class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 7. attributes table values</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1437,15 +1437,15 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </tbody>
 </table>
 <table id="features_to_media" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 8. features_to_media table</caption>
+<caption class="title">Table 8. features_to_attributes table</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">primary_column_value</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">attribute_column_value</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">base_id</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">attribute_id</th>
 </tr>
 </thead>
 <tbody>
@@ -1476,7 +1476,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The <a href="#features_to_media">features_to_media table</a> relates the id columns between the features table and the media table.</p>
+<p>The <a href="#features_to_media">features_to_attributes table</a> relates the id columns between the features table and the media table.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1491,12 +1491,12 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'gpkgext_relations' (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  primary_table_name TEXT NOT NULL,
-  primary_column TEXT NOT NULL,
-  foreign_table_name TEXT NOT NULL,
-  foreign_column TEXT NOT NULL,
+  base_table_name TEXT NOT NULL,
+  base_primary_column TEXT NOT NULL DEFAULT 'id',
+  attribute_table_name TEXT NOT NULL,
+  attribute_primary_column TEXT NOT NULL DEFAULT 'id',
   relation_name TEXT NOT NULL,
-  mapping_table TEXT UNIQUE,
+  mapping_table_name TEXT UNIQUE,
   cardinality TEXT NOT NULL
  );</code></pre>
 </div>
@@ -1507,8 +1507,8 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_mapping_table' (
-  primary_column_id INTEGER NOT NULL,
-  attribute_column_id INTEGER NOT NULL
+  base_id INTEGER NOT NULL,
+  attribute_id INTEGER NOT NULL
  );</code></pre>
 </div>
 </div>
@@ -1522,8 +1522,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
   geometry GEOMETRY,
   text_attribute TEXT,
   real_attribute REAL,
-  boolean_attribute BOOLEAN,
-  relation TEXT NULL);</code></pre>
+  boolean_attribute BOOLEAN)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1537,8 +1536,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 <pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_media' (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   data BLOB NOT NULL,
-  content_type TEXT NOT NULL,
-  relation TEXT NULL);</code></pre>
+  content_type TEXT NOT NULL)</code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
