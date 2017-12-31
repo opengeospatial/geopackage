@@ -429,7 +429,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 </head>
 <body class="book">
-<div style=" opacity:0.5; z-index:99; color:red; font-size: 6em; width: 100px; height: 100px; position: fixed; top:0; bottom: 0; left: 0; right: 0; margin: auto; ">DRAFT</div>
 <div id="header">
 <h1>OGC GeoPackage Related Tables Extension (DRAFT)</h1>
 </div>
@@ -566,7 +565,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_references">3. References</a></li>
 <li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
 <ul class="sectlevel2">
-<li><a href="#_strong_base_data_strong">4.1. <strong>base data</strong></a></li>
+<li><a href="#_strong_geospatial_data_strong">4.1. <strong>geospatial data</strong></a></li>
 <li><a href="#_strong_term_name_strong">4.2. <strong>term name</strong></a></li>
 </ul>
 </li>
@@ -616,12 +615,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="paragraph">
 <p>A GeoPackage <a href="#geopackage">[geopackage]</a> is a platform-independent SQLite <a href="#sqlite">[sqlite]</a> database file that contains GeoPackage data and metadata tables.
-GeoPackage is designed to be extensible, including support for additional data types.</p>
+GeoPackages, as described by the GeoPackage Encoding Standard <a href="#GPKG1_2">[GPKG1_2]</a> are designed to be extensible, including support for additional data types.
+This document defines the Related Tables Extension (RTE) for the GeoPackage Encoding Standard.</p>
 </div>
 <div class="paragraph">
-<p>This document defines an extension that allows a GeoPackage to contain additional data that is related to base data (generally features).
-As an example, this can be used to establish a many-to-many relationship between features (e.g. points, lines, or areas) and multimedia files.
-To support this, an ancillary data table (<code>gpkgext_relations</code>) is used in conjunction with user-defined mapping tables.</p>
+<p>The RTE defines the rules and requirements for creating relationships in a GeoPackage data store between geospatial data tables and other tables that contain or reference related content such as attributes or media.
+Geospatial data tables (such as features or tiles tables) contain location information and/or geometries.
+There are many examples of where the RTE can be used including relating parcel (land lot) features to pictures of that parcel or linking census boundaries to the related demographic census data.</p>
 </div>
 <div class="paragraph">
 <p><strong class="big">ii.    Keywords</strong></p>
@@ -636,15 +636,20 @@ To support this, an ancillary data table (<code>gpkgext_relations</code>) is use
 <p><strong class="big">iii.   Preface</strong></p>
 </div>
 <div class="paragraph">
-<p>The GeoPackage Related Tables extension defines the rules and requirements for associating tables with existing feature or attribute tables in a GeoPackage <a href="#GPKG1_2">[GPKG1_2]</a> data store. One use case for this extension is to associate features with related multimedia content such as:</p>
+<p>The GeoPackage Related Tables Extension (RTE) defines the rules and requirements for creating relationships in a GeoPackage <a href="#geopackage">[geopackage]</a> data store between geospatial data tables and other tables that contain or reference related content such as attributes or media.
+Geospatial data tables (such as features or tiles tables) contain location information and/or geometries.
+Conceptually, this extension is similar to the OGC Table Joining Service Interface Standard <a href="#OGC-TJS-IS">[OGC-TJS-IS]</a>.</p>
+</div>
+<div class="paragraph">
+<p>One use case for this extension is to associate features with related multimedia content such as:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>photographs;</p>
+<p>photographs.</p>
 </li>
 <li>
-<p>audio or video files; or,</p>
+<p>audio or video files.</p>
 </li>
 <li>
 <p>PDFs.</p>
@@ -652,7 +657,8 @@ To support this, an ancillary data table (<code>gpkgext_relations</code>) is use
 </ul>
 </div>
 <div class="paragraph">
-<p>For example, implementing this extension would provide the ability to associated pictures of a house with a specific parcel.</p>
+<p>There are many examples of where the RTE can be used including relating parcel (land lot) features to pictures of that parcel or linking census boundaries to the related demographic census data.
+To support this capability, an ancillary data table (<code>gpkgext_relations</code>) is used in conjunction with user-defined mapping tables.</p>
 </div>
 <div class="paragraph">
 <p>This extension, like all GeoPackage extensions, is intended to be transparent and to not interfere with GPKG compliant, but non-supporting, software packages. The OGC GeoPackage (GPKG) Related Tables Extension Interoperability Experiment (GPKG-RTE IE) <a href="#GPKG-RTE_IE">[GPKG-RTE_IE]</a> verified that the extension is correctly designed to meet the design goals and to be transparent in this manner. The goal of the IE was achieved by building GeoPackages containing embedded multimedia content and sharing those GeoPackages with other software products. This IE produced an OGC Engineering Report <a href="#GPKG-RTE_IE_ER">[GPKG-RTE_IE_ER]</a> that discusses whether the extension is fit for use and adoption by the OGC.</p>
@@ -680,10 +686,10 @@ To support this, an ancillary data table (<code>gpkgext_relations</code>) is use
 </ul>
 </div>
 <div class="paragraph">
-<p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.</p>
+<p><em>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.</em></p>
 </div>
 <div class="paragraph">
-<p>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</p>
+<p><em>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</em></p>
 </div>
 <div class="paragraph">
 <p><strong class="big">iv.    Submitting organizations</strong></p>
@@ -774,9 +780,10 @@ As an example, this can be used to establish a many-to-many relationship between
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
 </div>
 <div class="sect2">
-<h3 id="_strong_base_data_strong"><a class="anchor" href="#_strong_base_data_strong"></a>4.1. <strong>base data</strong></h3>
+<h3 id="_strong_geospatial_data_strong"><a class="anchor" href="#_strong_geospatial_data_strong"></a>4.1. <strong>geospatial data</strong></h3>
 <div class="paragraph">
-<p>The data (generally, but not exclusively, features) that is being related to as part of this extension</p>
+<p>Data containing location information and/or geometries.
+In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1594,6 +1601,9 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 </li>
 <li>
 <p>[<a id="GPKG-RTE_IE_ER"></a>] GeoPackage Related Tables Extension Interoperability Experiment Engineering Report</p>
+</li>
+<li>
+<p>[<a id="OGC-TJS-IS"></a>] <a href="http://portal.opengeospatial.org/files/?artifact_id=40095">OGC 10-070r2 Table Joining Service Interface Standard</a></p>
 </li>
 </ul>
 </div>
