@@ -566,15 +566,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_references">3. References</a></li>
 <li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
 <ul class="sectlevel2">
-<li><a href="#_strong_cardinality_strong">4.1. <strong>cardinality</strong></a></li>
-<li><a href="#_strong_geospatial_data_strong">4.2. <strong>geospatial data</strong></a></li>
-<li><a href="#_strong_one_to_many_strong">4.3. <strong>one-to-many</strong></a></li>
-<li><a href="#_strong_many_to_many_strong">4.4. <strong>many-to-many</strong></a></li>
-<li><a href="#_strong_many_to_one_strong">4.5. <strong>many-to-one</strong></a></li>
-<li><a href="#_strong_related_data_strong">4.6. <strong>related data</strong></a></li>
-<li><a href="#_strong_user_defined_attributes_table_strong">4.7. <strong>user-defined attributes table</strong></a></li>
-<li><a href="#_strong_user_defined_mapping_table_strong">4.8. <strong>user-defined mapping table</strong></a></li>
-<li><a href="#_strong_user_defined_media_table_strong">4.9. <strong>user-defined media table</strong></a></li>
+<li><a href="#_strong_attributes_data_strong">4.1. <strong>attributes data</strong></a></li>
+<li><a href="#_strong_base_data_strong">4.2. <strong>base data</strong></a></li>
+<li><a href="#_strong_cardinality_strong">4.3. <strong>cardinality</strong></a></li>
+<li><a href="#_strong_geospatial_data_strong">4.4. <strong>geospatial data</strong></a></li>
+<li><a href="#_strong_one_to_many_strong">4.5. <strong>one-to-many</strong></a></li>
+<li><a href="#_strong_many_to_many_strong">4.6. <strong>many-to-many</strong></a></li>
+<li><a href="#_strong_many_to_one_strong">4.7. <strong>many-to-one</strong></a></li>
+<li><a href="#_strong_related_data_strong">4.8. <strong>related data</strong></a></li>
+<li><a href="#_strong_user_defined_attributes_table_strong">4.9. <strong>user-defined attributes table</strong></a></li>
+<li><a href="#_strong_user_defined_mapping_table_strong">4.10. <strong>user-defined mapping table</strong></a></li>
+<li><a href="#_strong_user_defined_media_table_strong">4.11. <strong>user-defined media table</strong></a></li>
 </ul>
 </li>
 <li><a href="#_conventions">5. Conventions</a>
@@ -589,7 +591,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_code_gpkg_extensions_code">6.1.1. <code>gpkg_extensions</code></a></li>
 <li><a href="#_code_gpkgext_relations_code">6.1.2. <code>gpkgext_relations</code></a></li>
 <li><a href="#user_defined_mapping_table">6.1.3. User-Defined Mapping Tables</a></li>
-<li><a href="#user_defined_attributes_table">6.1.4. User-Defined Attribute Tables</a></li>
+<li><a href="#user_defined_related_data_table">6.1.4. User-Defined Related Data Tables</a></li>
 </ul>
 </li>
 <li><a href="#_requirement_class_2_media">6.2. Requirement Class 2 – Media</a>
@@ -643,7 +645,7 @@ There are many examples of where the RTE can be used including relating parcel (
 <p><strong class="big">iii.   Preface</strong></p>
 </div>
 <div class="paragraph">
-<p>The GeoPackage Related Tables Extension (RTE) defines the rules and requirements for creating relationships in a GeoPackage <a href="#geopackage">[geopackage]</a> data store between geospatial data tables and other tables that contain or reference related content such as attributes or media.
+<p>The GeoPackage Related Tables Extension (RTE) defines the rules and requirements for creating relationships in a GeoPackage <a href="#geopackage">[geopackage]</a> data store between geospatial or attributes data tables and other tables that contain or reference related content such as attributes or media.
 Geospatial data tables (such as features or tiles tables) contain location information and/or geometries.
 Conceptually, this extension is similar to the OGC Table Joining Service Interface Standard <a href="#OGC-TJS-IS">[OGC-TJS-IS]</a>.</p>
 </div>
@@ -750,7 +752,7 @@ To support this capability, an ancillary data table (<code>gpkgext_relations</co
 GeoPackage is designed to be extensible, including support for additional data types.</p>
 </div>
 <div class="paragraph">
-<p>This document defines an extension that allows a GeoPackage to contain additional data that is related to geospatial data (generally, but not exclusively, features).
+<p>This document defines an extension that allows a GeoPackage to contain additional data that is related to geospatial (generally, but not exclusively, features) or attributes data.
 As an example, this can be used to establish a many-to-many relationship between features (e.g. points, lines, or areas) and multimedia files.</p>
 </div>
 </div>
@@ -794,56 +796,68 @@ As an example, this can be used to establish a many-to-many relationship between
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
 </div>
 <div class="sect2">
-<h3 id="_strong_cardinality_strong"><a class="anchor" href="#_strong_cardinality_strong"></a>4.1. <strong>cardinality</strong></h3>
+<h3 id="_strong_attributes_data_strong"><a class="anchor" href="#_strong_attributes_data_strong"></a>4.1. <strong>attributes data</strong></h3>
+<div class="paragraph">
+<p>Non-spatial tabular data that is designed to be joined with geospatial data for analysis. In a GeoPackage, attributes data is stored in attributes tables as per <a href="http://www.geopackage.org/spec/#attributes" class="bare">http://www.geopackage.org/spec/#attributes</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_strong_base_data_strong"><a class="anchor" href="#_strong_base_data_strong"></a>4.2. <strong>base data</strong></h3>
+<div class="paragraph">
+<p>Data that is linked in some way to related data (in other words, the <em>left</em> side of the A&#8594;B relationship). In this extension, base data is stored in geospatial or attributes data tables.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_strong_cardinality_strong"><a class="anchor" href="#_strong_cardinality_strong"></a>4.3. <strong>cardinality</strong></h3>
 <div class="paragraph">
 <p>A relationship between two entities <code>A</code> and <code>B</code>. For the purposes of this extension, <code>A</code> refers geospatial data and <code>B</code> refers to related data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_geospatial_data_strong"><a class="anchor" href="#_strong_geospatial_data_strong"></a>4.2. <strong>geospatial data</strong></h3>
+<h3 id="_strong_geospatial_data_strong"><a class="anchor" href="#_strong_geospatial_data_strong"></a>4.4. <strong>geospatial data</strong></h3>
 <div class="paragraph">
 <p>Data containing location information and/or geometries.
 In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_one_to_many_strong"><a class="anchor" href="#_strong_one_to_many_strong"></a>4.3. <strong>one-to-many</strong></h3>
+<h3 id="_strong_one_to_many_strong"><a class="anchor" href="#_strong_one_to_many_strong"></a>4.5. <strong>one-to-many</strong></h3>
 <div class="paragraph">
 <p>A type of cardinality in which an element of <code>A</code> may be linked to zero or more elements of <code>B</code>, but an element of <code>B</code> is linked to one and only one element of <code>A</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_many_to_many_strong"><a class="anchor" href="#_strong_many_to_many_strong"></a>4.4. <strong>many-to-many</strong></h3>
+<h3 id="_strong_many_to_many_strong"><a class="anchor" href="#_strong_many_to_many_strong"></a>4.6. <strong>many-to-many</strong></h3>
 <div class="paragraph">
 <p>A type of cardinality in which an element of <code>A</code> may be linked to zero or more elements of <code>B</code> and an element of <code>B</code> may be linked to zero or more elements of <code>A</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_many_to_one_strong"><a class="anchor" href="#_strong_many_to_one_strong"></a>4.5. <strong>many-to-one</strong></h3>
+<h3 id="_strong_many_to_one_strong"><a class="anchor" href="#_strong_many_to_one_strong"></a>4.7. <strong>many-to-one</strong></h3>
 <div class="paragraph">
 <p>A type of cardinality in which an element of <code>A</code> is linked to one and only one element of <code>B</code>, but an element of <code>B</code> may be linked to zero or more elements of <code>A</code>.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_related_data_strong"><a class="anchor" href="#_strong_related_data_strong"></a>4.6. <strong>related data</strong></h3>
+<h3 id="_strong_related_data_strong"><a class="anchor" href="#_strong_related_data_strong"></a>4.8. <strong>related data</strong></h3>
 <div class="paragraph">
-<p>Data that is linked in some way to geospatial data. In this extension, related data is stored in a user-defined attributes table.</p>
+<p>Data that is linked to in some way to base data (in other words, the <em>right</em> side of the A&#8594;B relationship). In this extension, related data is stored in a user-defined attributes table.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_user_defined_attributes_table_strong"><a class="anchor" href="#_strong_user_defined_attributes_table_strong"></a>4.7. <strong>user-defined attributes table</strong></h3>
+<h3 id="_strong_user_defined_attributes_table_strong"><a class="anchor" href="#_strong_user_defined_attributes_table_strong"></a>4.9. <strong>user-defined attributes table</strong></h3>
 <div class="paragraph">
 <p>In this extension, a user-defined attributes table is a table that contains data that is related to existing geospatial data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_user_defined_mapping_table_strong"><a class="anchor" href="#_strong_user_defined_mapping_table_strong"></a>4.8. <strong>user-defined mapping table</strong></h3>
+<h3 id="_strong_user_defined_mapping_table_strong"><a class="anchor" href="#_strong_user_defined_mapping_table_strong"></a>4.10. <strong>user-defined mapping table</strong></h3>
 <div class="paragraph">
 <p>In this extension, a user-defined mapping table is a join table that links geospatial data and related data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_user_defined_media_table_strong"><a class="anchor" href="#_strong_user_defined_media_table_strong"></a>4.9. <strong>user-defined media table</strong></h3>
+<h3 id="_strong_user_defined_media_table_strong"><a class="anchor" href="#_strong_user_defined_media_table_strong"></a>4.11. <strong>user-defined media table</strong></h3>
 <div class="paragraph">
 <p>In this extension, a user-defined media table is a user-defined attributes table that is specifically designed to contain multimedia content.</p>
 </div>
@@ -1028,36 +1042,36 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>geospatial_table_name</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>base_table_name</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the table containing the geospatial data (e.g., features) to relate</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the table containing the base data (e.g., features) to relate</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>geospatial_primary_column</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>base_primary_column</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the primary key column in <code>geospatial_table_name</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the primary key column in <code>base_table_name</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>attributes_table_name</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>related_table_name</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the table containing the attributes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the table containing the related</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>attributes_primary_column</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>related_primary_column</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the primary key column in <code>attributes_table_name</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the primary key column in <code>related_table_name</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
@@ -1081,15 +1095,6 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>cardinality</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">One of <code>one-to-many</code>, <code>many-to-one</code>, or <code>many-to-many</code></p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -1103,9 +1108,9 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 4</strong> </p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger-geospatial<br>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger-base<br>
 <br></p>
-<p class="tableblock">For each row in <code>gpkgext_relations</code>, there SHALL be a table or view of the name referenced in <code>geospatial_table_name</code> and that table SHALL have an entry in <code>gpkg_contents</code>.
+<p class="tableblock">For each row in <code>gpkgext_relations</code>, there SHALL be a table or view of the name referenced in <code>base_table_name</code> and that table SHALL have an entry in <code>gpkg_contents</code>.
  </p></td>
 </tr>
 </tbody>
@@ -1132,9 +1137,9 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_attributes<br>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_related<br>
 <br></p>
-<p class="tableblock">For each row in <code>gpkgext_relations</code>, the <code>attributes_table_name</code> column SHALL contain the name of a user-defined attributes table as described by <a href="#user_defined_attributes_table">User-Defined Attribute Tables</a>.</p></td>
+<p class="tableblock">For each row in <code>gpkgext_relations</code>, the <code>related_table_name</code> column SHALL contain the name of a user-defined attributes table as described by <a href="#user_defined_related_data_table">User-Defined Related Data Tables</a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1153,20 +1158,6 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The <code>cardinality</code> column is informational only. It should be populated during the data load process and updated by the GeoPackage client if needed. Export processes may use this column to determine the right way to export the data.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 <div class="sect3">
@@ -1211,18 +1202,18 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>geospatial_id</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>base_id</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The primary key value of the geospatial table</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The primary key value of the base data table</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>attributes_id</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>related_id</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The primary key value of the attributes table</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The primary key value of the related data table</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
@@ -1255,9 +1246,9 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8</strong> </p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_geospatial<br>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_base<br>
 <br></p>
-<p class="tableblock">For each row of a user-defined mapping table, the <code>geospatial_id</code> column SHALL correlate to the primary key of the corresponding geospatial table (as identified by the <code>geospatial_primary_column</code> of the associated row in <code>gpkgext_relations</code>).
+<p class="tableblock">For each row of a user-defined mapping table, the <code>base_id</code> column SHALL correlate to the primary key of the corresponding base table (as identified by the <code>base_primary_column</code> of the associated row in <code>gpkgext_relations</code>).
  </p></td>
 </tr>
 </tbody>
@@ -1270,9 +1261,9 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 9</strong> </p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_attributes<br>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_related<br>
 <br></p>
-<p class="tableblock">For each row of a user-defined mapping table, the <code>attributes_id</code> column SHALL correlate to the primary key of the corresponding attributes table (as identified by the <code>attributes_primary_column</code> of the associated row in <code>gpkgext_relations</code>).
+<p class="tableblock">For each row of a user-defined mapping table, the <code>related_id</code> column SHALL correlate to the primary key of the corresponding related data table (as identified by the <code>related_primary_column</code> of the associated row in <code>gpkgext_relations</code>).
  </p></td>
 </tr>
 </tbody>
@@ -1285,7 +1276,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>A user-defined mapping table MAY contain no rows.</p>
+<p>This specification makes no statement on the cardinality of a user-defined mapping table. It MAY contain no rows or have a one-to-many, many-to-one, or many-to-many relationship. While it is possible to enforce a one-to-many or many-to-one relationship by applying a UNIQUE constraint to the <code>attributes_id</code> or <code>base_id</code> respectively, this is NOT RECOMMENDED because the presence of these constraints is not exposed by SQLite in an easy-to-query manner.</p>
 </div>
 </td>
 </tr>
@@ -1294,7 +1285,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="user_defined_attributes_table"><a class="anchor" href="#user_defined_attributes_table"></a>6.1.4. User-Defined Attribute Tables</h4>
+<h4 id="user_defined_related_data_table"><a class="anchor" href="#user_defined_related_data_table"></a>6.1.4. User-Defined Related Data Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_3"><a class="anchor" href="#_table_definition_3"></a>Table Definition</h5>
 <table id="r10" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1305,9 +1296,9 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 10</strong> </p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table_defs/udat<br>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table_defs/udrdt<br>
 <br></p>
-<p class="tableblock"> A user-defined attributes table or view SHALL be an attributes table as defined by <a href="http://www.geopackage.org/spec120/#attributes" class="bare">http://www.geopackage.org/spec120/#attributes</a>.</p></td>
+<p class="tableblock"> A user-defined related data table or view SHALL be an attributes table as defined by <a href="http://www.geopackage.org/spec120/#attributes" class="bare">http://www.geopackage.org/spec120/#attributes</a>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1352,7 +1343,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 11</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/media/udmt<br>
 <br></p>
-<p class="tableblock">A user-defined attributes table or view SHALL be a user-defined media table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>attributes_table_name</code> has a <code>relation_name</code> of "media".
+<p class="tableblock">A user-defined related data table or view SHALL be a user-defined media table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "media".
  </p></td>
 </tr>
 </tbody>
@@ -1498,11 +1489,11 @@ Ensure that there is a conformance class for each requirements class and a test 
 <div class="sectionbody">
 <div class="paragraph">
 <p>This example illustrates support for many-to-many relationships but the concept may be used in a degenerative way to support one-to-many or many-to-one relationships.
-The content of the <code>gpkgext_relations</code> includes a <a href="#features_to_media">features_to_attributes table</a> that relates the <a href="#features">features table values</a> and <a href="#media">[media]</a> using their respective <code>id</code> columns.</p>
+The content of the <code>gpkgext_relations</code> includes a <a href="#features_to_media">features_to_media table</a> that relates the <a href="#features">features table values</a> and <a href="#media">media table values</a> using their respective <code>id</code> columns.</p>
 </div>
 <div class="paragraph">
 <p>In this example, there are four features (ID 1, 2, 3 and 4) and three PNG media items (ID 17, 18, and 19).
-Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
+Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1523,23 +1514,21 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 <table class="tableblock frame-all grid-all spread">
 <caption class="title">Table 5. gpkgext_relations table values</caption>
 <colgroup>
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2857%;">
-<col style="width: 14.2858%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
 </colgroup>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">base_table_name</th>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">base_column</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">attribute_table_name</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">attribute_column</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">related_table_name</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">related_column</th>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">relation_name</th>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">mapping_table_name</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">cardinality</th>
 </tr>
 </thead>
 <tbody>
@@ -1550,7 +1539,6 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">id</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">media</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">features_to_media</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">many-to-many</p></td>
 </tr>
 </tbody>
 </table>
@@ -1585,8 +1573,8 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 </tr>
 </tbody>
 </table>
-<table id="attributes" class="tableblock frame-all grid-all" style="width: 80%;">
-<caption class="title">Table 7. attributes table values</caption>
+<table id="media" class="tableblock frame-all grid-all" style="width: 80%;">
+<caption class="title">Table 7. media table values</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1618,7 +1606,7 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 </tbody>
 </table>
 <table id="features_to_media" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 8. features_to_attributes table</caption>
+<caption class="title">Table 8. features_to_media table</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1626,7 +1614,7 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 <thead>
 <tr>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">base_id</th>
-<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">attribute_id</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">related_id</th>
 </tr>
 </thead>
 <tbody>
@@ -1657,7 +1645,7 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>The <a href="#features_to_media">features_to_attributes table</a> relates the id columns between the features table and the media table.</p>
+<p>The <a href="#features_to_media">features_to_media table</a> table relates the <code>id</code> columns between the features table and the media table.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1672,13 +1660,12 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 <div class="content">
 <pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'gpkgext_relations' (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  geospatial_table_name TEXT NOT NULL,
-  geospatial_primary_column TEXT NOT NULL DEFAULT 'id',
-  attributes_table_name TEXT NOT NULL,
-  attributes_primary_column TEXT NOT NULL DEFAULT 'id',
+  base_table_name TEXT NOT NULL,
+  base_primary_column TEXT NOT NULL DEFAULT 'id',
+  related_table_name TEXT NOT NULL,
+  related_primary_column TEXT NOT NULL DEFAULT 'id',
   relation_name TEXT NOT NULL,
-  mapping_table_name TEXT NOT NULL UNIQUE,
-  cardinality TEXT NOT NULL CHECK( cardinality in ('many-to-many','many-to-one','one-to-many'))
+  mapping_table_name TEXT NOT NULL UNIQUE
  );</code></pre>
 </div>
 </div>
@@ -1688,8 +1675,8 @@ Using the <a href="#features_to_media">features_to_attributes table</a>,</p>
 <div class="listingblock">
 <div class="content">
 <pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_mapping_table' (
-  geospatial_id INTEGER NOT NULL,
-  attributes_id INTEGER NOT NULL
+  base_id INTEGER NOT NULL,
+  related_id INTEGER NOT NULL
  );</code></pre>
 </div>
 </div>
