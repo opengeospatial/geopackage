@@ -429,7 +429,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 </head>
 <body class="book">
-  <div style=" opacity:0.5; z-index:99; color:red; font-size: 6em; width: 100px; height: 100px; position: fixed; top:0; bottom: 0; left: 0; right: 0; margin: auto; ">DRAFT</div>
 <div id="header">
 <h1>OGC GeoPackage Related Tables Extension (DRAFT)</h1>
 </div>
@@ -586,7 +585,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_requirements_normative">6. Requirements (Normative)</a>
 <ul class="sectlevel2">
-<li><a href="#_requirement_class_1_table_definitions">6.1. Requirement Class 1 – Table Definitions</a>
+<li><a href="#_common_requirements_table_definitions">6.1. Common Requirements – Table Definitions</a>
 <ul class="sectlevel3">
 <li><a href="#_code_gpkg_extensions_code">6.1.1. <code>gpkg_extensions</code></a></li>
 <li><a href="#_code_gpkgext_relations_code">6.1.2. <code>gpkgext_relations</code></a></li>
@@ -594,9 +593,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#user_defined_related_data_table">6.1.4. User-Defined Related Data Tables</a></li>
 </ul>
 </li>
-<li><a href="#_requirement_class_2_media">6.2. Requirement Class 2 – Media</a>
+<li><a href="#_media_requirement_class">6.2. Media Requirement Class</a>
 <ul class="sectlevel3">
 <li><a href="#_user_defined_media_tables">6.2.1. User-Defined Media Tables</a></li>
+</ul>
+</li>
+<li><a href="#_simple_attributes_requirement_class">6.3. Simple Attributes Requirement Class</a>
+<ul class="sectlevel3">
+<li><a href="#_user_defined_simple_attribute_tables">6.3.1. User-Defined Simple Attribute Tables</a></li>
+</ul>
+</li>
+<li><a href="#_related_features_requirement_class">6.4. Related Features Requirement Class</a>
+<ul class="sectlevel3">
+<li><a href="#_user_defined_related_features_tables">6.4.1. User-Defined Related Features Tables</a></li>
 </ul>
 </li>
 </ul>
@@ -888,7 +897,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <h2 id="_requirements_normative"><a class="anchor" href="#_requirements_normative"></a>6. Requirements (Normative)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_requirement_class_1_table_definitions"><a class="anchor" href="#_requirement_class_1_table_definitions"></a>6.1. Requirement Class 1 – Table Definitions</h3>
+<h3 id="_common_requirements_table_definitions"><a class="anchor" href="#_common_requirements_table_definitions"></a>6.1. Common Requirements – Table Definitions</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -946,6 +955,35 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/extensions-gerr<br>
+<br></p>
+<p class="tableblock">A GeoPackage that contains a row in the <code>gpkg_extensions</code> table for <code>gpkgext_relations</code> SHALL contain at least one related table relationship.
+ </p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The intent of this requirement is that a GeoPackage shall not declare the Related Tables Extension unless it is used within the GeoPackage. However because a user defined mapping table may be empty, there may not yet be any related data in the GeoPackage. As a consequence, if all related table relationships are removed, the extension must be removed from <code>gpkg_extensions</code> as well.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table id="r3" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 3</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/extensions-udmt<br>
 <br></p>
 <p class="tableblock">A GeoPackage that complies with the Related Tables Extension SHALL contain rows in the <code>gpkg_extensions</code> table for each <a href="#user_defined_mapping_table">User Defined Mapping Table</a> as described in <a href="#gpkg_extensions_records">Extensions Table Record</a>.
@@ -992,14 +1030,14 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 <div class="sect3">
 <h4 id="_code_gpkgext_relations_code"><a class="anchor" href="#_code_gpkgext_relations_code"></a>6.1.2. <code>gpkgext_relations</code></h4>
-<table id="r3" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r4" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 3</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 4</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger<br>
 <br></p>
 <p class="tableblock"> A GeoPackage that complies with this extension SHALL contain a <code>gpkgext_relations</code> table as per <a href="#gpkgext_relations_table">Extended Relations Table Definition</a> and <a href="#gpkgext_relations_sql">Extended Relations Table Definition SQL (Normative)</a>.
@@ -1100,14 +1138,14 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 <div class="sect4">
 <h5 id="_table_values_2"><a class="anchor" href="#_table_values_2"></a>Table Values</h5>
-<table id="r4" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r5" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 4</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger-base<br>
 <br></p>
 <p class="tableblock">For each row in <code>gpkgext_relations</code>, there SHALL be a table or view of the name referenced in <code>base_table_name</code> and that table SHALL have an entry in <code>gpkg_contents</code>.
@@ -1129,20 +1167,6 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </tr>
 </table>
 </div>
-<table id="r5" class="tableblock frame-all grid-all" style="width: 90%;">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 75%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_related<br>
-<br></p>
-<p class="tableblock">For each row in <code>gpkgext_relations</code>, the <code>related_table_name</code> column SHALL contain the name of a user-defined attributes table as described by <a href="#user_defined_related_data_table">User-Defined Related Data Tables</a>.</p></td>
-</tr>
-</tbody>
-</table>
 <table id="r6" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1151,9 +1175,38 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 6</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_related<br>
+<br></p>
+<p class="tableblock">For each row in <code>gpkgext_relations</code>, the <code>related_table_name</code> column SHALL contain the name of a user-defined attributes table as described by <a href="#user_defined_related_data_table">User-Defined Related Data Tables</a>.</p></td>
+</tr>
+</tbody>
+</table>
+<table id="r7" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 7</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_udmt<br>
 <br></p>
 <p class="tableblock">For each row in <code>gpkgext_relations</code>, the <code>mapping_table_name</code> column SHALL contain the name of a user-defined mapping table or view as described by <a href="#user_defined_mapping_table">User-Defined Mapping Tables</a>.
+ </p></td>
+</tr>
+</tbody>
+</table>
+<table id="r8" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_relname<br>
+<br>
+Each <code>relation_name</code> column in a <code>gpkgext_relations</code> row SHALL either match a <code>relation_name</code> from the Requirements Classes for User-Defined Related Data Tables in this specification (e.g. <code>media</code> for <a href="#_media_requirement_class">Media Requirement Class</a>), or be of the form <code>x-</code>&lt;author&gt;_&lt;relation_name&gt; where &lt;author&gt; indicates the person or organization that developed and maintains this set of User-Defined Related Tables.
  </p></td>
 </tr>
 </tbody>
@@ -1164,20 +1217,35 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <h4 id="user_defined_mapping_table"><a class="anchor" href="#user_defined_mapping_table"></a>6.1.3. User-Defined Mapping Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_2"><a class="anchor" href="#_table_definition_2"></a>Table Definition</h5>
-<table id="r7" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r9" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 7</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 9</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt<br>
 <br></p>
-<p class="tableblock">A user-defined mapping table or view SHALL conform to <a href="#gpkgext_user_defined_mapping_table">User-Defined Mapping Table Definition</a>.</p></td>
+<p class="tableblock">A user-defined mapping table or view SHALL contain all of the columns described in <a href="#gpkgext_user_defined_mapping_table">User-Defined Mapping Table Definition</a>.
+</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>A user-defined mapping table MAY contain no rows. This is intended to support declaring a conceptual relationship where no instances of that relationship currently exist in the GeoPackage (e.g. no related data has been added, or all applicable data has been deleted).</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table id="gpkgext_user_defined_mapping_table" class="tableblock frame-all grid-all spread">
 <caption class="title">Table 3. User-Defined Mapping Table Definition</caption>
 <colgroup>
@@ -1229,7 +1297,8 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>See <a href="#gpkgext_user_defined_mapping_table_sql">Extended Relations Mapping Table SQL (Informative)</a> for example SQL for defining a user-defined mapping table.</p>
+<p>See <a href="#gpkgext_user_defined_mapping_table_sql">Extended Relations Mapping Table SQL (Informative)</a> for example SQL for defining a user-defined mapping table.
+A user-defined mapping table MAY also contain other columns not listed here.</p>
 </div>
 </td>
 </tr>
@@ -1238,14 +1307,14 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 <div class="sect4">
 <h5 id="_table_values_3"><a class="anchor" href="#_table_values_3"></a>Table Values</h5>
-<table id="r8" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r10" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 10</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_base<br>
 <br></p>
 <p class="tableblock">For each row of a user-defined mapping table, the <code>base_id</code> column SHALL correlate to the primary key of the corresponding base table (as identified by the <code>base_primary_column</code> of the associated row in <code>gpkgext_relations</code>).
@@ -1253,14 +1322,14 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </tr>
 </tbody>
 </table>
-<table id="r9" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r11" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 9</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 11</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_related<br>
 <br></p>
 <p class="tableblock">For each row of a user-defined mapping table, the <code>related_id</code> column SHALL correlate to the primary key of the corresponding related data table (as identified by the <code>related_primary_column</code> of the associated row in <code>gpkgext_relations</code>).
@@ -1288,14 +1357,14 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <h4 id="user_defined_related_data_table"><a class="anchor" href="#user_defined_related_data_table"></a>6.1.4. User-Defined Related Data Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_3"><a class="anchor" href="#_table_definition_3"></a>Table Definition</h5>
-<table id="r10" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r12" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 10</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 12</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table_defs/udrdt<br>
 <br></p>
 <p class="tableblock"> A user-defined related data table or view SHALL be an attributes table as defined by <a href="http://www.geopackage.org/spec120/#attributes" class="bare">http://www.geopackage.org/spec120/#attributes</a>.</p></td>
@@ -1306,7 +1375,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_requirement_class_2_media"><a class="anchor" href="#_requirement_class_2_media"></a>6.2. Requirement Class 2 – Media</h3>
+<h3 id="_media_requirement_class"><a class="anchor" href="#_media_requirement_class"></a>6.2. Media Requirement Class</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1333,14 +1402,14 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <h4 id="_user_defined_media_tables"><a class="anchor" href="#_user_defined_media_tables"></a>6.2.1. User-Defined Media Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_4"><a class="anchor" href="#_table_definition_4"></a>Table Definition</h5>
-<table id="r11" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r13" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 11</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 13</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/media/udmt<br>
 <br></p>
 <p class="tableblock">A user-defined related data table or view SHALL be a user-defined media table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "media".
@@ -1348,14 +1417,14 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </tr>
 </tbody>
 </table>
-<table id="r12" class="tableblock frame-all grid-all" style="width: 90%;">
+<table id="r14" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 75%;">
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 12</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 14</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/media/table_def<br>
 <br></p>
 <p class="tableblock">A user-defined media table or view SHALL contain all of the columns described in <a href="#gpkg_user_defined_media_table">User-Defined Media Table Definition</a>.</p></td>
@@ -1419,6 +1488,189 @@ A user-defined media table MAY also contain other columns not listed here.</p>
 </tr>
 </table>
 </div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_simple_attributes_requirement_class"><a class="anchor" href="#_simple_attributes_requirement_class"></a>6.3. Simple Attributes Requirement Class</h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Simple Attributes</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/gpkg-rt/1.0/simpleattr" class="bare">http://www.opengis.net/spec/gpkg-rt/1.0/simpleattr</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">www.opengis.net/spec/gpkg-rt/1.0/table-defs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_user_defined_simple_attribute_tables"><a class="anchor" href="#_user_defined_simple_attribute_tables"></a>6.3.1. User-Defined Simple Attribute Tables</h4>
+<div class="sect4">
+<h5 id="_table_definition_5"><a class="anchor" href="#_table_definition_5"></a>Table Definition</h5>
+<table id="r15" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 15</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/simpleattr/udat<br>
+<br></p>
+<p class="tableblock">A user-defined related data table or view SHALL be a user-defined simple attribute table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "simple_attributes".
+ </p></td>
+</tr>
+</tbody>
+</table>
+<table id="r16" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 16</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/simpleattr/table_def<br>
+<br></p>
+<p class="tableblock">A user-defined simple attribute table or view SHALL contain the primary key column and at least one other column as defined in <a href="#gpkg_user_defined_simpleattr_table">User-Defined Simple Attributes Table Definition</a>. A user-defined simple attribute table SHALL only contain data belonging to the TEXT, INTEGER, or REAL storage classes and SHALL NOT contain NULL or BLOB storage classes (e.g., GEOMETRY).</p></td>
+</tr>
+</tbody>
+</table>
+<table id="gpkg_user_defined_simpleattr_table" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 5. User-Defined Simple Attributes Table Definition</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Column Name</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Column Type</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Column Description</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Null</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Autoincrement primary key</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PK</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Text attribute content</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Integer attribute content</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Floating point number attribute content</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>See <a href="#gpkgext_user_defined_simpleattr_table_sql">Example User Defined Simple Attribute Table Definition SQL (Informative)</a> for example SQL for defining a user-defined simple attributes table.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_related_features_requirement_class"><a class="anchor" href="#_related_features_requirement_class"></a>6.4. Related Features Requirement Class</h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Related Features</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/gpkg-rt/1.0/relatedfeat" class="bare">http://www.opengis.net/spec/gpkg-rt/1.0/relatedfeat</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">www.opengis.net/spec/gpkg-rt/1.0/table-defs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="_user_defined_related_features_tables"><a class="anchor" href="#_user_defined_related_features_tables"></a>6.4.1. User-Defined Related Features Tables</h4>
+<div class="sect4">
+<h5 id="_table_definition_6"><a class="anchor" href="#_table_definition_6"></a>Table Definition</h5>
+<table id="r17" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 17</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedfeat/udat<br>
+<br></p>
+<p class="tableblock">A user-defined related data table or view SHALL be a user-defined related features table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "features".
+ </p></td>
+</tr>
+</tbody>
+</table>
+<table id="r18" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 18</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedfeat/table_def<br>
+<br></p>
+<p class="tableblock">A user-defined related features table or view SHALL be a vector feature user data table as defined in <a href="http://www.geopackage.org/spec/#feature_user_tables">the OGC® GeoPackage Encoding Standard</a>.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -1512,7 +1764,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </ul>
 </div>
 <table class="tableblock frame-all grid-all spread">
-<caption class="title">Table 5. gpkgext_relations table values</caption>
+<caption class="title">Table 6. gpkgext_relations table values</caption>
 <colgroup>
 <col style="width: 16.6666%;">
 <col style="width: 16.6666%;">
@@ -1542,8 +1794,21 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The following SQL query will reveal this information:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>select base_table_name,
+    base_primary_column,
+    related_table_name,
+    related_primary_column,
+    mapping_table_name
+from gpkgext_relations;</pre>
+</div>
+</div>
 <table id="features" class="tableblock frame-all grid-all" style="width: 50%;">
-<caption class="title">Table 6. features table values</caption>
+<caption class="title">Table 7. features table values</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1574,7 +1839,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </tbody>
 </table>
 <table id="media" class="tableblock frame-all grid-all" style="width: 80%;">
-<caption class="title">Table 7. media table values</caption>
+<caption class="title">Table 8. media table values</caption>
 <colgroup>
 <col style="width: 33.3333%;">
 <col style="width: 33.3333%;">
@@ -1606,7 +1871,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </tbody>
 </table>
 <table id="features_to_media" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 8. features_to_media table</caption>
+<caption class="title">Table 9. features_to_media table</caption>
 <colgroup>
 <col style="width: 50%;">
 <col style="width: 50%;">
@@ -1647,6 +1912,16 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 <div class="paragraph">
 <p>The <a href="#features_to_media">features_to_media table</a> table relates the <code>id</code> columns between the features table and the media table.</p>
 </div>
+<div class="paragraph">
+<p>The following SQL query will reveal this information:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>select features.id, features_to_media.related_id
+    from features, features_to_media
+where features.id=features_to_media.base_id;</pre>
+</div>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1654,7 +1929,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 <h2 id="_table_definition_sql"><a class="anchor" href="#_table_definition_sql"></a>Annex C: Table Definition SQL</h2>
 <div class="sectionbody">
 <table id="gpkgext_relations_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 9. Extended Relations Table Definition SQL (Normative)</caption>
+<caption class="title">Table 10. Extended Relations Table Definition SQL (Normative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -1670,7 +1945,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </div>
 </div>
 <table id="gpkgext_user_defined_mapping_table_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 10. Extended Relations Mapping Table SQL (Informative)</caption>
+<caption class="title">Table 11. Extended Relations Mapping Table SQL (Informative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -1681,7 +1956,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 </div>
 </div>
 <table id="gpkg_features_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 11. Example User Defined Features Table Definition SQL (Informative)</caption>
+<caption class="title">Table 12. Example User Defined Features Table Definition SQL (Informative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -1697,7 +1972,7 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
 <p>This table is a modified version of <a href="http://www.geopackage.org/spec120/#_sample_feature_table_informative">the informative example in the core document</a>. The <code>raster_or_photo</code> column is removed with the intent of making the binary data available as per this extension.</p>
 </div>
 <table id="gpkgext_user_defined_media_table_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 12. Example User Defined Media Table Definition SQL (Informative)</caption>
+<caption class="title">Table 13. Example User Defined Media Table Definition SQL (Informative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -1705,6 +1980,18 @@ Using the <a href="#features_to_media">features_to_media table</a>,</p>
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   data BLOB NOT NULL,
   content_type TEXT NOT NULL)</code></pre>
+</div>
+</div>
+<table id="gpkgext_user_defined_simpleattr_table_sql" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 14. Example User Defined Simple Attribute Table Definition SQL (Informative)</caption>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_attributes' (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  label TEXT NOT NULL,
+  description TEXT NOT NULL,
+  arisings INTEGER NOT NULL)</code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
