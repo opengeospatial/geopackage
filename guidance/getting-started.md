@@ -13,6 +13,7 @@ There are a number of ways to open a GeoPackage.
 
 ### Creating a GeoPackage
 Similarly, to create a new GeoPackage from scratch or from an existing file (e.g., a shapefile or .csv):
+* For direct SQL access, start with the [empty geopackage template](http://www.geopackage.org/data/empty.gpkg)
 * For a desktop application, consider [QGIS](https://qgis.org/en/site/)
 * For a command line program, consider [GDAL](http://www.gdal.org) vector and raster utilities 
 * This [blog post](http://www.fulcrumapp.com/blog/working-with-geodata/) provides an example that steps through creating a geopackage using ogr2ogr, as well as how to add the [spatialite](https://www.gaia-gis.it/fossil/libspatialite/index) extension to enable further spatial analysis in SQLite.
