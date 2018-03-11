@@ -613,10 +613,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_media_types_for_any_data_encoding_s">7. Media Types for any data encoding(s)</a></li>
 <li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a>
 <ul class="sectlevel2">
-<li><a href="#_conformance_class_a">A.1. Conformance Class A</a>
+<li><a href="#_common_requirements">A.1. Common Requirements</a>
 <ul class="sectlevel3">
 <li><a href="#_requirement_1">A.1.1. Requirement 1</a></li>
 <li><a href="#_requirement_2">A.1.2. Requirement 2</a></li>
+<li><a href="#_requirement_3">A.1.3. Requirement 3</a></li>
+<li><a href="#_requirement_4">A.1.4. Requirement 4</a></li>
+<li><a href="#_requirement_5">A.1.5. Requirement 5</a></li>
+<li><a href="#_requirement_6">A.1.6. Requirement 6</a></li>
+<li><a href="#_requirement_7">A.1.7. Requirement 7</a></li>
+<li><a href="#_requirement_8">A.1.8. Requirement 8</a></li>
+<li><a href="#_requirement_9">A.1.9. Requirement 9</a></li>
+<li><a href="#_requirement_10">A.1.10. Requirement 10</a></li>
+<li><a href="#_requirement_11">A.1.11. Requirement 11</a></li>
 </ul>
 </li>
 </ul>
@@ -771,7 +780,7 @@ As an example, this can be used to establish a many-to-many relationship between
 <h2 id="_conformance"><a class="anchor" href="#_conformance"></a>2. Conformance</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This standard defines requirements for a related tables containing information such as multimedia content to be stored in a GeoPackage.</p>
+<p>This standard defines requirements for specialised attribute tables (containing information such as multimedia content to be stored in a GeoPackage, or simple attributes) and mapping tables to relate information in separate tables, along with metadata to describe those tables and the relationships between them.</p>
 </div>
 <div class="paragraph">
 <p>Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup>.</p>
@@ -820,7 +829,7 @@ As an example, this can be used to establish a many-to-many relationship between
 <div class="sect2">
 <h3 id="_strong_cardinality_strong"><a class="anchor" href="#_strong_cardinality_strong"></a>4.3. <strong>cardinality</strong></h3>
 <div class="paragraph">
-<p>A relationship between two entities <code>A</code> and <code>B</code>. For the purposes of this extension, <code>A</code> refers geospatial data and <code>B</code> refers to related data.</p>
+<p>A relationship between two entities <code>A</code> and <code>B</code>. For the purposes of this extension, <code>A</code> refers to base data and <code>B</code> refers to related data.</p>
 </div>
 </div>
 <div class="sect2">
@@ -851,7 +860,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="sect2">
 <h3 id="_strong_related_data_strong"><a class="anchor" href="#_strong_related_data_strong"></a>4.8. <strong>related data</strong></h3>
 <div class="paragraph">
-<p>Data that is linked to in some way to base data (in other words, the <em>right</em> side of the A&#8594;B relationship). In this extension, related data is stored in a user-defined attributes table.</p>
+<p>Data that is linked to in some way from base data (in other words, the <em>right</em> side of the A&#8594;B relationship). In this extension, related data is stored in a user-defined attributes table (of which user-defined media table is a special case) or feature table.</p>
 </div>
 </div>
 <div class="sect2">
@@ -869,7 +878,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="sect2">
 <h3 id="_strong_user_defined_media_table_strong"><a class="anchor" href="#_strong_user_defined_media_table_strong"></a>4.11. <strong>user-defined media table</strong></h3>
 <div class="paragraph">
-<p>In this extension, a user-defined media table is a user-defined attributes table that is specifically designed to contain multimedia content.</p>
+<p>In this extension, a user-defined media table is a user-defined attributes table that is specifically designed to contain multimedia content (including, but not limited to, images, diagrams, formatted text, moving images or audio).</p>
 </div>
 </div>
 </div>
@@ -883,13 +892,13 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="sect2">
 <h3 id="_identifiers"><a class="anchor" href="#_identifiers"></a>5.1. Identifiers</h3>
 <div class="paragraph">
-<p>The normative provisions in this specification are denoted by the URI</p>
+<p>The normative provisions in this specification are denoted by the URI prefix</p>
 </div>
 <div class="paragraph">
-<p><a href="http://www.opengis.net/spec/{standard}/{m.n}" class="bare">http://www.opengis.net/spec/{standard}/{m.n}</a></p>
+<p><a href="http://www.opengis.net/spec/gpkg-rt/1.0/" class="bare">http://www.opengis.net/spec/gpkg-rt/1.0/</a></p>
 </div>
 <div class="paragraph">
-<p>All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.</p>
+<p>All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base. For example, if the requirement identifier is shown as <code>/req/table-defs/extensions-ger</code> then the unique identifier for that requirement is <code><a href="http://www.opengis.net/spec/gpkg-rt/1.0/req/table-defs/extensions-ger" class="bare">http://www.opengis.net/spec/gpkg-rt/1.0/req/table-defs/extensions-ger</a></code>.</p>
 </div>
 </div>
 </div>
@@ -1149,7 +1158,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger-base<br>
 <br></p>
-<p class="tableblock">For each row in <code>gpkgext_relations</code>, there SHALL be a table or view of the name referenced in <code>base_table_name</code> and that table SHALL have an entry in <code>gpkg_contents</code>.
+<p class="tableblock">For each row in <code>gpkgext_relations</code>, there SHALL be a table or view of the name referenced in <code>base_table_name</code> and that table or view SHALL have an entry in <code>gpkg_contents</code>.
  </p></td>
 </tr>
 </tbody>
@@ -1178,7 +1187,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 6</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_related<br>
 <br></p>
-<p class="tableblock">For each row in <code>gpkgext_relations</code>, the <code>related_table_name</code> column SHALL contain the name of a user-defined attributes table as described by <a href="#user_defined_related_data_table">User-Defined Related Data Tables</a>.</p></td>
+<p class="tableblock">For each row in <code>gpkgext_relations</code>, there SHALL be a table or view of the name referenced in <code>related_table_name</code> and that table or view SHALL have an entry in <code>gpkg_contents</code>.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1399,7 +1408,7 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>This requirements class allows you to relate to multimedia files such as pictures and videos. For example, you could relate building features with pictures or videos taken of those areas.</p>
+<p>This requirements class allows a GeoPackage producer or editor to relate features or attributes to multimedia files such as pictures and videos. For example, this could relate building features with pictures or videos taken of those areas.</p>
 </div>
 <div class="sect3">
 <h4 id="_user_defined_media_tables"><a class="anchor" href="#_user_defined_media_tables"></a>6.2.1. User-Defined Media Tables</h4>
@@ -1485,7 +1494,8 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 <td class="content">
 <div class="paragraph">
 <p>See <a href="#gpkgext_user_defined_media_table_sql">Example User Defined Media Table Definition SQL (Informative)</a> for example SQL for defining a user-defined media table.
-A user-defined media table MAY also contain other columns not listed here.</p>
+A user-defined media table MAY also contain other columns not listed here. Refer to the Dublin Core profile (Informative) for
+a set of additional columns that may be provided.</p>
 </div>
 </td>
 </tr>
@@ -1519,7 +1529,7 @@ A user-defined media table MAY also contain other columns not listed here.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>This requirements class allows you to relate to sets of tabular text or numeric data. For example, you could relate land parcels with statistical information that is collected over different boundaries.</p>
+<p>This requirements class allows a GeoPackage producer or editor to relate sets of tabular text or numeric data. For example, this could relate land parcels with statistical information that is collected over different boundaries, or at different times.</p>
 </div>
 <div class="sect3">
 <h4 id="_user_defined_simple_attribute_tables"><a class="anchor" href="#_user_defined_simple_attribute_tables"></a>6.3.1. User-Defined Simple Attribute Tables</h4>
@@ -1645,7 +1655,7 @@ A user-defined media table MAY also contain other columns not listed here.</p>
 </tbody>
 </table>
 <div class="paragraph">
-<p>This requirements class allows you to link features with other features. For example, you could link road features with related pylon features.</p>
+<p>This requirements class allows a GeoPackage producer or editor to link features with other features. For example, this could link road features with related pylon features.</p>
 </div>
 <div class="sect3">
 <h4 id="_user_defined_related_features_tables"><a class="anchor" href="#_user_defined_related_features_tables"></a>6.4.1. User-Defined Related Features Tables</h4>
@@ -1689,7 +1699,7 @@ A user-defined media table MAY also contain other columns not listed here.</p>
 <h2 id="_media_types_for_any_data_encoding_s"><a class="anchor" href="#_media_types_for_any_data_encoding_s"></a>7. Media Types for any data encoding(s)</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A section describing the MIME-types to be used is mandatory for any standard involving data encodings. If no suitable MIME type exists in <a href="http://www.iana.org/assignments/media-types/index.html" class="bare">http://www.iana.org/assignments/media-types/index.html</a> then this section may be used to define a new MIME type for registration with IANA.</p>
+<p>This standard provides an extension to GeoPackage and does not affect the GeoPackage data encoding.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1710,7 +1720,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </table>
 </div>
 <div class="sect2">
-<h3 id="_conformance_class_a"><a class="anchor" href="#_conformance_class_a"></a>A.1. Conformance Class A</h3>
+<h3 id="_common_requirements"><a class="anchor" href="#_common_requirements"></a>A.1. Common Requirements</h3>
 <div class="sect3">
 <h4 id="_requirement_1"><a class="anchor" href="#_requirement_1"></a>A.1.1. Requirement 1</h4>
 <table class="tableblock frame-all grid-all spread">
@@ -1720,26 +1730,417 @@ Ensure that there is a conformance class for each requirements class and a test 
 </colgroup>
 <tbody>
 <tr>
-<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/conf-class-a/req-name-1</p></td>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/applicability</p></td>
 </tr>
 <tr>
-<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/req-class-a/req-name-1</p></td>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/extensions-ger</p></td>
 </tr>
 <tr>
-<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that&#8230;&#8203;</p></td>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify whether the Related Tables Extension is applicable.</p></td>
 </tr>
 <tr>
-<th class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Inspect&#8230;&#8203;</p></td>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>SELECT COUNT(*) FROM gpkg_extensions WHERE extension_name IN ('related_tables', 'gpkg_related_tables')</code></p>
+<p class="tableblock">Extension not in use if count is empty</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/extensions-ger</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/extensions-ger</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the <code>gpkg_extensions</code> table contains the required <code>gpkgext_relations</code> table.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>SELECT * FROM gpkg_extensions WHERE table_name = 'gpkgext_relations')</code></p>
+<p class="tableblock">Fail if number of rows returned is not 1.</p>
+<p class="tableblock">Pass if results match required content from <a href="#gpkg_extensions_records">Extensions Table Record</a>, else Fail.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect3">
 <h4 id="_requirement_2"><a class="anchor" href="#_requirement_2"></a>A.1.2. Requirement 2</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/extensions-gerr</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/extensions-gerr</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the <code>gpkg_extensions</code> table contains at least one user defined mapping table.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT table_name FROM gpkg_extensions WHERE (extension_name IN ('related_table', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')</code></p>
+<p class="tableblock">2. Fail if number of rows returned is 0.</p>
+<p class="tableblock">3. For each <code>table_name</code> row returned in Step 1:</p>
+<p class="tableblock">  - <code>SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{table_name}'</code></p>
+<p class="tableblock">  - Fail if no rows returned.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_3"><a class="anchor" href="#_requirement_3"></a>A.1.3. Requirement 3</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/extensions-udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/extensions-udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the <code>gpkg_extensions</code> table contains the required user defined mapping table contents</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT column_name, definition, scope FROM gpkg_extensions WHERE (extension_name IN ('related_table', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')</code></p>
+<p class="tableblock">2. Fail if number of rows returned is 0.</p>
+<p class="tableblock">3. For each row returned in Step 1, fail if <code>column_name</code> is not null, <code>definition</code> is not "TBD" or <code>scope</code> is not "read-write".</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_4"><a class="anchor" href="#_requirement_4"></a>A.1.4. Requirement 4</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/ger</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the <code>gpkgext_relations</code> table has the required table definition.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>PRAGMA table_info(gpkgext_relations)</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. Pass if the column names, types, nullability, default values, primary key, and unique key constraints match all of those in the contents of <a href="#gpkgext_relations_table">Extended Relations Table Definition</a>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p class="tableblock">4. Fail otherwise.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_5"><a class="anchor" href="#_requirement_5"></a>A.1.5. Requirement 5</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/ger-base</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger-base</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the base tables listed in <code>gpkgext_relations</code> table are in the GeoPackage database</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT base_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each <code>base_table_name</code> row returned in Step 1:</p>
+<p class="tableblock">  - <code>SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{base_table_name}'</code></p>
+<p class="tableblock">  - Fail if no rows returned.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/ger-base-contents</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger-base</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the base tables listed in <code>gpkgext_relations</code> table are in the GeoPackage contents table</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT base_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each <code>base_table_name</code> row returned in Step 1:</p>
+<p class="tableblock">  - <code>SELECT table_name FROM gpkg_contents WHERE table_name = '{base_table_name}'</code></p>
+<p class="tableblock">  - Fail if no rows returned.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_6"><a class="anchor" href="#_requirement_6"></a>A.1.6. Requirement 6</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/ger-related</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_related</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the related tables listed in <code>gpkgext_relations</code> table are in the GeoPackage database</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT related_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each <code>related_table_name</code> row returned in Step 1:</p>
+<p class="tableblock">  - <code>SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{related_table_name}'</code></p>
+<p class="tableblock">  - Fail if no rows returned.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/ger-related-contents</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_related</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the related tables listed in <code>gpkgext_relations</code> table are in the GeoPackage contents table</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT related_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each <code>related_table_name</code> row returned in Step 1:</p>
+<p class="tableblock">  - <code>SELECT table_name FROM gpkg_contents WHERE table_name = '{related_table_name}'</code></p>
+<p class="tableblock">  - Fail if no rows returned.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_7"><a class="anchor" href="#_requirement_7"></a>A.1.7. Requirement 7</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/ger-udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the mapping tables listed in <code>gpkgext_relations</code> table are in the GeoPackage database</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT mapping_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each <code>mapping_table_name</code> row returned in Step 1:</p>
+<p class="tableblock">  - <code>SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{mapping_table_name}'</code></p>
+<p class="tableblock">  - Fail if no rows returned.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_8"><a class="anchor" href="#_requirement_8"></a>A.1.8. Requirement 8</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/ger-relname</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_relname</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the relation_name entries listed in <code>gpkgext_relations</code> table are valid.</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT base_table_name, relation_name FROM gpkgext_relations WHERE (relation_name NOT IN ('features', 'simple_attributes', 'media') AND relation_name NOT LIKE 'x-<em>%\_</em>%' ESCAPE '\')</code></p>
+<p class="tableblock">2. Fail if returns any rows</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_9"><a class="anchor" href="#_requirement_9"></a>A.1.9. Requirement 9</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the mapping tables listed in <code>gpkgext_relations</code> table have the correct structure</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT mapping_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each <code>mapping_table_name</code> row returned in Step 1:</p>
+<p class="tableblock">  - <code>PRAGMA table_info({mapping_table_name})</code></p>
+<p class="tableblock">  - Fail if returns an empty result set.</p>
+<p class="tableblock">  - Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of <a href="#gpkgext_user_defined_mapping_table">User-Defined Mapping Table Definition</a>. Additional columns, column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_10"><a class="anchor" href="#_requirement_10"></a>A.1.10. Requirement 10</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/udmt-base</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_base</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the contents of mapping tables listed in <code>gpkgext_relations</code> table correlate to base table rows</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT base_table_name, base_primary_column, mapping_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each row returned in Step 1, fail if any <code>base_id</code> value in {mapping_table_name} does not match an entry in the {base_primary_column} column of the {base_table_name} table.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_11"><a class="anchor" href="#_requirement_11"></a>A.1.11. Requirement 11</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/table-defs/udmt-related</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/udmt_related</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the contents of mapping tables listed in <code>gpkgext_relations</code> table correlate to related table rows</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT related_table_name, related_primary_column, mapping_table_name FROM gpkgext_relations</code></p>
+<p class="tableblock">2. Fail if returns an empty result set.</p>
+<p class="tableblock">3. For each row returned in Step 1, fail if any <code>related_id</code> value in {mapping_table_name} does not match an entry in the {related_primary_column} column of the {related_table_name} table.</p>
+<p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
