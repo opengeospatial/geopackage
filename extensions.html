@@ -25,7 +25,16 @@
     </div>
     <div class="container">
       <div class="page-header">
-        <h1>GeoPackage Extensions</h1>
+        <h2>GeoPackage Extensions</h2>
+      </div>
+      <p class="lead">This section lists GeoPackage extensions that have been adopted by OGC and therefore are part of the GeoPackage Encoding Standard.</p>
+      
+  <dl class="row">
+    <dt class="col-sm-3">  <a href="http://docs.opengeospatial.org/is/17-066r1/17-066r1.html">Tiled Gridded Coverage Data</a></dt>
+    <dd class="col-sm-9">The extension (previously titled Elevation Extension)" defines how to encode and store tiled regular gridded data, such as a digital elevation model, in a GeoPackage.</dd>
+  </dl>
+      <div class="page-header">
+        <h2>Community Extensions</h2>
       </div>
       <p class="lead">This page lists GeoPackage extensions that are not currently part of the GeoPackage Encoding Standard. Often these are developed outside of OGC. It is often preferable to use an existing extension (even if it is proprietary) instead of developing your own. Extensions that have widespread adoption will be considered for OGC approval. </p>
       <p class="lead"><i>To publish a new extension, fill out the <a href="http://www.geopackage.org/spec/#extension_template">extension template</a> and let us know on the <a href="https://lists.opengeospatial.org/mailman/listinfo/geopackage">GeoPackage Mailing List</a>.</i></p>
@@ -44,9 +53,6 @@
    </dd>
    <dt class="col-sm-3"><a href="http://www.gdal.org/geopackage_aspatial.html">Aspatial Support (Legacy)</a><dt>
    <dd class="col-sm-9">Support for aspatial data (ie. SQLite tables/views without a geometry column), potentially with associated metadata. This was used in GDAL 2.0 and GDAL 2.1, before the introduction of the 'attributes' data_type of GeoPackage v1.2. Starting with GDAL 2.2, 'attributes' will be used by default instead.
-   </dd>
-   <dt class="col-sm-3"><a href="https://github.com/opengeospatial/geopackage-elevation/blob/master/spec/index.adoc">Tiled Gridded Elevation Data Extension (Draft)</a></dt>
-   <dd class="col-sm-9">Defines the rules for encoding and storing 16-bit and 32-bit tiled regular grid coverages composed of regular gridded data, such as elevation. This extension is currently under revision and this document is scheduled to be updated in August 2017.
    </dd>
    <dt class="col-sm-3"><a href="http://www.geopackage.org/spec110/#extension_geometry_encoding">User Defined Geometry Types (Deprecated)</a><dt>
    <dd class="col-sm-9">Enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage. Removed from GeoPackage 1.2 due to interoperability reasons.
