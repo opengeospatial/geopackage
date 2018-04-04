@@ -626,6 +626,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_requirement_9">A.1.9. Requirement 9</a></li>
 <li><a href="#_requirement_10">A.1.10. Requirement 10</a></li>
 <li><a href="#_requirement_11">A.1.11. Requirement 11</a></li>
+<li><a href="#_requirement_12">A.1.12. Requirement 12</a></li>
+<li><a href="#_requirement_13">A.1.13. Requirement 13</a></li>
+<li><a href="#_requirement_14">A.1.14. Requirement 14</a></li>
+<li><a href="#_requirement_15">A.1.15. Requirement 15</a></li>
+<li><a href="#_requirement_16">A.1.16. Requirement 16</a></li>
+<li><a href="#_requirement_17">A.1.17. Requirement 17</a></li>
 </ul>
 </li>
 </ul>
@@ -1768,7 +1774,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>SELECT * FROM gpkg_extensions WHERE table_name = 'gpkgext_relations')</code></p>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>SELECT * FROM gpkg_extensions WHERE table_name = 'gpkgext_relations'</code></p>
 <p class="tableblock">Fail if number of rows returned is not 1.</p>
 <p class="tableblock">Pass if results match required content from <a href="#gpkg_extensions_records">Extensions Table Record</a>, else Fail.</p></td>
 </tr>
@@ -1797,7 +1803,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT table_name FROM gpkg_extensions WHERE (extension_name IN ('related_table', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')</code></p>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT table_name FROM gpkg_extensions WHERE (extension_name IN ('related_tables', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')</code></p>
 <p class="tableblock">2. Fail if number of rows returned is 0.</p>
 <p class="tableblock">3. For each <code>table_name</code> row returned in Step 1:</p>
 <p class="tableblock">  - <code>SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{table_name}'</code></p>
@@ -1829,7 +1835,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT column_name, definition, scope FROM gpkg_extensions WHERE (extension_name IN ('related_table', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')</code></p>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT column_name, definition, scope FROM gpkg_extensions WHERE (extension_name IN ('related_tables', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')</code></p>
 <p class="tableblock">2. Fail if number of rows returned is 0.</p>
 <p class="tableblock">3. For each row returned in Step 1, fail if <code>column_name</code> is not null, <code>definition</code> is not "TBD" or <code>scope</code> is not "read-write".</p>
 <p class="tableblock">4. Pass if no fails.</p></td>
@@ -2138,6 +2144,187 @@ Ensure that there is a conformance class for each requirements class and a test 
 <p class="tableblock">2. Fail if returns an empty result set.</p>
 <p class="tableblock">3. For each row returned in Step 1, fail if any <code>related_id</code> value in {mapping_table_name} does not match an entry in the {related_primary_column} column of the {related_table_name} table.</p>
 <p class="tableblock">4. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_12"><a class="anchor" href="#_requirement_12"></a>A.1.12. Requirement 12</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/media/udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/media/udmt</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify whether the requirements class applies for user-defined media tables</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>SELECT COUNT(*) FROM gpkgext_relations WHERE relation_name = 'media'</code></p>
+<p class="tableblock">Requirement class is not in use if count is zero</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_13"><a class="anchor" href="#_requirement_13"></a>A.1.13. Requirement 13</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/media/table_def</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/media/table_def</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the user-defined media tables have the correct structure</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT related_table_name FROM gpkgext_relations WHERE relation_name = 'media'</code></p>
+<p class="tableblock">2. For each related_table_name row returned in Step 1:</p>
+<p class="tableblock">- <code>PRAGMA table_info({related_table_name})</code></p>
+<p class="tableblock">- Fail if returns an empty result set.</p>
+<p class="tableblock">- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of [gpkg_user_defined_media_table]. Additional columns, column order, check constraints, trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p class="tableblock">3. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_14"><a class="anchor" href="#_requirement_14"></a>A.1.14. Requirement 14</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/simpleattr/udat</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/simpleattr/udat</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify whether the requirements class applies for user-defined simple attributes tables</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>SELECT COUNT(*) FROM gpkgext_relations WHERE relation_name = 'simple_attributes'</code></p>
+<p class="tableblock">Requirement class is not in use if count is zero</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_15"><a class="anchor" href="#_requirement_15"></a>A.1.15. Requirement 15</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/simpleattr/table_def</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/simpleattr/table_def</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the user-defined simple attribute tables have the correct structure</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT related_table_name FROM gpkgext_relations WHERE relation_name = 'simple_attributes'</code></p>
+<p class="tableblock">2. For each related_table_name row returned in Step 1:</p>
+<p class="tableblock">- <code>PRAGMA table_info({related_table_name})</code></p>
+<p class="tableblock">- Fail if returns an empty result set.</p>
+<p class="tableblock">- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of [gpkg_user_defined_simpleattr_table].</p>
+<p class="tableblock">- Fail if <code>Column Type</code> includes storage classes other than <code>TEXT</code>, <code>INTEGER</code>, or <code>REAL</code>.</p>
+<p class="tableblock">3. Pass if no fails.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_16"><a class="anchor" href="#_requirement_16"></a>A.1.16. Requirement 16</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/relatedfeat/udat</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedfeat/udat</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify whether the requirements class applies for user-defined features tables</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>SELECT COUNT(*) FROM gpkgext_relations WHERE relation_name = 'features'</code></p>
+<p class="tableblock">Requirement class is not in use if count is zero</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_requirement_17"><a class="anchor" href="#_requirement_17"></a>A.1.17. Requirement 17</h4>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test id:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/conf/relatedfeat/table_def</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Requirement:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedfeat/table_def</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test purpose:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the user-defined related features tables have the correct structure</p></td>
+</tr>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Test method:</p></th>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1. <code>SELECT related_table_name FROM gpkgext_relations WHERE relation_name = 'features'</code></p>
+<p class="tableblock">2. For each related_table_name row returned in Step 1:</p>
+<p class="tableblock">- <code>PRAGMA table_info({related_table_name})</code></p>
+<p class="tableblock">- Fail if returns an empty result set.</p>
+<p class="tableblock">- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of [<a href="http://www.geopackage.org/spec/#feature_user_tables" class="bare">http://www.geopackage.org/spec/#feature_user_tables</a>].</p>
+<p class="tableblock">3. Pass if no fails.</p></td>
 </tr>
 </tbody>
 </table>
