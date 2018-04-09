@@ -9188,7 +9188,7 @@ These spatial index triggers SHALL be defined as follows:</p>
                Non-empty geometry
    Actions   : Remove record from rtree for old &lt;i&gt;
                Insert record into rtree for new &lt;i&gt; */</span>
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update3 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update3 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">ON</span> &lt;t&gt;
   <span class="keyword">WHEN</span> OLD.&lt;i&gt; != NEW.&lt;i&gt; <span class="keyword">AND</span>
        (NEW.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;))
 <span class="class">BEGIN</span>
@@ -14394,7 +14394,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-03-29 14:41:47 UTC
+Last updated 2018-04-09 17:32:16 UTC
 </div>
 </div>
 </body>
