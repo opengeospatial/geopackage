@@ -142,7 +142,7 @@ END;
                Non-empty geometry
    Actions   : Remove record from rtree for old <i>
                Insert record into rtree for new <i> */
-CREATE TRIGGER rtree_<t>_<c>_update3 AFTER UPDATE OF <c> ON <t>
+CREATE TRIGGER rtree_<t>_<c>_update3 AFTER UPDATE ON <t>
   WHEN OLD.<i> != NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
 BEGIN
