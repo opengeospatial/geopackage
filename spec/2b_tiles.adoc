@@ -204,10 +204,10 @@ The width of a tile matrix (the difference between `min_x` and `max_x` in `gpkg_
 Similarly, height of a tile matrix (the difference between `min_y` and `max_y` in `gpkg_tile_matrix_set`) SHALL equal the product of `matrix_height`, `tile_height`, and `pixel_y_size` for that zoom level.
 ====
 
-The `gpkg_tile_matrix` table MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.
-
-GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale "whole world" zoom level view ^<<K20>>^, as specified by http://portal.opengeospatial.org/files/?artifact_id=35326[WMTS] <<16>>.
-The tile coordinate (0,0) always refers to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.
+Tile matrices are numbered from top left to bottom right (zero-indexed) so the top left tile is (0,0). 
+(This follows the convention used by by http://portal.opengeospatial.org/files/?artifact_id=35326[WMTS] <<16>>.)
+Tile matrices may be sparsely populated – no specific tile or even tile matrix must be present.
+If the global tile matrix set covers the whole earth, then zoom level 0, tile (0,0) is the whole world.
 
 [[r46]]
 [caption=""]
