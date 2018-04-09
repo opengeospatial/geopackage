@@ -1878,11 +1878,10 @@ Similarly, height of a tile matrix (the difference between <code>min_y</code> an
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>gpkg_tile_matrix</code> table MAY contain row records for zoom levels in a tile pyramid user data table that do not contain tiles.</p>
-</div>
-<div class="paragraph">
-<p>GeoPackages follow the most frequently used conventions of a tile origin at the upper left and a zoom-out-level of 0 for the smallest map scale "whole world" zoom level view <sup><a href="#K20">[K20]</a></sup>, as specified by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.
-The tile coordinate (0,0) always refers to the tile in the upper left corner of the tile matrix at any zoom level, regardless of the actual availability of that tile.</p>
+<p>Tile matrices are numbered from top left to bottom right (zero-indexed) so the top left tile is (0,0).
+(This follows the convention used by by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.)
+Tile matrices may be sparsely populated – no specific tile or even tile matrix must be present.
+If the global tile matrix set covers the whole earth, then zoom level 0, tile (0,0) is the whole world.</p>
 </div>
 <div id="r46" class="exampleblock">
 <div class="title">Requirement 46</div>
@@ -14394,7 +14393,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-09 17:32:16 UTC
+Last updated 2018-04-09 17:47:57 UTC
 </div>
 </div>
 </body>
