@@ -7,7 +7,7 @@ Add a row to this table for each tile pyramid that does not have tile matrices s
 | Column        | Value           |
 | ------------- |-------------|
 | `table_name`  | _tile pyramid user data table name_ |
-| `column_name` | _column containing tile data_ |
+| `column_name` | `tile_data`|
 | `extension_name` | `gpkg_zoom_other` |
 | `definition`  | http://www.geopackage.org/spec120/#extension_geometry_types |
 | `scope`   | _read-write_  |
