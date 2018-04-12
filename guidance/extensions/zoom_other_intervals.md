@@ -1,3 +1,5 @@
+_Go [back](../getting-started.md)_
+
 ### [Zoom Other Intervals](http://www.geopackage.org/spec120/#extension_zoom_other_intervals)
 This extension allows the use of tile pyramids with zoom levels that are separated by something other than a power of 2. This can be useful for certain types of raster data as described in this [blog post](http://geopackage.blogspot.com/2015/11/powers-of-two-scale-sets.html).
 

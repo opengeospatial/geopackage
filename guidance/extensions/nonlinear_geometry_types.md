@@ -1,3 +1,5 @@
+_Go [back](../getting-started.md)_
+
 ### [Nonlinear Geometry Types Extension](http://www.geopackage.org/spec120/#extension_geometry_types)
 This extension allows the use of [extended geometry types](http://www.geopackage.org/spec120/#geometry_types_extension). 
 

@@ -1,3 +1,5 @@
+_Go [back](../getting-started.md)_
+
 ### [Schema](http://www.geopackage.org/spec120/#extension_schema)
 This extension provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly. The information provided by this extension can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic. The extension was originally designed to describe the schema of _features_ but it could apply to any user-defined table with user-defined columns. 
 

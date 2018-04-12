@@ -1,3 +1,5 @@
+_Go [back](../index.html)_
+
 ## Getting Started With GeoPackage
 
 ### Identifying a GeoPackage
@@ -171,7 +173,7 @@ The following extensions have been adopted by OGC:
 * [Zoom Other Intervals](extensions/zoom_other_intervals.md)
 * [Tiles Encoding WebP](extensions/tiles_encoding_webp.md)
 * [Metadata](extensions/metadata.md)
-* [Schema](extensions/metadata.md)
+* [Schema](extensions/schema.md)
 * [WKT for Coordinate Reference Systems](extensions/wkt_for_crs.md)
 * [Tiled Gridded Coverage Data](extensions/tiled_gridded_coverage_data.md)
 

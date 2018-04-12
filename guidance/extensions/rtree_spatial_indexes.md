@@ -1,3 +1,5 @@
+_Go [back](../getting-started.md)_
+
 ### [RTree Spatial Indexes Extension](http://www.geopackage.org/spec120/#extension_rtree)
 This extension adds a new capability for spatially indexing geometry columns. This extension uses the rtree implementation provided by the [SQLite R*Tree Module extension](http://www.sqlite.org/rtree.html).
 
