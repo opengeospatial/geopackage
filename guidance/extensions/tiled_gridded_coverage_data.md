@@ -36,6 +36,7 @@ Add a row to this table for each coverage.
 | `uom` | Units of Measure for values in the grid coverage (see [UCUM](http://unitsofmeasure.org/ucum.html)) |
 | `field_name` | Type of Gridded coverage data (default is "Height") |
 | `quantity_definition` | Description of the values contained in the gridded overage (default is "Height") |
+
 \* Only used for "integer" datatype
 
 #### [`gpkg_2d_gridded_tile_ancillary`](http://docs.opengeospatial.org/is/17-066r1/17-066r1.html#_tile_ancillary)
@@ -52,6 +53,7 @@ Add a row to this table for each tile for each coverage.
 | `max`** | Maximum value of this tile |
 | `mean`** | The arithmetic mean of values in this tile |
 | `std_dev`** | The standard deviation of values in this tile |
+
 \* Only used for "integer" datatype
 
 \*\* These values are natural, not scaled or offset
