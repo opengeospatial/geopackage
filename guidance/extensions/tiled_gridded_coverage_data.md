@@ -18,7 +18,7 @@ To use this extension, add the following rows to this table.
 Like any other content type, add a row for each coverage, using a `data_type` of "2d-gridded-coverage".
 
 #### [`gpkg_spatial_ref_sys`](http://docs.opengeospatial.org/is/17-066r1/17-066r1.html#gpkg_spatial_ref_sys)
-Like any other content type, the CRS for your contents must be registered in this table. A GeoPackage complying with this extension must have an entry for EPSG::4979 (WGS-84 with height above ellipsoid), but use of this SRS is not required.
+Like any other content type, the SRS for your contents must be registered in this table. Much like GeoPackage provides a default SRS (EPSG::4326) for normal use, when this extension is in use, EPSG::4979 (WGS-84 with height above ellipsoid) is provided as a default. However, any valid SRS may be used.
 
 #### [`gpkg_2d_gridded_coverage_ancillary`](http://docs.opengeospatial.org/is/17-066r1/17-066r1.html#coverage-ancillary)
 Add a row to this table for each coverage.
