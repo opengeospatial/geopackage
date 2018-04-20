@@ -1,13 +1,20 @@
 ### GeoPackage Implementation Guide
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
-While the GeoPackage Encoding Standard does not specify client requirements, there are certain expectations that the developers of the standard had when it was developed.
-Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_. Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. Capability Level 1 indicates the minimum level of interoperability and compliance and the levels increase from there. Capability Level 3 generally indicates the long-term vision for GeoPackage compliance.
+While the GeoPackage Encoding Standard does not specify client requirements, there are certain expectations that GeoPackage creators had when the standard was developed.
+This guide attempts to articulate those expectations so that developers produce software that is consistent with what the creators of GeoPackage envisioned.
+
+Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_. 
+Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
+Capability Level 1 indicates the minimum level of interoperability. Capability Level 2 indicates an increased level of capability and compliance and Capability Level 3 generally indicates the long-term vision for GeoPackage support.
 
 This approach allows developers to develop their software incrementally, achieving useful capabilities at a pace aligned with their own roadmaps and business models.
-The approach also gives guidance back to the SWG – some capability levels are not achievable today and these should be given highest priority in future SWG activities.
+There is no expectation that any particular piece of software support any particular capability or capability level.
+Consider this more of a catalog or taxonomy for GeoPackage support capabilities, things that could be supported in GeoPackage software.
+
+> Note: This approach also gives guidance back to the SWG – some capability levels are not achievable today and these should be given highest priority in future SWG activities.
 
 ### Contents
-The `gpkg_contents` table lists the contents that are available in a GeoPackage. A client should use this table to determine what content to load.
+GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for producers and editors) and determine (for clients) what content to load.
 
 ###### Level 0
 Load and utilize one or more sets of contents (tiles or features) using hard-coded table names.
@@ -21,16 +28,16 @@ Load the contents from `gpkg_contents`, present the user a list of contents to u
 ###### Level 3
 Load a list of OWS Context files, each representing a specific use case or scenario, and allow the user to select one for use.
 
-> Note: The specification for this capability is still being developed.
+> NOTE: The specification for this capability is still being developed.
 
 ### Spatial Reference System (SRS)
-The `gpkg_spatial_ref_sys` table lists the SRSs that are in use in a GeoPackage. 
+GeoPackages are expected to use SRSs to ensure the consistency of coordinates.
 
 ###### Level 0
 GeoPackage contents are utilized without recognition of SRSs.
 
 ###### Level 1
-GeoPackage software supports the default SRSs of EPSG::4326 (WGS-84), 0 (undefined geographic coordinate reference systems), and -1 (undefined Cartesian coordinate reference systems).
+GeoPackage software supports the three SRSs of EPSG::4326 (WGS-84), 0 (undefined geographic coordinate reference systems), and -1 (undefined Cartesian coordinate reference systems) that are listed by default in the `gpkg_spatial_ref_sys` table.
 
 ###### Level 2
 GeoPackage software supports arbitrary SRSs that are listed in `gpkg_spatial_ref_sys`. The software performs any transformations needed if multiple SRSs are in use at the same time.
@@ -47,15 +54,15 @@ The actual utilization of feature data is very open-ended. Many systems visualiz
 GeoPackage software supports at least one simple geometry type (point, line, or polygon).
 
 ###### Level 1
-GeoPackage software supports all "simple features" primitive geometry types (point, line, polygon, multipoint, multiline, and multipolygon).
+GeoPackage software supports all six "simple features" primitive geometry types (point, line, polygon, multipoint, multiline, and multipolygon).
 
 ###### Level 2
-GeoPackage software supports geometry collections of arbitrary size and complexity. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage writing software also supports the [RTree Spatial Index Extension](extensions/rtree_spatial_indexes.md) and uses this extension to improve spatial querying performance.
+GeoPackage software supports geometry collections of arbitrary size and complexity. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage-writing software also supports the [RTree Spatial Index Extension](extensions/rtree_spatial_indexes.md) and uses this extension to improve spatial querying performance.
 
 ###### Level 3
 GeoPackage software supports extended geometry types using the [Nonlinear Geometry Types Extension](extensions/nonlinear_geometry_types.md).
 
-#### Attributes of Feature Tables
+#### Attributes of Feature Data
 
 ###### Level 0
 GeoPackage software supports hard-coded attributes.
@@ -67,6 +74,18 @@ GeoPackage software supports arbitrary attributes of any name and [supported dat
 GeoPackage software supports arbitrary attributes that are defined using the [Schema Extension](extensions/schema.md). Where appropriate, the schema defines metadata that improves the readability of visualizations and query results.
 
 #### Feature Visualization
+Not all GeoPackage clients visualize feature data, but those that do must consider how the styles (portrayal rules) are produced and selected by the user.
+
+###### Level 1
+Features are visualized using hard-coded styling rules.
+
+###### Level 2
+Features are styled through the GeoPackage client using styling rules that are provided by the client or defined by the user through the client. 
+
+###### Level 3
+Features styles are encoded as part of Contexts (see above) that are included as part of the GeoPackage.
+
+> NOTE: This capability is still under development.
 
 ### Attributes
 Attributes tables are non-spatial data that may be joined as part of a view. This eliminates a potential source of redundancy and bloat in GeoPackage files.
