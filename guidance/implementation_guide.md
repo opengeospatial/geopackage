@@ -1,7 +1,11 @@
-### GeoPackage Implementation Guide
+_Go [back](../index.html)_
+
+## GeoPackage Implementation Guide
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
 While the GeoPackage Encoding Standard does not specify client requirements, there are certain expectations that GeoPackage creators had when the standard was developed.
 This guide attempts to articulate those expectations so that developers produce software that is consistent with what the creators of GeoPackage envisioned.
+The guide also presents an example client operation.
+If a GeoPackage can perform the indicated operation, it is capable of meeting this capability level.
 
 Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_. 
 Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
@@ -17,13 +21,27 @@ Consider this more of a catalog or taxonomy for GeoPackage support capabilities,
 GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for producers and editors) and determine (for clients) what content to load.
 
 ###### Level 0
-Load and utilize one or more sets of contents (tiles or features) using hard-coded table names.
+GeoPackage Client loads and utilize one or more sets of contents (tiles or features) using hard-coded table names.
 
 ###### Level 1
-Load and utilize a single set of contents (tiles or features) by picking the first item in `gpkg_contents`.
+GeoPackage cliient loads and utilizes a single set of contents (tiles or features) by picking the first item in `gpkg_contents`.
+
+> Example (tiles): 
+> 
+> Open https://portal.opengeospatial.org/files/?artifact_id=74983
+> 
+> Client loads the tiles without interaction with the user
 
 ###### Level 2
 Load the contents from `gpkg_contents`, present the user a list of contents to utilize, and allow the user to open one or more of them.
+
+> Example: 
+> 
+> Open https://portal.opengeospatial.org/files/?artifact_id=74984
+> 
+> Client presents a list with two contents (one tiles, one feature)
+>
+> User can select one or both contents for use
 
 ###### Level 3
 Load a list of OWS Context files, each representing a specific use case or scenario, and allow the user to select one for use.
@@ -39,11 +57,29 @@ GeoPackage contents are utilized without recognition of SRSs.
 ###### Level 1
 GeoPackage software supports the three SRSs of EPSG::4326 (WGS-84), 0 (undefined geographic coordinate reference systems), and -1 (undefined Cartesian coordinate reference systems) that are listed by default in the `gpkg_spatial_ref_sys` table.
 
+> Example: 
+> 
+> Open https://portal.opengeospatial.org/files/?artifact_id=74984
+> 
+> This GeoPackage contains tiles and features, both in EPSG::4326. The client should be able to use these contents normally.
+
 ###### Level 2
 GeoPackage software supports arbitrary SRSs that are listed in `gpkg_spatial_ref_sys`. The software performs any transformations needed if multiple SRSs are in use at the same time.
 
+> Example 1 (features):
+> 
+> Open http://www.geopackage.org/data/sample1_2.gpkg
+> 
+> This GeoPackage contains features in different SRSs. The client should be able to use these contents normally.
+
 ###### Level 3
 GeoPackage software supports arbitrary SRSs that are encoded in [CRS WKT2](http://docs.opengeospatial.org/is/12-063r5/12-063r5.html), using the [WKT for CRS Extension](extensions/wkt_for_crs.md).
+
+> Example 1 (features):
+> 
+> Open http://www.geopackage.org/data/sample1_2F10.gpkg
+> 
+> This GeoPackage contains features in different SRSs encoded using CRS WKT2. The client should be able to use these contents normally.
 
 ### Features
 The actual utilization of feature data is very open-ended. Many systems visualize feature data, but feature data is also well-suited to a number of analysis operations.
@@ -56,11 +92,29 @@ GeoPackage software supports at least one simple geometry type (point, line, or 
 ###### Level 1
 GeoPackage software supports all six "simple features" primitive geometry types (point, line, polygon, multipoint, multiline, and multipolygon).
 
+> Example:
+> 
+> Open http://www.geopackage.org/data/sample1_2.gpkg
+> 
+> The client should be able to handle all of the 2D features (point2d, linestring2d, etc.) in this GeoPackage.
+
 ###### Level 2
-GeoPackage software supports geometry collections of arbitrary size and complexity. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage-writing software also supports the [RTree Spatial Index Extension](extensions/rtree_spatial_indexes.md) and uses this extension to improve spatial querying performance.
+GeoPackage software supports geometry collections (of arbitrary size and complexity) and generic geometries. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage-writing software also supports the [RTree Spatial Index Extension](extensions/rtree_spatial_indexes.md) and uses this extension to improve spatial querying performance.
+
+> Example:
+> 
+> Open http://www.geopackage.org/data/sample1_2.gpkg
+> 
+> The client should be able to handle all of the features in this GeoPackage
 
 ###### Level 3
 GeoPackage software supports extended geometry types using the [Nonlinear Geometry Types Extension](extensions/nonlinear_geometry_types.md).
+
+> Example:
+> 
+> Open http://www.geopackage.org/data/gdal_sample_v1.2_spi_nonlinear_webp_elevation.gpkg
+> 
+> The client should be able to handle all of the features in this GeoPackage
 
 #### Attributes of Feature Data
 
@@ -70,8 +124,16 @@ GeoPackage software supports hard-coded attributes.
 ###### Level 1
 GeoPackage software supports arbitrary attributes of any name and [supported data type](http://www.geopackage.org/spec120/#table_column_data_types). GeoPackage clients read these attributes from the user-defined feature table and present them to the user or utilize them where appropriate.
 
+> Example:
+> 
+> Open http://www.geopackage.org/data/sample1_2.gpkg
+> 
+> The client should be able to use all of the attributes on the features and their attributes in the "counties" layer.
+
 ###### Level 2
 GeoPackage software supports arbitrary attributes that are defined using the [Schema Extension](extensions/schema.md). Where appropriate, the schema defines metadata that improves the readability of visualizations and query results.
+
+> NOTE: There is currently no example available at this time.
 
 #### Feature Geometry Visualization
 Not all GeoPackage clients visualize feature data, but those that do must consider how the styles (portrayal rules) are produced and selected by the user.

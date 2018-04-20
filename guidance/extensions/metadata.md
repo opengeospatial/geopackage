@@ -23,7 +23,7 @@ Add a row to this table for each metadata document.
 | `metadata` | The actual metadata document |
 
 #### `gpkg_metadata_reference`
-Add a row to this table for each GeoPackage, table, column, row, or row/column that has a metadata document.
+Add a row to this table for each GeoPackage, table, column, row, or row/column that has a metadata document. Multiple rows can refer to a single `gpkg_metadata` entry. It is also possible for an element (geopackage, table, column, row, or row/column) to have multiple metadata documents.
 
 | Column        | Value       |
 | ------------- |-------------|
