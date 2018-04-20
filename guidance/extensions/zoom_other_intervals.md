@@ -11,7 +11,7 @@ Add a row to this table for each tile pyramid that does not have tile matrices s
 | `table_name`  | _tile pyramid user data table name_ |
 | `column_name` | `tile_data`|
 | `extension_name` | `gpkg_zoom_other` |
-| `definition`  | http://www.geopackage.org/spec120/#extension_geometry_types |
+| `definition`  | http://www.geopackage.org/spec120/#extension_zoom_other_intervals |
 | `scope`   | _read-write_  |
 
 #### `gpkg_tile_matrix` 
