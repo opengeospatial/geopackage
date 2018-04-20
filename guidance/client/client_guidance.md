@@ -53,7 +53,7 @@ GeoPackage software supports geometry collections of arbitrary size and complexi
 ###### Level 3
 GeoPackage software supports extended geometry types using the [Nonlinear Geometry Types Extension](../extensions/nonlinear_geometry_types.md).
 
-#### Attributes
+#### Attributes of Feature Tables
 
 ###### Level 0
 GeoPackage software supports hard-coded attributes.
@@ -62,7 +62,18 @@ GeoPackage software supports hard-coded attributes.
 GeoPackage software supports arbitrary attributes of any name and [supported data type](http://www.geopackage.org/spec120/#table_column_data_types).
 
 ###### Level 2
-GeoPackage software supports arbitrary attributes that are defined using the [Schema Extension](../extensions/schema.md).
+GeoPackage software supports arbitrary attributes that are defined using the [Schema Extension](../extensions/schema.md). Where appropriate, the schema i
+
+### Attributes
+Attributes tables are non-spatial data that may be joined . This eliminates a potential source of redundancy and bloat in GeoPackage files.
+
+###### Level 1
+GeoPackage-writing software creates views to join feature tables and attribute tables. (GeoPackage clients are then able to utilize these views as they would a table, but only in a read-only mode.)
+
+###### Level 2
+GeoPackage-writing software uses the ["updatable view" technique](https://www.sqlite.org/lang_createtrigger.html#instead_of_trigger) to produce updatable views that combine the flexibility of joining multiple tables together with the insert/update/delete capabilities of a table. (GeoPackage clients are then able to utilize these views as they would a table.)
+
+> NOTE: While this capability is possible today, there is currently not clear guidance on how this should be done.
 
 ###### Level 3
 GeoPackage software supports many-to-many relationships between features and attributes using the Related Tables Extension.
@@ -87,7 +98,9 @@ GeoPackage software supports tile matrix sets with arbitrary zoom levels using t
 GeoPackage software supports PNG and JPG tiles.
 
 ###### Level 2
-GeoPackage-producing software produces heterogeneous tile sets for imagery overlays, using JPG files (with their superior compression) for central tiles and PNG (with alpha channel transparency) for border tiles so that the user is able to see the underlying layers at the edge of the imagery coverage area.
+GeoPackage-writing software produces heterogeneous tile sets for imagery overlays, using JPG files (with their superior compression) for central tiles and PNG (with alpha channel transparency) for border tiles so that the user is able to see the underlying layers at the edge of the imagery coverage area.
 
 ###### Level 3
 GeoPackage software supports the WebP format using the [Tiles Encoding WebP Extension](../extensions/tiles_encoding_webp.md). GeoPackage producers use this format to reduce GeoPackage size when the expected clients are known to support it.
+
+
