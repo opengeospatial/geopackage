@@ -167,8 +167,11 @@ When a GeoPackage is loaded for visualization via an OWS Context (see above), th
 
 ### Metadata
 ###### Level 1
+GeoPackage-writing software fully populates the `gpkg_contents` table for each set of contents and GeoPackage clients present this information to the user.
 
 ###### Level 2
+GeoPackage software supports the [Metadata Extension](extensions/metadata.md). GeoPackage-writing software populates the two metadata tables with information regarding each dataset and GeoPackage clients make this metadata available to the user upon request. 
 
 ###### Level 3
+GeoPackage software supports hierarchical metadata in conjunction with the [Metadata Extension](extensions/metadata.md). Metadata is traceable from the tile or feature level up to the GeoPackage level.
 
