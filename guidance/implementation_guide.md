@@ -68,12 +68,12 @@ GeoPackage software supports extended geometry types using the [Nonlinear Geomet
 GeoPackage software supports hard-coded attributes.
 
 ###### Level 1
-GeoPackage software supports arbitrary attributes of any name and [supported data type](http://www.geopackage.org/spec120/#table_column_data_types).
+GeoPackage software supports arbitrary attributes of any name and [supported data type](http://www.geopackage.org/spec120/#table_column_data_types). GeoPackage clients read these attributes from the user-defined feature table and present them to the user or utilize them where appropriate.
 
 ###### Level 2
 GeoPackage software supports arbitrary attributes that are defined using the [Schema Extension](extensions/schema.md). Where appropriate, the schema defines metadata that improves the readability of visualizations and query results.
 
-#### Feature Visualization
+#### Feature Geometry Visualization
 Not all GeoPackage clients visualize feature data, but those that do must consider how the styles (portrayal rules) are produced and selected by the user.
 
 ###### Level 1
@@ -87,8 +87,27 @@ Features styles are encoded as part of Contexts (see above) that are included as
 
 > NOTE: This capability is still under development.
 
+#### Feature Attribute Visualization
+###### Level 0
+Attributes may be used internally but are not exposed to the user by 
+
+
+###### Level 1
+Features are visualized using hard-coded styling rules.
+
+###### Level 2
+Features are styled through the GeoPackage client using styling rules that are provided by the client (perhaps based on content type) or defined by the user through the client. 
+
+###### Level 3
+Features styles are encoded as part of Contexts (see above) that are included as part of the GeoPackage.
+
+> NOTE: This capability is still under development.
+
 ### Attributes
 Attributes tables are non-spatial data that may be joined as part of a view. This eliminates a potential source of redundancy and bloat in GeoPackage files.
+
+###### Level 0
+Attribute information is duplicated across multiple feature tables instead of being stored in a separate attributes table.
 
 ###### Level 1
 GeoPackage-writing software creates views to join feature tables and attribute tables. (GeoPackage clients are then able to utilize these views as they would a table, but only in a read-only mode.)
@@ -129,7 +148,7 @@ GeoPackage software supports PNG and JPG tiles.
 GeoPackage-writing software produces heterogeneous tile sets for imagery overlays, using JPG files (with their superior compression) for central tiles and PNG (with alpha channel transparency) for border tiles so that the user is able to see the underlying layers at the edge of the imagery coverage area.
 
 ###### Level 3
-GeoPackage software supports the WebP format using the [Tiles Encoding WebP Extension](extensions/tiles_encoding_webp.md). GeoPackage producers use this format to reduce GeoPackage size when the expected clients are known to support it.
+GeoPackage software supports the WebP format using the [Tiles Encoding WebP Extension](extensions/tiles_encoding_webp.md). GeoPackage-writing software uses this format to reduce GeoPackage size when the expected clients are known to support it.
 
 #### Tile Visualization
 ###### Level 0
@@ -146,4 +165,10 @@ When a GeoPackage is loaded for visualization via an OWS Context (see above), th
 
 > Note: The specification for this capability is still being developed.
 
+### Metadata
+###### Level 1
+
+###### Level 2
+
+###### Level 3
 
