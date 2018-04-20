@@ -1,7 +1,7 @@
 _Go [back](../getting-started.md)_
 
 ### [WKT for Coordinate Reference Systems](http://www.geopackage.org/spec120/#extension_crs_wkt)
-This extension allows the use of the "[Well-known text representation of coordinate reference systems](http://docs.opengeospatial.org/is/12-063r5/12-063r5.html)" format (OGC 12-063r5) to describe SRSs.
+This extension allows the use of the "[Well-known text representation of coordinate reference systems](http://docs.opengeospatial.org/is/12-063r5/12-063r5.html)" format (OGC 12-063r5, also known as CRS WKT2) to describe SRSs.
 
 #### `gpkg_extensions`
 If using this extension, add the following row to this table:
