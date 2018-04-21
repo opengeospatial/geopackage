@@ -193,11 +193,23 @@ GeoPackage software supports a hard-coded tile matrix set.
 ###### Level 1
 GeoPackage software supports the Google Maps-compatible Tile Matrix Set. 
 
+> Example:
+> 
+> Load the "rivers_tiles" tile pyramid from http://geopackage.org/data/rivers.gpkg. 
+> Zoom levels 1-6 should be available.
+
 ###### Level 2
 GeoPackage software supports any tile matrix set that has a power-of-2 interval between zoom levels.
 
+> Example:
+> 
+> Load the "MGCPPREVIEW5SKU" tile pyramid from https://portal.opengeospatial.org/files/?artifact_id=74863.
+> Zoom levels 9-16 should be available.
+
 ###### Level 3
 GeoPackage software supports tile matrix sets with arbitrary zoom levels using the [Zoom Other Intervals](extensions/zoom_other_intervals.md) extension. When useful, this extension is used to preserve the quality of the highest zoom level and minimize the bloat of the GeoPackage.
+
+> NOTE: There is currently no example available at this time.
 
 #### Tile Encoding
 
@@ -210,12 +222,21 @@ GeoPackage-writing software produces heterogeneous tile sets for imagery overlay
 ###### Level 3
 GeoPackage software supports the WebP format using the [Tiles Encoding WebP Extension](extensions/tiles_encoding_webp.md). GeoPackage-writing software uses this format to reduce GeoPackage size when the expected clients are known to support it.
 
+> Example:
+> 
+> Load the "byte_webp" tile pyramid from http://www.geopackage.org/data/gdal_sample_v1.2_spi_nonlinear_webp_elevation.gpkg.
+> A single tile should be available.
+
 #### Tile Visualization
+This section applies to generic map capabilities of a GeoPackage client.
+
 ###### Level 0
 A GeoPackage client can render a fixed view of tiled raster data.
 
 ###### Level 1
 A GeoPackage client can display the raster data (centered on the extents specified in the corresponding row of `gpkg_contents`), pan, switch zoom levels, and zoom to global extent.
+
+> NOTE:  Any tiles example could be used to demonstrate the desired behavior.
 
 ###### Level 2
 A GeoPackage client can display multiple tile matrix sets simultaneously, transforming into a single SRS if needed.
@@ -229,9 +250,20 @@ When a GeoPackage is loaded for visualization via an OWS Context (see above), th
 ###### Level 1
 GeoPackage-writing software fully populates the `gpkg_contents` table for each set of contents and GeoPackage clients present this information to the user.
 
+> NOTE:  Any compliant GeoPackage could be used to demonstrate the desired behavior.
+
 ###### Level 2
 GeoPackage software supports the [Metadata Extension](extensions/metadata.md). GeoPackage-writing software populates the two metadata tables with information regarding each dataset and GeoPackage clients make this metadata available to the user upon request. 
 
+> Example:
+> 
+> Load 
+https://portal.opengeospatial.org/files/?artifact_id=74984.
+>
+> There is metadata for the whole GeoPackage and for the "Veg_DC" layer.
+
 ###### Level 3
 GeoPackage software supports hierarchical metadata in conjunction with the [Metadata Extension](extensions/metadata.md). Metadata is traceable from the tile or feature level up to the GeoPackage level.
+
+> NOTE: There is currently no example available at this time.
 
