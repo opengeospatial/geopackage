@@ -135,33 +135,31 @@ GeoPackage software supports arbitrary attributes that are defined using the [Sc
 
 > NOTE: There is currently no example available at this time.
 
-#### Feature Geometry Visualization
+#### Feature Visualization
 Not all GeoPackage clients visualize feature data, but those that do must consider how the styles (portrayal rules) are produced and selected by the user.
 
 ###### Level 1
-Features are visualized using hard-coded styling rules.
+Feature geometries and/or attributes are visualized using hard-coded styling rules.
+
+> Example: 
+> 
+> Open https://portal.opengeospatial.org/files/?artifact_id=74984 and select the vegetation layer.
+> 
+> The client then renders the features using hard-coded styling rules.
 
 ###### Level 2
-Features are styled through the GeoPackage client using styling rules that are provided by the client or defined by the user through the client. 
+Feature geometries and/or attributes are styled through the GeoPackage client using styling rules that are provided by the client or defined by the user through the client. 
+
+> Example: 
+> 
+> Open https://portal.opengeospatial.org/files/?artifact_id=74984 and select the vegetation layer.
+> 
+> The client asks the user to select a styling rules set or to create one.
+>
+> The client then renders the features using the selected styling rules.
 
 ###### Level 3
-Features styles are encoded as part of Contexts (see above) that are included as part of the GeoPackage.
-
-> NOTE: This capability is still under development.
-
-#### Feature Attribute Visualization
-###### Level 0
-Attributes may be used internally but are not exposed to the user by 
-
-
-###### Level 1
-Features are visualized using hard-coded styling rules.
-
-###### Level 2
-Features are styled through the GeoPackage client using styling rules that are provided by the client (perhaps based on content type) or defined by the user through the client. 
-
-###### Level 3
-Features styles are encoded as part of Contexts (see above) that are included as part of the GeoPackage.
+Feature styles are encoded as part of Contexts (see above) that are included as part of the GeoPackage.
 
 > NOTE: This capability is still under development.
 
