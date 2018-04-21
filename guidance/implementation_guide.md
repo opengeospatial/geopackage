@@ -3,13 +3,13 @@ _Go [back](../index.html)_
 ## GeoPackage Implementation Guide
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
 While the GeoPackage Encoding Standard does not specify client requirements, there are certain expectations that GeoPackage creators had when the standard was developed.
-This guide attempts to articulate those expectations so that developers produce software that is consistent with what the creators of GeoPackage envisioned.
-The guide also presents an example client operation.
-If a GeoPackage can perform the indicated operation, it is capable of meeting this capability level.
+This guide attempts to articulate those expectations so that developers produce software that is consistent with what GeoPackage creators envisioned.
 
 Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_. 
 Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
 Capability Level 1 indicates the minimum level of interoperability. Capability Level 2 indicates an increased level of capability and compliance and Capability Level 3 generally indicates the long-term vision for GeoPackage support.
+Where possible, the guide also presents an example client operation for each capability level.
+If a GeoPackage can perform the indicated operation, it is capable of meeting this capability level.
 
 This approach allows developers to develop their software incrementally, achieving useful capabilities at a pace aligned with their own roadmaps and business models.
 There is no expectation that any particular piece of software support any particular capability or capability level.
@@ -21,27 +21,27 @@ Consider this more of a catalog or taxonomy for GeoPackage support capabilities,
 GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for producers and editors) and determine (for clients) what content to load.
 
 ###### Level 0
-GeoPackage Client loads and utilize one or more sets of contents (tiles or features) using hard-coded table names.
+GeoPackage client loads and utilize one or more sets of contents (tiles or features) using hard-coded table names.
 
 ###### Level 1
-GeoPackage cliient loads and utilizes a single set of contents (tiles or features) by picking the first item in `gpkg_contents`.
+GeoPackage client loads and utilizes a single set of contents (tiles or features) by picking the first item in `gpkg_contents`.
 
 > Example (tiles): 
 > 
-> Open https://portal.opengeospatial.org/files/?artifact_id=74983
+> Open https://portal.opengeospatial.org/files/?artifact_id=74983.
 > 
-> Client loads the tiles without interaction with the user
+> Client loads the tiles without interaction with the user.
 
 ###### Level 2
-Load the contents from `gpkg_contents`, present the user a list of contents to utilize, and allow the user to open one or more of them.
+GeoPackage client loads the contents from `gpkg_contents`, presents the user a list of contents to utilize, and allows the user to open one or more of them.
 
 > Example: 
 > 
 > Open https://portal.opengeospatial.org/files/?artifact_id=74984
 > 
-> Client presents a list with two contents (one tiles, one feature)
+> Client presents a list with two contents (one tiles, one feature).
 >
-> User can select one or both contents for use
+> User can select one or both contents for use.
 
 ###### Level 3
 Load a list of OWS Context files, each representing a specific use case or scenario, and allow the user to select one for use.
@@ -59,7 +59,7 @@ GeoPackage software supports the three SRSs of EPSG::4326 (WGS-84), 0 (undefined
 
 > Example: 
 > 
-> Open https://portal.opengeospatial.org/files/?artifact_id=74984
+> Open https://portal.opengeospatial.org/files/?artifact_id=74984.
 > 
 > This GeoPackage contains tiles and features, both in EPSG::4326. The client should be able to use these contents normally.
 
@@ -68,7 +68,7 @@ GeoPackage software supports arbitrary SRSs that are listed in `gpkg_spatial_ref
 
 > Example 1 (features):
 > 
-> Open http://www.geopackage.org/data/sample1_2.gpkg
+> Open http://www.geopackage.org/data/sample1_2.gpkg.
 > 
 > This GeoPackage contains features in different SRSs. The client should be able to use these contents normally.
 
@@ -77,7 +77,7 @@ GeoPackage software supports arbitrary SRSs that are encoded in [CRS WKT2](http:
 
 > Example 1 (features):
 > 
-> Open http://www.geopackage.org/data/sample1_2F10.gpkg
+> Open http://www.geopackage.org/data/sample1_2F10.gpkg.
 > 
 > This GeoPackage contains features in different SRSs encoded using CRS WKT2. The client should be able to use these contents normally.
 
@@ -94,7 +94,7 @@ GeoPackage software supports all six "simple features" primitive geometry types 
 
 > Example:
 > 
-> Open http://www.geopackage.org/data/sample1_2.gpkg
+> Open http://www.geopackage.org/data/sample1_2.gpkg.
 > 
 > The client should be able to handle all of the 2D features (point2d, linestring2d, etc.) in this GeoPackage.
 
@@ -103,18 +103,18 @@ GeoPackage software supports geometry collections (of arbitrary size and complex
 
 > Example:
 > 
-> Open http://www.geopackage.org/data/sample1_2.gpkg
+> Open http://www.geopackage.org/data/sample1_2.gpkg.
 > 
-> The client should be able to handle all of the features in this GeoPackage
+> The client should be able to handle all of the features in this GeoPackage.
 
 ###### Level 3
 GeoPackage software supports extended geometry types using the [Nonlinear Geometry Types Extension](extensions/nonlinear_geometry_types.md).
 
 > Example:
 > 
-> Open http://www.geopackage.org/data/gdal_sample_v1.2_spi_nonlinear_webp_elevation.gpkg
+> Open http://www.geopackage.org/data/gdal_sample_v1.2_spi_nonlinear_webp_elevation.gpkg.
 > 
-> The client should be able to handle all of the features in this GeoPackage
+> The client should be able to handle all of the features in this GeoPackage.
 
 #### Attributes of Feature Data
 
@@ -126,7 +126,7 @@ GeoPackage software supports arbitrary attributes of any name and [supported dat
 
 > Example:
 > 
-> Open http://www.geopackage.org/data/sample1_2.gpkg
+> Open http://www.geopackage.org/data/sample1_2.gpkg.
 > 
 > The client should be able to use all of the attributes on the features and their attributes in the "counties" layer.
 
@@ -204,6 +204,7 @@ GeoPackage software supports any tile matrix set that has a power-of-2 interval 
 > Example:
 > 
 > Load the "MGCPPREVIEW5SKU" tile pyramid from https://portal.opengeospatial.org/files/?artifact_id=74863.
+>
 > Zoom levels 9-16 should be available.
 
 ###### Level 3
@@ -219,12 +220,15 @@ GeoPackage software supports PNG and JPG tiles.
 ###### Level 2
 GeoPackage-writing software produces heterogeneous tile sets for imagery overlays, using JPG files (with their superior compression) for central tiles and PNG (with alpha channel transparency) for border tiles so that the user is able to see the underlying layers at the edge of the imagery coverage area.
 
+> NOTE: There is currently no example available at this time.
+
 ###### Level 3
 GeoPackage software supports the WebP format using the [Tiles Encoding WebP Extension](extensions/tiles_encoding_webp.md). GeoPackage-writing software uses this format to reduce GeoPackage size when the expected clients are known to support it.
 
 > Example:
 > 
 > Load the "byte_webp" tile pyramid from http://www.geopackage.org/data/gdal_sample_v1.2_spi_nonlinear_webp_elevation.gpkg.
+>
 > A single tile should be available.
 
 #### Tile Visualization
@@ -240,6 +244,8 @@ A GeoPackage client can display the raster data (centered on the extents specifi
 
 ###### Level 2
 A GeoPackage client can display multiple tile matrix sets simultaneously, transforming into a single SRS if needed.
+
+> NOTE: There is currently no example available at this time.
 
 ###### Level 3
 When a GeoPackage is loaded for visualization via an OWS Context (see above), the default view is read from the Context.
