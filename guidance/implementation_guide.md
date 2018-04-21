@@ -2,14 +2,19 @@ _Go [back](../index.html)_
 
 ## GeoPackage Implementation Guide
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
-While the GeoPackage Encoding Standard does not specify client requirements, there are certain expectations that GeoPackage creators had when the standard was developed.
-This guide attempts to articulate those expectations so that developers produce software that is consistent with what GeoPackage creators envisioned.
+While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed.
+This guide attempts to articulate those expectations so that developers produce software that is consistent with what GeoPackage creators envisioned. 
+Where appropriate, the roles of GeoPackage-writing software (producers and editors) are differentiated from clients.
+
+> NOTE: For the purposes of this guide, client operations are by definition _read-only_ even though clients may of course edit GeoPackages.
+> If there is no considerable difference between reading and writing software, the generic term _GeoPackage software_ is used.
 
 Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_. 
 Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
 Capability Level 1 indicates the minimum level of interoperability. Capability Level 2 indicates an increased level of capability and compliance and Capability Level 3 generally indicates the long-term vision for GeoPackage support.
 Where possible, the guide also presents an example client operation for each capability level.
-If a GeoPackage can perform the indicated operation, it is capable of meeting this capability level.
+If a GeoPackage client can perform the indicated operation, it is capable of meeting this capability level.
+The compliance of GeoPackage-writing software is easier to define; if it can produce a GeoPackage that can be used in place of the file referenced in the sample, then it is compliant.
 
 This approach allows developers to develop their software incrementally, achieving useful capabilities at a pace aligned with their own roadmaps and business models.
 There is no expectation that any particular piece of software support any particular capability or capability level.
@@ -18,7 +23,7 @@ Consider this more of a catalog or taxonomy for GeoPackage support capabilities,
 > Note: This approach also gives guidance back to the SWG – some capability levels are not achievable today and these should be given highest priority in future SWG activities.
 
 ### Contents
-GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for producers and editors) and determine (for clients) what content to load.
+GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for GeoPackage-writing software) and determine (for clients) what content to load.
 
 ###### Level 0
 GeoPackage client loads and utilize one or more sets of contents (tiles or features) using hard-coded table names.
@@ -44,7 +49,7 @@ GeoPackage client loads the contents from `gpkg_contents`, presents the user a l
 > User can select one or both contents for use.
 
 ###### Level 3
-Load a list of OWS Context files, each representing a specific use case or scenario, and allow the user to select one for use.
+GeoPackage client loads a list of OWS Context files, each representing a specific use case or scenario, and allows the user to select one for use.
 
 > NOTE: The specification for this capability is still being developed.
 
@@ -99,7 +104,7 @@ GeoPackage software supports all six "simple features" primitive geometry types 
 > The client should be able to handle all of the 2D features (point2d, linestring2d, etc.) in this GeoPackage.
 
 ###### Level 2
-GeoPackage software supports geometry collections (of arbitrary size and complexity) and generic geometries. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage-writing software also supports the [RTree Spatial Index Extension](extensions/rtree_spatial_indexes.md) and uses this extension to improve spatial querying performance.
+GeoPackage software supports geometry collections (of arbitrary size and complexity) and generic geometries. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage-writing software also supports the [RTree Spatial Index Extension](extensions/rtree_spatial_indexes.md) and uses this extension to improve spatial querying performance for clients.
 
 > Example:
 > 
@@ -217,10 +222,12 @@ GeoPackage software supports tile matrix sets with arbitrary zoom levels using t
 ###### Level 1
 GeoPackage software supports PNG and JPG tiles.
 
+> NOTE: Client support for JPG and PNG is so ubiquitous that it is unlikely that a visualization client would not be able to display either.
+
 ###### Level 2
 GeoPackage-writing software produces heterogeneous tile sets for imagery overlays, using JPG files (with their superior compression) for central tiles and PNG (with alpha channel transparency) for border tiles so that the user is able to see the underlying layers at the edge of the imagery coverage area.
 
-> NOTE: There is currently no example available at this time.
+> NOTE: Because of the aforementioned ubiquity of PNG and JPG support, this is more of a challenge for GeoPackage-writing software.
 
 ###### Level 3
 GeoPackage software supports the WebP format using the [Tiles Encoding WebP Extension](extensions/tiles_encoding_webp.md). GeoPackage-writing software uses this format to reduce GeoPackage size when the expected clients are known to support it.
@@ -267,6 +274,11 @@ GeoPackage software supports the [Metadata Extension](extensions/metadata.md). G
 https://portal.opengeospatial.org/files/?artifact_id=74984.
 >
 > There is metadata for the whole GeoPackage and for the "Veg_DC" layer.
+
+-----------
+
+> NOTE: There are a number of metadata formats available. Support or conformance to these formats is outside the scope of this document.
+
 
 ###### Level 3
 GeoPackage software supports hierarchical metadata in conjunction with the [Metadata Extension](extensions/metadata.md). Metadata is traceable from the tile or feature level up to the GeoPackage level.
