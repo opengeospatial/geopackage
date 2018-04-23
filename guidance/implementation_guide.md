@@ -168,25 +168,6 @@ Feature styles are encoded as part of Contexts (see above) that are included as 
 
 > NOTE: This capability is still under development.
 
-### Attributes
-Attributes tables are non-spatial data that may be joined as part of a view. This eliminates a potential source of redundancy and bloat in GeoPackage files.
-
-###### Level 0
-Attribute information is duplicated across multiple feature tables instead of being stored in a separate attributes table.
-
-###### Level 1
-GeoPackage-writing software creates views to join feature tables and attribute tables. (GeoPackage clients are then able to utilize these views as they would a table, but only in a read-only mode.)
-
-###### Level 2
-GeoPackage-writing software uses the ["updatable view" technique](https://www.sqlite.org/lang_createtrigger.html#instead_of_trigger) to produce updatable views that combine the flexibility of joining multiple tables together with the insert/update/delete capabilities of a table. (GeoPackage clients are then able to utilize these views as they would a table.)
-
-> NOTE: While this capability is possible today, there is currently not clear guidance on how this should be done.
-
-###### Level 3
-GeoPackage software supports many-to-many relationships between features and attributes using the Related Tables Extension.
-
-> NOTE: This capability is still under development.
-
 ### Tiles
 Tiled raster data is primarily designed for visualization purposes.
 
@@ -258,6 +239,28 @@ A GeoPackage client can display multiple tile matrix sets simultaneously, transf
 When a GeoPackage is loaded for visualization via an OWS Context (see above), the default view is read from the Context.
 
 > Note: The specification for this capability is still being developed.
+
+### Attributes
+Attributes tables are non-spatial data that may be joined as part of a view. This eliminates a potential source of redundancy and bloat in GeoPackage files.
+
+###### Level 0
+Attribute information is duplicated across multiple feature tables instead of being stored in a separate attributes table.
+
+###### Level 1
+GeoPackage-writing software creates one or more attributes tables. GeoPackage clients support joining these attributes with existing feature tables.
+
+###### Level 2a
+GeoPackage-writing software creates views to join feature tables and attribute tables. (GeoPackage clients are then able to utilize these views as they would a table, but only in a read-only mode.)
+
+###### Level 2b
+GeoPackage-writing software uses the ["updatable view" technique](https://www.sqlite.org/lang_createtrigger.html#instead_of_trigger) to produce updatable views that combine the flexibility of joining multiple tables together with the insert/update/delete capabilities of a table. (GeoPackage clients are then able to utilize these views as they would a table.)
+
+> NOTE: While this capability is possible today, there is currently not clear guidance on how this should be done.
+
+###### Level 3
+GeoPackage software supports many-to-many relationships between features and attributes using the Related Tables Extension.
+
+> NOTE: This capability is still under development.
 
 ### Metadata
 ###### Level 1
