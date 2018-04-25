@@ -2,16 +2,19 @@ _Go [back](../index.html)_
 
 ## GeoPackage Implementation Guide
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
-While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed.
-This guide attempts to articulate those expectations so that developers produce software that is consistent with what GeoPackage creators envisioned. 
+While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed, as well as expectations that have emerged from the user community as GeoPackage has been more broadly adopted.
+This guide attempts to articulate those expectations so that developers produce consistent software. 
 Where appropriate, the roles of GeoPackage-writing software (producers and editors) are differentiated from clients.
 
 > NOTE: For the purposes of this guide, client operations are by definition _read-only_ even though clients may of course edit GeoPackages.
 > If there is no considerable difference between reading and writing software, the generic term _GeoPackage software_ is used.
 
-Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_. 
-Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
-Capability Level 1 indicates the minimum level of interoperability. Capability Level 2 indicates an increased level of capability and compliance and Capability Level 3 generally indicates the long-term vision for GeoPackage support.
+Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_: 
+* Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
+* Capability Level 1 indicates the minimum level of interoperability. 
+* Capability Level 2 indicates an increased level of capability and compliance.
+* Capability Level 3 generally indicates the long-term vision for GeoPackage support, such as implementation of new adopted and community extensions.
+
 Where possible, the guide also presents an example client operation for each capability level.
 If a GeoPackage client can perform the indicated operation, it is capable of meeting this capability level.
 The compliance of GeoPackage-writing software is easier to define; if it can produce a GeoPackage that can be used in place of the file referenced in the sample, then it is compliant.
@@ -26,7 +29,7 @@ Consider this more of a catalog or taxonomy for GeoPackage support capabilities,
 GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for GeoPackage-writing software) and determine (for clients) what content to load.
 
 ###### Level 0
-GeoPackage client loads and utilize one or more sets of contents (tiles or features) using hard-coded table names.
+GeoPackage client loads and utilizes one or more sets of contents (tiles or features) using hard-coded table names.
 
 ###### Level 1
 GeoPackage client loads and utilizes a single set of contents (tiles or features) by picking the first item in `gpkg_contents`.
