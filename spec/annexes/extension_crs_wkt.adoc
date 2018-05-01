@@ -134,6 +134,22 @@ If, for a particular row, both the `definition` and `definition_12_063` columns 
 
 [cols="1,5a"]
 |========================================
+|*Test Case ID* |+/extensions/crs_wkt/extensions/data_values+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Method* |
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
+. Not testable if returns an empty result set
+. Fail if there is not exactly one row
+. Fail if scope is not "read-write"
+. Fail if column_name is not "definition_12_063"
+. Fail if table_name is not "gpkg_spatial_ref_sys"
+. Pass if no fails
+|*Reference* |Annex F.10 Req 145
+|*Test Type:* |Capabilities
+|========================================
+
+[cols="1,5a"]
+|========================================
 |*Test Case ID* |+/extension_crs_wkt/data_values_default+
 |*Test Purpose* |Verify that the gpkg_spatial_ref_sys table contains the required default contents. Extends `/base/core/gpkg_spatial_ref_sys/data_values_default`.
 |*Test Method* |
