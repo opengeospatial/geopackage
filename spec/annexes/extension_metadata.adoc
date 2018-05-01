@@ -120,6 +120,7 @@ GeoPackages complying with this extension SHALL have rows in the `gpkg_extension
 [WARNING]
 =====
 Requirement 140 was updated as part of GeoPackage 1.2.1. 
+In 1.1.0 and 1.2.0, the details of required `gpkg_extensions` rows were inadvertently left unspecified.
 While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.
 =====
 
@@ -285,8 +286,8 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . Not testable if returns an empty result set
 . Fail if there are not exactly two rows
 . For each row returned from step 1
-.. Fail if scope is not "read-write".
-.. Fail if column_name is not NULL.
+.. Fail if scope is not "read-write"
+.. Fail if column_name is not NULL
 . Fail if either table_name entry is not present
 . Pass if no fails
 |*Reference* |Annex F.8 Req 140
