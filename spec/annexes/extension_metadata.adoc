@@ -279,12 +279,15 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/extensions/metadata/extensions/data_values_scope+
-|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Purpose* |Verify that the gpkg_extensions table has the required rows.
 |*Test Method* |
-. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
 . Not testable if returns an empty result set
+. Fail if there are not exactly two rows
 . For each row returned from step 1
 .. Fail if scope is not "read-write".
+.. Fail if column_name is not NULL.
+. Fail if both table_name entries are not present
 . Pass if no fails
 |*Reference* |Annex F.8 Req 140
 |*Test Type:* |Capabilities
