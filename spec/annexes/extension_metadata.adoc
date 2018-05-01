@@ -113,8 +113,8 @@ See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 [caption=""]
 .Requirement 140
 ====
-GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_metadata" SHALL comply with this extension. 
-GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<ExtensionTableRecord>> (below).
+GeoPackages with rows in the `gpkg_extensions` table with an `extension_name` of "gpkg_metadata" SHALL comply with this extension. 
+GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<MetadataExtensionTableRecord>> (below).
 ====
 
 [WARNING]
@@ -123,8 +123,8 @@ Requirement 140 was updated as part of GeoPackage 1.2.1.
 While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.
 =====
 
-[#ExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
-.Extension Table Record
+[#MetadataExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
+.Extension Table Records
 [cols=",,,,",options="header",]
 |=============================================================================================================================================================================================================================================================================================================================================================================================
 |*table_name* |*column_name* |*extension_name* |*definition* |*scope*
@@ -278,7 +278,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/extensions/metadata/extensions/data_values_scope+
+|*Test Case ID* |+/extensions/metadata/extensions/data_values+
 |*Test Purpose* |Verify that the gpkg_extensions table has the required rows.
 |*Test Method* |
 . SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
@@ -287,7 +287,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . For each row returned from step 1
 .. Fail if scope is not "read-write".
 .. Fail if column_name is not NULL.
-. Fail if both table_name entries are not present
+. Fail if either table_name entry is not present
 . Pass if no fails
 |*Reference* |Annex F.8 Req 140
 |*Test Type:* |Capabilities

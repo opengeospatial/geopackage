@@ -112,8 +112,30 @@ See <<gpkg_data_column_constraints_sql>>.
 [caption=""]
 .Requirement 141
 ====
-GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_schema" SHALL comply with this extension. The row SHALL have a `scope` of "read-write".
+GeoPackages with rows in the `gpkg_extensions` table with an `extension_name` of "gpkg_schema" SHALL comply with this extension. 
+GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<SchemaExtensionTableRecord>> (below).
 ====
+
+[WARNING]
+=====
+Requirement 141 was updated as part of GeoPackage 1.2.1. 
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.
+=====
+
+[#SchemaExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
+.Extension Table Records
+[cols=",,,,",options="header",]
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+|*table_name* |*column_name* |*extension_name* |*definition* |*scope*
+|`gpkg_data_columns` |null |`gpkg_schema` |_see note below_|`read-write`
+|`gpkg_data_column_constraints` |null |`gpkg_schema` |_see note below_|`read-write`
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+
+[NOTE]
+=====
+For the `definition` column, use a hyperlink that describes the current implementation of this extension. 
+While a URL like http://www.geopackage.org/spec/#extension_schema is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_schema where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_schema is the permalink for this extension for GeoPackage 1.2.1.
+=====
 
 [float]
 ====== Data Columns
@@ -257,13 +279,16 @@ If the `gpkg_data_column_constraints` table contains rows with `constraint_type`
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/extensions/schema/extensions/data_values_scope+
-|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Case ID* |+/extensions/schema/extensions/data_values+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required rows.
 |*Test Method* |
-. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
 . Not testable if returns an empty result set
+. Fail if there are not exactly two rows
 . For each row returned from step 1
 .. Fail if scope is not "read-write".
+.. Fail if column_name is not NULL.
+. Fail if either table_name entry is not present
 . Pass if no fails
 |*Reference* |Annex F.9 Req 141
 |*Test Type:* |Capabilities
