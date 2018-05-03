@@ -2,8 +2,8 @@ _Go [back](../index.html)_
 
 ## GeoPackage Implementation Guide
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
-While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed.
-This guide attempts to articulate those expectations so that developers produce software that is consistent with what GeoPackage creators envisioned. 
+While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed, as well as expectations that have emerged from the user community as GeoPackage has been more broadly adopted.
+This guide attempts to articulate those expectations so that developers produce consistent software. 
 
 > WARNING: This document is not an OGC Standard and may not be referred to as such. This document is an implementation guide and is not an official position of the OGC membership. It is distributed for informational purposes only and is subject to change without notice.
 
