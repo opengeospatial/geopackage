@@ -4,20 +4,29 @@ _Go [back](../index.html)_
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
 While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed, as well as expectations that have emerged from the user community as GeoPackage has been more broadly adopted.
 This guide attempts to articulate those expectations so that developers produce consistent software. 
-Where appropriate, the roles of GeoPackage-writing software (producers and editors) are differentiated from clients.
 
-> NOTE: For the purposes of this guide, client operations are by definition _read-only_ even though clients may of course edit GeoPackages.
-> If there is no considerable difference between reading and writing software, the generic term _GeoPackage software_ is used.
+> WARNING: This document is not an OGC Standard and may not be referred to as such. This document is an implementation guide and is not an official position of the OGC membership. It is distributed for informational purposes only and is subject to change without notice.
 
-Where possible, the guidelines are presented in a _tiered_ approach using multiple _capability levels_: 
-* Capability Level 0 indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
-* Capability Level 1 indicates the minimum level of interoperability. 
-* Capability Level 2 indicates an increased level of capability and compliance.
-* Capability Level 3 generally indicates the long-term vision for GeoPackage support, such as implementation of new adopted and community extensions.
+### _Terms and Definitions_
+**GeoPackage Software** - software capable of reading and/or writing GeoPackages
+
+**GeoPackage Client** - software capable of (at a minimum) accessing GeoPackage content in a _read-only_ mode.
+
+**GeoPackage-writing Software** - software capable of (at a minimum) producing or modifying a GeoPackage
+
+> NOTE: Where appropriate, the roles of GeoPackage-writing software (producers and editors) are differentiated from clients.
+
+### _Capability Levels_
+Where possible, the guidelines are presented in a __tiered__ approach using multiple _capability levels_. 
+
+* **Capability Level 0** indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
+* **Capability Level 1** indicates the minimum level of interoperability. 
+* **Capability Level 2** indicates an increased level of capability and compliance.
+* **Capability Level 3** generally indicates the long-term vision for GeoPackage support.
 
 Where possible, the guide also presents an example client operation for each capability level.
 If a GeoPackage client can perform the indicated operation, it is capable of meeting this capability level.
-The compliance of GeoPackage-writing software is easier to define; if it can produce a GeoPackage that can be used in place of the file referenced in the sample, then it is compliant.
+The compliance of GeoPackage-writing software is easier to define: if it can produce a GeoPackage that can be used in place of the file referenced in the sample, then it is compliant.
 
 This approach allows developers to develop their software incrementally, achieving useful capabilities at a pace aligned with their own roadmaps and business models.
 There is no expectation that any particular piece of software support any particular capability or capability level.
@@ -25,6 +34,7 @@ Consider this more of a catalog or taxonomy for GeoPackage support capabilities,
 
 > Note: This approach also gives guidance back to the SWG – some capability levels are not achievable today and these should be given highest priority in future SWG activities.
 
+### Core 
 ### Contents
 GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for GeoPackage-writing software) and determine (for clients) what content to load.
 
@@ -63,7 +73,7 @@ GeoPackages are expected to use SRSs to ensure the consistency of coordinates.
 GeoPackage contents are utilized without recognition of SRSs.
 
 ###### Level 1
-GeoPackage software supports the three SRSs of EPSG::4326 (WGS-84), 0 (undefined geographic coordinate reference systems), and -1 (undefined Cartesian coordinate reference systems) that are listed by default in the `gpkg_spatial_ref_sys` table.
+GeoPackage software supports the three built-in SRSs of EPSG::4326 (WGS-84), 0 (undefined geographic coordinate reference systems), and -1 (undefined Cartesian coordinate reference systems) that are listed by default in the `gpkg_spatial_ref_sys` table.
 
 > Example: 
 > 
@@ -89,7 +99,7 @@ GeoPackage software supports arbitrary SRSs that are encoded in [CRS WKT2](http:
 > 
 > This GeoPackage contains features in different SRSs encoded using CRS WKT2. The client should be able to use these contents normally.
 
-### Features
+### Features Option
 The actual utilization of feature data is very open-ended. Many systems visualize feature data, but feature data is also well-suited to a number of analysis operations.
 
 #### Geometries
@@ -171,32 +181,31 @@ Feature styles are encoded as part of Contexts (see above) that are included as 
 
 > NOTE: This capability is still under development.
 
-### Tiles
+### Tiles Option
 Tiled raster data is primarily designed for visualization purposes.
 
 #### Tile Matrix Sets
 
 ###### Level 0
-GeoPackage software supports a hard-coded tile matrix set. 
-
-###### Level 1
-GeoPackage software supports the Google Maps-compatible Tile Matrix Set. 
+GeoPackage software exclusively supports the Google Maps-compatible Tile Matrix Set.
 
 > Example:
 > 
 > Load the "rivers_tiles" tile pyramid from http://geopackage.org/data/rivers.gpkg. 
-> Zoom levels 1-6 should be available.
+> Zoom levels 0-6 should be available.
 
-###### Level 2
-GeoPackage software supports any tile matrix set that has a power-of-2 interval between zoom levels.
+###### Level 1
+GeoPackage software supports any tile matrix set that has a power-of-2 interval between zoom levels. This tile matrix set may have global or regional extents.
 
 > Example:
 > 
 > Load the "MGCPPREVIEW5SKU" tile pyramid from https://portal.opengeospatial.org/files/?artifact_id=74863.
 >
 > Zoom levels 9-16 should be available.
+> 
+> TODO: add additional sample files to this example.
 
-###### Level 3
+###### Level 2
 GeoPackage software supports tile matrix sets with arbitrary zoom levels using the [Zoom Other Intervals](extensions/zoom_other_intervals.md) extension. When useful, this extension is used to preserve the quality of the highest zoom level and minimize the bloat of the GeoPackage.
 
 > NOTE: There is currently no example available at this time.
@@ -243,7 +252,7 @@ When a GeoPackage is loaded for visualization via an OWS Context (see above), th
 
 > Note: The specification for this capability is still being developed.
 
-### Attributes
+### Attributes Option
 Attributes tables are non-spatial data that may be joined as part of a view. This eliminates a potential source of redundancy and bloat in GeoPackage files.
 
 ###### Level 0
@@ -265,7 +274,8 @@ GeoPackage software supports many-to-many relationships between features and att
 
 > NOTE: This capability is still under development.
 
-### Metadata
+### Other Extensions
+#### Metadata Extension
 ###### Level 1
 GeoPackage-writing software fully populates the `gpkg_contents` table for each set of contents and GeoPackage clients present this information to the user.
 
@@ -285,9 +295,13 @@ https://portal.opengeospatial.org/files/?artifact_id=74984.
 
 > NOTE: There are a number of metadata formats available. Support or conformance to these formats is outside the scope of this document.
 
-
 ###### Level 3
 GeoPackage software supports hierarchical metadata in conjunction with the [Metadata Extension](extensions/metadata.md). Metadata is traceable from the tile or feature level up to the GeoPackage level.
 
 > NOTE: There is currently no example available at this time.
+
+#### Tiled Gridded Coverage Data
+
+> TODO
+
 
