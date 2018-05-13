@@ -176,6 +176,13 @@ END;
 
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
+[WARNING]
+=====
+GeoPackage Versions 1.2.0 and prior have an incorrect update3 trigger that will fail in certain circumstances. 
+It is strongly recommended to update older GeoPackages with the correct trigger presented here. 
+The GeoPackage Executable Test Suite has been updated to accept either version of the trigger in older versions and to mandate the corrected version in versions after 1.2.0.
+=====
+
 [float]
 ===== GeoPackage SQLite Configuration
 
