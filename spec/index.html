@@ -7106,6 +7106,15 @@ Request For Comment (RFC).</p>
 <p>Updating Table 19 to fix typos and improve clarity <a href="https://github.com/opengeospatial/geopackage/pull/427">https://github.com/opengeospatial/geopackage/pull/427</a></p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annexes F.8, F.9, F.10</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Updating R140, R141, and R145 to indicate required rows and column values <a href="https://github.com/opengeospatial/geopackage/issue/426">https://github.com/opengeospatial/geopackage/issue/426</a></p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 
@@ -8421,6 +8430,22 @@ These spatial index triggers SHALL be defined as follows:</p>
 <div class="paragraph">
 <p>where &lt;t&gt; and &lt;c&gt; are replaced with the names of the feature table and geometry column being indexed and &lt;i&gt; is replaced with the name of the feature table integer primary key column.</p>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>GeoPackage Versions 1.2.0 and prior have an incorrect update3 trigger that will fail in certain circumstances.
+It is strongly recommended to update older GeoPackages with the correct trigger presented here.
+The GeoPackage Executable Test Suite has been updated to accept either version of the trigger in older versions and to mandate the corrected version in versions after 1.2.0.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <h5 id="_geopackage_sqlite_configuration_3" class="float">GeoPackage SQLite Configuration</h5>
 <div class="paragraph">
 <p>Definition of SQLite configuration settings</p>
@@ -9552,9 +9577,77 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
 <div class="title">Requirement 140</div>
 <div class="content">
 <div class="paragraph">
-<p>GeoPackages with a row in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_metadata" SHALL comply with this extension. The row SHALL have a <code>scope</code> of "read-write".</p>
+<p>GeoPackages with rows in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_metadata" SHALL comply with this extension.
+GeoPackages complying with this extension SHALL have rows in the <code>gpkg_extensions</code> table as described in <a href="#MetadataExtensionTableRecord">[MetadataExtensionTableRecord]</a> (below).</p>
 </div>
 </div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Requirement 140 was updated as part of GeoPackage 1.2.1.
+In 1.1.0 and 1.2.0, the details of required <code>gpkg_extensions</code> rows were inadvertently left unspecified.
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing <code>gpkg_extensions</code> rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table id="MetadataExtensionTableRecord" class="tableblock frame-all grid-all" style="width:100%; ">
+<caption class="title">Table 20. Extension Table Records</caption>
+<colgroup>
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;"> 
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>table_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>column_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>extension_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>definition</strong></th>
+<th class="tableblock halign-left valign-top"><strong>scope</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_metadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_metadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>see note below</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_metadata_reference</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_metadata</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>see note below</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+</tbody>
+</table>
+
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For the <code>definition</code> column, use a hyperlink that describes the current implementation of this extension.
+While a URL like <a href="http://www.geopackage.org/spec/#extension_metadata">http://www.geopackage.org/spec/#extension_metadata</a> is acceptable, permalinks to specific versions are provided upon publication using the URL pattern <a href="http://www.geopackage.org/specMmP/#extension_metadata">http://www.geopackage.org/specMmP/#extension_metadata</a> where <code>M</code> is the major version, <code>m</code> is the minor version, and <code>P</code> is the patch. For example <a href="http://www.geopackage.org/spec121/#extension_metadata">http://www.geopackage.org/spec121/#extension_metadata</a> is the permalink for this extension for GeoPackage 1.2.1.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <h6 id="_gpkg_metadata" class="float">gpkg_metadata</h6>
 <div class="paragraph">
@@ -9563,7 +9656,7 @@ The list of valid scope names and their definitions is provided in <a href="#met
 The initial contents of this table were obtained from the ISO 19115 <a href="#28">[28]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <sup><a href="#K32">[K32]</a></sup> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
 </div>
 <table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 20. Metadata Scopes</caption>
+<caption class="title">Table 21. Metadata Scopes</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -9862,13 +9955,13 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/extensions/metadata/extensions/data_values_scope</code></p>
+<p><code>/extensions/metadata/extensions/data_values</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_extensions table has the required row.</p>
+<p>Verify that the gpkg_extensions table has the required rows.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -9876,20 +9969,29 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_metadata</em>;</p>
+<p>SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_metadata</em>;</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
+</li>
+<li>
+<p>Fail if there are not exactly two rows</p>
 </li>
 <li>
 <p>For each row returned from step 1</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if scope is not "read-write".</p>
+<p>Fail if scope is not "read-write"</p>
+</li>
+<li>
+<p>Fail if column_name is not NULL</p>
 </li>
 </ol>
 </div>
+</li>
+<li>
+<p>Fail if either table_name entry is not present</p>
 </li>
 <li>
 <p>Pass if no fails</p>
@@ -11041,7 +11143,7 @@ level.</p>
 <p>So here is the data after both examples:</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 21. xml_metadata</caption>
+<caption class="title">Table 22. xml_metadata</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11175,7 +11277,7 @@ level.</p>
 </table>
 
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 22. gpkg_metadata_reference</caption>
+<caption class="title">Table 23. gpkg_metadata_reference</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11434,7 +11536,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Column
 </div>
 </div>
 <table id="gpkg_data_columns_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 23. Data Columns Table Definition</caption>
+<caption class="title">Table 24. Data Columns Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11526,7 +11628,7 @@ If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">
 The constraint_name column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table Definition</a>.</p>
 </div>
 <table id="gpkg_data_column_constraints_cols" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 24. Data Column Constraints Table Definition</caption>
+<caption class="title">Table 25. Data Column Constraints Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11615,9 +11717,77 @@ The constraint_name column is referenced by the <code>constraint_name</code> col
 <div class="title">Requirement 141</div>
 <div class="content">
 <div class="paragraph">
-<p>GeoPackages with a row in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_schema" SHALL comply with this extension. The row SHALL have a <code>scope</code> of "read-write".</p>
+<p>GeoPackages with rows in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_schema" SHALL comply with this extension.
+GeoPackages complying with this extension SHALL have rows in the <code>gpkg_extensions</code> table as described in <a href="#SchemaExtensionTableRecord">[SchemaExtensionTableRecord]</a> (below).</p>
 </div>
 </div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Requirement 141 was updated as part of GeoPackage 1.2.1.
+In 1.1.0 and 1.2.0, the details of required <code>gpkg_extensions</code> rows were inadvertently left unspecified.
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing <code>gpkg_extensions</code> rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table id="SchemaExtensionTableRecord" class="tableblock frame-all grid-all" style="width:100%; ">
+<caption class="title">Table 26. Extension Table Records</caption>
+<colgroup>
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;"> 
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>table_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>column_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>extension_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>definition</strong></th>
+<th class="tableblock halign-left valign-top"><strong>scope</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_data_columns</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>see note below</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_data_column_constraints</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_schema</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>see note below</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+</tbody>
+</table>
+
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For the <code>definition</code> column, use a hyperlink that describes the current implementation of this extension.
+While a URL like <a href="http://www.geopackage.org/spec/#extension_schema">http://www.geopackage.org/spec/#extension_schema</a> is acceptable, permalinks to specific versions are provided upon publication using the URL pattern <a href="http://www.geopackage.org/specMmP/#extension_schema">http://www.geopackage.org/specMmP/#extension_schema</a> where <code>M</code> is the major version, <code>m</code> is the minor version, and <code>P</code> is the patch. For example <a href="http://www.geopackage.org/spec121/#extension_schema">http://www.geopackage.org/spec121/#extension_schema</a> is the permalink for this extension for GeoPackage 1.2.1.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <h6 id="_data_columns" class="float">Data Columns</h6>
 <div id="r104" class="exampleblock">
@@ -11652,7 +11822,7 @@ The case sensitive value column contains an enumerated legal value for constrain
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 25. Sample Data Column Constraints</caption>
+<caption class="title">Table 27. Sample Data Column Constraints</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -11917,13 +12087,13 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/extensions/schema/extensions/data_values_scope</code></p>
+<p><code>/extensions/schema/extensions/data_values</code></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_extensions table has the required row.</p>
+<p>Verify that the gpkg_extensions table has the required rows.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -11931,20 +12101,29 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_schema</em>;</p>
+<p>SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_schema</em>;</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
+</li>
+<li>
+<p>Fail if there are not exactly two rows</p>
 </li>
 <li>
 <p>For each row returned from step 1</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if scope is not "read-write".</p>
+<p>Fail if scope is not "read-write"</p>
+</li>
+<li>
+<p>Fail if column_name is not NULL</p>
 </li>
 </ol>
 </div>
+</li>
+<li>
+<p>Fail if either table_name entry is not present</p>
 </li>
 <li>
 <p>Pass if no fails</p>
@@ -12665,7 +12844,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 </div>
 </div>
 <table id="gpkg_spatial_ref_sys_cols_crs_wkt" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 26. Spatial Ref Sys Table Definition</caption>
+<caption class="title">Table 28. Spatial Ref Sys Table Definition</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -12750,9 +12929,70 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="title">Requirement 145</div>
 <div class="content">
 <div class="paragraph">
-<p>GeoPackages with a row in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_crs_wkt" SHALL comply with this extension. The row SHALL have a <code>scope</code> of "read-write".</p>
+<p>GeoPackages with a row in the <code>gpkg_extensions</code> table with an <code>extension_name</code> of "gpkg_crs_wkt" SHALL comply with this extension.
+GeoPackages complying with this extension SHALL have a row in the <code>gpkg_extensions</code> table as described in <a href="#CRSWKTExtensionTableRecord">[CRSWKTExtensionTableRecord]</a> (below).</p>
 </div>
 </div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Requirement 145 has been updated as part of GeoPackage 1.2.1.
+In 1.1.0 and 1.2.0, the <code>table_name</code> and <code>column_name</code> column values of the required <code>gpkg_extensions</code> row were inadvertently left unspecified.
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing <code>gpkg_extensions</code> column values, it is recommended to update these values to comply with the updated requirement on older versions as well.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table id="CRSWKTExtensionTableRecord" class="tableblock frame-all grid-all" style="width:100%; ">
+<caption class="title">Table 29. Extension Table Records</caption>
+<colgroup>
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;">
+<col style="width:%;"> 
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>table_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>column_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>extension_name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>definition</strong></th>
+<th class="tableblock halign-left valign-top"><strong>scope</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_spatial_ref_sys</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition_12_063</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>gpkg_crs_wkt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>see note below</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+</tbody>
+</table>
+
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For the <code>definition</code> column, use a hyperlink that describes the current implementation of this extension.
+While a URL like <a href="http://www.geopackage.org/spec/#extension_crs_wkt">http://www.geopackage.org/spec/#extension_crs_wkt</a> is acceptable, permalinks to specific versions are provided upon publication using the URL pattern <a href="http://www.geopackage.org/specMmP/#extension_crs_wkt">http://www.geopackage.org/specMmP/#extension_crs_wkt</a> where <code>M</code> is the major version, <code>m</code> is the minor version, and <code>P</code> is the patch. For example <a href="http://www.geopackage.org/spec121/#extension_crs_wkt">http://www.geopackage.org/spec121/#extension_crs_wkt</a> is the permalink for this extension for GeoPackage 1.2.1.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <h6 id="_gpkg_spatial_ref_sys_3" class="float">gpkg_spatial_ref_sys</h6>
 <div id="r116" class="exampleblock">
@@ -12832,6 +13072,67 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 </table>
 
 <h5 id="_table_data_values_10" class="float">Table Data Values</h5>
+<table class="tableblock frame-all grid-all" style="width:100%; ">
+<colgroup>
+<col style="width:16%;">
+<col style="width:83%;"> 
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>/extensions/crs_wkt/extensions/data_values</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Verify that the gpkg_extensions table has the required row.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = <em>gpkg_schema</em>;</p>
+</li>
+<li>
+<p>Not testable if returns an empty result set</p>
+</li>
+<li>
+<p>Fail if there is not exactly one row</p>
+</li>
+<li>
+<p>Fail if scope is not "read-write"</p>
+</li>
+<li>
+<p>Fail if column_name is not "definition_12_063"</p>
+</li>
+<li>
+<p>Fail if table_name is not "gpkg_spatial_ref_sys"</p>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Annex F.10 Req 145</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Capabilities</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+
 <table class="tableblock frame-all grid-all" style="width:100%; ">
 <colgroup>
 <col style="width:16%;">
@@ -13014,7 +13315,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <h2 id="geometry_types"> Annex G: Geometry Types (Normative)</h2>
 <div class="sectionbody">
 <table id="geometry_types_core" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 27. Geometry Type Codes (Core)</caption>
+<caption class="title">Table 30. Geometry Type Codes (Core)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -13062,7 +13363,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 </table>
 
 <table id="geometry_types_extension" class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 28. Geometry Type Codes (Extension)</caption>
+<caption class="title">Table 31. Geometry Type Codes (Extension)</caption>
 <colgroup>
 <col style="width:25%;">
 <col style="width:75%;"> 
@@ -13132,7 +13433,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <h2 id="tiles_example_appendix"> Annex H: Tiles Zoom Times Two Example (Informative)</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all" style="width:100%; ">
-<caption class="title">Table 29. Zoom Times Two Example</caption>
+<caption class="title">Table 32. Zoom Times Two Example</caption>
 <colgroup>
 <col style="width:%;">
 <col style="width:%;">
@@ -13592,7 +13893,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-04-19 18:34:55 UTC
+Last updated 2018-05-13 14:18:47 UTC
 </div>
 </div>
 </body>
