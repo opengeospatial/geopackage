@@ -7131,6 +7131,15 @@ Request For Comment (RFC).</p>
 <p>Clarifying use of extents in gpkg_contents with tiles content <a href="https://github.com/opengeospatial/geopackage/issue/426">https://github.com/opengeospatial/geopackage/issue/426</a></p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.9 Table 23</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Correcting typo in column name <a href="https://github.com/opengeospatial/geopackage/pull/434">https://github.com/opengeospatial/geopackage/pull/434</a></p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 
@@ -11615,7 +11624,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Column
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>constraint_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Column value constraint name (lowercase) specified by reference to <code>gpkg_data_column_constraints.constraint</code> name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Column value constraint name (lowercase) specified by reference to <code>gpkg_data_column_constraints.constraint_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -11641,7 +11650,7 @@ If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_data_column_constraints</code> table contains data to specify restrictions on basic data type column values.
-The constraint_name column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table Definition</a>.</p>
+The <code>constraint_name</code> column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table Definition</a>.</p>
 </div>
 <table id="gpkg_data_column_constraints_cols" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 25. Data Column Constraints Table Definition</caption>
@@ -11833,8 +11842,8 @@ If it is not NULL, it SHALL contain a constraint_name column value (which SHALL 
 </div>
 <h6 id="_data_column_constraints" class="float">Data Column Constraints</h6>
 <div class="paragraph">
-<p>The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
-The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+<p>The lowercase <code>gpkg_data_column_constraints</code> <code>constraint_type</code> column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
+The case sensitive value column contains an enumerated legal value for <code>constraint_type</code> "enum", a pattern match string for constraint_type "glob", or NULL for <code>constraint_type</code> "range". The set of value column values in rows of <code>constraint_type</code> "enum" with the same <code>constraint_name</code> contains all possible enumerated values for the constraint name. The <code>min</code> and <code>max</code> column values specify the minim and maximum valid values for constraint_type "range", or are NULL for <code>constraint_type</code> "enum" or "glob". The <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values contain <strong>1</strong> if the min and max values are inclusive, <strong>0</strong> if they are exclusive, or are NULL for constraint_type "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
@@ -13909,7 +13918,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-16 15:16:17 UTC
+Last updated 2018-05-16 19:28:15 UTC
 </div>
 </div>
 </body>
