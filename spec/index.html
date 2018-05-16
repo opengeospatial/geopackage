@@ -782,7 +782,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>min_x</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box minimum easting or longitude for all content in table_name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box minimum easting or longitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -790,7 +790,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>min_y</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box minimum northing or latitude for all content in table_name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box minimum northing or latitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -798,7 +798,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>max_x</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box maximum easting or longitude for all content in table_name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box maximum easting or longitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -806,7 +806,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>max_y</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DOUBLE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box maximum northing or latitude for all content in table_name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bounding box maximum northing or latitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -6702,6 +6702,13 @@ Request For Comment (RFC).</p>
 </div></div></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rich Fecher</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Radiant Solutions</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>richard.fecher&lt;at&gt;radiantsolutions.com</p>
+</div></div></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Nathan P. Frantz</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">U.S. Army Geospatial Center ERDC</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
@@ -7113,6 +7120,15 @@ Request For Comment (RFC).</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Annexes F.8, F.9, F.10</p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Updating R140, R141, and R145 to indicate required rows and column values <a href="https://github.com/opengeospatial/geopackage/issue/426">https://github.com/opengeospatial/geopackage/issue/426</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rich Fecher</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Clarifying use of extents in gpkg_contents with tiles content <a href="https://github.com/opengeospatial/geopackage/issue/426">https://github.com/opengeospatial/geopackage/issue/426</a></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -13893,7 +13909,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-13 14:18:47 UTC
+Last updated 2018-05-16 15:16:17 UTC
 </div>
 </div>
 </body>
