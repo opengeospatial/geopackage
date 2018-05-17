@@ -274,20 +274,3 @@ Definition of SQL functions
 |*Reference* |Annex F.3 Req 77
 |*Test Type* |Capability
 |========================================
-
-[cols="1,5a"]
-|========================================
-|*Test Case ID* |+/reg_ext/features/spatial_indexes/implementation/sql_functions+
-|*Test Purpose* |Verify the correct implementation of sql functions used in spatial indexes on feature table geometry columns.
-|*Test Method* |
-. Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
-. For each Geometry Test Data Set <gtype_test> data table row for each geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:
-.. SELECT 'Fail' FROM <gtype_test> WHERE ST_IsEmpty(geom.) != empty
-.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MinX(geom) != minx
-.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MaxX(geom) != maxx
-.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MinY(geom) != miny
-.. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MaxY(geom) != maxy
-. Pass if no 'Fail' selected from step 2
-|*Reference* |Annex F.3 Req 78
-|*Test Type* |Capability
-|========================================
