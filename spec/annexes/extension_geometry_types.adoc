@@ -141,7 +141,7 @@ viii. Otherwise log pass
 .. SELECT result_set_column_name FROM result_set_table_name
 .. For each geometry column value from step a
 ... If the first two bytes of each geometry column value are "GP", then
-.... /opt/extension_mechanism/extensions/data/table_def
+.... /opt/extension_mechanism/data/table_def
 .... Fail if failed
 .... SELECT ST_GeometryType(geometry column value) AS <gtype>;
 .... SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = \'gpkg_geom_' \|\| <gtype>
