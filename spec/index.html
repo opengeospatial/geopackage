@@ -7158,6 +7158,15 @@ Request For Comment (RFC).</p>
 <p>Correcting incorrect ATS references <a href="https://github.com/opengeospatial/geopackage/issue/439">https://github.com/opengeospatial/geopackage/issue/439</a></p>
 </div></div></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.3</p></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Removing ATS entry associated with removed requirement <a href="https://github.com/opengeospatial/geopackage/pull/441">https://github.com/opengeospatial/geopackage/pull/441</a></p>
+</div></div></td>
+</tr>
 </tbody>
 </table>
 
@@ -8775,74 +8784,6 @@ The GeoPackage Executable Test Suite has been updated to accept either version o
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
 <p>Annex F.3 Req 77</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Capability</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-
-<table class="tableblock frame-all grid-all" style="width:100%; ">
-<colgroup>
-<col style="width:16%;">
-<col style="width:83%;"> 
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p><code>/reg_ext/features/spatial_indexes/implementation/sql_functions</code></p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify the correct implementation of sql functions used in spatial indexes on feature table geometry columns.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension</p>
-</li>
-<li>
-<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt; WHERE ST_IsEmpty(geom.) != empty</p>
-</li>
-<li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt;  WHERE ST_MinX(geom) != minx</p>
-</li>
-<li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt;  WHERE ST_MaxX(geom) != maxx</p>
-</li>
-<li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt;  WHERE ST_MinY(geom) != miny</p>
-</li>
-<li>
-<p>SELECT <em>Fail</em> FROM &lt;gtype_test&gt;  WHERE ST_MaxY(geom) != maxy</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if no <em>Fail</em> selected from step 2</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Annex F.3 Req 78</p>
 </div></div></td>
 </tr>
 <tr>
@@ -13936,7 +13877,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-17 03:17:31 UTC
+Last updated 2018-05-17 17:48:19 UTC
 </div>
 </div>
 </body>
