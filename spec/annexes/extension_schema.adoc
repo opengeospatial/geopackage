@@ -99,7 +99,7 @@ The `constraint_name` column is referenced by the `constraint_name` column in th
 |`max_is_inclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
 |`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes|
 |=======================================================================
-_The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
+_The `min` and `max` columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
 
 See <<gpkg_data_column_constraints_sql>>.
 
@@ -159,15 +159,15 @@ The `column_name` column value in a `gpkg_data_columns` table row SHALL contain 
 [caption=""]
 .Requirement 106
 ====
-The constraint_name column value in a gpkg_data_columns table MAY be NULL.
-If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
+The `constraint_name` column value in a `gpkg_data_columns` table MAY be NULL.
+If it is not NULL, it SHALL contain a `constraint_name` column value (which SHALL be lowercase) from the `gpkg_data_column_constraints` table.
 ====
 
 [float]
 ====== Data Column Constraints
 
 The lowercase `gpkg_data_column_constraints` `constraint_type` column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<33>>).
-The case sensitive value column contains an enumerated legal value for `constraint_type` "enum", a pattern match string for constraint_type "glob", or NULL for `constraint_type` "range". The set of value column values in rows of `constraint_type` "enum" with the same `constraint_name` contains all possible enumerated values for the constraint name. The `min` and `max` column values specify the minim and maximum valid values for constraint_type "range", or are NULL for `constraint_type` "enum" or "glob". The `min_is_inclusive` and `max_is_inclusive` column values contain *1* if the min and max values are inclusive, *0* if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+The case sensitive `value` column contains an enumerated legal value for `constraint_type` "enum", a pattern match string for `constraint_type` "glob", or NULL for `constraint_type` "range". The set of `value` column values in rows of `constraint_type` "enum" with the same `constraint_name` contains all possible enumerated values for the constraint name. The `min` and `max` column values specify the minimum and maximum valid values for `constraint_type` "range", or are NULL for `constraint_type` "enum" or "glob". The `min_is_inclusive` and `max_is_inclusive` column values contain *1* if the `min` and `max` values (respectively) are inclusive, *0* if they are exclusive, or are NULL for `constraint_type` "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.
 
 .Sample Data Column Constraints
