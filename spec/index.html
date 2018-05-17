@@ -11731,7 +11731,7 @@ The <code>constraint_name</code> column is referenced by the <code>constraint_na
 </table>
 
 <div class="paragraph">
-<p><em>The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5.</em></p>
+<p><em>The <code>min</code> and <code>max</code> columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5.</em></p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
@@ -11835,15 +11835,15 @@ While a URL like <a href="http://www.geopackage.org/spec/#extension_schema">http
 <div class="title">Requirement 106</div>
 <div class="content">
 <div class="paragraph">
-<p>The constraint_name column value in a gpkg_data_columns table MAY be NULL.
-If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.</p>
+<p>The <code>constraint_name</code> column value in a <code>gpkg_data_columns</code> table MAY be NULL.
+If it is not NULL, it SHALL contain a <code>constraint_name</code> column value (which SHALL be lowercase) from the <code>gpkg_data_column_constraints</code> table.</p>
 </div>
 </div>
 </div>
 <h6 id="_data_column_constraints" class="float">Data Column Constraints</h6>
 <div class="paragraph">
 <p>The lowercase <code>gpkg_data_column_constraints</code> <code>constraint_type</code> column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
-The case sensitive value column contains an enumerated legal value for <code>constraint_type</code> "enum", a pattern match string for constraint_type "glob", or NULL for <code>constraint_type</code> "range". The set of value column values in rows of <code>constraint_type</code> "enum" with the same <code>constraint_name</code> contains all possible enumerated values for the constraint name. The <code>min</code> and <code>max</code> column values specify the minim and maximum valid values for constraint_type "range", or are NULL for <code>constraint_type</code> "enum" or "glob". The <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values contain <strong>1</strong> if the min and max values are inclusive, <strong>0</strong> if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+The case sensitive <code>value</code> column contains an enumerated legal value for <code>constraint_type</code> "enum", a pattern match string for <code>constraint_type</code> "glob", or NULL for <code>constraint_type</code> "range". The set of <code>value</code> column values in rows of <code>constraint_type</code> "enum" with the same <code>constraint_name</code> contains all possible enumerated values for the constraint name. The <code>min</code> and <code>max</code> column values specify the minimum and maximum valid values for <code>constraint_type</code> "range", or are NULL for <code>constraint_type</code> "enum" or "glob". The <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values contain <strong>1</strong> if the <code>min</code> and <code>max</code> values (respectively) are inclusive, <strong>0</strong> if they are exclusive, or are NULL for <code>constraint_type</code> "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width:100%; ">
@@ -13918,7 +13918,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-05-16 19:28:15 UTC
+Last updated 2018-05-17 01:25:06 UTC
 </div>
 </div>
 </body>
