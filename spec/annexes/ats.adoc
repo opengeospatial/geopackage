@@ -396,6 +396,17 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 
 [cols="1,5a"]
 |========================================
+|*Test Case ID* |+/opt/features/geometry_columns/data/data_values_srs_id_match+
+|*Test Purpose* |Verify that the `srs_id` column values are consistent between `gpkg_geometry_columns` and `gpkg_contents`.
+|*Test Method* |
+. SELECT a.srs_id, b.srs_id FROM gpkg_geometry_columns a, gpkg_contents b WHERE a.table_name = b.table_name
+. Fail if returns any rows have non-matching SRS IDs
+|*Reference* |Clause 2.1.5.1.2 Req 146:
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_z+
 |*Test Purpose* |Verify that the `gpkg_geometry_columns` table `z` column values are valid.
 |*Test Method* |
@@ -658,6 +669,17 @@ END;
 . PRAGMA foreign_key_check('gpkg_geometry_columns')
 . Fail if returns any rows with a fourth column foreign key index value of 1 (gpkg_spatial_ref_sys)
 |*Reference* |Clause 2.2.6.1.2 Req 41:
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/data_values_srs_id_match+
+|*Test Purpose* |Verify that the `srs_id` column values are consistent between `gpkg_tile_matrix_set` and `gpkg_contents` tables.
+|*Test Method* |
+. SELECT a.srs_id, b.srs_id FROM gpkg_tile_matrix_set a, gpkg_contents b WHERE a.table_name = b.table_name
+. Fail if returns any rows have non-matching SRS IDs
+|*Reference* |Clause 2.2.6.1.2 Req 147:
 |*Test Type* |Capability
 |========================================
 
