@@ -494,15 +494,15 @@ FROM gpkg_geometry_columns WHERE table_name IN
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/features/vector_features/data/data_values_geometry_type+
-|*Test Purpose* |Verify that the geometry type of feature geometries are of the type or are assignable for the geometry type specified by the `gpkg_geometry` columns table `geometry_type_name` column value.
+|*Test Purpose* |Verify that the geometry type of feature geometries are of the type specified by the `gpkg_geometry` columns table `geometry_type_name` column value.
 |*Test Method* |
 . SELECT table_name AS tn, column_name AS cn, geometry_type_name AS gt_name FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
 . Not testable if returns an empty result set
 . For each row from step 1
-.. *Select the set of geometry types in use for the values in cn
+.. Select the set of geometry types in use for the values in cn
 .. For each row actual_type_name from step a
-... *Determine if each geometry type is assignable to the actual_type_name
-... Fail if any are not assignable
+... Determine if each geometry type matches the actual_type_name
+... Fail if any geometries do not match
 . Pass if no fails
 |*Reference* |Clause 2.1.6.1.2 Req 32:
 |*Test Type* |Capability
