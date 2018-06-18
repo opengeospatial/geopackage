@@ -85,7 +85,6 @@ The `gpkg_contents` table SHALL contain a row with a lowercase `data_type` colum
 A GeoPackage SHALL store feature table geometries with or without optional elevation (Z) and/or measure (M) values in SQL BLOBs using the Standard GeoPackageBinary format specified in table <<gpb_spec>> and clause <<gpb_data_blob_format>>.
 ====
 
-
 .GeoPackage SQL Geometry Binary Format
 [[gpb_spec]]
 ----
@@ -138,12 +137,29 @@ StandardGeoPackageBinary {
 ** 0: Big Endian (most significant byte first)
 ** 1: Little Endian (least significant byte first)
 
-
+[NOTE]
+====
 Well-Known Binary as defined in OGC 06-103r4 <<9>> does not provide a standardized encoding for an empty point set (i.e., 'Point Empty' in Well-Known Text).
 In GeoPackages these points SHALL be encoded as a Point where each coordinate value is set to an IEEE-754 quiet NaN value.
 GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000000f87f as the binary encoding of the NaN values.
+====
 
+.Envelope
+The optional envelope inside a GeoPackageBinary BLOB exists to provide performance benefits in certain scenarios.
+
+[[r148]]
+[caption=""]
+.Requirement 148
+====
+When the geometry envelope of a GeoPackageBinary is not empty and valid, the geometry envelope for each feature instance SHALL fall within the extents of the feature table as expressed the corresponding entry in `gpkg_geometry_columns`.
+====
+
+[[r149]]
+[caption=""]
+.Requirement 149
+====
 When the WKBGeometry in a GeoPackageBinary is empty, either the envelope contents indicator code SHALL be 0 indicating no envelope, or the envelope SHALL have its values set to NaN as defined for an empty point.
+====
 
 [[sql_geometry_types]]
 ==== SQL Geometry Types
