@@ -288,8 +288,14 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 [caption=""]
 .Requirement 54
 ====
-Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or view^<<K17>>^ with a unique name that SHALL be structured consistently with <<tiles_user_tables_data_table_definition>>, <<example_tiles_table_cols>>, and <<example_tiles_table_sql>>.
+Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or view^<<K17>>^ with a unique name that SHALL be structured consistently with <<tiles_user_tables_data_table_definition>>, <<example_tiles_table_cols>>, and <<example_tiles_table_sql>>. The `id` column of a tiles table or view SHALL be of type INTEGER and SHALL contain unique values for each row.
 ====
+
+=======
+[NOTE]
+=====
+For a tiles table, the `id` column SHOULD be a primary key to ensure that each value is unique. Using an integer primary key in a tiles table allows tiles to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant tiles view with a discoverable key-like column^<<K17>>^.
+=====
 
 [#example_tiles_table_cols,reftext='{table-caption} {counter:table-num}']
 .Tiles Table or View Definition

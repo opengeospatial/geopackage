@@ -38,10 +38,20 @@ Non-spatial attribute data is stored in user-defined Attribute tables. Attribute
 [caption=""]
 .Requirement 119
 ====
-A GeoPackage MAY contain tables or updatable views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL have a column with column type INTEGER and PRIMARY KEY AUTOINCREMENT column constraints per <<gpkg_attributes_example>> and <<example_attributes_table_sql>>.
+A GeoPackage MAY contain tables or views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL be structured consistently with <<gpkg_attributes_example>> and <<example_attributes_table_sql>>.
 ====
 
-The integer primary key of an Attribute table allows attribute sets to be linked to row level metadata records in the gpkg_metadata table by rowid <<B5>> values in the gpkg_metadata_reference table as described in clause <<extension_metadata>> below.
+[[r151]]
+[caption=""]
+.Requirement 151
+====
+An attributes table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be a primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.
+====
+
+[NOTE]
+=====
+Using an integer primary key in an attributes table allows attributes to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant attributes view with a discoverable key-like column^<<K17>>^.
+=====
 
 [#gpkg_attributes_example,reftext='{table-caption} {counter:table-num}']
 .GeoPackage Attributes Example Table or View Definition
