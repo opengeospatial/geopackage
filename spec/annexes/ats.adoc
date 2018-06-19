@@ -441,19 +441,23 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/features/vector_features/data/feature_table_integer_primary_key+
-|*Test Purpose* |Verify that every vector features user data table has an integer primary key.
+|*Test Case ID* |+/opt/features/vector_features/data/feature_table+
+|*Test Purpose* |Verify that every vector feature table or view is present and that each has a discoverable integer primary key or key-like column.
 |*Test Method* |
 . SELECT table_name FROM gpkg_contents WHERE data_type = 'features'
 . Not testable if returns an empty result set
 . For each row from step 1
 .. PRAGMA table_info(table_name) 
 .. Fail if returns an empty result set
-.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"
+.. Identify the id column
+... If the result set contains a row where the pk column value is 1 then it is the id column
+... Otherwise the first column is the id column
+.. Fail if the id column is not of type "INTEGER"
 .. SELECT COUNT(*) - COUNT(DISTINCT id) from table_name
 .. Fail if result is nonzero
 . Pass if no fails.
 |*Reference* |Clause 2.1.6.1.1 Req 29:
+|*Reference* |Clause 2.1.6.1.1 Req 150:
 |*Test Type* |Basic
 |========================================
 
@@ -874,7 +878,7 @@ END;
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/opt/tiles/tile_pyramid/data/table_def+
-|*Test Purpose* |Verify that multiple tile pyramids are stored in different tiles tables with unique names containing the required columns.
+|*Test Purpose* |Verify that the tile pyramids each have a table or view, that all required columns are present, and that the "id" column has unique values.
 |*Test Method* |
 . SELECT COUNT(table_name) FROM gpkg_contents WERE data_type = "tiles"
 . Not testable if less than 1
@@ -882,8 +886,10 @@ END;
 . For each row from step 3
 .. PRAGMA table_info(table_name)
 .. Fail if returns an empty result set 
-.. Fail if result set does not contain one row where the pk column value is 1 and the not null column value is 1 and the type column value is "INTEGER"and the name column value is "id" 
+.. Fail if result set does not contain one row where the "type" column value is "INTEGER" and the "name" column value is "id" 
 .. Fail if result set does not contain four other rows where the name column values are "zoom_level","tile_column","tile_row", and "tile_data".
+.. SELECT COUNT(*) - COUNT(DISTINCT id) from table_name
+.. Fail if result is nonzero
 . Pass if no fails
 |*Reference* |Clause 2.2.8.1.1 Req 54:
 |*Test Type* |Basic
@@ -1064,13 +1070,19 @@ END;
 |*Test Purpose* |Verify that the `gpkg_contents` `table_name` value table exists and is apparently an attributes table for every row with a `data_type` column value of "attributes".
 |*Test Method* |
 . SELECT table_name FROM gpkg_contents WHERE data_type = "attributes"
-. Not testable if returns empty result set
+. Not testable if returns an empty result set
 . For each row from step 1
 .. PRAGMA table_info(table_name) 
-.. Fail if returns an empty result set 
-.. Fail if result set does not contain one row where the `pk` column value is 1 and the `notnull` column value is 1 and the `type` column value is "INTEGER" and the `name` column value is "id" 
+.. Fail if returns an empty result set
+.. Identify the id column
+... If the result set contains a row where the pk column value is 1 then it is the id column
+... Otherwise the first column is the id column
+.. Fail if the id column is not of type "INTEGER"
+.. SELECT COUNT(*) - COUNT(DISTINCT id) from table_name
+.. Fail if result is nonzero
 . Pass if no fails.
-|*Reference* |Clause 2.4.2.1.1 Req 64a
-|*Reference* |Clause 2.4.3.1.1 Req 64b
+|*Reference* |Clause 2.4.2.1.1 Req 118
+|*Reference* |Clause 2.4.3.1.1 Req 119
+|*Reference* |Clause 2.4.3.1.1 Req 151
 |*Test Type* |Capability
 |========================================
