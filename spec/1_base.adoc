@@ -224,10 +224,10 @@ A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_content
 |`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |UNIQUE
 |`description` |TEXT |A human-readable description for the table_name content |yes |'' |
 |`last_change` |DATETIME |timestamp of last change to content, in ISO 8601 format|no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
-|`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates. |yes | |
-|`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates. |yes | |
-|`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.|yes | |
-|`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.|yes | |
+|`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name. See warning below. |yes | |
+|`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name. See warning below. |yes | |
+|`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name. See warning below. |yes | |
+|`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name. See warning below. |yes | |
 |`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match `gpkg_tile_matrix_set.srs_id` |yes | |FK
 |=======================================================================
 
@@ -253,7 +253,12 @@ The `last_change` SHOULD contain the timestamp of when the content in the refere
 Values of the `gpkg_contents` table `last_change` column SHALL be in http://www.iso.org/iso/catalogue_detail?csnumber=40874[ISO 8601] <<29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. ^<<K7>>^
 ====
 
-The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bounding box of the content. Applications may use this bounding box as the extents of a default view but there are no requirements that this bounding box be exact or represent the minimum bounding box of the content. The values are in the units specified by that CRS.
+The `min_x`, `min_y`, `max_x`, and `max_y` column values describe the bounding box (extents) of the content, in the units specified by the row's `srs_id` column value.
+
+[WARNING]
+=====
+For _tiles_ content, the extents are _informative_; there is no requirement that these extents be exact or represent the minimum bounding box of the content. To provide a better user experience for sparsely populated tiles matrix sets, applications may use this bounding box as the extents of a default view. For the actual extents of a tile matrix set, see <<gpkg_tile_matrix_set_cols>>.
+=====
 
 [[r16]]
 [caption=""]
