@@ -228,7 +228,7 @@ A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_content
 |`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name. See warning below. |yes | |
 |`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name. See warning below. |yes | |
 |`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name. See warning below. |yes | |
-|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match `gpkg_tile_matrix_set.srs_id` |yes | |FK
+|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`. See note below. |yes | |FK
 |=======================================================================
 
 See <<gpkg_contents_sql>>.
@@ -266,3 +266,8 @@ For _tiles_ content, the extents are _informative_; there is no requirement that
 ====
 Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
 ====
+
+[NOTE]
+===========
+When `data_type` is "features", the `srs_id` also matches `gpkg_geometry_columns.srs_id` (see <<r146>>). When `data_type` is "tiles", the `srs_id` also matches `gpkg_tile_matrix_set.srs_id` (see <<r147>>).
+===========
