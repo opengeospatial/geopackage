@@ -290,13 +290,13 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 |*Test Case ID* |+/opt/features/geometry_encoding/data/blob_envelope+
 |*Test Purpose* |Verify that geometries stored in feature geometry WKBs fall within the extents in those WKBs.
 |*Test Method* |
-. SELECT table_name AS tn, column_name AS cn, min_x, min_y, max_x, max_y, FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
+. SELECT ggc.table_name AS tn, ggc.column_name AS cn, gc.min_x, gc.min_y, gc.max_x, gc.max_y, gc.srs_id FROM gpkg_contents gc, gpkg_geometry_columns ggc WHERE ggc.table_name = gc.table_name and gc.data_type = 'features'
 . Not testable if returns an empty result set
 . For each row from step 1
 .. SELECT cn FROM tn
 .. Not testable if none found
 .. For each cn value from step a
-... If the geometry is not empty, and the envelope is not empty, and envelope values are not NaN: Fail if the envelope falls outside the extents of gpkg_geometry_columns extents.
+... If the geometry is not empty, the envelope is not empty, and envelope values are not NaN: Fail if the envelope falls outside the extents from gpkg_contents.
 ... If the geometry is empty, fail if the envelope is not empty and does not contain values of NaN.
 .  Pass if no fails
 |*Reference* |Clause 2.1.3.1.1 Req 148:
