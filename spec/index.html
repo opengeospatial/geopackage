@@ -3908,7 +3908,7 @@ The GeoPackage standard does not place any constraints on application, platform,
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT a.srs_id a_srs_id, b.srs_id b_srs_id FROM gpkg_geometry_columns a, gpkg_contents b WHERE a.table_name = b.table_name and a_srs_id != b_srs_id</p>
+<p>SELECT a.srs_id srs_id, a.table_name tn FROM gpkg_geometry_columns a, gpkg_contents b WHERE a.table_name = b.table_name and a.srs_id != b.srs_id</p>
 </li>
 <li>
 <p>Fail if any rows are returned</p>
@@ -4949,7 +4949,7 @@ END;</p>
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT a.srs_id a_srs_id, b.srs_id b_srs_id FROM gpkg_tile_matrix_set a, gpkg_contents b WHERE a.table_name = b.table_name and a_srs_id != b_srs_id</p>
+<p>SELECT a.srs_id srs_id, a.table_name tn FROM gpkg_tile_matrix_set a, gpkg_contents b WHERE a.table_name = b.table_name and a.srs_id != b.srs_id</p>
 </li>
 <li>
 <p>Fail if returns any rows have non-matching SRS IDs</p>
@@ -13999,7 +13999,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-06-23 03:20:30 UTC
+Last updated 2018-06-23 03:53:32 UTC
 </div>
 </div>
 </body>
