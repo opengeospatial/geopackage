@@ -399,8 +399,8 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 |*Test Case ID* |+/opt/features/geometry_columns/data/data_values_srs_id_match+
 |*Test Purpose* |Verify that the `srs_id` column values are consistent between `gpkg_geometry_columns` and `gpkg_contents`.
 |*Test Method* |
-. SELECT a.srs_id, b.srs_id FROM gpkg_geometry_columns a, gpkg_contents b WHERE a.table_name = b.table_name
-. Fail if returns any rows have non-matching SRS IDs
+. SELECT a.srs_id srs_id, a.table_name tn FROM gpkg_geometry_columns a, gpkg_contents b WHERE a.table_name = b.table_name and a.srs_id != b.srs_id
+. Fail if any rows are returned
 |*Reference* |Clause 2.1.5.1.2 Req 146:
 |*Test Type* |Capability
 |========================================
@@ -677,7 +677,7 @@ END;
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix_set/data/data_values_srs_id_match+
 |*Test Purpose* |Verify that the `srs_id` column values are consistent between `gpkg_tile_matrix_set` and `gpkg_contents` tables.
 |*Test Method* |
-. SELECT a.srs_id, b.srs_id FROM gpkg_tile_matrix_set a, gpkg_contents b WHERE a.table_name = b.table_name
+. SELECT a.srs_id srs_id, a.table_name tn FROM gpkg_tile_matrix_set a, gpkg_contents b WHERE a.table_name = b.table_name and a.srs_id != b.srs_id
 . Fail if returns any rows have non-matching SRS IDs
 |*Reference* |Clause 2.2.6.1.2 Req 147:
 |*Test Type* |Capability
