@@ -1502,15 +1502,14 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 <div class="title">Requirement 32</div>
 <div class="content">
 <div class="paragraph">
-<p>Feature table geometry columns SHALL contain geometries of the type or assignable for the type specified for the column by the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> uppercase column value <sup><a href="#K13">[K13]</a></sup></p>
+<p>Feature table geometry columns SHALL contain geometries of the type <span class="line-through">or assignable for the type</span> specified for the column by the <code>gpkg_geometry_columns</code> table <code>geometry_type_name</code> uppercase column value <sup><a href="#K13">[K13]</a></sup>.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>Geometry subtypes are assignable as defined in <a href="#geometry_types">Geometry Types (Normative)</a> and shown in part in <a href="#core_geometry_model_figure">Core Geometry Model</a>.
-For example, if the <code>geometry_type_name</code> value in the <code>gpkg_geometry_columns</code> table is for a geometry type like POINT that has no subtypes, then the feature table geometry column MAY only contain geometries of that type.
-If the geometry <code>type_name</code> value in the <code>gpkg_geometry_columns</code> table is for a geometry type like GEOMETRYCOLLECTION that has subtypes, then the feature table geometry column MAY only contain geometries of that type or any of its direct or indirect subtypes.
-If the geometry <code>type_name</code> is GEOMETRY (the root of the geometry type hierarchy) then the feature table geometry column MAY contain geometries of any geometry type.</p>
+<p>Allowed geometry types are defined in <a href="#geometry_types">Geometry Types (Normative)</a> and shown in part in <a href="#core_geometry_model_figure">Core Geometry Model</a>.
+If the geometry <code>type_name</code> value is "GEOMETRY" then the feature table geometry column MAY contain geometries of any allowed geometry type.
+If the geometry <code>type_name</code> value is "GEOMETRYCOLLECTION" then the feature table geometry column MAY contain zero or more geometries of any allowed geometry type.</p>
 </div>
 <div class="paragraph">
 <p>The presence or absence of optional elevation (Z) and/or measure (M) values in a geometry does not change its type or assignability. The unit of measure for optional elevation(Z) values is determined by the CRS of the geometry; it is as-defined by a 3D CRS, and undefined for a 2D CRS. The unit of measure for optional measure (M) values is determined by the CRS of the geometry.</p>
@@ -4263,7 +4262,7 @@ FROM gpkg_geometry_columns WHERE table_name IN
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the geometry type of feature geometries are of the type or are assignable for the geometry type specified by the <code>gpkg_geometry</code> columns table <code>geometry_type_name</code> column value.</p>
+<p>Verify that the geometry type of feature geometries are of the type specified by the <code>gpkg_geometry</code> columns table <code>geometry_type_name</code> column value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -4281,17 +4280,17 @@ FROM gpkg_geometry_columns WHERE table_name IN
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>*Select the set of geometry types in use for the values in cn</p>
+<p>Select the set of geometry types in use for the values in cn</p>
 </li>
 <li>
 <p>For each row actual_type_name from step a</p>
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>*Determine if each geometry type is assignable to the actual_type_name</p>
+<p>Determine if each geometry type matches the actual_type_name</p>
 </li>
 <li>
-<p>Fail if any are not assignable</p>
+<p>Fail if any geometries do not match</p>
 </li>
 </ol>
 </div>
@@ -13999,7 +13998,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-06-23 03:53:32 UTC
+Last updated 2018-06-25 17:42:52 UTC
 </div>
 </div>
 </body>
