@@ -429,6 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 </head>
 <body class="book">
+  <div style=" opacity:0.5; z-index:99; color:red; font-size: 6em; width: 100px; height: 100px; position: fixed; top:0; bottom: 0; left: 0; right: 0; margin: auto; ">DRAFT</div>
 <div id="header">
 <h1>OGC GeoPackage Related Tables Extension (DRAFT)</h1>
 </div>
@@ -573,9 +574,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_strong_many_to_many_strong">4.6. <strong>many-to-many</strong></a></li>
 <li><a href="#_strong_many_to_one_strong">4.7. <strong>many-to-one</strong></a></li>
 <li><a href="#_strong_related_data_strong">4.8. <strong>related data</strong></a></li>
-<li><a href="#_strong_user_defined_attributes_table_strong">4.9. <strong>user-defined attributes table</strong></a></li>
-<li><a href="#_strong_user_defined_mapping_table_strong">4.10. <strong>user-defined mapping table</strong></a></li>
-<li><a href="#_strong_user_defined_media_table_strong">4.11. <strong>user-defined media table</strong></a></li>
+<li><a href="#_strong_relationship_strong">4.9. <strong>relationship</strong></a></li>
+<li><a href="#_strong_user_defined_attributes_table_strong">4.10. <strong>user-defined attributes table</strong></a></li>
+<li><a href="#_strong_user_defined_mapping_table_strong">4.11. <strong>user-defined mapping table</strong></a></li>
+<li><a href="#_strong_user_defined_media_table_strong">4.12. <strong>user-defined media table</strong></a></li>
 </ul>
 </li>
 <li><a href="#_conventions">5. Conventions</a>
@@ -712,7 +714,7 @@ To support this capability, an ancillary data table (<code>gpkgext_relations</co
 <p>Extension Type: This extension provides new requirements dependent on GeoPackage <a href="http://www.geopackage.org/spec120/index.html#features">Clause 2.1</a> and <a href="http://www.geopackage.org/spec120/index.html#attributes">Clause 2.4</a>.</p>
 </li>
 <li>
-<p>Applicability: This extension defines a relationship between feature tables and aspatial tables that hold related content (e.g., media).</p>
+<p>Applicability: This extension defines relationships between feature tables and tables that hold related content, including multimedia, simple attributes, and other features.</p>
 </li>
 <li>
 <p>Scope: read-write</p>
@@ -835,7 +837,7 @@ As an example, this can be used to establish a many-to-many relationship between
 <div class="sect2">
 <h3 id="_strong_cardinality_strong"><a class="anchor" href="#_strong_cardinality_strong"></a>4.3. <strong>cardinality</strong></h3>
 <div class="paragraph">
-<p>A relationship between two entities <code>A</code> and <code>B</code>. For the purposes of this extension, <code>A</code> refers to base data and <code>B</code> refers to related data.</p>
+<p>The property of a relationship between two entities, specifying whether it is one-to-one, one-to-many, many-to-one, or many-to-many.</p>
 </div>
 </div>
 <div class="sect2">
@@ -870,19 +872,25 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_user_defined_attributes_table_strong"><a class="anchor" href="#_strong_user_defined_attributes_table_strong"></a>4.9. <strong>user-defined attributes table</strong></h3>
+<h3 id="_strong_relationship_strong"><a class="anchor" href="#_strong_relationship_strong"></a>4.9. <strong>relationship</strong></h3>
+<div class="paragraph">
+<p>For the purposes of this extension, a link between two entities <code>A</code> and <code>B</code>. <code>A</code> refers to base data and <code>B</code> refers to related data.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_strong_user_defined_attributes_table_strong"><a class="anchor" href="#_strong_user_defined_attributes_table_strong"></a>4.10. <strong>user-defined attributes table</strong></h3>
 <div class="paragraph">
 <p>In this extension, a user-defined attributes table is a table that contains data that is related to existing geospatial data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_user_defined_mapping_table_strong"><a class="anchor" href="#_strong_user_defined_mapping_table_strong"></a>4.10. <strong>user-defined mapping table</strong></h3>
+<h3 id="_strong_user_defined_mapping_table_strong"><a class="anchor" href="#_strong_user_defined_mapping_table_strong"></a>4.11. <strong>user-defined mapping table</strong></h3>
 <div class="paragraph">
 <p>In this extension, a user-defined mapping table is a join table that links geospatial data and related data.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_strong_user_defined_media_table_strong"><a class="anchor" href="#_strong_user_defined_media_table_strong"></a>4.11. <strong>user-defined media table</strong></h3>
+<h3 id="_strong_user_defined_media_table_strong"><a class="anchor" href="#_strong_user_defined_media_table_strong"></a>4.12. <strong>user-defined media table</strong></h3>
 <div class="paragraph">
 <p>In this extension, a user-defined media table is a user-defined attributes table that is specifically designed to contain multimedia content (including, but not limited to, images, diagrams, formatted text, moving images or audio).</p>
 </div>
@@ -1600,21 +1608,21 @@ a set of additional columns that may be provided.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Text attribute content</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Integer attribute content</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Floating point number attribute content</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 </tr>
 </tbody>
@@ -2202,7 +2210,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 <p class="tableblock">2. For each related_table_name row returned in Step 1:</p>
 <p class="tableblock">- <code>PRAGMA table_info({related_table_name})</code></p>
 <p class="tableblock">- Fail if returns an empty result set.</p>
-<p class="tableblock">- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of [gpkg_user_defined_media_table]. Additional columns, column order, check constraints, trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
+<p class="tableblock">- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of <a href="#gpkg_user_defined_media_table">User-Defined Media Table Definition</a>. Additional columns, column order, check constraints, trigger definitions, and other column definitions in the returned sql are irrelevant.</p>
 <p class="tableblock">3. Pass if no fails.</p></td>
 </tr>
 </tbody>
@@ -2262,7 +2270,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 <p class="tableblock">2. For each related_table_name row returned in Step 1:</p>
 <p class="tableblock">- <code>PRAGMA table_info({related_table_name})</code></p>
 <p class="tableblock">- Fail if returns an empty result set.</p>
-<p class="tableblock">- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of [gpkg_user_defined_simpleattr_table].</p>
+<p class="tableblock">- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of <a href="#gpkg_user_defined_simpleattr_table">User-Defined Simple Attributes Table Definition</a>.</p>
 <p class="tableblock">- Fail if <code>Column Type</code> includes storage classes other than <code>TEXT</code>, <code>INTEGER</code>, or <code>REAL</code>.</p>
 <p class="tableblock">3. Pass if no fails.</p></td>
 </tr>
@@ -2573,6 +2581,33 @@ where features.id=features_to_media.base_id;</pre>
 </tr>
 </tbody>
 </table>
+<table id="gpkgext_user_defined_media_table_dublin_core_sql" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 11. Example User Defined Media Table Definition SQL - Dublin Core (Informative)</caption>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_media_with_metadata' (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  data BLOB NOT NULL,
+  content_type TEXT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  date INTEGER NOT NULL,
+  source TEXT NOT NULL)</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO-8601), as REAL (days relative to Gregorian calendar start) and INTEGER (seconds relative to Unix epoch). See SQLite documentation for more information including conversion between forms.
+</td>
+</tr>
+</table>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -2580,7 +2615,7 @@ where features.id=features_to_media.base_id;</pre>
 <h2 id="_table_definition_sql"><a class="anchor" href="#_table_definition_sql"></a>Annex D: Table Definition SQL</h2>
 <div class="sectionbody">
 <table id="gpkgext_relations_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 11. Extended Relations Table Definition SQL (Normative)</caption>
+<caption class="title">Table 12. Extended Relations Table Definition SQL (Normative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -2596,7 +2631,7 @@ where features.id=features_to_media.base_id;</pre>
 </div>
 </div>
 <table id="gpkgext_user_defined_mapping_table_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 12. Extended Relations Mapping Table SQL (Informative)</caption>
+<caption class="title">Table 13. Extended Relations Mapping Table SQL (Informative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -2607,7 +2642,7 @@ where features.id=features_to_media.base_id;</pre>
 </div>
 </div>
 <table id="gpkg_features_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 13. Example User Defined Features Table Definition SQL (Informative)</caption>
+<caption class="title">Table 14. Example User Defined Features Table Definition SQL (Informative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -2623,7 +2658,7 @@ where features.id=features_to_media.base_id;</pre>
 <p>This table is a modified version of <a href="http://www.geopackage.org/spec120/#_sample_feature_table_informative">the informative example in the core document</a>. The <code>raster_or_photo</code> column is removed with the intent of making the binary data available as per this extension.</p>
 </div>
 <table id="gpkgext_user_defined_media_table_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 14. Example User Defined Media Table Definition SQL (Informative)</caption>
+<caption class="title">Table 15. Example User Defined Media Table Definition SQL (Informative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -2634,7 +2669,7 @@ where features.id=features_to_media.base_id;</pre>
 </div>
 </div>
 <table id="gpkgext_user_defined_simpleattr_table_sql" class="tableblock frame-all grid-all spread">
-<caption class="title">Table 15. Example User Defined Simple Attribute Table Definition SQL (Informative)</caption>
+<caption class="title">Table 16. Example User Defined Simple Attribute Table Definition SQL (Informative)</caption>
 </table>
 <div class="listingblock">
 <div class="content">
@@ -2676,6 +2711,13 @@ where features.id=features_to_media.base_id;</pre>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">initial version</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-06</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.2</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">J. Yutzler</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">After IE completion</p></td>
+</tr>
 </tbody>
 </table>
 <div style="page-break-after: always;"></div>
@@ -2714,7 +2756,7 @@ where features.id=features_to_media.base_id;</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-02-28 16:03:56 EST
+Last updated 2018-06-27 16:44:21 EDT
 </div>
 </div>
 </body>
