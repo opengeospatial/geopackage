@@ -429,7 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 </head>
 <body class="book">
-  <div style=" opacity:0.5; z-index:99; color:red; font-size: 6em; width: 100px; height: 100px; position: fixed; top:0; bottom: 0; left: 0; right: 0; margin: auto; ">DRAFT</div>
+<div style=" opacity:0.5; z-index:99; color:red; font-size: 6em; width: 100px; height: 100px; position: fixed; top:0; bottom: 0; left: 0; right: 0; margin: auto; ">DRAFT</div>
 <div id="header">
 <h1>OGC GeoPackage Related Tables Extension (DRAFT)</h1>
 </div>
@@ -585,34 +585,47 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_identifiers">5.1. Identifiers</a></li>
 </ul>
 </li>
-<li><a href="#_requirements_normative">6. Requirements (Normative)</a>
+<li><a href="#DesignClause">6. Design (Informative)</a>
 <ul class="sectlevel2">
-<li><a href="#_common_requirements_table_definitions">6.1. Common Requirements – Table Definitions</a>
+<li><a href="#_overview">6.1. Overview</a></li>
+<li><a href="#_requirements_classes">6.2. Requirements Classes</a>
 <ul class="sectlevel3">
-<li><a href="#_code_gpkg_extensions_code">6.1.1. <code>gpkg_extensions</code></a></li>
-<li><a href="#_code_gpkgext_relations_code">6.1.2. <code>gpkgext_relations</code></a></li>
-<li><a href="#user_defined_mapping_table">6.1.3. User-Defined Mapping Tables</a></li>
-<li><a href="#user_defined_related_data_table">6.1.4. User-Defined Related Data Tables</a></li>
+<li><a href="#_media">6.2.1. Media</a></li>
+<li><a href="#_simple_attributes">6.2.2. Simple Attributes</a></li>
+<li><a href="#_features">6.2.3. Features</a></li>
 </ul>
 </li>
-<li><a href="#media_rc">6.2. Media Requirements Class</a>
+<li><a href="#_usage_scenario">6.3. Usage scenario</a></li>
+</ul>
+</li>
+<li><a href="#_requirements_normative">7. Requirements (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_common_requirements_table_definitions">7.1. Common Requirements – Table Definitions</a>
 <ul class="sectlevel3">
-<li><a href="#_user_defined_media_tables">6.2.1. User-Defined Media Tables</a></li>
+<li><a href="#_code_gpkg_extensions_code">7.1.1. <code>gpkg_extensions</code></a></li>
+<li><a href="#_code_gpkgext_relations_code">7.1.2. <code>gpkgext_relations</code></a></li>
+<li><a href="#user_defined_mapping_table">7.1.3. User-Defined Mapping Tables</a></li>
+<li><a href="#user_defined_related_data_table">7.1.4. User-Defined Related Data Tables</a></li>
 </ul>
 </li>
-<li><a href="#sa_rc">6.3. Simple Attributes Requirements Class</a>
+<li><a href="#media_rc">7.2. Media Requirements Class</a>
 <ul class="sectlevel3">
-<li><a href="#_user_defined_simple_attribute_tables">6.3.1. User-Defined Simple Attribute Tables</a></li>
+<li><a href="#_user_defined_media_tables">7.2.1. User-Defined Media Tables</a></li>
 </ul>
 </li>
-<li><a href="#f_rc">6.4. Related Features Requirements Class</a>
+<li><a href="#sa_rc">7.3. Simple Attributes Requirements Class</a>
 <ul class="sectlevel3">
-<li><a href="#_user_defined_related_features_tables">6.4.1. User-Defined Related Features Tables</a></li>
+<li><a href="#_user_defined_simple_attribute_tables">7.3.1. User-Defined Simple Attribute Tables</a></li>
+</ul>
+</li>
+<li><a href="#f_rc">7.4. Related Features Requirements Class</a>
+<ul class="sectlevel3">
+<li><a href="#_user_defined_related_features_tables">7.4.1. User-Defined Related Features Tables</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#_media_types_for_any_data_encoding_s">7. Media Types for any data encoding(s)</a></li>
+<li><a href="#_media_types_for_any_data_encoding_s">8. Media Types for any data encoding(s)</a></li>
 <li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a>
 <ul class="sectlevel2">
 <li><a href="#_common_requirements">A.1. Common Requirements</a>
@@ -741,6 +754,12 @@ To support this capability, an ancillary data table (<code>gpkgext_relations</co
 <li>
 <p>Compusult</p>
 </li>
+<li>
+<p>Radiant Solutions</p>
+</li>
+<li>
+<p>SOFWERX</p>
+</li>
 </ul>
 </div>
 <div class="paragraph">
@@ -766,6 +785,22 @@ To support this capability, an ancillary data table (<code>gpkgext_relations</co
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Jeff Yutzler</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Image Matters</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Tracey Birch</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">SOFWERX</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Jason MacDonald</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Compusult</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Ashley Antonides</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Radiant Solutions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Brad Hards</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">&#8201;&#8212;&#8201;</p></td>
 </tr>
 </tbody>
 </table>
@@ -918,10 +953,146 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_requirements_normative"><a class="anchor" href="#_requirements_normative"></a>6. Requirements (Normative)</h2>
+<h2 id="DesignClause"><a class="anchor" href="#DesignClause"></a>6. Design (Informative)</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_common_requirements_table_definitions"><a class="anchor" href="#_common_requirements_table_definitions"></a>6.1. Common Requirements – Table Definitions</h3>
+<h3 id="_overview"><a class="anchor" href="#_overview"></a>6.1. Overview</h3>
+<div class="paragraph">
+<p>The core of the Related Tables Extension is a mapping between existing table types defined by GPKG 1.2 - <a href="http://www.geopackage.org/spec/#features">features</a>, <a href="http://www.geopackage.org/spec/#tiles">tiles</a> and <a href="http://www.geopackage.org/spec/#attributes">attributes</a>. The mapping is defined by a new kind of table defined by the Related Tables Extension. The mapping table links related rows in those tables of those types by reference to their primary keys. For example, to link a row in Table A to a row in Table B, the mapping table includes a row that has two values - the primary key of the row from Table A, and the primary key of the row from Table B.</p>
+</div>
+<div class="paragraph">
+<p>The mapping table allows many-to-many relationships. For example, to relate another row in Table B to the same row in Table A, the mapping table would simply include another row with the appropriate primary keys. See <a href="#img_relatedtablesconcept">Figure 1</a>.</p>
+</div>
+<div id="img_relatedtablesconcept" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/RelatedTablesConcept.png" alt="RelatedTablesConcept" width="800">
+</div>
+<div class="title">Figure 1. Related Tables concept</div>
+</div>
+<div class="paragraph">
+<p>Mapping tables are unique to each pair of tables. The appropriate mapping table for each table pair (if any) is identified in a new table <code>gpkgext_relations</code>, which also specifies the name of the primary key column and the type of related data. This version of the Related Tables Extension supports three types of related data, which are separate conformance classes:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>media</p>
+</li>
+<li>
+<p>simple attributes</p>
+</li>
+<li>
+<p>features</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The relationships can be considered directional, in that they relate primary keys of two tables in terms of base (the "left" or "from" side of the mapping) and related (the "right" or "to" side of the mapping). Since the related tables are valid GPKG 1.2 table types (potentially with some additional constraints), they can form the base side of another mapping. This allows chaining (directed graph) of relationships as appropriate to represent the modelled data. See <a href="#img_related_tables_uml">Figure 2</a>.</p>
+</div>
+<div id="img_related_tables_uml" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/related_tables_uml.png" alt="related tables uml" width="800">
+</div>
+<div class="title">Figure 2. Related Tables UML Diagram</div>
+</div>
+<div class="paragraph">
+<p>The Related Tables Extension makes no constraints on the base table; it can be any table type supported by GPKG 1.2 - tiles, attributes or features. The related ("right" / "to") table is constrained by defined values of <code>relation_name</code> which is a TEXT value in the <code>gpkgext_relations</code> table. The constraining of relationships serves two purposes - it allows clients to provide appropriate rendering of content, and it communicates the intent of the relationship. Since the relationship is text, values other than those defined by the Related Tables Extension document can be used, however this will not be interoperable without some other coordination mechanism.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_requirements_classes"><a class="anchor" href="#_requirements_classes"></a>6.2. Requirements Classes</h3>
+<div class="sect3">
+<h4 id="_media"><a class="anchor" href="#_media"></a>6.2.1. Media</h4>
+<div class="paragraph">
+<p>The Media conformance class is used for related tables that provide multimedia content. The GPKG table type is <a href="http://www.geopackage.org/spec/#attributes">attributes</a>. This was the original intent of the Related Tables Interoperability Experiment, and remains an important use. For example, using a <code>relation_name</code> of <code>media</code> provides the ability to link a set of photographs, line diagrams, documents, videos and/or audio files to a specific location (typically a point or polygon feature; but the Related Tables Extension does not prohibit some other kind of feature, or a row in an attribute table, or a row in a tile table being used as the base side of the mapping to the media table). The minimum content of the user defined media table is a primary key, a BLOB containing the media content (conceptually a byte array in the GeoPackage), and the <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA Media Type</a> type for the media content (e.g., <code>image/jpeg</code> for a photograph).</p>
+</div>
+<div class="paragraph">
+<p>An example of this is a land parcel (land lot) as the feature (base table), and photographs of the location (house, commercial property, etc.) as the related media.</p>
+</div>
+<div class="paragraph">
+<p>Note that the related table does not need to include additional columns, although additional columns are permitted in the related table definition, so they can be added if desired. The Related Tables Extension does not constrain or codify what the additional columns can be. Specific communities of interest may wish to provide usage profiles of the Media conformance class to meet specific operational or business needs. Clients that intend to display GeoPackages that make use of the Media conformance class of the Related Tables Extension may wish to provide additional attribute display on a "best efforts" basis (e.g., view with the column names as labels for the text and numeric row values).</p>
+</div>
+<div class="paragraph">
+<p>For example, additional column content might include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An indicator of the size of the media content (although this can be determined using the SQLite <code>length()</code> function)</p>
+</li>
+<li>
+<p>A title or description of the content of the media BLOB</p>
+</li>
+<li>
+<p>License information, usage restrictions, or security constraints</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_simple_attributes"><a class="anchor" href="#_simple_attributes"></a>6.2.2. Simple Attributes</h4>
+<div class="paragraph">
+<p>The Simple Attributes conformance class is used for related tables that include only "simple attributes" - those SQLite values that are part of the TEXT, INTEGER and REAL <a href="https://www.sqlite.org/datatype3.html#storage_classes_and_datatypes">storage classes</a>. The GPKG table type is <a href="http://www.geopackage.org/spec/#attributes">attributes</a>. This is intended to support data that would typically be represented in Comma Separated Value (CSV) or spreadsheet formats, such as reference tables or observations. The simple attributes related table is not permitted to contain BLOB data (such as multimedia content, or feature GEOMETRY - these are covered by other conformance classes).</p>
+</div>
+<div class="paragraph">
+<p>Only two columns are required in the related attributes table - the primary key, and one other column (which can be of TEXT, INTEGER, REAL, or a type that maps to one of those storage classes). As for Media, the Simple Attributes related table does not need to include additional columns, although additional columns are permitted in the related table definition, so they can be added if desired. The Related Tables Extension does not constrain or codify what the additional columns can be.  Specific communities of interest may wish to provide usage profiles of the Simple Attributes conformance class to meet specific operational or business needs. Clients that intend to display GeoPackages that make use of the Simple Attributes conformance class of the Related Tables Extension may wish to provide additional attribute display on a "best efforts" basis (e.g., view with the column names as labels for the text and numeric row values; or a spreadsheet-style table representation).</p>
+</div>
+<div class="paragraph">
+<p>An example of this is a land parcel (land lot) as the feature (base table), and contact details for the managing agent as the related table. While this could be supported by embedding the contact details for each land parcel, this could be a lot of duplication and require update if a phone number or email address changes.</p>
+</div>
+<div class="paragraph">
+<p>Note that the feature (base table) could link to many attribute table rows. An example of this would be for a set of valuations for the property, or records of property inspections or maintenance work conducted on the property.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_features"><a class="anchor" href="#_features"></a>6.2.3. Features</h4>
+<div class="paragraph">
+<p>The Features conformance class is used for related tables that are <a href="http://www.geopackage.org/spec/#feature_user_tables">GPKG 1.2 vector feature tables</a>. The GPKG table type is <a href="http://www.geopackage.org/spec/#features">features</a>. This is intended to support defining relationships between feature types. No changes or constraints are made on the extant definition of the features tables.</p>
+</div>
+<div class="paragraph">
+<p>An example of this is linking the location of a condominium (town house) or apartment with the locations of associated parking places or individual garden plots.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_usage_scenario"><a class="anchor" href="#_usage_scenario"></a>6.3. Usage scenario</h3>
+<div class="paragraph">
+<p>A single GeoPackage could include each of these relationships. For example, an airport can be considered as a point location with some attributes, which would be represented in GeoPackage as a features table. Similarly, the runways may be considered as polygons with attributes, which would be represented in GeoPackage as a different features table. See <a href="#img_airportsandrunways">Figure 3</a>. The mapping between those feature tables can be represented using the Related Tables Extension, so that a graphical user interface could identify and select the runways for a particular airport, including associated attributes and metadata.</p>
+</div>
+<div id="img_airportsandrunways" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/AirportsAndRunways.png" alt="AirportsAndRunways" width="1000">
+</div>
+<div class="title">Figure 3. Airports and runways for Tampa area (from FAA data, AIRAC cycle 1802)</div>
+</div>
+<div class="paragraph">
+<p>In addition to feature geometry, an airport may have associated documents, such as terminal procedures. These are typically provided as PDF documents containing a mix of text and diagrams, as shown in <a href="#img_arrivalprocedure">Figure 4</a>. These could be common to a range of airports in a close area (which is the case for that Arrival procedure), specific to a particular airport, or they could be specific to a particular runway, as shown in <a href="#img_gpsapproach">Figure 5</a>.</p>
+</div>
+<div id="img_arrivalprocedure" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/bridgearrival.png" alt="bridgearrival" height="1000">
+</div>
+<div class="title">Figure 4. Bridge Eight Arrival (from FAA data, AIRAC cycle 1802)</div>
+</div>
+<div id="img_gpsapproach" class="imageblock" style="text-align: center">
+<div class="content">
+<img src="images/gpsapproach.png" alt="gpsapproach" height="1000">
+</div>
+<div class="title">Figure 5. Tampa International RWY 19L GPS Instrument Approach(from FAA data, AIRAC cycle 1802)</div>
+</div>
+<div class="paragraph">
+<p>This information can be represented using the user defined media table, either by incorporating the original PDF as the content of the data BLOB, or by rendering it to an image format such as PNG and using that as the content of the data BLOB. Mapping tables can relate the feature tables (e.g., airport geometry as points and runways as polygons, as described above) to the media table.</p>
+</div>
+<div class="paragraph">
+<p>Airports may also have associated attributes that are not geospatial or media, such as the communications frequencies that are required. There are often multiple frequencies, and they are often common to multiple airports in an area. The frequency information can be represented as an attributes table, with the mapping from airport to communication frequency through a simple attributes mapping. There could well be additional attribute information, such as a mapping from the terminal procedures media table to currency (validity dates, last change) or to the responsible information provider and associated contact details.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_requirements_normative"><a class="anchor" href="#_requirements_normative"></a>7. Requirements (Normative)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_common_requirements_table_definitions"><a class="anchor" href="#_common_requirements_table_definitions"></a>7.1. Common Requirements – Table Definitions</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -953,7 +1124,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </tbody>
 </table>
 <div class="sect3">
-<h4 id="_code_gpkg_extensions_code"><a class="anchor" href="#_code_gpkg_extensions_code"></a>6.1.1. <code>gpkg_extensions</code></h4>
+<h4 id="_code_gpkg_extensions_code"><a class="anchor" href="#_code_gpkg_extensions_code"></a>7.1.1. <code>gpkg_extensions</code></h4>
 <div class="sect4">
 <h5 id="_table_values"><a class="anchor" href="#_table_values"></a>Table Values</h5>
 <table id="r1" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1053,7 +1224,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_code_gpkgext_relations_code"><a class="anchor" href="#_code_gpkgext_relations_code"></a>6.1.2. <code>gpkgext_relations</code></h4>
+<h4 id="_code_gpkgext_relations_code"><a class="anchor" href="#_code_gpkgext_relations_code"></a>7.1.2. <code>gpkgext_relations</code></h4>
 <table id="r4" class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1124,7 +1295,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>related_table_name</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the table containing the related</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the table containing the related content</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
@@ -1142,7 +1313,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>relation_name</code></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of the relation</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name (profile) of the relationship</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
@@ -1238,7 +1409,7 @@ Each <code>relation_name</code> column in a <code>gpkgext_relations</code> row S
 </div>
 </div>
 <div class="sect3">
-<h4 id="user_defined_mapping_table"><a class="anchor" href="#user_defined_mapping_table"></a>6.1.3. User-Defined Mapping Tables</h4>
+<h4 id="user_defined_mapping_table"><a class="anchor" href="#user_defined_mapping_table"></a>7.1.3. User-Defined Mapping Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_2"><a class="anchor" href="#_table_definition_2"></a>Table Definition</h5>
 <table id="r9" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1378,7 +1549,7 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="user_defined_related_data_table"><a class="anchor" href="#user_defined_related_data_table"></a>6.1.4. User-Defined Related Data Tables</h4>
+<h4 id="user_defined_related_data_table"><a class="anchor" href="#user_defined_related_data_table"></a>7.1.4. User-Defined Related Data Tables</h4>
 <div class="paragraph">
 <p>There are no explicit requirements for a generic user-defined related data table. However, interoperability is improved if a specific requirements class is used. The following subsections describe three requirements classes.</p>
 </div>
@@ -1398,7 +1569,7 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="media_rc"><a class="anchor" href="#media_rc"></a>6.2. Media Requirements Class</h3>
+<h3 id="media_rc"><a class="anchor" href="#media_rc"></a>7.2. Media Requirements Class</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1425,7 +1596,7 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 <p>This requirements class allows a GeoPackage producer or editor to relate features or attributes to multimedia files such as pictures and videos. For example, this could relate building features with pictures or videos taken of those areas.</p>
 </div>
 <div class="sect3">
-<h4 id="_user_defined_media_tables"><a class="anchor" href="#_user_defined_media_tables"></a>6.2.1. User-Defined Media Tables</h4>
+<h4 id="_user_defined_media_tables"><a class="anchor" href="#_user_defined_media_tables"></a>7.2.1. User-Defined Media Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_3"><a class="anchor" href="#_table_definition_3"></a>Table Definition</h5>
 <table id="r12" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1519,7 +1690,7 @@ a set of additional columns that may be provided.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="sa_rc"><a class="anchor" href="#sa_rc"></a>6.3. Simple Attributes Requirements Class</h3>
+<h3 id="sa_rc"><a class="anchor" href="#sa_rc"></a>7.3. Simple Attributes Requirements Class</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1546,7 +1717,7 @@ a set of additional columns that may be provided.</p>
 <p>This requirements class allows a GeoPackage producer or editor to relate sets of tabular text or numeric data. For example, this could relate land parcels with statistical information that is collected over different boundaries, or at different times.</p>
 </div>
 <div class="sect3">
-<h4 id="_user_defined_simple_attribute_tables"><a class="anchor" href="#_user_defined_simple_attribute_tables"></a>6.3.1. User-Defined Simple Attribute Tables</h4>
+<h4 id="_user_defined_simple_attribute_tables"><a class="anchor" href="#_user_defined_simple_attribute_tables"></a>7.3.1. User-Defined Simple Attribute Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_4"><a class="anchor" href="#_table_definition_4"></a>Table Definition</h5>
 <table id="r14" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1645,7 +1816,7 @@ a set of additional columns that may be provided.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="f_rc"><a class="anchor" href="#f_rc"></a>6.4. Related Features Requirements Class</h3>
+<h3 id="f_rc"><a class="anchor" href="#f_rc"></a>7.4. Related Features Requirements Class</h3>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 20%;">
@@ -1672,7 +1843,7 @@ a set of additional columns that may be provided.</p>
 <p>This requirements class allows a GeoPackage producer or editor to link features with other features. For example, this could link road features with related pylon features.</p>
 </div>
 <div class="sect3">
-<h4 id="_user_defined_related_features_tables"><a class="anchor" href="#_user_defined_related_features_tables"></a>6.4.1. User-Defined Related Features Tables</h4>
+<h4 id="_user_defined_related_features_tables"><a class="anchor" href="#_user_defined_related_features_tables"></a>7.4.1. User-Defined Related Features Tables</h4>
 <div class="sect4">
 <h5 id="_table_definition_5"><a class="anchor" href="#_table_definition_5"></a>Table Definition</h5>
 <table id="r16" class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1710,7 +1881,7 @@ a set of additional columns that may be provided.</p>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_media_types_for_any_data_encoding_s"><a class="anchor" href="#_media_types_for_any_data_encoding_s"></a>7. Media Types for any data encoding(s)</h2>
+<h2 id="_media_types_for_any_data_encoding_s"><a class="anchor" href="#_media_types_for_any_data_encoding_s"></a>8. Media Types for any data encoding(s)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This standard provides an extension to GeoPackage and does not affect the GeoPackage data encoding.</p>
@@ -2716,7 +2887,7 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.2</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">J. Yutzler</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">After IE completion</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">post-IE</p></td>
 </tr>
 </tbody>
 </table>
@@ -2756,7 +2927,7 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-06-27 16:44:21 EDT
+Last updated 2018-06-29 08:28:33 EDT
 </div>
 </div>
 </body>
