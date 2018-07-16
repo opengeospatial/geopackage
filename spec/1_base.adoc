@@ -76,7 +76,7 @@ The *GeoPackage* designation is designed to provide maximum interoperability bet
 The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <<table_column_data_types>>. Extended GeoPackages MAY contain additional data types as specified through the <<extension_mechanism>>.
 ====
 
-[[table_column_data_types]]
+[#table_column_data_types,reftext='{table-caption} {counter:table-num}']
 .GeoPackage Data Types
 [cols=",",options="header"]
 |=======================================================================
@@ -155,7 +155,7 @@ The coordinate reference system definitions it contains are referenced by the Ge
 The `gpkg_spatial_ref_sys` table includes the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
 Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) standards.
 
-[[gpkg_spatial_ref_sys_cols]]
+[#gpkg_spatial_ref_sys_cols,reftext='{table-caption} {counter:table-num}']
 .Spatial Ref Sys Table Definition
 [cols=",,,,",options="header",]
 |=======================================================================
@@ -182,7 +182,7 @@ Definition column WKT values in the `gpkg_spatial_ref_sys` table define the Spat
 The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed in <<gpkg_spatial_ref_sys_records>>. The record with an `srs_id` of 4326 SHALL correspond to http://www.google.com/search?as_q=WGS-84[WGS-84] <<15>> as defined by  http://www.epsg.org/Geodetic.html[EPSG] <<B3>> in http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] <<13>><<14>>. The record with an `srs_id` of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an `srs_id` of 0 SHALL be used for undefined geographic coordinate reference systems.
 ====
 
-[[gpkg_spatial_ref_sys_records]]
+[#gpkg_spatial_ref_sys_records,reftext='{table-caption} {counter:table-num}']
 .Spatial Ref Sys Table Records
 [cols=",,,,,",options="header",]
 |=======================================================================
@@ -214,7 +214,7 @@ The `gpkg_contents` table is intended to provide a list of all geospatial conten
 A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_contents_cols>> and <<gpkg_contents_sql>>.
 ====
 
-[[gpkg_contents_cols]]
+[#gpkg_contents_cols,reftext='{table-caption} {counter:table-num}']
 .Contents Table Definition
 [cols=",,,,,",options="header",]
 |=======================================================================
