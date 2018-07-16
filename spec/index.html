@@ -271,7 +271,7 @@ Document language: 	English<br></p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A <strong>GeoPackage</strong> is an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information.
-It is a platform-independent SQLite <a href="#5">[5]</a> database file that contains the GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">[geopackage_tables_figure]</a> below.</p>
+It is a platform-independent SQLite <a href="#5">[5]</a> database file that contains the GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">GeoPackage Tables Overview</a> below.</p>
 </div>
 <div class="paragraph">
 <p>The GeoPackage Encoding Standard (this document) describes a set of conventions for storing the following within an SQLite database:</p>
@@ -421,7 +421,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 <div class="title">Requirement 5</div>
 <div class="content">
 <div class="paragraph">
-<p>The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <a href="#table_column_data_types">[table_column_data_types]</a>. Extended GeoPackages MAY contain additional data types as specified through the <a href="#extension_mechanism">Extension Mechanism</a>.</p>
+<p>The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <a href="#table_column_data_types">GeoPackage Data Types</a>. Extended GeoPackages MAY contain additional data types as specified through the <a href="#extension_mechanism">Extension Mechanism</a>.</p>
 </div>
 </div>
 </div>
@@ -549,7 +549,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 <div class="title">Requirement 10</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL include a <code>gpkg_spatial_ref_sys</code> table per clause 1.1.2.1.1 <a href="#spatial_ref_sys_data_table_definition">Table Definition</a>, Table <a href="#gpkg_spatial_ref_sys_cols">[gpkg_spatial_ref_sys_cols]</a> and Table <a href="#gpkg_spatial_ref_sys_sql">gpkg_spatial_ref_sys Table Definition SQL</a>.</p>
+<p>A GeoPackage SHALL include a <code>gpkg_spatial_ref_sys</code> table per clause 1.1.2.1.1 <a href="#spatial_ref_sys_data_table_definition">Table Definition</a>, Table <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> and Table <a href="#gpkg_spatial_ref_sys_sql">gpkg_spatial_ref_sys Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -558,7 +558,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 The coordinate reference system definitions it contains are referenced by the GeoPackage <code>gpkg_contents</code> and <code>gpkg_geometry_columns</code> tables to relate the vector and tile data in user tables to locations on the earth.</p>
 </div>
 <div class="paragraph">
-<p>The <code>gpkg_spatial_ref_sys</code> table includes the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">[gpkg_spatial_ref_sys_cols]</a> below containing data that defines spatial reference systems.
+<p>The <code>gpkg_spatial_ref_sys</code> table includes the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Spatial Ref Sys Table Definition</a> below containing data that defines spatial reference systems.
 Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) standards.</p>
 </div>
 <table id="gpkg_spatial_ref_sys_cols" class="tableblock frame-all grid-all" style="width:100%; ">
@@ -638,7 +638,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="title">Requirement 11</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_spatial_ref_sys</code> table SHALL contain at a minimum the records listed in <a href="#gpkg_spatial_ref_sys_records">[gpkg_spatial_ref_sys_records]</a>. The record with an <code>srs_id</code> of 4326 SHALL correspond to <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a> <a href="#15">[15]</a> as defined by  <a href="http://www.epsg.org/Geodetic.html">EPSG</a> <a href="#B3">[B3]</a> in <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> <a href="#13">[13]</a><a href="#14">[14]</a>. The record with an <code>srs_id</code> of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an <code>srs_id</code> of 0 SHALL be used for undefined geographic coordinate reference systems.</p>
+<p>The <code>gpkg_spatial_ref_sys</code> table SHALL contain at a minimum the records listed in <a href="#gpkg_spatial_ref_sys_records">Spatial Ref Sys Table Records</a>. The record with an <code>srs_id</code> of 4326 SHALL correspond to <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a> <a href="#15">[15]</a> as defined by  <a href="http://www.epsg.org/Geodetic.html">EPSG</a> <a href="#B3">[B3]</a> in <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> <a href="#13">[13]</a><a href="#14">[14]</a>. The record with an <code>srs_id</code> of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an <code>srs_id</code> of 0 SHALL be used for undefined geographic coordinate reference systems.</p>
 </div>
 </div>
 </div>
@@ -714,7 +714,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="title">Requirement 13</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a href="#gpkg_contents_cols">[gpkg_contents_cols]</a> and <a href="#gpkg_contents_sql">gpkg_contents Table Definition SQL</a>.</p>
+<p>A GeoPackage file SHALL include a <code>gpkg_contents</code> table per table <a href="#gpkg_contents_cols">Contents Table Definition</a> and <a href="#gpkg_contents_sql">gpkg_contents Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -910,7 +910,7 @@ The first component of the SQL schema for vector features in a GeoPackage is the
 Other components are defined below.</p>
 </div>
 <div class="paragraph">
-<p>In a GeoPackage, "simple" features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) <a href="#12">[12]</a> geometry model shown in <a href="#core_geometry_model_figure">[core_geometry_model_figure]</a> below.</p>
+<p>In a GeoPackage, "simple" features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) <a href="#12">[12]</a> geometry model shown in <a href="#core_geometry_model_figure">Core Geometry Model</a> below.</p>
 </div>
 <div id="core_geometry_model_figure" class="imageblock">
 <div class="content">
@@ -1203,7 +1203,7 @@ GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000
 <div class="title">Requirement 20</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeometryCollection) in <a href="#geometry_types">Geometry Types (Normative)</a> <a href="#geometry_types_core">[geometry_types_core]</a> in the GeoPackageBinary geometry encoding format.</p>
+<p>A GeoPackage SHALL store feature table geometries with the basic simple feature geometry types (Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, GeometryCollection) in <a href="#geometry_types">Geometry Types (Normative)</a> <a href="#geometry_types_core">Geometry Type Codes (Core)</a> in the GeoPackageBinary geometry encoding format.</p>
 </div>
 </div>
 </div>
@@ -1220,7 +1220,7 @@ GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000
 <div class="title">Requirement 21</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage with a <code>gpkg_contents</code> table row with a "features" <code>data_type</code> SHALL contain a <code>gpkg_geometry_columns</code> table per <a href="#gpkg_geometry_columns_cols">[gpkg_geometry_columns_cols]</a> and <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
+<p>A GeoPackage with a <code>gpkg_contents</code> table row with a "features" <code>data_type</code> SHALL contain a <code>gpkg_geometry_columns</code> table per <a href="#gpkg_geometry_columns_cols">Geometry Columns Table Definition</a> and <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -1264,7 +1264,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>geometry_type_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name from <a href="#geometry_types_core">[geometry_types_core]</a> or <a href="#geometry_types_extension">[geometry_types_extension]</a> in <a href="#geometry_types">Geometry Types (Normative)</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name from <a href="#geometry_types_core">Geometry Type Codes (Core)</a> or <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a> in <a href="#geometry_types">Geometry Types (Normative)</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -1388,7 +1388,7 @@ Features are rows in a feature table.
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage MAY contain tables or views<sup><a href="#K17">[K17]</a></sup> containing vector features.
-Every such feature table or view in a GeoPackage SHALL be structured consistently with <a href="#example_feature_table_cols">[example_feature_table_cols]</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.</p>
+Every such feature table or view in a GeoPackage SHALL be structured consistently with <a href="#example_feature_table_cols">EXAMPLE : Sample Feature Table or View<sup><a href="#K17">[K17]</a></sup> Definition</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.</p>
 </div>
 </div>
 </div>
@@ -1507,7 +1507,7 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 </div>
 </div>
 <div class="paragraph">
-<p>Allowed geometry types are defined in <a href="#geometry_types">Geometry Types (Normative)</a> and shown in part in <a href="#core_geometry_model_figure">[core_geometry_model_figure]</a>.
+<p>Allowed geometry types are defined in <a href="#geometry_types">Geometry Types (Normative)</a> and shown in part in <a href="#core_geometry_model_figure">Core Geometry Model</a>.
 If the geometry <code>type_name</code> value is "GEOMETRY" then the feature table geometry column MAY contain geometries of any allowed geometry type.
 If the geometry <code>type_name</code> value is "GEOMETRYCOLLECTION" then the feature table geometry column MAY contain zero or more geometries of any allowed geometry type.</p>
 </div>
@@ -1647,7 +1647,7 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 <div class="title">Requirement 38</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>gpkg_tile_matrix_set</code> table per <a href="#tile_matrix_set_data_table_definition">Table Definition</a>, <a href="#gpkg_tile_matrix_set_cols">[gpkg_tile_matrix_set_cols]</a> and <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.</p>
+<p>A GeoPackage that contains a tile pyramid user data table SHALL contain  <code>gpkg_tile_matrix_set</code> table per <a href="#tile_matrix_set_data_table_definition">Table Definition</a>, <a href="#gpkg_tile_matrix_set_cols">Tile Matrix Set Table Definition</a> and <a href="#gpkg_tile_matrix_set_sql">gpkg_tile_matrix_set Table Creation SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -1788,7 +1788,7 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 <div class="title">Requirement 42</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrix</code> table per clause 2.2.7.1.1 <a href="#tile_matrix_data_table_definition">Table Definition</a>, Table <a href="#gpkg_tile_matrix_cols">[gpkg_tile_matrix_cols]</a> and Table <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>.</p>
+<p>A GeoPackage that contains a tile pyramid user data table SHALL contain a <code>gpkg_tile_matrix</code> table per clause 2.2.7.1.1 <a href="#tile_matrix_data_table_definition">Table Definition</a>, Table <a href="#gpkg_tile_matrix_cols">Tile Matrix Metadata Table Definition</a> and Table <a href="#gpkg_tile_matrix_sql">gpkg_tile_matrix Table Creation SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -1994,7 +1994,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div class="title">Requirement 54</div>
 <div class="content">
 <div class="paragraph">
-<p>Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or view<sup><a href="#K17">[K17]</a></sup> with a unique name that SHALL be structured consistently with <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">[example_tiles_table_cols]</a>, and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>.</p>
+<p>Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or view<sup><a href="#K17">[K17]</a></sup> with a unique name that SHALL be structured consistently with <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Tiles Table or View Definition</a>, and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>.</p>
 </div>
 </div>
 </div>
@@ -2133,7 +2133,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage MAY contain a table named <code>gpkg_extensions</code>.
-If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extensions_table_definition">Table Definition</a>, <a href="#gpkg_extensions_cols">[gpkg_extensions_cols]</a>, and <a href="#gpkg_extensions_sql">gpkg_extensions Table Definition SQL</a>. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.</p>
+If present this table SHALL be defined per clause 2.3.2.1.1 <a href="#extensions_table_definition">Table Definition</a>, <a href="#gpkg_extensions_cols">GeoPackage Extensions Table Definition (Table Name: gpkg_extensions)</a>, and <a href="#gpkg_extensions_sql">gpkg_extensions Table Definition SQL</a>. An extension SHALL NOT modify the definition or semantics of existing columns. An extension MAY define additional tables or columns. An extension MAY allow new values or encodings for existing columns.</p>
 </div>
 </div>
 </div>
@@ -2330,7 +2330,7 @@ This is indicated by a gpkg_extensions.scope column value of "write_only".</p>
 <div class="title">Requirement 118</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_contents</code> table SHALL contain a row with a <code>data_type</code> column value of "attributes" for each attributes data table or view.</p>
+<p>The gpkg_contents table SHALL contain a row with a data_type column value of "attributes" for each attributes data table or view.</p>
 </div>
 </div>
 </div>
@@ -2350,7 +2350,7 @@ This is indicated by a gpkg_extensions.scope column value of "write_only".</p>
 <div class="title">Requirement 119</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain tables or updatable views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL have a column with column type INTEGER and PRIMARY KEY AUTOINCREMENT column constraints per <a href="#gpkg_attributes_example">[gpkg_attributes_example]</a> and <a href="#example_attributes_table_sql">EXAMPLE: Attributes table Create Table SQL (Informative)</a>.</p>
+<p>A GeoPackage MAY contain tables or updatable views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL have a column with column type INTEGER and PRIMARY KEY AUTOINCREMENT column constraints per <a href="#gpkg_attributes_example">GeoPackage Attributes Example Table or View Definition</a> and <a href="#example_attributes_table_sql">EXAMPLE: Attributes table Create Table SQL (Informative)</a>.</p>
 </div>
 </div>
 </div>
@@ -7330,7 +7330,7 @@ Request For Comment (RFC).</p>
 <h3 id="_uml_notation">B.10. UML Notation</h3>
 <div class="paragraph">
 <p>The diagrams that appear in this standard are presented using the Unified Modeling Language (UML) <a href="#B14">[B14]</a> static structure diagrams.
-The UML notations used in this standard for RDBMS tables in a GeoPackage are described in <a href="#uml_notation_rdbms">[uml_notation_rdbms]</a> below.</p>
+The UML notations used in this standard for RDBMS tables in a GeoPackage are described in <a href="#uml_notation_rdbms">UML Notation for RDBMS Tables</a> below.</p>
 </div>
 <div id="uml_notation_rdbms" class="imageblock">
 <div class="content">
@@ -7380,7 +7380,7 @@ columns:</p>
 </div>
 <div class="sect2">
 <h3 id="_geopackage_tables_detailed_diagram">B.11. GeoPackage Tables Detailed Diagram</h3>
-<div id="img_gpkg_uml" class="imageblock">
+<div class="imageblock">
 <div class="content">
 <img src="geopackage-uml.png" alt="geopackage uml">
 </div>
@@ -7391,14 +7391,14 @@ columns:</p>
 <h3 id="_geopackage_minimal_tables_for_features_diagram">B.12. GeoPackage Minimal Tables for Features Diagram</h3>
 <div class="imageblock">
 <div class="content">
-<img src="geopackage-features.png" alt="#img_gpkg_uml_featuresreftext='Figure 5'">
+<img src="geopackage-features.png" alt="geopackage features">
 </div>
 <div class="title">Figure 5. GeoPackage Minimal Tables for Features</div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_geopackage_minimal_tables_for_tiles_diagram">B.13. GeoPackage Minimal Tables for Tiles Diagram</h3>
-<div id="img_gpkg_uml_tiles" class="imageblock">
+<div class="imageblock">
 <div class="content">
 <img src="geopackage-tiles.png" alt="geopackage tiles">
 </div>
@@ -8050,7 +8050,7 @@ Definitions of those extensions are in the form specified by the template in <a 
 </div>
 <div class="paragraph">
 <p>Clause 2.1.4 of the GeoPackage Version 1 Encoding Standard specifies support for the Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeometryCollection geometry types in the GeoPackageBinary geometry encoding format specified in clause 2.1.3.
-This extension specifies support for the additional CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, and Surface geometry types in the GeoPackage Binary geometry encoding format using the codes from <a href="#geometry_types_extension">[geometry_types_extension]</a>.</p>
+This extension specifies support for the additional CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, and Surface geometry types in the GeoPackage Binary geometry encoding format using the codes from <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a>.</p>
 </div>
 <h4 id="_extension_author_2" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -8058,7 +8058,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 </div>
 <h4 id="_extension_name_or_template_2" class="float">Extension Name or Template</h4>
 <div class="paragraph">
-<p>Extension names are constructed from the gpkg_geom_&lt;gname&gt; template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types_extension">[geometry_types_extension]</a>.</p>
+<p>Extension names are constructed from the gpkg_geom_&lt;gname&gt; template where &lt;gname&gt; is the uppercase name of the extension geometry type from <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a>.</p>
 </div>
 <h4 id="_extension_type_2" class="float">Extension Type</h4>
 <div class="paragraph">
@@ -8086,7 +8086,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 66</div>
 <div class="content">
 <div class="paragraph">
-<p>The GeoPackageBinary geometry encoding format specified in clause <a href="#gpb_format">Geometry Encoding</a> SHALL be used to encode non-linear geometry types using the type codes in <a href="#geometry_types">Geometry Types (Normative)</a> table <a href="#geometry_types_extension">[geometry_types_extension]</a>.</p>
+<p>The GeoPackageBinary geometry encoding format specified in clause <a href="#gpb_format">Geometry Encoding</a> SHALL be used to encode non-linear geometry types using the type codes in <a href="#geometry_types">Geometry Types (Normative)</a> table <a href="#geometry_types_extension">Geometry Type Codes (Extension)</a>.</p>
 </div>
 </div>
 </div>
@@ -9498,7 +9498,7 @@ There is no GeoPackage requirement that such metadata be provided or that define
 <div class="title">Requirement 93</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage A GeoPackage MAY contain a table named <code>gpkg_metadata</code>. If present it SHALL be defined per clauses <a href="#metadata_table_table_definition">Metadata Table</a>, <a href="#gpkg_metadata_cols">[gpkg_metadata_cols]</a>, and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
+<p>A GeoPackage A GeoPackage MAY contain a table named <code>gpkg_metadata</code>. If present it SHALL be defined per clauses <a href="#metadata_table_table_definition">Metadata Table</a>, <a href="#gpkg_metadata_cols">Metadata Table Definition</a>, and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -9538,7 +9538,7 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>md_scope</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Case sensitive name of the data scope to which this metadata applies; see <a href="#metadata_scopes">[metadata_scopes]</a> below</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Case sensitive name of the data scope to which this metadata applies; see <a href="#metadata_scopes">Metadata Scopes</a> below</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><em>dataset</em></p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -9582,7 +9582,7 @@ The structure (schema) information could be in whatever encoding is used by the 
 <div class="title">Requirement 95</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage that contains a <code>gpkg_metadata</code> table SHALL contain a <code>gpkg_metadata_reference</code> table per clauses <a href="#metadata_reference_table_table_definition">Metadata Reference Table</a>, <a href="#gpkg_metadata_reference_cols">[gpkg_metadata_reference_cols]</a>, and <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.</p>
+<p>A GeoPackage that contains a <code>gpkg_metadata</code> table SHALL contain a <code>gpkg_metadata_reference</code> table per clauses <a href="#metadata_reference_table_table_definition">Metadata Reference Table</a>, <a href="#gpkg_metadata_reference_cols">Metadata Reference Table Definition (Table Name: gpkg_metadata_reference)</a>, and <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -9757,8 +9757,8 @@ While a URL like <a href="http://www.geopackage.org/spec/#extension_metadata">ht
 <h6 id="_gpkg_metadata" class="float">gpkg_metadata</h6>
 <div class="paragraph">
 <p>The <code>md_scope</code> column in the <code>gpkg_metadata</code> table is the name of the applicable scope for the contents of the metadata column for a given row.
-The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">[metadata_scopes]</a> below.
-The initial contents of this table were obtained from the ISO 19115 <a href="#28">[28]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <sup><a href="#K32">[K32]</a></sup> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">[gpkg_metadata_cols]</a>.</p>
+The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">Metadata Scopes</a> below.
+The initial contents of this table were obtained from the ISO 19115 <a href="#28">[28]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <sup><a href="#K32">[K32]</a></sup> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">Metadata Table Definition</a>.</p>
 </div>
 <table id="metadata_scopes" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 21. Metadata Scopes</caption>
@@ -9877,7 +9877,7 @@ The initial contents of this table were obtained from the ISO 19115 <a href="#28
 <div class="title">Requirement 94</div>
 <div class="content">
 <div class="paragraph">
-<p>Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table SHALL be one of the name column values from <a href="#metadata_scopes">[metadata_scopes]</a>.</p>
+<p>Each <code>md_scope</code> column value in a <code>gpkg_metadata</code> table SHALL be one of the name column values from <a href="#metadata_scopes">Metadata Scopes</a>.</p>
 </div>
 </div>
 </div>
@@ -11636,7 +11636,7 @@ The information provided by this option can be used by applications to, for inst
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage MAY contain a table named <code>gpkg_data_columns</code>.
-If present it SHALL be defined per <a href="#gpkg_data_columns_cols">[gpkg_data_columns_cols]</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Columns Table Definition</a> and <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -11724,13 +11724,13 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
 <div class="content">
 <div class="paragraph">
 <p>A GeoPackage MAY contain a table named <code>gpkg_data_column_constraints</code>.
-If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">[gpkg_data_column_constraints_cols]</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+If present it SHALL be defined per <a href="#gpkg_data_column_constraints_cols">Data Column Constraints Table Definition</a> and <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_data_column_constraints</code> table contains data to specify restrictions on basic data type column values.
-The <code>constraint_name</code> column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">[gpkg_data_columns_cols]</a>.</p>
+The <code>constraint_name</code> column is referenced by the <code>constraint_name</code> column in the <code>gpkg_data_columns</code> table defined in <a href="#gpkg_data_columns_cols">Data Columns Table Definition</a>.</p>
 </div>
 <table id="gpkg_data_column_constraints_cols" class="tableblock frame-all grid-all" style="width:100%; ">
 <caption class="title">Table 25. Data Column Constraints Table Definition</caption>
@@ -12944,7 +12944,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="title">Requirement 115</div>
 <div class="content">
 <div class="paragraph">
-<p>For GeoPackages conforming to this extension, the <code>gpkg_spatial_ref_sys</code> table SHALL have an additional column called <code>definition_12_063</code> as per <a href="#gpkg_spatial_ref_sys_cols_crs_wkt">[gpkg_spatial_ref_sys_cols_crs_wkt]</a> and <a href="#gpkg_spatial_ref_sys_crs_wkt_sql">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</a>.</p>
+<p>For GeoPackages conforming to this extension, the <code>gpkg_spatial_ref_sys</code> table SHALL have an additional column called <code>definition_12_063</code> as per <a href="#gpkg_spatial_ref_sys_cols_crs_wkt">Spatial Ref Sys Table Definition</a> and <a href="#gpkg_spatial_ref_sys_crs_wkt_sql">gpkg_spatial_ref_sys Table Definition SQL (CRS WKT Extension)</a>.</p>
 </div>
 </div>
 </div>
@@ -13998,7 +13998,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-07-16 21:43:18 UTC
+Last updated 2018-07-16 21:55:44 UTC
 </div>
 </div>
 </body>
