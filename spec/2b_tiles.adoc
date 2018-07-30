@@ -3,7 +3,7 @@
 
 ==== Tile Matrix Introduction
 
-The Tiles option specifies a mechanism for storing raster data in tile pyramids. "Tile pyramid" refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself. "Tile" refers to an individual raster image such as a PNG or JPEG that covers a specific geographic area. "Tile matrix" refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level^<<K14>>^ "Tile matrix set" refers to the definition of a tile pyramid's tiling structure. This mechanism is based on the model for tile matrix sets described in Section 6 of <<16>>. 
+The Tiles option specifies a mechanism for storing raster data in tile pyramids. "Tile pyramid" refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself. "Tile" refers to an individual raster image such as a PNG or JPEG that covers a specific geographic area. "Tile matrix" refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level^<<K14>>^ "Tile matrix set" refers to the definition of a tile pyramid's tiling structure. This mechanism is based on the model for tile matrix sets described in Section 6 of <<16>>.
 
 The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose coupling to enable widespread implementation. A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container. The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.
 
@@ -204,7 +204,7 @@ The width of a tile matrix (the difference between `min_x` and `max_x` in `gpkg_
 Similarly, height of a tile matrix (the difference between `min_y` and `max_y` in `gpkg_tile_matrix_set`) SHALL equal the product of `matrix_height`, `tile_height`, and `pixel_y_size` for that zoom level.
 ====
 
-Tile matrices are numbered from top left to bottom right (zero-indexed) so the top left tile is (0,0). 
+Tile matrices are numbered from top left to bottom right (zero-indexed) so the top left tile is (0,0).
 (This follows the convention used by by http://portal.opengeospatial.org/files/?artifact_id=35326[WMTS] <<16>>.)
 Tile matrices may be sparsely populated – no specific tile or even tile matrix must be present.
 If the global tile matrix set covers the whole earth, then zoom level 0, tile (0,0) is the whole world.
@@ -266,7 +266,7 @@ When `zoom_level` column values in the `gpkg_tile_matrix` table are sorted in as
 ====
 
 Tiles MAY or MAY NOT be provided for level 0 or any other particular zoom level. ^<<K21>>^
-This means that a tile matrix set can be sparse, i.e. not contain a tile for any particular position at a certain tile zoom level.
+This means that a tile matrix set can be sparse, i.e., not contain a tile for any particular position at a certain tile zoom level.
 ^<<K22>>^ This does not affect the informative spatial extent stated by the min/max x/y columns values in the `gpkg_contents` record for the same `table_name`, the exact spatial extent stated by the min/max x/y columns values in the `gpkg_tile_matrix_set` record for the same table name, or the tile matrix width and height at that level. ^<<K23>>^
 
 [[tiles_user_tables]]
