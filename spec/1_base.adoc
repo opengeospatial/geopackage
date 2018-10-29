@@ -4,6 +4,11 @@ The required capabilities specified in this clause serve as the base for options
 All gpkg_* tables and views and all tiles user data tables specified in this standard SHALL have only the specified columns and table constraints. Any features user data tables MAY have columns in addition to those specified.
 All specified table, view, column, trigger, and constraint name values SHALL be lowercase.
 
+[NOTE]
+====
+For maximum interoperability, all GeoPackage table, view, column, trigger, and constraint name values SHOULD start with a lowercase character and only include lowercase characters, numbers 0-9, and underscores (`_`).
+====
+
 === Core
 
 The mandatory core capabilities defined in sub clauses and requirement statements of this clause SHALL be implemented by every *GeoPackage* and *GeoPackage SQLite Configuration*.
@@ -224,11 +229,11 @@ A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_content
 |`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |UNIQUE
 |`description` |TEXT |A human-readable description for the table_name content |yes |'' |
 |`last_change` |DATETIME |timestamp of last change to content, in ISO 8601 format|no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
-|`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name |yes | |
-|`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name |yes | |
-|`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name |yes | |
-|`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name |yes | |
-|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`; when `data_type` is features, SHALL also match `gpkg_geometry_columns.srs_id`; When data_type is tiles, SHALL also match `gpkg_tile_matrix_set.srs_id` |yes | |FK
+|`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates. |yes | |
+|`min_y` |DOUBLE |Bounding box minimum northing or latitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates. |yes | |
+|`max_x` |DOUBLE |Bounding box maximum easting or longitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.|yes | |
+|`max_y` |DOUBLE |Bounding box maximum northing or latitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates.|yes | |
+|`srs_id` |INTEGER |Spatial Reference System ID: `gpkg_spatial_ref_sys.srs_id`|yes | |FK
 |=======================================================================
 
 See <<gpkg_contents_sql>>.
@@ -261,3 +266,8 @@ The bounding box (`min_x`, `min_y`, `max_x`, `max_y`) provides an informative bo
 ====
 Values of the `gpkg_contents` table `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` table `srs_id` column.
 ====
+
+[NOTE]
+===========
+When `data_type` is "features", the `srs_id` also matches `gpkg_geometry_columns.srs_id` (see <<r146>>). When `data_type` is "tiles", the `srs_id` also matches `gpkg_tile_matrix_set.srs_id` (see <<r147>>).
+===========

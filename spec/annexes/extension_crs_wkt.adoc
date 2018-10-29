@@ -67,8 +67,30 @@ For GeoPackages conforming to this extension, the `gpkg_spatial_ref_sys` table S
 [caption=""]
 .Requirement 145
 ====
-GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_crs_wkt" SHALL comply with this extension. The row SHALL have a `scope` of "read-write".
+GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_crs_wkt" SHALL comply with this extension.
+GeoPackages complying with this extension SHALL have a row in the `gpkg_extensions` table as described in <<CRSWKTExtensionTableRecord>> (below).
 ====
+
+[WARNING]
+=====
+Requirement 145 has been updated as part of GeoPackage 1.2.1. 
+In 1.1.0 and 1.2.0, the `table_name` and `column_name` column values of the required `gpkg_extensions` row were inadvertently left unspecified.
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` column values, it is recommended to update these values to comply with the updated requirement on older versions as well.
+=====
+
+[#CRSWKTExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
+.Extension Table Records
+[cols=",,,,",options="header",]
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+|*table_name* |*column_name* |*extension_name* |*definition* |*scope*
+|`gpkg_spatial_ref_sys` |`definition_12_063` |`gpkg_crs_wkt` |_see note below_|`read-write`
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+
+[NOTE]
+=====
+For the `definition` column, use a hyperlink that describes the current implementation of this extension. 
+While a URL like http://www.geopackage.org/spec/#extension_crs_wkt is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_crs_wkt where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_crs_wkt is the permalink for this extension for GeoPackage 1.2.1.
+=====
 
 [float]
 ====== gpkg_spatial_ref_sys
@@ -109,6 +131,22 @@ If, for a particular row, both the `definition` and `definition_12_063` columns 
 
 [float]
 ===== Table Data Values
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/crs_wkt/extensions/data_values+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Method* |
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
+. Not testable if returns an empty result set
+. Fail if there is not exactly one row
+. Fail if scope is not "read-write"
+. Fail if column_name is not "definition_12_063"
+. Fail if table_name is not "gpkg_spatial_ref_sys"
+. Pass if no fails
+|*Reference* |Annex F.10 Req 145
+|*Test Type:* |Capabilities
+|========================================
 
 [cols="1,5a"]
 |========================================

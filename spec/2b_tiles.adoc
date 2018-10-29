@@ -29,7 +29,7 @@ In a GeoPackage, zoom levels are integers in sequence from 0 to n that identify 
 Adjacent zoom levels immediately precede or follow each other and differ by a value of 1.
 Pixel sizes are real numbers in the terrain units of the spatial reference system of a tile image specifying the dimensions of the real world area represented by one pixel.
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
-In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <<tiles_factor2_example_appendix>>.
+In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <<tiles_example_appendix>>.
 Other "zoom other intervals" conventions use different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
 See Web Map Tile Service (WMTS) <<16>> Annex E for additional examples of both conventions.
 
@@ -141,6 +141,13 @@ The gpkg_tile_matrix_set table SHALL contain one row record for each tile pyrami
 .Requirement 41
 ====
 Values of the `gpkg_tile_matrix_set` `srs_id` column SHALL reference values in the `gpkg_spatial_ref_sys` `srs_id` column.
+====
+
+[[r147]]
+[caption=""]
+.Requirement 147
+====
+The `srs_id` value in a `gpkg_tile_matrix_set` table row SHALL match the `srs_id` column value from the corresponding row in the `gpkg_contents` table.
 ====
 
 [[tile_matrix]]
@@ -293,7 +300,7 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 |`zoom_level` |INTEGER |min(zoom_level) \<= `zoom_level` \<= max(zoom_level) for `t_table_name` |no | |UK
 |`tile_column` |INTEGER |0 to `tile_matrix` `matrix_width` – 1 |no | |UK
 |`tile_row` |INTEGER |0 to `tile_matrix` `matrix_height` - 1 |no | |UK
-|`tile_data` |BLOB |Of an image MIME type specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>>, <<tile_enc_webp>> |no | |
+|`tile_data` |BLOB |Of an image MIME type specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>>, <<extension_tiles_webp>> |no | |
 |=======================================================================
 
 See <<example_tiles_table_sql>>.

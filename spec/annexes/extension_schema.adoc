@@ -4,8 +4,8 @@
 [float]
 ==== Introduction
 
-The schema option provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
-The information provided by this option can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.
+The schema extension provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
+The information provided by this extension can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.
 
 [float]
 ==== Extension Author
@@ -20,12 +20,12 @@ GeoPackage SWG, author_name `gpkg`
 [float]
 ==== Extension Type
 
-New Requirement Dependent on Clause <<features>>
+New requirement dependent on clauses <<features>>, <<attributes>>, and <<extension_mechanism>>.
 
 [float]
 ==== Applicability
 
-This extension may apply to any <<feature_user_tables>>.
+This extension may apply to any <<feature_user_tables>>, <<attributes_user_tables>>, or extension tables (see <<attributes_user_tables>>).
 
 [float]
 ==== Scope
@@ -61,7 +61,7 @@ If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_co
 |`title` |TEXT |A human-readable formal title for the column_name content |yes |
 |`description` |TEXT |A human-readable description for the column_name content |yes |
 |`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type of column_name if BLOB type, or NULL for other types |yes |
-|`constraint_name` |TEXT |Column value constraint name (lowercase) specified by reference to `gpkg_data_column_constraints.constraint` name |yes |
+|`constraint_name` |TEXT |Column value constraint name (lowercase) specified by reference to `gpkg_data_column_constraints.constraint_name` |yes |
 |=======================================================================
 
 GeoPackage applications MAY ^<<K38>>^ use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type ^<<K39>>^ information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
@@ -82,7 +82,7 @@ If present it SHALL be defined per <<gpkg_data_column_constraints_cols>> and <<g
 ====
 
 The `gpkg_data_column_constraints` table contains data to specify restrictions on basic data type column values.
-The constraint_name column is referenced by the `constraint_name` column in the `gpkg_data_columns` table defined in <<gpkg_data_columns_cols>>.
+The `constraint_name` column is referenced by the `constraint_name` column in the `gpkg_data_columns` table defined in <<gpkg_data_columns_cols>>.
 
 
 [[gpkg_data_column_constraints_cols]]
@@ -99,7 +99,7 @@ The constraint_name column is referenced by the `constraint_name` column in the 
 |`max_is_inclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
 |`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes|
 |=======================================================================
-_The min and max columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
+_The `min` and `max` columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
 
 See <<gpkg_data_column_constraints_sql>>.
 
@@ -112,8 +112,31 @@ See <<gpkg_data_column_constraints_sql>>.
 [caption=""]
 .Requirement 141
 ====
-GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_schema" SHALL comply with this extension. The row SHALL have a `scope` of "read-write".
+GeoPackages with rows in the `gpkg_extensions` table with an `extension_name` of "gpkg_schema" SHALL comply with this extension. 
+GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<SchemaExtensionTableRecord>> (below).
 ====
+
+[WARNING]
+=====
+Requirement 141 was updated as part of GeoPackage 1.2.1. 
+In 1.1.0 and 1.2.0, the details of required `gpkg_extensions` rows were inadvertently left unspecified.
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.
+=====
+
+[#SchemaExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
+.Extension Table Records
+[cols=",,,,",options="header",]
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+|*table_name* |*column_name* |*extension_name* |*definition* |*scope*
+|`gpkg_data_columns` |null |`gpkg_schema` |_see note below_|`read-write`
+|`gpkg_data_column_constraints` |null |`gpkg_schema` |_see note below_|`read-write`
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+
+[NOTE]
+=====
+For the `definition` column, use a hyperlink that describes the current implementation of this extension. 
+While a URL like http://www.geopackage.org/spec/#extension_schema is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_schema where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_schema is the permalink for this extension for GeoPackage 1.2.1.
+=====
 
 [float]
 ====== Data Columns
@@ -122,7 +145,7 @@ GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` o
 [caption=""]
 .Requirement 104
 ====
-Values of the `gpkg_data_columns` table `table_name` column value SHALL reference values in the `gpkg_contents` `table_name` column.
+Values of the `gpkg_data_columns` table `table_name` column value SHALL reference values in the `table_name` column from either `gpkg_contents` or `gpkg_extensions`.
 ====
 
 [[r105]]
@@ -136,15 +159,15 @@ The `column_name` column value in a `gpkg_data_columns` table row SHALL contain 
 [caption=""]
 .Requirement 106
 ====
-The constraint_name column value in a gpkg_data_columns table MAY be NULL.
-If it is not NULL, it SHALL contain a constraint_name column value (which SHALL be lowercase) from the gpkg_data_column_constraints table.
+The `constraint_name` column value in a `gpkg_data_columns` table MAY be NULL.
+If it is not NULL, it SHALL contain a `constraint_name` column value (which SHALL be lowercase) from the `gpkg_data_column_constraints` table.
 ====
 
 [float]
 ====== Data Column Constraints
 
-The lowercase gpkg_data_column_constraints constraint_type column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<33>>).
-The case sensitive value column contains an enumerated legal value for constraint_type "enum", a pattern match string for constraint_type "glob", or NULL for constraint_type "range". The set of value column values in rows of constraint_type "enum" with the same constraint_name contains all possible enumerated values for the constraint name. The min and max column values specify the minim and maximum valid values for constraint_type "range", or are NULL for constraint_type "enum" or "glob". The min_is_inclusive and max_is_inclusive column values contain 1 if the min and max values are inclusive, 0 if they are exclusive, or are NULL for constraint_type "enum" or "glob".
+The lowercase `gpkg_data_column_constraints` `constraint_type` column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<33>>).
+The case sensitive `value` column contains an enumerated legal value for `constraint_type` "enum", a pattern match string for `constraint_type` "glob", or NULL for `constraint_type` "range". The set of `value` column values in rows of `constraint_type` "enum" with the same `constraint_name` contains all possible enumerated values for the constraint name. The `min` and `max` column values specify the minimum and maximum valid values for `constraint_type` "range", or are NULL for `constraint_type` "enum" or "glob". The `min_is_inclusive` and `max_is_inclusive` column values contain *1* if the `min` and `max` values (respectively) are inclusive, *0* if they are exclusive, or are NULL for `constraint_type` "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.
 
 .Sample Data Column Constraints
@@ -257,13 +280,16 @@ If the `gpkg_data_column_constraints` table contains rows with `constraint_type`
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/extensions/schema/extensions/data_values_scope+
-|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Case ID* |+/extensions/schema/extensions/data_values+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required rows.
 |*Test Method* |
-. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
 . Not testable if returns an empty result set
+. Fail if there are not exactly two rows
 . For each row returned from step 1
-.. Fail if scope is not "read-write".
+.. Fail if scope is not "read-write"
+.. Fail if column_name is not NULL
+. Fail if either table_name entry is not present
 . Pass if no fails
 |*Reference* |Annex F.9 Req 141
 |*Test Type:* |Capabilities

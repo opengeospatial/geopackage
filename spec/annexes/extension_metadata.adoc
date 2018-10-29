@@ -91,11 +91,11 @@ The `gpkg_metadata_reference` table is not required to contain any rows.
 [cols=",,,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Default |Key
-|`reference_scope` |TEXT |Lowercase metadata reference scope; one of 'geopackage', 'table','column', 'row', 'row/col' |no | |
-|`table_name` |TEXT |Name of the table to which this metadata reference applies, or NULL for reference_scope of 'geopackage'. |yes | |
-|`column_name` |TEXT |Name of the column to which this metadata reference applies; NULL for `reference_scope` of 'geopackage','table' or 'row', or the name of a column in the `table_name` table for `reference_scope` of 'column' or 'row/col' |yes | |
-|`row_id_value` ^<<K30>>^ |INTEGER |NULL for `reference_scope` of 'geopackage', 'table' or 'column', or the rowed of a row record in the `table_name` table for `reference_scope` of 'row' or 'row/col' |yes | |
-|`timestamp` |DATETIME |timestamp value in ISO 8601 format as defined by the strftime function \'%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |strftime(\'%Y-%m-%dT%H:%M:%fZ', \'now') |
+|`reference_scope` |TEXT |Lowercase metadata reference scope; one of 'geopackage', 'table', 'column', 'row', 'row/col' |no | |
+|`table_name` |TEXT |Name of the table to which this metadata reference applies, or NULL for reference_scope of 'geopackage' |yes | |
+|`column_name` |TEXT |For `reference_scope` of 'column' or 'row/col', name of the column to which this metadata reference applies (NULL otherwise) |yes | |
+|`row_id_value` ^<<K30>>^ |INTEGER |For `reference_scope` of 'row' or 'row/col', the rowid of a row record in the table referenced by `table_name` (NULL otherwise) |yes | |
+|`timestamp` |DATETIME |Timestamp value in ISO 8601 format as defined by the strftime function \'%Y-%m-%dT%H:%M:%fZ' format string applied to the current time |no |strftime(\'%Y-%m-%dT%H:%M:%fZ', \'now') |
 |`md_file_id` |INTEGER |`gpkg_metadata` table id column value for the metadata to which this `gpkg_metadata_reference` applies |no | |FK
 |`md_parent_id` |INTEGER |`gpkg_metadata` table id column value for the hierarchical parent `gpkg_metadata` for the `gpkg_metadata` to which this `gpkg_metadata_reference` applies, or NULL if `md_file_id` forms the root of a metadata hierarchy |yes | |FK
 |=======================================================================
@@ -113,8 +113,31 @@ See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 [caption=""]
 .Requirement 140
 ====
-GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_metadata" SHALL comply with this extension. The row SHALL have a `scope` of "read-write".
+GeoPackages with rows in the `gpkg_extensions` table with an `extension_name` of "gpkg_metadata" SHALL comply with this extension. 
+GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<MetadataExtensionTableRecord>> (below).
 ====
+
+[WARNING]
+=====
+Requirement 140 was updated as part of GeoPackage 1.2.1. 
+In 1.1.0 and 1.2.0, the details of required `gpkg_extensions` rows were inadvertently left unspecified.
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.
+=====
+
+[#MetadataExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
+.Extension Table Records
+[cols=",,,,",options="header",]
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+|*table_name* |*column_name* |*extension_name* |*definition* |*scope*
+|`gpkg_metadata` |null |`gpkg_metadata` |_see note below_|`read-write`
+|`gpkg_metadata_reference` |null |`gpkg_metadata` |_see note below_|`read-write`
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+
+[NOTE]
+=====
+For the `definition` column, use a hyperlink that describes the current implementation of this extension. 
+While a URL like http://www.geopackage.org/spec/#extension_metadata is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_metadata where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_metadata is the permalink for this extension for GeoPackage 1.2.1.
+=====
 
 [float]
 ====== gpkg_metadata
@@ -256,13 +279,16 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/extensions/metadata/extensions/data_values_scope+
-|*Test Purpose* |Verify that the gpkg_extensions table has the required row.
+|*Test Case ID* |+/extensions/metadata/extensions/data_values+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required rows.
 |*Test Method* |
-. SELECT scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_metadata';
 . Not testable if returns an empty result set
+. Fail if there are not exactly two rows
 . For each row returned from step 1
-.. Fail if scope is not "read-write".
+.. Fail if scope is not "read-write"
+.. Fail if column_name is not NULL
+. Fail if either table_name entry is not present
 . Pass if no fails
 |*Reference* |Annex F.8 Req 140
 |*Test Type:* |Capabilities

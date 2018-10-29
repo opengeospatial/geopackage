@@ -147,6 +147,7 @@ All questions regarding this document should be directed to the editor or the co
 |Scott Clark |LNM Solutions |scott.clark<at>lmnsolutions.com
 |David Cray |U.S. Army Geospatial Center GASD |David.Cray<at>usace.army.mil
 |Paul Daisey |Image Matters |pauld<at>imagemattersllc.com
+|Rich Fecher |Radiant Solutions |richard.fecher<at>radiantsolutions.com
 |Nathan P. Frantz |U.S. Army Geospatial Center ERDC |Nathan.P.Frantz<at>usace.army.mil
 |Alessandro Furieri |Spatialite |a.furieri<at>lqt.it
 |Randy Gladish |Image Matters |randyg<at>imagemattersllc.com
@@ -190,111 +191,27 @@ All questions regarding this document should be directed to the editor or the co
 [cols="2,1,2,2,5a",options="header",]
 |=======================================================================
 |Date |Rel |Editor |Paragraph modified |Description
-|2014-07-14| R11| Paul Daisey| 1.1.2.1.1| Remove "at a minimum" after "includes" in 2nd paragraph, 1st sentence; conflicts with Clause 1
-|2014-07-14| R11| Paul Daisey| 2.1.4.1.1| Req 20 42in insert space between 42 and in
-|2014-07-14| R11| Paul Daisey| 2.2.8.1.1| Change Table 30 to Table 29
-|2014-07-14| R11| Paul Daisey| 2.5.2.1.1| Change access to accesses in 1st paragraph, 2nd sentence
-|2014-07-14| R11| Paul Daisey| Annex A, A.3.1.1.1| inAnnex E insert space between in and Annex
-|2014-07-14| R11| Paul Daisey| Annex A, A.3.1.1.1| 43without insert space between 43 and without
-|2014-07-14| R11| Paul Daisey| Annex B, B.5| Change pepijn.vaneeckhoudt email from gmail to Luciad
-|2014-07-14| R11| Paul Daisey| Annex B, B.5| Change all "@" to "<at>"
-|2014-07-14| R11| Paul Daisey| Annex C, C.10| Remove UNIQUE from PK constraint
-|2014-12-12| R11| Paul Daisey| 2.1.1| Add a footnote to "GeometryCollection" description
-|2014-12-12| R11| Paul Daisey| 2.1.6.1.1| Add new Req 30b
-|2014-12-12| R11| Paul Daisey| Annex A, A.2.1.6.1.1| Add feature_table_geometry_column_type test
-|2014-12-12| R11| Paul Daisey| 2.1.5.1.1| Add "and geometry types" to 1st paragraph 1st sentence
-|2014-12-12| R11| Paul Daisey| 1.1.1.1.4| Add footnote to Req 6
-|2014-12-12| R11| Paul Daisey| 2.1.3.1.1| replace ISO 13249-3 with OGC 06-103r4
-|2014-12-12| R11| Paul Daisey| 2.1.3.1.1| Correct references in footnote 1:  [13] becomes [9] and [16] becomes [12]
-|2014-12-12| R11| Paul Daisey| 1.1.1.2.2| Remove "and run" from clause and Req 9
-|2014-12-12| R11| Paul Daisey| 1.1.1.2.2| Remove PRAGMA foreign_keys runtime option from Table 2
-|2014-12-12| R11| Paul Daisey| Annex A, A.2.2.7.1.1| Change step 2 to "Not testable if less than 1"
-|2014-12-12| R11| Paul Daisey| Annex A, A.2.2.6.1.1| Remove obsolete provisions (unique, column order, other columns) from step 3
-|2014-12-12| R11| Paul Daisey| 2.1.6.1.2| Add sentences specifying unit of measure determination for geometry Z and M values.
-|2014-12-12| R11| Paul Daisey| 1.1.3.1.1, Table 4| Change description column default value to ''
-|2014-12-12| R11| Paul Daisey| Annex C, C.7, Table 29| Remove spurious ")" from tile_data column definition
-|2014-12-12| R11| Paul Daisey| Annex D, D.3, Table 39 |Correct ISO 8601 timestamp GLOB expressions
-|2015-03-16| R11| Scott Simmons| entire document| Minor format corrections
-|2015-04-27| R11| Joe Brumley| entire document| Minor format corrections for corrigendum
-|2015-06-10| R12| Brad Hards| 2.2.1| Fix typos
-|2015-06-17| R12| Jeff Yutzler| 2.2.6.1.1| Clarify role of bounding box in Tile Matrix Set table https://github.com/opengeospatial/geopackage/issues/102
-|2015-06-17| R12| Jeff Yutzler| 2.2.7.1.2| Add new Req 44b https://github.com/opengeospatial/geopackage/issues/102
-|2015-06-24| R12| Jeff Yutzler| 1.1.2.1.2| Clarify Req 11 https://github.com/opengeospatial/geopackage/issues/110
-|2015-08-04| R12| Jeff Yutzler| Figures 4, 5, 6| Correct multiplicity https://github.com/opengeospatial/geopackage/issues/117
-|2015-08-04| R12| Jeff Yutzler| Annex I| Update Footnote #18 (JFIF) to T.871 https://github.com/opengeospatial/geopackage/issues/104
-|2015-08-25| R12| Jeff Yutzler| Whole document| Remove revision markup https://github.com/opengeospatial/geopackage/issues/135
-|2015-08-25| R12| Jeff Yutzler| Annex B, B.6| Remove old changes https://github.com/opengeospatial/geopackage/issues/133
-|2015-08-26| R12| Jeff Yutzler| Annex B, B.6| Fix casing of minIsInclusive, maxIsInclusive, and description https://github.com/opengeospatial/geopackage/issues/130
-|2015-08-25| R12| Jeff Yutzler| Annex B, B.6| Clarify rules for case sensitivity for views, triggers, constraints https://github.com/opengeospatial/geopackage/issues/131
-|2015-09-09| R12| Brad Hards| Intro| Fix typos
-|2015-09-29| R12| Brad Hards| 1.1.3.1.1| Fix typos
-|2015-09-29| R12| Jeff Yutzler| 1.1.3.1.1| User-defined tables do not need to have lowercase column names https://github.com/opengeospatial/geopackage/issues/144
-|2015-10-19| R12| Jeff Yutzler| Annex F, F.4| Fix typos https://github.com/opengeospatial/geopackage/issues/152
-|2015-10-29| R12| Brad Hards| 1.1.3.1.1| Fix typos
-|2015-11-09| R12| Jeff Yutzler| Multiple| Fix typos
-|2015-11-19| R12| Jeff Yutzler| Multiple| Numerous administrative edits https://github.com/opengeospatial/geopackage/issues/160
-|2015-11-26| R12| Jeff Yutzler| Annex F, F.9| Define GLOB https://github.com/opengeospatial/geopackage/issues/156
-|2015-11-26| R12| Jeff Yutzler| Annex F| Collapse all extensions into a single annex https://github.com/opengeospatial/geopackage/issues/132
-|2015-11-26| R12| Jeff Yutzler| Annex F, F.8, F.9| Demote Metadata and Schema sections to extensions https://github.com/opengeospatial/geopackage/issues/147
-|2015-11-26| R12| Jeff Yutzler| Annex E| Update extension template https://github.com/opengeospatial/geopackage/issues/165
-|2015-11-26| R12| Jeff Yutzler| Annex F, F.10| Create new extension for CRS WKT https://github.com/opengeospatial/geopackage/issues/137
-|2015-12-02| R12| Jeff Yutzler| Annex A, Annex F| Clean ATS references https://github.com/opengeospatial/geopackage/issues/169
-|2015-12-04| R12| Jeff Yutzler| 2.3.2.1.2| Update rules for listing extensions https://github.com/opengeospatial/geopackage/issues/175
-|2015-12-04| R12| Jeff Yutzler| All Annexes| Scrub annex references https://github.com/opengeospatial/geopackage/issues/176
-|2015-12-26| R12| Brad Hards| 2.3.2.1| Fix typos
-|2015-12-26| R12| Jeff Yutzler| Annex F.9| Make "identifier" unique in Table 42, Table 45 https://github.com/opengeospatial/geopackage/issues/183
-|2015-12-28| R12| Jeff Yutzler| Annex A.1.1.2| Fix column names in ATS tests
-|2016-01-20| R12| Jeff Yutzler| 1.1.1.1.1| Bump version number https://github.com/opengeospatial/geopackage/issues/188
-|2016-05-08| R13| Jeff Yutzler| 1.1.1.1.1| Clarify that GeoPackage header is null terminated https://github.com/opengeospatial/geopackage/pull/209
-|2016-05-17| R13| Jeff Yutzler| Annex B.11-13| Update UML diagrams to show DATETIME https://github.com/opengeospatial/geopackage/issues/214
-|2016-07-12| R13| Jeff Yutzler| 1.1.3| Rewrite description of gpkg_contents https://github.com/opengeospatial/geopackage/issues/221
-|2016-07-18| R13| Frederic Houbie| Annex B.2| Add new terms and definitions https://github.com/opengeospatial/geopackage/issues/213
-|2016-08-02| R13| Chris Clark| Annex F.9| Correct wording in Table 42 https://github.com/opengeospatial/geopackage/issues/231
-|2016-08-02| R13| Chris Clark| Annex F.10| Correct column name for CRS WKT extension https://github.com/opengeospatial/geopackage/issues/258
-|2016-08-23| R13| Jeff Yutzler| Annex F.1| Deprecate Requirement 69 https://github.com/opengeospatial/geopackage/issues/234
-|2016-08-23| R13| Jeff Yutzler| Annex F.2,4,5| Deprecate extensions F.2, F.4, F.5 https://github.com/opengeospatial/geopackage/issues/235
-|2016-08-23| R13| Chris Clark| 2.2.7.1.2| Rewrite Requirement 53 https://github.com/opengeospatial/geopackage/issues/237
-|2016-08-23| R13| Chris Clark| Multiple| Fix Typos https://github.com/opengeospatial/geopackage/issues/238
-|2016-09-06| R13| Chris Clark| Annex F.8| Simplify triggers to avoid failures https://github.com/opengeospatial/geopackage/issues/228
-|2016-09-13| R13| Jeff Yutzler| Annex F.8| Add default to SQL DDL https://github.com/opengeospatial/geopackage/issues/243
-|2016-09-20| R13| Jeff Yutzler| 2.3.2.1.1| Update description for "definition" column https://github.com/opengeospatial/geopackage/issues/241
-|2016-10-04| R13| Jeff Yutzler| 2.4| Adding "attributes" section to describe use of non-spatial data https://github.com/opengeospatial/geopackage/issues/221
-|2016-10-17| R13| Jeff Yutzler| Multiple| Fix typos https://github.com/opengeospatial/geopackage/issues/249
-|2016-10-17| R13| Jeff Yutzler| 1.1.1.1.1, Annex A| Allow for version increments in SQLite header https://github.com/opengeospatial/geopackage/issues/255
-|2016-10-17| R13| Jeff Yutzler| 1.1.1.1.2| Eliminate .gpkx option https://github.com/opengeospatial/geopackage/issues/261
-|2016-10-17| R13| Jeff Yutzler| Annex F.9| Correct min/max_is_inclusive in abstract tests https://github.com/opengeospatial/geopackage/issues/260
-|2016-10-19| R13| Brian Osborn| 1.1.1.1.1| Update application ID 
-|2016-10-19| R13| Jeff Yutzler| Annex F.11| Add elevation extension to standard https://github.com/opengeospatial/geopackage/issues/242
-|2016-10-20| R13| Jeff Yutzler| 2.3.2.1.1| Add to Requirement 58 to clarify rules for extensions
-|2016-10-24| R13| Jake Molnar| 2.2.6.1.2| Fix typo
-|2016-12-07| R13| Jeff Yutzler| 1.1.1.1.1| Rewrite Requirement 2 to use GPKG application_id + user_version
-|2017-02-27| R14| Jeff Yutzler| Annex A.1.1.1.1| Rewrite ATS for Requirement 5 https://github.com/opengeospatial/geopackage/issues/279
-|2017-02-27| R14| Jeff Yutzler| Annex A.2.1.6.1| Rewrite ATS for Requirement 29 https://github.com/opengeospatial/geopackage/issues/282
-|2017-02-27| R14| Jeff Yutzler| Annex A.2.1.3.1| Rewrite ATS for Requirements 19 and 20 (geometry BLOB format) https://github.com/opengeospatial/geopackage/issues/285
-|2017-02-27| R14| Jeff Yutzler| 2.1.5.1.1, Annex A.2.1.5.1| Add "null" column to Table 6, Rewrite ATS for Requirements 21, 23 https://github.com/opengeospatial/geopackage/issues/286
-|2017-02-27| R14| Jeff Yutzler| Annex A| Removing explicit dependencies on Spatialite in ATS https://github.com/opengeospatial/geopackage/issues/288
-|2017-02-27| R14| Jeff Yutzler| 2.2| Removing 'tiles' stipulation from Requirements 39 and 43 https://github.com/opengeospatial/geopackage/issues/295
-|2017-03-02| R14| Jeff Yutzler| Multiple| Various typographical issues https://github.com/opengeospatial/geopackage/issues/290
-|2017-03-06| R14| Jeff Yutzler| 1.1.1.2.2| Removing Requirement 9 https://github.com/opengeospatial/geopackage/issues/309
-|2017-03-13| R14| Jeff Yutzler| Annex A.1.1.2.1| Rewrite ATS for Requirement 11 https://github.com/opengeospatial/geopackage/issues/300
-|2017-03-13| R14| Jeff Yutzler| Annex A| Rewrite ATS for Requirements 2, 12, 14, 15, 17 https://github.com/opengeospatial/geopackage/issues/308
-|2017-03-17| R14| Jeff Yutzler| Multiple| Switching to fixed requirements numbers (not auto-generated) https://github.com/opengeospatial/geopackage/issues/314
-|2017-03-17| R14| Jeff Yutzler| Annex F.10| Rewording Requirement 115 https://github.com/opengeospatial/geopackage/issues/258
-|2017-03-21| R14| Jeff Yutzler| Multiple| Scrubbing document for inappropriate use of "view" https://github.com/opengeospatial/geopackage/issues/301
-|2017-03-22| R14| Jeff Yutzler| Multiple| Various typographical issues https://github.com/opengeospatial/geopackage/issues/290
-|2017-04-17| R14| Jeff Yutzler| Annex F.1| Clean up Non-Linear Geometry Types extension https://github.com/opengeospatial/geopackage/issues/347
-|2017-04-17| R14| Jeff Yutzler| Annex F.7| Clean up WebP extension https://github.com/opengeospatial/geopackage/issues/345
-|2017-04-17| R14| Jeff Yutzler| Annex F.3| Clean up RTree Index extension https://github.com/opengeospatial/geopackage/issues/341
-|2017-04-17| R14| Jeff Yutzler| Multiple| Clarifying language on use of extensions, removing Requirement 17 https://github.com/opengeospatial/geopackage/issues/323
-|2017-04-17| R14| Jeff Yutzler| 2.2.1| Updating Tile Matrix introduction https://github.com/opengeospatial/geopackage/issues/351
-|2017-04-26| R14| Jeff Yutzler| Annex I| Updating reference to ISO 19115 https://github.com/opengeospatial/geopackage/issues/356
-|2017-06-02| R14| Jeff Yutzler| Annex F.7| clarifying whether you can mix or match JPG/PNG/WebP https://github.com/opengeospatial/geopackage/issues/362
-|2017-06-02| R14| Jeff Yutzler| Annex F.10| adding R145 for CRS WKT extension https://github.com/opengeospatial/geopackage/issues/363
-|2017-06-02| R14| Jeff Yutzler| 1.1.3.1.2, 2.2.6.1| clarifying tile matrix set extents, adding R144 https://github.com/opengeospatial/geopackage/issues/366
-|2017-06-27| R14| Jeff Yutzler| 2.2.8.1.1 | removing improper defaults https://github.com/opengeospatial/geopackage/issues/358
-|2017-07-18| R14| Jeff Yutzler| 3 | adding new security consideration related to SQLite
-|2017-08-01| R14| Jeff Yutzler| 2.3.2.1.2, Annex A.2.3.1.1 | adding explanatory text regarding table name case sensitivity; updating corresponding ATS test
-
+|2014-02-10| R10| Paul Daisey| All |1.0.0
+|2015-04-20| R11| Paul Daisey| All |1.0.1
+|2015-08-04| R12| Jeff Yutzler| All |1.1.0
+|2017-08-25| R14| Jeff Yutzler| All| 1.2.0
+|2017-11-22| R15| Jeff Yutzler| 1.1.1.1.1| Adding reference to database limits https://github.com/opengeospatial/geopackage/issues/391
+|2017-11-22| R15| Jeff Yutzler| Annex F.8| fixing DDL in metadata example https://github.com/opengeospatial/geopackage/issues/382
+|2017-11-22| R15| Jeff Yutzler| A.2.1.5.1., Annex F.1| updating incorrect table references to Annex G https://github.com/opengeospatial/geopackage/issues/390
+|2017-12-18| R15| Jeff Yutzler| multiple| Clarifying "non null" constraint for views https://github.com/opengeospatial/geopackage/issues/395
+|2017-12-18| R15| Jeff Yutzler| Annex F.3| Rewriting introduction to extension https://github.com/opengeospatial/geopackage/pull/401
+|2018-01-22| R15| Jeff Yutzler| 2.1.3.1.1.| Clarifying GeoPackageBinary 'X' bit https://github.com/opengeospatial/geopackage/issues/402
+|2018-01-22| R15| Jeff Yutzler| Annex F.2, F.4, F.5| Providing links to deprecated extensions https://github.com/opengeospatial/geopackage/pull/404
+|2018-03-05| R15| Jeff Yutzler| 2.2.1| Fixing broken internal link https://github.com/opengeospatial/geopackage/pull/407
+|2018-03-29| R15| Jeff Yutzler| Annex F.11| Updating references to adopted tiled gridded coverage data extension https://github.com/opengeospatial/geopackage/pull/421, https://github.com/opengeospatial/geopackage/pull/422
+|2018-04-09| R15| Jeff Yutzler| Annex F.3| Removing erroneous part of trigger https://github.com/opengeospatial/geopackage/issues/414
+|2018-04-19| R15| Jeff Yutzler| Annex F.8| Updating Table 19 to fix typos and improve clarity https://github.com/opengeospatial/geopackage/pull/427
+|2018-05-01| R15| Jeff Yutzler| Annexes F.8, F.9, F.10| Updating R140, R141, and R145 to indicate required rows and column values https://github.com/opengeospatial/geopackage/issue/426
+|2018-05-16| R15| Rich Fecher| 1.1.3.1.1| Clarifying use of extents in gpkg_contents with tiles content https://github.com/opengeospatial/geopackage/issue/426
+|2018-05-16| R15| Jeff Yutzler| Annex F.9 Table 23| Correcting typo in column name https://github.com/opengeospatial/geopackage/pull/434
+|2018-05-16| R15| Jeff Yutzler| multiple| Eliminating references to "GEOMCOLLECTION" https://github.com/opengeospatial/geopackage/issue/436
+|2018-05-16| R15| Jeff Yutzler| Annexes F.1, F.6| Correcting incorrect ATS references https://github.com/opengeospatial/geopackage/issue/439
+|2018-05-17| R15| Jeff Yutzler| Annex F.3| Removing ATS entry associated with removed requirement https://github.com/opengeospatial/geopackage/pull/441
 |=======================================================================
 
 === Changes to the OGC® Abstract Specification
@@ -305,6 +222,7 @@ The OGC® Abstract Specification does not require changes to accommodate this OG
 
 None at present.
 
+[[_potential_future_work]]
 === Potential Future Work (Informative)
 
 Future versions of this standard MAY do the following:

@@ -6,7 +6,7 @@
 
 This extension of clause <<sql_geometry_types>> defines additional geometry types.
 
-Clause 2.1.4 of the GeoPackage Version 1 Encoding Standard specifies support for the Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeomCollection geometry types in the GeoPackageBinary geometry encoding format specified in clause 2.1.3.
+Clause 2.1.4 of the GeoPackage Version 1 Encoding Standard specifies support for the Geometry, Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeometryCollection geometry types in the GeoPackageBinary geometry encoding format specified in clause 2.1.3.
 This extension specifies support for the additional CircularString, CompoundCurve, CurvePolygon, MultiCurve, MultiSurface, Curve, and Surface geometry types in the GeoPackage Binary geometry encoding format using the codes from <<geometry_types_extension>>.
 
 [float]
@@ -141,7 +141,7 @@ viii. Otherwise log pass
 .. SELECT result_set_column_name FROM result_set_table_name
 .. For each geometry column value from step a
 ... If the first two bytes of each geometry column value are "GP", then
-.... /opt/extension_mechanism/extensions/data/table_def
+.... /opt/extension_mechanism/data/table_def
 .... Fail if failed
 .... SELECT ST_GeometryType(geometry column value) AS <gtype>;
 .... SELECT extension_name FROM gpkg_extensions WERE table_name = result_set_table_name AND column_name = result_set_column_name AND extension_name = \'gpkg_geom_' \|\| <gtype>
