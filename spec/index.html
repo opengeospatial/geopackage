@@ -155,7 +155,7 @@ Document language: 	English<br></p>
 <ul class="sectlevel3">
 <li><a href="#_introduction_3">2.4.1. Introduction</a></li>
 <li><a href="#_contents_4">2.4.2. Contents</a></li>
-<li><a href="#_attributes_user_data_tables">2.4.3. Attributes User Data Tables</a></li>
+<li><a href="#attributes_user_tables">2.4.3. Attributes User Data Tables</a></li>
 </ul>
 </li>
 </ul>
@@ -2352,7 +2352,7 @@ This is indicated by a gpkg_extensions.scope column value of "write_only".</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_attributes_user_data_tables">2.4.3. Attributes User Data Tables</h4>
+<h4 id="attributes_user_tables">2.4.3. Attributes User Data Tables</h4>
 <div class="sect4">
 <h5 id="_data_18">2.4.3.1. Data</h5>
 <div class="sect5">
@@ -11619,8 +11619,8 @@ An example of the data items in such a model is shown in the following table.</p
 <h3 id="extension_schema">F.9. Schema</h3>
 <h4 id="_introduction_10" class="float">Introduction</h4>
 <div class="paragraph">
-<p>The schema option provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
-The information provided by this option can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.</p>
+<p>The schema extension provides a means to describe the columns of tables in a GeoPackage with more detail than can be captured by the SQL table definition directly.
+The information provided by this extension can be used by applications to, for instance, present data contained in a GeoPackage in a more user-friendly fashion or implement data validation logic.</p>
 </div>
 <h4 id="_extension_author_7" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -11632,11 +11632,11 @@ The information provided by this option can be used by applications to, for inst
 </div>
 <h4 id="_extension_type_7" class="float">Extension Type</h4>
 <div class="paragraph">
-<p>New Requirement Dependent on Clause <a href="#features">Features</a></p>
+<p>New requirement dependent on clauses <a href="#features">Features</a>, <a href="#attributes">Attributes</a>, and <a href="#extension_mechanism">Extension Mechanism</a>.</p>
 </div>
 <h4 id="_applicability_7" class="float">Applicability</h4>
 <div class="paragraph">
-<p>This extension may apply to any <a href="#feature_user_tables">Vector Feature User Data Tables</a>.</p>
+<p>This extension may apply to any <a href="#feature_user_tables">Vector Feature User Data Tables</a>, <a href="#attributes_user_tables">Attributes User Data Tables</a>, or extension tables (see <a href="#attributes_user_tables">Attributes User Data Tables</a>).</p>
 </div>
 <h4 id="_scope_7" class="float">Scope</h4>
 <div class="paragraph">
@@ -11913,7 +11913,7 @@ While a URL like <a href="http://www.geopackage.org/spec/#extension_schema">http
 <div class="title">Requirement 104</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>gpkg_data_columns</code> table <code>table_name</code> column value SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column.</p>
+<p>Values of the <code>gpkg_data_columns</code> table <code>table_name</code> column value SHALL reference values in the <code>table_name</code> column from either <code>gpkg_contents</code> or <code>gpkg_extensions</code>.</p>
 </div>
 </div>
 </div>
@@ -14012,7 +14012,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-10-29 16:08:41 UTC
+Last updated 2018-10-29 16:14:15 UTC
 </div>
 </div>
 </body>
