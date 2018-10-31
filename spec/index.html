@@ -11676,7 +11676,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Data Column
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the tiles or feature table</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of a table specified in <code>gpkg_contents.table_name</code> or <code>gpkg_extensions.table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
@@ -11731,6 +11731,20 @@ The <code>gpkg_data_columns</code> data CAN be used to provide more specific col
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_data_columns_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In versions 1.2.1 and earlier, the <code>table_name</code> column had a foreign key to <code>gpkg_contents.table_name</code>. This constraint has been relaxed but software that edits GeoPackages should be aware that this constraint will exist in many existing files.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <h6 id="data_column_constraints_table_definition" class="float">Data Column Constraints</h6>
 <div id="r107" class="exampleblock">
@@ -11829,6 +11843,21 @@ The <code>constraint_name</code> column is referenced by the <code>constraint_na
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_data_column_constraints_sql">gpkg_data_columns Table Definition SQL</a>.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In GeoPackage 1.0, this table had column names <code>minIsInclusive</code> and <code>maxIsInclusive</code> instead of <code>min_is_inclusive</code> and <code>max_is_inclusive</code>.
+This was corrected in GeoPackage 1.1 but it is possible that some older GeoPackages may have rows in this table and use the incorrect column names.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <h5 id="_table_data_values_8" class="float">Table Data Values</h5>
 <h6 id="_gpkg_extensions_4" class="float">gpkg_extensions</h6>
@@ -12280,7 +12309,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that for each gpkg_data_columns row, the table_name value matches a row in gpkg_contents.</p>
+<p>Verify that for each gpkg_data_columns row, the table_name value matches a row in gpkg_contents or gpkg_extensions.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12288,7 +12317,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <td class="tableblock halign-left valign-top"><div><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT DISTINCT gdc.table_name AS gdc_table, gc.table_name AS gc_table FROM gpkg_data_columns AS gdc LEFT OUTER JOIN gpkg_contents AS gc ON gdc.table_name = gc.tbl_name;</p>
+<p>SELECT DISTINCT gdc.table_name AS gdc_table, ge.table_name AS joined_table FROM gpkg_data_columns AS gdc LEFT OUTER JOIN gpkg_contents AS gc ON gdc.table_name = gc.table_name LEFT OUTER JOIN gpkg_extensions AS ge ON gdc.table_name = ge.table_name;</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12298,7 +12327,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if gc_table is NULL.</p>
+<p>Fail if joined_table is NULL.</p>
 </li>
 </ol>
 </div>
@@ -12902,8 +12931,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
   description <span class="predefined-type">TEXT</span>,
   mime_type <span class="predefined-type">TEXT</span>,
   constraint_name <span class="predefined-type">TEXT</span>,
-  <span class="type">CONSTRAINT</span> pk_gdc <span class="directive">PRIMARY</span> <span class="type">KEY</span> (table_name, column_name),
-  <span class="type">CONSTRAINT</span> fk_gdc_tn <span class="directive">FOREIGN</span> <span class="type">KEY</span> (table_name) <span class="keyword">REFERENCES</span> gpkg_contents(table_name)
+  <span class="type">CONSTRAINT</span> pk_gdc <span class="directive">PRIMARY</span> <span class="type">KEY</span> (table_name, column_name)
 );</code></pre>
 </div>
 </div>
@@ -14028,7 +14056,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-10-29 17:53:52 UTC
+Last updated 2018-10-31 17:07:30 UTC
 </div>
 </div>
 </body>
