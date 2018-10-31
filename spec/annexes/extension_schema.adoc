@@ -55,7 +55,7 @@ If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_co
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
-|`table_name` |TEXT |Name of a table specified by reference to `gpkg_contents.table_name` |no |PK
+|`table_name` |TEXT |Name of a table specified in `gpkg_contents.table_name` or `gpkg_extensions.table_name` |no |PK
 |`column_name` |TEXT |Name of the table column |no |PK
 |`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |UNIQUE
 |`title` |TEXT |A human-readable formal title for the column_name content |yes |
@@ -68,6 +68,11 @@ GeoPackage applications MAY ^<<K38>>^ use the `gpkg_data_columns` table to store
 The `gpkg_data_columns` data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
 
 See <<gpkg_data_columns_sql>>.
+
+[WARNING]
+====
+In versions 1.2.1 and earlier, the `table_name` column had a foreign key to `gpkg_contents.table_name`. This constraint has been relaxed but software that edits GeoPackages should be aware that this constraint will exist in many existing files.
+====
 
 [[data_column_constraints_table_definition]]
 [float]
@@ -102,6 +107,12 @@ The `constraint_name` column is referenced by the `constraint_name` column in th
 _The `min` and `max` columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
 
 See <<gpkg_data_column_constraints_sql>>.
+
+[WARNING]
+====
+In GeoPackage 1.0, this table had column names `minIsInclusive` and `maxIsInclusive` instead of `min_is_inclusive` and `max_is_inclusive`. 
+This was corrected in GeoPackage 1.1 but it is possible that some older GeoPackages may have rows in this table and use the incorrect column names.
+====
 
 [float]
 ===== Table Data Values
@@ -298,12 +309,12 @@ If the `gpkg_data_column_constraints` table contains rows with `constraint_type`
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/extensions/schema/data_columns/table_name+
-|*Test Purpose* |Verify that for each gpkg_data_columns row, the table_name value matches a row in gpkg_contents.
+|*Test Purpose* |Verify that for each gpkg_data_columns row, the table_name value matches a row in gpkg_contents or gpkg_extensions.
 |*Test Method* |
-. SELECT DISTINCT gdc.table_name AS gdc_table, gc.table_name AS gc_table FROM gpkg_data_columns AS gdc LEFT OUTER JOIN gpkg_contents AS gc ON gdc.table_name = gc.tbl_name;
+. SELECT DISTINCT gdc.table_name AS gdc_table, ge.table_name AS joined_table FROM gpkg_data_columns AS gdc LEFT OUTER JOIN gpkg_contents AS gc ON gdc.table_name = gc.table_name LEFT OUTER JOIN gpkg_extensions AS ge ON gdc.table_name = ge.table_name;
 . Not testable if returns an empty result set
 . For each row from step 1
-.. Fail if gc_table is NULL.
+.. Fail if joined_table is NULL.
 . Pass if no fails.
 |*Reference* |Annex F.9 Req 104
 |*Test Type* |Capability
@@ -468,8 +479,7 @@ CREATE TABLE gpkg_data_columns (
   description TEXT,
   mime_type TEXT,
   constraint_name TEXT,
-  CONSTRAINT pk_gdc PRIMARY KEY (table_name, column_name),
-  CONSTRAINT fk_gdc_tn FOREIGN KEY (table_name) REFERENCES gpkg_contents(table_name)
+  CONSTRAINT pk_gdc PRIMARY KEY (table_name, column_name)
 );
 ----
 
