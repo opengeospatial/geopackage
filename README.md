@@ -63,7 +63,7 @@ The Geopackage SWG currently has the following email lists:
 
 **SWG Chair: Jeff Yutzler**
 
-**SWG Vice Chair: Frédéric Houbie**
+**SWG Vice Chair: Tracey Birch**
 
 
 Editing and commenting
