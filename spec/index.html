@@ -12134,7 +12134,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_columns table exists and has the correct definition.</p>
+<p>Verify that the <code>gpkg_data_columns</code> table exists and has the correct definition.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12187,7 +12187,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints table exists and has the correct definition.</p>
+<p>Verify that the <code>gpkg_data_column_constraints table</code> exists and has the correct definition.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12241,7 +12241,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_extensions table has the required rows.</p>
+<p>Verify that the <code>gpkg_extensions</code> table has the required rows.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12309,7 +12309,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that for each gpkg_data_columns row, the table_name value matches a row in gpkg_contents or gpkg_extensions.</p>
+<p>Verify that for each <code>gpkg_data_columns</code> row, the table_name value matches a row in <code>gpkg_contents</code> or <code>gpkg_extensions</code>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12368,7 +12368,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that for each gpkg_data_columns row, the column_name matches a column in the table or view identified by the table_name column value.</p>
+<p>Verify that for each <code>gpkg_data_columns</code> row, the <code>column_name</code> value matches a column in the table or view identified by the <code>table_name</code> column value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12430,7 +12430,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that for each gpkg_data_columns row, if the constraint_name value is NOT NULL then the constraint_type column value contains a constraint_type column value from the gpkg_data_column_constraints table for a row with a matching constraint_name value.</p>
+<p>Verify that for each <code>gpkg_data_columns</code> row, if the <code>constraint_name</code> value is NOT NULL then the <code>constraint_type</code> column value contains a <code>constraint_type</code> column value from the <code>gpkg_data_column_constraints</code> table for a row with a matching <code>constraint_name</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12496,7 +12496,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints constraint_type column values are one of "range", "enum", or "glob".</p>
+<p>Verify that the <code>gpkg_data_column_constraints</code> <code>constraint_type</code> column values are one of "range", "enum", or "glob".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12555,7 +12555,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints constraint_name column values for constraint_type values  of "range", or "glob" are unique.</p>
+<p>Verify that the <code>gpkg_data_column_constraints</code> <code>constraint_name</code> column values for <code>constraint_type</code> values of "range", or "glob" are unique.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12614,7 +12614,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints value column values are NULL for rows with a constraint_type value of "range".</p>
+<p>Verify that the <code>gpkg_data_column_constraints</code> <code>value</code> column values are NULL for rows with a <code>constraint_type</code> value of "range".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12673,7 +12673,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints min column values are NOT NULL and less than the max column values for rows with a constraint_type value of "range".</p>
+<p>Verify that the <code>gpkg_data_column_constraints</code> <code>min</code> column values are NOT NULL and less than the <code>max</code> column values for rows with a <code>constraint_type</code> value of "range".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12738,7 +12738,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints min_is_inclusive and max_is_inclusive  column values are NOT NULL and either 0 or 1 for rows with a constraint_type value of "range".</p>
+<p>Verify that the <code>gpkg_data_column_constraints</code> <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values are NOT NULL and either 0 or 1 for rows with a <code>constraint_type</code> value of "range".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12806,7 +12806,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints min, max, min_is_inclusive and max_is_inclusive column values are NULL for rows with a constraint_type value of "enum" or "glob".</p>
+<p>Verify that the <code>gpkg_data_column_constraints</code> <code>min</code>, <code>max</code>, <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values are NULL for rows with a <code>constraint_type</code> value of "enum" or "glob".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12874,7 +12874,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
 <td class="tableblock halign-left valign-top"><div><div class="paragraph">
-<p>Verify that the gpkg_data_column_constraints value column values are NOT NULL for rows with a constraint_type value of "enum" or "glob".</p>
+<p>Verify that the <code>gpkg_data_column_constraints</code> <code>value</code> column values are NOT NULL for rows with a <code>constraint_type</code> value of "enum" or "glob".</p>
 </div></div></td>
 </tr>
 <tr>
@@ -14056,7 +14056,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-01 02:22:30 UTC
+Last updated 2018-11-07 03:48:46 UTC
 </div>
 </div>
 </body>
