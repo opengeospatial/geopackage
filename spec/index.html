@@ -10796,7 +10796,7 @@ table when reference_scope is &quot;column&quot; or &quot;row/col&quot;</span><s
 violates constraint: column name must be NULL when reference_scope
 is &quot;geopackage&quot;, &quot;table&quot; or &quot;row&quot;</span><span class="delimiter">'</span></span>)
 <span class="keyword">WHERE</span> (NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> NEW.column_nameIS <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>);
+<span class="keyword">AND</span> NEW.column_name <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>);
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata_reference
 violates constraint: column name must be defined for the specified
 table when reference_scope is &quot;column&quot; or &quot;row/col&quot;</span><span class="delimiter">'</span></span>)
@@ -14090,7 +14090,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2018-11-12 14:04:34 UTC
+Last updated 2018-12-01 21:50:23 UTC
 </div>
 </div>
 </body>
