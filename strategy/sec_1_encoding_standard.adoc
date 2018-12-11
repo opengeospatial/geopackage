@@ -1,0 +1,63 @@
+== Encoding Standard
+
+### 1.2.1
+* [x] GitHub Version
+* [x] Release Notes
+* [x] SWG Motion
+* [x] TC Vote
+* [x] [Publication](http://www.geopackage.org/spec121/)
+* [ ] Press release - none was issued
+
+### 1.3.0
+* [ ] Issues
+  * [ ] [Views](https://github.com/opengeospatial/geopackage/issues/446)
+  * [ ] [Assignable geometries](https://github.com/opengeospatial/geopackage/issues/445)
+  * [x] [SRS ID alignment](https://github.com/opengeospatial/geopackage/issues/444)
+  * [ ] [Geometry in WKB extents](https://github.com/opengeospatial/geopackage/issues/443)
+  * [ ] https://github.com/opengeospatial/geopackage/issues/442
+
+### Unfiled
+* [ ] [Open tickets](https://github.com/opengeospatial/geopackage/issues)
+* [ ] Tile Matrix Set - waiting for further movement from OGC. The OAB approved releasing a draft standard for an open comment period but the commencement of this period was delayed.
+* [ ] Requirements Classes - this would provide consistency with other standards and make capabilities and requirements easier to organize.
+* [ ] Versioning of extensions. There is not currently a clear way to update extensions and maintain reverse compatibility. The SWG took a look at this issue and decided to delay action, but the time may come where further action is necessary.
+
+### Tiled Gridded Coverage Extension
+This was released as a [separate document](http://docs.opengeospatial.org/is/17-066r1/17-066r1.html) so that it could be maintained separately. There are no plans to produce another version but this could change.
+* [x] [Update the names of the tests in the ATS (change "elevation" to "coverage")](https://github.com/opengeospatial/geopackage-tiled-gridded-coverage/issues/43)
+
+### Related Tables Extension
+* [x] GitHub Version
+* [x] Release Notes
+* [x] SWG Motion
+* [x] [Online draft](http://www.geopackage.org/18-000.html)
+* [ ] TC Vote
+* [ ] Publication
+* [ ] Press release
+
+### Standards Revision Process
+The process has been working well. We have been able to produce new revisions of the standard roughly every year. Individual changes are managed through [Github Issues](https://github.com/opengeospatial/geopackage/issues) and [pull requests](https://github.com/opengeospatial/geopackage/pulls). The process for creating a new GeoPackage revision is as follows:
+
+. Create a release notes document.
+   .. Reserve an [OGC document number](https://portal.opengeospatial.org/?m=public&subtab=request&tab=1)
+   .. Create a GitHub repository by duplicating an existing repository (e.g., https://github.com/jyutzler/ogc18-024)
+. Make one or more changes.
+   .. Open a GitHub issue.
+   .. Commit the GitHub pull request. This causes the [working version](http://www.geopackage.org/spec/) of the standard to be updated.
+   .. Create a release notes entry. Administrative changes get a line in a table. Substantive changes get a more detailed description.
+. When the SWG is satisfied that there are enough contents for a change, the SWG moves to approve the release. After that, do the following:
+   .. Mark a [GitHub release](https://github.com/opengeospatial/geopackage/releases)
+   .. Produce a revision system notes is created
+. OGC approves the revision. For corrigenda, this is basically a rubber-stamp process by the TC. For a minor release, the process is more detailed.
+   .. OAB Review
+   .. Public Comment Period
+   .. Adjudication of public comments
+   .. TC vote
+
+### GitHub Pipeline
+We have a pipeline to manage our [GitHub content](https://github.com/opengeospatial/geopackage).
+
+* [x] The `gh-pages` branch gets published to geopackage.org.
+* [x] The pipeline will automatically convert any Markdown to HTML.
+* [x] Every time a change is made to the `master` branch, the pipeline generates `spec/index.html` on the `gh-pages` branch from the contents of the `spec` directory on the `master` branch.
+* [ ] Migration to AsciiDoc will allow us to improve the presentation of the various geopackage.org pages. Does the pipeline automatically convert AsciiDoc to HTML like it does with Markdown? Does AsciiDoc support inline checkboxes on bullets?
