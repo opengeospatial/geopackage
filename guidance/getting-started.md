@@ -21,6 +21,9 @@ Similarly, if you wish to create a new GeoPackage from scratch or from an existi
 * For using a command line program, consider the [GDAL](http://www.gdal.org) vector and raster utilities 
 * This [blog post](http://www.fulcrumapp.com/blog/working-with-geodata/) (The section titled "Creating a GeoPackage with Reference Data") provides an example that describes steps for creating a GeoPackage using ogr2ogr. The post also provides information on how to add the [SpatiaLite](https://www.gaia-gis.it/fossil/libspatialite/index) extension to enable further spatial analysis in SQLite.
 
+
+    Note: For maximum interoperability, start your database identifiers (table names, column names, etc.) with a lowercase character and only use lowercase characters, numbers 0-9, and underscores (`_`).
+
 ### Checking a GeoPackage Version
 Using a direct SQL interface such as DB Browser is the easiest way to check a GeoPackage version. SQLite uses [`pragma` statements](https://www.sqlite.org/pragma.html) to implement non-standard SQL functions. 
 These statements can be executed just like any other SQL statement and where relevant, they return a result set. The two pragmas you need to know are:
