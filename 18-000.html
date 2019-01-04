@@ -430,7 +430,75 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 <style>
-/* Pygments CSS disabled. Pygments is not available. */
+.listingblock .pygments .hll { background-color: #ffffcc }
+.listingblock .pygments, .listingblock .pygments code { background: #f8f8f8; }
+.listingblock .pygments .tok-c { color: #408080; font-style: italic } /* Comment */
+.listingblock .pygments .tok-err { border: 1px solid #FF0000 } /* Error */
+.listingblock .pygments .tok-k { color: #008000; font-weight: bold } /* Keyword */
+.listingblock .pygments .tok-o { color: #666666 } /* Operator */
+.listingblock .pygments .tok-ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.listingblock .pygments .tok-cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.listingblock .pygments .tok-cp { color: #BC7A00 } /* Comment.Preproc */
+.listingblock .pygments .tok-cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.listingblock .pygments .tok-c1 { color: #408080; font-style: italic } /* Comment.Single */
+.listingblock .pygments .tok-cs { color: #408080; font-style: italic } /* Comment.Special */
+.listingblock .pygments .tok-gd { color: #A00000 } /* Generic.Deleted */
+.listingblock .pygments .tok-ge { font-style: italic } /* Generic.Emph */
+.listingblock .pygments .tok-gr { color: #FF0000 } /* Generic.Error */
+.listingblock .pygments .tok-gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.listingblock .pygments .tok-gi { color: #00A000 } /* Generic.Inserted */
+.listingblock .pygments .tok-go { color: #888888 } /* Generic.Output */
+.listingblock .pygments .tok-gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.listingblock .pygments .tok-gs { font-weight: bold } /* Generic.Strong */
+.listingblock .pygments .tok-gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.listingblock .pygments .tok-gt { color: #0044DD } /* Generic.Traceback */
+.listingblock .pygments .tok-kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.listingblock .pygments .tok-kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.listingblock .pygments .tok-kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.listingblock .pygments .tok-kp { color: #008000 } /* Keyword.Pseudo */
+.listingblock .pygments .tok-kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.listingblock .pygments .tok-kt { color: #B00040 } /* Keyword.Type */
+.listingblock .pygments .tok-m { color: #666666 } /* Literal.Number */
+.listingblock .pygments .tok-s { color: #BA2121 } /* Literal.String */
+.listingblock .pygments .tok-na { color: #7D9029 } /* Name.Attribute */
+.listingblock .pygments .tok-nb { color: #008000 } /* Name.Builtin */
+.listingblock .pygments .tok-nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.listingblock .pygments .tok-no { color: #880000 } /* Name.Constant */
+.listingblock .pygments .tok-nd { color: #AA22FF } /* Name.Decorator */
+.listingblock .pygments .tok-ni { color: #999999; font-weight: bold } /* Name.Entity */
+.listingblock .pygments .tok-ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.listingblock .pygments .tok-nf { color: #0000FF } /* Name.Function */
+.listingblock .pygments .tok-nl { color: #A0A000 } /* Name.Label */
+.listingblock .pygments .tok-nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.listingblock .pygments .tok-nt { color: #008000; font-weight: bold } /* Name.Tag */
+.listingblock .pygments .tok-nv { color: #19177C } /* Name.Variable */
+.listingblock .pygments .tok-ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.listingblock .pygments .tok-w { color: #bbbbbb } /* Text.Whitespace */
+.listingblock .pygments .tok-mb { color: #666666 } /* Literal.Number.Bin */
+.listingblock .pygments .tok-mf { color: #666666 } /* Literal.Number.Float */
+.listingblock .pygments .tok-mh { color: #666666 } /* Literal.Number.Hex */
+.listingblock .pygments .tok-mi { color: #666666 } /* Literal.Number.Integer */
+.listingblock .pygments .tok-mo { color: #666666 } /* Literal.Number.Oct */
+.listingblock .pygments .tok-sa { color: #BA2121 } /* Literal.String.Affix */
+.listingblock .pygments .tok-sb { color: #BA2121 } /* Literal.String.Backtick */
+.listingblock .pygments .tok-sc { color: #BA2121 } /* Literal.String.Char */
+.listingblock .pygments .tok-dl { color: #BA2121 } /* Literal.String.Delimiter */
+.listingblock .pygments .tok-sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.listingblock .pygments .tok-s2 { color: #BA2121 } /* Literal.String.Double */
+.listingblock .pygments .tok-se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.listingblock .pygments .tok-sh { color: #BA2121 } /* Literal.String.Heredoc */
+.listingblock .pygments .tok-si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.listingblock .pygments .tok-sx { color: #008000 } /* Literal.String.Other */
+.listingblock .pygments .tok-sr { color: #BB6688 } /* Literal.String.Regex */
+.listingblock .pygments .tok-s1 { color: #BA2121 } /* Literal.String.Single */
+.listingblock .pygments .tok-ss { color: #19177C } /* Literal.String.Symbol */
+.listingblock .pygments .tok-bp { color: #008000 } /* Name.Builtin.Pseudo */
+.listingblock .pygments .tok-fm { color: #0000FF } /* Name.Function.Magic */
+.listingblock .pygments .tok-vc { color: #19177C } /* Name.Variable.Class */
+.listingblock .pygments .tok-vg { color: #19177C } /* Name.Variable.Global */
+.listingblock .pygments .tok-vi { color: #19177C } /* Name.Variable.Instance */
+.listingblock .pygments .tok-vm { color: #19177C } /* Name.Variable.Magic */
+.listingblock .pygments .tok-il { color: #666666 } /* Literal.Number.Integer.Long */
 </style>
 </head>
 <body class="book">
@@ -598,6 +666,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_media">6.2.1. Media</a></li>
 <li><a href="#_simple_attributes">6.2.2. Simple Attributes</a></li>
 <li><a href="#_features">6.2.3. Features</a></li>
+<li><a href="#_attributes">6.2.4. Attributes</a></li>
+<li><a href="#_tiles">6.2.5. Tiles</a></li>
 </ul>
 </li>
 <li><a href="#_usage_scenario">6.3. Usage scenario</a></li>
@@ -626,6 +696,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#f_rc">7.4. Related Features Requirements Class</a>
 <ul class="sectlevel3">
 <li><a href="#_user_defined_related_features_tables">7.4.1. User-Defined Related Features Tables</a></li>
+</ul>
+</li>
+<li><a href="#attr_rc">7.5. Related Attributes Requirements class</a>
+<ul class="sectlevel3">
+<li><a href="#_user_defined_related_attributes_tables">7.5.1. User-Defined Related Attributes Tables</a></li>
+</ul>
+</li>
+<li><a href="#tiles_rc">7.6. Related Tiles Requirements class</a>
+<ul class="sectlevel3">
+<li><a href="#_user_defined_related_tiles_tables">7.6.1. User-Defined Related Tiles Tables</a></li>
 </ul>
 </li>
 </ul>
@@ -729,7 +809,7 @@ To support this capability, an ancillary data table (<code>gpkgext_relations</co
 <p>Extension Name or Template: <code>related_tables</code>; upon adoption the alias <code>gpkg_related_tables</code> MAY be used</p>
 </li>
 <li>
-<p>Extension Type: This extension provides new requirements dependent on GeoPackage <a href="http://www.geopackage.org/spec120/index.html#features">Clause 2.1</a> and <a href="http://www.geopackage.org/spec120/index.html#attributes">Clause 2.4</a>.</p>
+<p>Extension Type: This extension provides new requirements dependent on GeoPackage <a href="http://www.geopackage.org/spec121/index.html#features">Clause 2.1</a>, <a href="http://www.geopackage.org/spec121/index.html#tiles">Clause 2.2</a>, and <a href="http://www.geopackage.org/spec121/index.html#attributes">Clause 2.4</a>.</p>
 </li>
 <li>
 <p>Applicability: This extension defines relationships between feature tables and tables that hold related content, including multimedia, simple attributes, and other features.</p>
@@ -844,7 +924,7 @@ As an example, this can be used to establish a many-to-many relationship between
 <div class="ulist">
 <ul>
 <li>
-<p>[<a id="GPKG1_2"></a>] OGC 12-128r14, <em>GeoPackage Encoding Standard 1.2</em>, August 6, 2017. <a href="http://www.geopackage.org/spec120/index.html">OGC 12-128r14 OGC® GeoPackage Encoding Standard v1.2.0 (On-line)</a></p>
+<p>[<a id="GPKG1_2_1"></a>] OGC 12-128r14, <em>GeoPackage Encoding Standard 1.2.1</em>, September 6, 2018. <a href="http://www.geopackage.org/spec121/index.html">OGC 12-128r15 OGC® GeoPackage Encoding Standard v1.2.1 - with Corrigendum (Online)</a></p>
 </li>
 <li>
 <p>[<a id="OWS_COMMON"></a>] OGC 06-121r9, <em>OGC Web Service Common Implementation Specification</em>, April 7, 2010. <a href="http://portal.opengeospatial.org/files/?artifact_id=38867" class="bare">http://portal.opengeospatial.org/files/?artifact_id=38867</a></p>
@@ -865,7 +945,7 @@ As an example, this can be used to establish a many-to-many relationship between
 <div class="sect2">
 <h3 id="_attributes_data"><a class="anchor" href="#_attributes_data"></a>4.1. <strong>attributes data</strong></h3>
 <div class="paragraph">
-<p>Non-spatial tabular data that is designed to be joined with geospatial data for analysis. In a GeoPackage, attributes data is stored in attributes tables as per <a href="http://www.geopackage.org/spec/#attributes" class="bare">http://www.geopackage.org/spec/#attributes</a>.</p>
+<p>Non-spatial tabular data that is designed to be joined with geospatial data for analysis. In a GeoPackage, attributes data is stored in attributes tables as per <a href="http://www.geopackage.org/spec121/#attributes" class="bare">http://www.geopackage.org/spec121/#attributes</a>.</p>
 </div>
 </div>
 <div class="sect2">
@@ -963,7 +1043,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="sect2">
 <h3 id="_overview"><a class="anchor" href="#_overview"></a>6.1. Overview</h3>
 <div class="paragraph">
-<p>The core of the Related Tables Extension is a mapping between existing table types defined by GPKG 1.2 - <a href="http://www.geopackage.org/spec/#features">features</a>, <a href="http://www.geopackage.org/spec/#tiles">tiles</a> and <a href="http://www.geopackage.org/spec/#attributes">attributes</a>. The mapping is defined by a new kind of table defined by the Related Tables Extension. The mapping table links related rows in those tables of those types by reference to their primary keys. For example, to link a row in Table A to a row in Table B, the mapping table includes a row that has two values - the primary key of the row from Table A, and the primary key of the row from Table B.</p>
+<p>The core of the Related Tables Extension is a mapping between existing table types defined by GPKG 1.2.1 - <a href="http://www.geopackage.org/spec121/#features">features</a>, <a href="http://www.geopackage.org/spec121/#tiles">tiles</a>, and <a href="http://www.geopackage.org/spec121/#attributes">attributes</a>. The mapping is defined by a new kind of table defined by the Related Tables Extension. The mapping table links related rows in those tables of those types by reference to their primary keys. For example, to link a row in Table A to a row in Table B, the mapping table includes a row that has two values - the primary key of the row from Table A, and the primary key of the row from Table B.</p>
 </div>
 <div class="paragraph">
 <p>The mapping table allows many-to-many relationships. For example, to relate another row in Table B to the same row in Table A, the mapping table would simply include another row with the appropriate primary keys. See <a href="#img_relatedtablesconcept">Figure 1</a>.</p>
@@ -975,7 +1055,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="title">Figure 1. Related Tables concept</div>
 </div>
 <div class="paragraph">
-<p>Mapping tables are unique to each pair of tables. The appropriate mapping table for each table pair (if any) is identified in a new table <code>gpkgext_relations</code>, which also specifies the name of the primary key column and the type of related data. This version of the Related Tables Extension supports three types of related data, which are separate conformance classes:</p>
+<p>Mapping tables are unique to each pair of tables. The appropriate mapping table for each table pair (if any) is identified in a new table <code>gpkgext_relations</code>, which also specifies the name of the primary key column and the type of related data. This version of the Related Tables Extension supports five types of related data, which are separate conformance classes:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -987,6 +1067,12 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 </li>
 <li>
 <p>features</p>
+</li>
+<li>
+<p>attributes</p>
+</li>
+<li>
+<p>tiles</p>
 </li>
 </ul>
 </div>
@@ -1008,7 +1094,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="sect3">
 <h4 id="_media"><a class="anchor" href="#_media"></a>6.2.1. Media</h4>
 <div class="paragraph">
-<p>The Media conformance class is used for related tables that provide multimedia content. The GPKG table type is <a href="http://www.geopackage.org/spec/#attributes">attributes</a>. This was the original intent of the Related Tables Interoperability Experiment, and remains an important use. For example, using a <code>relation_name</code> of <code>media</code> provides the ability to link a set of photographs, line diagrams, documents, videos and/or audio files to a specific location (typically a point or polygon feature; but the Related Tables Extension does not prohibit some other kind of feature, or a row in an attribute table, or a row in a tile table being used as the base side of the mapping to the media table). The minimum content of the user defined media table is a primary key, a BLOB containing the media content (conceptually a byte array in the GeoPackage), and the <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA Media Type</a> type for the media content (e.g., <code>image/jpeg</code> for a photograph).</p>
+<p>The Media conformance class is used for related tables that provide multimedia content. The GPKG table type is <a href="http://www.geopackage.org/spec121/#attributes">attributes</a>. This was the original intent of the Related Tables Interoperability Experiment, and remains an important use. For example, using a <code>relation_name</code> of <code>media</code> provides the ability to link a set of photographs, line diagrams, documents, videos and/or audio files to a specific location (typically a point or polygon feature; but the Related Tables Extension does not prohibit some other kind of feature, or a row in an attribute table, or a row in a tile table being used as the base side of the mapping to the media table). The minimum content of the user defined media table is a primary key, a BLOB containing the media content (conceptually a byte array in the GeoPackage), and the <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">IANA Media Type</a> type for the media content (e.g., <code>image/jpeg</code> for a photograph).</p>
 </div>
 <div class="paragraph">
 <p>An example of this is a land parcel (land lot) as the feature (base table), and photographs of the location (house, commercial property, etc.) as the related media.</p>
@@ -1036,7 +1122,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="sect3">
 <h4 id="_simple_attributes"><a class="anchor" href="#_simple_attributes"></a>6.2.2. Simple Attributes</h4>
 <div class="paragraph">
-<p>The Simple Attributes conformance class is used for related tables that include only "simple attributes" - those SQLite values that are part of the TEXT, INTEGER and REAL <a href="https://www.sqlite.org/datatype3.html#storage_classes_and_datatypes">storage classes</a>. The GPKG table type is <a href="http://www.geopackage.org/spec/#attributes">attributes</a>. This is intended to support data that would typically be represented in Comma Separated Value (CSV) or spreadsheet formats, such as reference tables or observations. The simple attributes related table is not permitted to contain BLOB data (such as multimedia content, or feature GEOMETRY - these are covered by other conformance classes).</p>
+<p>The Simple Attributes conformance class is used for related tables that include only "simple attributes" - those SQLite values that are part of the TEXT, INTEGER and REAL <a href="https://www.sqlite.org/datatype3.html#storage_classes_and_datatypes">storage classes</a>. The GPKG table type is <a href="http://www.geopackage.org/spec121/#attributes">attributes</a>. This is intended to support data that would typically be represented in Comma Separated Value (CSV) or spreadsheet formats, such as reference tables or observations. The simple attributes related table is not permitted to contain BLOB data (such as multimedia content, or feature GEOMETRY - these are covered by other conformance classes).</p>
 </div>
 <div class="paragraph">
 <p>Only two columns are required in the related attributes table - the primary key, and one other column (which can be of TEXT, INTEGER, REAL, or a type that maps to one of those storage classes). As for Media, the Simple Attributes related table does not need to include additional columns, although additional columns are permitted in the related table definition, so they can be added if desired. The Related Tables Extension does not constrain or codify what the additional columns can be.  Specific communities of interest may wish to provide usage profiles of the Simple Attributes conformance class to meet specific operational or business needs. Clients that intend to display GeoPackages that make use of the Simple Attributes conformance class of the Related Tables Extension may wish to provide additional attribute display on a "best efforts" basis (e.g., view with the column names as labels for the text and numeric row values; or a spreadsheet-style table representation).</p>
@@ -1051,10 +1137,25 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <div class="sect3">
 <h4 id="_features"><a class="anchor" href="#_features"></a>6.2.3. Features</h4>
 <div class="paragraph">
-<p>The Features conformance class is used for related tables that are <a href="http://www.geopackage.org/spec/#feature_user_tables">GPKG 1.2 vector feature tables</a>. The GPKG table type is <a href="http://www.geopackage.org/spec/#features">features</a>. This is intended to support defining relationships between feature types. No changes or constraints are made on the extant definition of the features tables.</p>
+<p>The Features conformance class is used for related tables that are <a href="http://www.geopackage.org/spec121/#feature_user_tables">GPKG 1.2.1 vector feature tables</a>. The GPKG table type is <a href="http://www.geopackage.org/spec121/#features">features</a>. This is intended to support defining relationships between feature types. No changes or constraints are made on the extant definition of the features tables.</p>
 </div>
 <div class="paragraph">
 <p>An example of this is linking the location of a condominium (town house) or apartment with the locations of associated parking places or individual garden plots.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_attributes"><a class="anchor" href="#_attributes"></a>6.2.4. Attributes</h4>
+<div class="paragraph">
+<p>The Attributes conformance class is used for related tables that comply with the GPKG <a href="http://www.geopackage.org/spec121/#attributes">attributes</a> table type. This is intended to support additional relationships to data which may already be stored as GPKG metadata.</p>
+</div>
+<div class="paragraph">
+<p>As with the Simple Attributes conformance class, only two columns are required in the related attributes table - the primary key, and one other column. The Related Tables Extension does not constrain or codify what additional columns can be. Unlike a Simple Attributes table, an Attributes table may include all data types allowed in a GPKG <a href="http://www.geopackage.org/spec121/#attributes">attributes</a> metadata table (e.g. BLOB data types).</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tiles"><a class="anchor" href="#_tiles"></a>6.2.5. Tiles</h4>
+<div class="paragraph">
+<p>The Tiles conformance class is used for related tables that are GPKG <a href="http://www.geopackage.org/spec121/#tiles">tiles</a> tables, specifically <a href="http://www.geopackage.org/spec121/#tiles_user_tables">tile pyramid</a> tables.</p>
 </div>
 </div>
 </div>
@@ -1406,7 +1507,7 @@ In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8 – gpkgext_relations Relation Name</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/table-defs/ger_relname<br>
 <br>
-Each <code>relation_name</code> column in a <code>gpkgext_relations</code> row SHALL either match a <code>relation_name</code> from the Requirements Classes for User-Defined Related Data Tables in this specification (e.g. <code>media</code> for <a href="#Media Requirement Class">[Media Requirement Class]</a>), or be of the form <code>x-</code>&lt;author&gt;_&lt;relation_name&gt; where &lt;author&gt; indicates the person or organization that developed and maintains this set of User-Defined Related Tables.
+Each <code>relation_name</code> column in a <code>gpkgext_relations</code> row SHALL either match a <code>relation_name</code> from the Requirements Classes for User-Defined Related Data Tables in this or other OGC standards (e.g. <code>media</code> for <a href="#Media Requirement Class">[Media Requirement Class]</a>), or be of the form <code>x-</code>&lt;author&gt;_&lt;relation_name&gt; where &lt;author&gt; indicates the person or organization that developed and maintains this set of User-Defined Related Tables.
  </p></td>
 </tr>
 </tbody>
@@ -1498,7 +1599,7 @@ Each <code>relation_name</code> column in a <code>gpkgext_relations</code> row S
 <td class="content">
 <div class="paragraph">
 <p>See <a href="#gpkgext_user_defined_mapping_table_sql">Extended Relations Mapping Table SQL (Informative)</a> for example SQL for defining a user-defined mapping table.
-A user-defined mapping table MAY also contain other columns not listed here.</p>
+A user-defined mapping table MAY be implemented as a GPKG <a href="http://www.geopackage.org/spec121/#attributes">attributes</a> table type, and MAY contain other columns not listed here.</p>
 </div>
 </td>
 </tr>
@@ -1556,7 +1657,7 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 <div class="sect3">
 <h4 id="user_defined_related_data_table"><a class="anchor" href="#user_defined_related_data_table"></a>7.1.4. User-Defined Related Data Tables</h4>
 <div class="paragraph">
-<p>There are no explicit requirements for a generic user-defined related data table. However, interoperability is improved if a specific requirements class is used. The following subsections describe three requirements classes.</p>
+<p>There are no explicit requirements for a generic user-defined related data table. However, interoperability is improved if a specific requirements class is used. The following subsections describe currently defined requirements classes.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1568,6 +1669,12 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 </li>
 <li>
 <p><a href="#f_rc">Related Features Requirements Class</a> (for features)</p>
+</li>
+<li>
+<p><a href="#attr_rc">Related Attributes Requirements class</a> (for attributes metadata)</p>
+</li>
+<li>
+<p><a href="#tiles_rc">Related Tiles Requirements class</a> (for tiles)</p>
 </li>
 </ul>
 </div>
@@ -1614,7 +1721,8 @@ A user-defined mapping table MAY also contain other columns not listed here.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 12 – Media Relation Name</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/media/udmt<br>
 <br></p>
-<p class="tableblock">A user-defined related data table or view SHALL be a user-defined media table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "media".
+<p class="tableblock">A user-defined related data table or view SHALL be a user-defined media table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "media".</p>
+<p class="tableblock">A user-defined media table or view SHALL meet all requirements of a GPKG <a href="http://www.geopackage.org/spec120/#attributes">attributes</a> table type.
  </p></td>
 </tr>
 </tbody>
@@ -1735,7 +1843,8 @@ a set of additional columns that may be provided.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 14 – Simple Attributes Relation Name</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/simpleattr/udat<br>
 <br></p>
-<p class="tableblock">A user-defined related data table or view SHALL be a user-defined simple attribute table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "simple_attributes".
+<p class="tableblock">A user-defined related data table or view SHALL be a user-defined simple attribute table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "simple_attributes".</p>
+<p class="tableblock">A user-defined simple attributes table or view SHALL meet all requirements of a GPKG <a href="http://www.geopackage.org/spec120/#attributes">attributes</a> table type.
  </p></td>
 </tr>
 </tbody>
@@ -1784,21 +1893,21 @@ a set of additional columns that may be provided.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Text attribute content</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Integer attribute content</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Floating point number attribute content</p></td>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>any</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
 </tr>
 </tbody>
@@ -1876,7 +1985,133 @@ a set of additional columns that may be provided.</p>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 17 – Features Table Definition</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedfeat/table_def<br>
 <br></p>
-<p class="tableblock">A user-defined related features table or view SHALL be a vector feature user data table as defined in <a href="http://www.geopackage.org/spec/#feature_user_tables">the OGC® GeoPackage Encoding Standard</a>.</p></td>
+<p class="tableblock">A user-defined related features table or view SHALL be a GPKG <a href="http://www.geopackage.org/spec120/#feature_user_tables">vector feature</a> table type.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="attr_rc"><a class="anchor" href="#attr_rc"></a>7.5. Related Attributes Requirements class</h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Attributes</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/gpkg-rt/1.0/attr" class="bare">http://www.opengis.net/spec/gpkg-rt/1.0/attr</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">www.opengis.net/spec/gpkg-rt/1.0/table-defs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This requirements class allows a GeoPackage producer or editor to link metadata which may already exist in a GPKG Attributes table, including data types beyond the Simple Attributes set (e.g. BLOB data).</p>
+</div>
+<div class="sect3">
+<h4 id="_user_defined_related_attributes_tables"><a class="anchor" href="#_user_defined_related_attributes_tables"></a>7.5.1. User-Defined Related Attributes Tables</h4>
+<div class="sect4">
+<h5 id="_table_definition_6"><a class="anchor" href="#_table_definition_6"></a>Table Definition</h5>
+<table id="r18" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 18 – Attributes Relation Name</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedattr/udat<br>
+<br></p>
+<p class="tableblock">A user-defined related data table or view SHALL be a user-defined related attributes table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "attributes".
+ </p></td>
+</tr>
+</tbody>
+</table>
+<table id="r19" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 19 – Attributes Table Definition</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedattr/table_def<br>
+<br></p>
+<p class="tableblock">A user-defined related attributes table or view SHALL be a GPKG <a href="http://www.geopackage.org/spec121/#_attributes_user_tables">attributes</a> table type.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="tiles_rc"><a class="anchor" href="#tiles_rc"></a>7.6. Related Tiles Requirements class</h3>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Tiles</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/gpkg-rt/1.0/tiles" class="bare">http://www.opengis.net/spec/gpkg-rt/1.0/tiles</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">www.opengis.net/spec/gpkg-rt/1.0/table-defs</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This requirements class allows a GeoPackage producer or editor to link to individual tiles in a GPKG tile pyramid user data table.</p>
+</div>
+<div class="sect3">
+<h4 id="_user_defined_related_tiles_tables"><a class="anchor" href="#_user_defined_related_tiles_tables"></a>7.6.1. User-Defined Related Tiles Tables</h4>
+<div class="sect4">
+<h5 id="_table_definition_7"><a class="anchor" href="#_table_definition_7"></a>Table Definition</h5>
+<table id="r20" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 20 – Tiles Relation Name</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedtiles/udat<br>
+<br></p>
+<p class="tableblock">A user-defined related data table or view SHALL be a user-defined related tiles table or view if the row in <code>gpkgext_relations</code> with a corresponding <code>related_table_name</code> has a <code>relation_name</code> of "tiles".
+ </p></td>
+</tr>
+</tbody>
+</table>
+<table id="r21" class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 21 – Tiles Table Definition</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">/req/relatedtiles/table_def<br>
+<br></p>
+<p class="tableblock">A user-defined related features table or view SHALL be a GPKG <a href="http://www.geopackage.org/spec/#tiles_user_tables">tile pyramid</a> table type.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2762,14 +2997,14 @@ where features.id=features_to_media.base_id;</pre>
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_media_with_metadata' (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  data BLOB NOT NULL,
-  content_type TEXT NOT NULL,
-  title TEXT NOT NULL,
-  description TEXT NOT NULL,
-  date INTEGER NOT NULL,
-  source TEXT NOT NULL)</code></pre>
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> <span class="tok-s1">&#39;sample_media_with_metadata&#39;</span> <span class="tok-p">(</span>
+  <span class="tok-n">id</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span> <span class="tok-n">AUTOINCREMENT</span><span class="tok-p">,</span>
+  <span class="tok-k">data</span> <span class="tok-nb">BLOB</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">content_type</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">title</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">description</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-nb">date</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-k">source</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">)</span></code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -2795,15 +3030,15 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'gpkgext_relations' (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  base_table_name TEXT NOT NULL,
-  base_primary_column TEXT NOT NULL DEFAULT 'id',
-  related_table_name TEXT NOT NULL,
-  related_primary_column TEXT NOT NULL DEFAULT 'id',
-  relation_name TEXT NOT NULL,
-  mapping_table_name TEXT NOT NULL UNIQUE
- );</code></pre>
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> <span class="tok-s1">&#39;gpkgext_relations&#39;</span> <span class="tok-p">(</span>
+  <span class="tok-n">id</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span> <span class="tok-n">AUTOINCREMENT</span><span class="tok-p">,</span>
+  <span class="tok-n">base_table_name</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">base_primary_column</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span> <span class="tok-k">DEFAULT</span> <span class="tok-s1">&#39;id&#39;</span><span class="tok-p">,</span>
+  <span class="tok-n">related_table_name</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">related_primary_column</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span> <span class="tok-k">DEFAULT</span> <span class="tok-s1">&#39;id&#39;</span><span class="tok-p">,</span>
+  <span class="tok-n">relation_name</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">mapping_table_name</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span> <span class="tok-k">UNIQUE</span>
+ <span class="tok-p">);</span></code></pre>
 </div>
 </div>
 <table id="gpkgext_user_defined_mapping_table_sql" class="tableblock frame-all grid-all stretch">
@@ -2811,10 +3046,10 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_mapping_table' (
-  base_id INTEGER NOT NULL,
-  related_id INTEGER NOT NULL
- );</code></pre>
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> <span class="tok-s1">&#39;sample_mapping_table&#39;</span> <span class="tok-p">(</span>
+  <span class="tok-n">base_id</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">related_id</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span>
+ <span class="tok-p">);</span></code></pre>
 </div>
 </div>
 <table id="gpkg_features_sql" class="tableblock frame-all grid-all stretch">
@@ -2822,12 +3057,12 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_feature_table' (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-  geometry GEOMETRY,
-  text_attribute TEXT,
-  real_attribute REAL,
-  boolean_attribute BOOLEAN)</code></pre>
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> <span class="tok-s1">&#39;sample_feature_table&#39;</span> <span class="tok-p">(</span>
+  <span class="tok-n">id</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span> <span class="tok-n">AUTOINCREMENT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">geometry</span> <span class="tok-n">GEOMETRY</span><span class="tok-p">,</span>
+  <span class="tok-n">text_attribute</span> <span class="tok-nb">TEXT</span><span class="tok-p">,</span>
+  <span class="tok-n">real_attribute</span> <span class="tok-nb">REAL</span><span class="tok-p">,</span>
+  <span class="tok-n">boolean_attribute</span> <span class="tok-nb">BOOLEAN</span><span class="tok-p">)</span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2838,10 +3073,10 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_media' (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  data BLOB NOT NULL,
-  content_type TEXT NOT NULL)</code></pre>
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> <span class="tok-s1">&#39;sample_media&#39;</span> <span class="tok-p">(</span>
+  <span class="tok-n">id</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span> <span class="tok-n">AUTOINCREMENT</span><span class="tok-p">,</span>
+  <span class="tok-k">data</span> <span class="tok-nb">BLOB</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">content_type</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">)</span></code></pre>
 </div>
 </div>
 <table id="gpkgext_user_defined_simpleattr_table_sql" class="tableblock frame-all grid-all stretch">
@@ -2849,11 +3084,11 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'sample_attributes' (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  label TEXT NOT NULL,
-  description TEXT NOT NULL,
-  arisings INTEGER NOT NULL)</code></pre>
+<pre class="pygments highlight"><code data-lang="sql"><span></span><span class="tok-k">CREATE</span> <span class="tok-k">TABLE</span> <span class="tok-s1">&#39;sample_attributes&#39;</span> <span class="tok-p">(</span>
+  <span class="tok-n">id</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">PRIMARY</span> <span class="tok-k">KEY</span> <span class="tok-n">AUTOINCREMENT</span><span class="tok-p">,</span>
+  <span class="tok-n">label</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">description</span> <span class="tok-nb">TEXT</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">,</span>
+  <span class="tok-n">arisings</span> <span class="tok-nb">INTEGER</span> <span class="tok-k">NOT</span> <span class="tok-k">NULL</span><span class="tok-p">)</span></code></pre>
 </div>
 </div>
 <div style="page-break-after: always;"></div>
