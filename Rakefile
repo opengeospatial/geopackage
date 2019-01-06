@@ -5,7 +5,7 @@ task :init_local do
 end
 
 task :generate do
-  system './runasciidoctor -D build/spec -a stylesheet=./asciidoctor.css ./spec/index.adoc'
+  system 'bundle exec asciidoctor -D build/spec -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/index.adoc'
   FileUtils.cp_r 'images/.', 'build/spec'
   FileUtils.cp_r 'stylesheets/.', 'build/spec'
 end
