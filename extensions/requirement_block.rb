@@ -2,6 +2,7 @@ require 'asciidoctor'
 require 'asciidoctor/extensions'
 
 class RequirementBlock < Asciidoctor::Extensions::BlockProcessor
+  option :name, :requirement
   option :contexts, [:paragraph]
   option :content_model, :simple
 
