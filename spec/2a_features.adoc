@@ -11,7 +11,7 @@ Other components are defined below.
 
 In a GeoPackage, "simple" features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) <<12>> geometry model shown in <<core_geometry_model_figure>> below.
 
-[[core_geometry_model_figure]]
+[#core_geometry_model_figure,reftext='{figure-caption} {counter:figure-num}']
 .Core Geometry Model
 image::core-geometry-model.png[Core geometry model]
 
@@ -175,7 +175,7 @@ A GeoPackage with a `gpkg_contents` table row with a "features" `data_type` SHAL
 The second component of the SQL schema for vector features in a GeoPackage is a `gpkg_geometry_columns` table that
 identifies the geometry columns and geometry types in tables that contain user data representing features.
 
-[[gpkg_geometry_columns_cols]]
+[#gpkg_geometry_columns_cols,reftext='{table-caption} {counter:table-num}']
 .Geometry Columns Table Definition
 [cols=",,,,",options="header",]
 |=======================================================================
@@ -289,7 +289,7 @@ Feature data models <<B23>> from non-GeoPackage implementations that have multip
 The declared SQL type of the geometry column in a vector feature user data table SHALL be specified by the `geometry_type_name` column for that `column_name` and `table_name` in the `gpkg_geometry_columns` table.
 ====
 
-[[example_feature_table_cols]]
+[#example_feature_table_cols,reftext='{table-caption} {counter:table-num}']
 .EXAMPLE : Sample Feature Table or View^<<K17>>^ Definition
 [cols=",,,,,",options="header"]
 |=======================================================================
