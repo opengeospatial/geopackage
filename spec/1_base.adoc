@@ -33,7 +33,7 @@ Using SQLite as the basis for GeoPackage simplifies production, distribution and
 [caption=""]
 .Requirement 1
 ====
-A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] <<5>> database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format] <<6>> <<7>>.
+A GeoPackage SHALL be a http://www.sqlite.org/[SQLite] <<B5>> database file using http://sqlite.org/fileformat2.html[version 3 of the SQLite file format] <<B6>> <<B7>>.
 The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <<B4>> string "SQLite format 3" ^<<K1>>^ ^<<K2>>^
 ====
 
@@ -58,6 +58,11 @@ A GeoPackage SHALL have the file extension name ".gpkg".
 ====
 
 [line-through]#It is RECOMMENDED that Extended GeoPackages use the file extension ".gpkx", but this is NOT a GeoPackage requirement.#
+
+[NOTE]
+====
+GeoPackage now has a registered media type (formerly MIME type) of `application/geopackage+vnd.sqlite3` <<B27>>.
+====
 
 ====== File Contents
 
