@@ -213,6 +213,8 @@ Definition of SQL functions
 ====
 [line-through]#The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.#
 ====
+[NOTE]
+The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test. 
 
 [float]
 ==== Abstract Test Suite
@@ -272,11 +274,12 @@ Definition of SQL functions
 |*Test Type* |Capability
 |========================================
 
+[line-through]
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/reg_ext/features/spatial_indexes/implementation/sql_functions+
-|*Test Purpose* |Verify the correct implementation of sql functions used in spatial indexes on feature table geometry columns.
-|*Test Method* |
+|[.line-through]#*Test Case ID*# |[.line-through]#+/reg_ext/features/spatial_indexes/implementation/sql_functions+#
+|[.line-through]#*Test Purpose*# |[.line-through]#Verify the correct implementation of sql functions used in spatial indexes on feature table geometry columns.#
+|[.line-through]#*Test Method*# |[line-through]
 . Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension
 . For each Geometry Test Data Set <gtype_test> data table row for each geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:
 .. SELECT 'Fail' FROM <gtype_test> WHERE ST_IsEmpty(geom.) != empty
@@ -285,6 +288,6 @@ Definition of SQL functions
 .. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MinY(geom) != miny
 .. SELECT 'Fail' FROM <gtype_test>  WHERE ST_MaxY(geom) != maxy
 . Pass if no 'Fail' selected from step 2
-|*Reference* |Annex F.3 Req 78
-|*Test Type* |Capability
+|[.line-through]#*Reference*#|[.line-through]#Annex F.3 Req 78#
+|[.line-through]#*Test Type*#|[.line-through]#Capability#
 |========================================
