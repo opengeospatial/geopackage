@@ -271,13 +271,11 @@ A GeoPackage MAY contain tables or views^<<K17>>^ containing vector features.
 Every such feature table or view in a GeoPackage SHALL be structured consistently with <<example_feature_table_cols>> and <<example_feature_table_sql>>.
 ====
 
-The integer primary key of a feature table allows features to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below.
-
 [[r30]]
 [caption=""]
 .Requirement 30
 ====
-A feature table SHALL have only one geometry column.
+A feature table or view SHALL have only one geometry column.
 ====
 
 Feature data models <<B23>> from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be transformed into GeoPackage implementations with a separate feature table for each geometry type whose rows have matching integer primary key values that allow them to be joined in a view with the same column definitions as the non-GeoPackage feature data model with multiple geometry columns.
@@ -288,6 +286,18 @@ Feature data models <<B23>> from non-GeoPackage implementations that have multip
 ====
 The declared SQL type of the geometry column in a vector feature user data table SHALL be specified by the `geometry_type_name` column for that `column_name` and `table_name` in the `gpkg_geometry_columns` table.
 ====
+
+[[r150]]
+[caption=""]
+.Requirement 150
+====
+A feature table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be a primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.
+====
+
+[NOTE]
+=====
+Using an integer primary key in a feature table allows features to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant feature view with a discoverable key-like column^<<K17>>^.
+=====
 
 [#example_feature_table_cols,reftext='{table-caption} {counter:table-num}']
 .EXAMPLE : Sample Feature Table or View^<<K17>>^ Definition
