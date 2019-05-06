@@ -303,7 +303,10 @@ Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid
 |`tile_data` |BLOB |Of an image MIME type specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>>, <<extension_tiles_webp>> |no | |
 |=======================================================================
 
-See <<example_tiles_table_sql>>.
+[WARNING]
+====
+Though this standard does not technically mandate the use of an indexing mechanism in a tiles table, the lack of such an index, e.g., a `UNIQUE` clause as in <<example_tiles_table_sql>>, is likely to significantly degrade the performance of queries.
+====
 
 ====== Table Data Values
 
