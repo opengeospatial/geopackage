@@ -8638,6 +8638,18 @@ The GeoPackage Executable Test Suite has been updated to accept either version o
 </div>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test.
+</td>
+</tr>
+</table>
+</div>
 <h4 id="_abstract_test_suite_3" class="float">Abstract Test Suite</h4>
 <h5 id="_extension_name" class="float">Extension Name</h5>
 <table class="tableblock frame-all grid-all stretch">
@@ -8839,6 +8851,73 @@ The GeoPackage Executable Test Suite has been updated to accept either version o
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Capability</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="line-through"><strong>Test Case ID</strong></span></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">/reg_ext/features/spatial_indexes/implementation/sql_functions</span></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="line-through"><strong>Test Purpose</strong></span></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">Verify the correct implementation of sql functions used in spatial indexes on feature table geometry columns.</span></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="line-through"><strong>Test Method</strong></span></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="olist line-through">
+<ol class="line-through">
+<li>
+<p>Open Geometry Test Data Set GeoPackage with GeoPackage SQLite Extension</p>
+</li>
+<li>
+<p>For each Geometry Test Data Set &lt;gtype_test&gt; data table row for each geometry type in Annex G, for an assortment of srs_ids, for an assortment of coordinate values including empty geometries, without and with z and / or m values, in both big and little endian encodings:</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>SELECT 'Fail' FROM &lt;gtype_test&gt; WHERE ST_IsEmpty(geom.) != empty</p>
+</li>
+<li>
+<p>SELECT 'Fail' FROM &lt;gtype_test&gt;  WHERE ST_MinX(geom) != minx</p>
+</li>
+<li>
+<p>SELECT 'Fail' FROM &lt;gtype_test&gt;  WHERE ST_MaxX(geom) != maxx</p>
+</li>
+<li>
+<p>SELECT 'Fail' FROM &lt;gtype_test&gt;  WHERE ST_MinY(geom) != miny</p>
+</li>
+<li>
+<p>SELECT 'Fail' FROM &lt;gtype_test&gt;  WHERE ST_MaxY(geom) != maxy</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no 'Fail' selected from step 2</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="line-through"><strong>Reference</strong></span></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">Annex F.3 Req 78</span></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><span class="line-through"><strong>Test Type</strong></span></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">Capability</span></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -13916,7 +13995,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-05-06 17:30:32 UTC
+Last updated 2019-05-06 17:33:50 UTC
 </div>
 </div>
 </body>
