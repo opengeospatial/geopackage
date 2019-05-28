@@ -1,22 +1,35 @@
 _Go [back](../index.html)_
 
+:encoding: utf-8
+:lang: en
+:toc: macro
+:toclevels: 3
+:numbered:
+:sectanchors:
+
 ## GeoPackage Implementation Guide
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
 While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed, as well as expectations that have emerged from the user community as GeoPackage has been more broadly adopted.
 This guide attempts to articulate those expectations so that developers produce consistent software. 
 
-> WARNING: This document is not an OGC Standard and may not be referred to as such. This document is an implementation guide and is not an official position of the OGC membership. It is distributed for informational purposes only and is subject to change without notice.
+[WARNING] 
+====
+This document is not an OGC Standard and may not be referred to as such. This document is an implementation guide and is not an official position of the OGC membership. It is distributed for informational purposes only and is subject to change without notice.
+====
 
-### _Terms and Definitions_
+### Terms and Definitions
 **GeoPackage Software** - software capable of reading and/or writing GeoPackages
 
 **GeoPackage Client** - software capable of (at a minimum) accessing GeoPackage content in a _read-only_ mode.
 
 **GeoPackage-writing Software** - software capable of (at a minimum) producing or modifying a GeoPackage
 
-> NOTE: Where appropriate, the roles of GeoPackage-writing software (producers and editors) are differentiated from clients.
+[NOTE]
+====
+Where appropriate, the roles of GeoPackage-writing software (producers and editors) are differentiated from clients.
+====
 
-### _Capability Levels_
+### Capability Levels
 Where possible, the guidelines are presented in a __tiered__ approach using multiple _capability levels_. 
 
 * **Capability Level 0** indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
@@ -32,10 +45,13 @@ This approach allows developers to develop their software incrementally, achievi
 There is no expectation that any particular piece of software support any particular capability or capability level.
 Consider this more of a catalog or taxonomy for GeoPackage support capabilities, things that could be supported in GeoPackage software.
 
-> NOTE: This approach also gives guidance back to the SWG – some capability levels are not achievable today and these should be given highest priority in future SWG activities.
+[NOTE]
+====
+This approach also gives guidance back to the SWG – some capability levels are not achievable today and these will be considered by the SWG for higher priority in  future activities.
+====
 
 ### Core 
-### Contents
+#### Contents
 GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for GeoPackage-writing software) and determine (for clients) what content to load.
 
 ###### Level 0
@@ -64,9 +80,12 @@ GeoPackage client loads the contents from `gpkg_contents`, presents the user a l
 ###### Level 3
 GeoPackage client loads a list of OWS Context files, each representing a specific use case or scenario, and allows the user to select one for use.
 
-> NOTE: The specification for this capability is still being developed.
+[NOTE]
+====
+The specification for this capability is still being developed.
+====
 
-### Spatial Reference System (SRS)
+#### Spatial Reference System (SRS)
 GeoPackages are expected to use SRSs to ensure the consistency of coordinates.
 
 ###### Level 0
@@ -99,10 +118,10 @@ GeoPackage software supports arbitrary SRSs that are encoded in [CRS WKT2](http:
     
     This GeoPackage contains features in different SRSs encoded using CRS WKT2. The client should be able to use these contents normally.
 
-### Features Option
+#### Features Option
 The actual utilization of feature data is very open-ended. Many systems visualize feature data, but feature data is also well-suited to a number of analysis operations.
 
-#### Geometries
+##### Geometries
 
 ###### Level 0
 GeoPackage software supports at least one simple geometry type (point, line, or polygon).
@@ -134,7 +153,7 @@ GeoPackage software supports extended geometry types using the [Nonlinear Geomet
     
     The client should be able to handle all of the features in this GeoPackage.
 
-#### Attributes of Feature Data
+##### Attributes of Feature Data
 
 ###### Level 0
 GeoPackage software supports hard-coded attributes.
@@ -151,9 +170,12 @@ GeoPackage software supports arbitrary attributes of any name and [supported dat
 ###### Level 2
 GeoPackage software supports arbitrary attributes that are defined using the [Schema Extension](extensions/schema.md). Where appropriate, the schema defines metadata that improves the readability of visualizations and query results.
 
-> NOTE: There is currently no example available at this time.
+[NOTE]
+====
+There is currently no example available at this time.
+====
 
-#### Feature Visualization
+##### Feature Visualization
 Not all GeoPackage clients visualize feature data, but those that do must consider how the styles (portrayal rules) are produced and selected by the user.
 
 ###### Level 1
@@ -179,12 +201,15 @@ Feature geometries and/or attributes are styled through the GeoPackage client us
 ###### Level 3
 Feature styles are encoded as part of Contexts (see above) that are included as part of the GeoPackage.
 
-> NOTE: This capability is still under development.
+[NOTE]
+====
+This capability is still under development.
+====
 
-### Tiles Option
+#### Tiles Option
 Tiled raster data is primarily designed for visualization purposes.
 
-#### Tile Matrix Sets
+##### Tile Matrix Sets
 
 ###### Level 0
 GeoPackage software exclusively supports the Google Maps-compatible Tile Matrix Set.
@@ -208,19 +233,28 @@ GeoPackage software supports any tile matrix set that has a power-of-2 interval 
 ###### Level 2
 GeoPackage software supports tile matrix sets with arbitrary zoom levels using the [Zoom Other Intervals](extensions/zoom_other_intervals.md) extension. When useful, this extension is used to preserve the quality of the highest zoom level and minimize the bloat of the GeoPackage.
 
-> NOTE: There is currently no example available at this time.
+[NOTE]
+====
+There is currently no example available at this time.
+====
 
-#### Tile Encoding
+##### Tile Encoding
 
 ###### Level 1
 GeoPackage software supports PNG and JPG tiles.
 
-> NOTE: Client support for JPG and PNG is so ubiquitous that it is unlikely that a visualization client would not be able to display either.
+[NOTE]
+====
+Client support for JPG and PNG is so ubiquitous that it is unlikely that a visualization client would not be able to display either.
+====
 
 ###### Level 2
 GeoPackage-writing software produces heterogeneous tile sets for imagery overlays, using JPG files (with their superior compression) for central tiles and PNG (with alpha channel transparency) for border tiles so that the user is able to see the underlying layers at the edge of the imagery coverage area.
 
-> NOTE: Because of the aforementioned ubiquity of PNG and JPG support, this is more of a challenge for GeoPackage-writing software.
+[NOTE]
+====
+Because of the aforementioned ubiquity of PNG and JPG support, this is more of a challenge for GeoPackage-writing software.
+====
 
 ###### Level 3
 GeoPackage software supports the WebP format using the [Tiles Encoding WebP Extension](extensions/tiles_encoding_webp.md). GeoPackage-writing software uses this format to reduce GeoPackage size when the expected clients are known to support it.
@@ -231,7 +265,7 @@ GeoPackage software supports the WebP format using the [Tiles Encoding WebP Exte
 
     A single tile should be available.
 
-#### Tile Visualization
+##### Tile Visualization
 This section applies to generic map capabilities of a GeoPackage client.
 
 ###### Level 0
@@ -240,19 +274,28 @@ A GeoPackage client can render a fixed view of tiled raster data.
 ###### Level 1
 A GeoPackage client can display the raster data (centered on the extents specified in the corresponding row of `gpkg_contents`), pan, switch zoom levels, and zoom to global extent.
 
-> NOTE:  Any tiles example could be used to demonstrate the desired behavior.
+[NOTE]
+====
+Any tiles example could be used to demonstrate the desired behavior.
+====
 
 ###### Level 2
 A GeoPackage client can display multiple tile matrix sets simultaneously, transforming into a single SRS if needed.
 
-> NOTE: There is currently no example available at this time.
+[NOTE]
+====
+There is currently no example available at this time.
+====
 
 ###### Level 3
 When a GeoPackage is loaded for visualization via an OWS Context (see above), the default view is read from the Context.
 
-> NOTE: The specification for this capability is still being developed.
+[NOTE]
+====
+The specification for this capability is still being developed.
+====
 
-### Attributes Option
+#### Attributes Option
 Attributes tables are non-spatial data that may be joined as part of a view. This eliminates a potential source of redundancy and bloat in GeoPackage files.
 
 ###### Level 0
@@ -267,19 +310,28 @@ GeoPackage-writing software creates views to join feature tables and attribute t
 ###### Level 2b
 GeoPackage-writing software uses the ["updatable view" technique](https://www.sqlite.org/lang_createtrigger.html#instead_of_trigger) to produce updatable views that combine the flexibility of joining multiple tables together with the insert/update/delete capabilities of a table. (GeoPackage clients are then able to utilize these views as they would a table.)
 
-> NOTE: While this capability is possible today, there is currently not clear guidance on how this should be done.
+[NOTE]
+====
+While this capability is possible today, there is currently not clear guidance on how this should be done.
+====
 
 ###### Level 3
 GeoPackage software supports many-to-many relationships between features and attributes using the Related Tables Extension.
 
-> NOTE: This capability is still under development.
+[NOTE]
+====
+There is currently no example available at this time.
+====
 
 ### Other Extensions
 #### Metadata Extension
 ###### Level 1
 GeoPackage-writing software fully populates the `gpkg_contents` table for each set of contents and GeoPackage clients present this information to the user.
 
-> NOTE:  Any compliant GeoPackage could be used to demonstrate the desired behavior.
+[NOTE]
+====
+Any compliant GeoPackage could be used to demonstrate the desired behavior.
+====
 
 ###### Level 2
 GeoPackage software supports the [Metadata Extension](extensions/metadata.md). GeoPackage-writing software populates the two metadata tables with information regarding each dataset and GeoPackage clients make this metadata available to the user upon request. 
@@ -290,12 +342,46 @@ GeoPackage software supports the [Metadata Extension](extensions/metadata.md). G
 
     There is metadata for the whole GeoPackage and for the "Veg_DC" layer.
 
-> NOTE: There are a number of metadata formats available. Support or conformance to these formats is outside the scope of this document.
-
 ###### Level 3
 GeoPackage software supports hierarchical metadata in conjunction with the [Metadata Extension](extensions/metadata.md). Metadata is traceable from the tile or feature level up to the GeoPackage level.
 
-> NOTE: There is currently no example available at this time.
+[NOTE]
+====
+There is currently no example available at this time.
+====
+
+#### Vector Tiles
+
+##### Attributes
+###### Level 0
+When no attributes are available in the vector tiles, the application can only display features with arbitrary styles.
+
+###### Level 1
+GeoPackage software embeds the attributes in the encoded files (Mapbox or GeoJSON).
+
+[NOTE]
+====
+There is currently no example available at this time.
+====
+
+###### Level 2
+GeoPackage software uses the `attributes_table_name` column of `gpkgext_vt_layers` to indicate the name of an attributes table that contains attributes for the features in that layer. 
+This allows the attributes to be encoded more efficiently, without being duplicated across each vector tile that contains the feature.
+
+[NOTE]
+====
+There is currently no example available at this time.
+====
+
+###### Level 3
+GeoPackage software uses the Related Tables Extension to correlate features (by their feature ID) with tiles containing the feature.
+This allows GeoPackage clients to perform queries without having to search all of the available vector tiles to find tiles containing the features that satisfy the query.
+
+[NOTE]
+====
+There is currently no example available at this time.
+====
+
 
 #### Tiled Gridded Coverage Data
 
