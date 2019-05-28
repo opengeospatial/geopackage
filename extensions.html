@@ -32,6 +32,8 @@
   <dl class="row">
     <dt class="col-sm-3">  <a href="http://docs.opengeospatial.org/is/17-066r1/17-066r1.html">Tiled Gridded Coverage Data</a></dt>
     <dd class="col-sm-9">The extension (previously titled Elevation Extension)" defines how to encode and store tiled regular gridded data, such as a digital elevation model, in a GeoPackage.</dd>
+    <dt class="col-sm-3">  <a href="http://docs.opengeospatial.org/is/18-000/18-000.html">Related Tables</a>  (see preface for template information)</dt>
+    <dd class="col-sm-9">This extension provides a mechanism for associating tables with existing feature or attribute tables in a GeoPackage. Among other things, it can be used to establish a many-to-many relationship between features and multimedia files. It was originally developed by Compusult and was refined during an OGC Interoperability Experiment.</dd>
   </dl>
       <div class="page-header">
         <h2>Community Extensions</h2>
@@ -40,8 +42,22 @@
       <p class="lead"><i>To publish a new extension, fill out the <a href="http://www.geopackage.org/spec/#extension_template">extension template</a> and let us know on the <a href="https://lists.opengeospatial.org/mailman/listinfo/geopackage">GeoPackage Mailing List</a>.</i></p>
       
   <dl class="row">
-    <dt class="col-sm-3">  <a href="https://www.geopackage.org/18-000.html">Related Tables</a>  (see preface for template information)</dt>
-    <dd class="col-sm-9">This extension provides a mechanism for associating tables with existing feature or attribute tables in a GeoPackage. Among other things, it can be used to establish a many-to-many relationship between features and multimedia files. It was originally developed by Compusult and the plan is to test it during an upcoming OGC Interoperability Experiment.</dd>
+    <dt class="col-sm-3">Vector Tiles</a></dt>
+    <dd class="col-sm-9">These extensions allow vector tiles to be stored in a GeoPackage. It was developed during the <a href="https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018">OGC Vector Tiles Pilot</a> and is currently being refined as part of <a href="https://www.opengeospatial.org/projects/initiatives/testbed15">OGC Testbed-15</a>. using the  approach but is in the process of being revised as part of the Vector Tiles Pilot.</dd>
+    <ul>
+      <li>  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/1-vte.adoc">Vector Tiles Extension</a> allows vector tiles to be stored in a GeoPackage.
+      </li>
+      <li>  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/2-mvte.adoc">Mapbox Vector Tiles Extension</a> allows vector tiles to be stored in the <a href="https://github.com/mapbox/vector-tile-spec">MapBox Vector Tiles</a> format.
+      </li>
+      <li>  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/3-gvte.adoc">GeoJSON Vector Tiles Extension</a> allows vector tiles to be stored in the <a href="">GeoJSON</a> format.
+      </li>
+      <li>  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/4-vtae.adoc">Vector Tiles Attributes Extension</a> allows for  correlation between features and the tiles containing them via the Related Tables Extension.
+      </li>
+    </ul>
+    <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/5-sse.adoc">Styling and Symbology Extension</a></dt>
+    <dd class="col-sm-9">This extension allows styles and symbols of artibrary formats to be stored in a GeoPackage.</dd>
+    <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc">OWS Context Extension</a></dt>
+    <dd class="col-sm-9">This extension allows <a href="https://owscontext.org">OWS Contexts</a> to be stored in a GeoPackage in a relational manner.</dd>
     <dt class="col-sm-3">  <a href="http://www.compusult.net/html/OGC/3DTile_GeoPackage_Ext_Draft.html">3D Tiles</a></dt>
     <dd class="col-sm-9">This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the <a href="https://github.com/AnalyticalGraphicsInc/3d-tiles">3D Tiles</a> spatial data structure.</dd>
     <dt class="col-sm-3">  <a href="https://github.com/pka/qgpkg/blob/master/qgis_geopackage_extension.md">QGIS Map Styling Information</a></dt>
@@ -58,8 +74,6 @@
    </dd>
     <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-ows-context/blob/master/spec/2_context_gpkg.adoc">OWS Context (Image Matters) (Deprecated)</a></dt>
     <dd class="col-sm-9">This extension, part of a joint effort between the GeoPackage SWG and OWS Context SWG, is an attempt to define an SQL-native encoding for OWS Context. It is incomplete, lacking a proper encoding for style information. It is in the process of being revised as part of the Vector Tiles Pilot.</dd>
-    <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/1_vector_tiles.adoc">Vector Tiles (Deprecated)</a></dt>
-    <dd class="col-sm-9">This extension allows vector tiles to be stored in a GeoPackage using the <a href="https://github.com/mapbox/vector-tile-spec">MapBox Vector Tiles</a> approach but is in the process of being revised as part of the Vector Tiles Pilot.</dd>
    <dt class="col-sm-3"><a href="http://www.geopackage.org/spec110/#extension_geometry_encoding">User Defined Geometry Types (Deprecated)</a><dt>
    <dd class="col-sm-9">Enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage. Removed from GeoPackage 1.2 due to interoperability reasons.
    </dd>
