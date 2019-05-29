@@ -26,8 +26,8 @@ task :init_travis do
   system "git clone --depth 1 -b #{deploy_branch} #{repo} build"
   Dir.chdir 'build/spec'
   system 'git rm -r .'
-  Dir.chdir '../..'
-  Dir.chdir 'guide'
+  Dir.chdir '../'
+  Dir.chdir 'build/guide'
   system 'git rm -r .'
   Dir.chdir '../..'
 end
