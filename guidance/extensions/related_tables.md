@@ -1,5 +1,7 @@
-### Getting Started
-The [GeoPackage Related Tables Extension](http://docs.opengeospatial.org/is/18-000/18-000.html) allows a GeoPackage to contain additional data that is related to geospatial (e.g., features) or attributes data.
+_Go [back](../getting-started.md)_
+
+### [Related Tables Extension](http://docs.opengeospatial.org/is/18-000/18-000.html)
+This extension allows a GeoPackage to contain additional data that is related to geospatial (e.g., features) or attributes data.
 As an example, this can be used to establish a many-to-many relationship between features (e.g., points, lines, or areas) and multimedia files. 
 By definition, the "left" side of the relationship is the "base" data and the "right" side of the relationship is the "related" data.
 
