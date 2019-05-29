@@ -179,6 +179,7 @@ The following extensions have been adopted by OGC:
 * [Schema](extensions/schema.md)
 * [WKT for Coordinate Reference Systems](extensions/wkt_for_crs.md)
 * [Tiled Gridded Coverage Data](extensions/tiled_gridded_coverage_data.md)
+* [Related Tables Extension](extensions/related_tables.md)
 
 ##### Community Extensions
 OGC acknowledges that there are use cases not covered by the GeoPackage standard. Implementers are welcome to use the extension mechanism defined here to develop community extensions. The extension mechanism provides advantages including discoverability (the extensions in use can be discovered by scanning a single table) and uniformity (declaring that an extension is in use indicates that a defined set of requirements are being met). However, this is a decision that should be made carefully as custom extensions do introduce interoperability risks.
