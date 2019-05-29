@@ -7,7 +7,9 @@ _Go [back](../index.html)_
 :numbered:
 :sectanchors:
 
-## GeoPackage Implementation Guide
+# GeoPackage Implementation Guide
+[preface]
+## Introduction
 The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
 While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed, as well as expectations that have emerged from the user community as GeoPackage has been more broadly adopted.
 This guide attempts to articulate those expectations so that developers produce consistent software. 
@@ -17,7 +19,8 @@ This guide attempts to articulate those expectations so that developers produce 
 This document is not an OGC Standard and may not be referred to as such. This document is an implementation guide and is not an official position of the OGC membership. It is distributed for informational purposes only and is subject to change without notice.
 ====
 
-### Terms and Definitions
+[preface]
+## Terms and Definitions
 **GeoPackage Software** - software capable of reading and/or writing GeoPackages
 
 **GeoPackage Client** - software capable of (at a minimum) accessing GeoPackage content in a _read-only_ mode.
@@ -29,7 +32,8 @@ This document is not an OGC Standard and may not be referred to as such. This do
 Where appropriate, the roles of GeoPackage-writing software (producers and editors) are differentiated from clients.
 ====
 
-### Capability Levels
+[preface]
+## Capability Levels
 Where possible, the guidelines are presented in a __tiered__ approach using multiple _capability levels_. 
 
 * **Capability Level 0** indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
@@ -50,8 +54,8 @@ Consider this more of a catalog or taxonomy for GeoPackage support capabilities,
 This approach also gives guidance back to the SWG – some capability levels are not achievable today and these will be considered by the SWG for higher priority in  future activities.
 ====
 
-### Core 
-#### Contents
+## Core 
+### Contents
 GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for GeoPackage-writing software) and determine (for clients) what content to load.
 
 ###### Level 0
@@ -85,7 +89,7 @@ GeoPackage client loads a list of OWS Context files, each representing a specifi
 The specification for this capability is still being developed.
 ====
 
-#### Spatial Reference System (SRS)
+### Spatial Reference System (SRS)
 GeoPackages are expected to use SRSs to ensure the consistency of coordinates.
 
 ###### Level 0
@@ -120,10 +124,10 @@ Open http://www.geopackage.org/data/sample1_2F10.gpkg.
 This GeoPackage contains features in different SRSs encoded using CRS WKT2. The client should be able to use these contents normally.
 ====
 
-#### Features Option
+### Features Option
 The actual utilization of feature data is very open-ended. Many systems visualize feature data, but feature data is also well-suited to a number of analysis operations.
 
-##### Geometries
+#### Geometries
 
 ###### Level 0
 GeoPackage software supports at least one simple geometry type (point, line, or polygon).
@@ -155,7 +159,7 @@ Open http://www.geopackage.org/data/gdal_sample_v1.2_spi_nonlinear_webp_elevatio
 The client should be able to handle all of the features in this GeoPackage.
 ====
 
-##### Attributes of Feature Data
+#### Attributes of Feature Data
 
 ###### Level 0
 GeoPackage software supports hard-coded attributes.
@@ -177,7 +181,7 @@ GeoPackage software supports arbitrary attributes that are defined using the lin
 There is currently no example available at this time.
 ====
 
-##### Feature Visualization
+#### Feature Visualization
 Not all GeoPackage clients visualize feature data, but those that do must consider how the styles (portrayal rules) are produced and selected by the user.
 
 ###### Level 1
@@ -207,10 +211,10 @@ Feature styles are encoded as part of Contexts (see above) that are included as 
 This capability is still under development.
 ====
 
-#### Tiles Option
+### Tiles Option
 Tiled raster data is primarily designed for visualization purposes.
 
-##### Tile Matrix Sets
+#### Tile Matrix Sets
 
 ###### Level 0
 GeoPackage software exclusively supports the Google Maps-compatible Tile Matrix Set.
@@ -239,7 +243,7 @@ GeoPackage software supports tile matrix sets with arbitrary zoom levels using t
 There is currently no example available at this time.
 ====
 
-##### Tile Encoding
+#### Tile Encoding
 ###### Level 1
 GeoPackage software supports PNG and JPG tiles.
 
@@ -265,7 +269,7 @@ Load the "byte_webp" tile pyramid from http://www.geopackage.org/data/gdal_sampl
 A single tile should be available.
 ====
 
-##### Tile Visualization
+#### Tile Visualization
 This section applies to generic map capabilities of a GeoPackage client.
 
 ###### Level 0
@@ -295,7 +299,7 @@ When a GeoPackage is loaded for visualization via an OWS Context (see above), th
 The specification for this capability is still being developed.
 ====
 
-#### Attributes Option
+### Attributes Option
 Attributes tables are non-spatial data that may be joined as part of a view. This eliminates a potential source of redundancy and bloat in GeoPackage files.
 
 ###### Level 0
@@ -323,8 +327,9 @@ GeoPackage software supports many-to-many relationships between features and att
 There is currently no example available at this time.
 ====
 
-### Other Extensions
-#### Metadata Extension
+## Extensions
+### Metadata
+#### General Use
 ###### Level 1
 GeoPackage-writing software fully populates the `gpkg_contents` table for each set of contents and GeoPackage clients present this information to the user.
 
@@ -350,8 +355,72 @@ GeoPackage software supports hierarchical metadata in conjunction with the link:
 There is currently no example available at this time.
 ====
 
-#### Vector Tiles
-##### Attributes
+#### Data Provenance
+###### Level 0
+By default, GeoPackage does not indicate the provenance of the data inside it.
+
+###### Level 1
+GeoPackage Providers version GeoPackage data when publishing it.
+As part of this process, the provider _should_ provide a checksum with the file so that the recipient can confirm that the file is correct and has not been tampered with.
+
+[NOTE]
+====
+This capability is outside of the scope of the GeoPackage Encoding Standard so there is no example for it.
+====
+
+###### Level 2
+GeoPackage Providers add a row to `gpkg_metadata` with a `md_scope` of "dataset" for each dataset listed in `gpkg_contents`.
+
+[NOTE]
+====
+There is not currently a consensus on the specification for the metadata document to be used here.
+====
+
+###### Level 3
+GeoPackage Providers add a row to `gpkg_metadata` with a `md_scope` of "collectionSession" for each independent editing session so that individual edits can be traced to a specific editing session.
+
+[NOTE]
+====
+There is not currently a consensus on the specification for the metadata document to be used here.
+====
+
+#### Change Management
+###### Level 0
+By default, GeoPackage has no capabilities for change management.
+However, in conjunction with Level 3 of Data Provenance (see above), 
+
+###### Level 1
+For each table that is modified, a GeoPackage Producer adds a row to `gpkg_metadata_reference` with a `reference_scope` of "table".
+This row is linked to a row in `gpkg_metadata` with a `md_scope` of "collectionSession".
+A GeoPackage Client can then read the `gpkg_metadata_reference` table to determine all tables that have been modified.
+
+[NOTE]
+====
+There is currently no example available at this time.
+====
+
+###### Level 2
+For each row that is modified, a GeoPackage Producer adds a row to `gpkg_metadata_reference` with a `reference_scope` of "row".
+This row is linked to a row in `gpkg_metadata` with a `md_scope` of "collectionSession".
+A GeoPackage Client can then read the `gpkg_metadata_reference` table to determine all rows that have been modified.
+
+[NOTE]
+====
+There is currently no example available at this time.
+====
+
+###### Level 3
+For each column value that is modified, a row is added to `gpkg_metadata_reference` with a `reference_scope` of "row/col".
+This row is linked to a row in `gpkg_metadata` with a `md_scope` of "collectionSession".
+A GeoPackage Client can then read the `gpkg_metadata_reference` table to determine all column values that have been modified.
+
+[NOTE]
+====
+There is currently no example available at this time.
+====
+
+### Vector Tiles
+#### Attributes
 ###### Level 0
 When no attributes are available in the vector tiles, the application can only display features with arbitrary styles.
 
@@ -381,7 +450,7 @@ This allows GeoPackage clients to perform queries without having to search all o
 There is currently no example available at this time.
 ====
 
-#### Tiled Gridded Coverage Data
+### Tiled Gridded Coverage Data
 
 [WARNING]
 ====
