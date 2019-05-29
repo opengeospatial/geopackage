@@ -10,8 +10,14 @@ task :generate do
   FileUtils.cp_r 'stylesheets/.', 'build/spec'
 end
 
+task :generate_guide do
+  # system 'bundle exec asciidoctor -D build/guide -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./guidance/implemenation_guide.adoc'
+  system 'bundle exec asciidoctor -D build/guide ./guidance/implemenation_guide.adoc'
+
+end
+
 desc 'Generate site'
-task :build => [:init_local, :generate]
+task :build => [:init_local, :generate, :generate_guide]
 
 task :init_travis do
   repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:').strip
@@ -19,6 +25,9 @@ task :init_travis do
 
   system "git clone --depth 1 -b #{deploy_branch} #{repo} build"
   Dir.chdir 'build/spec'
+  system 'git rm -r .'
+  Dir.chdir '../..'
+  Dir.chdir 'build/guide'
   system 'git rm -r .'
   Dir.chdir '../..'
 end
