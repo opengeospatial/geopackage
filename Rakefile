@@ -27,7 +27,7 @@ task :init_travis do
   Dir.chdir 'build/spec'
   system 'git rm -r .'
   Dir.chdir '../..'
-  Dir.chdir 'build/guide'
+  Dir.chdir 'guide'
   system 'git rm -r .'
   Dir.chdir '../..'
 end
