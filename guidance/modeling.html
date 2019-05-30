@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+	<head>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+		<title>
+			OGC GeoPackage
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Official GeoPackage web site of the Open Geospatial Consortium">
+		<meta name="author" content="Jeff Yutzler"><!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+		<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+		<!--script src="js/less-1.3.3.min.js"></script-->
+		<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+		<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/style.css" rel="stylesheet" type="text/css"><!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]><script src="js/html5shiv.js"></script>  <![endif]-->
+		<!-- Fav and touch icons -->
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../img/apple-touch-icon-144-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../img/apple-touch-icon-114-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../img/apple-touch-icon-72-precomposed.png">
+		<link rel="apple-touch-icon-precomposed" href="../img/apple-touch-icon-57-precomposed.png">
+		<link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../js/scripts.js"></script>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-2 column">
+					<div class="margin-top-40">
+						<a href="http://myogc.org"><img src="../img/ogc_logo_tnr_mlc_blue_HR.png" alt="Visit the OGC" height="50px"></a>
+					</div>
+				</div>
+				<div class="col-md-8 column">
+					<h1>
+						GeoPackage Modeling Guidelines <!-- <small>Subtext for header</small> -->
+					</h1>
+					<h2>
+						Introduction
+					</h2>
+					<p>
+						The GeoPackage encoding standard mandates in Requirements <a href="../spec/#_requirement-22">22</a> and <a href="../spec/#_requirement-30">30</a> that vector feature user tables shall only have a single geometry. This is advantageous for two reasons:
+					</p>
+					<ul>
+						<li>
+							It keeps the semantics of the data model concise: a feature has one shape. This is in line with other vector data formats with which GeoPackage is often compared, such as Shapefile or GeoJSON. By sharing this restriction, converting data from one format to another is more straightforward. This is particularly beneficial in enterprise workflows. For example, mobile components use a GeoPackage to view the business data, while the web-clients use a GeoJSON version of the same.
+						</li>
+						<li>
+							Allowing multiple geometries per feature table would compromise GeoPackage's position in the GIS application ecosystem. Most ready-made GIS data viewers handle data formats in a uniform manner. Opening a file creates a layer on map and the layer shows the features contained in that file. There are usually some UI-capabilities to view properties of a feature or change the styling of a feature. If feature tables were to contain multiple geometries, the visualization of a GeoPackage in such a COTS-viewer would be much more complicated. What geometry should be shown on the map? All of them? Only the first? Editing tools would create a similar set of problems.
+						</li>
+					</ul>
+					<p>
+					    This restriction should not be seen as a limitation. Since a GeoPackage is a relational database, users can create rich data models to describe the required scenarios. Instead of adding more geometry columns to a single table, the general approach is to extract these geometries into a separate table, creating a one-to-many relationship between the geometries and the feature.
+					</p>
+					<p>
+					    This document illustrates three different use-cases for associating multiple geometries with a single feature. For each, it:
+					<p>
+						<ul>
+							 <li>
+								 describes a common use-case
+						 	 </li>
+							 <li>
+								 presents a corresponding example of the database schema
+							 </li>
+							 <li>
+								 shows how these tables should be appropriately registered in the gpkg_* tables
+							 </li>
+							 <li>
+								 shows how views can be used to enhance the utility and usability of the resulting GeoPackage
+							 </li>
+						 </ul>
+					</p>
+					<h2>Use Cases
+					</h2>
+					<h3>
+						1. Tracking previous geometries of a single feature
+					</h3>
+					<h4>
+						<u><i>Example use case</i></u>
+					</h4>
+					<p>
+						You want to store the history of edits to the geometry of a pipe-feature. For each edit, you want to keep track of when that modification was made. 
+					</p>
+					<p>
+						The last edit is the current geometry of the feature. This is the main pipe geometry that you want to present to your users by default.
+					</p>
+					<h4>
+						<u><i>Proposed Solution:</i></u>
+					</h4>
+					<p>
+						<ol>
+							<li>
+								<p>
+									Store the geometries of the feature in a table separate from the table that contains the pipe-metadata. These are the historical. Link these to the pipe-table.
+								</p>
+							</li>
+							<li>
+								<p>
+									Use a view to links a pipe to its most recent geometry. Add this view to the gpkg_contents table.
+								</p>
+							</li>
+						</ol>
+					</p>
+					<h4>
+						<u><i>Table Design:</i></u>
+					</h4>
+					<div style="float: left;padding-right:1em;">
+						<img class="img" alt="GeoPackage" src="img/mgimage001.png" width="100%">
+					</div>
+					<h4>
+						<u><i>View Design:</i></u>
+					</h4>
+					<span style="font-family:monospace;">
+						<pre>
+CREATE VIEW pipes_current AS 
+SELECT shape, max(date_created), type
+FROM pipe_history as A JOIN pipes as B 
+ON A.pipe_id=B.pipe_id 
+GROUP BY B.pipe_id;						</pre>
+					</span>
+					<h4>
+						<u><i>Table Entries:</i></u>
+					</h4>
+					<h5>
+						<b>gpkg_contents</b>
+					</h5>
+					<table class="table-bordered table-striped">
+						<tbody>
+							<tr>
+								<th>table_name</th>
+								<th>data_type</th>
+								<th>identifier</th>
+								<th>description</th>
+								<th>srs_id</th>
+							</tr>
+							<tr>
+								<td>pipe_history</td>
+								<td>features</td>
+								<td>pipe_history</td>
+								<td>pipe edits</td>
+								<td>4326</td>
+							</tr>
+							<tr>
+								<td>pipes_current</td>
+								<td>features</td>
+								<td>pipes_current</td>
+								<td>current pipes</td>
+								<td>4326</td>
+							</tr>
+						</tbody>
+					</table>
+					<h5>
+						<b>gpkg_geometry_columns</b>
+					</h5>
+					<table class="table-bordered table-striped">
+						<tbody>
+							<tr>
+								<th>table_name</th>
+								<th>column_name</th>
+								<th>geometry_type_name</th>
+								<th>srs_id</th>
+								<th>z</th>
+								<th>m</th>
+							</tr>
+							<tr>
+								<td>pipe_history</td>
+								<td>shape</td>
+								<td>Geometry</td>
+								<td>4326</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>pipes_current</td>
+								<td>shape</td>
+								<td>Geometry</td>
+								<td>4326</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+					<h3>
+						2. Features consisting of multiple components
+					</h3>
+					<h4>
+						<u><i>Example use case</i></u>
+					</h4>
+					<p>
+						You need to model a feature that has multiple geometries. Associated with this main feature, are ancillary features, each which its own properties and shape. For example, the main feature is a park with a polygon boundary. Associated with this park are entrances, which are modeled as points.
+					</p>
+					<h4>
+						<u><i>Proposed Solution:</i></u>
+					</h4>
+					<p>
+						<ol>
+							<li>
+								<p>
+									Store the main features separately from the ancillary features. This allows you to associate different metadata with each feature/subfeature.
+								</p>
+							</li>
+							<li>
+								<p>
+									The park – boundary + entrances – can be tied together by using a view. This provides the “overview” picture, which remodels the park as a collection of geometries.
+								</p>
+							</li>
+						</ol>
+					</p>
+					<h4>
+						<u><i>Table Design:</i></u>
+					</h4>
+					<div style="float: left;padding-right:1em;">
+						<img class="img" alt="GeoPackage" src="img/mgimage002.png" width="100%">
+					</div>
+					<h4>
+						<u><i>View Design:</i></u>
+					</h4>
+					<p>
+						<i>
+							Note: This statement uses the ST_* functions from the gpkg SQLite extension (cf. <a href="https://bitbucket.org/luciad/libgpkg">https://bitbucket.org/luciad/libgpkg</a>)
+						</i>
+					</p>
+					<span style="font-family:monospace;">
+						<pre>
+CREATE VIEW park_complete AS 
+SELECT A.park_id, ST_GeomFromText('GEOMETRYCOLLECTION(' || ST_AsText(A.shape) || ',' || group_concat(ST_AsText(B.shape)) ||')')  as shape
+FROM park_json as A 
+JOIN park_entrances_json as B 
+ON A.park_id = B.park_id
+GROUP BY A.park_id;						</pre>
+					</span>
+					<h4>
+						<u><i>Table Entries:</i></u>
+					</h4>
+					<h5>
+						<b>gpkg_contents</b>
+					</h5>
+					<table class="table-bordered table-striped">
+						<tbody>
+							<tr>
+								<th>table_name</th>
+								<th>data_type</th>
+								<th>identifier</th>
+								<th>description</th>
+								<th>srs_id</th>
+							</tr>
+							<tr>
+								<td>park</td>
+								<td>features</td>
+								<td>park</td>
+								<td>Park boundaries</td>
+								<td>4326</td>
+							</tr>
+							<tr>
+								<td>park_entrances</td>
+								<td>features</td>
+								<td>park_entrances</td>
+								<td>Park entrances</td>
+								<td>4326</td>
+							</tr>
+							<tr>
+								<td>park_complete</td>
+								<td>features</td>
+								<td>park_complete</td>
+								<td>association of park boundary with entrances</td>
+								<td>4326</td>
+							</tr>
+						</tbody>
+					</table>
+					<h5>
+						<b>gpkg_geometry_columns</b>
+					</h5>
+					<table class="table-bordered table-striped">
+						<tbody>
+							<tr>
+								<th>table_name</th>
+								<th>column_name</th>
+								<th>geometry_type_name</th>
+								<th>srs_id</th>
+								<th>z</th>
+								<th>m</th>
+							</tr>
+							<tr>
+								<td>park</td>
+								<td>shape</td>
+								<td>Geometry</td>
+								<td>4326</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>park_entrance</td>
+								<td>shape</td>
+								<td>Geometry</td>
+								<td>4326</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>park_complete</td>
+								<td>shape</td>
+								<td>Geometry</td>
+								<td>4326</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+					<h3>
+						3. Features that have multi-resolution
+					</h3>
+					<h4>
+						<u><i>Example use case</i></u>
+					</h4>
+					<p>
+						For efficiency reasons, it is often desirable to have the same feature represented by different geometries of varying resolution. This is typically used for features with large extents, such as roads, rivers, municipal boundaries, etc …. The viewer application shows the coarser version of geometries at smaller scales (ie. zoomed out), while at larger scales (ie. zoomed in) it shows the most detailed version. In general, you would define a handful of scale-breaks upfront.
+					</p>
+					<h4>
+						<u><i>Proposed Solution:</i></u>
+					</h4>
+					<p>
+						Suppose we have multiple resolutions for roads in a road dataset:
+					</p>
+					<p>
+						<ol>
+							<li>
+								<p>
+									Store all geometries in a table, separate from the properties of the road. Associate with each geometry the scale-break for which it applies. In our example, we are using the [min|max]scale_denominator columns to store the scale-break values.
+								</p>
+							</li>
+							<li>
+								<p>
+									A view joins together the properties with the geometries. This view will in effect contain many duplicates and should not be rendered as-is. 
+								</p>
+							</li>
+						</ol>
+					</p>
+					<p>
+						This solution requires the viewer-application to apply the correct filtering, relying on the min-max scale associated with the geometry. That is, the application only renders the geometries which are appropriate for each scale-break. This is an application-level requirement, unrelated to the GeoPackage format, and the implementation depends on the particular product you would be using. For products that support <a href="http://www.opengeospatial.org/standards/sld">SLD</a>, this scale-based filtering is fairly straightforward. In your FeatureTypeStyle, create multiple rules, one for each scale-break on the map. In each rule, filter all the geometries that do not correspond to the desired scalebreak.
+					</p>
+					<p>
+						For example, in SLD, a rule to only show the roads with a coarse resolution (zoomed out) would look something like this:
+					</p>
+					<span style="font-family:monospace;">
+						<pre>
+&lt;Rule&gt;
+  &lt;Name&gt;small scale&lt;/Name&gt;
+  &lt;Description&gt;
+    &lt;Title&gt;small scaled roads&lt;/Title&gt;
+    &lt;Abstract&gt;shows only the low resolution roads&lt;/Abstract&gt;
+  &lt;/Description&gt;
+  &lt;ogc:Filter&gt;
+    &lt;ogc:PropertyIsGreaterThan&gt;
+      &lt;ogc:PropertyName&gt;min_scale_denominator&lt;/ogc:PropertyName&gt;
+      &lt;ogc:Literal&gt;2.0E8&lt;/ogc:Literal&gt;
+    &lt;/ogc:PropertyIsGreaterThan&gt;
+  &lt;/ogc:Filter&gt;
+  &lt;MinScaleDenominator&gt;2.0E8&lt;/MinScaleDenominator&gt;
+  &lt;LineSymbolizer&gt;
+    &lt;Stroke&gt;
+      &lt;SvgParameter name="stroke"&gt;#0000ff&lt;/SvgParameter&gt;
+      &lt;SvgParameter name="stroke-width"&gt;2&lt;/SvgParameter&gt;
+    &lt;/Stroke&gt;
+  &lt;/LineSymbolizer&gt;
+&lt;/Rule&gt;						</pre>
+					</span>
+					<h4>
+						<u><i>Table Design:</i></u>
+					</h4>
+					<div style="float: left;padding-right:1em;">
+						<img class="img" alt="GeoPackage" src="img/mgimage003.png" width="100%">
+					</div>
+					<h4>
+						<u><i>View Design:</i></u>
+					</h4>
+					<span style="font-family:monospace;">
+						<pre>
+CREATE VIEW  roads_all AS 
+SELECT  *
+FROM road as A 
+JOIN road_geometries as B 
+ON A.road_id = B.road_id						</pre>
+					</span>
+					<h4>
+						<u><i>Table Entries:</i></u>
+					</h4>
+					<h5>
+						<b>gpkg_contents</b>
+					</h5>
+					<table class="table-bordered table-striped">
+						<tbody>
+							<tr>
+								<th>table_name</th>
+								<th>data_type</th>
+								<th>identifier</th>
+								<th>description</th>
+								<th>srs_id</th>
+							</tr>
+							<tr>
+								<td>road_geometries</td>
+								<td>features</td>
+								<td>road_geometries</td>
+								<td>Muktiple resolution for road geometries</td>
+								<td>4326</td>
+							</tr>
+							<tr>
+								<td>roads_all</td>
+								<td>features</td>
+								<td>roads_all</td>
+								<td>Multiple resolutions for road geometries, associated with properties of the roads</td>
+								<td>4326</td>
+							</tr>
+						</tbody>
+					</table>
+					<h5>
+						<b>gpkg_geometry_columns</b>
+					</h5>
+					<table class="table-bordered table-striped">
+						<tbody>
+							<tr>
+								<th>table_name</th>
+								<th>column_name</th>
+								<th>geometry_type_name</th>
+								<th>srs_id</th>
+								<th>z</th>
+								<th>m</th>
+							</tr>
+							<tr>
+								<td>road_geometries</td>
+								<td>shape</td>
+								<td>Geometry</td>
+								<td>4326</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+							<tr>
+								<td>roads_all</td>
+								<td>shape</td>
+								<td>Geometry</td>
+								<td>4326</td>
+								<td>2</td>
+								<td>2</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="container">
+				<div class="row clearfix">
+					<div class="col-md-12 column text-center">
+						<p>
+							<small>Copyright 2015 Open Geospatial Consortium. Some rights reserved.</small>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
