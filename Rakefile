@@ -12,7 +12,7 @@ end
 
 task :generate_guide do
   # system 'bundle exec asciidoctor -D build/guide -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./guidance/implemenation_guide.adoc'
-  system 'bundle exec asciidoctor -D build/guidance ./guidance/implemenation_guide.adoc'
+  system 'bundle exec asciidoctor -D build/guide ./guide/implemenation_guide.adoc'
 
 end
 
@@ -27,7 +27,7 @@ task :init_travis do
   Dir.chdir 'build/spec'
   system 'git rm -r .'
   Dir.chdir '../..'
-  Dir.chdir 'build/guidance'
+  Dir.chdir 'build/guide'
   system 'git rm -r .'
   Dir.chdir '../..'
 end
