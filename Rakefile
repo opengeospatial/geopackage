@@ -12,7 +12,7 @@ end
 
 task :generate_guide do
   # system 'bundle exec asciidoctor -D build/guide -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./guidance/implemenation_guide.adoc'
-  system 'bundle exec asciidoctor -D build/guide ./guidance/implemenation_guide.adoc'
+  system 'bundle exec asciidoctor -D build/guidance ./guidance/implemenation_guide.adoc'
 
 end
 
@@ -23,11 +23,11 @@ task :init_travis do
   repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:').strip
   deploy_branch = 'gh-pages'
 
-  system "git clone --depth 1 -b #{deploy_branch} #{repo} build"
+  system "git clone --depth 10 -b #{deploy_branch} #{repo} build"
   Dir.chdir 'build/spec'
   system 'git rm -r .'
-  Dir.chdir '../'
-  Dir.chdir 'build/guide'
+  Dir.chdir '../..'
+  Dir.chdir 'build/guidance'
   system 'git rm -r .'
   Dir.chdir '../..'
 end
