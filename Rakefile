@@ -12,7 +12,7 @@ end
 
 task :generate_guide do
   # system 'bundle exec asciidoctor -D build/guide -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./guidance/implemenation_guide.adoc'
-  system 'bundle exec asciidoctor -D build/guide ./guide/implemenation_guide.adoc'
+  system 'bundle exec asciidoctor -D build/guide ./guide/implementation_guide.adoc'
 
 end
 
