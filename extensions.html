@@ -42,7 +42,7 @@
       <p class="lead"><i>To publish a new extension, fill out the <a href="http://www.geopackage.org/spec/#extension_template">extension template</a> and let us know on the <a href="https://lists.opengeospatial.org/mailman/listinfo/geopackage">GeoPackage Mailing List</a>.</i></p>
       
   <dl class="row">
-    <dt class="col-sm-3">Vector Tiles</a></dt>
+    <dt class="col-sm-3">Vector Tiles</dt>
     <dd class="col-sm-9"><p>These extensions allow vector tiles to be stored in a GeoPackage. They were developed during the <a href="https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018">OGC Vector Tiles Pilot</a> and are currently being refined as part of <a href="https://www.opengeospatial.org/projects/initiatives/testbed15">OGC Testbed-15</a>.</p>
       <ul>
         <li>  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/1-vte.adoc">Vector Tiles Extension</a> allows vector tiles to be stored in a GeoPackage.
@@ -58,7 +58,20 @@
     <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/5-sse.adoc">Styling and Symbology Extension</a></dt>
     <dd class="col-sm-9">This extension allows styles and symbols of artibrary formats to be stored in a GeoPackage.</dd>
     <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc">OWS Context Extension</a></dt>
-    <dd class="col-sm-9">This extension allows <a href="https://owscontext.org">OWS Contexts</a> to be stored in a GeoPackage in a relational manner.</dd>
+    <dd class="col-sm-9">This extension allows <a href="https://owscontext.org">OWS Contexts</a> to be stored in a GeoPackage.</dd>
+    <dt class="col-sm-3"><a href="https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/7-metadata-profiles.adoc">Metadata Profiles</a></dt>
+    <dd class="col-sm-9"><p>This extension allows for metadata profiles to be defined as extensions with a scope of "metadata". The following are proposed metadata profiles that were developed during <a href="https://www.opengeospatial.org/projects/initiatives/testbed15">OGC Testbed-15</a>.</p>
+      <ul>
+        <li>  <a href="https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/11-metadata-styles.adoc">Styles</a> metadata describes a specific stylesheet.
+        </li>
+        <li>  <a href="https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/8-metadata-dataset-provenance.adoc">Dataset Provenance</a> metadata describes a specific dataset (i.e., GeoPackage table).
+        </li>
+        <li>  <a href="https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/9-metadata-updates.adoc">Updates</a> provides support for delta updates.
+        </li>
+        <li>  <a href="https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/10-metadata-manifest.adoc">Manifest</a> metadata represents the optional elements currently in use in the file.
+        </li>
+      </ul>
+    </dd>
     <dt class="col-sm-3">  <a href="http://www.compusult.net/html/OGC/3DTile_GeoPackage_Ext_Draft.html">3D Tiles</a></dt>
     <dd class="col-sm-9">This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the <a href="https://github.com/AnalyticalGraphicsInc/3d-tiles">3D Tiles</a> spatial data structure.</dd>
     <dt class="col-sm-3">  <a href="https://github.com/pka/qgpkg/blob/master/qgis_geopackage_extension.md">QGIS Map Styling Information</a></dt>
@@ -73,8 +86,8 @@
    <dt class="col-sm-3"><a href="http://www.gdal.org/geopackage_aspatial.html">Aspatial Support (Legacy)</a><dt>
    <dd class="col-sm-9">Support for aspatial data (ie. SQLite tables/views without a geometry column), potentially with associated metadata. This was used in GDAL 2.0 and GDAL 2.1, before the introduction of the 'attributes' data_type of GeoPackage v1.2. Starting with GDAL 2.2, 'attributes' will be used by default instead.
    </dd>
-    <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-ows-context/blob/master/spec/2_context_gpkg.adoc">OWS Context (Image Matters) (Deprecated)</a></dt>
-    <dd class="col-sm-9">This extension, part of a joint effort between the GeoPackage SWG and OWS Context SWG, is an attempt to define an SQL-native encoding for OWS Context. It is incomplete, lacking a proper encoding for style information. It is in the process of being revised as part of the Vector Tiles Pilot.</dd>
+    <dt class="col-sm-3">  <a href="https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc">OWS Context (Image Matters) (Deprecated)</a></dt>
+    <dd class="col-sm-9">This extension, part of a joint effort between the GeoPackage SWG and OWS Context SWG, is an attempt to define an SQL-native encoding for OWS Context. It is incomplete, lacking a proper encoding for style information. It was considered of the Vector Tiles Pilot and Testbed-15 but is not under active consideration at this time.</dd>
    <dt class="col-sm-3"><a href="http://www.geopackage.org/spec110/#extension_geometry_encoding">User Defined Geometry Types (Deprecated)</a><dt>
    <dd class="col-sm-9">Enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage. Removed from GeoPackage 1.2 due to interoperability reasons.
    </dd>
