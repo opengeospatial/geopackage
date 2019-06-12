@@ -110,7 +110,7 @@ The `gpkg_tile_matrix_set` table describes names a tile matrix set (pyramid). Th
 * `table_name` and `srs_id` match the entries in `gpkg_contents`
 * `min_x`, `min_y`, `max_x`, and `max_y`: the actual spatial extents of the tile pyramid. 
 This is must be exact so that applications can use this information to geolocate tiles correctly. 
-(This is in contrast with the extents in `gpkg_contents` which are informative.)
+(This is in contrast with the extents in `gpkg_contents` which are informative and are expected to reflect the extents of _usable content_.)
 
 ##### [`gpkg_tile_matrix`](http://www.geopackage.org/spec120/#tile_matrix)
 Each tile matrix set is composed of one or more tile matrices, each identified by its zoom level. 
