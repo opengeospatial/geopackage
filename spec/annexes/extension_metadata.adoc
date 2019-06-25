@@ -4,11 +4,27 @@
 [float]
 ==== Introduction
 
-Two tables in a GeoPackage provide a means of storing metadata in MIME <<21>> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
-These tables are intended to provide the support necessary to implement the hierarchical metadata models as defined in ISO 19115 <<28>> and illustrated in <<metadata_example_appendix>> and <<raster_or_tile_metadata_example_appendix>>. As GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.
+The GeoPackage Metadata Extension provides a means of storing metadata in a GeoPackage and relating it to any GeoPackage content.
+There is no GeoPackage requirement that any such metadata be provided; this extension simply provides a mechanism for storing this information. 
+This extension is agnostic with regards to the metadata format used.
+Metadata may be encoded in accordance with any authoritative metadata specification and in any MIME <<21>> encoding.
+If this extension is used, such metadata and data that relates it to GeoPackage contents should not be stored in other tables.
 
-The `gpkg_metadata` table that contains metadata is described in clause <<_metadata_table>>, and the `gpkg_metadata_reference` table that relates `gpkg_metadata` to GeoPackage data is described in clause <<_metadata_reference_table>>.
-There is no GeoPackage requirement that such metadata be provided or that defined metadata be structured in a hierarchical fashion ^<<K27>>^. This extension simply provides a mechanism for storing this information. If this extension is used, such metadata ^<<K28>>^ and data that relates it to GeoPackage contents should not be stored in other tables.
+[float]
+===== In-field Updates
+As GeoPackage data is captured and updated, metadata changes associated with the new or modified data MAY be captured separately and referenced to existing global and general metadata.
+
+[float]
+===== Hierarchical Metadata
+The tables defined by this extension are intended to provide the support necessary to implement  hierarchical metadata models such as those defined in ISO 19115 <<28>> ^<<K27>>^. 
+There is no GeoPackage requirement that metadata be structured in a hierarchical fashion.
+
+===== Metadata Profiles
+Metadata profiles are an optional agreement on how metadata is to be used in a GeoPackage to meet a particular purpose.
+Through the extension mechanism, a community of interest MAY define one or more metadata profiles that specify the encoding, scope, and purpose of a particular type of metadata.
+Without this mechanism, a GeoPackage client would be forced to inspect all metadata content to respect an out-of-band (non-machine-encoded) agreement to determine how metadata is being used in that file.
+
+<<metadata_profiles,See below>> for more information.
 
 [float]
 ==== Extension Author
@@ -100,7 +116,7 @@ The `gpkg_metadata_reference` table is not required to contain any rows.
 |`md_parent_id` |INTEGER |`gpkg_metadata` table id column value for the hierarchical parent `gpkg_metadata` for the `gpkg_metadata` to which this `gpkg_metadata_reference` applies, or NULL if `md_file_id` forms the root of a metadata hierarchy |yes | |FK
 |=======================================================================
 
-Every row in `gpkg_metadata_reference` that has null value as `md_parent_id` forms the root of a metadata hierarchy.^<<K31>>^
+Every row in `gpkg_metadata_reference` that has a NULL value as `md_parent_id` forms the root of a metadata hierarchy.^<<K31>>^
 
 See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 
@@ -117,6 +133,13 @@ GeoPackages with rows in the `gpkg_extensions` table with an `extension_name` of
 GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<MetadataExtensionTableRecord>> (below).
 ====
 
+[[r151]]
+[caption=""]
+.Requirement 151
+====
+(extends <<r64>>) The scope column value in a `gpkg_extensions` row MAY be lowercase "metadata" to designate a metadata profile.
+====
+
 [WARNING]
 =====
 Requirement 140 was updated as part of GeoPackage 1.2.1. 
@@ -127,17 +150,20 @@ While the executable test suite running on an older GeoPackage version will not 
 [#MetadataExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
 .Extension Table Records
 [cols=",,,,",options="header",]
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|====
 |*table_name* |*column_name* |*extension_name* |*definition* |*scope*
 |`gpkg_metadata` |null |`gpkg_metadata` |_see note below_|`read-write`
 |`gpkg_metadata_reference` |null |`gpkg_metadata` |_see note below_|`read-write`
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|`gpkg_metadata` |null |_metadata profile name_ |_metadata profile definition_|`metadata`
+|====
 
 [NOTE]
 =====
 For the `definition` column, use a hyperlink that describes the current implementation of this extension. 
 While a URL like http://www.geopackage.org/spec/#extension_metadata is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_metadata where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_metadata is the permalink for this extension for GeoPackage 1.2.1.
 =====
+
+For more information on producing metadata profiles, <<metadata_profiles,see below>>.
 
 [float]
 ====== gpkg_metadata
@@ -169,6 +195,8 @@ The initial contents of this table were obtained from the ISO 19115 <<28>>, Anne
 |collectionHardware |003 |Information applies to the collection hardware class
 |nonGeographicDataset |007 |Information applies to non-geographic data
 |dimensionGroup |008 |Information applies to a dimension group
+|style |NA |Information applies to a specific style
+|manifest |NA |Metadata describes the optional contents in use in the GeoPackage 
 |=======================================================================
 
 [[r94]]
@@ -232,6 +260,26 @@ Every `gpkg_metadata_reference` table row `md_file_id` column value SHALL be an 
 ====
 Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NOT NULL SHALL be an id column value from the `gpkg_metadata` table that is not equal to the `md_file_id` column value for that row.
 ====
+
+[float]
+[[metadata_profiles]]
+==== Metadata Profiles
+Metadata profiles are an optional agreement on how metadata is to be used in a GeoPackage to meet a particular purpose.
+Metadata profiles are documented in much the same way as other extensions, through the <<extension_template>>.
+When this mechanism is in use, the "definition" column of the corresponding row in `gpkg_extensions` references the document that describes the profile.
+
+A metadata profile specifies the following:
+
+* the name of the profile
+* the intent of the metadata document
+* the following columns from <<gpkg_metadata_cols,gpkg_metadata>>:
+** the metadata scope (`md_scope`)
+** the metadata standard URI (`md_standard_uri`)
+** the metadata MIME type (`mime_type`)
+* the following columns from <<gpkg_metadata_reference_cols,gpkg_metadata_reference>>:
+** the reference scope (`reference_scope`)
+
+Multiple metadata profiles may be present in a GeoPackage, but they should be unambiguous so so that a client who is aware of the profile can definitively identify the purpose of each corresponding metadata document.
 
 [float]
 ==== Abstract Test Suite
