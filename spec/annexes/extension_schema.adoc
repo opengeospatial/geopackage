@@ -474,12 +474,13 @@ If the `gpkg_data_column_constraints` table contains rows with `constraint_type`
 CREATE TABLE gpkg_data_columns (
   table_name TEXT NOT NULL,
   column_name TEXT NOT NULL,
-  name TEXT UNIQUE,
+  name TEXT,
   title TEXT,
   description TEXT,
   mime_type TEXT,
   constraint_name TEXT,
-  CONSTRAINT pk_gdc PRIMARY KEY (table_name, column_name)
+  CONSTRAINT pk_gdc PRIMARY KEY (table_name, column_name),
+  CONSTRAINT gdc_tn UNIQUE (table_name, name)
 );
 ----
 
