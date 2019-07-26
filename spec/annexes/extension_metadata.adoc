@@ -100,7 +100,7 @@ The `gpkg_metadata_reference` table is not required to contain any rows.
 |`md_parent_id` |INTEGER |`gpkg_metadata` table id column value for the hierarchical parent `gpkg_metadata` for the `gpkg_metadata` to which this `gpkg_metadata_reference` applies, or NULL if `md_file_id` forms the root of a metadata hierarchy |yes | |FK
 |=======================================================================
 
-Every row in `gpkg_metadata_reference` that has null value as `md_parent_id` forms the root of a metadata hierarchy.^<<K31>>^
+Every row in `gpkg_metadata_reference` that has a NULL value as `md_parent_id` forms the root of a metadata hierarchy.^<<K31>>^
 
 See <<table_definition_sql>> clause <<gpkg_metadata_reference_sql>>.
 
@@ -127,11 +127,11 @@ While the executable test suite running on an older GeoPackage version will not 
 [#MetadataExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
 .Extension Table Records
 [cols=",,,,",options="header",]
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|====
 |*table_name* |*column_name* |*extension_name* |*definition* |*scope*
 |`gpkg_metadata` |null |`gpkg_metadata` |_see note below_|`read-write`
 |`gpkg_metadata_reference` |null |`gpkg_metadata` |_see note below_|`read-write`
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|====
 
 [NOTE]
 =====
@@ -148,7 +148,7 @@ The initial contents of this table were obtained from the ISO 19115 <<28>>, Anne
 [#metadata_scopes,reftext='{table-caption} {counter:table-num}']
 .Metadata Scopes
 [cols=",,",options="header",]
-|=======================================================================
+|====
 |Name (md_scope) |Scope Code |Definition
 |undefined |NA |Metadata information scope is undefined
 |fieldSession |012 |Information applies to the field session
@@ -169,7 +169,8 @@ The initial contents of this table were obtained from the ISO 19115 <<28>>, Anne
 |collectionHardware |003 |Information applies to the collection hardware class
 |nonGeographicDataset |007 |Information applies to non-geographic data
 |dimensionGroup |008 |Information applies to a dimension group
-|=======================================================================
+|style |NA |Information applies to a specific style
+|====
 
 [[r94]]
 [caption=""]
@@ -479,156 +480,6 @@ INSERT INTO gpkg_metadata_reference VALUES (
   98,
   99
 )
-----
-
-[float]
-==== Trigger Definition SQL (Informative)
-
-[float]
-===== metadata
-
-.metadata Trigger Definition SQL
-[cols=","]
-[source,sql]
-----
-CREATE TRIGGER 'gpkg_metadata_md_scope_insert'
-BEFORE INSERT ON 'gpkg_metadata'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata violates
-constraint: md_scope must be one of undefined | fieldSession |
-collectionSession | series | dataset | featureType | feature |
-attributeType | attribute | tile | model | catalog | schema |
-taxonomy software | service | collectionHardware |
-nonGeographicDataset | dimensionGroup')
-WHERE NOT(NEW.md_scope IN
-('undefined','fieldSession','collectionSession','series','dataset',
-'featureType','feature','attributeType','attribute','tile','model',
-'catalog','schema','taxonomy','software','service',
-'collectionHardware','nonGeographicDataset','dimensionGroup'));
-END
-
-CREATE TRIGGER 'gpkg_metadata_md_scope_update'
-BEFORE UPDATE OF 'md_scope' ON 'gpkg_metadata'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table gpkg_metadata violates
-constraint: md_scope must be one of undefined | fieldSession |
-collectionSession | series | dataset | featureType | feature |
-attributeType | attribute | tile | model | catalog | schema |
-taxonomy software | service | collectionHardware |
-nonGeographicDataset | dimensionGroup')
-WHERE NOT(NEW.md_scope IN
-('undefined','fieldSession','collectionSession','series','dataset',
-'featureType','feature','attributeType','attribute','tile','model',
-'catalog','schema','taxonomy','software','service',
-'collectionHardware','nonGeographicDataset','dimensionGroup'));
-END
-----
-
-[float]
-===== metadata_reference
-
-.gpkg_metadata_reference Trigger Definition SQL
-[cols=","]
-[source,sql]
-----
-CREATE TRIGGER 'gpkg_metadata_reference_reference_scope_insert'
-BEFORE INSERT ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata_reference
-violates constraint: reference_scope must be one of "geopackage",
-table", "column", "row", "row/col"')
-WHERE NOT NEW.reference_scope IN
-('geopackage','table','column','row','row/col');
-END
-
-CREATE TRIGGER 'gpkg_metadata_reference_reference_scope_update'
-BEFORE UPDATE OF 'reference_scope' ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table gpkg_metadata_reference
-violates constraint: referrence_scope must be one of "geopackage",
-"table", "column", "row", "row/col"')
-WHERE NOT NEW.reference_scope IN
-('geopackage','table','column','row','row/col');
-END
-
-CREATE TRIGGER 'gpkg_metadata_reference_column_name_insert'
-BEFORE INSERT ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata_reference
-violates constraint: column name must be NULL when reference_scope
-is "geopackage", "table" or "row"')
-WHERE (NEW.reference_scope IN ('geopackage','table','row')
-AND NEW.column_name IS NOT NULL);
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata_reference
-violates constraint: column name must be defined for the specified
-table when reference_scope is "column" or "row/col"')
-WHERE (NEW.reference_scope IN ('column','row/col')
-AND NOT NEW.table_name IN (
-SELECT name FROM SQLITE_MASTER WHERE type = 'table'
-AND name = NEW.table_name
-AND sql LIKE ('%' || NEW.column_name || '%')));
-END
-
-CREATE TRIGGER 'gpkg_metadata_reference_column_name_update'
-BEFORE UPDATE OF column_name ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table gpkg_metadata_reference
-violates constraint: column name must be NULL when reference_scope
-is "geopackage", "table" or "row"')
-WHERE (NEW.reference_scope IN ('geopackage','table','row')
-AND NEW.column_name IS NOT NULL);
-SELECT RAISE(ABORT, 'update on table gpkg_metadata_reference
-violates constraint: column name must be defined for the specified
-table when reference_scope is "column" or "row/col"')
-WHERE (NEW.reference_scope IN ('column','row/col')
-AND NOT NEW.table_name IN (
-SELECT name FROM SQLITE_MASTER WHERE type = 'table'
-AND name = NEW.table_name
-AND sql LIKE ('%' || NEW.column_name || '%')));
-END
-
-CREATE TRIGGER 'gpkg_metadata_reference_row_id_value_insert'
-BEFORE INSERT ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata_reference
-violates constraint: row_id_value must be NULL when reference_scope
-is "geopackage", "table" or "column"')
-WHERE NEW.reference_scope IN ('geopackage','table','column')
-AND NEW.row_id_value IS NOT NULL;
-END
-
-CREATE TRIGGER 'gpkg_metadata_reference_row_id_value_update'
-BEFORE UPDATE OF 'row_id_value' ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table gpkg_metadata_reference
-violates constraint: row_id_value must be NULL when reference_scope
-is "geopackage", "table" or "column"')
-WHERE NEW.reference_scope IN ('geopackage','table','column')
-AND NEW.row_id_value IS NOT NULL;
-END
-
-CREATE TRIGGER 'gpkg_metadata_reference_timestamp_insert'
-BEFORE INSERT ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table gpkg_metadata_reference
-violates constraint: timestamp must be a valid time in ISO 8601
-"yyyy-mm-ddThh:mm:ss.cccZ" form')
-WHERE NOT (NEW.timestamp GLOB
-'[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-
-9]:[0-5][0-9].[0-9][0-9][0-9]Z'
-AND strftime('%s',NEW.timestamp) NOT NULL);
-END
-CREATE TRIGGER 'gpkg_metadata_reference_timestamp_update'
-BEFORE UPDATE OF 'timestamp' ON 'gpkg_metadata_reference'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'update on table gpkg_metadata_reference
-violates constraint: timestamp must be a valid time in ISO 8601
-"yyyy-mm-ddThh:mm:ss.cccZ" form')
-WHERE NOT (NEW.timestamp GLOB
-'[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-
-9]:[0-5][0-9].[0-9][0-9][0-9]Z'
-AND strftime('%s',NEW.timestamp) NOT NULL);
-END
 ----
 
 [float]
