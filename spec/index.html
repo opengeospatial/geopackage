@@ -1428,7 +1428,7 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 <div class="title">Requirement 150</div>
 <div class="content">
 <div class="paragraph">
-<p>A feature table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be an integer primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.</p>
+<p>A feature table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be a primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.</p>
 </div>
 </div>
 </div>
@@ -13026,12 +13026,13 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_data_columns (
   table_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   column_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  name <span class="predefined-type">TEXT</span> <span class="directive">UNIQUE</span>,
+  name <span class="predefined-type">TEXT</span>,
   title <span class="predefined-type">TEXT</span>,
   description <span class="predefined-type">TEXT</span>,
   mime_type <span class="predefined-type">TEXT</span>,
   constraint_name <span class="predefined-type">TEXT</span>,
-  <span class="type">CONSTRAINT</span> pk_gdc <span class="directive">PRIMARY</span> <span class="type">KEY</span> (table_name, column_name)
+  <span class="type">CONSTRAINT</span> pk_gdc <span class="directive">PRIMARY</span> <span class="type">KEY</span> (table_name, column_name),
+  <span class="type">CONSTRAINT</span> gdc_tn <span class="directive">UNIQUE</span> (table_name, name)
 );</code></pre>
 </div>
 </div>
@@ -14143,7 +14144,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-17 13:56:35 UTC
+Last updated 2019-07-26 19:24:51 UTC
 </div>
 </div>
 </body>
