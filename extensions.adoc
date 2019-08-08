@@ -1,0 +1,62 @@
+## GeoPackage Extensions
+
+The following are GeoPackage extensions that have been discussed, reviewed, and approved by the OGC as official extensions to the GeoPackage Encoding Standard.
+
+[cols="20,80"]
+|====
+|**link:http://docs.opengeospatial.org/is/17-066r1/17-066r1.html[Tiled Gridded Coverage Data]** |The extension (previously titled "Elevation Extension") defines how to encode and store tiled regular gridded data, such as a digital elevation model, in a GeoPackage.
+| **http://docs.opengeospatial.org/is/18-000/18-000.html[Related Tables]** (see preface for template information) | This extension defines a mechanism for associating tables with existing GeoPackage feature or attribute tables. Among other things, related tables can be used to establish a many-to-many relationship between features and multimedia files. This extension was originally developed by OGC Member Compusult and was refined during an OGC Interoperability Experiment.
+|====
+
+## Community Extensions
+The following are GeoPackage extensions that are not currently official extensions to the GeoPackage Encoding Standard.
+These extensions may be developed as part of OGC Innovation Program activities or completely outside of OGC activities.
+Using a community extension (even if it is proprietary) may be preferable to developing your own extension.
+Extensions that have widespread adoption may be considered for OGC approval. 
+
+[WARNING]
+====
+The extensions listed in this section have not not been adopted by the OGC may only be used and/or implemented with the following caveats: 
+
+* Recognize that the extension is a draft and as such _may change without notice_ at any time;
+* Beware that if such a change occurs, you bear the full responsibility for revising your implementation to be compatible/consistent with the updated specification;
+* Use at your own risk;
+* Community extensions *MUST NOT* be specified in any procurement language unless that procurement is specifically focused on improving that extension. 
+====
+
+[cols="20,80"]
+|====
+|Vector Tiles|
+These extensions define how to store tiled vector (aka vector tiles) to be stored in a GeoPackage. These extensions were developed during the link:https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018[OGC Vector Tiles Pilot] and are currently being refined as part of link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15].
+
+link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/1-vte.adoc[Vector Tiles Extension] defines how vector tiles can be stored in a GeoPackage. 
+
+link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/2-mvte.adoc[Mapbox Vector Tiles Extension] defines how vector tiles can be stored in the link:https://github.com/mapbox/vector-tile-spec[MapBox Vector Tiles] format. 
+
+link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/3-gvte.adoc[GeoJSON Vector Tiles Extension] defines how vector tiles can be stored in the link:https://tools.ietf.org/html/rfc7946[GeoJSON] format. 
+
+link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/4-vtae.adoc[Vector Tiles Attributes Extension] defines how correlation between features and the tiles containing them using the GeoPackage Related Tables Extension. 
+|link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/5-sse.adoc[Styling and Symbology Extension]|This extension defines how styles and symbols of arbitrary formats can be stored in a GeoPackage.
+|link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc[OWS Context Extension]|This extension defines link:https://owscontext.org/[OWS Contexts] can be stored in a GeoPackage.
+|link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/7-metadata-profiles.adoc[Metadata Profiles]|This extension allows for metadata profiles to be defined as extensions with a scope of "metadata". The following are proposed metadata profiles that were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15]:
+
+link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/11-metadata-styles.adoc[Styles] metadata describes a specific stylesheet. 
+
+link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/8-metadata-dataset-provenance.adoc[Dataset Provenance] metadata describes a specific dataset (i.e., GeoPackage table). 
+
+link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/9-metadata-updates.adoc[Updates] provides support for delta updates. 
+
+link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/10-metadata-manifest.adoc[Manifest] metadata represents the optional elements currently in use in the file. 
+
+|link:http://www.compusult.net/html/OGC/3DTile_GeoPackage_Ext_Draft.html[3D Tiles]|This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the 3D Tiles spatial data structure.
+|link:https://github.com/pka/qgpkg/blob/master/qgis_geopackage_extension.md[QGIS Map Styling Information]|This extension stores QGIS projects with their resources like images in print templates in a GeoPackage file. 
+|link:http://ngageoint.github.io/GeoPackage/docs/extensions/feature-tile-link.html[Feature Tile Link] |This extension creates a link between a feature and tile table. A tile table containing tiles that represent or were generated from features can be linked to the feature table. The link enables feature queries when dealing with tiles representing features.
+|link:http://ngageoint.github.io/GeoPackage/docs/extensions/geometry-index.html[Geometry Index]|This extension defines a SQLite version agnostic way to index user feature table geometries by their bounding envelopes for fast ranged searches. Mobile implementations, including Android and iOS, use earlier versions of SQLite and can not rely on the R*Tree Module implementation. Each geometry in a feature table is indexed by its geometry id and x, y, z, and m value ranges. The geometry index can be queried for fast retrieval of only geometries overlapping a desired envelope bounds. 
+|link:https://github.com/GeoCat/geopackage-owc-spec/blob/master/owc_geopackage_extension.md[OWS Context (GeoCat)]|The main goal of the extension is to store context and styling of a mapping project as part of a GeoPackage file containing the data it refers to. The extension aims at similar use cases as presented in The USGS GeoPackage Styling Experiment in Testbed 12, however the approach is a bit different.
+|link:http://www.gdal.org/geopackage_aspatial.html[Aspatial Support (Legacy)]|Support for aspatial data (ie. SQLite tables/views without a geometry column), potentially with associated metadata. This was used in GDAL 2.0 and GDAL 2.1, before the introduction of the 'attributes' data_type of GeoPackage v1.2. Starting with GDAL 2.2, 'attributes' will be used by default instead. 
+|link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc[OWS Context (Image Matters)] (Deprecated)|This extension, part of a joint effort between the GeoPackage SWG and OWS Context SWG, is an attempt to define an SQL-native encoding for OWS Context. It is incomplete, lacking a proper encoding for style information. It was considered of the Vector Tiles Pilot and Testbed-15 but is not under active consideration at this time.
+|link:http://www.geopackage.org/spec110/#extension_geometry_encoding[User Defined Geometry Types] (Deprecated)|Enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage. Removed from GeoPackage 1.2 due to interoperability reasons. 
+|link:http://www.geopackage.org/spec110/#extension_geometry_type_triggers[Geometry Type Triggers] (Deprecated)|Geometry type triggers prevent the storage of geometries of types that are not assignable from the geometry types specified in the `gpkg_geometry_columns` table in the geometry columns of the specified tables. Removed from GeoPackage 1.2 due to interoperability reasons. 
+|link:http://www.geopackage.org/spec110/#extension_geometry_srsid_triggers[Geometry SRS ID Triggers] (Deprecated)| Geometry SRS_ID triggers prevent the storage of geometries with spatial reference system identifiers that are not specified in the `gpkg_geometry_columns` table in the geometry columns of the specified tables. Removed from GeoPackage 1.2 due to interoperability reasons.
+|====
+
