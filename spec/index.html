@@ -8162,7 +8162,7 @@ This extension specifies support for the additional CircularString, CompoundCurv
 <div class="title">Requirement 65</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="http://www.geopackage.org/spec/#r25">GPKG-25</a>) The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row MAY be one of the uppercase extended non-linear geometry type names specified in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
+<p>(extends <a href="#r25">Requirement 25</a>) The <code>geometry_type_name</code> value in a <code>gpkg_geometry_columns</code> row MAY be one of the uppercase extended non-linear geometry type names specified in <a href="#geometry_types">Geometry Types (Normative)</a>.</p>
 </div>
 </div>
 </div>
@@ -9420,7 +9420,7 @@ This extension allows the use of <code>image/x-webp</code> as an additional enco
 <div class="title">Requirement 92</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="http://www.geopackage.org/spec/#r36">GPKG-36</a> and <a href="http://www.geopackage.org/spec/#r37">GPKG-37</a>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<a href="#22">[22]</a>. Files complying with the WebP format SHALL have the <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/x-webp</code>.</p>
+<p>(extends <a href="#r36">Requirement 36</a> and <a href="#r37">Requirement 37</a>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<a href="#22">[22]</a>. Files complying with the WebP format SHALL have the <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/x-webp</code>.</p>
 </div>
 </div>
 </div>
@@ -9819,7 +9819,7 @@ The <code>gpkg_metadata_reference</code> table is not required to contain any ro
 </tbody>
 </table>
 <div class="paragraph">
-<p>Every row in <code>gpkg_metadata_reference</code> that has null value as <code>md_parent_id</code> forms the root of a metadata hierarchy.<sup><a href="#K31">[K31]</a></sup></p>
+<p>Every row in <code>gpkg_metadata_reference</code> that has a NULL value as <code>md_parent_id</code> forms the root of a metadata hierarchy.<sup><a href="#K31">[K31]</a></sup></p>
 </div>
 <div class="paragraph">
 <p>See <a href="#table_definition_sql">Table Definition SQL (Normative)</a> clause <a href="#gpkg_metadata_reference_sql">gpkg_metadata_reference Table Definition SQL</a>.</p>
@@ -10016,6 +10016,11 @@ The initial contents of this table were obtained from the ISO 19115 <a href="#28
 <td class="tableblock halign-left valign-top"><p class="tableblock">dimensionGroup</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">008</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a dimension group</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">style</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">NA</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Information applies to a specific style</p></td>
 </tr>
 </tbody>
 </table>
@@ -10796,148 +10801,6 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 )</code></pre>
 </div>
 </div>
-<h4 id="_trigger_definition_sql_informative_2" class="float">Trigger Definition SQL (Informative)</h4>
-<h5 id="_metadata" class="float">metadata</h5>
-<div class="listingblock">
-<div class="title">metadata Trigger Definition SQL</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_md_scope_insert</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata violates
-constraint: md_scope must be one of undefined | fieldSession |
-collectionSession | series | dataset | featureType | feature |
-attributeType | attribute | tile | model | catalog | schema |
-taxonomy software | service | collectionHardware |
-nonGeographicDataset | dimensionGroup</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span>(NEW.md_scope <span class="keyword">IN</span>
-(<span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">fieldSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">collectionSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">series</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
-<span class="string"><span class="delimiter">'</span><span class="content">featureType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">feature</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attributeType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attribute</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">tile</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">model</span><span class="delimiter">'</span></span>,
-<span class="string"><span class="delimiter">'</span><span class="content">catalog</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">schema</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">taxonomy</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">software</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">service</span><span class="delimiter">'</span></span>,
-<span class="string"><span class="delimiter">'</span><span class="content">collectionHardware</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">nonGeographicDataset</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dimensionGroup</span><span class="delimiter">'</span></span>));
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_md_scope_update</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">'</span><span class="content">md_scope</span><span class="delimiter">'</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata violates
-constraint: md_scope must be one of undefined | fieldSession |
-collectionSession | series | dataset | featureType | feature |
-attributeType | attribute | tile | model | catalog | schema |
-taxonomy software | service | collectionHardware |
-nonGeographicDataset | dimensionGroup</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span>(NEW.md_scope <span class="keyword">IN</span>
-(<span class="string"><span class="delimiter">'</span><span class="content">undefined</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">fieldSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">collectionSession</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">series</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
-<span class="string"><span class="delimiter">'</span><span class="content">featureType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">feature</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attributeType</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">attribute</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">tile</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">model</span><span class="delimiter">'</span></span>,
-<span class="string"><span class="delimiter">'</span><span class="content">catalog</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">schema</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">taxonomy</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">software</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">service</span><span class="delimiter">'</span></span>,
-<span class="string"><span class="delimiter">'</span><span class="content">collectionHardware</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">nonGeographicDataset</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">dimensionGroup</span><span class="delimiter">'</span></span>));
-<span class="keyword">END</span></code></pre>
-</div>
-</div>
-<h5 id="_metadata_reference" class="float">metadata_reference</h5>
-<div class="listingblock">
-<div class="title">gpkg_metadata_reference Trigger Definition SQL</div>
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_reference_scope_insert</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata_reference
-violates constraint: reference_scope must be one of &quot;geopackage&quot;,
-table&quot;, &quot;column&quot;, &quot;row&quot;, &quot;row/col&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> NEW.reference_scope <span class="keyword">IN</span>
-(<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row/col</span><span class="delimiter">'</span></span>);
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_reference_scope_update</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">'</span><span class="content">reference_scope</span><span class="delimiter">'</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata_reference
-violates constraint: referrence_scope must be one of &quot;geopackage&quot;,
-&quot;table&quot;, &quot;column&quot;, &quot;row&quot;, &quot;row/col&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> NEW.reference_scope <span class="keyword">IN</span>
-(<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row/col</span><span class="delimiter">'</span></span>);
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_column_name_insert</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata_reference
-violates constraint: column name must be NULL when reference_scope
-is &quot;geopackage&quot;, &quot;table&quot; or &quot;row&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> (NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> NEW.column_name <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>);
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata_reference
-violates constraint: column name must be defined for the specified
-table when reference_scope is &quot;column&quot; or &quot;row/col&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> (NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row/col</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> <span class="keyword">NOT</span> NEW.table_name <span class="keyword">IN</span> (
-<span class="class">SELECT</span> name <span class="keyword">FROM</span> SQLITE_MASTER <span class="keyword">WHERE</span> type = <span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>
-<span class="keyword">AND</span> name = NEW.table_name
-<span class="keyword">AND</span> sql <span class="keyword">LIKE</span> (<span class="string"><span class="delimiter">'</span><span class="content">%</span><span class="delimiter">'</span></span> || NEW.column_name || <span class="string"><span class="delimiter">'</span><span class="content">%</span><span class="delimiter">'</span></span>)));
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_column_name_update</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> column_name <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata_reference
-violates constraint: column name must be NULL when reference_scope
-is &quot;geopackage&quot;, &quot;table&quot; or &quot;row&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> (NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> NEW.column_name <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>);
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata_reference
-violates constraint: column name must be defined for the specified
-table when reference_scope is &quot;column&quot; or &quot;row/col&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> (NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">row/col</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> <span class="keyword">NOT</span> NEW.table_name <span class="keyword">IN</span> (
-<span class="class">SELECT</span> name <span class="keyword">FROM</span> SQLITE_MASTER <span class="keyword">WHERE</span> type = <span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>
-<span class="keyword">AND</span> name = NEW.table_name
-<span class="keyword">AND</span> sql <span class="keyword">LIKE</span> (<span class="string"><span class="delimiter">'</span><span class="content">%</span><span class="delimiter">'</span></span> || NEW.column_name || <span class="string"><span class="delimiter">'</span><span class="content">%</span><span class="delimiter">'</span></span>)));
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_row_id_value_insert</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata_reference
-violates constraint: row_id_value must be NULL when reference_scope
-is &quot;geopackage&quot;, &quot;table&quot; or &quot;column&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> NEW.row_id_value <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>;
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_row_id_value_update</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">'</span><span class="content">row_id_value</span><span class="delimiter">'</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata_reference
-violates constraint: row_id_value must be NULL when reference_scope
-is &quot;geopackage&quot;, &quot;table&quot; or &quot;column&quot;</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> NEW.reference_scope <span class="keyword">IN</span> (<span class="string"><span class="delimiter">'</span><span class="content">geopackage</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">table</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">column</span><span class="delimiter">'</span></span>)
-<span class="keyword">AND</span> NEW.row_id_value <span class="keyword">IS</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>;
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_timestamp_insert</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table gpkg_metadata_reference
-violates constraint: timestamp must be a valid time in ISO 8601
-&quot;yyyy-mm-ddThh:mm:ss.cccZ&quot; form</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.timestamp GLOB
-<span class="string"><span class="delimiter">'</span><span class="content">[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-
-9]:[0-5][0-9].[0-9][0-9][0-9]Z</span><span class="delimiter">'</span></span>
-<span class="keyword">AND</span> strftime(<span class="string"><span class="delimiter">'</span><span class="content">%s</span><span class="delimiter">'</span></span>,NEW.timestamp) <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>);
-<span class="keyword">END</span>
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference_timestamp_update</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> <span class="string"><span class="delimiter">'</span><span class="content">timestamp</span><span class="delimiter">'</span></span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_metadata_reference</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table gpkg_metadata_reference
-violates constraint: timestamp must be a valid time in ISO 8601
-&quot;yyyy-mm-ddThh:mm:ss.cccZ&quot; form</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> <span class="keyword">NOT</span> (NEW.timestamp GLOB
-<span class="string"><span class="delimiter">'</span><span class="content">[1-2][0-9][0-9][0-9]-[0-1][0-9]-[0-3][0-9]T[0-2][0-9]:[0-5][0-
-9]:[0-5][0-9].[0-9][0-9][0-9]Z</span><span class="delimiter">'</span></span>
-<span class="keyword">AND</span> strftime(<span class="string"><span class="delimiter">'</span><span class="content">%s</span><span class="delimiter">'</span></span>,NEW.timestamp) <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>);
-<span class="keyword">END</span></code></pre>
-</div>
-</div>
 <h4 id="_examples_informative_2" class="float">Examples (Informative)</h4>
 <h5 id="metadata_example_appendix" class="float">Hierarchical Metadata Example One - ISO19115.</h5>
 <div class="paragraph">
@@ -11694,7 +11557,7 @@ level.</p>
 <h5 id="raster_or_tile_metadata_example_appendix" class="float">Raster or Tile Metadata Example</h5>
 <div class="paragraph">
 <p>A number of raster image processing problems MAY require the support of more metadata that is contained in the image itself.
-Applications MAY use the <code>gpkg_metadata</code> and <code>gpkg_metadata_reference</code> tables defined in clause <a href="#_metadata">metadata</a> to store raster image metadata defined according to standard authoritative or application or vendor specific metadata models.
+Applications MAY use the <code>gpkg_metadata</code> and <code>gpkg_metadata_reference</code> tables defined in clause <a href="#_metadata">[_metadata]</a> to store raster image metadata defined according to standard authoritative or application or vendor specific metadata models.
 An example of the data items in such a model is shown in the following table.</p>
 </div>
 <div class="ulist">
@@ -14144,7 +14007,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2019-07-26 19:25:26 UTC
+Last updated 2019-08-09 18:11:42 UTC
 </div>
 </div>
 </body>
