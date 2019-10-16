@@ -145,6 +145,10 @@ GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000
 
 When the WKBGeometry in a GeoPackageBinary is empty, either the envelope contents indicator code SHALL be 0 indicating no envelope, or the envelope SHALL have its values set to NaN as defined for an empty point.
 
+When the WKBGeometry in a GeoPackageBinary is empty (i.e. 'ST_IsEmpty' returns
+true), the empty geometry flag (Y) SHALL be 1 indicating an empty geometry,
+otherwise the empty geometry flag SHALL be 0.
+
 [[sql_geometry_types]]
 ==== SQL Geometry Types
 
