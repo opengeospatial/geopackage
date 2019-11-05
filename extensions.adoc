@@ -38,19 +38,23 @@ link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/2-mvte
 link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/3-gvte.adoc[GeoJSON Vector Tiles Extension] defines how vector tiles can be stored in the link:https://tools.ietf.org/html/rfc7946[GeoJSON] format. 
 
 link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/4-vtae.adoc[Vector Tiles Attributes Extension] defines how correlation between features and the tiles containing them using the GeoPackage Related Tables Extension. 
-|link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/5-sse.adoc[Styling and Symbology Extension]|This extension defines how styles and symbols of arbitrary formats can be stored in a GeoPackage.
-|link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc[OWS Context Extension]|This extension defines link:https://owscontext.org/[OWS Contexts] can be stored in a GeoPackage.
-|link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/7-metadata-profiles.adoc[Metadata Profiles]|This extension allows for metadata profiles to be defined as extensions with a scope of "metadata". The following are proposed metadata profiles that were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15]:
+|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/5-sse.adoc[Styling and Symbology Extension]|This extension defines how styles and symbols of arbitrary formats can be stored in a GeoPackage.
+|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/6-owce.adoc[OWS Context Extension]|This extension defines link:https://owscontext.org/[OWS Contexts] can be stored in a GeoPackage.
+|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/7-metadata-profiles.adoc[Metadata Profiles]|This extension allows for metadata profiles to be defined as extensions with a scope of "metadata". The following are proposed metadata profiles that were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15]:
 
-link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/11-metadata-styles.adoc[Styles] metadata describes a specific stylesheet. 
+link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/11-metadata-styles.adoc[Styles] metadata describes a specific stylesheet. 
 
-link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/8-metadata-dataset-provenance.adoc[Dataset Provenance] metadata describes a specific dataset (i.e., GeoPackage table). 
+link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/8-metadata-dataset-provenance.adoc[Dataset Provenance] metadata describes a specific dataset (i.e., GeoPackage table). 
 
-link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/9-metadata-updates.adoc[Updates] provides support for delta updates. 
+link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/12-metadata-dataset-stac.adoc[Dataset Provenance (STAC)] metadata, as above, but using link:https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md[SpatioTemporal Asset Catalog] documents.
 
-link:https://gitlab.com/imagemattersllc/ogc-tb-15-opf/blob/master/spec/10-metadata-manifest.adoc[Manifest] metadata represents the optional elements currently in use in the file. 
+link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/9-metadata-updates.adoc[Updates] provides support for delta updates. 
+
+link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/10-metadata-manifest.adoc[Manifest] metadata represents the optional elements currently in use in the file. 
 
 |link:http://www.compusult.net/html/OGC/3DTile_GeoPackage_Ext_Draft.html[3D Tiles]|This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the 3D Tiles spatial data structure.
+|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/13-semantic-annotations.adoc[Semantic Annotations]|A semantic annotation is a semantically grounded term that can be applied to another concept.
+Use of this extension enables semantic annotations to be applied to any business object in the current GeoPackage.
 |link:https://github.com/pka/qgpkg/blob/master/qgis_geopackage_extension.md[QGIS Map Styling Information]|This extension stores QGIS projects with their resources like images in print templates in a GeoPackage file. 
 |link:http://ngageoint.github.io/GeoPackage/docs/extensions/feature-tile-link.html[Feature Tile Link] |This extension creates a link between a feature and tile table. A tile table containing tiles that represent or were generated from features can be linked to the feature table. The link enables feature queries when dealing with tiles representing features.
 |link:http://ngageoint.github.io/GeoPackage/docs/extensions/geometry-index.html[Geometry Index]|This extension defines a SQLite version agnostic way to index user feature table geometries by their bounding envelopes for fast ranged searches. Mobile implementations, including Android and iOS, use earlier versions of SQLite and can not rely on the R*Tree Module implementation. Each geometry in a feature table is indexed by its geometry id and x, y, z, and m value ranges. The geometry index can be queried for fast retrieval of only geometries overlapping a desired envelope bounds. 
