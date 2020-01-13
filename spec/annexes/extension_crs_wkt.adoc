@@ -145,7 +145,7 @@ If, for a particular row, both the `definition` and `definition_12_063` columns 
 |*Test Case ID* |+/extensions/crs_wkt/extensions/data_values+
 |*Test Purpose* |Verify that the gpkg_extensions table has the required row.
 |*Test Method* |
-. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_schema';
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_crs_wkt';
 . Not testable if returns an empty result set
 . Fail if there is not exactly one row
 . Fail if scope is not "read-write"
