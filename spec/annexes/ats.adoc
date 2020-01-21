@@ -276,11 +276,30 @@ Note: Some of these tests require a spatial engine or custom code beyond simple 
 ... Fail if the first two bytes of each gc are not "GP"
 ... Fail if gc.version_number is not 0
 ... Fail if gc.flags.GeopackageBinary type != 0
-... Fail if cn.flags.E is 5-7
-... *Fail if the geometry is empty but the envelope is not empty (gc.flags.envelope != 0 and envelope values are not NaN)
+... Fail if cn.flags.E is not in the set {0, 1, 2, 3, 4}
 .  Pass if no fails
 |*Reference* |Clause 2.1.3.1.1 Req 19:
 |*Test Type* |Capability
+|========================================
+
+*Empty Geometries*
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/opt/features/geometry_encoding/data/empty_geometry+
+|*Test Purpose* |Verify that empty geometries are encoded consistently in the StandardGeoPackageBinary format.
+|*Test Method* |
+. SELECT table_name AS tn, column_name AS cn FROM gpkg_geometry_columns WHERE table_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = 'features')
+. Not testable if returns an empty result set
+. For each row from step 1
+.. SELECT cn FROM tn
+.. Not testable if none found
+.. For each cn value from step a
+... Fail if gc.flags.Y == 1 and gc.flags.E != 0 
+... Fail if the geometry is empty but the envelope is not empty (gc.flags.E != 0 and envelope values are not NaN)
+.  Pass if no fails
+|*Reference* |Clause 2.1.3.1.1 Req 152:
+|*Test Type* |Basic
 |========================================
 
 ===== SQL Geometry Types
