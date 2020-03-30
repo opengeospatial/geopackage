@@ -147,7 +147,9 @@ Applications should be aware of this possibility and if possible, drop to the ne
 
 #### [Attributes](http://www.geopackage.org/spec120/#attributes)
 Attributes are tables that only contain non-spatial data. 
-This data is commonly joined with spatial data as required by an application. The rules for attribute data are pretty wide open in the GeoPackage standard. 
+The rules for attributes are similar to those for features, 
+but attributes have no geometry column and the corresponding row in `gpkg_contents` has a `data_type` of "attributes".
+This data is commonly joined with spatial data as required by an application. 
 
 #### [Extensions](http://www.geopackage.org/spec120/#extension_mechanism)
 In addition to tiles, features, and attributes, GeoPackage has a well-defined extension mechanism to support use cases that are not part of the core standard. 
