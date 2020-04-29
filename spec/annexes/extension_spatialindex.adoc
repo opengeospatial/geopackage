@@ -88,7 +88,7 @@ Each newly created spatial index SHALL be populated using the following SQL stat
 [source,sql]
 ----
 INSERT OR REPLACE INTO rtree_<t>_<c>
-  SELECT <i>, st_minx(<c>), st_maxx(<c>), st_miny(<c>), st_maxy(<c>) FROM <t>;
+  SELECT <i>, st_minx(<c>), st_maxx(<c>), st_miny(<c>), st_maxy(<c>) FROM <t> WHERE <c> NOT NULL AND NOT ST_Empty(<c>);
 ----
 
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
