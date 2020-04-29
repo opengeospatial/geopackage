@@ -8700,7 +8700,7 @@ Each newly created spatial index SHALL be populated using the following SQL stat
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt;
-  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt;;</code></pre>
+  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt; <span class="keyword">WHERE</span> &lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_Empty(&lt;c&gt;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -10883,7 +10883,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <div class="title">gpkg_metadata Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
-  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
   md_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   mime_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">text/xml</span><span class="delimiter">'</span></span>,
@@ -10930,7 +10930,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
-  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
   md_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   mime_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">text/xml</span><span class="delimiter">'</span></span>,
@@ -14128,7 +14128,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-04-22 18:31:48 UTC
+Last updated 2020-04-29 05:38:53 UTC
 </div>
 </div>
 </body>
