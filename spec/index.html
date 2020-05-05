@@ -778,7 +778,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <td class="tableblock halign-left valign-top"><p class="tableblock">A human-readable identifier (e.g. short name) for the table_name content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">UNIQUE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>description</code></p></td>
@@ -6861,6 +6861,10 @@ integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest t
 <dd>
 <p>Unified Modeling Language</p>
 </dd>
+<dt>UK</dt>
+<dd>
+<p>Unique Key</p>
+</dd>
 <dt>UTC</dt>
 <dd>
 <p>Coordinated Universal Time</p>
@@ -8700,7 +8704,7 @@ Each newly created spatial index SHALL be populated using the following SQL stat
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt;
-  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt; <span class="keyword">WHERE</span> &lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_Empty(&lt;c&gt;);</code></pre>
+  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt;;</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -11779,7 +11783,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Table 16</a
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of a table specified in <code>gpkg_contents.table_name</code> or <code>gpkg_extensions.table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">PK, UK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>column_name</code></p></td>
@@ -11793,7 +11797,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Table 16</a
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A human-readable identifier (e.g. short name) for the column_name content</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">UNIQUE</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UK</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>title</code></p></td>
@@ -11884,21 +11888,21 @@ The <code>constraint_name</code> column is referenced by the <code>constraint_na
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of constraint (lowercase)</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jointly Unique</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>constraint_type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Type name of constraint: 'range' | 'enum' | 'glob'</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jointly Unique</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>value</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Specified case sensitive value for 'enum' or 'glob' or NULL for 'range' constraint_type</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unique</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jointly Unique</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>min</code></p></td>
@@ -14128,7 +14132,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-04-29 05:38:53 UTC
+Last updated 2020-05-05 23:00:00 UTC
 </div>
 </div>
 </body>
