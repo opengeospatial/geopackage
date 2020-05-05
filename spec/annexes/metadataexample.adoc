@@ -4,17 +4,6 @@
 
 Suppose we have this metadata:
 
-[source,sql]
-----
-CREATE TABLE gpkg_metadata (
-  id INTEGER CONSTRAINT m_pk PRIMARY KEY ASC NOT NULL,
-  md_scope TEXT NOT NULL DEFAULT 'dataset',
-  md_standard_uri TEXT NOT NULL,
-  mime_type TEXT NOT NULL DEFAULT 'text/xml',
-  metadata TEXT NOT NULL DEFAULT ''
-)
-----
-
 [cols=",,,",options="header"]
 |======
 |id |md_scope |md_standard_uri |metadata
@@ -26,23 +15,6 @@ CREATE TABLE gpkg_metadata (
 |7 |attributeType |http://www.isotc211.org/2005/gmd |TEXT
 |8 |attribute |http://www.isotc211.org/2005/gmd |TEXT
 |======
-
-and this reference table definition:
-
-[source,sql]
-----
-CREATE TABLE gpkg_metadata_reference (
-  reference_scope TEXT NOT NULL,
-  table_name TEXT,
-  column_name TEXT,
-  row_id_value INTEGER,
-  timestamp TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
-  md_file_id INTEGER NOT NULL,
-  md_parent_id INTEGER,
-  CONSTRAINT crmr_mfi_fk FOREIGN KEY (md_file_id) REFERENCES gpkg_metadata(id),
-  CONSTRAINT crmr_mpi_fk FOREIGN KEY (md_parent_id) REFERENCES gpkg_metadata(id)
-)
-----
 
 1) Consider a geographic data provider generating vector mapping data for three Administrative areas(A, B and C).  ... The metadata could be carried exclusively at Dataset Series level.
 

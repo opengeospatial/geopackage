@@ -2,6 +2,13 @@
 [appendix]
 == Table Definition SQL (Normative)
 
+[NOTE]
+====
+A GeoPackage MAY have minor changes to the table definition SQL
+such as declaring a primary key AUTOINCREMENT as long as the identifier names,
+data types, null declarations, primary keys, and key constraints are kept intact.
+====
+
 === gpkg_spatial_ref_sys
 
 [[gpkg_spatial_ref_sys_sql]]
@@ -132,7 +139,7 @@ NOTE: Implementer must provide code4name(geometry_type_name) SQL function
 [source,sql]
 ----
 CREATE TABLE sample_feature_table (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  id INTEGER PRIMARY KEY,
   geometry GEOMETRY,
   text_attribute TEXT,
   real_attribute REAL,
@@ -205,7 +212,7 @@ INSERT INTO gpkg_tile_matrix VALUES (
 [source,sql]
 ----
 CREATE TABLE sample_tile_pyramid (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  id INTEGER PRIMARY KEY,
   zoom_level INTEGER NOT NULL,
   tile_column INTEGER NOT NULL,
   tile_row INTEGER NOT NULL,
@@ -254,7 +261,7 @@ CREATE TABLE gpkg_extensions (
 [source,sql]
 ----
 CREATE TABLE sample_attributes (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  id INTEGER PRIMARY KEY,
   text_attribute TEXT,
   real_attribute REAL,
   boolean_attribute BOOLEAN,
