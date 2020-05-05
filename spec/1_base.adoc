@@ -231,7 +231,7 @@ A GeoPackage file SHALL include a `gpkg_contents` table per table <<gpkg_content
 |Column Name |Type |Description |Null |Default |Key
 |`table_name` |TEXT |The name of the actual content (e.g., tiles, features, or attributes) table |no | |PK
 |`data_type` |TEXT |Type of data stored in the table |no | |
-|`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |UNIQUE
+|`identifier` |TEXT |A human-readable identifier (e.g. short name) for the table_name content |yes | |UK
 |`description` |TEXT |A human-readable description for the table_name content |yes |'' |
 |`last_change` |DATETIME |timestamp of last change to content, in ISO 8601 format|no |`strftime('%Y-%m-%dT%H:%M:%fZ', 'now')` |
 |`min_x` |DOUBLE |Bounding box minimum easting or longitude for all content in table_name. If tiles, this is informational and the tile matrix set should be used for calculating tile coordinates. |yes | |

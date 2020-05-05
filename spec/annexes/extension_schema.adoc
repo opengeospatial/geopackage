@@ -55,9 +55,9 @@ If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_co
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
-|`table_name` |TEXT |Name of a table specified in `gpkg_contents.table_name` or `gpkg_extensions.table_name` |no |PK
+|`table_name` |TEXT |Name of a table specified in `gpkg_contents.table_name` or `gpkg_extensions.table_name` |no |PK, UK
 |`column_name` |TEXT |Name of the table column |no |PK
-|`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |UNIQUE
+|`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |UK
 |`title` |TEXT |A human-readable formal title for the column_name content |yes |
 |`description` |TEXT |A human-readable description for the column_name content |yes |
 |`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type of column_name if BLOB type, or NULL for other types |yes |
@@ -95,9 +95,9 @@ The `constraint_name` column is referenced by the `constraint_name` column in th
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Column Type |Column Description |Null |Key
-|`constraint_name` |TEXT |Name of constraint (lowercase)|no |Unique
-|`constraint_type` |TEXT |Type name of constraint: 'range' \| 'enum' \| 'glob' |no |Unique
-|`value` |TEXT |Specified case sensitive value for 'enum' or 'glob' or NULL for 'range' constraint_type |yes |Unique
+|`constraint_name` |TEXT |Name of constraint (lowercase)|no |Jointly Unique
+|`constraint_type` |TEXT |Type name of constraint: 'range' \| 'enum' \| 'glob' |no |Jointly Unique
+|`value` |TEXT |Specified case sensitive value for 'enum' or 'glob' or NULL for 'range' constraint_type |yes |Jointly Unique
 |`min` |NUMERIC |Minimum value for 'range' or NULL for 'enum' or 'glob' constraint_type |yes |
 |`min_is_inclusive` |BOOLEAN |0 (false) if min value is exclusive, or 1 (true) if min value is inclusive |yes |
 |`max` |NUMERIC |Maximum value for 'range' or NULL for 'enum' or 'glob' constraint_type |yes |
