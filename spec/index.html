@@ -7835,14 +7835,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 </table>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_zoom_level_insert</span><span class="delimiter">'</span></span>
-<span class="keyword">BEFORE</span> <span class="class">INSERT</span> <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
-<span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
-<span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">insert on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0</span><span class="delimiter">'</span></span>)
-<span class="keyword">WHERE</span> (NEW.zoom_level &lt; <span class="integer">0</span>);
-<span class="keyword">END</span>
-
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_zoom_level_update</span><span class="delimiter">'</span></span>
+<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TRIGGER</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix_zoom_level_update</span><span class="delimiter">'</span></span>
 <span class="keyword">BEFORE</span> <span class="class">UPDATE</span> <span class="keyword">of</span> zoom_level <span class="keyword">ON</span> <span class="string"><span class="delimiter">'</span><span class="content">gpkg_tile_matrix</span><span class="delimiter">'</span></span>
 <span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> <span class="class">BEGIN</span>
 <span class="class">SELECT</span> RAISE(ABORT, <span class="string"><span class="delimiter">'</span><span class="content">update on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0</span><span class="delimiter">'</span></span>)
@@ -14019,7 +14012,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-05-06 02:32:31 UTC
+Last updated 2020-05-06 14:21:23 UTC
 </div>
 </div>
 </body>
