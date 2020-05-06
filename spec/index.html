@@ -373,7 +373,7 @@ The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#
 <div class="title">Requirement 2</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. <sup><a href="#K3">[K3]</a></sup> A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.3.0 this value is 0x0000283C (the hexadecimal value for 10300). <sup><a href="#K4">[K4]</a></sup></p>
+<p>A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. <sup><a href="#K3">[K3]</a></sup> A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.2.1 this value is 0x000027D9 (the hexadecimal value for 10201). <sup><a href="#K4">[K4]</a></sup></p>
 </div>
 </div>
 </div>
@@ -1977,7 +1977,7 @@ If the global tile matrix set covers the whole earth, then zoom level 0, tile (0
 <div class="title">Requirement 46</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>zoom_level</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL not be negative.</p>
+<p><span class="line-through">The <code>zoom_level</code> column value in a <code>gpkg_tile_matrix</code> table row SHALL not be negative.</span></p>
 </div>
 </div>
 </div>
@@ -2626,9 +2626,6 @@ The GeoPackage standard does not place any constraints on application, platform,
 </li>
 <li>
 <p>Fail if the integer representation of the user_version string is less than 10200.</p>
-</li>
-<li>
-<p>If the integer representation of the user_version string is less than 10300, fall back to the tests for GeoPackage 1.2.</p>
 </li>
 </ol>
 </div>
@@ -5366,60 +5363,6 @@ LEFT OUTER JOIN &lt;user_data_tiles_table&gt; AS udtt ON udtt.zoom_level =  gtmm
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>Clause 2.2.7.1.2 Req 45:</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Capability</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 83.3334%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>/opt/tiles/gpkg_tile_matrix/data/data_values_zoom_level</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that zoom level column values in the <code>gpkg_tile_matrix</code> table are not negative.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT zoom_level FROM gpkg_tile_matrix</p>
-</li>
-<li>
-<p>Not testable if returns an empty result set</p>
-</li>
-<li>
-<p>SELECT min(zoom_level) FROM gpkg_tile_matrix_metadata.</p>
-</li>
-<li>
-<p>Fail if less than 0.</p>
-</li>
-<li>
-<p>Pass otherwise.</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Clause 2.2.7.1.2 Req 46:</p>
 </div></div></td>
 </tr>
 <tr>
@@ -10395,65 +10338,6 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tr>
 </tbody>
 </table>
-<h6 id="_gpkg_metadata_2" class="float">gpkg_metadata</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 83.3334%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>/extensions/metadata/metadata/data_values_md_scope</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from <a href="#metadata_scopes">Table 15</a>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT md_scope FROM gpkg_metadata</p>
-</li>
-<li>
-<p>Not testable if returns an empty result set</p>
-</li>
-<li>
-<p>For each row returned from step 1</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if md_scope value not one of the name column values from <a href="#metadata_scopes">Table 15</a>.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if no fails</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Annex F.8 Req 94</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Capabilities</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <h6 id="_gpkg_metadata_reference_2" class="float">gpkg_metadata_reference</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -10885,7 +10769,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tbody>
 </table>
 <h4 id="_table_definition_sql" class="float">Table Definition SQL</h4>
-<h5 id="_gpkg_metadata_3" class="float">gpkg_metadata</h5>
+<h5 id="_gpkg_metadata_2" class="float">gpkg_metadata</h5>
 <div id="gpkg_metadata_sql" class="listingblock">
 <div class="title">gpkg_metadata Table Definition SQL</div>
 <div class="content">
@@ -14135,7 +14019,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-05-06 02:14:51 UTC
+Last updated 2020-05-06 02:32:31 UTC
 </div>
 </div>
 </body>
