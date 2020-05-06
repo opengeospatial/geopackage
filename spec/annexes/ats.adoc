@@ -775,20 +775,6 @@ END;
 
 [cols="1,5a"]
 |========================================
-|*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_zoom_level+
-|*Test Purpose* |Verify that zoom level column values in the `gpkg_tile_matrix` table are not negative.
-|*Test Method* |
-. SELECT zoom_level FROM gpkg_tile_matrix
-. Not testable if returns an empty result set
-. SELECT min(zoom_level) FROM gpkg_tile_matrix_metadata.
-. Fail if less than 0. 
-. Pass otherwise.
-|*Reference* |Clause 2.2.7.1.2 Req 46:
-|*Test Type* |Capability
-|========================================
-
-[cols="1,5a"]
-|========================================
 |*Test Case ID* |+/opt/tiles/gpkg_tile_matrix/data/data_values_matrix_width+
 |*Test Purpose* |Verify that the `matrix_width` values in the `gpkg_tile_matrix` table are valid.
 |*Test Method* |
