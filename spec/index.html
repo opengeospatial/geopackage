@@ -373,7 +373,7 @@ The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#
 <div class="title">Requirement 2</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. <sup><a href="#K3">[K3]</a></sup> A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.3.0 this value is 0x0000283C (the hexadecimal value for 10300). <sup><a href="#K4">[K4]</a></sup></p>
+<p>A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. <sup><a href="#K3">[K3]</a></sup> A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.2.1 this value is 0x000027D9 (the hexadecimal value for 10201). <sup><a href="#K4">[K4]</a></sup></p>
 </div>
 </div>
 </div>
@@ -2626,9 +2626,6 @@ The GeoPackage standard does not place any constraints on application, platform,
 </li>
 <li>
 <p>Fail if the integer representation of the user_version string is less than 10200.</p>
-</li>
-<li>
-<p>If the integer representation of the user_version string is less than 10300, fall back to the tests for GeoPackage 1.2.</p>
 </li>
 </ol>
 </div>
@@ -7302,30 +7299,160 @@ Request For Comment (RFC).</p>
 </div></div></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2018-09-06</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-11-22</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">All</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.1.1.1</p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>1.2.1</p>
+<p>Adding reference to database limits <a href="https://github.com/opengeospatial/geopackage/issues/391" class="bare">https://github.com/opengeospatial/geopackage/issues/391</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-11-22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.8</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>fixing DDL in metadata example <a href="https://github.com/opengeospatial/geopackage/issues/382" class="bare">https://github.com/opengeospatial/geopackage/issues/382</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-11-22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A.2.1.5.1., Annex F.1</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>updating incorrect table references to Annex G <a href="https://github.com/opengeospatial/geopackage/issues/390" class="bare">https://github.com/opengeospatial/geopackage/issues/390</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-12-18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">multiple</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Clarifying "non null" constraint for views <a href="https://github.com/opengeospatial/geopackage/issues/395" class="bare">https://github.com/opengeospatial/geopackage/issues/395</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2017-12-18</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.3</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Rewriting introduction to extension <a href="https://github.com/opengeospatial/geopackage/pull/401" class="bare">https://github.com/opengeospatial/geopackage/pull/401</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-01-22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.1.3.1.1.</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Clarifying GeoPackageBinary 'X' bit <a href="https://github.com/opengeospatial/geopackage/issues/402" class="bare">https://github.com/opengeospatial/geopackage/issues/402</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-01-22</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.2, F.4, F.5</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Providing links to deprecated extensions <a href="https://github.com/opengeospatial/geopackage/pull/404" class="bare">https://github.com/opengeospatial/geopackage/pull/404</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-03-05</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2.2.1</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Fixing broken internal link <a href="https://github.com/opengeospatial/geopackage/pull/407" class="bare">https://github.com/opengeospatial/geopackage/pull/407</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-03-29</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.11</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Updating references to adopted tiled gridded coverage data extension <a href="https://github.com/opengeospatial/geopackage/pull/421" class="bare">https://github.com/opengeospatial/geopackage/pull/421</a>, <a href="https://github.com/opengeospatial/geopackage/pull/422" class="bare">https://github.com/opengeospatial/geopackage/pull/422</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-04-09</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.3</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Removing erroneous part of trigger <a href="https://github.com/opengeospatial/geopackage/issues/414" class="bare">https://github.com/opengeospatial/geopackage/issues/414</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-04-19</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.8</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Updating Table 19 to fix typos and improve clarity <a href="https://github.com/opengeospatial/geopackage/pull/427" class="bare">https://github.com/opengeospatial/geopackage/pull/427</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-01</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annexes F.8, F.9, F.10</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Updating R140, R141, and R145 to indicate required rows and column values <a href="https://github.com/opengeospatial/geopackage/issue/426" class="bare">https://github.com/opengeospatial/geopackage/issue/426</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rich Fecher</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.3.1.1</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Clarifying use of extents in gpkg_contents with tiles content <a href="https://github.com/opengeospatial/geopackage/issue/426" class="bare">https://github.com/opengeospatial/geopackage/issue/426</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.9 Table 23</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Correcting typo in column name <a href="https://github.com/opengeospatial/geopackage/pull/434" class="bare">https://github.com/opengeospatial/geopackage/pull/434</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">multiple</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Eliminating references to "GEOMCOLLECTION" <a href="https://github.com/opengeospatial/geopackage/issue/436" class="bare">https://github.com/opengeospatial/geopackage/issue/436</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-16</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annexes F.1, F.6</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Correcting incorrect ATS references <a href="https://github.com/opengeospatial/geopackage/issue/439" class="bare">https://github.com/opengeospatial/geopackage/issue/439</a></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2018-05-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Annex F.3</p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p>Removing ATS entry associated with removed requirement <a href="https://github.com/opengeospatial/geopackage/pull/441" class="bare">https://github.com/opengeospatial/geopackage/pull/441</a></p>
 </div></div></td>
 </tr>
 </tbody>
 </table>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>Detailed release notes for this version of GeoPackage are available at: <a href="https://gitlab.com/imagemattersllc/ogc18-066/-/blob/master/rn.adoc" class="bare">https://gitlab.com/imagemattersllc/ogc18-066/-/blob/master/rn.adoc</a>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 </div>
 <div class="sect2">
 <h3 id="_changes_to_the_ogc_abstract_specification">B.7. Changes to the OGC® Abstract Specification</h3>
@@ -8577,7 +8704,7 @@ Each newly created spatial index SHALL be populated using the following SQL stat
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt;
-  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt;;</code></pre>
+  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt; <span class="keyword">WHERE</span> &lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_Empty(&lt;c&gt;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -14005,7 +14132,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-05-18 19:19:38 UTC
+Last updated 2020-05-19 15:42:02 UTC
 </div>
 </div>
 </body>
