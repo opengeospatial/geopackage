@@ -1502,7 +1502,7 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement primary key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement<sup><a href="#K6a">[K6a]</a></sup> primary key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
@@ -2097,7 +2097,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement primary key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement<sup><a href="#K6a">[K6a]</a></sup> primary key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
@@ -2482,7 +2482,7 @@ This is indicated by a gpkg_extensions.scope column value of "write-only".</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement primary key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement<sup><a href="#K6a">[K6a]</a></sup> primary key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
@@ -7486,7 +7486,7 @@ columns:</p>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_spatial_ref_sys (
   srs_name <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  srs_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  srs_id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
   organization <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   organization_coordsys_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   definition  <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -7607,7 +7607,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="title">sample_feature_table Table Definition SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_feature_table (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   geometry GEOMETRY,
   text_attribute <span class="predefined-type">TEXT</span>,
   real_attribute REAL,
@@ -7676,7 +7676,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="title">EXAMPLE: tiles table Create Table SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_tile_pyramid (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   zoom_level <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tile_column <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   tile_row <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
@@ -7689,7 +7689,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="title">EXAMPLE: tiles table Insert Statement (Informative)</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">INSERT</span> <span class="class">INTO</span> sample_matrix_pyramid <span class="keyword">VALUES</span> (
-  <span class="integer">1</span>,
+  <span class="predefined-constant">NULL</span>,
   <span class="integer">1</span>,
   <span class="integer">1</span>,
   <span class="integer">1</span>,
@@ -7720,7 +7720,7 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="title">EXAMPLE: Attributes table Create Table SQL (Informative)</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> sample_attributes (
-  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   text_attribute <span class="predefined-type">TEXT</span>,
   real_attribute REAL,
   boolean_attribute <span class="predefined-type">BOOLEAN</span>,
@@ -7745,6 +7745,13 @@ Implementer must provide code4name(geometry_type_name) SQL function
 <div class="sect1">
 <h2 id="_trigger_definition_sql_informative">Annex D: Trigger Definition SQL (Informative)</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>This annex describes triggers that MAY be created in GeoPackages to verify conformance to specific requirements.
+GeoPackage clients SHOULD recognize that these triggers may be present in GeoPackages and be prepared to handle errors raised by the triggers.
+It is possible that new GeoPackage extensions may extend certain GeoPackage requirements in ways that would make one or more of these triggers unnecessary or incorrect.
+It is the responsibility of the system adding the extension to the GeoPackage to check for the presence of relevant triggers and to replace them with corrected or benign ones.
+Simply dropping the triggers may not be sufficient as some systems could naively reinstate them if they are detected to be missing.</p>
+</div>
 <div class="sect2">
 <h3 id="_gpkg_tile_matrix_2">D.1. gpkg_tile_matrix</h3>
 <table class="tableblock frame-none grid-none stretch">
@@ -9663,7 +9670,7 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement primary key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement<sup><a href="#K6a">[K6a]</a></sup> primary key</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
@@ -10760,7 +10767,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <div class="title">gpkg_metadata Table Definition SQL</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
-  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
+  id <span class="predefined-type">INTEGER</span> <span class="directive">PRIMARY</span> <span class="type">KEY</span> AUTOINCREMENT,
   md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
   md_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
   mime_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">text/xml</span><span class="delimiter">'</span></span>,
@@ -10803,17 +10810,6 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <h5 id="metadata_example_appendix" class="float">Hierarchical Metadata Example One - ISO19115.</h5>
 <div class="paragraph">
 <p>Suppose we have this metadata:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata (
-  id <span class="predefined-type">INTEGER</span> <span class="type">CONSTRAINT</span> m_pk <span class="directive">PRIMARY</span> <span class="type">KEY</span> <span class="directive">ASC</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  md_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">dataset</span><span class="delimiter">'</span></span>,
-  md_standard_uri <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  mime_type <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="content">text/xml</span><span class="delimiter">'</span></span>,
-  metadata <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> <span class="string"><span class="delimiter">'</span><span class="delimiter">'</span></span>
-)</code></pre>
-</div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -10877,21 +10873,6 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </table>
 <div class="paragraph">
 <p>and this reference table definition:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">CREATE</span> <span class="type">TABLE</span> gpkg_metadata_reference (
-  reference_scope <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  table_name <span class="predefined-type">TEXT</span>,
-  column_name <span class="predefined-type">TEXT</span>,
-  row_id_value <span class="predefined-type">INTEGER</span>,
-  <span class="predefined-type">timestamp</span> <span class="predefined-type">TEXT</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="directive">DEFAULT</span> (strftime(<span class="string"><span class="delimiter">'</span><span class="content">%Y-%m-%dT%H:%M:%fZ</span><span class="delimiter">'</span></span>,<span class="string"><span class="delimiter">'</span><span class="content">now</span><span class="delimiter">'</span></span>)),
-  md_file_id <span class="predefined-type">INTEGER</span> <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>,
-  md_parent_id <span class="predefined-type">INTEGER</span>,
-  <span class="type">CONSTRAINT</span> crmr_mfi_fk <span class="directive">FOREIGN</span> <span class="type">KEY</span> (md_file_id) <span class="keyword">REFERENCES</span> gpkg_metadata(id),
-  <span class="type">CONSTRAINT</span> crmr_mpi_fk <span class="directive">FOREIGN</span> <span class="type">KEY</span> (md_parent_id) <span class="keyword">REFERENCES</span> gpkg_metadata(id)
-)</code></pre>
-</div>
 </div>
 <div class="paragraph">
 <p>1) Consider a geographic data provider generating vector mapping data for three Administrative areas(A, B and C).  &#8230;&#8203; The metadata could be carried exclusively at Dataset Series level.</p>
@@ -13900,6 +13881,9 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="K6"></a>[K6] New applications should use the latest available SQLite version software <a href="#8">[8]</a></p>
 </li>
 <li>
+<p><a id="K6a"></a>[K6a] The use of the AUTOINCREMENT keyword is optional but recommended. Implementers MAY omit the AUTOINCREMENT keyword for performance reasons, with the understanding that doing so has the potential to allow primary key identifiers to be reused.</p>
+</li>
+<li>
 <p><a id="K7"></a>[K7] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).</p>
 </li>
 <li>
@@ -14005,7 +13989,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-05-20 00:21:47 UTC
+Last updated 2020-05-20 03:12:46 UTC
 </div>
 </div>
 </body>
