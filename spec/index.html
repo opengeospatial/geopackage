@@ -1572,6 +1572,7 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 <div class="paragraph">
 <p>Allowed geometry types are defined in <a href="#geometry_types">Geometry Types (Normative)</a> and shown in part in <a href="#core_geometry_model_figure">Figure 2</a>.
 If the geometry <code>type_name</code> value is "GEOMETRY" then the feature table geometry column MAY contain geometries of any allowed geometry type.
+This type name is to be used when the geometry type is unknown or if multiple geometry types will be present in the same table (e.g., POLYGON and MULTIPOLYGON).
 If the geometry <code>type_name</code> value is "GEOMETRYCOLLECTION" then the feature table geometry column MAY contain zero or more geometries of any allowed geometry type.</p>
 </div>
 <div class="paragraph">
@@ -13989,7 +13990,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-05-20 03:12:46 UTC
+Last updated 2020-05-20 03:28:31 UTC
 </div>
 </div>
 </body>
