@@ -11,7 +11,7 @@
 ----
 CREATE TABLE gpkg_spatial_ref_sys (
   srs_name TEXT NOT NULL,
-  srs_id INTEGER NOT NULL PRIMARY KEY,
+  srs_id INTEGER PRIMARY KEY,
   organization TEXT NOT NULL,
   organization_coordsys_id INTEGER NOT NULL,
   definition  TEXT NOT NULL,
@@ -132,7 +132,7 @@ NOTE: Implementer must provide code4name(geometry_type_name) SQL function
 [source,sql]
 ----
 CREATE TABLE sample_feature_table (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   geometry GEOMETRY,
   text_attribute TEXT,
   real_attribute REAL,
@@ -205,7 +205,7 @@ INSERT INTO gpkg_tile_matrix VALUES (
 [source,sql]
 ----
 CREATE TABLE sample_tile_pyramid (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   zoom_level INTEGER NOT NULL,
   tile_column INTEGER NOT NULL,
   tile_row INTEGER NOT NULL,
@@ -220,7 +220,7 @@ CREATE TABLE sample_tile_pyramid (
 [source,sql]
 ----
 INSERT INTO sample_matrix_pyramid VALUES (
-  1,
+  NULL,
   1,
   1,
   1,
@@ -254,7 +254,7 @@ CREATE TABLE gpkg_extensions (
 [source,sql]
 ----
 CREATE TABLE sample_attributes (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   text_attribute TEXT,
   real_attribute REAL,
   boolean_attribute BOOLEAN,
