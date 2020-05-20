@@ -438,6 +438,12 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 [float]
 ===== gpkg_metadata
 
+[NOTE]
+====
+GeoPackage versions 1.2.1 and prior had an optional validation triggers `gpkg_metadata` and `gpkg_metadata_reference`.
+These triggers were determined to be excessively strict and were not enabling interoperability in a meaningful way so they have been removed in version 1.3.0.
+====
+
 [[gpkg_metadata_sql]]
 .gpkg_metadata Table Definition SQL
 [cols=","]
