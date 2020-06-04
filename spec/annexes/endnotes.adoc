@@ -9,6 +9,7 @@
 - [[[K4a]]] For more information on maximum database size, see Section 14 of https://www.sqlite.org/limits.html. 
 - [[[K5]]] The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.
 - [[[K6]]] New applications should use the latest available SQLite version software <<8>>
+- [[[K6a]]] The use of the AUTOINCREMENT keyword is optional but recommended. Implementers MAY omit the AUTOINCREMENT keyword for performance reasons, with the understanding that doing so has the potential to allow primary key identifiers to be reused.
 - [[[K7]]] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
 - [[[K8]]] GeometryCollection is a generic term for the ST_GeomCollection type defined in <<12>>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMETRYCOLLECTION defined in <<10>> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.
 - [[[K9]]] OGC WKB simple feature geometry types specified in <<9>> are a subset of the ISO WKB geometry types specified in <<12>>

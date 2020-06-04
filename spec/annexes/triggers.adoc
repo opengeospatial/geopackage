@@ -1,5 +1,10 @@
 [appendix]
 == Trigger Definition SQL (Informative)
+This annex describes triggers that MAY be created in GeoPackages to verify conformance to specific requirements.
+GeoPackage clients SHOULD recognize that these triggers may be present in GeoPackages and be prepared to handle errors raised by the triggers.
+It is possible that new GeoPackage extensions may extend certain GeoPackage requirements in ways that would make one or more of these triggers unnecessary or incorrect.
+It is the responsibility of the system adding the extension to the GeoPackage to check for the presence of relevant triggers and to replace them with corrected or benign ones.
+Simply dropping the triggers may not be sufficient as some systems could naively reinstate them if they are detected to be missing.
 
 === gpkg_tile_matrix
 
