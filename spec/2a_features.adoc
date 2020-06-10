@@ -280,8 +280,27 @@ Features are rows in a feature table.
 [caption=""]
 .Requirement 29
 ====
-A GeoPackage MAY contain tables or views^<<K17>>^ containing vector features.
-Every such feature table or view in a GeoPackage SHALL be structured consistently with <<example_feature_table_cols>> and <<example_feature_table_sql>>.
+A GeoPackage MAY contain tables containing vector features.
+Every such feature table SHALL be structured consistently with <<example_feature_table_cols>> and <<example_feature_table_sql>>.
+A feature table SHALL have a primary key column of type INTEGER and that column SHALL act as a `rowid` alias.
+====
+
+[NOTE]
+====
+The integer primary key of a feature table allows features to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below.
+====
+
+[[r150]]
+[caption=""]
+.Requirement 150
+====
+A GeoPackage MAY contain views containing vector features.
+Every such feature view SHALL have a first column of type INTEGER and that column SHALL contain unique values for each row.
+====
+
+[NOTE]
+====
+Since the concept of primary keys does not exist for views in SQLite, this requirement provides a way to produce a compliant feature view with a discoverable key-like column^<<K17>>^.
 ====
 
 [[r30]]
@@ -291,7 +310,10 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 A feature table or view SHALL have only one geometry column.
 ====
 
+[NOTE]
+====
 Feature data models <<B23>> from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be transformed into GeoPackage implementations with a separate feature table for each geometry type whose rows have matching integer primary key values that allow them to be joined in a view with the same column definitions as the non-GeoPackage feature data model with multiple geometry columns.
+====
 
 [[r31]]
 [caption=""]
@@ -300,24 +322,12 @@ Feature data models <<B23>> from non-GeoPackage implementations that have multip
 The declared SQL type of the geometry column in a vector feature user data table SHALL be specified by the `geometry_type_name` column for that `column_name` and `table_name` in the `gpkg_geometry_columns` table.
 ====
 
-[[r150]]
-[caption=""]
-.Requirement 150
-====
-A feature table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be an integer primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.
-====
-
-[NOTE]
-=====
-Using an integer primary key in a feature table allows features to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant feature view with a discoverable key-like column^<<K17>>^.
-=====
-
 [#example_feature_table_cols,reftext='{table-caption} {counter:table-num}']
 .EXAMPLE : Sample Feature Table or View^<<K17>>^ Definition
 [cols=",,,,,",options="header"]
 |=======================================================================
 |Column Name |Type |Description |Null |Default |Key
-|`id` |INTEGER |Autoincrement^<<K6a>>^ primary key |no | |PK
+|`id` |INTEGER |Autoincrement^<<K6a>>^ primary key |N/A | |PK
 |`geometry` |GEOMETRY |GeoPackage Geometry |yes | |
 |`text_attribute` |TEXT |Text attribute of feature |yes | |
 |`real_attribute` |REAL |Real attribute of feature |yes | |

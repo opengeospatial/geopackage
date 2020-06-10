@@ -288,24 +288,39 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 [caption=""]
 .Requirement 54
 ====
-Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or view^<<K17>>^ with a unique name that SHALL be structured consistently with <<tiles_user_tables_data_table_definition>>, <<example_tiles_table_cols>>, and <<example_tiles_table_sql>>. The `id` column of a tiles table or view SHALL be of type INTEGER and SHALL contain unique values for each row.
+A GeoPackage MAY contain tables containing tile pyramid user data for a single tile matrix set.
+Every such tile pyramid user data table SHALL be structured consistently with <<tiles_user_tables_data_table_definition>> and <<example_tiles_table_sql>>.
+A table SHALL have a primary key column of type INTEGER and that column SHALL act as a `rowid` alias.
+====
+
+[NOTE]
+====
+The integer primary key of a tile pyramid user data table allows tiles to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below.
+====
+
+[[r153]]
+[caption=""]
+.Requirement 153
+====
+A GeoPackage MAY contain views containing tile pyramid user data for a single tile matrix set.
+Every such tile pyramid user data view SHALL have a first column of type INTEGER and that column SHALL contain unique values for each row.
 ====
 
 [NOTE]
 =====
-For a tiles table, the `id` column SHOULD be a primary key to ensure that each value is unique. Using an integer primary key in a tiles table allows tiles to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant tiles view with a discoverable key-like column^<<K17>>^.
+Since the concept of primary keys does not exist for views in SQLite, this requirement provides a way to produce a compliant tile pyramid user data view with a discoverable key-like column^<<K17>>^.
 =====
 
 [#example_tiles_table_cols,reftext='{table-caption} {counter:table-num}']
 .Tiles Table or View Definition
-[cols=",,,,,",options="header",]
+[cols=",,,,",options="header",]
 |=======================================================================
-|Column Name |Column Type |Column Description |Null |Default |Key
-|`id` |INTEGER |Autoincrement^<<K6a>>^ primary key |no | |PK
-|`zoom_level` |INTEGER |min(zoom_level) \<= `zoom_level` \<= max(zoom_level) for `t_table_name` |no | |UK
-|`tile_column` |INTEGER |0 to `tile_matrix` `matrix_width` – 1 |no | |UK
-|`tile_row` |INTEGER |0 to `tile_matrix` `matrix_height` - 1 |no | |UK
-|`tile_data` |BLOB |Of an image MIME type specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>>, <<extension_tiles_webp>> |no | |
+|Column Name |Column Type |Column Description |Null|Key
+|`id` |INTEGER |Autoincrement^<<K6a>>^ primary key |N/A |PK
+|`zoom_level` |INTEGER |min(zoom_level) \<= `zoom_level` \<= max(zoom_level) for `t_table_name` |no |UK
+|`tile_column` |INTEGER |0 to `tile_matrix` `matrix_width` – 1 |no |UK
+|`tile_row` |INTEGER |0 to `tile_matrix` `matrix_height` - 1 |no |UK
+|`tile_data` |BLOB |Of an image MIME type specified in clauses <<tile_enc_png>>, <<tile_enc_jpeg>>, <<extension_tiles_webp>> |no |
 |=======================================================================
 
 [WARNING]
