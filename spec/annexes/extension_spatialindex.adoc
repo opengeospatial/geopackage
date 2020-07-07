@@ -216,8 +216,11 @@ Definition of SQL functions
 ====
 [line-through]#The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.#
 ====
+
 [NOTE]
-The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test. 
+====
+The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test. In addition, due to SQLite link:https://www.sqlite.org/rtree.html#roundoff_error[rounding limitations], clients should exercise care when using these indexes during queries.
+====
 
 [float]
 ==== Abstract Test Suite
