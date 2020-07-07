@@ -574,7 +574,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 </div>
 <div class="paragraph">
 <p>A table named <code>gpkg_spatial_ref_sys</code> is the first component of the standard SQL schema for simple features described in clause <a href="#sfsql_intro">Simple Features SQL Introduction</a> below.
-The spatial reference system (SRS) definitions it contains are referenced by the GeoPackage <code>gpkg_contents</code> and <code>gpkg_geometry_columns</code> tables to relate the vector and tile data in user tables to locations on the earth.</p>
+The coordinate reference system definitions it contains are referenced by the GeoPackage <code>gpkg_contents</code> and <code>gpkg_geometry_columns</code> tables to relate the vector and tile data in user tables to locations on the earth.</p>
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_spatial_ref_sys</code> table includes the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Table 2</a> below containing data that defines spatial reference systems.
@@ -650,25 +650,6 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <div class="sect5">
 <h6 id="gpkg_srs_table_data_values">1.1.2.1.2. Table Data Values</h6>
 <div class="paragraph">
-<p>The <code>srs_id</code> column is a primary key for this table and this primary key is used as a foreign key throughout GeoPackage.
-For convenience, <code>srs_id</code> and <code>organization_coordsys_id</code> values are typically the same.
-However, there is no guarantee that SRS IDs will be globally unique across organizations.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>GeoPackage clients should not make assumptions regarding the organization or definition of any SRS ID other than those defined in <a href="#r11">Requirement 11</a>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
 <p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <a href="#r11">Requirement 11</a>. Values are constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#r11">Requirement 11</a>:</p>
 </div>
 <div id="r11" class="exampleblock">
@@ -730,7 +711,7 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 <div class="title">Requirement 12</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL contain records to define all spatial reference systems used by  GeoPackage contents (features, tiles, etc.).</p>
+<p>The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.</p>
 </div>
 </div>
 </div>
@@ -8604,7 +8585,7 @@ Each newly created spatial index SHALL be populated using the following SQL stat
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt;
-  <span class="class">SELECT</span> &lt;i&gt;, st_minx(&lt;c&gt;), st_maxx(&lt;c&gt;), st_miny(&lt;c&gt;), st_maxy(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt; <span class="keyword">WHERE</span> &lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_Empty(&lt;c&gt;);</code></pre>
+  <span class="class">SELECT</span> &lt;i&gt;, ST_MinX(&lt;c&gt;), ST_MaxX(&lt;c&gt;), ST_MinY(&lt;c&gt;), ST_MaxY(&lt;c&gt;) <span class="keyword">FROM</span> &lt;t&gt; <span class="keyword">WHERE</span> &lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(&lt;c&gt;);</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -8803,7 +8784,9 @@ The GeoPackage Executable Test Suite has been updated to accept either version o
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test.
+<div class="paragraph">
+<p>The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test. In addition, due to SQLite <a href="https://www.sqlite.org/rtree.html#roundoff_error">rounding limitations</a>, clients should exercise care when using these indexes during queries.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -14024,7 +14007,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-07-07 18:28:25 UTC
+Last updated 2020-07-07 18:39:43 UTC
 </div>
 </div>
 </body>
