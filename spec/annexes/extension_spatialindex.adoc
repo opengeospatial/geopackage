@@ -81,7 +81,7 @@ The rtree function id parameter becomes the virtual table 64-bit signed integer 
 [float]
 ====== Load Spatial Index Values
 
-The indexes provided by the SQLite Virtual Table RTree extension are not automatic indices.
+The indexes provided by the SQLite Virtual Table RTree extension are not automatic indexes.
 This means the index data structure needs to be manually populated, updated and queried.
 Each newly created spatial index SHALL be populated using the following SQL statement
 
@@ -219,7 +219,10 @@ Definition of SQL functions
 
 [NOTE]
 ====
-The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test. In addition, due to SQLite link:https://www.sqlite.org/rtree.html#roundoff_error[rounding limitations], clients should exercise care when using these indexes during queries.
+The minimum bounding indexes created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature.
+However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test.
+Clients should exercise care when using these indexes during queries because the SQLite RTree module might link:https://www.sqlite.org/rtree.html#roundoff_error[round bounding boxes slightly outward] (up to 0.000012%).
+Queries using spatial indexes should contain slightly expanded bounding boxes to guard against this.
 ====
 
 [float]
