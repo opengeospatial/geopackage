@@ -38,27 +38,34 @@ Non-spatial attribute data is stored in user-defined Attribute tables. Attribute
 [caption=""]
 .Requirement 119
 ====
-A GeoPackage MAY contain tables or views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL be structured consistently with <<gpkg_attributes_example>> and <<example_attributes_table_sql>>.
+A GeoPackage MAY contain tables containing attribute sets. Every such attribute table SHALL be structured consistently with <<gpkg_attributes_example>> and <<example_attributes_table_sql>>.
+A table SHALL have a primary key column of type INTEGER and that column SHALL act as a `rowid` alias.
+====
+
+[NOTE]
+====
+The integer primary key of an attributes table allows features to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below.
 ====
 
 [[r151]]
 [caption=""]
 .Requirement 151
 ====
-An attributes table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be a primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.
+A GeoPackage MAY contain views containing attributes.
+Every such attributes view SHALL have a first column of type INTEGER and that column SHALL contain unique values for each row.
 ====
 
 [NOTE]
 =====
-Using an integer primary key in an attributes table allows attributes to be linked to row level metadata records in the `gpkg_metadata` table by rowid <<B5>> values in the `gpkg_metadata_reference` table as described in clause <<_metadata_reference_table>> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant attributes view with a discoverable key-like column^<<K17>>^.
+Since the concept of primary keys does not exist for views in SQLite, this requirement provides a way to produce a compliant attributes view with a discoverable key-like column^<<K17>>^.
 =====
 
 [#gpkg_attributes_example,reftext='{table-caption} {counter:table-num}']
-.GeoPackage Attributes Example Table or View Definition
+.Sample Attributes Table Definition
 [cols=",,,,",options="header",]
 |=======================================================================
 |Column Name |Col Type |Column Description |Null |Key
-|`id` |INTEGER |Autoincrement^<<K6a>>^ primary key |no |PK
+|`id` |INTEGER |Autoincrement^<<K6a>>^ primary key |N/A^<<K6b>>^ |PK
 |`text_attribute` |TEXT |Text attribute of feature |yes |
 |`real_attribute` |REAL |Real attribute of feature |yes | 
 |`boolean_attribute` |BOOLEAN |Boolean attribute of feature |yes |
