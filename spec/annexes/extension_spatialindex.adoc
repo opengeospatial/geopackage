@@ -81,14 +81,14 @@ The rtree function id parameter becomes the virtual table 64-bit signed integer 
 [float]
 ====== Load Spatial Index Values
 
-The indexes provided by the SQLite Virtual Table RTree extension are not automatic indices.
+The indexes provided by the SQLite Virtual Table RTree extension are not automatic indexes.
 This means the index data structure needs to be manually populated, updated and queried.
 Each newly created spatial index SHALL be populated using the following SQL statement
 
 [source,sql]
 ----
 INSERT OR REPLACE INTO rtree_<t>_<c>
-  SELECT <i>, st_minx(<c>), st_maxx(<c>), st_miny(<c>), st_maxy(<c>) FROM <t> WHERE <c> NOT NULL AND NOT ST_Empty(<c>);
+  SELECT <i>, ST_MinX(<c>), ST_MaxX(<c>), ST_MinY(<c>), ST_MaxY(<c>) FROM <t> WHERE <c> NOT NULL AND NOT ST_IsEmpty(<c>);
 ----
 
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
@@ -216,8 +216,14 @@ Definition of SQL functions
 ====
 [line-through]#The SQL functions on geometries in this SQLite Extension SHALL operate correctly on extended geometry types specified by <<extension_geometry_encoding>> and/or <<extension_geometry_types>> when those extensions are also implemented.#
 ====
+
 [NOTE]
-The minimum bounding indices created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature. However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test. 
+====
+The minimum bounding indexes created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature.
+However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test.
+Clients should exercise care when using these indexes during queries because the SQLite RTree module might link:https://www.sqlite.org/rtree.html#roundoff_error[round bounding boxes slightly outward] (up to 0.000012%).
+Queries using spatial indexes should contain slightly expanded bounding boxes to guard against this.
+====
 
 [float]
 ==== Abstract Test Suite
