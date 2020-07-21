@@ -160,7 +160,7 @@ A GeoPackage SHALL include a `gpkg_spatial_ref_sys` table per clause 1.1.2.1.1 <
 ====
 
 A table named `gpkg_spatial_ref_sys` is the first component of the standard SQL schema for simple features described in clause <<sfsql_intro>> below.
-The coordinate reference system definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
+The spatial reference system (SRS) definitions it contains are referenced by the GeoPackage `gpkg_contents` and `gpkg_geometry_columns` tables to relate the vector and tile data in user tables to locations on the earth.
 
 The `gpkg_spatial_ref_sys` table includes the columns specified in SQL/MM (ISO 13249-3) <<12>> and shown in <<gpkg_spatial_ref_sys_cols>> below containing data that defines spatial reference systems.
 Views of this table MAY be used to provide compatibility with the http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698[SQL/MM] <<12>> (see <<sqlmm_gpkg_spatial_ref_sys_sql>>) and OGC http://portal.opengeospatial.org/files/?artifact_id=25354[Simple Features SQL] <<9>><<10>><<11>> (Table 21) standards.
@@ -182,6 +182,15 @@ See <<gpkg_spatial_ref_sys_sql>>.
 
 [[gpkg_srs_table_data_values]]
 ====== Table Data Values
+The `srs_id` column is a primary key for this table and this primary key is used as a foreign key throughout GeoPackage.
+The `srd_id` column values are also found in the `srs_id` attribute of the GeoPackage SQL Geometry Binary Format (see <<r33>>).
+For convenience, `srs_id` and `organization_coordsys_id` values are typically the same.
+However, there is no guarantee that SRS IDs will be globally unique across organizations.
+
+[WARNING]
+====
+GeoPackage clients should not make assumptions regarding the organization or definition of any SRS ID other than those defined in <<r11>>.
+====
 
 Definition column WKT values in the `gpkg_spatial_ref_sys` table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <<r11>>. Values are constructed per the EBNF syntax in <<32>> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <<13>><<14>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<r11>>:
 
@@ -206,7 +215,7 @@ The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed i
 [caption=""]
 .Requirement 12
 ====
-The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define all spatial reference systems used by features and tiles in a GeoPackage.
+The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define all spatial reference systems used by  GeoPackage contents (features, tiles, etc.).
 ====
 
 ==== Contents
