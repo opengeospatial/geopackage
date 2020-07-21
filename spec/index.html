@@ -1452,35 +1452,9 @@ Features are rows in a feature table.
 <div class="title">Requirement 29</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain tables or views<sup><a href="#K17">[K17]</a></sup> containing vector features.
-Every such feature table or view in a GeoPackage SHALL be structured consistently with <a href="#example_feature_table_cols">Table 6</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.</p>
-</div>
-</div>
-</div>
-<div id="r30" class="exampleblock">
-<div class="title">Requirement 30</div>
-<div class="content">
-<div class="paragraph">
-<p>A feature table or view SHALL have only one geometry column.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Feature data models <a href="#B23">[B23]</a> from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be transformed into GeoPackage implementations with a separate feature table for each geometry type whose rows have matching integer primary key values that allow them to be joined in a view with the same column definitions as the non-GeoPackage feature data model with multiple geometry columns.</p>
-</div>
-<div id="r31" class="exampleblock">
-<div class="title">Requirement 31</div>
-<div class="content">
-<div class="paragraph">
-<p>The declared SQL type of the geometry column in a vector feature user data table SHALL be specified by the <code>geometry_type_name</code> column for that <code>column_name</code> and <code>table_name</code> in the <code>gpkg_geometry_columns</code> table.</p>
-</div>
-</div>
-</div>
-<div id="r150" class="exampleblock">
-<div class="title">Requirement 150</div>
-<div class="content">
-<div class="paragraph">
-<p>A feature table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be an integer primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.</p>
+<p>A GeoPackage MAY contain tables containing vector features.
+Every such feature table SHALL be structured consistently with <a href="#example_feature_table_cols">Table 6</a> and <a href="#example_feature_table_sql">sample_feature_table Table Definition SQL (Informative)</a>.
+A feature table SHALL have a primary key column of type INTEGER and that column SHALL act as a <code>rowid</code> alias.</p>
 </div>
 </div>
 </div>
@@ -1492,14 +1466,67 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Using an integer primary key in a feature table allows features to be linked to row level metadata records in the <code>gpkg_metadata</code> table by rowid <a href="#B5">[B5]</a> values in the <code>gpkg_metadata_reference</code> table as described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant feature view with a discoverable key-like column<sup><a href="#K17">[K17]</a></sup>.</p>
+<p>The integer primary key of a feature table allows features to be linked to row level metadata records in the <code>gpkg_metadata</code> table by rowid <a href="#B5">[B5]</a> values in the <code>gpkg_metadata_reference</code> table as described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a> below.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
+<div id="r150" class="exampleblock">
+<div class="title">Requirement 150</div>
+<div class="content">
+<div class="paragraph">
+<p>A GeoPackage MAY contain views containing vector features.
+Every such feature view SHALL have a first column of type INTEGER and that column SHALL contain unique values for each row.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since the concept of primary keys does not exist for views in SQLite, this requirement provides a way to produce a compliant feature view with a discoverable key-like column<sup><a href="#K17">[K17]</a></sup>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="r30" class="exampleblock">
+<div class="title">Requirement 30</div>
+<div class="content">
+<div class="paragraph">
+<p>A feature table or view SHALL have only one geometry column.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Feature data models <a href="#B23">[B23]</a> from non-GeoPackage implementations that have multiple geometry columns per feature table MAY be transformed into GeoPackage implementations with a separate feature table for each geometry type whose rows have matching integer primary key values that allow them to be joined in a view with the same column definitions as the non-GeoPackage feature data model with multiple geometry columns.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="r31" class="exampleblock">
+<div class="title">Requirement 31</div>
+<div class="content">
+<div class="paragraph">
+<p>The declared SQL type of the geometry column in a vector feature user data table SHALL be specified by the <code>geometry_type_name</code> column for that <code>column_name</code> and <code>table_name</code> in the <code>gpkg_geometry_columns</code> table.</p>
+</div>
+</div>
+</div>
 <table id="example_feature_table_cols" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 7. EXAMPLE : Sample Feature Table or View<sup><a href="#K17">[K17]</a></sup> Definition</caption>
+<caption class="title">Table 7. Sample Feature Table Definition</caption>
 <colgroup>
 <col style="width: 16.6666%;">
 <col style="width: 16.6666%;">
@@ -1523,7 +1550,7 @@ Every such feature table or view in a GeoPackage SHALL be structured consistentl
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement<sup><a href="#K6a">[K6a]</a></sup> primary key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A<sup><a href="#K6b">[K6b]</a></sup></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
@@ -2076,7 +2103,9 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <div class="title">Requirement 54</div>
 <div class="content">
 <div class="paragraph">
-<p>Each tile matrix set in a GeoPackage SHALL be stored in a different tile pyramid user data table or view<sup><a href="#K17">[K17]</a></sup> with a unique name that SHALL be structured consistently with <a href="#tiles_user_tables_data_table_definition">Table Definition</a>, <a href="#example_tiles_table_cols">Table 9</a>, and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>. The <code>id</code> column of a tiles table or view SHALL be of type INTEGER and SHALL contain unique values for each row.</p>
+<p>A GeoPackage MAY contain tables containing tile pyramid user data for a single tile matrix set.
+Every such tile pyramid user data table SHALL be structured consistently with <a href="#tiles_user_tables_data_table_definition">Table Definition</a> and <a href="#example_tiles_table_sql">EXAMPLE: tiles table Create Table SQL (Informative)</a>.
+A table SHALL have a primary key column of type INTEGER and that column SHALL act as a <code>rowid</code> alias.</p>
 </div>
 </div>
 </div>
@@ -2088,21 +2117,43 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 </td>
 <td class="content">
 <div class="paragraph">
-<p>For a tiles table, the <code>id</code> column SHOULD be a primary key to ensure that each value is unique. Using an integer primary key in a tiles table allows tiles to be linked to row level metadata records in the <code>gpkg_metadata</code> table by rowid <a href="#B5">[B5]</a> values in the <code>gpkg_metadata_reference</code> table as described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant tiles view with a discoverable key-like column<sup><a href="#K17">[K17]</a></sup>.</p>
+<p>The integer primary key of a tile pyramid user data table allows tiles to be linked to row level metadata records in the <code>gpkg_metadata</code> table by rowid <a href="#B5">[B5]</a> values in the <code>gpkg_metadata_reference</code> table as described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a> below.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="r153" class="exampleblock">
+<div class="title">Requirement 153</div>
+<div class="content">
+<div class="paragraph">
+<p>A GeoPackage MAY contain views containing tile pyramid user data for a single tile matrix set.
+Every such tile pyramid user data view SHALL have a first column of type INTEGER and that column SHALL contain unique values for each row.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since the concept of primary keys does not exist for views in SQLite, this requirement provides a way to produce a compliant tile pyramid user data view with a discoverable key-like column<sup><a href="#K17">[K17]</a></sup>.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <table id="example_tiles_table_cols" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 10. Tiles Table or View Definition</caption>
+<caption class="title">Table 10. Sample Tiles Table Definition</caption>
 <colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.6666%;">
-<col style="width: 16.667%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
 </colgroup>
 <thead>
 <tr>
@@ -2110,7 +2161,6 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <th class="tableblock halign-left valign-top">Column Type</th>
 <th class="tableblock halign-left valign-top">Column Description</th>
 <th class="tableblock halign-left valign-top">Null</th>
-<th class="tableblock halign-left valign-top">Default</th>
 <th class="tableblock halign-left valign-top">Key</th>
 </tr>
 </thead>
@@ -2119,8 +2169,7 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement<sup><a href="#K6a">[K6a]</a></sup> primary key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A<sup><a href="#K6b">[K6b]</a></sup></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
 <tr>
@@ -2128,7 +2177,6 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">min(zoom_level) &lt;= <code>zoom_level</code> &lt;= max(zoom_level) for <code>t_table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UK</p></td>
 </tr>
 <tr>
@@ -2136,7 +2184,6 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0 to <code>tile_matrix</code> <code>matrix_width</code> – 1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UK</p></td>
 </tr>
 <tr>
@@ -2144,7 +2191,6 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">0 to <code>tile_matrix</code> <code>matrix_height</code> - 1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">UK</p></td>
 </tr>
 <tr>
@@ -2152,7 +2198,6 @@ This means that a tile matrix set can be sparse, i.e. not contain a tile for any
 <td class="tableblock halign-left valign-top"><p class="tableblock">BLOB</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Of an image MIME type specified in clauses <a href="#tile_enc_png">Tile Encoding PNG</a>, <a href="#tile_enc_jpeg">Tile Encoding JPEG</a>, <a href="#extension_tiles_webp">Tiles Encoding WebP</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 </tbody>
@@ -2455,15 +2500,8 @@ This is indicated by a gpkg_extensions.scope column value of "write-only".</p>
 <div class="title">Requirement 119</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain tables or views containing attribute sets. Every such Attribute table or view in a GeoPackage SHALL be structured consistently with <a href="#gpkg_attributes_example">Table 11</a> and <a href="#example_attributes_table_sql">EXAMPLE: Attributes table Create Table SQL (Informative)</a>.</p>
-</div>
-</div>
-</div>
-<div id="r151" class="exampleblock">
-<div class="title">Requirement 151</div>
-<div class="content">
-<div class="paragraph">
-<p>An attributes table or view SHALL have a column that uniquely identifies the row. For a feature table, the column SHOULD be a primary key. If there is no primary key column, the first column SHALL be of type INTEGER and SHALL contain unique values for each row.</p>
+<p>A GeoPackage MAY contain tables containing attribute sets. Every such attribute table SHALL be structured consistently with <a href="#gpkg_attributes_example">Table 11</a> and <a href="#example_attributes_table_sql">EXAMPLE: Attributes table Create Table SQL (Informative)</a>.
+A table SHALL have a primary key column of type INTEGER and that column SHALL act as a <code>rowid</code> alias.</p>
 </div>
 </div>
 </div>
@@ -2475,14 +2513,37 @@ This is indicated by a gpkg_extensions.scope column value of "write-only".</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Using an integer primary key in an attributes table allows attributes to be linked to row level metadata records in the <code>gpkg_metadata</code> table by rowid <a href="#B5">[B5]</a> values in the <code>gpkg_metadata_reference</code> table as described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a> below. Since the concept of primary keys does not exist for views in SQLite, this requirement also provides a way to produce a compliant attributes view with a discoverable key-like column<sup><a href="#K17">[K17]</a></sup>.</p>
+<p>The integer primary key of an attributes table allows features to be linked to row level metadata records in the <code>gpkg_metadata</code> table by rowid <a href="#B5">[B5]</a> values in the <code>gpkg_metadata_reference</code> table as described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a> below.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="r151" class="exampleblock">
+<div class="title">Requirement 151</div>
+<div class="content">
+<div class="paragraph">
+<p>A GeoPackage MAY contain views containing attributes.
+Every such attributes view SHALL have a first column of type INTEGER and that column SHALL contain unique values for each row.</p>
+</div>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Since the concept of primary keys does not exist for views in SQLite, this requirement provides a way to produce a compliant attributes view with a discoverable key-like column<sup><a href="#K17">[K17]</a></sup>.</p>
 </div>
 </td>
 </tr>
 </table>
 </div>
 <table id="gpkg_attributes_example" class="tableblock frame-all grid-all stretch">
-<caption class="title">Table 12. GeoPackage Attributes Example Table or View Definition</caption>
+<caption class="title">Table 12. Sample Attributes Table Definition</caption>
 <colgroup>
 <col style="width: 20%;">
 <col style="width: 20%;">
@@ -2504,7 +2565,7 @@ This is indicated by a gpkg_extensions.scope column value of "write-only".</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>id</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">INTEGER</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Autoincrement<sup><a href="#K6a">[K6a]</a></sup> primary key</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">N/A<sup><a href="#K6b">[K6b]</a></sup></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
 </tr>
 <tr>
@@ -13925,6 +13986,9 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="K6a"></a>[K6a] The use of the AUTOINCREMENT keyword is optional but recommended. Implementers MAY omit the AUTOINCREMENT keyword for performance reasons, with the understanding that doing so has the potential to allow primary key identifiers to be reused.</p>
 </li>
 <li>
+<p><a id="K6b"></a>[K6b] When a table has a primary key that is backed by a ROWID, the "null" flag is ignored.</p>
+</li>
+<li>
 <p><a id="K7"></a>[K7] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).</p>
 </li>
 <li>
@@ -14030,7 +14094,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-07-21 23:42:22 UTC
+Last updated 2020-07-21 23:42:50 UTC
 </div>
 </div>
 </body>
