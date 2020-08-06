@@ -58,7 +58,7 @@ A GeoPackage that contains tile pyramid user data tables with `tile_data` column
 [caption=""]
 .Requirement 92
 ====
-(extends <<r36>> and <<r37>>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<<22>>. Files complying with the WebP format SHALL have the http://www.ietf.org/rfc/rfc2046.txt[MIME type] `image/x-webp`.
+(extends <<r36>> and <<r37>>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<<I22>>. Files complying with the WebP format SHALL have the http://www.ietf.org/rfc/rfc2046.txt[MIME type] `image/x-webp`.
 ====
 
 [NOTE]
@@ -98,7 +98,7 @@ None
 |========================================
 |*Test Case ID* |+/extensions/tile_encoding_webp/data/webp_ext_row+
 |*Test Purpose:* |Verify that this extension is registered using proper rows in the `gpkg_extensions` table.
-|*Test Method:* |	
+|*Test Method:* |
 . /opt/extension_mechanism/data/data_values_table_name will test whether the `table_name` values are valid.
 . SELECT column_name, scope FROM gpkg_extensions where extension_name = 'gpkg_webp';
 . For each row table_name from step 1

@@ -1,19 +1,19 @@
 [appendix]
-== Endnotes 
+== Endnotes
 
 [bibliography]
-- [[[K1]]] SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this standard was written. See Future Work clause in Annex B. 
-- [[[K2]]] SQLite is in the public domain (see http://www.sqlite.org/copyright.html) 
-- [[[K3]]] With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196444487;" SQL statement, where 1196444487 is the 32-bit integer value of 0x47504B47. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x4B, 0x47 at offset 68 in the SQLite database file (see http://www.sqlite.org/fileformat2.html#database_header for details). 
+- [[[K1]]] SQLite version 4 (reference B25), which will be an alternative to version 3, not a replacement thereof, was not available when this standard was written. See Future Work clause in Annex B.
+- [[[K2]]] SQLite is in the public domain (see http://www.sqlite.org/copyright.html)
+- [[[K3]]] With SQLite versions 3.7.17 and later this value MAY be set with the "PRAGMA application_id=1196444487;" SQL statement, where 1196444487 is the 32-bit integer value of 0x47504B47. With earlier versions of SQLite the application id can be set by writing the byte sequence 0x47, 0x50, 0x4B, 0x47 at offset 68 in the SQLite database file (see http://www.sqlite.org/fileformat2.html#database_header for details).
 - [[[K4]]] Older GeoPackages use a different versioning mechanism. Instead of using the user_version, they have an application ID of "GP10" (for GeoPackage 1.0 and 1.0.1) or "GP11" (for GeoPackage 1.1).
-- [[[K4a]]] For more information on maximum database size, see Section 14 of https://www.sqlite.org/limits.html. 
+- [[[K4a]]] For more information on maximum database size, see Section 14 of https://www.sqlite.org/limits.html.
 - [[[K5]]] The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.
-- [[[K6]]] New applications should use the latest available SQLite version software <<8>>
+- [[[K6]]] New applications should use the latest available SQLite version software <<I8>>
 - [[[K6a]]] The use of the AUTOINCREMENT keyword is optional but recommended. Implementers MAY omit the AUTOINCREMENT keyword for performance reasons, with the understanding that doing so has the potential to allow primary key identifiers to be reused.
 - [[[K6b]]] When a table has a primary key that is backed by a ROWID, the "null" flag is ignored.
 - [[[K7]]] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
-- [[[K8]]] GeometryCollection is a generic term for the ST_GeomCollection type defined in <<12>>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMETRYCOLLECTION defined in <<10>> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.
-- [[[K9]]] OGC WKB simple feature geometry types specified in <<9>> are a subset of the ISO WKB geometry types specified in <<12>>
+- [[[K8]]] GeometryCollection is a generic term for the ST_GeomCollection type defined in <<I12>>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMETRYCOLLECTION defined in <<I10>> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.
+- [[[K9]]] OGC WKB simple feature geometry types specified in <<I9>> are a subset of the ISO WKB geometry types specified in <<I12>>
 - [[[K10]]] WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.
 - [[[K11]]] The axis order in WKB is always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation and m is optional measure.
 - [[[K12]]] A GeoPackage is not required to contain any feature data tables. Feature data tables in a GeoPackage MAY be empty.

@@ -60,11 +60,11 @@ If present it SHALL be defined per <<gpkg_data_columns_cols>> and <<gpkg_data_co
 |`name` |TEXT |A human-readable identifier (e.g. short name) for the column_name content |yes |UK
 |`title` |TEXT |A human-readable formal title for the column_name content |yes |
 |`description` |TEXT |A human-readable description for the column_name content |yes |
-|`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type of column_name if BLOB type, or NULL for other types |yes |
+|`mime_type` |TEXT |http://www.iana.org/assignments/media-types/index.html[MIME] <<I21>> type of column_name if BLOB type, or NULL for other types |yes |
 |`constraint_name` |TEXT |Column value constraint name (lowercase) specified by reference to `gpkg_data_column_constraints.constraint_name` |yes |
 |=======================================================================
 
-GeoPackage applications MAY ^<<K38>>^ use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] <<21>> type ^<<K39>>^ information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
+GeoPackage applications MAY ^<<K38>>^ use the `gpkg_data_columns` table to store minimal application schema identifying, descriptive and http://www.iana.org/assignments/media-types/index.html[MIME] <<I21>> type ^<<K39>>^ information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite `sqlite_master` table and pragma `table_info(table_name)` SQL function.
 The `gpkg_data_columns` data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.
 
 See <<gpkg_data_columns_sql>>.
@@ -110,7 +110,7 @@ See <<gpkg_data_column_constraints_sql>>.
 
 [WARNING]
 ====
-In GeoPackage 1.0, this table had column names `minIsInclusive` and `maxIsInclusive` instead of `min_is_inclusive` and `max_is_inclusive`. 
+In GeoPackage 1.0, this table had column names `minIsInclusive` and `maxIsInclusive` instead of `min_is_inclusive` and `max_is_inclusive`.
 This was corrected in GeoPackage 1.1 but it is possible that some older GeoPackages may have rows in this table and use the incorrect column names.
 ====
 
@@ -123,13 +123,13 @@ This was corrected in GeoPackage 1.1 but it is possible that some older GeoPacka
 [caption=""]
 .Requirement 141
 ====
-GeoPackages with rows in the `gpkg_extensions` table with an `extension_name` of "gpkg_schema" SHALL comply with this extension. 
+GeoPackages with rows in the `gpkg_extensions` table with an `extension_name` of "gpkg_schema" SHALL comply with this extension.
 GeoPackages complying with this extension SHALL have rows in the `gpkg_extensions` table as described in <<SchemaExtensionTableRecord>> (below).
 ====
 
 [WARNING]
 =====
-Requirement 141 was updated as part of GeoPackage 1.2.1. 
+Requirement 141 was updated as part of GeoPackage 1.2.1.
 In 1.1.0 and 1.2.0, the details of required `gpkg_extensions` rows were inadvertently left unspecified.
 While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` rows, it is recommended to update these rows to comply with the updated requirement on older versions as well.
 =====
@@ -145,7 +145,7 @@ While the executable test suite running on an older GeoPackage version will not 
 
 [NOTE]
 =====
-For the `definition` column, use a hyperlink that describes the current implementation of this extension. 
+For the `definition` column, use a hyperlink that describes the current implementation of this extension.
 While a URL like http://www.geopackage.org/spec/#extension_schema is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_schema where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_schema is the permalink for this extension for GeoPackage 1.2.1.
 =====
 
@@ -177,7 +177,7 @@ If it is not NULL, it SHALL contain a `constraint_name` column value (which SHAL
 [float]
 ====== Data Column Constraints
 
-The lowercase `gpkg_data_column_constraints` `constraint_type` column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<33>>).
+The lowercase `gpkg_data_column_constraints` `constraint_type` column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <<I33>>).
 The case sensitive `value` column contains an enumerated legal value for `constraint_type` "enum", a pattern match string for `constraint_type` "glob", or NULL for `constraint_type` "range". The set of `value` column values in rows of `constraint_type` "enum" with the same `constraint_name` contains all possible enumerated values for the constraint name. The `min` and `max` column values specify the minimum and maximum valid values for `constraint_type` "range", or are NULL for `constraint_type` "enum" or "glob". The `min_is_inclusive` and `max_is_inclusive` column values contain *1* if the `min` and `max` values (respectively) are inclusive, *0* if they are exclusive, or are NULL for `constraint_type` "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.
 

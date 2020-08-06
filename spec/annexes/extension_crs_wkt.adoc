@@ -4,7 +4,7 @@
 [float]
 ==== Introduction
 
-The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <<34>>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <<32>> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.
+The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <<I34>>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <<I32>> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.
 
 [float]
 ==== Extension Author
@@ -53,9 +53,9 @@ For GeoPackages conforming to this extension, the `gpkg_spatial_ref_sys` table S
 |`srs_id` |INTEGER |Unique identifier for each Spatial Reference System within a GeoPackage |true |PK
 |`organization` |TEXT |Case-insensitive name of the defining organization e.g. EPSG or epsg |true |
 |`organization_coordsys_id` |INTEGER |Numeric ID of the Spatial Reference System assigned by the organization |true |
-|`definition` |TEXT |Well-known Text <<32>> Representation of the Spatial Reference System |true| 
+|`definition` |TEXT |Well-known Text <<I32>> Representation of the Spatial Reference System |true|
 |`description` |TEXT |Human readable description of this SRS |false|
-|`definition_12_063` |TEXT |Well-known Text <<34>> Representation of the Spatial Reference System |true|
+|`definition_12_063` |TEXT |Well-known Text <<I34>> Representation of the Spatial Reference System |true|
 |====
 
 [NOTE]
@@ -78,7 +78,7 @@ GeoPackages complying with this extension SHALL have a row in the `gpkg_extensio
 
 [WARNING]
 =====
-Requirement 145 has been updated as part of GeoPackage 1.2.1. 
+Requirement 145 has been updated as part of GeoPackage 1.2.1.
 In 1.1.0 and 1.2.0, the `table_name` and `column_name` column values of the required `gpkg_extensions` row were inadvertently left unspecified.
 While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` column values, it is recommended to update these values to comply with the updated requirement on older versions as well.
 =====
@@ -93,7 +93,7 @@ While the executable test suite running on an older GeoPackage version will not 
 
 [NOTE]
 =====
-For the `definition` column, use a hyperlink that describes the current implementation of this extension. 
+For the `definition` column, use a hyperlink that describes the current implementation of this extension.
 While a URL like http://www.geopackage.org/spec/#extension_crs_wkt is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_crs_wkt where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_crs_wkt is the permalink for this extension for GeoPackage 1.2.1.
 =====
 
@@ -103,14 +103,14 @@ While a URL like http://www.geopackage.org/spec/#extension_crs_wkt is acceptable
 [caption=""]
 .Requirement 116
 ====
-Values of the `definition_12_063` column SHALL be constructed per the WKT syntax in <<34>>.
+Values of the `definition_12_063` column SHALL be constructed per the WKT syntax in <<I34>>.
 ====
 
 [[r117]]
 [caption=""]
 .Requirement 117
 ====
-At least one definition column SHALL be defined with a valid definition unless the value of the `srs_id` column is `0` or `-1`. Both columns SHOULD be defined. If it is not possible to produce a valid <<32>> definition then the value of the `definition` column MAY be `undefined`. If it is not possible to produce a valid <<34>> definition then the value of the `definition_12_063` column MAY be `undefined`.
+At least one definition column SHALL be defined with a valid definition unless the value of the `srs_id` column is `0` or `-1`. Both columns SHOULD be defined. If it is not possible to produce a valid <<I32>> definition then the value of the `definition` column MAY be `undefined`. If it is not possible to produce a valid <<I34>> definition then the value of the `definition_12_063` column MAY be `undefined`.
 ====
 
 [NOTE]
@@ -165,7 +165,7 @@ If, for a particular row, both the `definition` and `definition_12_063` columns 
 .. Confirm that this returns "NONE" -1 "undefined" "undefined"
 . `SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = 0`
 .. Confirm that this returns "NONE" 0 "undefined" "undefined"
-. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326` 
+. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326`
 .. Confirm that this is a valid CRS
 . `SELECT definition_12_063 FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326`
 .. Confirm that this is a valid 12-063 CRS
