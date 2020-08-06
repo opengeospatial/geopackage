@@ -263,7 +263,7 @@ Document language: 	English<br></p>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A <strong>GeoPackage</strong> is an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information.
-It is a platform-independent SQLite <a href="#5">[5]</a> database file that contains the GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">Figure 1</a> below.</p>
+It is a platform-independent SQLite <a href="#I5">[I5]</a> database file that contains the GeoPackage data and metadata tables shown in <a href="#geopackage_tables_figure">Figure 1</a> below.</p>
 </div>
 <div class="paragraph">
 <p>The GeoPackage Encoding Standard (this document) describes a set of conventions for storing the following within an SQLite database:</p>
@@ -305,7 +305,7 @@ A GeoPackage MAY contain spatial indexes on feature geometries and SQL triggers 
 <p>A <strong>GeoPackage SQLite Configuration</strong> consists of the SQLite 3 software library and a set of compile- and runtime configurations options.</p>
 </div>
 <div class="paragraph">
-<p>A <strong>GeoPackage SQLite Extension</strong> is a SQLite loadable extension that MAY provide SQL functions <a href="#12">[12]</a> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <a href="#1">[1]</a> <a href="#2">[2]</a> <a href="#3">[3]</a> <a href="#4">[4]</a> access to a GeoPackage file. This standard does not address the issues listed in the <a href="#_potential_future_work">Potential Future Work (Informative)</a> clause in <a href="#background_and_context">Background and Context (Normative)</a>, which MAY be addressed in a subsequent version of this standard or by other specifications.</p>
+<p>A <strong>GeoPackage SQLite Extension</strong> is a SQLite loadable extension that MAY provide SQL functions <a href="#I12">[I12]</a> to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API <a href="#I1">[I1]</a> <a href="#I2">[I2]</a> <a href="#I3">[I3]</a> <a href="#I4">[I4]</a> access to a GeoPackage file. This standard does not address the issues listed in the <a href="#_potential_future_work">Potential Future Work (Informative)</a> clause in <a href="#background_and_context">Background and Context (Normative)</a>, which MAY be addressed in a subsequent version of this standard or by other specifications.</p>
 </div>
 <div id="geopackage_tables_figure" class="imageblock">
 <div class="content">
@@ -537,7 +537,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 <div class="title">Requirement 8</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via <a href="http://www.sqlite.org/download.html">SQLite version 3</a> <a href="#6">[6]</a> software APIs. <sup><a href="#K6">[K6]</a></sup></p>
+<p>A GeoPackage SQLite Configuration SHALL provide SQL access to GeoPackage contents via <a href="http://www.sqlite.org/download.html">SQLite version 3</a> <a href="#I6">[I6]</a> software APIs. <sup><a href="#K6">[K6]</a></sup></p>
 </div>
 </div>
 </div>
@@ -545,7 +545,7 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 <div class="sect5">
 <h6 id="_every_gpkg_sqlite_configuration">1.1.1.2.2. Every GPKG SQLite Configuration</h6>
 <div class="paragraph">
-<p>The <a href="http://www.sqlite.org/download.html">SQLite</a> <a href="#8">[8]</a> library has many <a href="http://www.sqlite.org/compile.html">compile time</a> and <a href="http://www.sqlite.org/pragma.html">run time</a> options that MAY be used to configure SQLite for different uses. Use of <a href="http://www.sqlite.org/compile.html#omitfeatures">SQLITE_OMIT options</a> is not recommended because certain elements of the GeoPackage standard depend on the availability of SQLite functionality at runtime.</p>
+<p>The <a href="http://www.sqlite.org/download.html">SQLite</a> <a href="#I8">[I8]</a> library has many <a href="http://www.sqlite.org/compile.html">compile time</a> and <a href="http://www.sqlite.org/pragma.html">run time</a> options that MAY be used to configure SQLite for different uses. Use of <a href="http://www.sqlite.org/compile.html#omitfeatures">SQLITE_OMIT options</a> is not recommended because certain elements of the GeoPackage standard depend on the availability of SQLite functionality at runtime.</p>
 </div>
 <div id="r9" class="exampleblock">
 <div class="title">Requirement 9</div>
@@ -577,8 +577,8 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 The spatial reference system (SRS) definitions it contains are referenced by the GeoPackage <code>gpkg_contents</code> and <code>gpkg_geometry_columns</code> tables to relate the vector and tile data in user tables to locations on the earth.</p>
 </div>
 <div class="paragraph">
-<p>The <code>gpkg_spatial_ref_sys</code> table includes the columns specified in SQL/MM (ISO 13249-3) <a href="#12">[12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Table 2</a> below containing data that defines spatial reference systems.
-Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#12">[12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> (Table 21) standards.</p>
+<p>The <code>gpkg_spatial_ref_sys</code> table includes the columns specified in SQL/MM (ISO 13249-3) <a href="#I12">[I12]</a> and shown in <a href="#gpkg_spatial_ref_sys_cols">Table 2</a> below containing data that defines spatial reference systems.
+Views of this table MAY be used to provide compatibility with the <a href="http://www.iso.org/iso/home/store/catalogue_ics/catalogue_detail_ics.htm?csnumber=53698">SQL/MM</a> <a href="#I12">[I12]</a> (see <a href="#sqlmm_gpkg_spatial_ref_sys_sql">SQL/MM View of gpkg_spatial_ref_sys Definition SQL (Informative)</a>) and OGC <a href="http://portal.opengeospatial.org/files/?artifact_id=25354">Simple Features SQL</a> <a href="#I9">[I9]</a><a href="#I10">[I10]</a><a href="#I11">[I11]</a> (Table 21) standards.</p>
 </div>
 <table id="gpkg_spatial_ref_sys_cols" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 2. Spatial Ref Sys Table Definition</caption>
@@ -630,7 +630,7 @@ Views of this table MAY be used to provide compatibility with the <a href="http:
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#32">[32]</a> Representation of the Spatial Reference System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#I32">[I32]</a> Representation of the Spatial Reference System</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -670,13 +670,13 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 </table>
 </div>
 <div class="paragraph">
-<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <a href="#r11">Requirement 11</a>. Values are constructed per the EBNF syntax in <a href="#32">[32]</a> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <a href="#13">[13]</a><a href="#14">[14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#r11">Requirement 11</a>:</p>
+<p>Definition column WKT values in the <code>gpkg_spatial_ref_sys</code> table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <a href="#r11">Requirement 11</a>. Values are constructed per the EBNF syntax in <a href="#I32">[I32]</a> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <a href="#I13">[I13]</a><a href="#I14">[I14]</a>. For example, see the return value in <a href="#spatial_ref_sys_data_values_default">[spatial_ref_sys_data_values_default]</a> Test Method step (3) used to test the definition for WGS-84 per <a href="#r11">Requirement 11</a>:</p>
 </div>
 <div id="r11" class="exampleblock">
 <div class="title">Requirement 11</div>
 <div class="content">
 <div class="paragraph">
-<p>The <code>gpkg_spatial_ref_sys</code> table SHALL contain at a minimum the records listed in <a href="#gpkg_spatial_ref_sys_records">Table 3</a>. The record with an <code>srs_id</code> of 4326 SHALL correspond to <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a> <a href="#15">[15]</a> as defined by  <a href="http://www.epsg.org/Geodetic.html">EPSG</a> <a href="#B3">[B3]</a> in <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> <a href="#13">[13]</a><a href="#14">[14]</a>. The record with an <code>srs_id</code> of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an <code>srs_id</code> of 0 SHALL be used for undefined geographic coordinate reference systems.</p>
+<p>The <code>gpkg_spatial_ref_sys</code> table SHALL contain at a minimum the records listed in <a href="#gpkg_spatial_ref_sys_records">Table 3</a>. The record with an <code>srs_id</code> of 4326 SHALL correspond to <a href="http://www.google.com/search?as_q=WGS-84">WGS-84</a> <a href="#I15">[I15]</a> as defined by  <a href="http://www.epsg.org/Geodetic.html">EPSG</a> <a href="#B3">[B3]</a> in <a href="http://www.epsg-registry.org/report.htm?type=selection&amp;entity=urn:ogc:def:crs:EPSG::4326&amp;reportDetail=long&amp;title=WGS%2084&amp;style=urn:uuid:report-style:default-with-code&amp;style_name=OGP%20Default%20With%20Code">4326</a> <a href="#I13">[I13]</a><a href="#I14">[I14]</a>. The record with an <code>srs_id</code> of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an <code>srs_id</code> of 0 SHALL be used for undefined geographic coordinate reference systems.</p>
 </div>
 </div>
 </div>
@@ -882,7 +882,7 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 <div class="title">Requirement 15</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> <a href="#29">[29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. <sup><a href="#K7">[K7]</a></sup></p>
+<p>Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> <a href="#I29">[I29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. <sup><a href="#K7">[K7]</a></sup></p>
 </div>
 </div>
 </div>
@@ -941,12 +941,12 @@ At a minimum, a GeoPackage SHOULD contain at least one user data table as define
 <h4 id="sfsql_intro">2.1.1. Simple Features SQL Introduction</h4>
 <div class="paragraph">
 <p>Vector feature data represents geolocated entities including conceptual ones such as districts, real world objects such as roads and rivers, and observations thereof.
-International standards <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a><a href="#12">[12]</a> have standardized practices for the storage, access and use of vector geospatial features and geometries via SQL in relational databases.
+International standards <a href="#I9">[I9]</a><a href="#I10">[I10]</a><a href="#I11">[I11]</a><a href="#I12">[I12]</a> have standardized practices for the storage, access and use of vector geospatial features and geometries via SQL in relational databases.
 The first component of the SQL schema for vector features in a GeoPackage is the <code>gpkg_spatial_ref_sys</code> table defined in clause <a href="#spatial_ref_sys">Spatial Reference Systems</a> above.
 Other components are defined below.</p>
 </div>
 <div class="paragraph">
-<p>In a GeoPackage, "simple" features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) <a href="#12">[12]</a> geometry model shown in <a href="#core_geometry_model_figure">Figure 2</a> below.</p>
+<p>In a GeoPackage, "simple" features are geolocated using a linear geometry subset of the SQL/MM (ISO 13249-3) <a href="#I12">[I12]</a> geometry model shown in <a href="#core_geometry_model_figure">Figure 2</a> below.</p>
 </div>
 <div id="core_geometry_model_figure" class="imageblock">
 <div class="content">
@@ -975,7 +975,7 @@ For example: A stream network may be modeled as multilinestring value with the m
 </div>
 <div class="paragraph">
 <p>A brief description of each geometry type is provided below.
-A more detailed description can be found in ISO 13249-3 <a href="#12">[12]</a>.</p>
+A more detailed description can be found in ISO 13249-3 <a href="#I12">[I12]</a>.</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1101,7 +1101,7 @@ StandardGeoPackageBinary {
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>per  OGC 06-103r4 <a href="#9">[9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup> <sup><a href="#K11">[K11]</a></sup></td>
+<td>per  OGC 06-103r4 <a href="#I9">[I9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup> <sup><a href="#K11">[K11]</a></sup></td>
 </tr>
 </table>
 </div>
@@ -1234,7 +1234,7 @@ StandardGeoPackageBinary {
 <li>
 <p>If the geometry is a Point, it SHALL be encoded with each coordinate value set to an IEEE-754 quiet NaN value.
 GeoPackages SHALL use big endian 0x7ff8000000000000 or little endian 0x000000000000f87f as the binary encoding of the NaN values.
-(This is because Well-Known Binary as defined in OGC 06-103r4 <a href="#9">[9]</a> does not provide a standardized encoding for an empty point set, i.e., 'Point Empty' in Well-Known Text.)</p>
+(This is because Well-Known Binary as defined in OGC 06-103r4 <a href="#I9">[I9]</a> does not provide a standardized encoding for an empty point set, i.e., 'Point Empty' in Well-Known Text.)</p>
 </li>
 </ol>
 </div>
@@ -1361,7 +1361,7 @@ identifies the geometry columns and geometry types in tables that contain user d
 <p>The FK on <code>gpkg_geometry_columns.srs_id</code> references the PK on <code>gpkg_spatial_ref_sys.srs_id</code> to ensure that geometry columns are only defined in feature tables for defined spatial reference systems.</p>
 </div>
 <div class="paragraph">
-<p>Views of this table MAY be used to provide compatibility with the SQL/MM <a href="#12">[12]</a> <a href="#sqlmm_gpkg_geometry_columns_sql">SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</a> and OGC Simple Features SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> <a href="#sfsql_gpkg_geometry_columns_sql">SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</a> specifications.</p>
+<p>Views of this table MAY be used to provide compatibility with the SQL/MM <a href="#I12">[I12]</a> <a href="#sqlmm_gpkg_geometry_columns_sql">SQL/MM View of gpkg_geometry_columns Definition SQL (Informative)</a> and OGC Simple Features SQL <a href="#I9">[I9]</a><a href="#I10">[I10]</a><a href="#I11">[I11]</a> <a href="#sfsql_gpkg_geometry_columns_sql">SF/SQL VIEW of gpkg_geometry_columns Definition SQL (Informative)</a> specifications.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_geometry_columns_sql">gpkg_geometry_columns Table Definition SQL</a>.</p>
@@ -1645,7 +1645,7 @@ If the geometry <code>type_name</code> value is "GEOMETRYCOLLECTION" then the fe
 <div class="sect3">
 <h4 id="_tile_matrix_introduction">2.2.1. Tile Matrix Introduction</h4>
 <div class="paragraph">
-<p>The Tiles option specifies a mechanism for storing raster data in tile pyramids. "Tile pyramid" refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself. "Tile" refers to an individual raster image such as a PNG or JPEG that covers a specific geographic area. "Tile matrix" refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level<sup><a href="#K14">[K14]</a></sup> "Tile matrix set" refers to the definition of a tile pyramid&#8217;s tiling structure. This mechanism is based on the model for tile matrix sets described in Section 6 of <a href="#16">[16]</a>.</p>
+<p>The Tiles option specifies a mechanism for storing raster data in tile pyramids. "Tile pyramid" refers to the concept of pyramid structure of tiles of different spatial extent and resolution at different zoom levels, and the tile data itself. "Tile" refers to an individual raster image such as a PNG or JPEG that covers a specific geographic area. "Tile matrix" refers to rows and columns of tiles that all have the same spatial extent and resolution at a particular zoom level<sup><a href="#K14">[K14]</a></sup> "Tile matrix set" refers to the definition of a tile pyramid&#8217;s tiling structure. This mechanism is based on the model for tile matrix sets described in Section 6 of <a href="#I16">[I16]</a>.</p>
 </div>
 <div class="paragraph">
 <p>The GeoPackage tile store data model MAY be implemented directly as SQL tables in a SQLite database for maximum performance, or as SQL views on top of tables in an existing SQLite tile store for maximum adaptability and loose coupling to enable widespread implementation. A GeoPackage CAN store multiple raster and tile pyramid data sets in different tables or views in the same container. The tables or views that implement the GeoPackage tile store data / metadata model are described and discussed individually in the following subsections.</p>
@@ -1680,7 +1680,7 @@ Pixel sizes are real numbers in the terrain units of the spatial reference syste
 Pixel size MAY vary by a constant factor or by different factors or intervals between some or all adjacent zoom levels in a tile matrix set.
 In the commonly used "zoom times two" convention, pixel sizes vary by a factor of 2 between all adjacent zoom levels, as shown in the example in <a href="#tiles_example_appendix">Tiles Zoom Times Two Example (Informative)</a>.
 Other "zoom other intervals" conventions use different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
-See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional examples of both conventions.</p>
+See Web Map Tile Service (WMTS) <a href="#I16">[I16]</a> Annex E for additional examples of both conventions.</p>
 </div>
 <div class="sect4">
 <h5 id="_data_10">2.2.3.1. Data</h5>
@@ -1707,7 +1707,7 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 <div class="title">Requirement 36</div>
 <div class="content">
 <div class="paragraph">
-<p>In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>, by default SHALL store that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>. <sup><a href="#K16">[K16]</a></sup></p>
+<p>In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#I17">[I17]</a><a href="#I18">[I18]</a><a href="#I19">[I19]</a>, by default SHALL store that tile data in <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#I20">[I20]</a><a href="#I21">[I21]</a>. <sup><a href="#K16">[K16]</a></sup></p>
 </div>
 </div>
 </div>
@@ -1724,7 +1724,7 @@ See Web Map Tile Service (WMTS) <a href="#16">[16]</a> Annex E for additional ex
 <div class="title">Requirement 37</div>
 <div class="content">
 <div class="paragraph">
-<p>In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#20">[20]</a><a href="#21">[21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#17">[17]</a><a href="#18">[18]</a><a href="#19">[19]</a>. <sup><a href="#K16">[K16]</a></sup></p>
+<p>In a GeoPackage that contains a tile pyramid user data table that contains tile data that is not <a href="http://www.iana.org/assignments/media-types/index.html">MIME type</a> <a href="http://libpng.org/pub/png/">image/png</a> <a href="#I20">[I20]</a><a href="#I21">[I21]</a>, by default SHALL store that tile data in <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <a href="http://www.jpeg.org/public/jfif.pdf">image/jpeg</a> <a href="#I17">[I17]</a><a href="#I18">[I18]</a><a href="#I19">[I19]</a>. <sup><a href="#K16">[K16]</a></sup></p>
 </div>
 </div>
 </div>
@@ -2017,7 +2017,7 @@ Similarly, height of a tile matrix (the difference between <code>min_y</code> an
 </div>
 <div class="paragraph">
 <p>Tile matrices are numbered from top left to bottom right (zero-indexed) so the top left tile is (0,0).
-(This follows the convention used by by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#16">[16]</a>.)
+(This follows the convention used by by <a href="http://portal.opengeospatial.org/files/?artifact_id=35326">WMTS</a> <a href="#I16">[I16]</a>.)
 Tile matrices may be sparsely populated – no specific tile or even tile matrix must be present.
 If the global tile matrix set covers the whole earth, then zoom level 0, tile (0,0) is the whole world.</p>
 </div>
@@ -2412,7 +2412,7 @@ GeoPackage implementers use their own author names to register other extensions.
 <div class="title">Requirement 63</div>
 <div class="content">
 <div class="paragraph">
-<p>The definition column value in a <code>gpkg_extensions</code> row SHALL contain a permalink, URI <a href="#23">[23]</a>, or reference to a document defining the extension as per the <a href="#extension_template">GeoPackage Extension Template (Informative)</a>.</p>
+<p>The definition column value in a <code>gpkg_extensions</code> row SHALL contain a permalink, URI <a href="#I23">[I23]</a>, or reference to a document defining the extension as per the <a href="#extension_template">GeoPackage Extension Template (Informative)</a>.</p>
 </div>
 </div>
 </div>
@@ -6758,10 +6758,10 @@ cross-platform, serverless, transactional, open source SQLite data container wit
 integrity constraints, an SQL API exposed via a "C" CLI and JDBC, and manifest tables that together act as an exchange and direct-use format for multiple types of geospatial data including vector features, features with raster attributes and tile matrix pyramids, especially on mobile / hand held devices in disconnected or limited network connectivity environments.</p>
 </div>
 <div class="paragraph">
-<p>Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are interdependent specification facets of the SF-SQL <a href="#9">[9]</a><a href="#10">[10]</a><a href="#11">[11]</a> and SQL-MM (Spatial) <a href="#12">[12]</a> standards that serve as normative references for the vector feature portion of this standard.</p>
+<p>Table formats, definitions of geometry types and metadata tables, relational integrity constraints, and SQL API are interdependent specification facets of the SF-SQL <a href="#I9">[I9]</a><a href="#I10">[I10]</a><a href="#I11">[I11]</a> and SQL-MM (Spatial) <a href="#I12">[I12]</a> standards that serve as normative references for the vector feature portion of this standard.</p>
 </div>
 <div class="paragraph">
-<p>This standard attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted implementations and existing standards such as WMTS <a href="#16">[16]</a> and ISO metadata <a href="#28">[28]</a>, to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.</p>
+<p>This standard attempts to support and use relevant raster types, storage table definitions, and metadata from widely adopted implementations and existing standards such as WMTS <a href="#I16">[I16]</a> and ISO metadata <a href="#I28">[I28]</a>, to integrate use of rasters as attributes of geospatial features, and to define relational integrity constraints and an SQL API thereon to provide a raster analogy to the SF-SQL and SF-MM data access and data quality assurance capabilities.</p>
 </div>
 <div class="paragraph">
 <p>Conformance classes for this standard are classified as core (mandatory) and extension (optional). The simple core of an Empty GeoPackage contains two SQL tables.</p>
@@ -9197,7 +9197,7 @@ In the commonly used "zoom times two" convention, pixel sizes vary by a factor o
 </div>
 <div class="paragraph">
 <p>This extension enables use of "zoom other intervals" conventions with different factors or irregular intervals with pixel sizes chosen for intuitive cartographic representation of raster data, or to coincide with the original pixel size of commonly used global image products.
-See WMTS <a href="#16">[16]</a> Annex E for additional examples of both conventions.</p>
+See WMTS <a href="#I16">[I16]</a> Annex E for additional examples of both conventions.</p>
 </div>
 <h4 id="_extension_author_4" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -9497,7 +9497,7 @@ This extension allows the use of <code>image/x-webp</code> as an additional enco
 <div class="title">Requirement 92</div>
 <div class="content">
 <div class="paragraph">
-<p>(extends <a href="#r36">Requirement 36</a> and <a href="#r37">Requirement 37</a>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<a href="#22">[22]</a>. Files complying with the WebP format SHALL have the <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/x-webp</code>.</p>
+<p>(extends <a href="#r36">Requirement 36</a> and <a href="#r37">Requirement 37</a>) A GeoPackage that contains a tile pyramid user data table that contains tile data MAY store tile_data in the WebP format<a href="#I22">[I22]</a>. Files complying with the WebP format SHALL have the <a href="http://www.ietf.org/rfc/rfc2046.txt">MIME type</a> <code>image/x-webp</code>.</p>
 </div>
 </div>
 </div>
@@ -9691,8 +9691,8 @@ Requirements 36 and 37 allow a tile pyramid user data table to contain PNG or JP
 <h3 id="extension_metadata">F.8. Metadata</h3>
 <h4 id="_introduction_9" class="float">Introduction</h4>
 <div class="paragraph">
-<p>Two tables in a GeoPackage provide a means of storing metadata in MIME <a href="#21">[21]</a> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
-These tables are intended to provide the support necessary to implement the hierarchical metadata models as defined in ISO 19115 <a href="#28">[28]</a> and illustrated in <a href="#metadata_example_appendix">Hierarchical Metadata Example One - ISO19115.</a> and <a href="#raster_or_tile_metadata_example_appendix">Raster or Tile Metadata Example</a>. As GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.</p>
+<p>Two tables in a GeoPackage provide a means of storing metadata in MIME <a href="#I21">[I21]</a> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
+These tables are intended to provide the support necessary to implement the hierarchical metadata models as defined in ISO 19115 <a href="#I28">[I28]</a> and illustrated in <a href="#metadata_example_appendix">Hierarchical Metadata Example One - ISO19115.</a> and <a href="#raster_or_tile_metadata_example_appendix">Raster or Tile Metadata Example</a>. As GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.</p>
 </div>
 <div class="paragraph">
 <p>The <code>gpkg_metadata</code> table that contains metadata is described in clause <a href="#_metadata_table">Metadata Table</a>, and the <code>gpkg_metadata_reference</code> table that relates <code>gpkg_metadata</code> to GeoPackage data is described in clause <a href="#_metadata_reference_table">Metadata Reference Table</a>.
@@ -9730,8 +9730,8 @@ There is no GeoPackage requirement that such metadata be provided or that define
 </div>
 </div>
 <div class="paragraph">
-<p>The first component of GeoPackage metadata is the <code>gpkg_metadata</code> table that MAY contain metadata in MIME <a href="#21">[21]</a> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <a href="#28">[28]</a>, ISO 19115-2 <a href="#B6">[B6]</a>, ISO 19139 <a href="#B7">[B7]</a>, Dublin Core <a href="#B8">[B8]</a>, CSDGM <a href="#B10">[B10]</a>, DDMS <a href="#B12">[B12]</a>, NMF/NMIS <a href="#B13">[B13]</a>, etc.
-The GeoPackage interpretation of what constitutes "metadata" is a broad one that includes UML models <a href="#B14">[B14]</a> encoded in XMI <a href="#B15">[B15]</a>, GML Application Schemas <a href="#30">[30]</a>, ISO 19110 feature catalogues <a href="#B18">[B18]</a>, OWL <a href="#B20">[B20]</a> and SKOS <a href="#B21">[B21]</a> taxonomies, etc.</p>
+<p>The first component of GeoPackage metadata is the <code>gpkg_metadata</code> table that MAY contain metadata in MIME <a href="#I21">[I21]</a> encodings structured in accordance with any authoritative metadata specification, such as ISO 19115 <a href="#I28">[I28]</a>, ISO 19115-2 <a href="#B6">[B6]</a>, ISO 19139 <a href="#B7">[B7]</a>, Dublin Core <a href="#B8">[B8]</a>, CSDGM <a href="#B10">[B10]</a>, DDMS <a href="#B12">[B12]</a>, NMF/NMIS <a href="#B13">[B13]</a>, etc.
+The GeoPackage interpretation of what constitutes "metadata" is a broad one that includes UML models <a href="#B14">[B14]</a> encoded in XMI <a href="#B15">[B15]</a>, GML Application Schemas <a href="#I30">[I30]</a>, ISO 19110 feature catalogues <a href="#B18">[B18]</a>, OWL <a href="#B20">[B20]</a> and SKOS <a href="#B21">[B21]</a> taxonomies, etc.</p>
 </div>
 <table id="gpkg_metadata_cols" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 18. Metadata Table Definition</caption>
@@ -9773,7 +9773,7 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>md_standard_uri</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">URI <a href="#23">[23]</a> reference to the metadata structure definition authority <sup><a href="#K29">[K29]</a></sup></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">URI <a href="#I23">[I23]</a> reference to the metadata structure definition authority <sup><a href="#K29">[K29]</a></sup></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">any</p></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -9781,9 +9781,9 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mime_type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">MIME <a href="#21">[21]</a> encoding of metadata</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">MIME <a href="#I21">[I21]</a> encoding of metadata</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">'text/xml' <a href="#24">[24]</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">'text/xml' <a href="#I24">[I24]</a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -9798,7 +9798,7 @@ The GeoPackage interpretation of what constitutes "metadata" is a broad one that
 </table>
 <div class="paragraph">
 <p>The md_standard_uri data value provides an identifier for the metadata structure (schema) specified by its definition authority.
-The structure (schema) information could be in whatever encoding is used by the definition authority, e.g. UML <a href="#B14">[B14]</a>, or IDEF1x <a href="#B16">[B16]</a>, or XML/Schema <a href="#25">[25]</a><a href="#26">[26]</a><a href="#27">[27]</a>, or RDF/S <a href="#B19">[B19]</a>.</p>
+The structure (schema) information could be in whatever encoding is used by the definition authority, e.g. UML <a href="#B14">[B14]</a>, or IDEF1x <a href="#B16">[B16]</a>, or XML/Schema <a href="#I25">[I25]</a><a href="#I26">[I26]</a><a href="#I27">[I27]</a>, or RDF/S <a href="#B19">[B19]</a>.</p>
 </div>
 <div class="paragraph">
 <p>See <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
@@ -9982,7 +9982,7 @@ While a URL like <a href="http://www.geopackage.org/spec/#extension_metadata" cl
 <div class="paragraph">
 <p>The <code>md_scope</code> column in the <code>gpkg_metadata</code> table is the name of the applicable scope for the contents of the metadata column for a given row.
 The list of valid scope names and their definitions is provided in <a href="#metadata_scopes">Table 15</a> below.
-The initial contents of this table were obtained from the ISO 19115 <a href="#28">[28]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <sup><a href="#K32">[K32]</a></sup> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">Table 12</a>.</p>
+The initial contents of this table were obtained from the ISO 19115 <a href="#I28">[I28]</a>, Annex B B.5.25 MD_ScopeCode code list, which was extended <sup><a href="#K32">[K32]</a></sup> for use in the GeoPackage specification by addition of entries with "NA" as the scope code column in <a href="#gpkg_metadata_cols">Table 12</a>.</p>
 </div>
 <table id="metadata_scopes" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 21. Metadata Scopes</caption>
@@ -10164,7 +10164,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <div class="title">Requirement 100</div>
 <div class="content">
 <div class="paragraph">
-<p>Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in ISO 8601 <a href="#29">[29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC.<sup><a href="#K37">[K37]</a></sup></p>
+<p>Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in ISO 8601 <a href="#I29">[I29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC.<sup><a href="#K37">[K37]</a></sup></p>
 </div>
 </div>
 </div>
@@ -11772,7 +11772,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Table 16</a
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>mime_type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.iana.org/assignments/media-types/index.html">MIME</a> <a href="#21">[21]</a> type of column_name if BLOB type, or NULL for other types</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.iana.org/assignments/media-types/index.html">MIME</a> <a href="#I21">[I21]</a> type of column_name if BLOB type, or NULL for other types</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">yes</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -11786,7 +11786,7 @@ If present it SHALL be defined per <a href="#gpkg_data_columns_cols">Table 16</a
 </tbody>
 </table>
 <div class="paragraph">
-<p>GeoPackage applications MAY <sup><a href="#K38">[K38]</a></sup> use the <code>gpkg_data_columns</code> table to store minimal application schema identifying, descriptive and <a href="http://www.iana.org/assignments/media-types/index.html">MIME</a> <a href="#21">[21]</a> type <sup><a href="#K39">[K39]</a></sup> information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite <code>sqlite_master</code> table and pragma <code>table_info(table_name)</code> SQL function.
+<p>GeoPackage applications MAY <sup><a href="#K38">[K38]</a></sup> use the <code>gpkg_data_columns</code> table to store minimal application schema identifying, descriptive and <a href="http://www.iana.org/assignments/media-types/index.html">MIME</a> <a href="#I21">[I21]</a> type <sup><a href="#K39">[K39]</a></sup> information about columns in user vector feature and tile matrix data tables that supplements the data available from the SQLite <code>sqlite_master</code> table and pragma <code>table_info(table_name)</code> SQL function.
 The <code>gpkg_data_columns</code> data CAN be used to provide more specific column data types and value ranges and application specific structural and semantic information to enable more informative user menu displays and more effective user decisions on the suitability of GeoPackage contents for specific purposes.</p>
 </div>
 <div class="paragraph">
@@ -12023,7 +12023,7 @@ If it is not NULL, it SHALL contain a <code>constraint_name</code> column value 
 </div>
 <h6 id="_data_column_constraints" class="float">Data Column Constraints</h6>
 <div class="paragraph">
-<p>The lowercase <code>gpkg_data_column_constraints</code> <code>constraint_type</code> column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#33">[33]</a>).
+<p>The lowercase <code>gpkg_data_column_constraints</code> <code>constraint_type</code> column value specifies the type of constraint: "range", "enum", or "glob" (GLOB is a text pattern match - see <a href="#I33">[I33]</a>).
 The case sensitive <code>value</code> column contains an enumerated legal value for <code>constraint_type</code> "enum", a pattern match string for <code>constraint_type</code> "glob", or NULL for <code>constraint_type</code> "range". The set of <code>value</code> column values in rows of <code>constraint_type</code> "enum" with the same <code>constraint_name</code> contains all possible enumerated values for the constraint name. The <code>min</code> and <code>max</code> column values specify the minimum and maximum valid values for <code>constraint_type</code> "range", or are NULL for <code>constraint_type</code> "enum" or "glob". The <code>min_is_inclusive</code> and <code>max_is_inclusive</code> column values contain <strong>1</strong> if the <code>min</code> and <code>max</code> values (respectively) are inclusive, <strong>0</strong> if they are exclusive, or are NULL for <code>constraint_type</code> "enum" or "glob".
 These restrictions MAY be enforced by SQL triggers or by code in applications that update GeoPackage data values.</p>
 </div>
@@ -13002,7 +13002,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <h3 id="extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</h3>
 <h4 id="_introduction_11" class="float">Introduction</h4>
 <div class="paragraph">
-<p>The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <a href="#34">[34]</a>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <a href="#32">[32]</a> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.</p>
+<p>The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <a href="#I34">[I34]</a>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <a href="#I32">[I32]</a> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.</p>
 </div>
 <h4 id="_extension_author_8" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -13085,7 +13085,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#32">[32]</a> Representation of the Spatial Reference System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#I32">[I32]</a> Representation of the Spatial Reference System</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -13099,7 +13099,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition_12_063</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#34">[34]</a> Representation of the Spatial Reference System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#I34">[I34]</a> Representation of the Spatial Reference System</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -13194,7 +13194,7 @@ While a URL like <a href="http://www.geopackage.org/spec/#extension_crs_wkt" cla
 <div class="title">Requirement 116</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>definition_12_063</code> column SHALL be constructed per the WKT syntax in <a href="#34">[34]</a>.</p>
+<p>Values of the <code>definition_12_063</code> column SHALL be constructed per the WKT syntax in <a href="#I34">[I34]</a>.</p>
 </div>
 </div>
 </div>
@@ -13202,7 +13202,7 @@ While a URL like <a href="http://www.geopackage.org/spec/#extension_crs_wkt" cla
 <div class="title">Requirement 117</div>
 <div class="content">
 <div class="paragraph">
-<p>At least one definition column SHALL be defined with a valid definition unless the value of the <code>srs_id</code> column is <code>0</code> or <code>-1</code>. Both columns SHOULD be defined. If it is not possible to produce a valid <a href="#32">[32]</a> definition then the value of the <code>definition</code> column MAY be <code>undefined</code>. If it is not possible to produce a valid <a href="#34">[34]</a> definition then the value of the <code>definition_12_063</code> column MAY be <code>undefined</code>.</p>
+<p>At least one definition column SHALL be defined with a valid definition unless the value of the <code>srs_id</code> column is <code>0</code> or <code>-1</code>. Both columns SHOULD be defined. If it is not possible to produce a valid <a href="#I32">[I32]</a> definition then the value of the <code>definition</code> column MAY be <code>undefined</code>. If it is not possible to produce a valid <a href="#I34">[I34]</a> definition then the value of the <code>definition_12_063</code> column MAY be <code>undefined</code>.</p>
 </div>
 </div>
 </div>
@@ -13980,7 +13980,7 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="K5"></a>[K5] The SQLite PRAGMA integrity_check SQL command does a full database scan that can take a long time to complete on a large GeoPackage file.</p>
 </li>
 <li>
-<p><a id="K6"></a>[K6] New applications should use the latest available SQLite version software <a href="#8">[8]</a></p>
+<p><a id="K6"></a>[K6] New applications should use the latest available SQLite version software <a href="#I8">[I8]</a></p>
 </li>
 <li>
 <p><a id="K6a"></a>[K6a] The use of the AUTOINCREMENT keyword is optional but recommended. Implementers MAY omit the AUTOINCREMENT keyword for performance reasons, with the understanding that doing so has the potential to allow primary key identifiers to be reused.</p>
@@ -13992,10 +13992,10 @@ For undated references, the latest edition of the normative document referred to
 <p><a id="K7"></a>[K7] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).</p>
 </li>
 <li>
-<p><a id="K8"></a>[K8] GeometryCollection is a generic term for the ST_GeomCollection type defined in <a href="#12">[12]</a>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMETRYCOLLECTION defined in <a href="#10">[10]</a> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.</p>
+<p><a id="K8"></a>[K8] GeometryCollection is a generic term for the ST_GeomCollection type defined in <a href="#I12">[I12]</a>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMETRYCOLLECTION defined in <a href="#I10">[I10]</a> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.</p>
 </li>
 <li>
-<p><a id="K9"></a>[K9] OGC WKB simple feature geometry types specified in <a href="#9">[9]</a> are a subset of the ISO WKB geometry types specified in <a href="#12">[12]</a></p>
+<p><a id="K9"></a>[K9] OGC WKB simple feature geometry types specified in <a href="#I9">[I9]</a> are a subset of the ISO WKB geometry types specified in <a href="#I12">[I12]</a></p>
 </li>
 <li>
 <p><a id="K10"></a>[K10] WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.</p>
@@ -14094,7 +14094,7 @@ For undated references, the latest edition of the normative document referred to
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-07-21 23:42:50 UTC
+Last updated 2020-08-06 21:36:58 UTC
 </div>
 </div>
 </body>
