@@ -6,7 +6,9 @@ All specified table, view, column, trigger, and constraint name values SHALL be 
 
 [NOTE]
 ====
-For maximum interoperability, all GeoPackage table, view, column, trigger, and constraint name values SHOULD start with a lowercase character and only include lowercase characters, numbers 0-9, and underscores (`_`).
+For maximum interoperability, all GeoPackage table, view, column, trigger, and constraint name values SHOULD start with a lowercase character and only include lowercase characters, numbers 0-9, underscores (`_`), and not exceed 128 characters in length.
+While SQLite is extremely flexible with regards to identifiers, standard practice and the SQL standard recommend these limits.
+Straying from these guidelines may cause interoperability issues, particularly if the data is to be used in other RDBMS systems.
 ====
 
 === Core
