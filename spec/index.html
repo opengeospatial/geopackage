@@ -331,7 +331,9 @@ All specified table, view, column, trigger, and constraint name values SHALL be 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>For maximum interoperability, all GeoPackage table, view, column, trigger, and constraint name values SHOULD start with a lowercase character and only include lowercase characters, numbers 0-9, and underscores (<code>_</code>).</p>
+<p>For maximum interoperability, all GeoPackage table, view, column, trigger, and constraint name values SHOULD start with a lowercase character and only include lowercase characters, numbers 0-9, underscores (<code>_</code>), and not exceed 128 characters in length.
+While SQLite is extremely flexible with regards to identifiers, standard practice and the SQL standard recommend these limits.
+Straying from these guidelines may cause interoperability issues, particularly if the data is to be used in other RDBMS systems.</p>
 </div>
 </td>
 </tr>
@@ -14095,7 +14097,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-08-19 18:21:16 UTC
+Last updated 2020-09-06 20:36:59 UTC
 </div>
 </div>
 </body>
