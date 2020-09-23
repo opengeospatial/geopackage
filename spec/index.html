@@ -1101,7 +1101,23 @@ StandardGeoPackageBinary {
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>per  OGC 06-103r4 <a href="#I9">[I9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup> <sup><a href="#K11">[K11]</a></sup></td>
+<td>per  OGC 06-103r4 <a href="#I9">[I9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup></td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The axis order in WKB stored in a GeoPackage follows the de facto standard for axis order in WKB and is therefore always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation, and m is optional measure.
+This ordering explicitly overrides the axis order as specified in the SRS metadata, applying Case 4 from OGC 08-038r7, Revision to Axis Order Policy and Recommendations<sup><a href="#K11">[K11]</a></sup>.
+This was done to maintain consistency with previous implementations of WKB that predated the OGC policy.</p>
+</div>
+</td>
 </tr>
 </table>
 </div>
@@ -13002,8 +13018,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <h3 id="extension_crs_wkt">F.10. WKT for Coordinate Reference Systems</h3>
 <h4 id="_introduction_11" class="float">Introduction</h4>
 <div class="paragraph">
-<p>The OGC GeoPackage standard was adopted prior to the adoption of "12-063r5 OGC Well known text representation of Coordinate Reference Systems" <a href="#I34">[I34]</a>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <a href="#I32">[I32]</a> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.
-OGC later adopted "18-010r7 OGC Well known text representation of Coordinate Reference Systems" <a href="#I36">[I36]</a>, in 6 June, 2019 as a revision to 12-063r5.</p>
+<p>The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <a href="#I34">[I34]</a>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <a href="#I32">[I32]</a> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.</p>
 </div>
 <h4 id="_extension_author_8" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -13100,7 +13115,7 @@ OGC later adopted "18-010r7 OGC Well known text representation of Coordinate Ref
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>definition_12_063</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#I34">[I34]</a> or <a href="#I36">[I36]</a> Representation of the Spatial Reference System</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Well-known Text <a href="#I34">[I34]</a> Representation of the Spatial Reference System</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -13195,30 +13210,15 @@ While a URL like <a href="http://www.geopackage.org/spec/#extension_crs_wkt" cla
 <div class="title">Requirement 116</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>definition_12_063</code> column SHALL be constructed per the WKT syntax in <a href="#I34">[I34]</a> and <a href="#I36">[I36]</a>.</p>
+<p>Values of the <code>definition_12_063</code> column SHALL be constructed per the WKT syntax in <a href="#I34">[I34]</a>.</p>
 </div>
 </div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>For backwards compatibility, only use common WKT values between 12-063 and 18-010.
-Additional WKT values in 18-010r7 can be used when required in the CRS definition.</p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 <div id="r117" class="exampleblock">
 <div class="title">Requirement 117</div>
 <div class="content">
 <div class="paragraph">
-<p>At least one definition column SHALL be defined with a valid definition unless the value of the <code>srs_id</code> column is <code>0</code> or <code>-1</code>. Both columns SHOULD be defined. If it is not possible to produce a valid <a href="#I32">[I32]</a> definition then the value of the <code>definition</code> column MAY be <code>undefined</code>. If it is not possible to produce a valid <a href="#I34">[I34]</a> or <a href="#I36">[I36]</a> definition then the value of the <code>definition_12_063</code> column MAY be <code>undefined</code>.</p>
+<p>At least one definition column SHALL be defined with a valid definition unless the value of the <code>srs_id</code> column is <code>0</code> or <code>-1</code>. Both columns SHOULD be defined. If it is not possible to produce a valid <a href="#I32">[I32]</a> definition then the value of the <code>definition</code> column MAY be <code>undefined</code>. If it is not possible to produce a valid <a href="#I34">[I34]</a> definition then the value of the <code>definition_12_063</code> column MAY be <code>undefined</code>.</p>
 </div>
 </div>
 </div>
@@ -13874,13 +13874,10 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 <p><a id="I33"></a>[I33] SQLite GLOB operator <a href="https://www.sqlite.org/lang_expr.html#glob" class="bare">https://www.sqlite.org/lang_expr.html#glob</a></p>
 </li>
 <li>
-<p><a id="I34"></a>[I34] Geographic information — Well-known text representation of coordinate reference systems <a href="http://docs.opengeospatial.org/is/12-063r5/12-063r5.html" class="bare">http://docs.opengeospatial.org/is/12-063r5/12-063r5.html</a></p>
+<p><a id="I34"></a>[I34] Geographic information — Well-known text representation of coordinate reference systems <a href="https://docs.opengeospatial.org/is/18-010r7/18-010r7.html" class="bare">https://docs.opengeospatial.org/is/18-010r7/18-010r7.html</a></p>
 </li>
 <li>
 <p><a id="I35"></a>[I35] TIFF &#8482;  Revision 6.0 Final — June 3, 1992 <a href="ftp://download.osgeo.org/libtiff/doc/TIFF6.pdf" class="bare">ftp://download.osgeo.org/libtiff/doc/TIFF6.pdf</a>, ©1986-1988, 1992 by Adobe® Systems Incorporated</p>
-</li>
-<li>
-<p><a id="I36"></a>[I36] Geographic information — Well-known text representation of coordinate reference systems <a href="https://docs.opengeospatial.org/is/18-010r7/18-010r7.html" class="bare">https://docs.opengeospatial.org/is/18-010r7/18-010r7.html</a></p>
 </li>
 </ul>
 </div>
@@ -14021,7 +14018,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 <p><a id="K10"></a>[K10] WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.</p>
 </li>
 <li>
-<p><a id="K11"></a>[K11] The axis order in WKB is always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation and m is optional measure.</p>
+<p><a id="K11"></a>[K11] See <a href="https://portal.ogc.org/files/?artifact_id=76024" class="bare">https://portal.ogc.org/files/?artifact_id=76024</a></p>
 </li>
 <li>
 <p><a id="K12"></a>[K12] A GeoPackage is not required to contain any feature data tables. Feature data tables in a GeoPackage MAY be empty.</p>
@@ -14114,7 +14111,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-09-23 18:28:13 UTC
+Last updated 2020-09-23 18:49:06 UTC
 </div>
 </div>
 </body>
