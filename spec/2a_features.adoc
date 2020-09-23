@@ -108,7 +108,14 @@ StandardGeoPackageBinary {
 <3> see <<flags_layout>>
 <4> see flags envelope contents indicator code below
 <5> The X bit in the header flags field must be set to 0.
-<6> per  OGC 06-103r4 <<I9>>  ^<<K9>>^ ^<<K10>>^ ^<<K11>>^
+<6> per  OGC 06-103r4 <<I9>>  ^<<K9>>^ ^<<K10>>^
+
+[WARNING]
+====
+The axis order in WKB stored in a GeoPackage follows the de facto standard for axis order in WKB and is therefore always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation, and m is optional measure.
+This ordering explicitly overrides the axis order as specified in the SRS metadata, applying Case 4 from OGC 08-038r7, Revision to Axis Order Policy and Recommendations^<<K11>>^.
+This was done to maintain consistency with previous implementations of WKB that predated the OGC policy.
+====
 
 [[flags_layout]]
 .bit layout of GeoPackageBinary flags byte
