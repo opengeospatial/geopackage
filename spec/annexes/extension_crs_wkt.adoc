@@ -4,7 +4,8 @@
 [float]
 ==== Introduction
 
-The OGC GeoPackage standard was adopted prior to the adoption of "OGC Well known text representation of Coordinate Reference Systems" <<I34>>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <<I32>> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.
+The OGC GeoPackage standard was adopted prior to the adoption of "12-063r5 OGC Well known text representation of Coordinate Reference Systems" <<I34>>, in 13 August, 2014. As a result, the OGC GeoPackage standard references an older document <<I32>> which has known ambiguities that are being encountered in the field. This extension establishes a new column to contain values that conform to the new standard.
+OGC later adopted "18-010r7 OGC Well known text representation of Coordinate Reference Systems" <<I36>>, in 6 June, 2019 as a revision to 12-063r5.
 
 [float]
 ==== Extension Author
@@ -55,7 +56,7 @@ For GeoPackages conforming to this extension, the `gpkg_spatial_ref_sys` table S
 |`organization_coordsys_id` |INTEGER |Numeric ID of the Spatial Reference System assigned by the organization |true |
 |`definition` |TEXT |Well-known Text <<I32>> Representation of the Spatial Reference System |true|
 |`description` |TEXT |Human readable description of this SRS |false|
-|`definition_12_063` |TEXT |Well-known Text <<I34>> Representation of the Spatial Reference System |true|
+|`definition_12_063` |TEXT |Well-known Text <<I34>> or <<I36>> Representation of the Spatial Reference System |true|
 |====
 
 [NOTE]
@@ -103,14 +104,21 @@ While a URL like http://www.geopackage.org/spec/#extension_crs_wkt is acceptable
 [caption=""]
 .Requirement 116
 ====
-Values of the `definition_12_063` column SHALL be constructed per the WKT syntax in <<I34>>.
+Values of the `definition_12_063` column SHALL be constructed per the WKT syntax in <<I34>> and <<I36>>.
 ====
+
+[NOTE]
+====
+For backwards compatibility, only use common WKT values between 12-063 and 18-010.
+Additional WKT values in 18-010r7 can be used when required in the CRS definition.
+====
+
 
 [[r117]]
 [caption=""]
 .Requirement 117
 ====
-At least one definition column SHALL be defined with a valid definition unless the value of the `srs_id` column is `0` or `-1`. Both columns SHOULD be defined. If it is not possible to produce a valid <<I32>> definition then the value of the `definition` column MAY be `undefined`. If it is not possible to produce a valid <<I34>> definition then the value of the `definition_12_063` column MAY be `undefined`.
+At least one definition column SHALL be defined with a valid definition unless the value of the `srs_id` column is `0` or `-1`. Both columns SHOULD be defined. If it is not possible to produce a valid <<I32>> definition then the value of the `definition` column MAY be `undefined`. If it is not possible to produce a valid <<I34>> or <<I36>> definition then the value of the `definition_12_063` column MAY be `undefined`.
 ====
 
 [NOTE]
