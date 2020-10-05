@@ -331,7 +331,11 @@ All specified table, view, column, trigger, and constraint name values SHALL be 
 </td>
 <td class="content">
 <div class="paragraph">
-<p>For maximum interoperability, all GeoPackage table, view, column, trigger, and constraint name values SHOULD start with a lowercase character and only include lowercase characters, numbers 0-9, and underscores (<code>_</code>).</p>
+<p>SQLite is more flexible with regards to identifiers than many other RDBMS systems.
+If GeoPackage data is to be used in other RDBMS systems, standard practices SHOULD be used to reduce potential interoperability risks.
+For maximum interoperability, all GeoPackage table, view, column, trigger, and constraint name values SHOULD start with a lowercase character and only include lowercase characters, numbers 0-9, and underscores (<code>_</code>).
+In addition, some RDBMS systems truncate identifier names that are longer than a fixed byte length which may be as short as 30 bytes.
+Therefore, long GeoPackage identifier values SHOULD be avoided and if long identifier values are used, then they SHOULD be unique for at least the first 30 bytes.</p>
 </div>
 </td>
 </tr>
@@ -1101,23 +1105,7 @@ StandardGeoPackageBinary {
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>per  OGC 06-103r4 <a href="#I9">[I9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup></td>
-</tr>
-</table>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The axis order in WKB stored in a GeoPackage follows the de facto standard for axis order in WKB and is therefore always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation, and m is optional measure.
-This ordering explicitly overrides the axis order as specified in the SRS metadata, applying Case 4 from OGC 08-038r7, Revision to Axis Order Policy and Recommendations<sup><a href="#K11">[K11]</a></sup>.
-This was done to maintain consistency with previous implementations of WKB that predated the OGC policy.</p>
-</div>
-</td>
+<td>per  OGC 06-103r4 <a href="#I9">[I9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup> <sup><a href="#K11">[K11]</a></sup></td>
 </tr>
 </table>
 </div>
@@ -14018,7 +14006,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 <p><a id="K10"></a>[K10] WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.</p>
 </li>
 <li>
-<p><a id="K11"></a>[K11] See <a href="https://portal.ogc.org/files/?artifact_id=76024" class="bare">https://portal.ogc.org/files/?artifact_id=76024</a></p>
+<p><a id="K11"></a>[K11] The axis order in WKB is always (x,y{,z}{,m}) where x is easting or longitude, y is northing or latitude, z is optional elevation and m is optional measure.</p>
 </li>
 <li>
 <p><a id="K12"></a>[K12] A GeoPackage is not required to contain any feature data tables. Feature data tables in a GeoPackage MAY be empty.</p>
@@ -14111,7 +14099,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-09-23 18:49:06 UTC
+Last updated 2020-10-05 18:14:20 UTC
 </div>
 </div>
 </body>
