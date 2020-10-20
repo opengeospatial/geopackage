@@ -360,7 +360,7 @@ Feature table geometry columns SHALL contain geometries of the type [line-throug
 Allowed geometry types are defined in <<geometry_types>> and shown in part in <<core_geometry_model_figure>>.
 If the geometry `type_name` value is "GEOMETRY" then the feature table geometry column MAY contain geometries of any allowed geometry type.
 This type name is to be used when the geometry type is unknown or if multiple geometry types will be present in the same table (e.g., POLYGON and MULTIPOLYGON).
-If the geometry `type_name` value is "GEOMETRYCOLLECTION" then the feature table geometry column MAY contain zero or more geometries of any allowed geometry type.
+If the geometry `type_name` value is "GEOMETRYCOLLECTION" then the feature table geometry column MAY geometries of type GeometryCollection containing zero or more geometries of any allowed geometry type.
 
 The presence or absence of optional elevation (Z) and/or measure (M) values in a geometry does not change its type or assignability. The unit of measure for optional elevation(Z) values is determined by the CRS of the geometry; it is as-defined by a 3D CRS, and undefined for a 2D CRS. The unit of measure for optional measure (M) values is determined by the CRS of the geometry.
 
