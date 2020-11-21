@@ -93,12 +93,12 @@ GeoPackageBinaryHeader {
   byte[2] magic = 0x4750; <1>
   byte version;           <2>
   byte flags;             <3>
-  int32 srs_id;
-  double[] envelope;      <4>
+  int32 srs_id;           <4>
+  double[] envelope;      <5>
 }
 
 StandardGeoPackageBinary {
-  GeoPackageBinaryHeader header; <5>
+  GeoPackageBinaryHeader header;
   WKBGeometry geometry;          <6>
 }
 ----
@@ -106,9 +106,9 @@ StandardGeoPackageBinary {
 <1> 'GP' in ASCII
 <2> 8-bit unsigned integer, 0 = version 1
 <3> see <<flags_layout>>
-<4> see flags envelope contents indicator code below
-<5> The X bit in the header flags field must be set to 0.
-<6> per  OGC 06-103r4 <<I9>>  ^<<K9>>^ ^<<K10>>^
+<4> the SRS ID, with the endianness specified by the _byte order_ flag
+<5> see _envelope contents indicator code_ below, with the endianness specified by the _byte order_ flag
+<6> per OGC 06-103r4 <<I9>>  ^<<K9>>^ ^<<K10>>^
 
 [WARNING]
 ====
@@ -144,6 +144,13 @@ This was done to maintain consistency with previous implementations of WKB that 
 * B: byte order for header values (1-bit Boolean)
 ** 0: Big Endian (most significant byte first)
 ** 1: Little Endian (least significant byte first)
+
+[WARNING]
+====
+The endianness specified by the B flag technically only pertains to header values, and not to the endianness of the WKBGeometry values themselves.
+The WKBGeometry has its own endianness flag as described in OGC 06-103r4.
+These values SHOULD be the same for consistency reasons.
+====
 
 [[r152]]
 [caption=""]
