@@ -408,7 +408,8 @@ Many mobile devices require external memory cards to be formatted using the FAT3
 </td>
 <td class="content">
 <div class="paragraph">
-<p>GeoPackage now has a registered media type (formerly MIME type) of <code>application/geopackage+vnd.sqlite3</code> <a href="#B27">[B27]</a>.</p>
+<p>GeoPackage now has a registered media type (formerly MIME type) of <code>application/geopackage+sqlite3</code> <a href="#B27">[B27]</a>.
+Previous statements that the media type is <span class="line-through"><code>application/geopackage+vnd.sqlite3</code></span> are in error.</p>
 </div>
 </td>
 </tr>
@@ -1071,12 +1072,12 @@ Each ring is defined by a Curve instance.</p>
   byte[2] magic = 0x4750; <i class="conum" data-value="1"></i><b>(1)</b>
   byte version;           <i class="conum" data-value="2"></i><b>(2)</b>
   byte flags;             <i class="conum" data-value="3"></i><b>(3)</b>
-  int32 srs_id;           <i class="conum" data-value="4"></i><b>(4)</b>
-  double[] envelope;      <i class="conum" data-value="5"></i><b>(5)</b>
+  int32 srs_id;
+  double[] envelope;      <i class="conum" data-value="4"></i><b>(4)</b>
 }
 
 StandardGeoPackageBinary {
-  GeoPackageBinaryHeader header;
+  GeoPackageBinaryHeader header; <i class="conum" data-value="5"></i><b>(5)</b>
   WKBGeometry geometry;          <i class="conum" data-value="6"></i><b>(6)</b>
 }</pre>
 </div>
@@ -1097,15 +1098,15 @@ StandardGeoPackageBinary {
 </tr>
 <tr>
 <td><i class="conum" data-value="4"></i><b>4</b></td>
-<td>the SRS ID, with the endianness specified by the <em>byte order</em> flag</td>
+<td>see flags envelope contents indicator code below</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="5"></i><b>5</b></td>
-<td>see <em>envelope contents indicator code</em> below, with the endianness specified by the <em>byte order</em> flag</td>
+<td>The X bit in the header flags field must be set to 0.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="6"></i><b>6</b></td>
-<td>per OGC 06-103r4 <a href="#I9">[I9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup></td>
+<td>per  OGC 06-103r4 <a href="#I9">[I9]</a>  <sup><a href="#K9">[K9]</a></sup> <sup><a href="#K10">[K10]</a></sup></td>
 </tr>
 </table>
 </div>
@@ -1236,22 +1237,6 @@ This was done to maintain consistency with previous implementations of WKB that 
 </div>
 </li>
 </ul>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>The endianness specified by the B flag technically only pertains to header values, and not to the endianness of the WKBGeometry values themselves.
-The WKBGeometry has its own endianness flag as described in OGC 06-103r4.
-These values SHOULD be the same for consistency reasons.</p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 <div id="r152" class="exampleblock">
 <div class="title">Requirement 152</div>
@@ -14150,7 +14135,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-11-21 21:19:59 UTC
+Last updated 2020-11-22 01:02:10 UTC
 </div>
 </div>
 </body>
