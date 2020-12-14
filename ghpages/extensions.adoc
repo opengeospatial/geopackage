@@ -45,7 +45,7 @@ link:https://gitlab.com/imagemattersllc/ogc-vtp2/-/blob/master/extensions/4-vtae
 |link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/32-generalized-tables.adoc[Generalized Tables]|This extension defines the relationship between base tables and generalized tables. The objective here is to be able to define generalized tables in a way that maximizes client performance.
 |link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/33-index-tables.adoc[Index Tables] |This extension defines describes how a GeoPackage can serve as an index for other GeoPackages. One use of this is to define a set of _segment_ GeoPackages, for performance reasons.
 |link:http://www.compusult.net/html/OGC/3DTile_GeoPackage_Ext_Draft.html[3D Tiles]|This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the 3D Tiles spatial data structure.
-|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/13-semantic-annotations.adoc[Semantic Annotations]|A semantic annotation is a semantically grounded term that can be applied to another concept.
+|link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/13-semantic-annotations.adoc[Semantic Annotations]|A semantic annotation is a semantically grounded term that can be applied to another concept.
 Use of this extension enables semantic annotations to be applied to any business object in the current GeoPackage.
 |link:https://github.com/pka/qgpkg/blob/master/qgis_geopackage_extension.md[QGIS Map Styling Information]|This extension stores QGIS projects with their resources like images in print templates in a GeoPackage file. 
 |link:http://ngageoint.github.io/GeoPackage/docs/extensions/feature-tile-link.html[Feature Tile Link] |This extension creates a link between a feature and tile table. A tile table containing tiles that represent or were generated from features can be linked to the feature table. The link enables feature queries when dealing with tiles representing features.
@@ -55,20 +55,19 @@ Use of this extension enables semantic annotations to be applied to any business
 
 [[metadata_profiles]]
 ## Metadata Profiles
-[cols="20,80"]
-|====
-| |  The following are proposed metadata profiles that were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15]:
 
-link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/11-metadata-styles.adoc[Styles] metadata describes a specific stylesheet. 
+The following metadata profiles were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed16[OGC Testbed-16]:
 
-link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/8-metadata-dataset-provenance.adoc[Dataset Provenance] metadata describes a specific dataset (i.e., GeoPackage table). 
+* link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/23-metadata-gemini.adoc[Gemini] metadata is an ISO 19115 profile for UK GEMINI (GEo-spatial Metadata INteroperability Initiative) metadata elements.
+* link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/22-metadata-dataset-provenance.adoc[Dataset Provenance] metadata uses OWS Context to describe a specific dataset (i.e., GeoPackage table) or an entire GeoPackage. Hierarchical metadata is used to allow, for example, the WPS request to be specified along with the WFS requests needed to produce a GeoPackage.
+* link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/24-metadata-cop.adoc[Common Operational Picture] metadata uses OWS Context to describe a map view including layers and styles.
 
-link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/12-metadata-dataset-stac.adoc[Dataset Provenance (STAC)] metadata, as above, but using link:https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md[SpatioTemporal Asset Catalog] documents.
+The following metadata profiles were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15]:
 
-link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/9-metadata-updates.adoc[Updates] provides support for delta updates. 
-
-link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/10-metadata-manifest.adoc[Manifest] metadata represents the optional elements currently in use in the file.
-|====
+* link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/11-metadata-styles.adoc[Styles] metadata describes a specific stylesheet.
+* link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/12-metadata-dataset-stac.adoc[Dataset Provenance (STAC)] metadata, as above, but using link:https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md[SpatioTemporal Asset Catalog] documents.
+* link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/9-metadata-updates.adoc[Updates] provides support for delta updates.
+* link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/10-metadata-manifest.adoc[Manifest] metadata represents the optional elements currently in use in the file.
 
 ## Deprecated Extensions
 [cols="20,80"]
