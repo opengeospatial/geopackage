@@ -11,13 +11,17 @@ task :generate do
 end
 
 task :generate_guide do
-  # system 'bundle exec asciidoctor -D build/guide -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./guidance/implemenation_guide.adoc'
-  system 'bundle exec asciidoctor -D build/guide ./guide/implementation_guide.adoc'
+  system 'bundle exec asciidoctor -D build/guide ./ghpages/implementation_guide.adoc'
+
+end
+
+task :generate_extensions do
+  system 'bundle exec asciidoctor -D build ./ghpages/extensions.adoc'
 
 end
 
 desc 'Generate site'
-task :build => [:init_local, :generate, :generate_guide]
+task :build => [:init_local, :generate, :generate_guide, :generate_extensions]
 
 task :init_travis do
   repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:').strip
