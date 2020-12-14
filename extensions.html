@@ -539,7 +539,7 @@ Extensions that have widespread adoption may be considered for OGC approval.</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the 3D Tiles spatial data structure.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/13-semantic-annotations.adoc">Semantic Annotations</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/13-semantic-annotations.adoc">Semantic Annotations</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A semantic annotation is a semantically grounded term that can be applied to another concept.
 Use of this extension enables semantic annotations to be applied to any business object in the current GeoPackage.</p></td>
 </tr>
@@ -566,23 +566,41 @@ Use of this extension enables semantic annotations to be applied to any business
 <div class="sect1">
 <h2 id="metadata_profiles">Metadata Profiles</h2>
 <div class="sectionbody">
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 20%;">
-<col style="width: 80%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The following are proposed metadata profiles that were developed during <a href="https://www.opengeospatial.org/projects/initiatives/testbed15">OGC Testbed-15</a>:</p>
-<p class="tableblock"><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/11-metadata-styles.adoc">Styles</a> metadata describes a specific stylesheet.</p>
-<p class="tableblock"><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/8-metadata-dataset-provenance.adoc">Dataset Provenance</a> metadata describes a specific dataset (i.e., GeoPackage table).</p>
-<p class="tableblock"><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/12-metadata-dataset-stac.adoc">Dataset Provenance (STAC)</a> metadata, as above, but using <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md">SpatioTemporal Asset Catalog</a> documents.</p>
-<p class="tableblock"><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/9-metadata-updates.adoc">Updates</a> provides support for delta updates.</p>
-<p class="tableblock"><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/10-metadata-manifest.adoc">Manifest</a> metadata represents the optional elements currently in use in the file.</p></td>
-</tr>
-</tbody>
-</table>
+<div class="paragraph">
+<p>The following metadata profiles were developed during <a href="https://www.opengeospatial.org/projects/initiatives/testbed16">OGC Testbed-16</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/23-metadata-gemini.adoc">Gemini</a> metadata is an ISO 19115 profile for UK GEMINI (GEo-spatial Metadata INteroperability Initiative) metadata elements.</p>
+</li>
+<li>
+<p><a href="https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/22-metadata-dataset-provenance.adoc">Dataset Provenance</a> metadata uses OWS Context to describe a specific dataset (i.e., GeoPackage table) or an entire GeoPackage. Hierarchical metadata is used to allow, for example, the WPS request to be specified along with the WFS requests needed to produce a GeoPackage.</p>
+</li>
+<li>
+<p><a href="https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/24-metadata-cop.adoc">Common Operational Picture</a> metadata uses OWS Context to describe a map view including layers and styles.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The following metadata profiles were developed during <a href="https://www.opengeospatial.org/projects/initiatives/testbed15">OGC Testbed-15</a>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/11-metadata-styles.adoc">Styles</a> metadata describes a specific stylesheet.</p>
+</li>
+<li>
+<p><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/12-metadata-dataset-stac.adoc">Dataset Provenance (STAC)</a> metadata, as above, but using <a href="https://github.com/radiantearth/stac-spec/blob/master/item-spec/item-spec.md">SpatioTemporal Asset Catalog</a> documents.</p>
+</li>
+<li>
+<p><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/9-metadata-updates.adoc">Updates</a> provides support for delta updates.</p>
+</li>
+<li>
+<p><a href="https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/10-metadata-manifest.adoc">Manifest</a> metadata represents the optional elements currently in use in the file.</p>
+</li>
+</ul>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -621,7 +639,7 @@ Use of this extension enables semantic annotations to be applied to any business
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2020-12-14 20:10:17 UTC
+Last updated 2020-12-14 22:56:37 UTC
 </div>
 </div>
 </body>
