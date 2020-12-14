@@ -29,18 +29,35 @@ The extensions listed in this section have not not been adopted by the OGC may o
 [cols="20,80"]
 |====
 |Vector Tiles|
-These extensions define how to store tiled vector (aka vector tiles) to be stored in a GeoPackage. These extensions were developed during the link:https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018[OGC Vector Tiles Pilot] and are currently being refined as part of link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15].
+These extensions define how to store tiled vector (aka vector tiles) to be stored in a GeoPackage. These extensions were developed during the link:https://www.opengeospatial.org/projects/initiatives/vt-pilot-2018[OGC Vector Tiles Pilot] and  link:https://www.ogc.org/projects/initiatives/vtp2[OGC Vector Tiles Pilot Phase 2].
 
-link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/1-vte.adoc[Vector Tiles Extension] defines how vector tiles can be stored in a GeoPackage. 
+link:https://gitlab.com/imagemattersllc/ogc-vtp2/-/blob/master/extensions/1-vte.adoc[Vector Tiles Extension] defines how vector tiles can be stored in a GeoPackage. 
 
-link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/2-mvte.adoc[Mapbox Vector Tiles Extension] defines how vector tiles can be stored in the link:https://github.com/mapbox/vector-tile-spec[MapBox Vector Tiles] format. 
+link:https://gitlab.com/imagemattersllc/ogc-vtp2/-/blob/master/extensions/2-mvte.adoc[Mapbox Vector Tiles Extension] defines how vector tiles can be stored in the link:https://github.com/mapbox/vector-tile-spec[MapBox Vector Tiles] format. 
 
-link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/3-gvte.adoc[GeoJSON Vector Tiles Extension] defines how vector tiles can be stored in the link:https://tools.ietf.org/html/rfc7946[GeoJSON] format. 
+link:https://gitlab.com/imagemattersllc/ogc-vtp2/-/blob/master/extensions/3-gvte.adoc[GeoJSON Vector Tiles Extension] defines how vector tiles can be stored in the link:https://tools.ietf.org/html/rfc7946[GeoJSON] format. 
 
-link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/4-vtae.adoc[Vector Tiles Attributes Extension] defines how correlation between features and the tiles containing them using the GeoPackage Related Tables Extension. 
-|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/5-sse.adoc[Styling and Symbology Extension]|This extension defines how styles and symbols of arbitrary formats can be stored in a GeoPackage.
-|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/6-owce.adoc[OWS Context Extension]|This extension defines link:https://owscontext.org/[OWS Contexts] can be stored in a GeoPackage.
-|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/7-metadata-profiles.adoc[Metadata Profiles]|This extension allows for metadata profiles to be defined as extensions with a scope of "metadata". The following are proposed metadata profiles that were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15]:
+link:https://gitlab.com/imagemattersllc/ogc-vtp2/-/blob/master/extensions/4-vtae.adoc[Vector Tiles Attributes Extension] defines how correlation between features and the tiles containing them using the GeoPackage Related Tables Extension. 
+
+|link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/5-portrayal.adoc[Styling and Symbology Extension]|This extension defines how styles and symbols of arbitrary formats can be stored in a GeoPackage.
+|link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/31-owscontext_geopackage.adoc[OWS Context Extension]|This extension defines how link:https://owscontext.org/[OWS Contexts] can be stored in a GeoPackage.
+|link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/7-metadata-profiles.adoc[Metadata Profiles]|This extension allows for metadata profiles to be defined as extensions with a scope of "metadata". See <<metadata_profiles,below>> for examples.
+|link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/32-generalized-tables.adoc[Generalized Tables]|This extension defines the relationship between base tables and generalized tables. The objective here is to be able to define generalized tables in a way that maximizes client performance.
+|link:https://gitlab.com/imagemattersllc/ogc-tb-16-gpkg/-/blob/master/extensions/33-index-tables.adoc[Index Tables] |This extension defines describes how a GeoPackage can serve as an index for other GeoPackages. One use of this is to define a set of _segment_ GeoPackages, for performance reasons.
+|link:http://www.compusult.net/html/OGC/3DTile_GeoPackage_Ext_Draft.html[3D Tiles]|This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the 3D Tiles spatial data structure.
+|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/13-semantic-annotations.adoc[Semantic Annotations]|A semantic annotation is a semantically grounded term that can be applied to another concept.
+Use of this extension enables semantic annotations to be applied to any business object in the current GeoPackage.
+|link:https://github.com/pka/qgpkg/blob/master/qgis_geopackage_extension.md[QGIS Map Styling Information]|This extension stores QGIS projects with their resources like images in print templates in a GeoPackage file. 
+|link:http://ngageoint.github.io/GeoPackage/docs/extensions/feature-tile-link.html[Feature Tile Link] |This extension creates a link between a feature and tile table. A tile table containing tiles that represent or were generated from features can be linked to the feature table. The link enables feature queries when dealing with tiles representing features.
+|link:http://ngageoint.github.io/GeoPackage/docs/extensions/geometry-index.html[Geometry Index]|This extension defines a SQLite version agnostic way to index user feature table geometries by their bounding envelopes for fast ranged searches. Mobile implementations, including Android and iOS, use earlier versions of SQLite and can not rely on the R*Tree Module implementation. Each geometry in a feature table is indexed by its geometry id and x, y, z, and m value ranges. The geometry index can be queried for fast retrieval of only geometries overlapping a desired envelope bounds. 
+|link:https://github.com/GeoCat/geopackage-owc-spec/blob/master/owc_geopackage_extension.md[OWS Context (GeoCat)]|The main goal of the extension is to store context and styling of a mapping project as part of a GeoPackage file containing the data it refers to. The extension aims at similar use cases as presented in The USGS GeoPackage Styling Experiment in Testbed 12, however the approach is a bit different.
+|====
+
+[[metadata_profiles]]
+## Metadata Profiles
+[cols="20,80"]
+|====
+| |  The following are proposed metadata profiles that were developed during link:https://www.opengeospatial.org/projects/initiatives/testbed15[OGC Testbed-15]:
 
 link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/11-metadata-styles.adoc[Styles] metadata describes a specific stylesheet. 
 
@@ -50,17 +67,14 @@ link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master
 
 link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/9-metadata-updates.adoc[Updates] provides support for delta updates. 
 
-link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/10-metadata-manifest.adoc[Manifest] metadata represents the optional elements currently in use in the file. 
+link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/10-metadata-manifest.adoc[Manifest] metadata represents the optional elements currently in use in the file.
+|====
 
-|link:http://www.compusult.net/html/OGC/3DTile_GeoPackage_Ext_Draft.html[3D Tiles]|This extension represents 3D data in a GeoPackage using a relational data model in SQLite that mirrors the 3D Tiles spatial data structure.
-|link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/13-semantic-annotations.adoc[Semantic Annotations]|A semantic annotation is a semantically grounded term that can be applied to another concept.
-Use of this extension enables semantic annotations to be applied to any business object in the current GeoPackage.
-|link:https://github.com/pka/qgpkg/blob/master/qgis_geopackage_extension.md[QGIS Map Styling Information]|This extension stores QGIS projects with their resources like images in print templates in a GeoPackage file. 
-|link:http://ngageoint.github.io/GeoPackage/docs/extensions/feature-tile-link.html[Feature Tile Link] |This extension creates a link between a feature and tile table. A tile table containing tiles that represent or were generated from features can be linked to the feature table. The link enables feature queries when dealing with tiles representing features.
-|link:http://ngageoint.github.io/GeoPackage/docs/extensions/geometry-index.html[Geometry Index]|This extension defines a SQLite version agnostic way to index user feature table geometries by their bounding envelopes for fast ranged searches. Mobile implementations, including Android and iOS, use earlier versions of SQLite and can not rely on the R*Tree Module implementation. Each geometry in a feature table is indexed by its geometry id and x, y, z, and m value ranges. The geometry index can be queried for fast retrieval of only geometries overlapping a desired envelope bounds. 
-|link:https://github.com/GeoCat/geopackage-owc-spec/blob/master/owc_geopackage_extension.md[OWS Context (GeoCat)]|The main goal of the extension is to store context and styling of a mapping project as part of a GeoPackage file containing the data it refers to. The extension aims at similar use cases as presented in The USGS GeoPackage Styling Experiment in Testbed 12, however the approach is a bit different.
+## Deprecated Extensions
+[cols="20,80"]
+|====
 |link:http://www.gdal.org/geopackage_aspatial.html[Aspatial Support (Legacy)]|Support for aspatial data (ie. SQLite tables/views without a geometry column), potentially with associated metadata. This was used in GDAL 2.0 and GDAL 2.1, before the introduction of the 'attributes' data_type of GeoPackage v1.2. Starting with GDAL 2.2, 'attributes' will be used by default instead. 
-|link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc[OWS Context (Image Matters)] (Deprecated)|This extension, part of a joint effort between the GeoPackage SWG and OWS Context SWG, is an attempt to define an SQL-native encoding for OWS Context. It is incomplete, lacking a proper encoding for style information. It was considered of the Vector Tiles Pilot and Testbed-15 but is not under active consideration at this time.
+|link:https://github.com/jyutzler/geopackage-vector-tiles/blob/master/spec/6-owce.adoc[OWS Context (Image Matters)] (Deprecated)|This extension, part of a joint effort between the GeoPackage SWG and OWS Context SWG, is an attempt to define an SQL-native encoding for OWS Context. It is incomplete, lacking a proper encoding for style information. It was considered of the Vector Tiles Pilot and Testbed-15 but is not under active consideration at this time. Another version is at link:https://gitlab.com/imagemattersllc/geopackage-metadata-profiles/blob/master/extensions/6-owce.adoc[].
 |link:http://www.geopackage.org/spec110/#extension_geometry_encoding[User Defined Geometry Types] (Deprecated)|Enables encoding of additional user-defined geometry types in ExtendedGeoPackageBinary format in an Extended GeoPackage. Removed from GeoPackage 1.2 due to interoperability reasons. 
 |link:http://www.geopackage.org/spec110/#extension_geometry_type_triggers[Geometry Type Triggers] (Deprecated)|Geometry type triggers prevent the storage of geometries of types that are not assignable from the geometry types specified in the `gpkg_geometry_columns` table in the geometry columns of the specified tables. Removed from GeoPackage 1.2 due to interoperability reasons. 
 |link:http://www.geopackage.org/spec110/#extension_geometry_srsid_triggers[Geometry SRS ID Triggers] (Deprecated)| Geometry SRS_ID triggers prevent the storage of geometries with spatial reference system identifiers that are not specified in the `gpkg_geometry_columns` table in the geometry columns of the specified tables. Removed from GeoPackage 1.2 due to interoperability reasons.
