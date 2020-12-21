@@ -1,0 +1,7 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 5* {set:cellbgcolor:#CACCCE}|Req/gpkg-contents +
+ +
+
+The http://www.geopackage.org/spec/#\_contents[`gpkg_contents`] table _SHALL_ contain a row with a `data_type` column value of _2d-gridded-coverage_ for each tile pyramid containing tiled gridded data. When relevant, such as for elevation, the srs_id column value for that row SHOULD reference an SRS that has a vertical datum. This requirement extends core requirement http://www.geopackage.org/spec/#r34[_GPKG-34_]). NOTE: Ideally for elevation data the vertical datum for each pyramid of elevation will be specified. However, it is impractical to mandate this for a number of reasons, including the difficulty in testing whether a specific SRS has a valid vertical datum. {set:cellbgcolor:#FFFFFF}
+|===

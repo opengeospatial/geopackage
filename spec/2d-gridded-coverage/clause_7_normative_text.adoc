@@ -1,0 +1,346 @@
+== Grid-Regular Coverage Extension Requirement Clauses
+
+Clause 7 defines the requirements for encoding and storing regular, grid coverages in a GeoPackage. These requirements are in addition or complement the requirements for raster tiles as defined in the core GeoPackage standard Clause 2.2.
+
+[[table-definitions]]
+=== Table Definitions
+
+Clauses 7.1.1 and 7.1.2 define the requirements and elements of Tiled Grid Extension ancillary (additional) tables required for storing a regular grid of values such as elevation in a GeoPackage.
+
+
+include::requirements/requirements_class_Table_Definitions.adoc[]
+
+[[coverage-ancillary]]
+==== Coverage Ancillary
+
+
+include::requirements/REQ001.adoc[]
+
+<<CoverageAncillaryTableDefinition>> provides definitions for columns in the Coverage Ancillary Table.
+
+
+[#CoverageAncillaryTableDefinition,reftext='{table-caption} {counter:table-num}']
+.Coverage Ancillary Table Definition
+[cols=",,,,,,",options="header",]
+|========================================================================================================================================================================
+|*Column Name* |*Column Type* |*Column Description* |*Null* |*Default* |*Key* |*Constraint*
+|`id` |INTEGER |Autoincrement primary key |no | |PK |
+|`tile_matrix_set_name` |TEXT |Foreign key to table_name in http://www.geopackage.org/spec/#tile_matrix_set_data_table_definition[`gpkg_tile_matrix_set`] |no | |FK |UNIQUE
+|`datatype` |TEXT |_integer_ or _float_ |no |_integer_ | |
+|`scale` |REAL |Scale as a multiple relative to the unit of measure |no |1 | |
+|`offset` |REAL |The offset to the 0 value |no |0 | |
+|`precision` |REAL footnote:[This is a REAL to support extensions that use non-integer data.] |The smallest value that has meaning for this dataset |yes |1 | |
+|`data_null` |REAL footnote:[This is a REAL to support extensions that use non-integer data.] |The value that indicates NULL |yes | | |
+|`grid_cell_encoding` |TEXT |Specifies how a value is assigned to a grid cell (pixel) |yes |grid-value-is-center | |
+|`uom` |TEXT |Units of Measure for values in the grid coverage |yes | | |
+|`field_name` |TEXT |Type of Gridded Coverage Data (default is Height). |yes |Height | |
+|`quantity_definition` |TEXT |Description of the values contained in the Gridded Coverage. |yes |Height | |
+|========================================================================================================================================================================
+
+
+===== Using the Scale and Offset Values
+
+Integer values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scale and offset MAY be applied to the entire coverage and/or the individual tile. The scale and offset do not apply to the `data_null` value as defined in the Coverage Ancillary Table Definitions (above).
+
+Actual cell values are be calculated by:
+
+* first multiplying the stored value by the `gpkg_2d_gridded_tile_ancillary_table.scale` value and then adding the `gpkg_2d_gridded_tile_ancillary_table.offset`,
+* followed by multiplying that value by the `gpkg_2d_gridded_coverage_ancillary.scale` value and then adding the `gpkg_2d_gridded_coverage_ancillary.offset`.
+
+In pseudo-code, this conversion would look like:
+
+`elevationInUnitOfMeasure = (SomeGrid_RegularCoverage.tile_data->pngpixels[i] * gpkg_2d_gridded_tile_ancillary.scale + gpkg_2d_gridded_tile_ancillary.offset) * gpkg_2d_gridded_coverage_ancillary.scale + gpkg_2d_gridded_coverage_ancillary.offset;`
+
+Note: _integer_ and _float_ refer to the values stored in the tiles. If _integer_ values have a real scale or offset applied to them, then the resulting values will be real. The scale and offset do not apply to tiles of datatype _float_.
+
+===== grid cell encoding
+
+There is a small set of possible ways in how a value is actually assigned to a given grid cell. For example, a value could be assigned to the center of a cell, a corner of a cell, and so forth. Additionally, a value can be assigned to the entire cell. The OGC standards baseline currently states the use of pixel-is-point: GMLJP2 follows the definition of grids in GML 3.2.1 [OGC 07-036] clause 19.2.2: “When a grid point is used to represent a sample space (e.g. image pixel), the grid point represents the center of the sample space (see ISO 19123:2005, 8.2.2)”. In this extension, we use “grid-value-is-area” rather than “pixel-is-area” for discrete coverages such as classified satellite imagery and specifies that the value for an entire grid cell is the same value.
+
+For the purposes of grid coverage GeoPackage extension, the following values are allowed.
+
+* grid-value-is-center: This is the default. Assume the value is center of grid cell.
+* grid-value-is-area – Assume the entire grid cell has the same value.
+* grid-value-is-corner – A typical use case is for a mesh of elevation values as specified in the OGC CDB standard Clause 5.6.1.
+
+As other sampling methods are identified, the list of enumeration types can be expanded.
+
+===== uom
+
+The default is the units of measure as defined in the vertical CRS metadata, such as for heights (elevations). However, for many types of grid coverage data there will not be a vertical CRS defined in EPSG or other registries. Examples of such phenomenon are temperature, pressure, and wind speed. The formal (normative) definition for these phenomenon should be specified based on some well know accepted registry, ontology, or other community accepted units of measurement definitions. Currently, UCUM is used as the normative UoM reference in the OGC standards baseline. Some examples from UCUM are:
+
+* Cel - Celsius, degree – temperature
+* [degF] – degree Fahrenheit – temperature
+* mbar - millibar – pressure
+* B[uV] - microvolt, bel – electric potential level
+
+There are other normative sources for UoM definitions, such as the World Meteorological codes registryfootnote:[https://codes.wmo.int/def/common/Unit] and the NASA QUDT semantic definitionsfootnote:[http://www.qudt.org/].
+
+An additional consideration is that a GeoPackage may be used in a disconnected environment. Therefore, the UoM specification should not be a URN or URI to some external resource. Consequently, the UoM code used should also have a specific field name and quantity definition.
+
+This field is mandatory.
+
+===== field_name
+
+field_name is an element of rangeType. Specifically, each “field” attribute in a given GeoPackage gridded coverage instance is identified by a name that is unique to the coverage instance. For example, if the field_name is “temperature”, then the entire coverage instance is “temperature”. Therefore, for this GeoPackage extension, there is only one field attribute and one instance. In the example below, consider a grid coverage comprised of temperatures and using SWE Data Common (08-094r1) to specify the field name.
+
+[source,xml]
+----
+<swe:field name="temperature">
+<swe:Quantity definition="http://mmisw.org/ont/cf/parameter/air_temperature">
+<swe:label>Air Temperature</swe:label>
+<swe:uom code="Cel"/>
+</swe:Quantity>
+</swe:field>
+----
+
+
+
+For a disconnected environment, the field_name should not be a URN or a URI. Instead use the label from the normative resource being referenced. In the above example, the field_name would be “air_temperature”. The quantity definition would also need to be specified.
+
+===== quantity definition
+
+Associated with the field name is a definition of that field/attribute. In SWE Common this is defined in the Quantity class. In the above example, navigating to http://mmisw.org/ont/cf/parameter/air_temperature provides a very specific definition of what is meant by “temperature”.
+
+Please note that in a disconnected environment, the use of URNs and URIs is discouraged. Instead, use the text field to provide the quantity definition for the UoM being used. For example, for the above example the Marine Metadata registry provides the following: “Air temperature is the bulk temperature of the air, not the surface (skin) temperature”.
+
+This metadata element/column is required if the values contained in a grid coverage are anything other than height (elevation). This is a text string that describes the field (type). This could be an http uri to an ontology or enumeration, such as “http://sweet.jpl.nasa.gov/2.0/spaceExtent.owl#Height"
+
+==== Tile Ancillary
+
+
+
+include::requirements/REQ002.adoc[]
+
+[#TileAncillaryTableDefinition,reftext='{table-caption} {counter:table-num}']
+.Tile Ancillary Table Definition
+[cols=",,,,,",options="header",]
+|==========================================================================================================================================================================================================================================================
+|*Column Name* |*Column Type* |*Column Description* |*Null* |*Default* |*Key*
+|`id` |INTEGER |Autoincrement primary key |no | |PK
+|`tpudt_name` |TEXT |Name of http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data table_] |no | |UNIQUEfootnote:[These two values are designed to be jointly unique so that they refer to a single row in a single table.]
+|`tpudt_id` |INTEGER |Foreign key to id in http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data table_] |no | |UNIQUEfootnote:[These two values are designed to be jointly unique so that they refer to a single row in a single table.]
+|`scale` |REAL |Scale as a multiple relative to the unit of measure |no |1 |
+|`offset` |REAL |The offset to the 0 value |no |0 |
+|`min` |REAL footnote:[This is a REAL to support extensions that use non-integer data.] |Minimum value of this tile |yes | |
+|`max` |REAL footnote:[This is a REAL to support extensions that use non-integer data.] |Maximum value of this tile |yes | |
+|`mean` |REAL |The arithmetic mean of values in this tile |yes | |
+|`std_dev` |REAL |The standard deviation of values in this tile |yes | |
+|==========================================================================================================================================================================================================================================================
+
+The min, max, and mean values are natural, i.e., not scaled or offset. Similarly, the std_dev is calculated based on the natural values. The scale and offset do not apply to tiles of datatype _float_.
+
+[[table-values]]
+=== Table Values
+
+The following requirements specify required and optional table values.
+
+
+
+include::requirements/requirements_class_Table_Values.adoc[]
+
+
+[[gpkg_spatial_ref_sys]]
+==== gpkg_spatial_ref_sys
+
+
+
+include::requirements/REQ003.adoc[]
+
+
+Due to limitations in expressing 3D coordinate reference systems in the original OGC (circa 2001) link:#Old_WKT_Reference[Well-known Text], it is recommended that GeoPackages complying with the grid-regular extension also comply with link:#New_WKT_Reference[ISO 19162] WKT for Coordinate Reference Systems as described in the GeoPackage CRS extension http://www.geopackage.org/spec/#extension_crs_wkt. Please refer to clause F.10 WKT for Coordinate Reference Systems in the core http://www.geopackage.org/spec110/[GeoPackage standard version 1.1] and later.
+
+
+[#SpatialRefSysTableRecord,reftext='{table-caption} {counter:table-num}']
+.Spatial Ref Sys Table Record
+[cols=",,,,,",options="header",]
+|=============================================================================================
+|*srs_name* |*srs_id* |*organization* |*organization_coordsys_id* |*definition* |*description*
+|any |`4979` |`EPSG` or `epsg` |`4979` |any |any
+|=============================================================================================
+
+
+
+
+include::requirements/REQ004.adoc[]
+
+
+[[gpkg_contents]]
+==== gpkg_contents
+
+
+
+
+
+include::requirements/REQ005.adoc[]
+
+[[gpkg_extensions]]
+==== gpkg_extensions
+
+
+include::requirements/REQ006.adoc[]
+
+[#ExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
+.Extension Table Record
+[cols=",,,,",options="header",]
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+|*table_name* |*column_name* |*extension_name* |*definition* |*scope*
+|`gpkg_2d_gridded_coverage_ancillary` |null |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
+|`gpkg_2d_gridded_tile_ancillary` |null |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
+|name of actual http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data table_] containing grid-regular data |`tile_data` |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
+|=============================================================================================================================================================================================================================================================================================================================================================================================
+
+[NOTE]
+=====================
+If this extension is adopted by OGC, the alias `gpkg_2d_gridded_coverage` will be assigned.
+=====================
+
+=== gpkg_2d_gridded_coverage_ancillary
+
+The following requirements class defined mandatory and optional elements for the coverage ancillary table definition.
+
+
+
+
+include::requirements/requirements_class_2d_Gridded_Coverage_Ancillary.adoc[]
+
+
+The following requirements refer to the `gpkg_2d_gridded_coverage_ancillary` table as per http://www.geopackage.org/spec/#gpkg_2d_gridded_coverage_ancillary_table[_Coverage Ancillary Table Definition_].
+
+
+
+include::requirements/REQ007.adoc[]
+
+
+
+
+include::requirements/REQ008.adoc[]
+
+
+
+
+include::requirements/REQ009.adoc[]
+
+
+=== gpkg_2d_gridded_tile_ancillary
+
+The following requirements class defined mandatory and optional elements for the tile ancillary table definition.
+
+
+
+
+
+include::requirements/requirements_class_2d_Gridded_Tile_Ancillary.adoc[]
+
+
+
+
+The following requirements refer to the `gpkg_2d_gridded_tile_ancillary` table as per http://www.geopackage.org/spec/#gpkg_2d_gridded_tile_ancillary_table[_Tile Ancillary Table Definition_].
+
+
+
+
+
+
+include::requirements/REQ010.adoc[]
+
+
+
+
+
+include::requirements/REQ011.adoc[]
+
+
+
+
+
+include::requirements/REQ012.adoc[]
+
+
+=== Tile Pyramid User Data Tables
+
+The following is the requirements class for the `CIS{two-colons}GeneralGridCoverage`, `class grid-regular` Tile Pyramid User Data Table extensions.
+
+
+
+
+include::requirements/requirements_class_Tile_Pyramid_User_Data_Tables.adoc[]
+
+
+
+
+include::requirements/REQ013.adoc[]
+
+
+
+
+include::requirements/REQ014.adoc[]
+
+
+== TIFF Encoding
+
+Due to the wide range of possible TIFF encodings, the TIFF encoding for a `GeneralGridCoverage`, `class grid-regular` (such as for elevation data) tile has been constrained for the sake of interoperability and best practice. Further, these constraints are provided as a basis for enhanced interoperability with using GeoPackages in an OGC compliant CDB data store. CDB, used in the modeling and simulation industry, has a major requirement for using GeneralGridCoverage, class grid-regular such as terrain (a grid of elevations). CDB defines a strict set of requirements for encoding terrain as a tiled TIFF coverage in a CDB data store.
+
+Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of the TIFF standard. The only allowed encoding extensions are:
+
+* IEEE floating point (see Requirement 17 below)
+* LZW compression (see Requirement 18 below)
+
+Tiles are encoded as a single-band image using one 32-bit floating point component per pixel. This implies a number of constraints which are listed below.
+
+* There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).
+* All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).
+* Other TIFF tags are derived from the other constraints in this extension.
+* No multi-image/tiling extensions defined in TIFF shall be used (see Requirement 19 and Requirement 20 below).
+
+
+
+
+include::requirements/requirements_class_Tiff_Encoding.adoc[]
+
+
+
+
+include::requirements/REQ015.adoc[]
+
+
+
+
+
+include::requirements/REQ016.adoc[]
+
+
+By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.
+
+
+
+
+include::requirements/REQ017.adoc[]
+
+
+
+By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
+
+
+
+
+include::requirements/REQ018.adoc[]
+
+
+NOTE to developers: Client applications that support the TIFF encoding are expected to support this LZW compression. This is due to the fact that GeoPackages containing gridded coverages delivered to a client may or may not use LZW compression.
+
+
+
+
+include::requirements/REQ019.adoc[]
+
+
+
+
+
+include::requirements/REQ020.adoc[]
+
+
+
+
+include::requirements/REQ021.adoc[]

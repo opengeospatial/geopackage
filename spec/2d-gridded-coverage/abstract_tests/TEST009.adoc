@@ -1,0 +1,15 @@
+[cols=",",options="header",]
+|=========================================================================================================================================================================================
+|*Test Case ID* |`/extensions/elevation/table_val/gpkg_2d_gridded_coverage_ancillary`
+|*Test Purpose:* |Verify that gpkg_2d_gridded_coverage_ancillary contains valid column values
+|*Test Method:* a|
+1.  `SELECT datatype, scale, offset FROM _gpkg_2d_gridded_coverage_ancillary_ WHERE tile_matrix_set_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = _2d-gridded-coverage_);`
+2.  For each result in 1
+a.  Fail if datatype is not "integer" or "float"
+b.  Fail if datatype is "float" and scale is not 1.0
+c.  Fail if datatype is "float" and offset is not 0.0
+3.  Pass if no fails
+
+|*Reference:* |Annex F.11 Req 9
+|*Test Type* |Capability
+|=========================================================================================================================================================================================

@@ -1,0 +1,14 @@
+[cols=",",options="header",]
+|=======================================================================================================
+|*Test Case ID* |`/extensions/elevation/table_ref/gpkg_contents/gpkg_2d_gridded_coverage_ancillary`
+|*Test Purpose:* |Verify that all required rows are present in gpkg_2d_gridded_coverage_ancillary
+|*Test Method:* a|
+1.  `SELECT table_name FROM gpkg_contents WHERE data_type = _2d-gridded-coverage_;`
+2.  For each table_name
+a.  `SELECT COUNT(*) FROM gpkg_2d_gridded_coverage_ancillary WHERE tile_matrix_set_name = _\{table_name}_`
+b.  Fail if count is not 1
+3.  Pass if no fails
+
+|*Reference:* |Annex F.11 Req 7
+|*Test Type* |Capability
+|=======================================================================================================

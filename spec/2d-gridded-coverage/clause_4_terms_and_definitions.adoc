@@ -1,0 +1,43 @@
+== Terms and Definitions
+
+This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following additional terms and definitions apply footnote:[The definitions for “height” and “depth” are meant to be general and are derived from ISO 19111. However, the reader should note that there are domain specific variations or enhancements of the definitions used in this standard.].
+
+
+=== *Continuous coverage*
+*coverage* that returns different values for the same feature attribute at different *direct positions* within a single spatial object, temporal object or spatiotemporal object in its domain. [ISO 19123]
+
+Note: A continuous (grid) coverage has values not only at the direct positions themselves, but also at any location between the direct positions. In other words, an application can apply interpolation methods to obtain values between direct positions.
+
+=== *Coordinate Reference System (CRS)*
+A coordinate system that is related to the real world by a datum. [ISO 19111]
+
+=== *Coverage*
+A coverage is a function that describe characteristics of real-world phenomena that vary over space and/or time. Typical examples are temperature, elevation and precipitation. A coverage is typically represented as a data structure containing a set of such values, each associated with one of the elements in a spatial, temporal or spatiotemporal domain. Typical spatial domains are point sets (e.g. sensor locations), curve sets (e.g. contour lines), grids (e.g. orthoimages, elevation models), etc. A property whose value varies as a function of time may be represented as a temporal coverage or time-series [https://www.w3.org/TR/sdw-bp/#bib-ISO-19109[__ISO-19109__]].NOTE: feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6 [ISO 19123]
+
+=== *Discrete Coverage*
+Coverage that returns the same feature attribute values for every direct position within any single spatial object, temporal object, or spatiotemporal object in its domain [ISO 19123/OGC Topic 6]
+
+=== *Depth*
+Distance of a point from a chosen reference surface measured upward along a line perpendicular to that surface. [ISO 19111]
+
+Note 1 to entry: A height below the reference surface will have a negative value, which would embrace both gravity-related heights and ellipsoidal heights.
+
+=== *Direct Position*
+The position described by a single set of *coordinates* within a *coordinate reference system*. [ISO 19123]
+
+=== *Elevation*
+Synonym for “height”
+
+=== *Grid*
+Grid network composed of two or more sets of curves in which the members of each set intersect the members of the other sets in an algorithmic way. NOTE: The curves partition a space into grid cells. [ISO 19123]
+
+=== *Grid point*
+Point located at the intersection of two or more curves in a grid. [ISO 19123:2005]
+
+=== *Height*
+Distance of a point from a chosen reference surface measured upward along a line perpendicular to that surface. [ISO 19111] Note 1 to entry: A height below the reference surface will have a negative value, which would embrace both gravity-related heights and ellipsoidal heights.
+
+=== *Regular grid*
+Grid whose grid lines have a constant distance along each grid axis

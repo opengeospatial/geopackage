@@ -1,0 +1,64 @@
+== Short introduction to coverages and CIS
+
+This section is extracted from the OGC Coverage Implementation Schema (CIS) standard. footnote:[The text in this section is extracted/summarized from the OGC Coverage Implementation Schema 1.1 (CIS) standard (OGC 09-146r6). Please note that This GeoPackage extension references CIS 1.1 and not CIS 1.0.]
+
+The GeoPackage tile grid extension is conceptually grounded in the OGC Coverage Implementation Schema (CIS). CIS specifies the OGC coverage model by establishing a concrete, interoperable, conformance-testable coverage structure. CIS is based on the abstract concepts of OGC Abstract Topic 6 (which is identical to ISO 19123:2005). ISO 19123 specifies an abstract model for coverages which is not per se interoperable. In other words, many different and incompatible implementations of the abstract model are possible. CIS, on the other hand, is interoperable in the sense that coverages can be conformance tested, regardless of their data format encoding, down to the level of single grid cell.
+
+Coverages can be encoded in any suitable format (such as GML, JSON, GeoTIFF, TIFF, PNG or Net­CDF) and can be partitioned, e.g., for a time-interleaved representation. Coverages are independent from service definitions and, therefore, can be accessed through a variety of OGC services types, such as the Web Coverage Service (WCS) Standard. The coverage structure can serve a wide range of coverage application domains, thereby contributing to harmonization and interoperability between and across these domains.
+
+Within the GeoPackage, a grid of elevations is a type of a regular gridded coverage (`CIS{two-colons}GeneralGridCoverage`, `class grid-regular`) that has a grid as their domain set describing the direct positions in multi-dimensional coordinate space, depending on the type of grid. In the class _grid-regular_, simple equidistant grids are established. footnote:[This GeoPackage extension uses the CIS 1.1. CIS 1.1 provides a definition for Rectified Grid Coverage for backwards compatibility with CIS 1.0. Please see CIS 1.1 sections 7.1 and 7.2 for discussion of compatibility.] This is illustrated in <<Grid_Illustration>>.
+
+
+[#Grid_Illustration,reftext='{figure-caption} {counter:figure-num}']
+.Illustration of a regular gridded coverage
+image:images/image1.png[image,width=128,height=94]
+
+=== A note on “elevation”
+
+Work on this extension originally focused on requirements for encoding a regular grid of elevations in a GeoPackage. The original (draft) version of this extension did not provide a definition of “elevation”. This version does include a very general definition of the term “elevation” as specified in ISO 19111:Spatial Referencing by Coordinates. This definition is almost identical to those found in a number of other documents, such as definitions for elevation (height) found in the Journal of Photogrammetry, standards documents from the International Civil Aviation Organization, American Society for Photogrammetry and Remote Sensing (ASPRS), the World Meteorological Organization, and the Federal Geographic Data Committee (FGDC). However, many of the definitions provided by those organizations take an earth centric view. OGC standards are being used for other planetary bodies. As such, this document uses a more general definition.
+
+Variations of the definition used in this document are often provided to meet domain specific requirements. As an example, ICAO uses, “The vertical distance of a point or a level, on or affixed to the surface of the earth, measured from mean sea level. Official ICAO publications sometimes use the term "gravity-related height" as a synonym of elevation.” This is the same as the definition used in this standard with the caveat that “elevation” is measured from mean sea level.
+
+The definition used in this standard accommodates any reference surface, including “elevation” as used in the building industry. Therefore, provision of proper coordinate reference system metadata is critical to determining the reference surface used for a specific elevation data set stored in a GeoPackage.
+
+
+=== Storage formats and grid cell values
+
+This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles as defined in GeoPackage Clause 2.2 using PNG (16-bit, signed integer) and TIFF (32-bit, float) files as the container for the grid values, such as elevation. The data producer has the responsibility to ensure that the intended recipient is able to read GeoPackages that contain a grid-regular coverage encoding (PNG or TIFF). Please note that using multiple zoom levels for a grid-regular coverage is purely optional. There is no requirement that grid-regular tiles have to be in a full pyramid. Clause 2.2 specifies how each zoom level is encoded. There may be only one zoom level.
+
+Clause 7.1.1.2 and Table 1 Ancillary Coverage Data Definition define how the application to specify how the value of a grid cell is assigned. Obviously, if we are dealing with a _continuous_ gridded coverage, values between grid cell center points can be interpolated, such as for contouring.
+
+=== Cross Walk of GeoPackage Column Names and OGC/ISO Baseline
+
+The following is a basic “crosswalk” between column names used in GeoPackage Clause 2.2 Tiles and semantics (tags) used in the OGC/ISO standards baseline, including Geography Markup Language (GML) and ISO 19123 Coverages. Please reference Annex B for an example of a GML encoding using domainSet, rangeType and rangeSet.
+
+==== GML GridEnvelope
+
+This GML element (Clause 19.2.2) defines the “limits” in pixel space of the grid matrix. The equivalent in the core GeoPackage standard is defined in Clause 2.2.7 Table 9. Tile Matrix Metadata Table Definition:
+
+_____________________________________________________________
+tile_width: Tile width in pixels (>= 1) for this zoom level
+
+tile_height: Tile height in pixels (>= 1) for this zoom level
+_____________________________________________________________
+
+
+==== CIS/SWE rangeType
+
+In the baseline, rangeType provides the ability to specify the characteristics of the coverage values contained in the rangeSet. As defined in ISO 19123, “The attribute _rangeType: RecordType_ shall describe the range of the coverage”. More specifically, the `rangeType` component adds a structure description and technical metadata required for an appropriate (however, application independent) understanding of a coverage. Units of measure (UoM), allowed values (such as for radiance), and precision are rangeType metadata elements. <<CoverageAncillaryTableDefinition>>  Coverage Ancillary Table Definitions provides columns for several key rangeType metadata elements.
+
+
+==== CIS/SWE rangeSet
+
+The rangeSet is comprised of the coverage range values, each one being associated with a direct position. In the case of the GeoPackage Grid Coverage extension, the rangeSet are the data values contained in the TIFF file. The requirements for using TIFF are defined in link:#tiff-encoding[Clause 8] of this document.
+
+
+==== GML/CIS/SWE domainSet
+
+The gml:domainSet property describes the domain of the coverage. The metadata defining the domain is provided in both the core GeoPackage tables and coverage ancillary tables and associated requirements for the grid coverage GeoPackage extension. Key elements of the domain metadata are defined in the core GeoPackage standard:
+
+* Clause 1.1.2 Table 2 Spatial Ref Sys Table Definition;
+* Clause 2.2.7 Table 9 Tile Matrix Metadata Table Definition in the core GeoPackage standard; and
+* Clause 1.1.3 Table 4 Contents Table Definition.
+
+Additional metadata elements describing the domain of a continuous regular grid coverage are provided in the coverage ancillary table (Table 1) and include units of measure (UoM), precision, and pixel sample encoding method.
