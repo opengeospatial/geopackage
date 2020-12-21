@@ -1,0 +1,41 @@
+== Terms and Definitions
+This document uses the terms defined in Sub-clause 5.3 of <<OWS_COMMON>>, which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+=== *attributes data*
+Non-spatial tabular data that is designed to be joined with geospatial data for analysis. In a GeoPackage, attributes data is stored in attributes tables as per http://www.geopackage.org/spec121/#attributes.
+
+=== *base data*
+Data that is linked in some way to related data (in other words, the _left_ side of the A->B relationship). In this extension, base data is stored in geospatial or attributes data tables.
+
+=== *cardinality*
+The property of a relationship between two entities, specifying whether it is one-to-one, one-to-many, many-to-one, or many-to-many.
+
+=== *geospatial data*
+Data containing location information and/or geometries.
+In a GeoPackage, geospatial data may be stored in features or tiles tables.
+
+=== *one-to-many*
+A type of cardinality in which an element of `A` may be linked to zero or more elements of `B`, but an element of `B` is linked to one and only one element of `A`.
+
+=== *many-to-many*
+A type of cardinality in which an element of `A` may be linked to zero or more elements of `B` and an element of `B` may be linked to zero or more elements of `A`.
+
+=== *many-to-one*
+A type of cardinality in which an element of `A` is linked to one and only one element of `B`, but an element of `B` may be linked to zero or more elements of `A`.
+
+=== *related data*
+Data that is linked to in some way from base data (in other words, the _right_ side of the A->B relationship). In this extension, related data is stored in a user-defined attributes table (of which user-defined media table is a special case) or feature table.
+
+=== *relationship*
+For the purposes of this extension, a link between two entities `A` and `B`. `A` refers to base data and `B` refers to related data.
+
+=== *user-defined attributes table*
+In this extension, a user-defined attributes table is a table that contains data that is related to existing geospatial data.
+
+=== *user-defined mapping table*
+In this extension, a user-defined mapping table is a join table that links geospatial data and related data.
+
+=== *user-defined media table*
+In this extension, a user-defined media table is a user-defined attributes table that is specifically designed to contain multimedia content (including, but not limited to, images, diagrams, formatted text, moving images or audio).

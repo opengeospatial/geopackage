@@ -1,0 +1,83 @@
+[appendix]
+:appendix-caption: Annex
+== Table Definition SQL
+
+
+[[gpkgext_relations_sql]]
+.Extended Relations Table Definition SQL (Normative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE 'gpkgext_relations' (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  base_table_name TEXT NOT NULL,
+  base_primary_column TEXT NOT NULL DEFAULT 'id',
+  related_table_name TEXT NOT NULL,
+  related_primary_column TEXT NOT NULL DEFAULT 'id',
+  relation_name TEXT NOT NULL,
+  mapping_table_name TEXT NOT NULL UNIQUE
+ );
+----
+
+[[gpkgext_user_defined_mapping_table_sql]]
+.Extended Relations Mapping Table SQL (Informative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE 'sample_mapping_table' (
+  base_id INTEGER NOT NULL,
+  related_id INTEGER NOT NULL
+ );
+----
+
+[[gpkg_features_sql]]
+.Example User Defined Features Table Definition SQL (Informative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE 'sample_feature_table' (
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  geometry GEOMETRY,
+  text_attribute TEXT,
+  real_attribute REAL,
+  boolean_attribute BOOLEAN)
+----
+This table is a modified version of http://www.geopackage.org/spec120/#_sample_feature_table_informative[the informative example in the core document]. The `raster_or_photo` column is removed with the intent of making the binary data available as per this extension.
+
+[[gpkgext_user_defined_media_table_sql]]
+.Example User Defined Media Table Definition SQL (Informative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE 'sample_media' (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  data BLOB NOT NULL,
+  content_type TEXT NOT NULL)
+----
+
+[[gpkgext_user_defined_simpleattr_table_sql]]
+.Example User Defined Simple Attribute Table Definition SQL (Informative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE 'sample_attributes' (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  label TEXT NOT NULL,
+  description TEXT NOT NULL,
+  arisings INTEGER NOT NULL)
+----

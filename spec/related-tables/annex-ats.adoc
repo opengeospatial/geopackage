@@ -1,0 +1,376 @@
+[appendix]
+:appendix-caption: Annex
+== Conformance Class Abstract Test Suite (Normative)
+
+[NOTE]
+Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
+
+=== Common Requirements
+
+==== <<r1,gpkg_extensions Row>>
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/applicability
+|Requirement: | /req/table-defs/extensions-ger
+|Test purpose: | Verify whether the Related Tables Extension is applicable.
+|Test method: |
+`SELECT COUNT(*) FROM gpkg_extensions WHERE extension_name IN ('related_tables', 'gpkg_related_tables')`
+
+Extension not in use if count is empty
+|===
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/extensions-ger
+|Requirement: |/req/table-defs/extensions-ger
+|Test purpose: | Verify that the `gpkg_extensions` table contains the required `gpkgext_relations` table.
+|Test method: |
+`SELECT * FROM gpkg_extensions WHERE table_name = 'gpkgext_relations'`
+
+Fail if number of rows returned is not 1.
+
+Pass if results match required content from <<gpkg_extensions_records>>, else Fail.
+|===
+
+==== <<r2,gpkgext_relations Row>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/extensions-gerr
+|Requirement: |/req/table-defs/extensions-gerr
+|Test purpose: | Verify that the `gpkg_extensions` table contains at least one user defined mapping table.
+|Test method: |
+1. `SELECT table_name FROM gpkg_extensions WHERE (extension_name IN ('related_tables', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')`
+
+2. Fail if number of rows returned is 0.
+
+3. For each `table_name` row returned in Step 1:
+
+  - `SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{table_name}'`
+
+  - Fail if no rows returned.
+
+4. Pass if no fails.
+|===
+
+
+==== <<r3,gpkg_extensions User Defined Mapping Table Rows>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/extensions-udmt
+|Requirement: |/req/table-defs/extensions-udmt
+|Test purpose: | Verify that the `gpkg_extensions` table contains the required user defined mapping table contents
+|Test method: |
+1. `SELECT column_name, definition, scope FROM gpkg_extensions WHERE (extension_name IN ('related_tables', 'gpkg_related_tables') AND table_name != 'gpkgext_relations')`
+
+2. Fail if number of rows returned is 0.
+
+3. For each row returned in Step 1, fail if `column_name` is not null, `definition` is not "TBD" or `scope` is not "read-write".
+
+4. Pass if no fails.
+|===
+
+
+==== <<r4,gpkgext_relations Table>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/ger
+|Requirement: |/req/table-defs/ger
+|Test purpose: | Verify that the `gpkgext_relations` table has the required table definition.
+|Test method: |
+1. `PRAGMA table_info(gpkgext_relations)`
+
+2. Fail if returns an empty result set.
+
+3. Pass if the column names, types, nullability, default values, primary key, and unique key constraints match all of those in the contents of <<gpkgext_relations_table>>. Column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+
+4. Fail otherwise.
+|===
+
+
+==== <<r5,gpkgext_relations Base Table>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/ger-base
+|Requirement: |/req/table-defs/ger-base
+|Test purpose: | Verify that the base tables listed in `gpkgext_relations` table are in the GeoPackage database
+|Test method: |
+1. `SELECT base_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each `base_table_name` row returned in Step 1:
+
+  - `SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{base_table_name}'`
+
+  - Fail if no rows returned.
+
+4. Pass if no fails.
+|===
+
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/ger-base-contents
+|Requirement: |/req/table-defs/ger-base
+|Test purpose: | Verify that the base tables listed in `gpkgext_relations` table are in the GeoPackage contents table
+|Test method: |
+1. `SELECT base_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each `base_table_name` row returned in Step 1:
+
+  - `SELECT table_name FROM gpkg_contents WHERE table_name = '{base_table_name}'`
+
+  - Fail if no rows returned.
+
+4. Pass if no fails.
+|===
+
+==== <<r6,gpkgext_relations Related Table>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/ger-related
+|Requirement: |/req/table-defs/ger_related
+|Test purpose: | Verify that the related tables listed in `gpkgext_relations` table are in the GeoPackage database
+|Test method: |
+1. `SELECT related_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each `related_table_name` row returned in Step 1:
+
+  - `SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{related_table_name}'`
+
+  - Fail if no rows returned.
+
+4. Pass if no fails.
+|===
+
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/ger-related-contents
+|Requirement: |/req/table-defs/ger_related
+|Test purpose: | Verify that the related tables listed in `gpkgext_relations` table are in the GeoPackage contents table
+|Test method: |
+1. `SELECT related_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each `related_table_name` row returned in Step 1:
+
+  - `SELECT table_name FROM gpkg_contents WHERE table_name = '{related_table_name}'`
+
+  - Fail if no rows returned.
+
+4. Pass if no fails.
+|===
+
+
+==== <<r7,gpkgext_relations User Defined Mapping Table>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/ger-udmt
+|Requirement: |/req/table-defs/ger_udmt
+|Test purpose: | Verify that the mapping tables listed in `gpkgext_relations` table are in the GeoPackage database
+|Test method: |
+1. `SELECT mapping_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each `mapping_table_name` row returned in Step 1:
+
+  - `SELECT tbl_name FROM sqlite_master WHERE tbl_name = '{mapping_table_name}'`
+
+  - Fail if no rows returned.
+
+4. Pass if no fails.
+|===
+
+
+==== <<r8,gpkgext_relations Relation Name>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/ger-relname
+|Requirement: |/req/table-defs/ger_relname
+|Test purpose: | Verify that the relation_name entries listed in `gpkgext_relations` table are valid.
+|Test method: |
+1. `SELECT base_table_name, relation_name FROM gpkgext_relations WHERE (relation_name NOT IN ('features', 'simple_attributes', 'media') AND relation_name NOT LIKE 'x-_%\__%' ESCAPE '\')`
+
+2. Fail if returns any rows
+|===
+
+
+==== <<r9,User Defined Mapping Table>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/udmt
+|Requirement: |/req/table-defs/udmt
+|Test purpose: | Verify that the mapping tables listed in `gpkgext_relations` table have the correct structure
+|Test method: |
+1. `SELECT mapping_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each `mapping_table_name` row returned in Step 1:
+
+  - `PRAGMA table_info({mapping_table_name})`
+
+  - Fail if returns an empty result set.
+
+  - Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of <<gpkgext_user_defined_mapping_table>>. Additional columns, column order, check constraint and trigger definitions, and other column definitions in the returned sql are irrelevant.
+
+4. Pass if no fails.
+|===
+
+
+==== <<r10,User Defined Mapping Table Base ID>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/udmt-base
+|Requirement: |/req/table-defs/udmt_base
+|Test purpose: | Verify that the contents of mapping tables listed in `gpkgext_relations` table correlate to base table rows
+|Test method: |
+1. `SELECT base_table_name, base_primary_column, mapping_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each row returned in Step 1, fail if any `base_id` value in {mapping_table_name} does not match an entry in the {base_primary_column} column of the {base_table_name} table.
+
+4. Pass if no fails.
+|===
+
+
+==== <<r11,User Defined Mapping Table Related ID>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/table-defs/udmt-related
+|Requirement: |/req/table-defs/udmt_related
+|Test purpose: | Verify that the contents of mapping tables listed in `gpkgext_relations` table correlate to related table rows
+|Test method: |
+1. `SELECT related_table_name, related_primary_column, mapping_table_name FROM gpkgext_relations`
+
+2. Fail if returns an empty result set.
+
+3. For each row returned in Step 1, fail if any `related_id` value in {mapping_table_name} does not match an entry in the {related_primary_column} column of the {related_table_name} table.
+
+4. Pass if no fails.
+|===
+
+==== <<r12,Media Relation Name>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/media/udmt
+|Requirement: |/req/media/udmt
+|Test purpose: | Verify whether the requirements class applies for user-defined media tables 
+|Test method: | `SELECT COUNT(*) FROM gpkgext_relations WHERE relation_name = 'media'`
+
+Requirement class is not in use if count is zero
+
+|===
+
+==== <<r13,Media Table Definition>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/media/table_def
+|Requirement: |/req/media/table_def
+|Test purpose: | Verify that the user-defined media tables have the correct structure
+|Test method: | 
+1. `SELECT related_table_name FROM gpkgext_relations WHERE relation_name = 'media'`
+
+2. For each related_table_name row returned in Step 1:
+
+- `PRAGMA table_info({related_table_name})`
+
+- Fail if returns an empty result set.
+
+- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of <<gpkg_user_defined_media_table>>. Additional columns, column order, check constraints, trigger definitions, and other column definitions in the returned sql are irrelevant.
+
+3. Pass if no fails.
+
+|===
+
+==== <<r14,Simple Attributes Relation Name>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/simpleattr/udat
+|Requirement: |/req/simpleattr/udat
+|Test purpose: | Verify whether the requirements class applies for user-defined simple attributes tables
+|Test method: | `SELECT COUNT(*) FROM gpkgext_relations WHERE relation_name = 'simple_attributes'`
+
+Requirement class is not in use if count is zero
+
+|===
+
+==== <<r15,Simple Attributes Table Definition>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/simpleattr/table_def
+|Requirement: |/req/simpleattr/table_def
+|Test purpose: | Verify that the user-defined simple attribute tables have the correct structure
+|Test method: |
+1. `SELECT related_table_name FROM gpkgext_relations WHERE relation_name = 'simple_attributes'`
+
+2. For each related_table_name row returned in Step 1:
+
+- `PRAGMA table_info({related_table_name})`
+
+- Fail if returns an empty result set.
+
+- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of <<gpkg_user_defined_simpleattr_table>>. 
+
+- Fail if `Column Type` includes storage classes other than `TEXT`, `INTEGER`, or `REAL`.
+
+3. Pass if no fails.
+
+|===
+
+==== <<r16,Features Relation Name>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/relatedfeat/udat
+|Requirement: |/req/relatedfeat/udat
+|Test purpose: | Verify whether the requirements class applies for user-defined features tables
+|Test method: | `SELECT COUNT(*) FROM gpkgext_relations WHERE relation_name = 'features'`
+
+Requirement class is not in use if count is zero
+
+|===
+
+==== <<r17,Features Table Definition>>
+
+[cols="20h,80d",width="100%"]
+|===
+|Test id: |/conf/relatedfeat/table_def
+|Requirement: |/req/relatedfeat/table_def
+|Test purpose: | Verify that the user-defined related features tables have the correct structure
+|Test method: |
+1. `SELECT related_table_name FROM gpkgext_relations WHERE relation_name = 'features'`
+
+2. For each related_table_name row returned in Step 1:
+
+- `PRAGMA table_info({related_table_name})`
+
+- Fail if returns an empty result set.
+
+- Fail if the column names, types, nullability, default values, primary key, and unique key constraints do match all of those in the contents of [http://www.geopackage.org/spec/#feature_user_tables]. 
+
+3. Pass if no fails.
+
+|===

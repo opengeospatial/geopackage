@@ -1,0 +1,68 @@
+[big]*i.     Abstract*
+
+A GeoPackage <<geopackage>> is a platform-independent SQLite <<sqlite>> database file that contains GeoPackage data and metadata tables.
+GeoPackages, as described by the GeoPackage Encoding Standard <<GPKG1_2>> are designed to be extensible, including support for additional data types.
+This document defines the Related Tables Extension (RTE) for the GeoPackage Encoding Standard.
+
+The RTE defines the rules and requirements for creating relationships in a GeoPackage data store between geospatial data tables and other tables that contain or reference related content such as attributes or media.
+Geospatial data tables (such as features or tiles tables) contain location information and/or geometries.
+There are many examples of where the RTE can be used including relating parcel (land lot) features to pictures of that parcel or linking census boundaries to the related demographic census data.
+
+[big]*ii.    Keywords*
+
+The following are keywords to be used by search engines and document catalogues.
+
+ogcdoc, OGC document, GeoPackage, extension, related tables, multimedia
+
+[big]*iii.   Preface*
+
+The GeoPackage Related Tables Extension (RTE) defines the rules and requirements for creating relationships in a GeoPackage <<geopackage>> data store between geospatial or attributes data tables and other tables that contain or reference related content such as attributes or media.
+Geospatial data tables (such as features or tiles tables) contain location information and/or geometries.
+Conceptually, this extension is similar to the OGC Table Joining Service Interface Standard <<OGC-TJS-IS>>.
+
+One use case for this extension is to associate features with related multimedia content such as:
+
+* photographs;
+* audio or video files; and
+* PDFs.
+
+There are many examples of where the RTE can be used including relating parcel (land lot) features to pictures of that parcel or linking census boundaries to the related demographic census data.
+To support this capability, an ancillary data table (`gpkgext_relations`) is used in conjunction with user-defined mapping tables.
+
+This extension, like all GeoPackage extensions, is intended to be transparent and to not interfere with GPKG compliant, but non-supporting, software packages. The OGC GeoPackage (GPKG) Related Tables Extension Interoperability Experiment (GPKG-RTE IE) <<GPKG-RTE_IE>> verified that the extension is correctly designed to meet the design goals and to be transparent in this manner. The goal of the IE was achieved by building GeoPackages containing embedded multimedia content and sharing those GeoPackages with other software products. This IE produced an OGC Engineering Report <<GPKG-RTE_IE_ER>> that discusses whether the extension is fit for use and adoption by the OGC.
+
+The following information is provided in compliance with the GeoPackage Extension template as defined in Annex E: GeoPackage Extension Template of the GeoPackage Standard. These additional introductory clauses are not elements in the standard OGC document template.
+
+* Extension Author: GeoPackage SWG; author_name `gpkg` to be used upon adoption.
+* Extension Name or Template: `related_tables`; upon adoption the alias `gpkg_related_tables` MAY be used
+* Extension Type: This extension provides new requirements dependent on GeoPackage http://www.geopackage.org/spec121/index.html#features[Clause 2.1], http://www.geopackage.org/spec121/index.html#tiles[Clause 2.2], and http://www.geopackage.org/spec121/index.html#attributes[Clause 2.4].
+* Applicability: This extension defines relationships between feature tables and tables that hold related content, including multimedia, simple attributes, and other features.
+* Scope: read-write
+
+_Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights._
+
+_Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation._
+
+[big]*iv.    Submitting organizations*
+
+The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
+
+- Image Matters LLC
+- Compusult
+- Radiant Solutions
+- SOFWERX
+
+[big]*v.     Submitters*
+
+All questions regarding this submission should be directed to the editor or the submitters:
+
+[cols=",",]
+|===================================
+|*Name* |*Affiliation*
+|Rob Cass |Compusult
+|Jeff Yutzler |Image Matters
+|Tracey Birch   |SOFWERX
+|Jason MacDonald | Compusult
+|Ashley Antonides | Radiant Solutions
+|Brad Hards | --
+|===================================

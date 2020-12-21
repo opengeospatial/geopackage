@@ -1,0 +1,73 @@
+[appendix]
+:appendix-caption: Annex
+== Example (Informative)
+
+This example illustrates support for many-to-many relationships but the concept may be used in a degenerative way to support one-to-many or many-to-one relationships.
+The content of the `gpkgext_relations` includes a <<features_to_media>> that relates the <<features>> and <<media>> using their respective `id` columns.
+
+In this example, there are four features (ID 1, 2, 3 and 4) and three PNG media items (ID 17, 18, and 19).
+Using the <<features_to_media>>,
+
+ * feature 1 relates to media 17 and 18
+ * feature 2 relates to media 18
+ * feature 3 relates to media 18
+ * feature 4 relates to media 17 and 19
+
+.gpkgext_relations table values
+[options="header"]
+|==============================================
+|base_table_name|base_column|related_table_name|related_column|relation_name|mapping_table_name
+|features          |id            |media               |id              |media        |features_to_media
+|==============================================
+
+The following SQL query will reveal this information:
+
+    select base_table_name, 
+        base_primary_column, 
+        related_table_name, 
+        related_primary_column, 
+        mapping_table_name 
+    from gpkgext_relations;
+
+[[features]]
+.features table values
+[width="50%",options="header"]
+|=======================================================================
+|id|geom
+|1|<BLOB>
+|2|<BLOB>
+|3|<BLOB>
+|4|<BLOB>
+|=======================================================================
+
+[[media]]
+.media table values
+[width="80%",options="header"]
+|=======================================================================
+|id|data|content_type
+|17|<BLOB>|image/png
+|18|<BLOB>|image/png
+|19|<BLOB>|image/png
+|=======================================================================
+
+[[features_to_media]]
+.features_to_media table
+[options="header"]
+|==============================================
+|base_id|related_id
+|4  | 17
+|4  | 19
+|3  | 18
+|2  | 18
+|1  | 18
+|1  | 17
+|==============================================
+
+The <<features_to_media>> table relates the `id` columns between the features table and the media table.
+
+The following SQL query will reveal this information:
+
+    select features.id, features_to_media.related_id 
+        from features, features_to_media 
+    where features.id=features_to_media.base_id;
+    

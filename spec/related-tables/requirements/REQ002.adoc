@@ -1,0 +1,15 @@
+[[r2]]
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2 – gpkgext_relations Row* {set:cellbgcolor:#CACCCE}|/req/table-defs/extensions-gerr +
+ +
+
+A GeoPackage that contains a row in the `gpkg_extensions` table for `gpkgext_relations` SHALL contain at least one related table relationship.
+ {set:cellbgcolor:#FFFFFF}
+|===
+
+[WARNING]
+====
+The intent of this requirement is that a GeoPackage shall not declare the Related Tables Extension unless it is used within the GeoPackage. As a consequence, if all rows are removed from  `gpkgext_relations`, that table must be dropped and all references to the extension must be removed from `gpkg_extensions` as well. However, because a related tables schema may be established without any data, empty user-defined mapping tables and/or related data tables are permitted.
+====
+
