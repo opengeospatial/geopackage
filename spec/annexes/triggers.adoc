@@ -15,13 +15,6 @@ Simply dropping the triggers may not be sufficient as some systems could naively
 |=============
 [source,sql]
 ----
-CREATE TRIGGER 'gpkg_tile_matrix_zoom_level_insert'
-BEFORE INSERT ON 'gpkg_tile_matrix'
-FOR EACH ROW BEGIN
-SELECT RAISE(ABORT, 'insert on table ''gpkg_tile_matrix'' violates constraint: zoom_level cannot be less than 0')
-WHERE (NEW.zoom_level < 0);
-END
-
 CREATE TRIGGER 'gpkg_tile_matrix_zoom_level_update'
 BEFORE UPDATE of zoom_level ON 'gpkg_tile_matrix'
 FOR EACH ROW BEGIN
