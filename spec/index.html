@@ -25,13 +25,13 @@
 <p>External identifier of this OGC® document: <a href="http://www.opengis.net/doc/IS/geopackage/1.3" class="bare">http://www.opengis.net/doc/IS/geopackage/1.3</a><br>
 URL for this OGC® document: <a href="http://www.geopackage.org/spec" class="bare">http://www.geopackage.org/spec</a><br>
 Internal reference number of this OGC® document: OGC 12-128r17<br>
-Version: 1.3<br>
+Version: 1.3_SNAPSHOT<br>
 Category: OGC® Encoding Standard<br>
 Editor:   Jeff Yutzler<br>
 Editor Emeritus: Paul Daisey<br>
 <em>Previous Version: <a href="http://www.opengis.net/doc/IS/geopackage/1.2.1" class="bare">http://www.opengis.net/doc/IS/geopackage/1.2.1</a></em><br>
 <em>Publication Date: TBD<br>
-_Approval Date:   2020-11-26<br>
+_Approval Date:   TBD<br>
 _Submission Date: 2020-08-19<br>
 _Original Version: <a href="http://www.opengis.net/doc/IS/geopackage/1.0" class="bare">http://www.opengis.net/doc/IS/geopackage/1.0</a></em><br></p>
 </div>
@@ -41,7 +41,7 @@ _Original Version: <a href="http://www.opengis.net/doc/IS/geopackage/1.0" class=
 <h2 id="_ogc_geopackage_encoding_standard">OGC® GeoPackage Encoding Standard</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Copyright © 2021 Open Geospatial Consortium.<br>
+<p>Copyright © 2020 Open Geospatial Consortium.<br>
 To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a><br></p>
 </div>
 <div class="admonitionblock warning">
@@ -52,7 +52,8 @@ To obtain additional rights of use, visit <a href="http://www.opengeospatial.org
 </td>
 <td class="content">
 <div class="paragraph">
-<p>This document is an OGC Member approved international standard. This document is available on a royalty free, non-discriminatory basis. Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.</p>
+<p>This document is not an OGC Standard. This document is distributed for review and comment. This document is subject to change without notice and may not be referred to as an OGC Standard. This is a revision to <a href="http://www.geopackage.org/spec121/index.html">GeoPackage 1.2.1 (OGC 12-128r15)</a>. There are both substantive and administrative differences between this version and the adopted version.
+For more information, see <a href="https://gitlab.com/imagemattersllc/ogc18-066/-/blob/master/rn.adoc">the release notes</a>.</p>
 </div>
 </td>
 </tr>
@@ -245,7 +246,7 @@ Document language: 	English<br></p>
 <h2 id="_abstract">Abstract</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This OGC® Encoding Standard defines GeoPackages for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales. Direct use means the ability to access and update data in a "native" storage format without intermediate format translations in an environment (e.g., through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.  GeoPackages are interoperable across all enterprise and personal computing environments, and are particularly useful on mobile devices like cell phones and tablets in communications environments with limited connectivity and bandwidth.</p>
+<p>This OGC® Encoding Standard defines GeoPackages for exchange and GeoPackage SQLite Extensions for direct use of vector geospatial features and / or tile matrix sets of earth images and raster maps at various scales. Direct use means the ability to access and update data in a "native" storage format without intermediate format translations in an environment (e.g. through an API) that guarantees data model and data set integrity and identical access and update results in response to identical requests from different client applications.  GeoPackages are interoperable across all enterprise and personal computing environments, and are particularly useful on mobile devices like cell phones and tablets in communications environments with limited connectivity and bandwidth.</p>
 </div>
 </div>
 </div>
@@ -270,16 +271,16 @@ It is a platform-independent SQLite <a href="#I5">[I5]</a> database file that co
 <div class="ulist">
 <ul>
 <li>
-<p>vector features;</p>
+<p>vector features</p>
 </li>
 <li>
-<p>tile matrix sets of imagery and raster maps at various scales;</p>
+<p>tile matrix sets of imagery and raster maps at various scales</p>
 </li>
 <li>
-<p>attributes (non-spatial data); and</p>
+<p>attributes (non-spatial data)</p>
 </li>
 <li>
-<p>extensions.</p>
+<p>extensions</p>
 </li>
 </ul>
 </div>
@@ -783,7 +784,7 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>table_name</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the actual content (e.g., tiles, features, or attributes) table</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the actual content (e.g., tiles, features, or attributes) table or view</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">PK</p></td>
@@ -791,7 +792,7 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>data_type</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Type of data stored in the table</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type of data stored in the table or view</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">no</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
@@ -2017,7 +2018,7 @@ See Web Map Tile Service (WMTS) <a href="#I16">[I16]</a> Annex E for additional 
 </table>
 <div class="paragraph">
 <p>The <code>gpkg_tile_matrix</code> table documents the structure of the tile matrix at each zoom level in each tiles table.
-It allows GeoPackages to contain rectangular as well as square tiles (e.g., for better representation of polar regions).
+It allows GeoPackages to contain rectangular as well as square tiles (e.g. for better representation of polar regions).
 It allows tile pyramids with zoom levels that differ in resolution by factors of 2, irregular intervals, or regular intervals other than factors of 2.</p>
 </div>
 <div class="paragraph">
@@ -2436,7 +2437,7 @@ Either the absence of a <code>gpkg_extensions</code> table or the absence of row
 <p>Each <code>extension_name</code> column value in a <code>gpkg_extensions</code> row SHALL be a unique case sensitive value of the form &lt;author&gt;_&lt;extension_name&gt; where &lt;author&gt; indicates the person or organization that developed and
 maintains the extension. The valid character set for &lt;author&gt; SHALL be [a-zA-Z0-9].
 The valid character set for &lt;extension_name&gt; SHALL be [a-zA-Z0-9_].
-An <code>extension_name</code> for the "gpkg" author name SHALL be one of those defined in this encoding standard or in an OGC document (e.g., Best Practices Document or Encoding Standard) that extends it.</p>
+An <code>extension_name</code> for the "gpkg" author name SHALL be one of those defined in this encoding standard or in an OGC document (e.g. Best Practices Document or Encoding Standard) that extends it.</p>
 </div>
 </div>
 </div>
@@ -7460,55 +7461,55 @@ Request For Comment (RFC).</p>
 <div class="sect2">
 <h3 id="_potential_future_work">B.9. Potential Future Work (Informative)</h3>
 <div class="paragraph">
-<p>Future versions of this standard MAY do the following.</p>
+<p>Future versions of this standard MAY do the following:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Investigate GeoPackage implementation on SQLite version 4 <a href="#B25">[B25]</a>.</p>
+<p>investigate GeoPackage implementation on SQLite version 4 <a href="#B25">[B25]</a>.</p>
 </li>
 <li>
-<p>Include requirements for elevation data and routes.</p>
+<p>include requirements for elevation data and routes.</p>
 </li>
 <li>
 <p>Future enhancements to this standard, a future GeoPackage Web Service specification and modifications to existing OGC Web Service (OWS) specifications to use GeoPackages as exchange formats MAY allow OWS to support provisioning of GeoPackages throughout an enterprise.</p>
 </li>
 <li>
-<p>Include additional raster / image formats, including fewer restrictions on the image/tiff format.</p>
+<p>include additional raster / image formats, including fewer restrictions on the image/tiff format.</p>
 </li>
 <li>
-<p>Include additional SQL API routines for interrogation and conversion of raster / image BLOBs.</p>
+<p>include additional SQL API routines for interrogation and conversion of raster / image BLOBs.</p>
 </li>
 <li>
-<p>Add infrastructure to the metadata tables such as a <code>temporal_columns</code> table that refers to the time properties of data records.</p>
+<p>add infrastructure to the metadata tables such as a <code>temporal_columns</code> table that refers to the time properties of data records.</p>
 </li>
 <li>
-<p>Specify a streaming synchronization protocol for GeoPackage as part of a future GeoPackage Web Service specification, and/or a future version of the GeoPackage and/or Web Synchronization Service specification(s).</p>
+<p>specify a streaming synchronization protocol for GeoPackage as part of a future GeoPackage Web Service specification, and/or a future version of the GeoPackage and/or Web Synchronization Service specification(s).</p>
 </li>
 <li>
-<p>Address symbology and styling information.</p>
+<p>address symbology and styling information.</p>
 </li>
 <li>
-<p>Include geographic / geodesic geometry types.</p>
+<p>include geographic / geodesic geometry types.</p>
 </li>
 <li>
-<p>Create a GeoPackage Abstract Object Model to support data encodings other than SQL.</p>
+<p>create a GeoPackage Abstract Object Model to support data encodings other than SQL.</p>
 </li>
 <li>
-<p>Add <a href="https://github.com/mapbox/utfgrid-spec">UTFGrid</a> support.</p>
+<p>add <a href="https://github.com/mapbox/utfgrid-spec">UTFGrid</a> support.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Future versions of this standard and/or one for a GeoPackage Web Service MAY do the following.</p>
+<p>Future versions of this standard and/or one for a GeoPackage Web Service MAY do the following:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Address utilities for importing and exporting vector, raster and tile data in various formats.</p>
+<p>address utilities for importing and exporting vector, raster and tile data in various formats.</p>
 </li>
 <li>
-<p>Address encryption of GeoPackages and/or individual tables or column values.</p>
+<p>address encryption of GeoPackages and/or individual tables or column values.</p>
 </li>
 </ul>
 </div>
@@ -11129,10 +11130,10 @@ level.</p>
 </div>
 <h5 id="_hierarchical_metadata_example_two_field_data_collection" class="float">Hierarchical Metadata Example Two - Field Data Collection</h5>
 <div class="paragraph">
-<p>This use case demonstrates a mechanism to indicate which data in a GeoPackage that was originally loaded with data from one or more services has been collected or updated since the initial load, and therefore MAY need to be uploaded to update the original services (e.g., WFS, WCS, WMTS).</p>
+<p>This use case demonstrates a mechanism to indicate which data in a GeoPackage that was originally loaded with data from one or more services has been collected or updated since the initial load, and therefore MAY need to be uploaded to update the original services (e.g. WFS, WCS, WMTS).</p>
 </div>
 <div class="paragraph">
-<p>Suppose a user with a mobile handheld device goes out in the field and collects observations of a new "Point of Interest" (POI) feature type, and associated metadata about the field session, the new feature type, some POI instances and some of their attributes (e.g., spatial accuracy, attribute accuracy) that results in the following additional metadata:</p>
+<p>Suppose a user with a mobile handheld device goes out in the field and collects observations of a new "Point of Interest" (POI) feature type, and associated metadata about the field session, the new feature type, some POI instances and some of their attributes (e.g. spatial accuracy, attribute accuracy) that results in the following additional metadata:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -14150,7 +14151,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-01-07 21:35:36 UTC
+Last updated 2021-01-19 12:40:37 UTC
 </div>
 </div>
 </body>
