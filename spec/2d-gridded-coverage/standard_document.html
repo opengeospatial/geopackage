@@ -1,0 +1,2688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.8">
+<title>OGC GeoPackage Extension for Tiled Gridded Coverage Data</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="./pygments-default.css">
+</head>
+<body class="book">
+<div id="header">
+<h1>OGC GeoPackage Extension for Tiled Gridded Coverage Data</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div style="page-break-after: always;"></div>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">Open Geospatial Consortium</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Submission Date: 2017-07-25</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date:   2018-03-06</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date:   2018-03-07</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">External identifier of this OGC&#174; document: <a href="http://www.opengis.net/doc/IS/geopackage-gr/1.0" class="bare">http://www.opengis.net/doc/IS/geopackage-gr/1.0</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Internal reference number of this OGC&#174; document:    17-066r1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Version: 1.0</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Category: OGC&#174; Implementation</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Editor:   Carl Reed</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong class="big">OGC GeoPackage Extension for Tiled Gridded Coverage Data</strong></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-none stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Copyright notice</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Copyright &#169; 2018 Open Geospatial Consortium</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock">To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a></p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-none grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Warning</strong></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>This document is an OGC Member endorsed international Community standard.  This Community standard was developed outside of the OGC and the originating party may continue to update their work; however, this document is fixed in content. This document is available on a royalty free, non-discriminatory basis. Recipients of this document are invited to submit, with their comments, notification of any relevant patent rights of which they are aware and to provide supporting documentation.</p>
+</div>
+<table class="tableblock frame-all grid-none" style="width: 50%;">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document type:   	OGC® Standard</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document subtype:   	Extension</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Approved for public release</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: 	English</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>License Agreement</p>
+</div>
+<div class="paragraph">
+<p><span class="small">Permission is hereby granted by the Open Geospatial Consortium, ("Licensor"), free of charge and subject to the terms set forth below, to any person obtaining a copy of this Intellectual Property and any associated documentation, to deal in the Intellectual Property without restriction (except as set forth below), including without limitation the rights to implement, use, copy, modify, merge, publish, distribute, and/or sublicense copies of the Intellectual Property, and to permit persons to whom the Intellectual Property is furnished to do so, provided that all copyright notices on the intellectual property are retained intact and that each person to whom the Intellectual Property is furnished agrees to the terms of this Agreement.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">If you modify the Intellectual Property, all copies of the modified Intellectual Property must include, in addition to the above copyright notice, a notice that the Intellectual Property includes modifications that have not been approved or adopted by LICENSOR.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">THIS LICENSE IS A COPYRIGHT LICENSE ONLY, AND DOES NOT CONVEY ANY RIGHTS UNDER ANY PATENTS THAT MAY BE IN FORCE ANYWHERE IN THE WORLD.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">THE INTELLECTUAL PROPERTY IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT OF THIRD PARTY RIGHTS. THE COPYRIGHT HOLDER OR HOLDERS INCLUDED IN THIS NOTICE DO NOT WARRANT THAT THE FUNCTIONS CONTAINED IN THE INTELLECTUAL PROPERTY WILL MEET YOUR REQUIREMENTS OR THAT THE OPERATION OF THE INTELLECTUAL PROPERTY WILL BE UNINTERRUPTED OR ERROR FREE. ANY USE OF THE INTELLECTUAL PROPERTY SHALL BE MADE ENTIRELY AT THE USER’S OWN RISK. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR ANY CONTRIBUTOR OF INTELLECTUAL PROPERTY RIGHTS TO THE INTELLECTUAL PROPERTY BE LIABLE FOR ANY CLAIM, OR ANY DIRECT, SPECIAL, INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM ANY ALLEGED INFRINGEMENT OR ANY LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR UNDER ANY OTHER LEGAL THEORY, ARISING OUT OF OR IN CONNECTION WITH THE IMPLEMENTATION, USE, COMMERCIALIZATION OR PERFORMANCE OF THIS INTELLECTUAL PROPERTY.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">This license is effective until terminated. You may terminate it at any time by destroying the Intellectual Property together with all copies in any form. The license will also terminate if you fail to comply with any term or condition of this Agreement. Except as provided in the following sentence, no such termination of this license shall require the termination of any third party end-user sublicense to the Intellectual Property which is in force as of the date of notice of such termination. In addition, should the Intellectual Property, or the operation of the Intellectual Property, infringe, or in LICENSOR&#8217;s sole opinion be likely to infringe, any patent, copyright, trademark or other right of a third party, you agree that LICENSOR, in its sole discretion, may terminate this license without any compensation or liability to you, your licensees or any other party. You agree upon termination of any kind to destroy or cause to be destroyed the Intellectual Property together with all copies in any form, whether held by you or by any third party.</span></p>
+</div>
+<div class="paragraph">
+<p><span class="small">Except as contained in this notice, the name of LICENSOR or of any other holder of a copyright in all or part of the Intellectual Property shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Intellectual Property without prior written authorization of LICENSOR or such copyright holder. LICENSOR is and shall at all times be the sole entity that may authorize you or any third party to use certification marks, trademarks or other special designations to indicate compliance with any LICENSOR standards or specifications. This Agreement is governed by the laws of the Commonwealth of Massachusetts. The application to this Agreement of the United Nations Convention on Contracts for the International Sale of Goods is hereby expressly excluded. In the event any provision of this Agreement shall be deemed unenforceable, void or invalid, such provision shall be modified so as to make it valid and enforceable, and as so modified the entire Agreement shall remain in full force and effect. No decision, action or inaction by LICENSOR shall be construed to be a waiver of any rights or remedies available to it.</span></p>
+</div>
+<div style="page-break-after: always;"></div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_scope">1. Scope</a></li>
+<li><a href="#_conformance">2. Conformance</a></li>
+<li><a href="#_references">3. References</a></li>
+<li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
+<ul class="sectlevel2">
+<li><a href="#_continuous_coverage">4.1. <strong>Continuous coverage</strong></a></li>
+<li><a href="#_coordinate_reference_system_crs">4.2. <strong>Coordinate Reference System (CRS)</strong></a></li>
+<li><a href="#_coverage">4.3. <strong>Coverage</strong></a></li>
+<li><a href="#_discrete_coverage">4.4. <strong>Discrete Coverage</strong></a></li>
+<li><a href="#_depth">4.5. <strong>Depth</strong></a></li>
+<li><a href="#_direct_position">4.6. <strong>Direct Position</strong></a></li>
+<li><a href="#_elevation">4.7. <strong>Elevation</strong></a></li>
+<li><a href="#_grid">4.8. <strong>Grid</strong></a></li>
+<li><a href="#_grid_point">4.9. <strong>Grid point</strong></a></li>
+<li><a href="#_height">4.10. <strong>Height</strong></a></li>
+<li><a href="#_regular_grid">4.11. <strong>Regular grid</strong></a></li>
+</ul>
+</li>
+<li><a href="#_conventions">5. Conventions</a>
+<ul class="sectlevel2">
+<li><a href="#_identifiers">5.1. Identifiers</a></li>
+</ul>
+</li>
+<li><a href="#_short_introduction_to_coverages_and_cis">6. Short introduction to coverages and CIS</a>
+<ul class="sectlevel2">
+<li><a href="#_a_note_on_elevation">6.1. A note on “elevation”</a></li>
+<li><a href="#_storage_formats_and_grid_cell_values">6.2. Storage formats and grid cell values</a></li>
+<li><a href="#_cross_walk_of_geopackage_column_names_and_ogciso_baseline">6.3. Cross Walk of GeoPackage Column Names and OGC/ISO Baseline</a>
+<ul class="sectlevel3">
+<li><a href="#_gml_gridenvelope">6.3.1. GML GridEnvelope</a></li>
+<li><a href="#_cisswe_rangetype">6.3.2. CIS/SWE rangeType</a></li>
+<li><a href="#_cisswe_rangeset">6.3.3. CIS/SWE rangeSet</a></li>
+<li><a href="#_gmlcisswe_domainset">6.3.4. GML/CIS/SWE domainSet</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_grid_regular_coverage_extension_requirement_clauses">7. Grid-Regular Coverage Extension Requirement Clauses</a>
+<ul class="sectlevel2">
+<li><a href="#table-definitions">7.1. Table Definitions</a>
+<ul class="sectlevel3">
+<li><a href="#coverage-ancillary">7.1.1. Coverage Ancillary</a></li>
+<li><a href="#_tile_ancillary">7.1.2. Tile Ancillary</a></li>
+</ul>
+</li>
+<li><a href="#table-values">7.2. Table Values</a>
+<ul class="sectlevel3">
+<li><a href="#gpkg_spatial_ref_sys">7.2.1. gpkg_spatial_ref_sys</a></li>
+<li><a href="#gpkg_contents">7.2.2. gpkg_contents</a></li>
+<li><a href="#gpkg_extensions">7.2.3. gpkg_extensions</a></li>
+</ul>
+</li>
+<li><a href="#_gpkg_2d_gridded_coverage_ancillary">7.3. gpkg_2d_gridded_coverage_ancillary</a></li>
+<li><a href="#_gpkg_2d_gridded_tile_ancillary">7.4. gpkg_2d_gridded_tile_ancillary</a></li>
+<li><a href="#_tile_pyramid_user_data_tables">7.5. Tile Pyramid User Data Tables</a></li>
+</ul>
+</li>
+<li><a href="#_tiff_encoding">8. TIFF Encoding</a></li>
+<li><a href="#_conformance_class_abstract_test_suite_normative">Annex A: Conformance Class Abstract Test Suite (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_table_definitions">A.1. Table Definitions</a>
+<ul class="sectlevel3">
+<li><a href="#_coverage_ancillary">A.1.1. Coverage Ancillary</a></li>
+<li><a href="#_tile_ancillary_2">A.1.2. Tile Ancillary</a></li>
+</ul>
+</li>
+<li><a href="#_table_values">A.2. Table Values</a>
+<ul class="sectlevel3">
+<li><a href="#_spatial_reference">A.2.1. Spatial Reference</a></li>
+</ul>
+</li>
+<li><a href="#_contents">A.3. Contents</a></li>
+<li><a href="#_extensions">A.4. Extensions</a></li>
+<li><a href="#_coverage_ancillary_2">A.5. Coverage Ancillary</a></li>
+<li><a href="#_tile_ancillary_3">A.6. Tile Ancillary</a></li>
+<li><a href="#_tile_pyramid_user_data_table">A.7. Tile Pyramid User Data Table</a></li>
+</ul>
+</li>
+<li><a href="#_informative_gml_example_showing_domainset_rangetype_and_rangetset">Annex B: Informative - GML example showing domainSet, rangeType, and rangetSet</a></li>
+<li><a href="#_table_definition_sql_for_grid_regular_extension_normative">Annex C: Table Definition SQL for Grid-Regular Extension (Normative)</a>
+<ul class="sectlevel2">
+<li><a href="#_coverage_ancillary_table_definition_sql">C.1. Coverage Ancillary Table Definition SQL</a></li>
+<li><a href="#_tile_ancillary_table_definition_sql">C.2. Tile Ancillary Table Definition SQL</a></li>
+</ul>
+</li>
+<li><a href="#_revision_history">Annex D: Revision History</a></li>
+<li><a href="#Bibliography">Annex E: Bibliography</a></li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p><strong class="big">i.     Abstract</strong></p>
+</div>
+<div class="paragraph">
+<p>The "GeoPackage Extension for Tiled Gridded Coverage Data” extension (previously titled Elevation Extension) defines how to encode and store tiled regular gridded data, such as a digital elevation model, in a GeoPackage. The tiles contain values, such as elevation, temperature or pressure, and the extension defines two encodings. The PNG encoding uses PNG files to store 16-bit integer values and a scale and offset may be applied to fine-tune the coverage range. To support 32-bit floating point data, the extension also defines a TIFF encoding. In this encoding, TIFF files are used to store 32-bit floating-point values. To simplify development, this encoding constrains many of the TIFF options to the minimal set needed to meet the floating-point requirement. The extension also defines two ancillary data tables: one for regular gridded coverages and one for tiles.</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">ii.    Keywords</strong></p>
+</div>
+<div class="paragraph">
+<p>The following are keywords to be used by search engines and document catalogues.</p>
+</div>
+<div class="paragraph">
+<p>ogcdoc, OGC document, geopackage, cis, coverage, grid</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">iii.   Preface</strong></p>
+</div>
+<div class="paragraph">
+<p>"GeoPackage Extension for Tiled Gridded Coverage Data” was initially documented in the GeoPackage 1.2 draft standard as Annex F.11 Tiled Gridded Elevation Data. In 2016, the GeoPackage Elevation Extension was tested and refined as part of the OGC GeoPackage Elevation Extension Interoperability Experiment <sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>. Based on the results of the Interoperability Experiment, the candidate extension was edited and submitted to the OGC Architecture Board for review and consideration. The OGC Architecture Board recommended that the Elevation extension not be an Annex of the core GeoPackage standard but instead should be a separate document that aligns to other parts of the OGC Standards Baseline. In the ISO 19123 Schema for Coverage Geometry standard and in the OGC Coverage Implementation Schema, this type of regular gridded data is classed as <code>grid-regular</code> <sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup>. This document is the result of implementing that recommendation. As part of the work, the scope of the extension was expanded from just elevation data to any regular gridded coverage data.</p>
+</div>
+<div class="paragraph">
+<p>NOTE and WARNING: Any implementations of the candidate standard prior to August 2017 may need to be revised to comply with changes to Table 1: Coverage Ancillary Table Definitions. Specifically, “pixel_encoding” has been changed to “grid_cell_encoding” and additional columns have been added to the Table.</p>
+</div>
+<div class="paragraph">
+<p>The following information is provided in compliance with the GeoPackage Extension template as defined in Annex E: GeoPackage Extension Template of the GeoPackage Standard. These additional introductory clauses are not elements in the standard OGC document template.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Extension Author: GeoPackage SWG, author_name of <code>gpkg</code> will be assigned if this extension is adopted by OGC.</p>
+</li>
+<li>
+<p>Extension Name or Template: <code>2d_gridded_coverage</code>, alias of <code>gpkg_2d_gridded_coverage</code> will be assigned if this extension is adopted by OGC.</p>
+</li>
+<li>
+<p>Extension Type: This extension has a dependency on <a href="http://www.geopackage.org/spec/#tiles"><em>Clause 2.2</em></a><sup class="footnote">[<a id="_footnoteref_3" class="footnote" href="#_footnotedef_3" title="View footnote.">3</a>]</sup> of the core GeoPackage standard.</p>
+</li>
+<li>
+<p>Applicability: This GeoPackage Gridded Coverages extension can be used to store any gridded coverage in a GeoPackage data store. This extension specifies requirements and optional clauses for additional GeoPackage tables as well as requirements for extensions to <a href="http://www.geopackage.org/spec/#tiles_user_tables"><em>tile pyramid user data tables</em></a> (Clause 2.2.8 of the GeoPackage core) that can be used to hold tiled, gridded coverage data.</p>
+</li>
+<li>
+<p>Scope: read-write</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.</p>
+</div>
+<div class="paragraph">
+<p>Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.</p>
+</div>
+<div class="paragraph">
+<p><strong class="big">iv.    Submitting organizations</strong></p>
+</div>
+<div class="paragraph">
+<p>The following organizations submitted this Document to the Open Geospatial Consortium (OGC):</p>
+</div>
+<div class="paragraph">
+<p>Organization name(s)</p>
+</div>
+<div class="paragraph">
+<p>The OGC GeoPackage Standards Working Group:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.opengeospatial.org/projects/groups/geopackageswg" class="bare">http://www.opengeospatial.org/projects/groups/geopackageswg</a></p>
+</div>
+<div class="paragraph">
+<p><strong class="big">v.     Submitters</strong></p>
+</div>
+<div class="paragraph">
+<p>All questions regarding this submission should be directed to the editor or the submitters:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Name</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Affiliation</strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Chris Clarke</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Compusult</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Carl Reed</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Carl Reed and Associates</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Jeff Yutzler</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Image Matters</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_scope"><a class="anchor" href="#_scope"></a>1. Scope</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This extension defines the rules for encoding and storing 16-bit and 32-bit tiled regular grid coverages composed of regular gridded data, such as elevation and temperature, in a GeoPackage. This capability may be used to support use cases such as the following:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Visualization</p>
+<div class="ulist">
+<ul>
+<li>
+<p>2D and 3D Draping and Texture mapping</p>
+</li>
+<li>
+<p>2D (hill shade, color relief, slope, aspect)</p>
+</li>
+<li>
+<p>3D (supporting changing view angles and level of detail)</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Analysis</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Contouring of any continuous coverage</p>
+</li>
+<li>
+<p>Volume computations</p>
+</li>
+<li>
+<p>Slicing for 3D printers and other applications</p>
+</li>
+<li>
+<p>Viewshed and line-of-sight</p>
+</li>
+<li>
+<p>Cross-country mobility (off-road routing)</p>
+</li>
+<li>
+<p>Site suitability and planning (slope analysis such as helicopter landing zones)</p>
+</li>
+<li>
+<p>3D geometry representations of features (ground-based, airspace)</p>
+</li>
+<li>
+<p>Terrain association (associating images to mapped locations)</p>
+</li>
+<li>
+<p>Augmented reality training</p>
+</li>
+<li>
+<p>Mesh generation</p>
+</li>
+<li>
+<p>Ancillary data for classification tools</p>
+</li>
+<li>
+<p>Trend Analysis</p>
+</li>
+<li>
+<p>“Heat” maps</p>
+</li>
+<li>
+<p>Drainage calculations</p>
+</li>
+<li>
+<p>Profiling</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>This extension was designed to be relatively easy to implement and to be suitable for a wide variety of computing environments, including the mobile/handheld computing environment<sup class="footnote">[<a id="_footnoteref_4" class="footnote" href="#_footnotedef_4" title="View footnote.">4</a>]</sup>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conformance"><a class="anchor" href="#_conformance"></a>2. Conformance</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This standard defines requirements for a Regular Grid Coverage, such as an elevation matrix, to be stored in a GeoPackage.</p>
+</div>
+<div class="paragraph">
+<p>Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site<sup class="footnote">[<a id="_footnoteref_5" class="footnote" href="#_footnotedef_5" title="View footnote.">5</a>]</sup>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_references"><a class="anchor" href="#_references"></a>3. References</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.</p>
+</div>
+<div class="paragraph">
+<p>ISO: ISO 12639, TIFF™ Revision 6.0 Final, June 3, 1992 Adobe® Systems Incorporated, 2004</p>
+</div>
+<div class="paragraph">
+<p><a id="New_WKT_Reference"></a>ISO / OGC: ISO 19162:2015 <em>Geographic information&#8201;&#8212;&#8201;Well-known text representation of coordinate reference systems</em>. Also OGC 12-063r5. <a href="http://docs.opengeospatial.org/is/12-063r5/12-063r5.html" class="bare">http://docs.opengeospatial.org/is/12-063r5/12-063r5.html</a>, 2015</p>
+</div>
+<div class="paragraph">
+<p><a id="Old_WKT_Reference"></a>OGC: OGC 01-009 <em>Implementation Specification: Coordinate Transformation Services Revision 1.0</em> <a href="http://portal.opengeospatial.org/files/?artifact_id=999"><em>http://portal.opengeospatial.org/files/?artifact_id=999</em></a>, 2001</p>
+</div>
+<div class="paragraph">
+<p>OGC: GC 08-015r2, <em>Abstract Specification Topic 2 – Spatial Referencing by Coordinates</em>, (ISO 19111), 2010</p>
+</div>
+<div class="paragraph">
+<p>OGC: OGC 07-011, <em>Abstract Specification Topic 6: Schema for coverage geometry and functions</em>, (ISO 19123), 2006</p>
+</div>
+<div class="paragraph">
+<p>OGC: OGC 15-115r3 <em>CDB Core Standard: Model and Physical Data Store Structure</em> <a href="https://portal.opengeospatial.org/files/?artifact_id=72712" class="bare">https://portal.opengeospatial.org/files/?artifact_id=72712</a>, 2016</p>
+</div>
+<div class="paragraph">
+<p>OGC: OGC 09-146r6 <em>Coverage Implementation Schema 1.1</em> <a href="http://docs.opengeospatial.org/is/09-146r6/09-146r6.html" class="bare">http://docs.opengeospatial.org/is/09-146r6/09-146r6.html</a>, 2017</p>
+</div>
+<div class="paragraph">
+<p>OGC: OGC 12-128r12, <em>GeoPackage Encoding Standard 1.1</em> <a href="http://www.geopackage.org/spec110/" class="bare">http://www.geopackage.org/spec110/</a>, 2015</p>
+</div>
+<div class="paragraph">
+<p>OGC: OGC 06-121r9 Web Services Common Standard, version 2.0.0, 2010</p>
+</div>
+<div class="paragraph">
+<p><a id="_Ref425705852"></a>OGC: OGC 08-094r1, OGC<sup>®</sup> SWE Common Data Model Encoding Standard, version 2.0, 2011</p>
+</div>
+<div class="paragraph">
+<p>UCUM : <a href="http://unitsofmeasure.org/ucum.html">The Unified Code for Units of Measure</a>. 2014</p>
+</div>
+<div class="paragraph">
+<p>Adobe Systems Incorporated: Adobe <em>TIFF ™ Revision 6.0 Final</em>, <a href="ftp://download.osgeo.org/libtiff/doc/TIFF6.pdf"><em>ftp://download.osgeo.org/libtiff/doc/TIFF6.pdf</em></a>, 1992</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_terms_and_definitions"><a class="anchor" href="#_terms_and_definitions"></a>4. Terms and Definitions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.</p>
+</div>
+<div class="paragraph">
+<p>For the purposes of this document, the following additional terms and definitions apply <sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>.</p>
+</div>
+<div class="sect2">
+<h3 id="_continuous_coverage"><a class="anchor" href="#_continuous_coverage"></a>4.1. <strong>Continuous coverage</strong></h3>
+<div class="paragraph">
+<p><strong>coverage</strong> that returns different values for the same feature attribute at different <strong>direct positions</strong> within a single spatial object, temporal object or spatiotemporal object in its domain. [ISO 19123]</p>
+</div>
+<div class="paragraph">
+<p>Note: A continuous (grid) coverage has values not only at the direct positions themselves, but also at any location between the direct positions. In other words, an application can apply interpolation methods to obtain values between direct positions.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_coordinate_reference_system_crs"><a class="anchor" href="#_coordinate_reference_system_crs"></a>4.2. <strong>Coordinate Reference System (CRS)</strong></h3>
+<div class="paragraph">
+<p>A coordinate system that is related to the real world by a datum. [ISO 19111]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_coverage"><a class="anchor" href="#_coverage"></a>4.3. <strong>Coverage</strong></h3>
+<div class="paragraph">
+<p>A coverage is a function that describe characteristics of real-world phenomena that vary over space and/or time. Typical examples are temperature, elevation and precipitation. A coverage is typically represented as a data structure containing a set of such values, each associated with one of the elements in a spatial, temporal or spatiotemporal domain. Typical spatial domains are point sets (e.g. sensor locations), curve sets (e.g. contour lines), grids (e.g. orthoimages, elevation models), etc. A property whose value varies as a function of time may be represented as a temporal coverage or time-series [<a href="https://www.w3.org/TR/sdw-bp/#bib-ISO-19109"><em>ISO-19109</em></a>].NOTE: feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6 [ISO 19123]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_discrete_coverage"><a class="anchor" href="#_discrete_coverage"></a>4.4. <strong>Discrete Coverage</strong></h3>
+<div class="paragraph">
+<p>Coverage that returns the same feature attribute values for every direct position within any single spatial object, temporal object, or spatiotemporal object in its domain [ISO 19123/OGC Topic 6]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_depth"><a class="anchor" href="#_depth"></a>4.5. <strong>Depth</strong></h3>
+<div class="paragraph">
+<p>Distance of a point from a chosen reference surface measured upward along a line perpendicular to that surface. [ISO 19111]</p>
+</div>
+<div class="paragraph">
+<p>Note 1 to entry: A height below the reference surface will have a negative value, which would embrace both gravity-related heights and ellipsoidal heights.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_direct_position"><a class="anchor" href="#_direct_position"></a>4.6. <strong>Direct Position</strong></h3>
+<div class="paragraph">
+<p>The position described by a single set of <strong>coordinates</strong> within a <strong>coordinate reference system</strong>. [ISO 19123]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_elevation"><a class="anchor" href="#_elevation"></a>4.7. <strong>Elevation</strong></h3>
+<div class="paragraph">
+<p>Synonym for “height”</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grid"><a class="anchor" href="#_grid"></a>4.8. <strong>Grid</strong></h3>
+<div class="paragraph">
+<p>Grid network composed of two or more sets of curves in which the members of each set intersect the members of the other sets in an algorithmic way. NOTE: The curves partition a space into grid cells. [ISO 19123]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_grid_point"><a class="anchor" href="#_grid_point"></a>4.9. <strong>Grid point</strong></h3>
+<div class="paragraph">
+<p>Point located at the intersection of two or more curves in a grid. [ISO 19123:2005]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_height"><a class="anchor" href="#_height"></a>4.10. <strong>Height</strong></h3>
+<div class="paragraph">
+<p>Distance of a point from a chosen reference surface measured upward along a line perpendicular to that surface. [ISO 19111] Note 1 to entry: A height below the reference surface will have a negative value, which would embrace both gravity-related heights and ellipsoidal heights.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_regular_grid"><a class="anchor" href="#_regular_grid"></a>4.11. <strong>Regular grid</strong></h3>
+<div class="paragraph">
+<p>Grid whose grid lines have a constant distance along each grid axis</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conventions"><a class="anchor" href="#_conventions"></a>5. Conventions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.</p>
+</div>
+<div class="sect2">
+<h3 id="_identifiers"><a class="anchor" href="#_identifiers"></a>5.1. Identifiers</h3>
+<div class="paragraph">
+<p>The normative provisions in this standard are denoted by the URI</p>
+</div>
+<div class="paragraph">
+<p><a href="http://www.opengis.net/spec/geopackage-gr/1.0" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0</a></p>
+</div>
+<div class="paragraph">
+<p>All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base. The three letter acronym “Req” is equivalent to the above URI. NOTE: The abbreviation “gr” stands for grid-regular.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_short_introduction_to_coverages_and_cis"><a class="anchor" href="#_short_introduction_to_coverages_and_cis"></a>6. Short introduction to coverages and CIS</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This section is extracted from the OGC Coverage Implementation Schema (CIS) standard. <sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup></p>
+</div>
+<div class="paragraph">
+<p>The GeoPackage tile grid extension is conceptually grounded in the OGC Coverage Implementation Schema (CIS). CIS specifies the OGC coverage model by establishing a concrete, interoperable, conformance-testable coverage structure. CIS is based on the abstract concepts of OGC Abstract Topic 6 (which is identical to ISO 19123:2005). ISO 19123 specifies an abstract model for coverages which is not per se interoperable. In other words, many different and incompatible implementations of the abstract model are possible. CIS, on the other hand, is interoperable in the sense that coverages can be conformance tested, regardless of their data format encoding, down to the level of single grid cell.</p>
+</div>
+<div class="paragraph">
+<p>Coverages can be encoded in any suitable format (such as GML, JSON, GeoTIFF, TIFF, PNG or Net­CDF) and can be partitioned, e.g., for a time-interleaved representation. Coverages are independent from service definitions and, therefore, can be accessed through a variety of OGC services types, such as the Web Coverage Service (WCS) Standard. The coverage structure can serve a wide range of coverage application domains, thereby contributing to harmonization and interoperability between and across these domains.</p>
+</div>
+<div class="paragraph">
+<p>Within the GeoPackage, a grid of elevations is a type of a regular gridded coverage (<code>CIS::GeneralGridCoverage</code>, <code>class grid-regular</code>) that has a grid as their domain set describing the direct positions in multi-dimensional coordinate space, depending on the type of grid. In the class <em>grid-regular</em>, simple equidistant grids are established. <sup class="footnote">[<a id="_footnoteref_8" class="footnote" href="#_footnotedef_8" title="View footnote.">8</a>]</sup> This is illustrated in <a href="#Grid_Illustration">Figure 1</a>.</p>
+</div>
+<div id="Grid_Illustration" class="paragraph">
+<div class="title">Illustration of a regular gridded coverage</div>
+<p><span class="image"><img src="images/image1.png" alt="image" width="128" height="94"></span></p>
+</div>
+<div class="sect2">
+<h3 id="_a_note_on_elevation"><a class="anchor" href="#_a_note_on_elevation"></a>6.1. A note on “elevation”</h3>
+<div class="paragraph">
+<p>Work on this extension originally focused on requirements for encoding a regular grid of elevations in a GeoPackage. The original (draft) version of this extension did not provide a definition of “elevation”. This version does include a very general definition of the term “elevation” as specified in ISO 19111:Spatial Referencing by Coordinates. This definition is almost identical to those found in a number of other documents, such as definitions for elevation (height) found in the Journal of Photogrammetry, standards documents from the International Civil Aviation Organization, American Society for Photogrammetry and Remote Sensing (ASPRS), the World Meteorological Organization, and the Federal Geographic Data Committee (FGDC). However, many of the definitions provided by those organizations take an earth centric view. OGC standards are being used for other planetary bodies. As such, this document uses a more general definition.</p>
+</div>
+<div class="paragraph">
+<p>Variations of the definition used in this document are often provided to meet domain specific requirements. As an example, ICAO uses, “The vertical distance of a point or a level, on or affixed to the surface of the earth, measured from mean sea level. Official ICAO publications sometimes use the term "gravity-related height" as a synonym of elevation.” This is the same as the definition used in this standard with the caveat that “elevation” is measured from mean sea level.</p>
+</div>
+<div class="paragraph">
+<p>The definition used in this standard accommodates any reference surface, including “elevation” as used in the building industry. Therefore, provision of proper coordinate reference system metadata is critical to determining the reference surface used for a specific elevation data set stored in a GeoPackage.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_storage_formats_and_grid_cell_values"><a class="anchor" href="#_storage_formats_and_grid_cell_values"></a>6.2. Storage formats and grid cell values</h3>
+<div class="paragraph">
+<p>This extension to the OGC GeoPackage Encoding Standard leverages the existing structure for raster tiles as defined in GeoPackage Clause 2.2 using PNG (16-bit, signed integer) and TIFF (32-bit, float) files as the container for the grid values, such as elevation. The data producer has the responsibility to ensure that the intended recipient is able to read GeoPackages that contain a grid-regular coverage encoding (PNG or TIFF). Please note that using multiple zoom levels for a grid-regular coverage is purely optional. There is no requirement that grid-regular tiles have to be in a full pyramid. Clause 2.2 specifies how each zoom level is encoded. There may be only one zoom level.</p>
+</div>
+<div class="paragraph">
+<p>Clause 7.1.1.2 and Table 1 Ancillary Coverage Data Definition define how the application to specify how the value of a grid cell is assigned. Obviously, if we are dealing with a <em>continuous</em> gridded coverage, values between grid cell center points can be interpolated, such as for contouring.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cross_walk_of_geopackage_column_names_and_ogciso_baseline"><a class="anchor" href="#_cross_walk_of_geopackage_column_names_and_ogciso_baseline"></a>6.3. Cross Walk of GeoPackage Column Names and OGC/ISO Baseline</h3>
+<div class="paragraph">
+<p>The following is a basic “crosswalk” between column names used in GeoPackage Clause 2.2 Tiles and semantics (tags) used in the OGC/ISO standards baseline, including Geography Markup Language (GML) and ISO 19123 Coverages. Please reference Annex B for an example of a GML encoding using domainSet, rangeType and rangeSet.</p>
+</div>
+<div class="sect3">
+<h4 id="_gml_gridenvelope"><a class="anchor" href="#_gml_gridenvelope"></a>6.3.1. GML GridEnvelope</h4>
+<div class="paragraph">
+<p>This GML element (Clause 19.2.2) defines the “limits” in pixel space of the grid matrix. The equivalent in the core GeoPackage standard is defined in Clause 2.2.7 Table 9. Tile Matrix Metadata Table Definition:</p>
+</div>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>tile_width: Tile width in pixels (&gt;= 1) for this zoom level</p>
+</div>
+<div class="paragraph">
+<p>tile_height: Tile height in pixels (&gt;= 1) for this zoom level</p>
+</div>
+</blockquote>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cisswe_rangetype"><a class="anchor" href="#_cisswe_rangetype"></a>6.3.2. CIS/SWE rangeType</h4>
+<div class="paragraph">
+<p>In the baseline, rangeType provides the ability to specify the characteristics of the coverage values contained in the rangeSet. As defined in ISO 19123, “The attribute <em>rangeType: RecordType</em> shall describe the range of the coverage”. More specifically, the <code>rangeType</code> component adds a structure description and technical metadata required for an appropriate (however, application independent) understanding of a coverage. Units of measure (UoM), allowed values (such as for radiance), and precision are rangeType metadata elements. <a href="#CoverageAncillaryTableDefinition">Table 1</a>  Coverage Ancillary Table Definitions provides columns for several key rangeType metadata elements.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cisswe_rangeset"><a class="anchor" href="#_cisswe_rangeset"></a>6.3.3. CIS/SWE rangeSet</h4>
+<div class="paragraph">
+<p>The rangeSet is comprised of the coverage range values, each one being associated with a direct position. In the case of the GeoPackage Grid Coverage extension, the rangeSet are the data values contained in the TIFF file. The requirements for using TIFF are defined in <a href="#tiff-encoding">Clause 8</a> of this document.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gmlcisswe_domainset"><a class="anchor" href="#_gmlcisswe_domainset"></a>6.3.4. GML/CIS/SWE domainSet</h4>
+<div class="paragraph">
+<p>The gml:domainSet property describes the domain of the coverage. The metadata defining the domain is provided in both the core GeoPackage tables and coverage ancillary tables and associated requirements for the grid coverage GeoPackage extension. Key elements of the domain metadata are defined in the core GeoPackage standard:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Clause 1.1.2 Table 2 Spatial Ref Sys Table Definition;</p>
+</li>
+<li>
+<p>Clause 2.2.7 Table 9 Tile Matrix Metadata Table Definition in the core GeoPackage standard; and</p>
+</li>
+<li>
+<p>Clause 1.1.3 Table 4 Contents Table Definition.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Additional metadata elements describing the domain of a continuous regular grid coverage are provided in the coverage ancillary table (Table 1) and include units of measure (UoM), precision, and pixel sample encoding method.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_grid_regular_coverage_extension_requirement_clauses"><a class="anchor" href="#_grid_regular_coverage_extension_requirement_clauses"></a>7. Grid-Regular Coverage Extension Requirement Clauses</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Clause 7 defines the requirements for encoding and storing regular, grid coverages in a GeoPackage. These requirements are in addition or complement the requirements for raster tiles as defined in the core GeoPackage standard Clause 2.2.</p>
+</div>
+<div class="sect2">
+<h3 id="table-definitions"><a class="anchor" href="#table-definitions"></a>7.1. Table Definitions</h3>
+<div class="paragraph">
+<p>Clauses 7.1.1 and 7.1.2 define the requirements and elements of Tiled Grid Extension ancillary (additional) tables required for storing a regular grid of values such as elevation in a GeoPackage.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Table Definitions</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/table-defs" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/table-defs</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/coverage-ancillary<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/tile-ancillary<br>
+requirement description </p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="coverage-ancillary"><a class="anchor" href="#coverage-ancillary"></a>7.1.1. Coverage Ancillary</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 1</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/table-defs/coverage-ancillary<br>
+<br></p>
+<p class="tableblock">A GeoPackage that contains tiled gridded data <em>SHALL</em> contain a <code>gpkg_2d_gridded_coverage_ancillary</code> table or view as per the Coverage Ancillary Table Definition below. Subsequent extensions or custom implementations <em>MAY</em> add additional columns to this table. Clients <em>SHALL</em> ignore additional columns that are unrecognized. </p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#CoverageAncillaryTableDefinition">Table 1</a> provides definitions for columns in the Coverage Ancillary Table.</p>
+</div>
+<table id="CoverageAncillaryTableDefinition" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 1. Coverage Ancillary Table Definition</caption>
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Column Name</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Column Type</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Column Description</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Null</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Default</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Key</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Constraint</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Autoincrement primary key</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PK</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>tile_matrix_set_name</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Foreign key to table_name in <a href="http://www.geopackage.org/spec/#tile_matrix_set_data_table_definition"><code>gpkg_tile_matrix_set</code></a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">FK</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">UNIQUE</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>datatype</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>integer</em> or <em>float</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><em>integer</em></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>scale</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Scale as a multiple relative to the unit of measure</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>offset</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The offset to the 0 value</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>precision</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL <sup class="footnote">[<a id="_footnoteref_9" class="footnote" href="#_footnotedef_9" title="View footnote.">9</a>]</sup></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The smallest value that has meaning for this dataset</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>data_null</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL <sup class="footnote">[<a id="_footnoteref_10" class="footnote" href="#_footnotedef_10" title="View footnote.">10</a>]</sup></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The value that indicates NULL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>grid_cell_encoding</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Specifies how a value is assigned to a grid cell (pixel)</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">grid-value-is-center</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>uom</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Units of Measure for values in the grid coverage</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>field_name</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Type of Gridded Coverage Data (default is Height).</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Height</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>quantity_definition</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Description of the values contained in the Gridded Coverage.</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Height</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+</tbody>
+</table>
+<div class="sect4">
+<h5 id="_using_the_scale_and_offset_values"><a class="anchor" href="#_using_the_scale_and_offset_values"></a>Using the Scale and Offset Values</h5>
+<div class="paragraph">
+<p>Integer values MAY be scaled and offset in order to make more efficient use of 16-bit integer space available in PNG files. The scale and offset MAY be applied to the entire coverage and/or the individual tile. The scale and offset do not apply to the <code>data_null</code> value as defined in the Coverage Ancillary Table Definitions (above).</p>
+</div>
+<div class="paragraph">
+<p>Actual cell values are be calculated by:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>first multiplying the stored value by the <code>gpkg_2d_gridded_tile_ancillary_table.scale</code> value and then adding the <code>gpkg_2d_gridded_tile_ancillary_table.offset</code>,</p>
+</li>
+<li>
+<p>followed by multiplying that value by the <code>gpkg_2d_gridded_coverage_ancillary.scale</code> value and then adding the <code>gpkg_2d_gridded_coverage_ancillary.offset</code>.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In pseudo-code, this conversion would look like:</p>
+</div>
+<div class="paragraph">
+<p><code>elevationInUnitOfMeasure = (SomeGrid_RegularCoverage.tile_data&#8594;pngpixels[i] * gpkg_2d_gridded_tile_ancillary.scale + gpkg_2d_gridded_tile_ancillary.offset) * gpkg_2d_gridded_coverage_ancillary.scale + gpkg_2d_gridded_coverage_ancillary.offset;</code></p>
+</div>
+<div class="paragraph">
+<p>Note: <em>integer</em> and <em>float</em> refer to the values stored in the tiles. If <em>integer</em> values have a real scale or offset applied to them, then the resulting values will be real. The scale and offset do not apply to tiles of datatype <em>float</em>.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_grid_cell_encoding"><a class="anchor" href="#_grid_cell_encoding"></a>grid cell encoding</h5>
+<div class="paragraph">
+<p>There is a small set of possible ways in how a value is actually assigned to a given grid cell. For example, a value could be assigned to the center of a cell, a corner of a cell, and so forth. Additionally, a value can be assigned to the entire cell. The OGC standards baseline currently states the use of pixel-is-point: GMLJP2 follows the definition of grids in GML 3.2.1 [OGC 07-036] clause 19.2.2: “When a grid point is used to represent a sample space (e.g. image pixel), the grid point represents the center of the sample space (see ISO 19123:2005, 8.2.2)”. In this extension, we use “grid-value-is-area” rather than “pixel-is-area” for discrete coverages such as classified satellite imagery and specifies that the value for an entire grid cell is the same value.</p>
+</div>
+<div class="paragraph">
+<p>For the purposes of grid coverage GeoPackage extension, the following values are allowed.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>grid-value-is-center: This is the default. Assume the value is center of grid cell.</p>
+</li>
+<li>
+<p>grid-value-is-area – Assume the entire grid cell has the same value.</p>
+</li>
+<li>
+<p>grid-value-is-corner – A typical use case is for a mesh of elevation values as specified in the OGC CDB standard Clause 5.6.1.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>As other sampling methods are identified, the list of enumeration types can be expanded.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_uom"><a class="anchor" href="#_uom"></a>uom</h5>
+<div class="paragraph">
+<p>The default is the units of measure as defined in the vertical CRS metadata, such as for heights (elevations). However, for many types of grid coverage data there will not be a vertical CRS defined in EPSG or other registries. Examples of such phenomenon are temperature, pressure, and wind speed. The formal (normative) definition for these phenomenon should be specified based on some well know accepted registry, ontology, or other community accepted units of measurement definitions. Currently, UCUM is used as the normative UoM reference in the OGC standards baseline. Some examples from UCUM are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Cel - Celsius, degree – temperature</p>
+</li>
+<li>
+<p>[degF] – degree Fahrenheit – temperature</p>
+</li>
+<li>
+<p>mbar - millibar – pressure</p>
+</li>
+<li>
+<p>B[uV] - microvolt, bel – electric potential level</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>There are other normative sources for UoM definitions, such as the World Meteorological codes registry<sup class="footnote">[<a id="_footnoteref_11" class="footnote" href="#_footnotedef_11" title="View footnote.">11</a>]</sup> and the NASA QUDT semantic definitions<sup class="footnote">[<a id="_footnoteref_12" class="footnote" href="#_footnotedef_12" title="View footnote.">12</a>]</sup>.</p>
+</div>
+<div class="paragraph">
+<p>An additional consideration is that a GeoPackage may be used in a disconnected environment. Therefore, the UoM specification should not be a URN or URI to some external resource. Consequently, the UoM code used should also have a specific field name and quantity definition.</p>
+</div>
+<div class="paragraph">
+<p>This field is mandatory.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_field_name"><a class="anchor" href="#_field_name"></a>field_name</h5>
+<div class="paragraph">
+<p>field_name is an element of rangeType. Specifically, each “field” attribute in a given GeoPackage gridded coverage instance is identified by a name that is unique to the coverage instance. For example, if the field_name is “temperature”, then the entire coverage instance is “temperature”. Therefore, for this GeoPackage extension, there is only one field attribute and one instance. In the example below, consider a grid coverage comprised of temperatures and using SWE Data Common (08-094r1) to specify the field name.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="xml">&lt;swe:field name="temperature"&gt;
+&lt;swe:Quantity definition="http://mmisw.org/ont/cf/parameter/air_temperature"&gt;
+&lt;swe:label&gt;Air Temperature&lt;/swe:label&gt;
+&lt;swe:uom code="Cel"/&gt;
+&lt;/swe:Quantity&gt;
+&lt;/swe:field&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>For a disconnected environment, the field_name should not be a URN or a URI. Instead use the label from the normative resource being referenced. In the above example, the field_name would be “air_temperature”. The quantity definition would also need to be specified.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_quantity_definition"><a class="anchor" href="#_quantity_definition"></a>quantity definition</h5>
+<div class="paragraph">
+<p>Associated with the field name is a definition of that field/attribute. In SWE Common this is defined in the Quantity class. In the above example, navigating to <a href="http://mmisw.org/ont/cf/parameter/air_temperature" class="bare">http://mmisw.org/ont/cf/parameter/air_temperature</a> provides a very specific definition of what is meant by “temperature”.</p>
+</div>
+<div class="paragraph">
+<p>Please note that in a disconnected environment, the use of URNs and URIs is discouraged. Instead, use the text field to provide the quantity definition for the UoM being used. For example, for the above example the Marine Metadata registry provides the following: “Air temperature is the bulk temperature of the air, not the surface (skin) temperature”.</p>
+</div>
+<div class="paragraph">
+<p>This metadata element/column is required if the values contained in a grid coverage are anything other than height (elevation). This is a text string that describes the field (type). This could be an http uri to an ontology or enumeration, such as “http://sweet.jpl.nasa.gov/2.0/spaceExtent.owl#Height"</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_tile_ancillary"><a class="anchor" href="#_tile_ancillary"></a>7.1.2. Tile Ancillary</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 2</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/table-defs/tile-ancillary<br>
+<br></p>
+<p class="tableblock">A GeoPackage that contains tiled gridded data SHALL contain a <code>gpkg_2d_gridded_tile_ancillary</code> table or view as per <a href="http://www.geopackage.org/spec/#gpkg_2d_gridded_tile_ancillary_table"><em>Tile Ancillary Table Definition</em></a>. Subsequent extensions or custom implementations MAY add additional columns to this table. Clients SHALL ignore additional columns that are unrecognized.</p></td>
+</tr>
+</tbody>
+</table>
+<table id="TileAncillaryTableDefinition" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 2. Tile Ancillary Table Definition</caption>
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Column Name</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Column Type</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Column Description</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Null</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Default</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Key</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>id</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Autoincrement primary key</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">PK</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>tpudt_name</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Name of <a href="http://www.geopackage.org/spec/#tiles_user_tables"><em>tile pyramid user data table</em></a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">UNIQUE<sup class="footnote">[<a id="_footnoteref_13" class="footnote" href="#_footnotedef_13" title="View footnote.">13</a>]</sup></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>tpudt_id</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">INTEGER</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Foreign key to id in <a href="http://www.geopackage.org/spec/#tiles_user_tables"><em>tile pyramid user data table</em></a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">UNIQUE<sup class="footnote">[<a id="_footnoteref_14" class="footnote" href="#_footnotedef_14" title="View footnote.">14</a>]</sup></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>scale</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Scale as a multiple relative to the unit of measure</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>offset</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The offset to the 0 value</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">no</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>min</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL <sup class="footnote">[<a id="_footnoteref_15" class="footnote" href="#_footnotedef_15" title="View footnote.">15</a>]</sup></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Minimum value of this tile</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>max</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL <sup class="footnote">[<a id="_footnoteref_16" class="footnote" href="#_footnotedef_16" title="View footnote.">16</a>]</sup></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Maximum value of this tile</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>mean</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The arithmetic mean of values in this tile</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>std_dev</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">REAL</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">The standard deviation of values in this tile</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">yes</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The min, max, and mean values are natural, i.e., not scaled or offset. Similarly, the std_dev is calculated based on the natural values. The scale and offset do not apply to tiles of datatype <em>float</em>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="table-values"><a class="anchor" href="#table-values"></a>7.2. Table Values</h3>
+<div class="paragraph">
+<p>The following requirements specify required and optional table values.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Table Values</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/table-values" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/table-values</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 3</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-spatial-ref-sys-row </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 4</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-spatial-ref-sys-record </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-contents </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 6</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-extensions </p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect3">
+<h4 id="gpkg_spatial_ref_sys"><a class="anchor" href="#gpkg_spatial_ref_sys"></a>7.2.1. gpkg_spatial_ref_sys</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 3</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-spatial-ref-sys-row<br>
+<br></p>
+<p class="tableblock">GeoPackages complying with this extension <em>SHALL</em> have a row in the <code>gpkg_spatial_ref_sys</code> table as described in <a href="http://www.geopackage.org/spec/#gpkg_spatial_ref_sys_record"><em>Spatial Ref Sys Table Record</em></a>:</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Due to limitations in expressing 3D coordinate reference systems in the original OGC (circa 2001) <a href="#Old_WKT_Reference">Well-known Text</a>, it is recommended that GeoPackages complying with the grid-regular extension also comply with <a href="#New_WKT_Reference">ISO 19162</a> WKT for Coordinate Reference Systems as described in the GeoPackage CRS extension <a href="http://www.geopackage.org/spec/#extension_crs_wkt" class="bare">http://www.geopackage.org/spec/#extension_crs_wkt</a>. Please refer to clause F.10 WKT for Coordinate Reference Systems in the core <a href="http://www.geopackage.org/spec110/">GeoPackage standard version 1.1</a> and later.</p>
+</div>
+<table id="SpatialRefSysTableRecord" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 3. Spatial Ref Sys Table Record</caption>
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.6666%;">
+<col style="width: 16.667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>srs_name</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>srs_id</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>organization</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>organization_coordsys_id</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>definition</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">any</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>4979</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>EPSG</code> or <code>epsg</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>4979</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">any</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">any</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 4</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-spatial-ref-sys-record<br>
+<br></p>
+<p class="tableblock">The <code>gpkg_spatial_ref_sys</code> table in a GeoPackage <em>SHALL</em> contain records to define all spatial reference systems used by tiled gridded data in a GeoPackage. The spatial reference system <em>SHALL</em> be used to define the vertical datum, reference geoid, and units of measure for the tiled gridded elevation data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="gpkg_contents"><a class="anchor" href="#gpkg_contents"></a>7.2.2. gpkg_contents</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-contents<br>
+<br></p>
+<p class="tableblock">The <a href="http://www.geopackage.org/spec/#_contents"><code>gpkg_contents</code></a> table _SHALL_ contain a row with a <code>data_type</code> column value of <em>2d-gridded-coverage</em> for each tile pyramid containing tiled gridded data. When relevant, such as for elevation, the srs_id column value for that row SHOULD reference an SRS that has a vertical datum. This requirement extends core requirement <a href="http://www.geopackage.org/spec/#r34"><em>GPKG-34</em></a>). NOTE: Ideally for elevation data the vertical datum for each pyramid of elevation will be specified. However, it is impractical to mandate this for a number of reasons, including the difficulty in testing whether a specific SRS has a valid vertical datum. </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="gpkg_extensions"><a class="anchor" href="#gpkg_extensions"></a>7.2.3. gpkg_extensions</h4>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 6</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-extensions<br>
+<br></p>
+<p class="tableblock">GeoPackages complying with this extension SHALL have rows in the <code>gpkg_extensions</code> table as described in <a href="#ExtensionTableRecord">Table 4</a> Extensions Table Record (below). </p></td>
+</tr>
+</tbody>
+</table>
+<table id="ExtensionTableRecord" class="tableblock frame-all grid-all stretch">
+<caption class="title">Table 4. Extension Table Record</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>table_name</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>column_name</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>extension_name</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>definition</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>scope</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>gpkg_2d_gridded_coverage_ancillary</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>gpkg_2d_gridded_coverage</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://docs.opengeospatial.org/is/17-066r1/17-066r1.html" class="bare">http://docs.opengeospatial.org/is/17-066r1/17-066r1.html</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>gpkg_2d_gridded_tile_ancillary</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">null</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>gpkg_2d_gridded_coverage</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://docs.opengeospatial.org/is/17-066r1/17-066r1.html" class="bare">http://docs.opengeospatial.org/is/17-066r1/17-066r1.html</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">name of actual <a href="http://www.geopackage.org/spec/#tiles_user_tables"><em>tile pyramid user data table</em></a> containing grid-regular data</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>tile_data</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>gpkg_2d_gridded_coverage</code></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://docs.opengeospatial.org/is/17-066r1/17-066r1.html" class="bare">http://docs.opengeospatial.org/is/17-066r1/17-066r1.html</a></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><code>read-write</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If this extension is adopted by OGC, the alias <code>gpkg_2d_gridded_coverage</code> will be assigned.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gpkg_2d_gridded_coverage_ancillary"><a class="anchor" href="#_gpkg_2d_gridded_coverage_ancillary"></a>7.3. gpkg_2d_gridded_coverage_ancillary</h3>
+<div class="paragraph">
+<p>The following requirements class defined mandatory and optional elements for the coverage ancillary table definition.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : 2d Gridded Coverage Ancillary</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/grid-coverage-ancillary" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/grid-coverage-ancillary</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 7</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary-set-name<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 9</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary-datatype<br>
+requirement description</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following requirements refer to the <code>gpkg_2d_gridded_coverage_ancillary</code> table as per <a href="http://www.geopackage.org/spec/#gpkg_2d_gridded_coverage_ancillary_table"><em>Coverage Ancillary Table Definition</em></a>.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 7</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded<br>
+<br></p>
+<p class="tableblock">For each row in <code>gpkg_contents</code> with a <code>data_type</code> column value of <em>2d-gridded-coverage</em>, there SHALL be a row in <code>gpkg_2d_gridded_coverage_ancillary</code>. Values of the tile_matrix_set_name column SHALL reference values in the <code>gpkg_contents</code> <code>table_name</code> column. </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary-set-name<br>
+<br></p>
+<p class="tableblock">Values of the <code>gpkg_2d_gridded_coverage_ancillary</code> <code>tile_matrix_set_name</code> column SHALL reference values in the <code>gpkg_tile_matrix_set</code> <code>table_name</code> column. </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 9</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary-datatype<br>
+<br></p>
+<p class="tableblock">Values of the <code>gpkg_2d_gridded_coverage_ancillary</code> <code>datatype</code> column MAY be <em>integer</em> or <em>float</em>. When the <code>datatype</code> is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults. </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_gpkg_2d_gridded_tile_ancillary"><a class="anchor" href="#_gpkg_2d_gridded_tile_ancillary"></a>7.4. gpkg_2d_gridded_tile_ancillary</h3>
+<div class="paragraph">
+<p>The following requirements class defined mandatory and optional elements for the tile ancillary table definition.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : 2d Gridded Tile Ancillary</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/grid-tile-ancillary" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/grid-tile-ancillary</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 10</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 11</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary-values<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 12</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary-dvalues-id<br>
+requirement description</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The following requirements refer to the <code>gpkg_2d_gridded_tile_ancillary</code> table as per <a href="http://www.geopackage.org/spec/#gpkg_2d_gridded_tile_ancillary_table"><em>Tile Ancillary Table Definition</em></a>.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 10</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary-row<br>
+<br></p>
+<p class="tableblock">For each row in a tile pyramid user data table corresponding to tiled, gridded elevation data, there SHALL be a row in <code>gpkg_2d_gridded_tile_ancillary</code>. </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 11</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary-values<br>
+<br></p>
+<p class="tableblock">Values of the <code>gpkg_2d_gridded_tile_ancillary</code> <code>tpudt_name</code> column SHALL reference existing <a href="http://www.geopackage.org/spec/#tiles_user_tables"><em>tile pyramid user data tables</em></a> and rows in <code>gpkg_2d_gridded_coverage_ancillary</code>. When the datatype of the corresponding <code>gpkg_2d_gridded_coverage_ancillary</code> row is <em>float</em>, the <code>scale</code> and <code>offset</code> values SHALL be set to the defaults. </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 12</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary-values-id<br>
+<br></p>
+<p class="tableblock">Values of the <code>gpkg_2d_gridded_tile_ancillary</code> <code>tpudt_id</code> column SHALL reference values in <code>id</code> column of the table referenced in <code>tpudt_name</code>. </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_tile_pyramid_user_data_tables"><a class="anchor" href="#_tile_pyramid_user_data_tables"></a>7.5. Tile Pyramid User Data Tables</h3>
+<div class="paragraph">
+<p>The following is the requirements class for the <code>CIS::GeneralGridCoverage</code>, <code>class grid-regular</code> Tile Pyramid User Data Table extensions.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class :  Tile Pyramid User Data Tables</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/tile-pyramid-user-data-tablaes" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/tile-pyramid-user-data-tablaes</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 13</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-pyramid-user-data-datatype-integer </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 14</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-pyramid-user-data-datatype-integer </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 13</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-pyramid-user-data-datatype-integer<br>
+<br></p>
+<p class="tableblock">For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>integer</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables"><em>tile pyramid user data table</em></a> containing tiled, gridded data SHALL be of <a href="http://www.ietf.org/rfc/rfc2046.txt"><em>MIME type</em></a> <code>image/png</code> and the data SHALL be 16-bit unsigned integer (single channel - "greyscale"). </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 14</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg- pyramid-user-data-datatype-float<br>
+<br></p>
+<p class="tableblock">(extends <a href="http://www.geopackage.org/spec/#r36"><em>GPKG-36</em></a> and <a href="http://www.geopackage.org/spec/#r37"><em>GPKG-37</em></a>) For data where the <code>datatype</code> column of the corresponding row in the <code>gpkg_2d_gridded_coverage_ancillary</code> table is <em>float</em>, the <code>tile_data</code> BLOB in the <a href="http://www.geopackage.org/spec/#tiles_user_tables"><em>tile pyramid user data table</em></a> containing tiled, gridded data SHALL be of <a href="http://www.ietf.org/rfc/rfc2046.txt"><em>MIME type</em></a> <code>image/tiff</code> and the data SHALL be 32-bit floating point as described by the TIFF Encoding (<a href="http://www.geopackage.org/spec/#tiff_encoding"><em>TIFF Encoding</em></a>). </p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_tiff_encoding"><a class="anchor" href="#_tiff_encoding"></a>8. TIFF Encoding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Due to the wide range of possible TIFF encodings, the TIFF encoding for a <code>GeneralGridCoverage</code>, <code>class grid-regular</code> (such as for elevation data) tile has been constrained for the sake of interoperability and best practice. Further, these constraints are provided as a basis for enhanced interoperability with using GeoPackages in an OGC compliant CDB data store. CDB, used in the modeling and simulation industry, has a major requirement for using GeneralGridCoverage, class grid-regular such as terrain (a grid of elevations). CDB defines a strict set of requirements for encoding terrain as a tiled TIFF coverage in a CDB data store.</p>
+</div>
+<div class="paragraph">
+<p>Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of the TIFF standard. The only allowed encoding extensions are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>IEEE floating point (see Requirement 17 below)</p>
+</li>
+<li>
+<p>LZW compression (see Requirement 18 below)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Tiles are encoded as a single-band image using one 32-bit floating point component per pixel. This implies a number of constraints which are listed below.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).</p>
+</li>
+<li>
+<p>All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).</p>
+</li>
+<li>
+<p>Other TIFF tags are derived from the other constraints in this extension.</p>
+</li>
+<li>
+<p>No multi-image/tiling extensions defined in TIFF shall be used (see Requirement 19 and Requirement 20 below).</p>
+</li>
+</ul>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Tiff Encoding</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/tiff" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/tiff</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 15</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-gr-tiff </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 16</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-gr-tiff-samplesperpixel </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 17</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-gr-tiff-float</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 18</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-gr-tiff-lzw </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 19</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-gr-tiff-single-image </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 20</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-gr-tiff-internal-tiles</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 21</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-valid-component-value</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 15</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff<br>
+<br></p>
+<p class="tableblock">A TIFF file used for storing tiled <code>RectifiedGridCoverages</code>, such as elevation data, <em>SHALL</em> conform to the TIFF specification<sup class="footnote">[<a id="_footnoteref_17" class="footnote" href="#_footnotedef_17" title="View footnote.">17</a>]</sup>. </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 16</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-samplesperpixel<br>
+<br></p>
+<p class="tableblock">A TIFF file storing tiled GeneralGridCoverage, class grid-regular, such as elevation data, <em>SHALL</em> have one sample per grid cell<sup class="footnote">[<a id="_footnoteref_18" class="footnote" href="#_footnotedef_18" title="View footnote.">18</a>]</sup>. This requirement constrains TIFF Section 2. </p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 17</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-float<br>
+<br></p>
+<p class="tableblock">A TIFF file storing tiled <code>GeneralGridCoverage</code>, <code>class grid-regular</code>, such as elevation data, <em>SHALL</em> have the 32-bit floating (FLOAT – 11) data type. This requirement constrains TIFF Section 19. </p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 18</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-lzw<br>
+<br></p>
+<p class="tableblock">A TIFF file storing tiled <code>GeneralGridCoverage</code>, <code>class grid-regular</code>, such as elevation data, <em>MAY</em> use the LZW compression option as per TIFF Section 13. </p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>NOTE to developers: Client applications that support the TIFF encoding are expected to support this LZW compression. This is due to the fact that GeoPackages containing gridded coverages delivered to a client may or may not use LZW compression.</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 19</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-single-image<br>
+<br></p>
+<p class="tableblock">A TIFF file storing tiled <code>R GeneralGridCoverage</code>, <code>class grid-regular</code>, such as elevation data, <em>SHALL</em> only contain single images per TIFF file. This requirement constrains TIFF Section 2. Multiple image files are not allowed. </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 20</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-internal-tiles<br>
+<br></p>
+<p class="tableblock">A TIFF file storing tiled <code>GeneralGridCoverage</code>, <code>class grid-regular</code>, such as elevation data, SHALL NOT contain internal tiles as per TIFF Section 15. This requirement constrains TIFF Section 15. </p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 21</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-valid-component-value<br>
+<br></p>
+<p class="tableblock">All pixels in an elevation tile <em>SHALL</em> be set with a valid component value. The mechanisms defined in this extension <em>SHALL</em> be used to indicate a missing value for a pixel. Use the data_null value defined in <a href="#coverage-ancillary">Coverage Ancillary</a>. Special Note: Special floating point values such as NaN and Inf SHALL NOT be used. </p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_conformance_class_abstract_test_suite_normative"><a class="anchor" href="#_conformance_class_abstract_test_suite_normative"></a>Annex A: Conformance Class Abstract Test Suite (Normative)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_table_definitions"><a class="anchor" href="#_table_definitions"></a>A.1. Table Definitions</h3>
+<div class="sect3">
+<h4 id="_coverage_ancillary"><a class="anchor" href="#_coverage_ancillary"></a>A.1.1. Coverage Ancillary</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_def/gpkg_2d_gridded_coverage_ancillary</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the "gpkg_2d_gridded_coverage_ancillary" table has the proper definition.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>PRAGMA table_info(gpkg_2d_gridded_coverage_ancillary)</code></p>
+</li>
+<li>
+<p>Fail if table does not have all of the columns specified in Table 27</p>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req 1</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Basic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_tile_ancillary_2"><a class="anchor" href="#_tile_ancillary_2"></a>A.1.2. Tile Ancillary</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_def/gpkg_2d_gridded_tile_ancillary</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the "gpkg_2d_gridded_tile_ancillary" table has the proper definition.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>PRAGMA table_info(gpkg_2d_gridded_tile_ancillary)</code></p>
+</li>
+<li>
+<p>Fail if table does not have all of the columns specified in Table 1</p>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req 2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Basic</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_table_values"><a class="anchor" href="#_table_values"></a>A.2. Table Values</h3>
+<div class="sect3">
+<h4 id="_spatial_reference"><a class="anchor" href="#_spatial_reference"></a>A.2.1. Spatial Reference</h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_val/gpkg_spatial_ref_sys/rows</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that the "gpkg_spatial_ref_sys" table has the required rows.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT COUNT(*) FROM gpkg_spatial_ref_sys WHERE organization_coordsys_id = 4979 AND (organization = <em>EPSG</em> OR organization = <em>epsg</em>)</code></p>
+</li>
+<li>
+<p>Fail if count is zero</p>
+</li>
+<li>
+<p>Pass if logged pass and no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 3</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Basic</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_val/gpkg_spatial_ref_sys/refs</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that all elevation data uses an SRS that is defined in gpkg_spatial_ref_sys</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p><code>SELECT COUNT(*) FROM gpkg_tile_matrix_set WHERE table_name = <em>{table_name}</em></code></p>
+</li>
+<li>
+<p>Fail if count is not 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_contents"><a class="anchor" href="#_contents"></a>A.3. Contents</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_val/gpkg_spatial_ref_sys</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that all elevation data uses an SRS that is defined in gpkg_spatial_ref_sys</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>Not testable if result set is empty</p>
+</li>
+<li>
+<p>Manually inspect that all elevation data is accounted for in the result set</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_extensions"><a class="anchor" href="#_extensions"></a>A.4. Extensions</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_val/gpkg_extensions</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that all required rows are present in gpkg_extensions</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name, column_name, extension_name, definition, scope from gpkg_extensions";</code></p>
+</li>
+<li>
+<p>Verify that the required rows in Table 3 for table_name gpkg_2d_gridded_coverage_ancillary and gpkg_2d_gridded_tile_ancillary are present.</p>
+</li>
+<li>
+<p>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p><code>SELECT column_name, definition, scope from gpkg_extensions WHERE extension_name = <em>gpkg_elevation_tiles</em> AND table_name = <em>{table_name}</em></code></p>
+</li>
+<li>
+<p>Fail if no rows found</p>
+</li>
+<li>
+<p>Fail if the results do not match the entry in Table 30 for a user defined table</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 6</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_coverage_ancillary_2"><a class="anchor" href="#_coverage_ancillary_2"></a>A.5. Coverage Ancillary</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_ref/gpkg_contents/gpkg_2d_gridded_coverage_ancillary</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that all required rows are present in gpkg_2d_gridded_coverage_ancillary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p><code>SELECT COUNT(*) FROM gpkg_2d_gridded_coverage_ancillary WHERE tile_matrix_set_name = <em>{table_name}</em></code></p>
+</li>
+<li>
+<p>Fail if count is not 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 7</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_ref/gpkg_2d_gridded_coverage_ancillary/gpkg_tile_matrix_set</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that gpkg_2d_gridded_coverage_ancillary references gpkg_tile_matrix_set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT tile_matrix_set_name FROM <em>gpkg_2d_gridded_coverage_ancillary</em>;</code></p>
+</li>
+<li>
+<p>For each tile_matrix_set_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p><code>SELECT count(*) FROM gpkg_tile_matrix_set WHERE table_name = <em>{tile_matrix_set_name}</em></code></p>
+</li>
+<li>
+<p>Fail if count is not 1</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 8</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_val/gpkg_2d_gridded_coverage_ancillary</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that gpkg_2d_gridded_coverage_ancillary contains valid column values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT datatype, scale, offset FROM <em>gpkg_2d_gridded_coverage_ancillary</em> WHERE tile_matrix_set_name IN (SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>);</code></p>
+</li>
+<li>
+<p>For each result in 1</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>Fail if datatype is not "integer" or "float"</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and scale is not 1.0</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and offset is not 0.0</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 9</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_tile_ancillary_3"><a class="anchor" href="#_tile_ancillary_3"></a>A.6. Tile Ancillary</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_ref/tpudt/gpkg_2d_gridded_tile_ancillary</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that all required rows are present in gpkg_2d_gridded_tile_ancillary</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p><code>SELECT {table_name}.id as tid, gpkg_2d_gridded_tile_ancillary.tpudt_id as taid from elev_png LEFT OUTER JOIN gpkg_2d_gridded_tile_ancillary ON {table_name}.id = gpkg_2d_gridded_tile_ancillary.tpudt_id AND gpkg_2d_gridded_tile_ancillary.tpudt_name = <em>{table_name}</em></code></p>
+</li>
+<li>
+<p>For each row</p>
+</li>
+<li>
+<p>Fail if taid is null</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 10, 12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_val/gpkg_2d_gridded_tile_ancillary</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that all required rows in gpkg_2d_gridded_tile_ancillary have valid values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT tpudt_name, scale, offset FROM gpkg_2d_gridded_tile_ancillary;</code></p>
+</li>
+<li>
+<p>For each row</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p>PRAGMA table_info({tpudt_name})</p>
+</li>
+<li>
+<p>Fail if tpudt_name is not a table or view</p>
+</li>
+<li>
+<p><code>SELECT datatype from gpkg_2d_gridded_coverage_ancillary WHERE tile_matrix_set_name = <em>{tpudt_name}</em></code></p>
+</li>
+<li>
+<p>Fail if no rows found</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and scale is not 1.0</p>
+</li>
+<li>
+<p>Fail if datatype is "float" and offset is not 0.0</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 11</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_tile_pyramid_user_data_table"><a class="anchor" href="#_tile_pyramid_user_data_table"></a>A.7. Tile Pyramid User Data Table</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><strong>Test Case ID</strong></th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><code>/extensions/elevation/table_val/tpudt</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Purpose:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Verify that all rows in tile pyramid user data tables have valid values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Method:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><div class="content"><div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code>SELECT table_name FROM gpkg_contents WHERE data_type = <em>2d-gridded-coverage</em>;</code></p>
+</li>
+<li>
+<p>For each table_name</p>
+<div class="olist loweralpha">
+<ol class="loweralpha">
+<li>
+<p><code>SELECT t.datatype AS datatype, u.id AS id, u.tile_data AS tile_data FROM gpkg_2d_gridded_coverage_ancillary t, {table_name} u WHERE t.tile_matrix_set_name = <em>table_name</em>;</code></p>
+</li>
+<li>
+<p>For each row</p>
+</li>
+<li>
+<p>If datatype is float, fail if tile_data is not a valid TIFF image as per requirements 115-121</p>
+</li>
+<li>
+<p>If datatype is integer, fail if tile_data is not a valid PNG image</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Pass if no fails</p>
+</li>
+</ol>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Reference:</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Annex F.11 Req 13, 14, 115-121</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><strong>Test Type</strong></p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Capability</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_informative_gml_example_showing_domainset_rangetype_and_rangetset"><a class="anchor" href="#_informative_gml_example_showing_domainset_rangetype_and_rangetset"></a>Annex B: Informative - GML example showing domainSet, rangeType, and rangetSet</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;gmlcov:RectifiedGridCoverage gml:id="DTM001" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gmlcov="http://www.opengis.net/gmlcov/1.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/gmlcov/1.0 file:///D:/Documents/OGC/Coverage/GMLCOV/Schemas/gmlcov/1.0.2/coverage.xsd"&gt;
+
+&lt;gml:domainSet&gt;
+
+&lt;gml:RectifiedGrid gml:id="rg0001_C0002" dimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/32633"&gt;
+
+&lt;gml:limits&gt;
+
+&lt;gml:GridEnvelope&gt;
+
+&lt;gml:low&gt;0 0&lt;/gml:low&gt;
+
+&lt;gml:high&gt;3327 2946&lt;/gml:high&gt;
+
+&lt;/gml:GridEnvelope&gt;
+
+&lt;/gml:limits&gt;
+
+&lt;gml:axisName&gt;x&lt;/gml:axisName&gt;
+
+&lt;gml:axisName&gt;y&lt;/gml:axisName&gt;
+
+&lt;gml:origin&gt;
+
+&lt;gml:Point gml:id="P0001" srsName="http://www.opengis.net/def/crs/EPSG/0/32633"&gt;
+
+&lt;gml:pos&gt;291355.903287358 4640962.87782889&lt;/gml:pos&gt;
+
+&lt;/gml:Point&gt;
+
+&lt;/gml:origin&gt;
+
+&lt;gml:offsetVector srsName="http://www.opengis.net/def/crs/EPSG/0/32633"&gt;0.298582141738734 0&lt;/gml:offsetVector&gt;
+
+&lt;gml:offsetVector  srsName="http://www.opengis.net/def/crs/EPSG/0/32633"&gt;0 -0.298582141738591&lt;/gml:offsetVector&gt;
+
+&lt;/gml:RectifiedGrid&gt;
+
+&lt;/gml:domainSet&gt;
+
+&lt;gml:rangeSet&gt;
+
+&lt;gml:File&gt;
+
+&lt;gml:rangeParameters/&gt;
+
+&lt;gml:fileName&gt;D:\Documents\Data\DTM001.tiff&lt;/gml:fileName&gt;
+
+&lt;gml:fileStructure&gt;Not interleaved&lt;/gml:fileStructure&gt;
+
+&lt;/gml:File&gt;
+
+&lt;/gml:rangeSet&gt;
+
+&lt;gmlcov:rangeType&gt;
+
+&lt;swe:DataRecord&gt;
+
+&lt;swe:field name="Height"&gt;
+
+&lt;swe:Quantity definition="http://sweet.jpl.nasa.gov/2.0/spaceExtent.owl#Height" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/9001"&gt;
+
+&lt;swe:description&gt;Height above mean sea level&lt;/swe:description&gt;
+
+&lt;swe:uom code="m"/&gt;
+
+&lt;/swe:Quantity&gt;
+
+&lt;/swe:field&gt;
+
+&lt;/swe:DataRecord&gt;
+
+&lt;/gmlcov:rangeType&gt;
+
+&lt;/gmlcov:RectifiedGridCoverage&gt;</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_table_definition_sql_for_grid_regular_extension_normative"><a class="anchor" href="#_table_definition_sql_for_grid_regular_extension_normative"></a>Annex C: Table Definition SQL for Grid-Regular Extension (Normative)</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_coverage_ancillary_table_definition_sql"><a class="anchor" href="#_coverage_ancillary_table_definition_sql"></a>C.1. Coverage Ancillary Table Definition SQL</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE 'gpkg_2d_gridded_coverage_ancillary' (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+
+tile_matrix_set_name TEXT NOT NULL UNIQUE,
+
+datatype TEXT NOT NULL DEFAULT 'integer',
+
+scale REAL NOT NULL DEFAULT 1.0,
+
+offset REAL NOT NULL DEFAULT 0.0,
+
+precision REAL DEFAULT 1.0,
+
+data_null REAL,
+
+grid_cell_encoding TEXT DEFAULT 'grid-value-is-center',
+
+uom TEXT,
+
+field_name TEXT DEFAULT 'Height',
+
+quantity_definition TEXT DEFAULT 'Height',
+
+CONSTRAINT fk_g2dgtct_name FOREIGN KEY('tile_matrix_set_name') REFERENCES
+
+gpkg_tile_matrix_set ( table_name )
+
+CHECK (datatype in ('integer','float')));</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_tile_ancillary_table_definition_sql"><a class="anchor" href="#_tile_ancillary_table_definition_sql"></a>C.2. Tile Ancillary Table Definition SQL</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="pygments highlight"><code data-lang="sql">CREATE TABLE gpkg_2d_gridded_tile_ancillary (
+
+id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+
+tpudt_name TEXT NOT NULL,
+
+tpudt_id INTEGER NOT NULL,
+
+scale REAL NOT NULL DEFAULT 1.0,
+
+offset REAL NOT NULL DEFAULT 0.0,
+
+min REAL DEFAULT NULL,
+
+max REAL DEFAULT NULL,
+
+mean REAL DEFAULT NULL,
+
+std_dev REAL DEFAULT NULL,
+
+CONSTRAINT fk_g2dgtat_name FOREIGN KEY (tpudt_name) REFERENCES gpkg_contents(table_name),
+
+UNIQUE (tpudt_name, tpudt_id));</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_revision_history"><a class="anchor" href="#_revision_history"></a>Annex D: Revision History</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+<col style="width: 20%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Date</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Release</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Editor</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Primary clauses modified</th>
+<th class="tableblock halign-left valign-top" style="background-color: #FFFFFF;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2017-07-25</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">0.1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Reed</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">initial version</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">2018-02-26</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">R1</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">C. Reed</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">all</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Address comments from TC vote</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex E: Bibliography</h2>
+<div class="sectionbody">
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="title">Example Bibliography (Delete this note).</div>
+<div class="paragraph">
+<p>The TC has approved Springer LNCS as the official document citation type.</p>
+</div>
+<div class="paragraph">
+<p>Springer LNCS is widely used in technical and computer science journals and other publications</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For citations in the text please use square brackets and consecutive numbers: [1], [2], [3]</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>– Actual References:</p>
+</div>
+<div class="paragraph">
+<p>[n] Journal: Author Surname, A.: Title. Publication Title. Volume number, Issue number, Pages Used (Year Published)</p>
+</div>
+<div class="paragraph">
+<p>[n] Web: Author Surname, A.: Title, <a href="http://Website-Url" class="bare">http://Website-Url</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p></p>
+</div>
+<div id="OGC2015" class="paragraph">
+<p>[1] OGC: OGC Testbed 12 Annex B: Architecture. (2015).</p>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. <a href="https://portal.opengeospatial.org/files/?artifact_id=70051&amp;version=1" class="bare">https://portal.opengeospatial.org/files/?artifact_id=70051&amp;version=1</a>
+</div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. Grid-regular in OGC Coverage Implementation Schema (CIS). More specifically, for a continuous grid-regular coverage, see CV_ContinuousQuadrilateralGridCoverage in ISO 19123 and OGC Topic Volume 6.
+</div>
+<div class="footnote" id="_footnotedef_3">
+<a href="#_footnoteref_3">3</a>. The GeoPackage (Clause 2.2) Tiles option specifies a mechanism for storing raster data in tile pyramids in a GeoPackage data store.
+</div>
+<div class="footnote" id="_footnotedef_4">
+<a href="#_footnoteref_4">4</a>. We acknowledge that this approach will not support certain applications that require a high degree of precision and/or accuracy (e.g., targeting). This is due to the encoding mechanism (PNG or TIFF).
+</div>
+<div class="footnote" id="_footnotedef_5">
+<a href="#_footnoteref_5">5</a>. <a href="http://www.opengeospatial.org/cite">www.opengeospatial.org/cite</a>
+</div>
+<div class="footnote" id="_footnotedef_6">
+<a href="#_footnoteref_6">6</a>. The definitions for “height” and “depth” are meant to be general and are derived from ISO 19111. However, the reader should note that there are domain specific variations or enhancements of the definitions used in this standard.
+</div>
+<div class="footnote" id="_footnotedef_7">
+<a href="#_footnoteref_7">7</a>. The text in this section is extracted/summarized from the OGC Coverage Implementation Schema 1.1 (CIS) standard (OGC 09-146r6). Please note that This GeoPackage extension references CIS 1.1 and not CIS 1.0.
+</div>
+<div class="footnote" id="_footnotedef_8">
+<a href="#_footnoteref_8">8</a>. This GeoPackage extension uses the CIS 1.1. CIS 1.1 provides a definition for Rectified Grid Coverage for backwards compatibility with CIS 1.0. Please see CIS 1.1 sections 7.1 and 7.2 for discussion of compatibility.
+</div>
+<div class="footnote" id="_footnotedef_9">
+<a href="#_footnoteref_9">9</a>. This is a REAL to support extensions that use non-integer data.
+</div>
+<div class="footnote" id="_footnotedef_10">
+<a href="#_footnoteref_10">10</a>. This is a REAL to support extensions that use non-integer data.
+</div>
+<div class="footnote" id="_footnotedef_11">
+<a href="#_footnoteref_11">11</a>. <a href="https://codes.wmo.int/def/common/Unit" class="bare">https://codes.wmo.int/def/common/Unit</a>
+</div>
+<div class="footnote" id="_footnotedef_12">
+<a href="#_footnoteref_12">12</a>. <a href="http://www.qudt.org/" class="bare">http://www.qudt.org/</a>
+</div>
+<div class="footnote" id="_footnotedef_13">
+<a href="#_footnoteref_13">13</a>. These two values are designed to be jointly unique so that they refer to a single row in a single table.
+</div>
+<div class="footnote" id="_footnotedef_14">
+<a href="#_footnoteref_14">14</a>. These two values are designed to be jointly unique so that they refer to a single row in a single table.
+</div>
+<div class="footnote" id="_footnotedef_15">
+<a href="#_footnoteref_15">15</a>. This is a REAL to support extensions that use non-integer data.
+</div>
+<div class="footnote" id="_footnotedef_16">
+<a href="#_footnoteref_16">16</a>. This is a REAL to support extensions that use non-integer data.
+</div>
+<div class="footnote" id="_footnotedef_17">
+<a href="#_footnoteref_17">17</a>. <a href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml" class="bare">https://www.loc.gov/preservation/digital/formats/fdd/fdd000022.shtml</a>
+</div>
+<div class="footnote" id="_footnotedef_18">
+<a href="#_footnoteref_18">18</a>. Note: In this document, pixel and grid cell may be considered as equivalent terms.
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2021-01-20 14:37:31 UTC
+</div>
+</div>
+</body>
+</html>
