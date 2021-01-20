@@ -1,0 +1,181 @@
+== Requirements (Normative)
+
+=== Common Requirements – Table Definitions
+include::requirements/requirements_class_Table_Definitions.adoc[]
+
+==== `gpkg_extensions`
+===== Table Values
+include::requirements/REQ001.adoc[]
+
+include::requirements/REQ002.adoc[]
+
+include::requirements/REQ003.adoc[]
+
+[[gpkg_extensions_records]]
+.Extensions Table Record
+[cols=",,,,",options="header",]
+|=======================================================================
+|table_name|column_name|extension_name|definition|scope
+|`gpkgext_relations`|null|`related_tables`|TBD|`read-write`
+|_name of actual <<user_defined_mapping_table,User Defined Mapping Table>>_|null|`related_tables`|TBD|`read-write`
+|=======================================================================
+
+==== `gpkgext_relations`
+include::requirements/REQ004.adoc[]
+
+===== Table Definition
+[[gpkgext_relations_table]]
+.Extended Relations Table Definition
+[cols="10,5,40,5,5,5,5",options="header",]
+|=======================================================================
+|Column Name            |Column Type  |Column Description                                                    |Null |Default  |Key |Unique
+|`id`                   |INTEGER      |Autoincrement primary key                                             |no   |         |PK  |yes
+|`base_table_name`      |TEXT         |Name of the table containing the base data (e.g., features) to relate |no   |         |    |no
+|`base_primary_column`  |TEXT         |Name of the primary key column in `base_table_name`                   |no   | `id`    |    |no
+|`related_table_name`   |TEXT         |Name of the table containing the related content                      |no   |         |    |no
+|`related_primary_column`     |TEXT         |Name of the primary key column in `related_table_name`          |no   |  `id`   |    |no
+|`relation_name`        |TEXT         |Name (profile) of the relationship                                    |no   |         |    |no
+|`mapping_table_name`   |TEXT         |Name of a mapping table    |no   |         |    |yes
+|=======================================================================
+
+===== Table Values
+include::requirements/REQ005.adoc[]
+
+[NOTE]
+====
+See <<gpkg_features_sql>> for example SQL for creating a features table for use with this extension.
+====
+
+include::requirements/REQ006.adoc[]
+
+include::requirements/REQ007.adoc[]
+
+include::requirements/REQ008.adoc[]
+
+[[user_defined_mapping_table]]
+==== User-Defined Mapping Tables
+===== Table Definition
+include::requirements/REQ009.adoc[]
+
+[[gpkgext_user_defined_mapping_table]]
+.User-Defined Mapping Table Definition
+[cols=",,,,,,",options="header",]
+
+|=================================================================
+|Column Name           | Column Type | Column Description                                     |Null |Default  |Key |Unique
+|`base_id`   | INTEGER     | The primary key value of the base data table    |no   |         |    |no
+|`related_id` | INTEGER     | The primary key value of the related data table  |no   |         |    |no
+|=================================================================
+
+[NOTE]
+====
+See <<gpkgext_user_defined_mapping_table_sql>> for example SQL for defining a user-defined mapping table.
+A user-defined mapping table MAY be implemented as a GPKG http://www.geopackage.org/spec121/#attributes[attributes] table type, and MAY contain other columns not listed here.
+====
+
+===== Table Values
+include::requirements/REQ010.adoc[]
+
+include::requirements/REQ011.adoc[]
+
+[NOTE]
+====
+This specification makes no statement on the cardinality of a user-defined mapping table. It MAY contain no rows or have a one-to-many, many-to-one, or many-to-many relationship. While it is possible to enforce a one-to-many or many-to-one relationship by applying a UNIQUE constraint to the `attributes_id` or `base_id` respectively, this is NOT RECOMMENDED because the presence of these constraints is not exposed by SQLite in an easy-to-query manner.
+====
+
+[[user_defined_related_data_table]]
+==== User-Defined Related Data Tables
+There are no explicit requirements for a generic user-defined related data table. However, interoperability is improved if a specific requirements class is used. The following subsections describe currently defined requirements classes.
+
+* <<media_rc>> (for multimedia files)
+* <<sa_rc>> (for text and numeric data)
+* <<f_rc>> (for features)
+* <<attr_rc>> (for attributes metadata)
+* <<tiles_rc>> (for tiles)
+
+[[media_rc]]
+=== Media Requirements Class
+include::requirements/requirements_class_Media.adoc[]
+This requirements class allows a GeoPackage producer or editor to relate features or attributes to multimedia files such as pictures and videos. For example, this could relate building features with pictures or videos taken of those areas.
+
+==== User-Defined Media Tables
+===== Table Definition
+include::requirements/media-udmt.adoc[]
+
+include::requirements/media-table_def.adoc[]
+
+[[gpkg_user_defined_media_table]]
+.User-Defined Media Table Definition
+[cols=",,,,",options="header",]
+|=======================================================================
+|Column Name    |Column Type |Column Description        |Null |Key
+|_any_          |INTEGER     |Autoincrement primary key |no   |PK
+|`data`         |BLOB        |Multimedia content        |no   |
+|`content_type` |TEXT        |Mime-type of data         |no   |
+|=======================================================================
+
+[NOTE]
+====
+See <<gpkgext_user_defined_media_table_sql>> for example SQL for defining a user-defined media table.
+A user-defined media table MAY also contain other columns not listed here. Refer to the Dublin Core profile (Informative) for
+a set of additional columns that may be provided.
+====
+
+[[sa_rc]]
+=== Simple Attributes Requirements Class
+include::requirements/requirements_class_SimpleAttributes.adoc[]
+This requirements class allows a GeoPackage producer or editor to relate sets of tabular text or numeric data. For example, this could relate land parcels with statistical information that is collected over different boundaries, or at different times.
+
+==== User-Defined Simple Attribute Tables
+===== Table Definition
+include::requirements/simpleattr-udat.adoc[]
+
+include::requirements/simpleattr-table_def.adoc[]
+
+[[gpkg_user_defined_simpleattr_table]]
+.User-Defined Simple Attributes Table Definition
+[cols=",,,,",options="header",]
+|================================================================================
+|Column Name    |Column Type |Column Description                      |Null  |Key
+|_any_          |INTEGER     |Autoincrement primary key               |no    |PK
+|_any_          |TEXT        |Text attribute content                  |no    |
+|_any_          |INTEGER     |Integer attribute content               |no    |
+|_any_          |REAL        |Floating point number attribute content |no    |
+|================================================================================
+[NOTE]
+====
+See <<gpkgext_user_defined_simpleattr_table_sql>> for example SQL for defining a user-defined simple attributes table.
+====
+
+[[f_rc]]
+=== Related Features Requirements Class
+include::requirements/requirements_class_RelatedFeatures.adoc[]
+This requirements class allows a GeoPackage producer or editor to link features with other features. For example, this could link road features with related pylon features.
+
+==== User-Defined Related Features Tables
+===== Table Definition
+include::requirements/relatedfeat-udft.adoc[]
+
+include::requirements/relatedfeat-table_def.adoc[]
+
+[[attr_rc]]
+=== Related Attributes Requirements class
+include::requirements/requirements_class_RelatedAttributes.adoc[]
+This requirements class allows a GeoPackage producer or editor to link metadata which may already exist in a GPKG Attributes table, including data types beyond the Simple Attributes set (e.g. BLOB data).
+
+==== User-Defined Related Attributes Tables
+===== Table Definition
+include::requirements/relatedattr-udft.adoc[]
+
+include::requirements/relatedattr-table_def.adoc[]
+
+[[tiles_rc]]
+=== Related Tiles Requirements class
+include::requirements/requirements_class_RelatedTiles.adoc[]
+This requirements class allows a GeoPackage producer or editor to link to individual tiles in a GPKG tile pyramid user data table.
+
+==== User-Defined Related Tiles Tables
+===== Table Definition
+include::requirements/relatedtiles-udft.adoc[]
+
+include::requirements/relatedtiles-table_def.adoc[]

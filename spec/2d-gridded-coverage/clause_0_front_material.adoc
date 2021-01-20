@@ -1,0 +1,49 @@
+[big]*i.     Abstract*
+
+The "GeoPackage Extension for Tiled Gridded Coverage Data” extension (previously titled Elevation Extension) defines how to encode and store tiled regular gridded data, such as a digital elevation model, in a GeoPackage. The tiles contain values, such as elevation, temperature or pressure, and the extension defines two encodings. The PNG encoding uses PNG files to store 16-bit integer values and a scale and offset may be applied to fine-tune the coverage range. To support 32-bit floating point data, the extension also defines a TIFF encoding. In this encoding, TIFF files are used to store 32-bit floating-point values. To simplify development, this encoding constrains many of the TIFF options to the minimal set needed to meet the floating-point requirement. The extension also defines two ancillary data tables: one for regular gridded coverages and one for tiles.
+
+[big]*ii.    Keywords*
+
+The following are keywords to be used by search engines and document catalogues.
+
+ogcdoc, OGC document, geopackage, cis, coverage, grid
+
+[big]*iii.   Preface*
+
+"GeoPackage Extension for Tiled Gridded Coverage Data” was initially documented in the GeoPackage 1.2 draft standard as Annex F.11 Tiled Gridded Elevation Data. In 2016, the GeoPackage Elevation Extension was tested and refined as part of the OGC GeoPackage Elevation Extension Interoperability Experiment footnote:[https://portal.opengeospatial.org/files/?artifact_id=70051&version=1]. Based on the results of the Interoperability Experiment, the candidate extension was edited and submitted to the OGC Architecture Board for review and consideration. The OGC Architecture Board recommended that the Elevation extension not be an Annex of the core GeoPackage standard but instead should be a separate document that aligns to other parts of the OGC Standards Baseline. In the ISO 19123 Schema for Coverage Geometry standard and in the OGC Coverage Implementation Schema, this type of regular gridded data is classed as `grid-regular` footnote:[Grid-regular in OGC Coverage Implementation Schema (CIS). More specifically, for a continuous grid-regular coverage, see CV_ContinuousQuadrilateralGridCoverage in ISO 19123 and OGC Topic Volume 6.]. This document is the result of implementing that recommendation. As part of the work, the scope of the extension was expanded from just elevation data to any regular gridded coverage data.
+
+NOTE and WARNING: Any implementations of the candidate standard prior to August 2017 may need to be revised to comply with changes to Table 1: Coverage Ancillary Table Definitions. Specifically, “pixel_encoding” has been changed to “grid_cell_encoding” and additional columns have been added to the Table.
+
+The following information is provided in compliance with the GeoPackage Extension template as defined in Annex E: GeoPackage Extension Template of the GeoPackage Standard. These additional introductory clauses are not elements in the standard OGC document template.
+
+* Extension Author: GeoPackage SWG, author_name of `gpkg` will be assigned if this extension is adopted by OGC.
+* Extension Name or Template: `2d_gridded_coverage`, alias of `gpkg_2d_gridded_coverage` will be assigned if this extension is adopted by OGC.
+* Extension Type: This extension has a dependency on http://www.geopackage.org/spec/#tiles[_Clause 2.2_]footnote:[The GeoPackage (Clause 2.2) Tiles option specifies a mechanism for storing raster data in tile pyramids in a GeoPackage data store.] of the core GeoPackage standard.
+* Applicability: This GeoPackage Gridded Coverages extension can be used to store any gridded coverage in a GeoPackage data store. This extension specifies requirements and optional clauses for additional GeoPackage tables as well as requirements for extensions to http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data tables_] (Clause 2.2.8 of the GeoPackage core) that can be used to hold tiled, gridded coverage data.
+* Scope: read-write
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+[big]*iv.    Submitting organizations*
+
+The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
+
+Organization name(s)
+
+The OGC GeoPackage Standards Working Group:
+
+http://www.opengeospatial.org/projects/groups/geopackageswg
+
+[big]*v.     Submitters*
+
+All questions regarding this submission should be directed to the editor or the submitters:
+
+[cols=",",]
+|===================================
+|*Name* |*Affiliation*
+|Chris Clarke |Compusult
+|Carl Reed |Carl Reed and Associates
+|Jeff Yutzler |Image Matters
+|===================================

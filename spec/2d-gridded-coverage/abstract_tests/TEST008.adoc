@@ -1,0 +1,14 @@
+[cols=",",options="header",]
+|=======================================================================================================
+|*Test Case ID* |`/extensions/elevation/table_ref/gpkg_2d_gridded_coverage_ancillary/gpkg_tile_matrix_set`
+|*Test Purpose:* |Verify that gpkg_2d_gridded_coverage_ancillary references gpkg_tile_matrix_set
+|*Test Method:* a|
+1.  `SELECT tile_matrix_set_name FROM _gpkg_2d_gridded_coverage_ancillary_;`
+2.  For each tile_matrix_set_name
+a.  `SELECT count(*) FROM gpkg_tile_matrix_set WHERE table_name = _\{tile_matrix_set_name}_`
+b.  Fail if count is not 1
+3.  Pass if no fails
+
+|*Reference:* |Annex F.11 Req 8
+|*Test Type* |Capability
+|=======================================================================================================

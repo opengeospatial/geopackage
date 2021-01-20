@@ -5,23 +5,17 @@ task :init_local do
 end
 
 task :generate do
-  system 'bundle exec asciidoctor -D build/spec -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/index.adoc'
+  system 'bundle exec asciidoctor -D build/spec -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/core/index.adoc'
+  system 'bundle exec asciidoctor -D build/spec/2d-gridded-coverage -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/2d-gridded-coverage/standard_document.adoc'
+  system 'bundle exec asciidoctor -D build/spec/related-tables -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/related-tables/standard_document.adoc'
+  system 'bundle exec asciidoctor -D build/guide ./ghpages/implementation_guide.adoc'
+  system 'bundle exec asciidoctor -D build ./ghpages/extensions.adoc'
   FileUtils.cp_r 'images/.', 'build/spec'
   FileUtils.cp_r 'stylesheets/.', 'build/spec'
 end
 
-task :generate_guide do
-  system 'bundle exec asciidoctor -D build/guide ./ghpages/implementation_guide.adoc'
-
-end
-
-task :generate_extensions do
-  system 'bundle exec asciidoctor -D build ./ghpages/extensions.adoc'
-
-end
-
 desc 'Generate site'
-task :build => [:init_local, :generate, :generate_guide, :generate_extensions]
+task :build => [:init_local, :generate]
 
 task :init_travis do
   repo = %x(git config remote.origin.url).gsub(/^git:/, 'https:').strip

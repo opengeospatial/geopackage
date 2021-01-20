@@ -1,0 +1,18 @@
+[cols=",",options="header",]
+|=======================================================================================================
+|*Test Case ID* |`/extensions/elevation/table_val/gpkg_2d_gridded_tile_ancillary`
+|*Test Purpose:* |Verify that all required rows in gpkg_2d_gridded_tile_ancillary have valid values
+|*Test Method:* a|
+1.  `SELECT tpudt_name, scale, offset FROM gpkg_2d_gridded_tile_ancillary;`
+2.  For each row
+a.  PRAGMA table_info(\{tpudt_name})
+b.  Fail if tpudt_name is not a table or view
+c.  `SELECT datatype from gpkg_2d_gridded_coverage_ancillary WHERE tile_matrix_set_name = _\{tpudt_name}_`
+d.  Fail if no rows found
+e.  Fail if datatype is "float" and scale is not 1.0
+f.  Fail if datatype is "float" and offset is not 0.0
+3.  Pass if no fails
+
+|*Reference:* |Annex F.11 Req 11
+|*Test Type* |Capability
+|=======================================================================================================

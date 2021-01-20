@@ -1,0 +1,26 @@
+== Scope
+
+This extension defines the rules for encoding and storing 16-bit and 32-bit tiled regular grid coverages composed of regular gridded data, such as elevation and temperature, in a GeoPackage. This capability may be used to support use cases such as the following:
+
+* Visualization
+** 2D and 3D Draping and Texture mapping
+** 2D (hill shade, color relief, slope, aspect)
+** 3D (supporting changing view angles and level of detail)
+* Analysis
+** Contouring of any continuous coverage
+** Volume computations
+** Slicing for 3D printers and other applications
+** Viewshed and line-of-sight
+** Cross-country mobility (off-road routing)
+** Site suitability and planning (slope analysis such as helicopter landing zones)
+** 3D geometry representations of features (ground-based, airspace)
+** Terrain association (associating images to mapped locations)
+** Augmented reality training
+** Mesh generation
+** Ancillary data for classification tools
+** Trend Analysis
+** “Heat” maps
+** Drainage calculations
+** Profiling
+
+This extension was designed to be relatively easy to implement and to be suitable for a wide variety of computing environments, including the mobile/handheld computing environmentfootnote:[We acknowledge that this approach will not support certain applications that require a high degree of precision and/or accuracy (e.g., targeting). This is due to the encoding mechanism (PNG or TIFF).].

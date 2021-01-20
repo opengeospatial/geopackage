@@ -1,0 +1,14 @@
+[cols=",",options="header",]
+|===================================================================================================
+|*Test Case ID* |`/extensions/elevation/table_val/gpkg_spatial_ref_sys/refs`
+|*Test Purpose:* |Verify that all elevation data uses an SRS that is defined in gpkg_spatial_ref_sys
+|*Test Method:* a|
+1.  `SELECT table_name FROM gpkg_contents WHERE data_type = _2d-gridded-coverage_;`
+2.  For each table_name
+a.  `SELECT COUNT(*) FROM gpkg_tile_matrix_set WHERE table_name = _\{table_name}_`
+b.  Fail if count is not 1
+3.  Pass if no fails
+
+|*Reference:* |Annex F.11 Req 4
+|*Test Type* |Capability
+|===================================================================================================

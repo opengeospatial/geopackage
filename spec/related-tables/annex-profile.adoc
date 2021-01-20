@@ -1,0 +1,44 @@
+[appendix]
+:appendix-caption: Annex
+== Dublin Core Profile (Informative)
+The Related Tables Extension intends to be flexible in which columns are required. The goal is to support a wide variety of input data. However, with loose control over the columns it can be difficult for users to understand why a specific relationship exists. This annex presents a recommendation that is designed to improve interoperability while maintaining as flexible a structure as possible. It is based on http://dublincore.org/documents/dcmi-terms/[Dublin Core] elements. 
+
+Columns for the following Dublin Core elements are RECOMMENDED to be present in a mapping table or a related data table. Clients SHOULD look for these elements and attempt to present them to the user where possible.
+
+* date
+* description
+* source
+* title
+
+Some columns use different names from Dublin Core elements, as shown in <<column_dublin_synonyms>>.
+
+[[column_dublin_synonyms]]
+.Column Name / Dublin Core Synonyms
+[cols=",",options="header",]
+|=======================================================================
+|Related Table Column Name    |Synonymous Dublin Core Element
+|`id`          |`identifier` 
+|`content_type` |`format` 
+|=======================================================================
+
+
+[[gpkgext_user_defined_media_table_dublin_core_sql]]
+.Example User Defined Media Table Definition SQL - Dublin Core (Informative)
+[cols=","]
+|=============
+|
+|=============
+[source,sql]
+----
+CREATE TABLE 'sample_media_with_metadata' (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  data BLOB NOT NULL,
+  content_type TEXT NOT NULL,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  date INTEGER NOT NULL,
+  source TEXT NOT NULL)
+----
+
+[NOTE]
+There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO-8601), as REAL (days relative to Gregorian calendar start) and INTEGER (seconds relative to Unix epoch). See SQLite documentation for more information including conversion between forms.

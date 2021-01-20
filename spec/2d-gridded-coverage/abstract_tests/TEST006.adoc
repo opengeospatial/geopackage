@@ -1,0 +1,17 @@
+[cols=",",options="header",]
+|=============================================================================================================================================
+|*Test Case ID* |`/extensions/elevation/table_val/gpkg_extensions`
+|*Test Purpose:* |Verify that all required rows are present in gpkg_extensions
+|*Test Method:* a|
+1.  `SELECT table_name, column_name, extension_name, definition, scope from gpkg_extensions";`
+2.  Verify that the required rows in Table 3 for table_name gpkg_2d_gridded_coverage_ancillary and gpkg_2d_gridded_tile_ancillary are present.
+3.  SELECT table_name FROM gpkg_contents WHERE data_type = _2d-gridded-coverage_;
+4.  For each table_name
+a.  `SELECT column_name, definition, scope from gpkg_extensions WHERE extension_name = _gpkg_elevation_tiles_ AND table_name = _\{table_name}_`
+b.  Fail if no rows found
+c.  Fail if the results do not match the entry in Table 30 for a user defined table
+5.  Pass if no fails
+
+|*Reference:* |Annex F.11 Req 6
+|*Test Type* |Capability
+|=============================================================================================================================================
