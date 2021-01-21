@@ -6,12 +6,16 @@ end
 
 task :generate do
   system 'bundle exec asciidoctor -D build/spec -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/core/index.adoc'
-  system 'bundle exec asciidoctor -D build/spec/2d-gridded-coverage -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/2d-gridded-coverage/standard_document.adoc'
-  system 'bundle exec asciidoctor -D build/spec/related-tables -I ./extensions -r asciidoctor_extensions.rb -a linkcss ./spec/related-tables/standard_document.adoc'
+  system 'bundle exec asciidoctor -D build/spec/2d-gridded-coverage -I ./extensions -r asciidoctor_extensions.rb -a linkcss -o index.html ./spec/2d-gridded-coverage/standard_document.adoc'
+  system 'bundle exec asciidoctor -D build/spec/related-tables -I ./extensions -r asciidoctor_extensions.rb -a linkcss -o index.html ./spec/related-tables/standard_document.adoc'
   system 'bundle exec asciidoctor -D build/guide ./ghpages/implementation_guide.adoc'
   system 'bundle exec asciidoctor -D build ./ghpages/extensions.adoc'
   FileUtils.cp_r 'images/.', 'build/spec'
   FileUtils.cp_r 'stylesheets/.', 'build/spec'
+  FileUtils.cp_r 'spec/2d-gridded-coverage/images/.', 'build/spec/2d-gridded-coverage/images'
+  FileUtils.cp_r 'stylesheets/.', 'build/spec/2d-gridded-coverage'
+  FileUtils.cp_r 'spec/related-tables/images/.', 'build/spec/related-tables/images'
+  FileUtils.cp_r 'stylesheets/.', 'build/spec/related-tables'
 end
 
 desc 'Generate site'
