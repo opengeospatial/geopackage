@@ -142,22 +142,7 @@
 <li><a href="#_scope">1. Scope</a></li>
 <li><a href="#_conformance">2. Conformance</a></li>
 <li><a href="#_references">3. References</a></li>
-<li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
-<ul class="sectlevel2">
-<li><a href="#_attributes_data">4.1. <strong>attributes data</strong></a></li>
-<li><a href="#_base_data">4.2. <strong>base data</strong></a></li>
-<li><a href="#_cardinality">4.3. <strong>cardinality</strong></a></li>
-<li><a href="#_geospatial_data">4.4. <strong>geospatial data</strong></a></li>
-<li><a href="#_one_to_many">4.5. <strong>one-to-many</strong></a></li>
-<li><a href="#_many_to_many">4.6. <strong>many-to-many</strong></a></li>
-<li><a href="#_many_to_one">4.7. <strong>many-to-one</strong></a></li>
-<li><a href="#_related_data">4.8. <strong>related data</strong></a></li>
-<li><a href="#_relationship">4.9. <strong>relationship</strong></a></li>
-<li><a href="#_user_defined_attributes_table">4.10. <strong>user-defined attributes table</strong></a></li>
-<li><a href="#_user_defined_mapping_table">4.11. <strong>user-defined mapping table</strong></a></li>
-<li><a href="#_user_defined_media_table">4.12. <strong>user-defined media table</strong></a></li>
-</ul>
-</li>
+<li><a href="#_terms_and_definitions">4. Terms and Definitions</a></li>
 <li><a href="#_conventions">5. Conventions</a>
 <ul class="sectlevel2">
 <li><a href="#_identifiers">5.1. Identifiers</a></li>
@@ -228,7 +213,7 @@
 <li><a href="#_gpkgext_relations_related_table">A.1.6. gpkgext_relations Related Table</a></li>
 <li><a href="#_gpkgext_relations_user_defined_mapping_table">A.1.7. gpkgext_relations User Defined Mapping Table</a></li>
 <li><a href="#_gpkgext_relations_relation_name">A.1.8. gpkgext_relations Relation Name</a></li>
-<li><a href="#_user_defined_mapping_table_2">A.1.9. User Defined Mapping Table</a></li>
+<li><a href="#_user_defined_mapping_table">A.1.9. User Defined Mapping Table</a></li>
 <li><a href="#_user_defined_mapping_table_base_id">A.1.10. User Defined Mapping Table Base ID</a></li>
 <li><a href="#_user_defined_mapping_table_related_id">A.1.11. User Defined Mapping Table Related ID</a></li>
 <li><a href="#_media_relation_name">A.1.12. Media Relation Name</a></li>
@@ -253,7 +238,7 @@
 <p><strong class="big">i.     Abstract</strong></p>
 </div>
 <div class="paragraph">
-<p>A GeoPackage <a href="#geopackage">[geopackage]</a> is a platform-independent SQLite <a href="#sqlite">[sqlite]</a> database file that contains GeoPackage data and metadata tables.
+<p>A GeoPackage <a href="#GEOPACKAGE">[GEOPACKAGE]</a> is a platform-independent SQLite <a href="#SQLITE">[SQLITE]</a> database file that contains GeoPackage data and metadata tables.
 GeoPackages, as described by the GeoPackage Encoding Standard <a href="#GPKG1_2">[GPKG1_2]</a> are designed to be extensible, including support for additional data types.
 This document defines the Related Tables Extension (RTE) for the GeoPackage Encoding Standard.</p>
 </div>
@@ -275,7 +260,7 @@ There are many examples of where the RTE can be used including relating parcel (
 <p><strong class="big">iii.   Preface</strong></p>
 </div>
 <div class="paragraph">
-<p>The GeoPackage Related Tables Extension (RTE) defines the rules and requirements for creating relationships in a GeoPackage <a href="#geopackage">[geopackage]</a> data store between geospatial or attributes data tables and other tables that contain or reference related content such as attributes or media.
+<p>The GeoPackage Related Tables Extension (RTE) defines the rules and requirements for creating relationships in a GeoPackage <a href="#GEOPACKAGE">[GEOPACKAGE]</a> data store between geospatial or attributes data tables and other tables that contain or reference related content such as attributes or media.
 Geospatial data tables (such as features or tiles tables) contain location information and/or geometries.
 Conceptually, this extension is similar to the OGC Table Joining Service Interface Standard <a href="#OGC-TJS-IS">[OGC-TJS-IS]</a>.</p>
 </div>
@@ -416,7 +401,7 @@ As an example, this can be used to establish a many-to-many relationship between
 <p>This standard defines requirements for specialized attribute tables (containing information such as multimedia content to be stored in a GeoPackage, or simple attributes) and mapping tables to relate information in separate tables, along with metadata to describe those tables and the relationships between them.</p>
 </div>
 <div class="paragraph">
-<p>Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup>.</p>
+<p>Conformance with this standard shall be checked using all the relevant tests specified in Annex A (normative) of this document. The framework, concepts, and methodology for testing, and the criteria to be achieved to claim conformance are specified in the OGC Compliance Testing Policies and Procedures and the OGC Compliance Testing web site <a href="#CITE">[CITE]</a>.</p>
 </div>
 </div>
 </div>
@@ -426,15 +411,21 @@ As an example, this can be used to establish a many-to-many relationship between
 <div class="paragraph">
 <p>The following normative documents contain provisions that, through reference in this text, constitute provisions of this document. For dated references, subsequent amendments to, or revisions of, any of these publications do not apply. For undated references, the latest edition of the normative document referred to applies.</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>[<a id="GPKG1_2_1"></a>] OGC 12-128r14, <em>GeoPackage Encoding Standard 1.2.1</em>, September 6, 2018. <a href="http://www.geopackage.org/spec121/index.html">OGC 12-128r15 OGC® GeoPackage Encoding Standard v1.2.1 - with Corrigendum (Online)</a></p>
-</li>
-<li>
-<p>[<a id="OWS_COMMON"></a>] OGC 06-121r9, <em>OGC Web Service Common Implementation Specification</em>, April 7, 2010. <a href="http://portal.opengeospatial.org/files/?artifact_id=38867" class="bare">http://portal.opengeospatial.org/files/?artifact_id=38867</a></p>
-</li>
-</ul>
+<div id="GPKG1_2" class="dlist">
+<dl>
+<dt class="hdlist1">GPKG1_2 </dt>
+<dd>
+<p>OGC 12-128r14, <em>GeoPackage Encoding Standard 1.2.1</em>, September 6, 2018. <a href="http://www.geopackage.org/spec121/index.html">OGC 12-128r15 OGC® GeoPackage Encoding Standard v1.2.1 - with Corrigendum (Online).</a></p>
+</dd>
+</dl>
+</div>
+<div id="OWS_COMMON" class="dlist">
+<dl>
+<dt class="hdlist1">OWS_COMMON </dt>
+<dd>
+<p>OGC 06-121r9, <em>OGC Web Service Common Implementation Specification</em>, April 7, 2010. <a href="http://portal.opengeospatial.org/files/?artifact_id=38867" class="bare">http://portal.opengeospatial.org/files/?artifact_id=38867</a>.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -447,78 +438,58 @@ As an example, this can be used to establish a many-to-many relationship between
 <div class="paragraph">
 <p>For the purposes of this document, the following additional terms and definitions apply.</p>
 </div>
-<div class="sect2">
-<h3 id="_attributes_data"><a class="anchor" href="#_attributes_data"></a>4.1. <strong>attributes data</strong></h3>
-<div class="paragraph">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">attributes data </dt>
+<dd>
 <p>Non-spatial tabular data that is designed to be joined with geospatial data for analysis. In a GeoPackage, attributes data is stored in attributes tables as per <a href="http://www.geopackage.org/spec121/#attributes" class="bare">http://www.geopackage.org/spec121/#attributes</a>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_base_data"><a class="anchor" href="#_base_data"></a>4.2. <strong>base data</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">base data </dt>
+<dd>
 <p>Data that is linked in some way to related data (in other words, the <em>left</em> side of the A&#8594;B relationship). In this extension, base data is stored in geospatial or attributes data tables.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_cardinality"><a class="anchor" href="#_cardinality"></a>4.3. <strong>cardinality</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">cardinality </dt>
+<dd>
 <p>The property of a relationship between two entities, specifying whether it is one-to-one, one-to-many, many-to-one, or many-to-many.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_geospatial_data"><a class="anchor" href="#_geospatial_data"></a>4.4. <strong>geospatial data</strong></h3>
-<div class="paragraph">
-<p>Data containing location information and/or geometries.
+</dd>
+<dt class="hdlist1">geospatial data </dt>
+<dd>
+<p>  Data containing location information and/or geometries.
 In a GeoPackage, geospatial data may be stored in features or tiles tables.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_one_to_many"><a class="anchor" href="#_one_to_many"></a>4.5. <strong>one-to-many</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">one-to-many </dt>
+<dd>
 <p>A type of cardinality in which an element of <code>A</code> may be linked to zero or more elements of <code>B</code>, but an element of <code>B</code> is linked to one and only one element of <code>A</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_many_to_many"><a class="anchor" href="#_many_to_many"></a>4.6. <strong>many-to-many</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">many-to-many </dt>
+<dd>
 <p>A type of cardinality in which an element of <code>A</code> may be linked to zero or more elements of <code>B</code> and an element of <code>B</code> may be linked to zero or more elements of <code>A</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_many_to_one"><a class="anchor" href="#_many_to_one"></a>4.7. <strong>many-to-one</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">many-to-one </dt>
+<dd>
 <p>A type of cardinality in which an element of <code>A</code> is linked to one and only one element of <code>B</code>, but an element of <code>B</code> may be linked to zero or more elements of <code>A</code>.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_related_data"><a class="anchor" href="#_related_data"></a>4.8. <strong>related data</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">related data </dt>
+<dd>
 <p>Data that is linked to in some way from base data (in other words, the <em>right</em> side of the A&#8594;B relationship). In this extension, related data is stored in a user-defined attributes table (of which user-defined media table is a special case) or feature table.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_relationship"><a class="anchor" href="#_relationship"></a>4.9. <strong>relationship</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">relationship </dt>
+<dd>
 <p>For the purposes of this extension, a link between two entities <code>A</code> and <code>B</code>. <code>A</code> refers to base data and <code>B</code> refers to related data.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_user_defined_attributes_table"><a class="anchor" href="#_user_defined_attributes_table"></a>4.10. <strong>user-defined attributes table</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">user-defined attributes table </dt>
+<dd>
 <p>In this extension, a user-defined attributes table is a table that contains data that is related to existing geospatial data.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_user_defined_mapping_table"><a class="anchor" href="#_user_defined_mapping_table"></a>4.11. <strong>user-defined mapping table</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">user-defined mapping table </dt>
+<dd>
 <p>In this extension, a user-defined mapping table is a join table that links geospatial data and related data.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_user_defined_media_table"><a class="anchor" href="#_user_defined_media_table"></a>4.12. <strong>user-defined media table</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">user-defined media table </dt>
+<dd>
 <p>In this extension, a user-defined media table is a user-defined attributes table that is specifically designed to contain multimedia content (including, but not limited to, images, diagrams, formatted text, moving images or audio).</p>
-</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -1980,7 +1951,7 @@ Ensure that there is a conformance class for each requirements class and a test 
 </table>
 </div>
 <div class="sect3">
-<h4 id="_user_defined_mapping_table_2"><a class="anchor" href="#_user_defined_mapping_table_2"></a>A.1.9. <a href="#r9">User Defined Mapping Table</a></h4>
+<h4 id="_user_defined_mapping_table"><a class="anchor" href="#_user_defined_mapping_table"></a>A.1.9. <a href="#r9">User Defined Mapping Table</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 20%;">
@@ -2642,37 +2613,60 @@ There are three ways to store dates in SQLite (and in GeoPackage) - as TEXT (ISO
 <div class="sect1">
 <h2 id="Bibliography"><a class="anchor" href="#Bibliography"></a>Annex F: Bibliography</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p>[<a id="geopackage"></a>] <a href="http://www.geopackage.org/" class="bare">http://www.geopackage.org/</a></p>
-</li>
-<li>
-<p>[<a id="sqlite"></a>] <a href="http://www.sqlite.org/" class="bare">http://www.sqlite.org/</a></p>
-</li>
-<li>
-<p>[<a id="GPKG-RTE_IE"></a>] <a href="http://www.opengeospatial.org/projects/initiatives/gpkg-rteie">GeoPackage Related Tables Extension Interoperability Experiment</a></p>
-</li>
-<li>
-<p>[<a id="GPKG-RTE_IE_ER"></a>] OGC: OGC 17-093r1, GeoPackage Related Tables Extension Interoperability Experiment Engineering Report, 2018</p>
-</li>
-<li>
-<p>[<a id="OGC-TJS-IS"></a>] <a href="http://portal.opengeospatial.org/files/?artifact_id=40095">OGC: OGC 10-070r2 Table Joining Service Interface Standard, 2010</a></p>
-</li>
-</ul>
+<div id="GEOPACKAGE" class="dlist">
+<dl>
+<dt class="hdlist1">GEOPACKAGE </dt>
+<dd>
+<p><a href="http://www.geopackage.org/" class="bare">http://www.geopackage.org/</a></p>
+</dd>
+</dl>
+</div>
+<div id="SQLITE" class="dlist">
+<dl>
+<dt class="hdlist1">SQLITE </dt>
+<dd>
+<p><a href="http://www.sqlite.org/" class="bare">http://www.sqlite.org/</a></p>
+</dd>
+</dl>
+</div>
+<div id="GPKG-RTE_IE" class="dlist">
+<dl>
+<dt class="hdlist1">GPKG-RTE_IE </dt>
+<dd>
+<p><a href="http://www.opengeospatial.org/projects/initiatives/gpkg-rteie">GeoPackage Related Tables Extension Interoperability Experiment</a></p>
+</dd>
+</dl>
+</div>
+<div id="GPKG-RTE_IE_ER" class="dlist">
+<dl>
+<dt class="hdlist1">GPKG-RTE_IE_ER </dt>
+<dd>
+<p>OGC: OGC 17-093r1, GeoPackage Related Tables Extension Interoperability Experiment Engineering Report, 2018.</p>
+</dd>
+</dl>
+</div>
+<div id="OGC-TJS-IS" class="dlist">
+<dl>
+<dt class="hdlist1">OGC-TJS-IS </dt>
+<dd>
+<p><a href="http://portal.opengeospatial.org/files/?artifact_id=40095">OGC: OGC 10-070r2 Table Joining Service Interface Standard, 2010</a></p>
+</dd>
+</dl>
+</div>
+<div id="CITE" class="dlist">
+<dl>
+<dt class="hdlist1">CITE </dt>
+<dd>
+<p><a href="http://www.opengeospatial.org/cite" class="bare">http://www.opengeospatial.org/cite</a></p>
+</dd>
+</dl>
 </div>
 </div>
-</div>
-</div>
-<div id="footnotes">
-<hr>
-<div class="footnote" id="_footnotedef_1">
-<a href="#_footnoteref_1">1</a>. <a href="http://www.opengeospatial.org/cite">www.opengeospatial.org/cite</a>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-02-03 18:12:05 UTC
+Last updated 2021-02-03 20:39:20 UTC
 </div>
 </div>
 </body>
