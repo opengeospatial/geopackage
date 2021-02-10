@@ -52,11 +52,11 @@ The GeoPackage Standards Working Group (SWG) is the group at OGC responsible for
 of the standard, but is working to do as much GeoPackage work in public as possible.
 
 The Geopackage SWG currently has the following email lists:
-   - geopackage@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage)
-      - Public List
+   - geopackage@lists.opengeospatial.org -- [sign up here](https://lists.ogc.org/mailman/listinfo/geopackage)
+      - Public List, very little traffic.
       - Open archives
       - No Intellectual Property items should be discussed here.
-   - geopackage.swg@lists.opengeospatial.org -- [sign up here](https://lists.opengeospatial.org/mailman/listinfo/geopackage.swg)
+   - geopackage.swg@lists.opengeospatial.org -- [sign up here](https://lists.ogc.org/mailman/listinfo/geopackage.swg)
       - Private List
       - Access controlled archives
       - Requires OGC membership and Observer Agreement to protect IPR (intellectual property rights)
