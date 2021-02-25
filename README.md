@@ -6,13 +6,13 @@ GeoPackage Standard
 GeoPackage is an open, standards-based, platform-independent, portable, self-describing, 
 compact format for transferring geospatial information. The GeoPackage standard 
 describes a set of conventions for storing the following within an SQLite database:
-   * [vector features](spec/2a_features.adoc)
-   * [tile matrix sets of imagery and raster maps at various scales](spec/2b_tiles.adoc)
-   * [attributes (non-spatial data)](spec/2f_attributes.adoc)
-   * [extensions](spec/annexes/extensions.adoc)
+   * [vector features](spec/core/2a_features.adoc)
+   * [tile matrix sets of imagery and raster maps at various scales](spec/core/2b_tiles.adoc)
+   * [attributes (non-spatial data)](spec/core/2f_attributes.adoc)
+   * [extensions](spec/core/annexes/extensions.adoc)
 
-These capabilities are built on a common [base](spec/1_base.adoc) and an 
-[Extension Mechanism](spec/2e_extensions-mechanism.adoc) is 
+These capabilities are built on a common [base](spec/core/1_base.adoc) and an 
+[Extension Mechanism](spec/core/2e_extensions-mechanism.adoc) is 
 described to provide implementors a way to include additional functionality in their GeoPackages.
 
 This OGC® Encoding Standard defines the schema for a GeoPackage, 
@@ -22,7 +22,7 @@ The allowable content of a GeoPackage is entirely defined in this standard.
 For more information about GeoPackage, including implementations and sample data, 
 go to the public page at http://www.geopackage.org. 
 An HTML version of the standard is available at http://www.geopackage.org/spec/.
-The asciidoc source for the standard is in the [spec/](spec/) folder.
+The asciidoc source for the standard is in the [spec/core/](spec/core/) folder.
 
 About
 -----
@@ -77,7 +77,7 @@ include a comment in the PR with any justification or reasoning on why the chang
 For more general comments (that don't include actual text changes to the spec) please create a GitHub
 [issue](https://github.com/opengeospatial/geopackage/issues) for that topic.
 
-Complex changes and feature requests must go throught the [change request](http://portal.opengeospatial.org/public_ogc/change_request.php) process. The details entered
+Complex changes and feature requests must go through the [change request](http://portal.opengeospatial.org/public_ogc/change_request.php) process. The details entered
 in the change request form will help the SWG adjudicate and prioritize the request.
 
 For more detailed guidance, or if you are new to GitHub, see the [Process page](process.md) for additional 
