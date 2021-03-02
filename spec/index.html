@@ -3481,13 +3481,13 @@ The GeoPackage standard does not place any constraints on application, platform,
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>/opt/valid_geopackage</p>
+<p><span class="line-through">/opt/valid_geopackage</span></p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that a GeoPackage contains a features or tiles table and <code>gpkg_contents</code> table row describing it.</p>
+<p><span class="line-through">Verify that a GeoPackage contains a features or tiles table and <code>gpkg_contents</code> table row describing it.</span></p>
 </div></div></td>
 </tr>
 <tr>
@@ -3495,13 +3495,13 @@ The GeoPackage standard does not place any constraints on application, platform,
 <td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT COUNT(*) FROM gpkg_contents WHERE data_type IN ('tiles', 'features')</p>
+<p><span class="line-through">SELECT COUNT(*) FROM gpkg_contents WHERE data_type IN ('tiles', 'features')</span></p>
 </li>
 <li>
-<p>Pass if result &gt; 0</p>
+<p><span class="line-through">Pass if result &gt; 0</span></p>
 </li>
 <li>
-<p>Fail otherwise</p>
+<p><span class="line-through">Fail otherwise</span></p>
 </li>
 </ol>
 </div></div></td>
@@ -3509,13 +3509,13 @@ The GeoPackage standard does not place any constraints on application, platform,
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Clause 2 Req 17:</p>
+<p><span class="line-through">Clause 2 Req 17</span>:</p>
 </div></div></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Capability</p>
+<p><span class="line-through">Capability</span></p>
 </div></div></td>
 </tr>
 </tbody>
@@ -7686,7 +7686,7 @@ columns:</p>
   <span class="class">SELECT</span>
     table_name,
     column_name,
-    <span class="string"><span class="delimiter">&quot;</span><span class="content">ST_</span><span class="delimiter">&quot;</span></span> || geometry_type_name,
+    <span class="string"><span class="delimiter">'</span><span class="content">ST_</span><span class="delimiter">'</span></span> || geometry_type_name <span class="keyword">AS</span> geometry_type_name,
     g.srs_id,
     srs_name
   <span class="keyword">FROM</span> gpkg_geometry_columns <span class="keyword">as</span> g <span class="keyword">JOIN</span> gpkg_spatial_ref_sys <span class="keyword">AS</span> s
@@ -14150,7 +14150,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-02-25 16:20:15 UTC
+Last updated 2021-03-02 16:41:35 UTC
 </div>
 </div>
 </body>

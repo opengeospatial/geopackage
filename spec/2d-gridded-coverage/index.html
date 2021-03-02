@@ -142,21 +142,7 @@
 <li><a href="#_scope">1. Scope</a></li>
 <li><a href="#_conformance">2. Conformance</a></li>
 <li><a href="#_references">3. References</a></li>
-<li><a href="#_terms_and_definitions">4. Terms and Definitions</a>
-<ul class="sectlevel2">
-<li><a href="#_continuous_coverage">4.1. <strong>Continuous coverage</strong></a></li>
-<li><a href="#_coordinate_reference_system_crs">4.2. <strong>Coordinate Reference System (CRS)</strong></a></li>
-<li><a href="#_coverage">4.3. <strong>Coverage</strong></a></li>
-<li><a href="#_discrete_coverage">4.4. <strong>Discrete Coverage</strong></a></li>
-<li><a href="#_depth">4.5. <strong>Depth</strong></a></li>
-<li><a href="#_direct_position">4.6. <strong>Direct Position</strong></a></li>
-<li><a href="#_elevation">4.7. <strong>Elevation</strong></a></li>
-<li><a href="#_grid">4.8. <strong>Grid</strong></a></li>
-<li><a href="#_grid_point">4.9. <strong>Grid point</strong></a></li>
-<li><a href="#_height">4.10. <strong>Height</strong></a></li>
-<li><a href="#_regular_grid">4.11. <strong>Regular grid</strong></a></li>
-</ul>
-</li>
+<li><a href="#_terms_and_definitions">4. Terms and Definitions</a></li>
 <li><a href="#_conventions">5. Conventions</a>
 <ul class="sectlevel2">
 <li><a href="#_identifiers">5.1. Identifiers</a></li>
@@ -474,77 +460,107 @@
 <div class="paragraph">
 <p>For the purposes of this document, the following additional terms and definitions apply <sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>.</p>
 </div>
-<div class="sect2">
-<h3 id="_continuous_coverage"><a class="anchor" href="#_continuous_coverage"></a>4.1. <strong>Continuous coverage</strong></h3>
-<div class="paragraph">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Continuous coverage </dt>
+<dd>
 <p><strong>coverage</strong> that returns different values for the same feature attribute at different <strong>direct positions</strong> within a single spatial object, temporal object or spatiotemporal object in its domain. [ISO 19123]</p>
+</dd>
+</dl>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Note: A continuous (grid) coverage has values not only at the direct positions themselves, but also at any location between the direct positions. In other words, an application can apply interpolation methods to obtain values between direct positions.</p>
+<p>A continuous (grid) coverage has values not only at the direct positions themselves, but also at any location between the direct positions. In other words, an application can apply interpolation methods to obtain values between direct positions.</p>
 </div>
+</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="_coordinate_reference_system_crs"><a class="anchor" href="#_coordinate_reference_system_crs"></a>4.2. <strong>Coordinate Reference System (CRS)</strong></h3>
-<div class="paragraph">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Coordinate Reference System (CRS) </dt>
+<dd>
 <p>A coordinate system that is related to the real world by a datum. [ISO 19111]</p>
+</dd>
+<dt class="hdlist1">Coverage </dt>
+<dd>
+<p>A coverage is a function that describe characteristics of real-world phenomena that vary over space and/or time. Typical examples are temperature, elevation and precipitation. A coverage is typically represented as a data structure containing a set of such values, each associated with one of the elements in a spatial, temporal or spatiotemporal domain. Typical spatial domains are point sets (e.g. sensor locations), curve sets (e.g. contour lines), grids (e.g. orthoimages, elevation models), etc. A property whose value varies as a function of time may be represented as a temporal coverage or time-series [<a href="https://www.w3.org/TR/sdw-bp/#bib-ISO-19109"><em>ISO-19109</em></a>].</p>
+</dd>
+</dl>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_coverage"><a class="anchor" href="#_coverage"></a>4.3. <strong>Coverage</strong></h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>A coverage is a function that describe characteristics of real-world phenomena that vary over space and/or time. Typical examples are temperature, elevation and precipitation. A coverage is typically represented as a data structure containing a set of such values, each associated with one of the elements in a spatial, temporal or spatiotemporal domain. Typical spatial domains are point sets (e.g. sensor locations), curve sets (e.g. contour lines), grids (e.g. orthoimages, elevation models), etc. A property whose value varies as a function of time may be represented as a temporal coverage or time-series [<a href="https://www.w3.org/TR/sdw-bp/#bib-ISO-19109"><em>ISO-19109</em></a>].NOTE: feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6 [ISO 19123]</p>
+<p>A feature that acts as a function to return values from its range for any direct position within its spatiotemporal domain, as defined in OGC Abstract Topic 6 [ISO 19123].</p>
 </div>
+</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="_discrete_coverage"><a class="anchor" href="#_discrete_coverage"></a>4.4. <strong>Discrete Coverage</strong></h3>
-<div class="paragraph">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Discrete Coverage </dt>
+<dd>
 <p>Coverage that returns the same feature attribute values for every direct position within any single spatial object, temporal object, or spatiotemporal object in its domain [ISO 19123/OGC Topic 6]</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_depth"><a class="anchor" href="#_depth"></a>4.5. <strong>Depth</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">Depth </dt>
+<dd>
 <p>Distance of a point from a chosen reference surface measured upward along a line perpendicular to that surface. [ISO 19111]</p>
+</dd>
+</dl>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>Note 1 to entry: A height below the reference surface will have a negative value, which would embrace both gravity-related heights and ellipsoidal heights.</p>
+<p>A height below the reference surface will have a negative value, which would embrace both gravity-related heights and ellipsoidal heights.</p>
 </div>
+</td>
+</tr>
+</table>
 </div>
-<div class="sect2">
-<h3 id="_direct_position"><a class="anchor" href="#_direct_position"></a>4.6. <strong>Direct Position</strong></h3>
-<div class="paragraph">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Direct Position </dt>
+<dd>
 <p>The position described by a single set of <strong>coordinates</strong> within a <strong>coordinate reference system</strong>. [ISO 19123]</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_elevation"><a class="anchor" href="#_elevation"></a>4.7. <strong>Elevation</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">Elevation </dt>
+<dd>
 <p>Synonym for “height”</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_grid"><a class="anchor" href="#_grid"></a>4.8. <strong>Grid</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">Grid </dt>
+<dd>
 <p>Grid network composed of two or more sets of curves in which the members of each set intersect the members of the other sets in an algorithmic way. NOTE: The curves partition a space into grid cells. [ISO 19123]</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_grid_point"><a class="anchor" href="#_grid_point"></a>4.9. <strong>Grid point</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">Grid point </dt>
+<dd>
 <p>Point located at the intersection of two or more curves in a grid. [ISO 19123:2005]</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_height"><a class="anchor" href="#_height"></a>4.10. <strong>Height</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">Height </dt>
+<dd>
 <p>Distance of a point from a chosen reference surface measured upward along a line perpendicular to that surface. [ISO 19111] Note 1 to entry: A height below the reference surface will have a negative value, which would embrace both gravity-related heights and ellipsoidal heights.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_regular_grid"><a class="anchor" href="#_regular_grid"></a>4.11. <strong>Regular grid</strong></h3>
-<div class="paragraph">
+</dd>
+<dt class="hdlist1">Regular grid </dt>
+<dd>
 <p>Grid whose grid lines have a constant distance along each grid axis</p>
-</div>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -2610,7 +2626,7 @@ requirement description</p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-02-25 16:20:15 UTC
+Last updated 2021-03-02 16:41:35 UTC
 </div>
 </div>
 </body>
