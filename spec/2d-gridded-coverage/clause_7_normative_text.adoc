@@ -11,13 +11,14 @@ include::requirements/requirements_class_Core.adoc[]
 
 Clauses 7.1.1 and 7.1.2 define the requirements and elements of Tiled Grid Extension ancillary (additional) tables required for storing a regular grid of values such as elevation in a GeoPackage.
 
+include::requirements/requirements_class_Table_Definitions.adoc[]
+
 [[coverage-ancillary]]
 ==== Coverage Ancillary
 
 include::requirements/REQ001.adoc[]
 
 <<CoverageAncillaryTableDefinition>> provides definitions for columns in the Coverage Ancillary Table.
-
 
 [#CoverageAncillaryTableDefinition,reftext='{table-caption} {counter:table-num}']
 .Coverage Ancillary Table Definition
@@ -112,7 +113,7 @@ include::requirements/REQ002.adoc[]
 [#TileAncillaryTableDefinition,reftext='{table-caption} {counter:table-num}']
 .Tile Ancillary Table Definition
 [cols=",,,,,",options="header",]
-|==========================================================================================================================================================================================================================================================
+|===
 |*Column Name* |*Column Type* |*Column Description* |*Null* |*Default* |*Key*
 |`id` |INTEGER |Autoincrement primary key |no | |PK
 |`tpudt_name` |TEXT |Name of http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data table_] |no | |UNIQUEfootnote:[These two values are designed to be jointly unique so that they refer to a single row in a single table.]
@@ -123,7 +124,7 @@ include::requirements/REQ002.adoc[]
 |`max` |REAL footnote:[This is a REAL to support extensions that use non-integer data.] |Maximum value of this tile |yes | |
 |`mean` |REAL |The arithmetic mean of values in this tile |yes | |
 |`std_dev` |REAL |The standard deviation of values in this tile |yes | |
-|==========================================================================================================================================================================================================================================================
+|===
 
 The min, max, and mean values are natural, i.e., not scaled or offset. Similarly, the std_dev is calculated based on the natural values. The scale and offset do not apply to tiles of datatype _float_.
 
@@ -131,11 +132,6 @@ The min, max, and mean values are natural, i.e., not scaled or offset. Similarly
 === Table Values
 
 The following requirements specify required and optional table values.
-
-
-
-include::requirements/requirements_class_Table_Values.adoc[]
-
 
 [[gpkg_spatial_ref_sys]]
 ==== gpkg_spatial_ref_sys
@@ -152,7 +148,6 @@ Due to limitations in expressing 3D coordinate reference systems in the original
 |any |`4979` |`EPSG` or `epsg` |`4979` |any |any
 |=============================================================================================
 
-
 include::requirements/REQ004.adoc[]
 
 
@@ -163,7 +158,6 @@ include::requirements/REQ005.adoc[]
 
 [[gpkg_extensions]]
 ==== gpkg_extensions
-
 
 include::requirements/REQ006.adoc[]
 
@@ -184,13 +178,7 @@ If this extension is adopted by OGC, the alias `gpkg_2d_gridded_coverage` will b
 
 === gpkg_2d_gridded_coverage_ancillary
 
-The following requirements class defined mandatory and optional elements for the coverage ancillary table definition.
-
-
-
-
-include::requirements/requirements_class_2d_Gridded_Coverage_Ancillary.adoc[]
-
+The following requirements defines mandatory and optional elements for the coverage ancillary table definition.
 
 The following requirements refer to the `gpkg_2d_gridded_coverage_ancillary` table as per http://www.geopackage.org/spec/#gpkg_2d_gridded_coverage_ancillary_table[_Coverage Ancillary Table Definition_].
 
@@ -213,7 +201,6 @@ include::requirements/REQ010.adoc[]
 
 include::requirements/REQ011.adoc[]
 
-
 include::requirements/REQ012.adoc[]
 
 
@@ -231,12 +218,12 @@ Due to the wide range of possible TIFF encodings, the TIFF encoding for a `Gener
 
 Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of the TIFF standard. The only allowed encoding extensions are:
 
-* IEEE floating point (see Requirement 17 below)
+* IEEE floating point or a binary data type where the SampleFormat has a value of either 1 (unsigned integer) or 2 (signed integer) AND the BitsPerSample is either 8, 16, or 32 (see Requirement 17 below)
 * LZW compression (see Requirement 18 below)
 
 Tiles are encoded as a single-band image using either one 32-bit floating point component per pixel. This implies a number of constraints which are listed below.
 
-* There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).
+* There is only one band per TIFF tile. In other words, for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).
 * All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).
 * Other TIFF tags are derived from the other constraints in this extension.
 * No multi-image/tiling extensions defined in TIFF shall be used (see Requirement 19 and Requirement 20 below).
@@ -245,7 +232,7 @@ The following requirement clarifies what the default encoding behavior is
 
 include::requirements/REQ014.adoc[]
 
-The following requirements class specifies requiements that restrict a TIFF encoding of gridded coverage data.
+The following requirements class specifies requirements that restrict a TIFF encoding of gridded coverage data.
 
 include::requirements/requirements_class_Tiff_Encoding.adoc[]
 
@@ -258,6 +245,20 @@ By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indic
 include::requirements/REQ017.adoc[]
 
 By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
+
+NOTE: Tag 277 is described in Section 6: RGB Full Color Images, sub-clause _Differences from Palette Color Images_ and in Section 8: Baseline Field Reference Guide sub-clause _The Fields_. The Type is  SHORT and defines the number of components per pixel. SamplesPerPixel is usually 1 for bilevel, grayscale, and palette-color images. See the TIFF ExtraSamples field for further information.
+
+include::requirements/REQ017.adoc[]
+
+By setting TAG 339 (SampleFormat, Type SHORT), the producer indicates that the Sample Value is one of the following as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF:
+
+1 = unsigned integer data
+2 = two’s complement signed integer data
+3 = IEEE floating point data [IEEE]
+
+The value specifies how to interpret each data sample in a pixel
+
+NOTE: A general description of TAG 258 is in Section 8: Baseline Field Reference Guide of the TIFF Standard. See also Section 4: Grayscale Images. By setting TAG 258   are 8 is typically for a Baseline TIFF grayscale image allowing specifying 16 for distinct shades of gray. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample. 
 
 include::requirements/REQ018.adoc[]
 
