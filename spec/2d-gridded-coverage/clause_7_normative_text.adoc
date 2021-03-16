@@ -2,17 +2,17 @@
 
 Clause 7 defines the requirements for encoding and storing regular, grid coverages in a GeoPackage. These requirements are in addition or complement the requirements for raster tiles as defined in the core GeoPackage standard Clause 2.2.
 
+The following requirements class incorporates all the requirements that define the core of the TGCE. These 13 requirements are defined in the sub-clauses uo to the TIFF Encoding requirements clause.
+
+include::requirements/requirements_class_Core.adoc[]
+
 [[table-definitions]]
 === Table Definitions
 
 Clauses 7.1.1 and 7.1.2 define the requirements and elements of Tiled Grid Extension ancillary (additional) tables required for storing a regular grid of values such as elevation in a GeoPackage.
 
-
-include::requirements/requirements_class_Table_Definitions.adoc[]
-
 [[coverage-ancillary]]
 ==== Coverage Ancillary
-
 
 include::requirements/REQ001.adoc[]
 
@@ -160,17 +160,11 @@ Due to limitations in expressing 3D coordinate reference systems in the original
 |=============================================================================================
 
 
-
-
 include::requirements/REQ004.adoc[]
 
 
 [[gpkg_contents]]
 ==== gpkg_contents
-
-
-
-
 
 include::requirements/REQ005.adoc[]
 
@@ -207,51 +201,24 @@ include::requirements/requirements_class_2d_Gridded_Coverage_Ancillary.adoc[]
 
 The following requirements refer to the `gpkg_2d_gridded_coverage_ancillary` table as per http://www.geopackage.org/spec/#gpkg_2d_gridded_coverage_ancillary_table[_Coverage Ancillary Table Definition_].
 
-
-
 include::requirements/REQ007.adoc[]
-
-
-
 
 include::requirements/REQ008.adoc[]
 
-
-
-
 include::requirements/REQ009.adoc[]
-
 
 === gpkg_2d_gridded_tile_ancillary
 
 The following requirements class defined mandatory and optional elements for the tile ancillary table definition.
 
 
-
-
-
 include::requirements/requirements_class_2d_Gridded_Tile_Ancillary.adoc[]
-
-
-
 
 The following requirements refer to the `gpkg_2d_gridded_tile_ancillary` table as per http://www.geopackage.org/spec/#gpkg_2d_gridded_tile_ancillary_table[_Tile Ancillary Table Definition_].
 
-
-
-
-
-
 include::requirements/REQ010.adoc[]
 
-
-
-
-
 include::requirements/REQ011.adoc[]
-
-
-
 
 
 include::requirements/REQ012.adoc[]
@@ -261,18 +228,9 @@ include::requirements/REQ012.adoc[]
 
 The following is the requirements class for the `CIS{two-colons}GeneralGridCoverage`, `class grid-regular` Tile Pyramid User Data Table extensions.
 
-
-
-
 include::requirements/requirements_class_Tile_Pyramid_User_Data_Tables.adoc[]
 
-
-
-
 include::requirements/REQ013.adoc[]
-
-
-
 
 include::requirements/REQ014.adoc[]
 
