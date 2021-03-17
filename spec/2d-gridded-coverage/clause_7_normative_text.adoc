@@ -95,7 +95,6 @@ field_name is an element of rangeType. Specifically, each “field” attribute 
 ----
 
 
-
 For a disconnected environment, the field_name should not be a URN or a URI. Instead use the label from the normative resource being referenced. In the above example, the field_name would be “air_temperature”. The quantity definition would also need to be specified.
 
 ===== quantity definition
@@ -107,8 +106,6 @@ Please note that in a disconnected environment, the use of URNs and URIs is disc
 This metadata element/column is required if the values contained in a grid coverage are anything other than height (elevation). This is a text string that describes the field (type). This could be an http uri to an ontology or enumeration, such as “http://sweet.jpl.nasa.gov/2.0/spaceExtent.owl#Height"
 
 ==== Tile Ancillary
-
-
 
 include::requirements/REQ002.adoc[]
 
@@ -177,12 +174,12 @@ include::requirements/REQ006.adoc[]
 [#ExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
 .Extension Table Record
 [cols=",,,,",options="header",]
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|===
 |*table_name* |*column_name* |*extension_name* |*definition* |*scope*
 |`gpkg_2d_gridded_coverage_ancillary` |null |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
 |`gpkg_2d_gridded_tile_ancillary` |null |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
 |name of actual http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data table_] containing grid-regular data |`tile_data` |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|===
 
 [NOTE]
 =====================
@@ -232,9 +229,6 @@ include::requirements/requirements_class_Tile_Pyramid_User_Data_Tables.adoc[]
 
 include::requirements/REQ013.adoc[]
 
-include::requirements/REQ014.adoc[]
-
-
 == TIFF Encoding
 
 Due to the wide range of possible TIFF encodings, the TIFF encoding for a `GeneralGridCoverage`, `class grid-regular` (such as for elevation data) tile has been constrained for the sake of interoperability and best practice. Further, these constraints are provided as a basis for enhanced interoperability with using GeoPackages in an OGC compliant CDB data store. CDB, used in the modeling and simulation industry, has a major requirement for using GeneralGridCoverage, class grid-regular such as terrain (a grid of elevations). CDB defines a strict set of requirements for encoding terrain as a tiled TIFF coverage in a CDB data store.
@@ -244,61 +238,37 @@ Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of the TIFF s
 * IEEE floating point (see Requirement 17 below)
 * LZW compression (see Requirement 18 below)
 
-Tiles are encoded as a single-band image using one 32-bit floating point component per pixel. This implies a number of constraints which are listed below.
+Tiles are encoded as a single-band image using either one 32-bit floating point component per pixel. This implies a number of constraints which are listed below.
 
 * There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).
 * All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).
 * Other TIFF tags are derived from the other constraints in this extension.
 * No multi-image/tiling extensions defined in TIFF shall be used (see Requirement 19 and Requirement 20 below).
 
+The following requirement clarifies what the default encoding behavior is 
 
+include::requirements/REQ014.adoc[]
 
+The following is the requirements class for the TIFF encoding of gridded coverage data.
 
 include::requirements/requirements_class_Tiff_Encoding.adoc[]
 
-
-
-
 include::requirements/REQ015.adoc[]
-
-
-
-
 
 include::requirements/REQ016.adoc[]
 
-
 By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.
-
-
-
 
 include::requirements/REQ017.adoc[]
 
-
-
 By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
-
-
-
 
 include::requirements/REQ018.adoc[]
 
-
 NOTE to developers: Client applications that support the TIFF encoding are expected to support this LZW compression. This is due to the fact that GeoPackages containing gridded coverages delivered to a client may or may not use LZW compression.
-
-
-
 
 include::requirements/REQ019.adoc[]
 
-
-
-
-
 include::requirements/REQ020.adoc[]
-
-
-
 
 include::requirements/REQ021.adoc[]
