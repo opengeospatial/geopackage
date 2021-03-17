@@ -7,17 +7,14 @@ Clause 7 defines the requirements for encoding and storing regular, grid coverag
 
 Clauses 7.1.1 and 7.1.2 define the requirements and elements of Tiled Grid Extension ancillary (additional) tables required for storing a regular grid of values such as elevation in a GeoPackage.
 
-
 include::requirements/requirements_class_Table_Definitions.adoc[]
 
 [[coverage-ancillary]]
 ==== Coverage Ancillary
 
-
 include::requirements/REQ001.adoc[]
 
 <<CoverageAncillaryTableDefinition>> provides definitions for columns in the Coverage Ancillary Table.
-
 
 [#CoverageAncillaryTableDefinition,reftext='{table-caption} {counter:table-num}']
 .Coverage Ancillary Table Definition
@@ -108,14 +105,12 @@ This metadata element/column is required if the values contained in a grid cover
 
 ==== Tile Ancillary
 
-
-
 include::requirements/REQ002.adoc[]
 
 [#TileAncillaryTableDefinition,reftext='{table-caption} {counter:table-num}']
 .Tile Ancillary Table Definition
 [cols=",,,,,",options="header",]
-|==========================================================================================================================================================================================================================================================
+|===
 |*Column Name* |*Column Type* |*Column Description* |*Null* |*Default* |*Key*
 |`id` |INTEGER |Autoincrement primary key |no | |PK
 |`tpudt_name` |TEXT |Name of http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data table_] |no | |UNIQUEfootnote:[These two values are designed to be jointly unique so that they refer to a single row in a single table.]
@@ -126,7 +121,7 @@ include::requirements/REQ002.adoc[]
 |`max` |REAL footnote:[This is a REAL to support extensions that use non-integer data.] |Maximum value of this tile |yes | |
 |`mean` |REAL |The arithmetic mean of values in this tile |yes | |
 |`std_dev` |REAL |The standard deviation of values in this tile |yes | |
-|==========================================================================================================================================================================================================================================================
+|===
 
 The min, max, and mean values are natural, i.e., not scaled or offset. Similarly, the std_dev is calculated based on the natural values. The scale and offset do not apply to tiles of datatype _float_.
 
@@ -135,21 +130,12 @@ The min, max, and mean values are natural, i.e., not scaled or offset. Similarly
 
 The following requirements specify required and optional table values.
 
-
-
-include::requirements/requirements_class_Table_Values.adoc[]
-
-
 [[gpkg_spatial_ref_sys]]
 ==== gpkg_spatial_ref_sys
 
-
-
 include::requirements/REQ003.adoc[]
 
-
 Due to limitations in expressing 3D coordinate reference systems in the original OGC (circa 2001) link:#Old_WKT_Reference[Well-known Text], it is recommended that GeoPackages complying with the grid-regular extension also comply with link:#New_WKT_Reference[ISO 19162] WKT for Coordinate Reference Systems as described in the GeoPackage CRS extension http://www.geopackage.org/spec/#extension_crs_wkt. Please refer to clause F.10 WKT for Coordinate Reference Systems in the core http://www.geopackage.org/spec110/[GeoPackage standard version 1.1] and later.
-
 
 [#SpatialRefSysTableRecord,reftext='{table-caption} {counter:table-num}']
 .Spatial Ref Sys Table Record
@@ -159,36 +145,28 @@ Due to limitations in expressing 3D coordinate reference systems in the original
 |any |`4979` |`EPSG` or `epsg` |`4979` |any |any
 |=============================================================================================
 
-
-
-
 include::requirements/REQ004.adoc[]
 
 
 [[gpkg_contents]]
 ==== gpkg_contents
 
-
-
-
-
 include::requirements/REQ005.adoc[]
 
 [[gpkg_extensions]]
 ==== gpkg_extensions
-
 
 include::requirements/REQ006.adoc[]
 
 [#ExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
 .Extension Table Record
 [cols=",,,,",options="header",]
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|===
 |*table_name* |*column_name* |*extension_name* |*definition* |*scope*
 |`gpkg_2d_gridded_coverage_ancillary` |null |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
 |`gpkg_2d_gridded_tile_ancillary` |null |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
 |name of actual http://www.geopackage.org/spec/#tiles_user_tables[_tile pyramid user data table_] containing grid-regular data |`tile_data` |`gpkg_2d_gridded_coverage` |http://docs.opengeospatial.org/is/17-066r1/17-066r1.html|`read-write`
-|=============================================================================================================================================================================================================================================================================================================================================================================================
+|===
 
 [NOTE]
 =====================
@@ -197,85 +175,37 @@ If this extension is adopted by OGC, the alias `gpkg_2d_gridded_coverage` will b
 
 === gpkg_2d_gridded_coverage_ancillary
 
-The following requirements class defined mandatory and optional elements for the coverage ancillary table definition.
-
-
-
-
-include::requirements/requirements_class_2d_Gridded_Coverage_Ancillary.adoc[]
-
+The following requirements defines mandatory and optional elements for the coverage ancillary table definition.
 
 The following requirements refer to the `gpkg_2d_gridded_coverage_ancillary` table as per http://www.geopackage.org/spec/#gpkg_2d_gridded_coverage_ancillary_table[_Coverage Ancillary Table Definition_].
 
-
-
 include::requirements/REQ007.adoc[]
 
-
-
-
 include::requirements/REQ008.adoc[]
-
-
-
 
 include::requirements/REQ009.adoc[]
 
 
 === gpkg_2d_gridded_tile_ancillary
 
-The following requirements class defined mandatory and optional elements for the tile ancillary table definition.
-
-
-
-
-
-include::requirements/requirements_class_2d_Gridded_Tile_Ancillary.adoc[]
-
-
-
+The following requirements define mandatory and optional elements for the tile ancillary table definition.
 
 The following requirements refer to the `gpkg_2d_gridded_tile_ancillary` table as per http://www.geopackage.org/spec/#gpkg_2d_gridded_tile_ancillary_table[_Tile Ancillary Table Definition_].
 
-
-
-
-
-
 include::requirements/REQ010.adoc[]
 
-
-
-
-
 include::requirements/REQ011.adoc[]
-
-
-
-
 
 include::requirements/REQ012.adoc[]
 
 
 === Tile Pyramid User Data Tables
 
-The following is the requirements class for the `CIS{two-colons}GeneralGridCoverage`, `class grid-regular` Tile Pyramid User Data Table extensions.
-
-
-
-
-include::requirements/requirements_class_Tile_Pyramid_User_Data_Tables.adoc[]
-
-
-
+The following are the requirements for the `CIS{two-colons}GeneralGridCoverage`, `class grid-regular` Tile Pyramid User Data Table extensions.
 
 include::requirements/REQ013.adoc[]
 
-
-
-
 include::requirements/REQ014.adoc[]
-
 
 == TIFF Encoding
 
@@ -294,53 +224,24 @@ Tiles are encoded as a single-band image using one 32-bit floating point compone
 * No multi-image/tiling extensions defined in TIFF shall be used (see Requirement 19 and Requirement 20 below).
 
 
-
-
 include::requirements/requirements_class_Tiff_Encoding.adoc[]
-
-
-
 
 include::requirements/REQ015.adoc[]
 
-
-
-
-
 include::requirements/REQ016.adoc[]
-
 
 By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.
 
-
-
-
 include::requirements/REQ017.adoc[]
-
-
 
 By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
 
-
-
-
 include::requirements/REQ018.adoc[]
-
 
 NOTE to developers: Client applications that support the TIFF encoding are expected to support this LZW compression. This is due to the fact that GeoPackages containing gridded coverages delivered to a client may or may not use LZW compression.
 
-
-
-
 include::requirements/REQ019.adoc[]
 
-
-
-
-
 include::requirements/REQ020.adoc[]
-
-
-
 
 include::requirements/REQ021.adoc[]
