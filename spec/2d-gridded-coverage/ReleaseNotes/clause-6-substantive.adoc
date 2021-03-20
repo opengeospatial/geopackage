@@ -5,6 +5,17 @@ There are four substative changes incorproated into the GeoPackage Tiled Gridded
 
 === https://github.com/opengeospatial/geopackage/issues/552[Issue 552]: Request ability to support additional data types in GeoPackage coverages.
 
+A synopsis of the issue and related suggested changes is:
+
+The CDB SWG is considering the use of GeoPackage to store coverage data as component of CDB 2.0. CDB currently uses a variety of data element types (in GeoTiff) to store coverage data. Therefore, the CDB SWG is requesting being able to use these data types in a GeoPackage coverage tile:
+
+    8/16/32 bit signed integers
+    8 bit unsigned integer (16-bit integer is currently supported, but only for PNG)
+    32-bit floating point (already supported in GeoPackage coverages)
+    1 bit (will be used in CDB 1.2 when adopted, as a binary mask)
+
+I think it would benefit the GeoPackage format to allow the use of GeoPackage coverages beyond a few narrow use cases that the existing formats allow.
+
 === https://github.com/opengeospatial/geopackage/issues/553[Issue 553]: Request enabling the use of multiple channels in a GeoPackage Coverage
 
 A synopsis of the issue and related suggested changes is: 
