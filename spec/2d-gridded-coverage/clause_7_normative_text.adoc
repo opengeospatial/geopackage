@@ -213,16 +213,15 @@ Due to the wide range of possible TIFF encodings, the TIFF encoding for a `Gener
 
 Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of the TIFF standard. The only allowed encoding extensions are:
 
-* IEEE floating point (see Requirement 17 below)
+* IEEE floating point or a binary data type where the SampleFormat has a value of either 1 (unsigned integer) or 2 (signed integer) AND the BitsPerSample is either 8, 16, or 32 (see Requirement 17 below)
 * LZW compression (see Requirement 18 below)
 
 Tiles are encoded as a single-band image using one 32-bit floating point component per pixel. This implies a number of constraints which are listed below.
 
-* There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).
+* There is only one band per TIFF tile. In other words, for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).
 * All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).
 * Other TIFF tags are derived from the other constraints in this extension.
 * No multi-image/tiling extensions defined in TIFF shall be used (see Requirement 19 and Requirement 20 below).
-
 
 include::requirements/requirements_class_Tiff_Encoding.adoc[]
 
@@ -232,9 +231,19 @@ include::requirements/REQ016.adoc[]
 
 By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.
 
+NOTE: Tag 277 is described in Section 6: RGB Full Color Images, sub-clause _Differences from Palette Color Images_ and in Section 8: Baseline Field Reference Guide sub-clause _The Fields_. The Type is  SHORT and defines the number of components per pixel. SamplesPerPixel is usually 1 for bilevel, grayscale, and palette-color images. See the TIFF ExtraSamples field for further information.
+
 include::requirements/REQ017.adoc[]
 
-By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
+By setting TAG 339 (SampleFormat, Type SHORT), the producer indicates that the Sample Value is one of the following as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF:
+
+1 = unsigned integer data
+2 = two’s complement signed integer data
+3 = IEEE floating point data [IEEE]
+
+The value specifies how to interpret each data sample in a pixel
+
+NOTE: A general description of TAG 258 is in Section 8: Baseline Field Reference Guide of the TIFF Standard. See also Section 4: Grayscale Images. By setting TAG 258   are 8 is typically for a Baseline TIFF grayscale image allowing specifying 16 for distinct shades of gray. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample. 
 
 include::requirements/REQ018.adoc[]
 
