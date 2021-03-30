@@ -311,6 +311,12 @@
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><strong class="big">vi.     Future Work</strong></p>
+</div>
+<div class="paragraph">
+<p>A single channel coverage can cover a lot of data types, but not all data types. In particular, there are data coverages that are comprised of multiple data values per grid cell, and designed that you need all the data elements to make use of this type of data. For example, a layer that describes current wind conditions would be both wind cardinal direction and velocity. In this case, it would be difficult to use either coverage without the other. More details are provided in GeoPackage Git Issue 553.</p>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1411,7 +1417,7 @@ requirement description </p></td>
 <div class="ulist">
 <ul>
 <li>
-<p>IEEE floating point (see Requirement 17 below)</p>
+<p>IEEE floating point or a binary data type where the SampleFormat has a value of either 1 (unsigned integer) or 2 (signed integer) AND the BitsPerSample is either 8, 16, or 32 (see Requirement 17 below)</p>
 </li>
 <li>
 <p>LZW compression (see Requirement 18 below)</p>
@@ -1424,7 +1430,7 @@ requirement description </p></td>
 <div class="ulist">
 <ul>
 <li>
-<p>There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).</p>
+<p>There is only one band per TIFF tile. In other words, for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).</p>
 </li>
 <li>
 <p>All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).</p>
@@ -1518,6 +1524,18 @@ requirement description </p></td>
 <div class="paragraph">
 <p>By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Tag 277 is described in Section 6: RGB Full Color Images, sub-clause <em>Differences from Palette Color Images</em> and in Section 8: Baseline Field Reference Guide sub-clause <em>The Fields</em>. The Type is  SHORT and defines the number of components per pixel. SamplesPerPixel is usually 1 for bilevel, grayscale, and palette-color images. See the TIFF ExtraSamples field for further information.
+</td>
+</tr>
+</table>
+</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1534,7 +1552,27 @@ A TIFF file storing tiled GeneralGridCoverage, class grid-regular (such as eleva
 </tbody>
 </table>
 <div class="paragraph">
-<p>By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.</p>
+<p>By setting TAG 339 (SampleFormat, Type SHORT), the producer indicates that the Sample Value is one of the following as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF:</p>
+</div>
+<div class="paragraph">
+<p>1 = unsigned integer data
+2 = two’s complement signed integer data
+3 = IEEE floating point data [IEEE]</p>
+</div>
+<div class="paragraph">
+<p>The value specifies how to interpret each data sample in a pixel</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+A general description of TAG 258 is in Section 8: Baseline Field Reference Guide of the TIFF Standard. See also Section 4: Grayscale Images. By setting TAG 258   are 8 is typically for a Baseline TIFF grayscale image allowing specifying 16 for distinct shades of gray. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
+</td>
+</tr>
+</table>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -2485,7 +2523,7 @@ A TIFF file storing tiled GeneralGridCoverage, class grid-regular (such as eleva
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-03-30 15:36:48 UTC
+Last updated 2021-03-30 17:02:49 UTC
 </div>
 </div>
 </body>
