@@ -1527,8 +1527,9 @@ requirement description </p></td>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 17</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-float<br>
-<br></p>
-<p class="tableblock">A TIFF file storing tiled <code>GeneralGridCoverage</code>, <code>class grid-regular</code>, such as elevation data, <em>SHALL</em> have the 32-bit floating (FLOAT – 11) data type. This requirement constrains TIFF Section 19. </p></td>
+<br>
+A TIFF file storing tiled GeneralGridCoverage, class grid-regular (such as elevation data) SHALL have 32-bit floating (FLOAT - 11) data type or have a binary data type where the SampleFormat has a value of either 1 (unsigned integer) or 2 (signed integer) AND the BitsPerSample is either 8, 16, or 32.</p>
+<p class="tableblock">This requirement constrains TIFF Section 19. </p></td>
 </tr>
 </tbody>
 </table>
@@ -2484,7 +2485,7 @@ requirement description </p></td>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-03-18 00:02:35 UTC
+Last updated 2021-03-30 15:36:48 UTC
 </div>
 </div>
 </body>
