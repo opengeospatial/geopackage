@@ -311,12 +311,6 @@
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p><strong class="big">vi.     Future Work</strong></p>
-</div>
-<div class="paragraph">
-<p>A single channel coverage can cover a lot of data types, but not all data types. In particular, there are data coverages that are comprised of multiple data values per grid cell, and designed that you need all the data elements to make use of this type of data. For example, a layer that describes current wind conditions would be both wind cardinal direction and velocity. In this case, it would be difficult to use either coverage without the other. More details are provided in GeoPackage Git Issue 553.</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -1111,6 +1105,44 @@ requirement description </p></td>
 <div class="paragraph">
 <p>The following requirements specify required and optional table values.</p>
 </div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : Table Values</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/table-values" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/table-values</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 3</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-spatial-ref-sys-row </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 4</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-spatial-ref-sys-record </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 5</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-contents </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 6</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-extensions </p></td>
+</tr>
+</tbody>
+</table>
 <div class="sect3">
 <h4 id="gpkg_spatial_ref_sys"><a class="anchor" href="#gpkg_spatial_ref_sys"></a>7.2.1. gpkg_spatial_ref_sys</h4>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
@@ -1270,8 +1302,45 @@ requirement description </p></td>
 <div class="sect2">
 <h3 id="_gpkg_2d_gridded_coverage_ancillary"><a class="anchor" href="#_gpkg_2d_gridded_coverage_ancillary"></a>7.3. gpkg_2d_gridded_coverage_ancillary</h3>
 <div class="paragraph">
-<p>The following requirements defines mandatory and optional elements for the coverage ancillary table definition.</p>
+<p>The following requirements class defined mandatory and optional elements for the coverage ancillary table definition.</p>
 </div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : 2d Gridded Coverage Ancillary</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/grid-coverage-ancillary" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/grid-coverage-ancillary</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 7</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 8</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary-set-name<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 9</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-coverage-ancillary-datatype<br>
+requirement description</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>The following requirements refer to the <code>gpkg_2d_gridded_coverage_ancillary</code> table as per <a href="http://www.geopackage.org/spec/#gpkg_2d_gridded_coverage_ancillary_table"><em>Coverage Ancillary Table Definition</em></a>.</p>
 </div>
@@ -1321,8 +1390,45 @@ requirement description </p></td>
 <div class="sect2">
 <h3 id="_gpkg_2d_gridded_tile_ancillary"><a class="anchor" href="#_gpkg_2d_gridded_tile_ancillary"></a>7.4. gpkg_2d_gridded_tile_ancillary</h3>
 <div class="paragraph">
-<p>The following requirements define mandatory and optional elements for the tile ancillary table definition.</p>
+<p>The following requirements class defined mandatory and optional elements for the tile ancillary table definition.</p>
 </div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class : 2d Gridded Tile Ancillary</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/grid-tile-ancillary" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/grid-tile-ancillary</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 10</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 11</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary-values<br>
+requirement description </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 12</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-2d-gridded-tile-ancillary-dvalues-id<br>
+requirement description</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
 <p>The following requirements refer to the <code>gpkg_2d_gridded_tile_ancillary</code> table as per <a href="http://www.geopackage.org/spec/#gpkg_2d_gridded_tile_ancillary_table"><em>Tile Ancillary Table Definition</em></a>.</p>
 </div>
@@ -1372,8 +1478,38 @@ requirement description </p></td>
 <div class="sect2">
 <h3 id="_tile_pyramid_user_data_tables"><a class="anchor" href="#_tile_pyramid_user_data_tables"></a>7.5. Tile Pyramid User Data Tables</h3>
 <div class="paragraph">
-<p>The following are the requirements for the <code>CIS::GeneralGridCoverage</code>, <code>class grid-regular</code> Tile Pyramid User Data Table extensions.</p>
+<p>The following is the requirements class for the <code>CIS::GeneralGridCoverage</code>, <code>class grid-regular</code> Tile Pyramid User Data Table extensions.</p>
 </div>
+<table class="tableblock frame-all grid-all" style="width: 90%;">
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirements Class :  Tile Pyramid User Data Tables</strong> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.opengis.net/spec/geopackage-gr/1.0/tile-pyramid-user-data-tablaes" class="bare">http://www.opengis.net/spec/geopackage-gr/1.0/tile-pyramid-user-data-tablaes</a> </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Target type</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Token</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Dependency</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock"><a href="http://www.geopackage.org/spec/#tiles" class="bare">http://www.geopackage.org/spec/#tiles</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 13</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-pyramid-user-data-datatype-integer </p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 14</strong> </p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-pyramid-user-data-datatype-integer </p></td>
+</tr>
+</tbody>
+</table>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1417,7 +1553,7 @@ requirement description </p></td>
 <div class="ulist">
 <ul>
 <li>
-<p>IEEE floating point or a binary data type where the SampleFormat has a value of either 1 (unsigned integer) or 2 (signed integer) AND the BitsPerSample is either 8, 16, or 32 (see Requirement 17 below)</p>
+<p>IEEE floating point (see Requirement 17 below)</p>
 </li>
 <li>
 <p>LZW compression (see Requirement 18 below)</p>
@@ -1430,7 +1566,7 @@ requirement description </p></td>
 <div class="ulist">
 <ul>
 <li>
-<p>There is only one band per TIFF tile. In other words, for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).</p>
+<p>There is only one band per TIFF tile, i.e., for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).</p>
 </li>
 <li>
 <p>All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).</p>
@@ -1524,18 +1660,6 @@ requirement description </p></td>
 <div class="paragraph">
 <p>By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Tag 277 is described in Section 6: RGB Full Color Images, sub-clause <em>Differences from Palette Color Images</em> and in Section 8: Baseline Field Reference Guide sub-clause <em>The Fields</em>. The Type is  SHORT and defines the number of components per pixel. SamplesPerPixel is usually 1 for bilevel, grayscale, and palette-color images. See the TIFF ExtraSamples field for further information.
-</td>
-</tr>
-</table>
-</div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
 <col style="width: 25%;">
@@ -1545,34 +1669,13 @@ Tag 277 is described in Section 6: RGB Full Color Images, sub-clause <em>Differe
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 17</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-float<br>
-<br>
-A TIFF file storing tiled GeneralGridCoverage, class grid-regular (such as elevation data) SHALL have 32-bit floating (FLOAT - 11) data type or have a binary data type where the SampleFormat has a value of either 1 (unsigned integer) or 2 (signed integer) AND the BitsPerSample is either 8, 16, or 32.</p>
-<p class="tableblock">This requirement constrains TIFF Section 19. </p></td>
+<br></p>
+<p class="tableblock">A TIFF file storing tiled <code>GeneralGridCoverage</code>, <code>class grid-regular</code>, such as elevation data, <em>SHALL</em> have the 32-bit floating (FLOAT – 11) data type. This requirement constrains TIFF Section 19. </p></td>
 </tr>
 </tbody>
 </table>
 <div class="paragraph">
-<p>By setting TAG 339 (SampleFormat, Type SHORT), the producer indicates that the Sample Value is one of the following as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF:</p>
-</div>
-<div class="paragraph">
-<p>1 = unsigned integer data
-2 = two’s complement signed integer data
-3 = IEEE floating point data [IEEE]</p>
-</div>
-<div class="paragraph">
-<p>The value specifies how to interpret each data sample in a pixel</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-A general description of TAG 258 is in Section 8: Baseline Field Reference Guide of the TIFF Standard. See also Section 4: Grayscale Images. By setting TAG 258   are 8 is typically for a Baseline TIFF grayscale image allowing specifying 16 for distinct shades of gray. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
-</td>
-</tr>
-</table>
+<p>By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.</p>
 </div>
 <table class="tableblock frame-all grid-all" style="width: 90%;">
 <colgroup>
@@ -1629,7 +1732,7 @@ A general description of TAG 258 is in Section 8: Baseline Field Reference Guide
 <td class="tableblock halign-left valign-top" style="background-color: #CACCCE;"><p class="tableblock"><strong>Requirement 21</strong> </p></td>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Req/gpkg-tiff-valid-component-value<br>
 <br></p>
-<p class="tableblock">All pixels in a tile of coverage data <em>SHALL</em> be set with a valid component value. The mechanisms defined in this extension <em>SHALL</em> be used to indicate a missing value for a pixel. Use the data_null value defined in <a href="#coverage-ancillary">Coverage Ancillary</a>. Special Note: Special floating point values such as NaN and Inf SHALL NOT be used. </p></td>
+<p class="tableblock">All pixels in an elevation tile <em>SHALL</em> be set with a valid component value. The mechanisms defined in this extension <em>SHALL</em> be used to indicate a missing value for a pixel. Use the data_null value defined in <a href="#coverage-ancillary">Coverage Ancillary</a>. Special Note: Special floating point values such as NaN and Inf SHALL NOT be used. </p></td>
 </tr>
 </tbody>
 </table>
@@ -2523,7 +2626,7 @@ A general description of TAG 258 is in Section 8: Baseline Field Reference Guide
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-03-30 17:02:49 UTC
+Last updated 2021-03-31 19:49:16 UTC
 </div>
 </div>
 </body>
