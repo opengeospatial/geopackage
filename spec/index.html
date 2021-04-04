@@ -10395,65 +10395,6 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tr>
 </tbody>
 </table>
-<h6 id="_gpkg_metadata_2" class="float">gpkg_metadata</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 83.3334%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>/extensions/metadata/metadata/data_values_md_scope</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from <a href="#metadata_scopes">Table 15</a>.</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT md_scope FROM gpkg_metadata</p>
-</li>
-<li>
-<p>Not testable if returns an empty result set</p>
-</li>
-<li>
-<p>For each row returned from step 1</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>Fail if md_scope value not one of the name column values from <a href="#metadata_scopes">Table 15</a>.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if no fails</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Annex F.8 Req 94</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Capabilities</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
 <h6 id="_gpkg_metadata_reference_2" class="float">gpkg_metadata_reference</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -10885,7 +10826,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tbody>
 </table>
 <h4 id="_table_definition_sql" class="float">Table Definition SQL</h4>
-<h5 id="_gpkg_metadata_3" class="float">gpkg_metadata</h5>
+<h5 id="_gpkg_metadata_2" class="float">gpkg_metadata</h5>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -12518,7 +12459,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that for each <code>gpkg_data_columns</code> row, if the <code>constraint_name</code> value is NOT NULL then the <code>gpkg_data_column_constraints</code> table contains at least a row with a matching <code>constraint_name</code> value.</p>
+<p>Verify that for each <code>gpkg_data_columns</code> row, if the <code>constraint_name</code> value is NOT NULL then the <code>constraint_type</code> column value contains a <code>constraint_type</code> column value from the <code>gpkg_data_column_constraints</code> table for a row with a matching <code>constraint_name</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12526,7 +12467,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT constraint_name AS cn FROM gpkg_data_columns</p>
+<p>SELECT constraint_name AS cn, constraint_type AS ct FROM gpkg_data_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12536,7 +12477,10 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>SELECT 1 FROM gpkg_data_column_constraints WHERE constraint_name = cn</p>
+<p>Fail if ct is NULL</p>
+</li>
+<li>
+<p>If ct NOT NULL, SELECT constraint_type FROM gpkg_data_column_constraints WHERE constraint_name = cn AND constraint_type = ct</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -14147,7 +14091,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-02 13:23:03 UTC
+Last updated 2021-04-04 10:13:16 UTC
 </div>
 </div>
 </body>
