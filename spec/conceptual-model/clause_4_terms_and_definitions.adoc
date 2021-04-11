@@ -1,0 +1,46 @@
+== Terms and Definitions
+This document used the terms defined in https://portal.ogc.org/public_ogc/directives/directives.php[OGC Policy Directive 49], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.
+
+This document also uses terms defined in the OGC Standard for Modular specifications (https://portal.opengeospatial.org/files/?artifact_id=34762[OGC 08-131r3]), also known as the 'ModSpec'. The definitions of terms such as standard, specification, requirement, and conformance test are provided in the ModSpec.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+conceptual model::
+model that defines concepts of a universe of discourse [ISO 19101-1:2014, 4.1.5]
+
+Empty GeoPackage::
+    A GeoPackage that contains a `gpkg_spatial_ref_sys` table, a `gpkg_contents` table with row record(s) with `data_type` column values of "features" or "tiles", and corresponding features tables per clause <<features>> and/or tiles tables per clause <<tiles>> where the user data tables per clauses 2.1.6. and 2.2.8 exist but contain no rows.
+
+Extended GeoPackage::
+    A GeoPackage that contains any additional data elements (tables or columns) or SQL constructs (data types, indexes, constraints or triggers) that are not specified in this encoding standard.
+
+GeoPackage file::
+    a platform-independent SQLite database file that contains GeoPackage data and metadata tables with specified definitions, integrity assertions, format limitations and content constraints.
+
+GeoPackage SQLite Configuration::
+    consists of the SQLite 3 software library and a set of compile- and runtime configurations options.
+
+GeoPackage SQLite Extension::
+    a SQLite loadable extension that MAY provide SQL functions to support spatial indexes and SQL triggers linked to a SQLite library with specified configuration requirements to provide SQL API access to a GeoPackage.
+
+Implementation Specification::
+    Specified on the OGC Document Types Register at http://www.opengis.net/def/doc-type/is
+
+Platform Independent Model::
+    a model that is independent of a spacific platform
+    [Object Management Group, Model Driven Architecture Guide rev. 2.0]
+
+Platform Specific Model::
+    a model of a system that is defined in terms of a specific platform [Object Management Group, Model Driven Architecture Guide rev. 2.0]
+
+tile::
+    a rectangular pictorial representation of geographic data, often part of a set of such elements, covering a spatially contiguous extent and sharing similar information content and graphical styling, which can be uniquely defined by a pair of indexes for the column and row along with an identifier for the tile matrix.
+
+tile matrix::
+    a collection of tiles for a fixed scale
+
+tile pyramid::
+    a collection of tile matrices defined at different scales
+
+Valid GeoPackage::
+    A GeoPackage that contains features per clause <<_features>> and/or tiles per clause <<tiles>> and row(s) in the `gpkg_contents` table with `data_type` column values of "features" and/or "tiles" describing the user data tables.

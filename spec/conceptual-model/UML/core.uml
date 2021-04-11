@@ -1,0 +1,57 @@
+classDiagram
+
+   class SpatialReferenceSystem {
+     name: String
+     id: Integer
+     organization: String
+     organization_coordsys_id: Integer
+     definition: String
+     description: String?
+     definition_12_063: String?
+   }
+   class EntityStore {
+     name: String
+     identifier: String?
+     description: String?
+     last_change: DateTime
+     min_x: Double?
+     min_y: Double?
+     max_x: Double?
+     max_y: Double?
+   }
+   class DataType {
+     <<enumeration>>
+     features
+     tiles
+     attributes
+     2d-gridded-coverage
+   }
+   class ValueType {
+     <<enumeration>>
+     Boolean
+     TinyInteger
+     SmallInteger
+     MediumInteger
+     Integer
+     Float
+     Real
+     String
+     Blob
+     Geometry
+     Date
+     DateTime
+   }
+   class EntityType {
+     dataType: DataType
+   }
+   class AttributeType {
+     name: String
+     valueType: ValueType
+   }
+   GeoPackage o-- "3..n" SpatialReferenceSystem: srss
+   EntityStore ..> SpatialReferenceSystem: srs
+   GeoPackage o-- "*" EntityStore: contents
+   EntityStore o-- "*" Entity: entities
+   EntityStore o-- EntityType: entityType
+   EntityType o-- "*" AttributeType: attributeTypes
+   Entity ..> EntityType: entityType

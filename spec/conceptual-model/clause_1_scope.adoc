@@ -1,0 +1,27 @@
+== Scope
+This standard documents an OGC Conceptual Model (CM) Standard for encoding geospatial information.
+A *GeoPackage* is an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information.
+The GeoPackage Conceptual Model Standard (this document) describes the model for encoding the following:
+
+* vector features;
+
+* tile matrix sets of imagery and raster maps at various scales;
+
+* attributes (non-spatial data); and
+
+* extensions.
+
+The GeoPackage Conceptual Model is a Platform Independent Model (PIM).
+It defines concepts in a manner which is independent of any implementing technology.
+As such, the GeoPackage CM cannot be implemented directly.
+Rather, it serves as the base for Platform Specific Models (PSM).
+A PSM adds to the PIM the technology-specific details needed to fully define the model for use with a specific technology.
+The PSM can then be used to generate artifacts such as schemas needed to build GeoPackage implementations.
+These artifacts include table definitions, integrity assertions, format limitations, and content constraints.
+
+This document was developed retroactively from the GeoPackage Encoding Standard (GES) 1.3.0.
+At the time, it was not deemed to be prudent to develop the conceptual model.
+The GES was intended specifically for the SQLite database format. 
+However, as SQLite's inherent limitations became more apparent, stakeholders determined that it would be beneficial to the community to standardize the model so that other PSMs could be supported in the future.
+As a result, this document remains agnostic to its potential uses.
+The contributors to this document believe that GeoPackage has the potential to evolve to support use cases and computing environments that go beyond what was originally conceived for the GES.

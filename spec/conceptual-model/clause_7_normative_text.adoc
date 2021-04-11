@@ -1,0 +1,112 @@
+== GeoPackage Conceptual Model
+This section presents the normative definition of the GeoPackage Conceptual Model.
+UML diagrams are provided to aid in understanding.
+The diagrams are intended to be normative, but if there is any discrepancy between the diagrams and the text then the text takes priority.
+
+[NOTE]
+====
+Requirements are numbered to maintain alignment with OGC 12-128.
+====
+
+=== Core
+A GeoPackage contains the content represented in <<Core_Classes>>.
+
+[#Core_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Core GeoPackage Classes
+image::images/core.png[]
+
+include::requirements/requirements_class_core.adoc[]
+
+=== Features
+
+GeoPackages that conform to the Features Requirements class contain the content represented in <<Features_Classes>>.
+
+[#Features_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Features GeoPackage Classes
+image::images/features.png[]
+
+include::requirements/requirements_class_features.adoc[]
+
+=== Tiles
+
+GeoPackages that conform to the Tiles Requirements class contain the content represented in <<Tiles_Classes>>.
+
+[#Tiles_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Tiles GeoPackage Classes
+image::images/tiles.png[]
+
+include::requirements/requirements_class_tiles.adoc[]
+
+=== Attributes
+
+GeoPackages that conform to the Attributes Requirements class contain the content represented in <<Attributes_Classes>>.
+
+[NOTE]
+====
+OGC 12-128 defined this concept as "attributes".
+However, this conflicts with the standard definition of an attribute as a member of a class.
+In this document, the term "attributes set" will be used to describe a user-defined class with multiple attributes and no geometry.
+====
+
+[#Attributes_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Attributes GeoPackage Classes
+image::images/attributes.png[]
+
+include::requirements/requirements_class_attributes.adoc[]
+
+=== Extensions
+
+GeoPackages that conform to the Extensions Requirements class contain the content represented in <<Extensions_Classes>>.
+
+[#Extensions_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Extensions GeoPackage Classes
+image::images/extensions.png[]
+
+include::requirements/requirements_class_extensions.adoc[]
+
+=== Metadata
+
+GeoPackages that conform to the Metadata Requirements class contain the content represented in <<Metadata_Classes>>.
+
+[#Metadata_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Metadata GeoPackage Classes
+image::images/metadata.png[]
+
+include::requirements/requirements_class_metadata.adoc[]
+
+=== Schema
+
+GeoPackages that conform to the Schema Requirements class contain the content represented in <<Schema_Classes>>.
+
+[#Schema_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Schema GeoPackage Classes
+image::images/schema.png[]
+
+include::requirements/requirements_class_schema.adoc[]
+
+=== Related Tables
+
+GeoPackages that conform to the Schema Requirements class contain the content represented in <<Schema_Classes>>.
+
+[#Schema_Classes,reftext='{figure-caption} {counter:figure-num}']
+.Schema GeoPackage Classes
+image::images/schema.png[]
+
+include::requirements/requirements_class_rte.adoc[]
+
+==== Requirement 1
+Paragraph - intro text for the requirement.
+
+Use the following table for Requirements, number sequentially.
+
+include::requirements/requirement.adoc[]
+
+Dictionary tables for requirements can be added as necessary. Modify the following example as needed.
+
+[width="90%",options="header"]
+|===
+|Names |Definition |Data types and values |Multiplicity and use
+|name 1 |definition of name 1 |float |One or more (mandatory)
+|name 2 |definition of name 2 |character string type, not empty |Zero or one (optional)
+|name 3 |definition of name 3 |GML:: Point PropertyType |One (mandatory)
+|===

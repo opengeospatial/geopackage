@@ -1,0 +1,73 @@
+== Conventions
+This section provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+
+=== UML
+This CM uses a modified form of Unified Modeling Language (UML) to describe GeoPackage classes.
+Classes are represented as UML classes and columns are represented as UML attributes.
+The conventions used are as follows:
+
+==== Relationships
+.A solid arrow indicates an association.
+[#uml_association, plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class AnyClass {
+  +id: integer
+  ...
+}
+Class AssociatedClass {
+  +id: integer
+  +parent_id: integer
+  ...
+}
+
+AnyClass --> AssociatedClass : association
+----
+
+.A diamond-based arrow indicates an aggregation.
+[#uml_aggregation, plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class GeoPackage {
+}
+Class EntityStore{
+}
+
+GeoPackage o-- "*" EntityStore : contents
+----
+
+.A solid line with a solid arrowhead indicates an inheritance.
+[#uml_inheritance, plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class BaseClass {
+}
+Class ChildClass {
+}
+
+BaseClass <|-- ChildClass
+----
+
+.A dotted line with a solid arrowhead indicates a realization.
+[#uml_inheritance, plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class BaseClass {
+}
+Class RealizedClass {
+}
+
+BaseClass <|.. RealizedClass
+----
+
+==== Multiplicity
+* Multiplicity is assumed to be `1` unless otherwise specified.
+* An unbounded multiplicity (0..n) is represented as `*`.
+* For attributes, see <<uml_null>>.
+* Other relationship multiplicities are explicitly specified.
+
+.A Question Mark `?` after a type name indicates a nullable attribute type
+[#uml_null, plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class AnyClass{
+  mandatory_attribute: String
+  optional_attribute: String?
+  ...
+}
+----

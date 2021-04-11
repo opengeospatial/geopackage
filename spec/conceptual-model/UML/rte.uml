@@ -1,0 +1,27 @@
+classDiagram
+
+   class ExtendedRelation {
+     relationName: RelationName
+   }
+   class RelationName {
+     <<enumeration>>
+     media
+     simple_attributes
+     features
+     attributes
+     tiles
+   }
+   GeoPackage o-- "*" ExtendedRelation: extendedRelations
+   
+   BaseEntity "0..n" <..> "0..n" RelatedEntity
+   BaseEntity ..|> Entity
+   RelatedEntity ..|> Entity
+   BaseEntityType ..|> EntityType
+   RelatedEntityType ..|> EntityType
+   ExtendedRelation ..> BaseEntityStore: baseEntityStore
+   ExtendedRelation ..> RelatedEntityStore: relatedEntityStore
+   BaseEntityStore ..|> EntityStore
+   RelatedEntityStore ..|> EntityStore
+   EntityStore ..> EntityType
+   BaseEntity ..> BaseEntityType
+   RelatedEntity ..> RelatedEntityType

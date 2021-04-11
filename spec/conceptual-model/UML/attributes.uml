@@ -1,0 +1,17 @@
+classDiagram
+
+   class AttributeType {
+     name: String
+     ValueType: ValueType
+   }
+   class AttributesStore {
+     dataType = attributes
+   }
+   EntityStore <|.. AttributesStore
+   AttributesStore "1" o-- "1" AttributesSetType: attributesSetType
+   AttributesStore "1" o-- "1" AttributesSet: attributesSet
+   AttributesSetType "1" o-- "1..n" AttributeType: attributeTypes
+   AttributesSet ..> AttributesSetType: attributesSetType
+   Attribute ..> AttributeType: attributeType
+   AttributesSet "1" o-- "*" Attribute: attributes
+   
