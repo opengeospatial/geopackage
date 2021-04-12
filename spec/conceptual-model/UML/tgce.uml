@@ -1,0 +1,45 @@
+classDiagram
+
+   class CoverageAncillary {
+     id: Integer
+     dataType: TGCEDatatype
+     scale: Real
+     offset: Real
+     precision: Real?
+     nullValue: Real?
+     gridCellEncoding: GridCellEncoding?
+     unitOfMeasure: String?
+     fieldName: String?
+     quantityDefinition: String?
+   }
+   class TileAncillary {
+     id: Integer
+     scale: Real
+     offset: Real
+     min: Real?
+     max: Real?
+     mean: Real?
+     standardDeviation: Real?
+   }
+   class TGCEDatatype {
+     <<enumeration>>
+     integer
+     float
+   }
+   class GridCellEncoding {
+     <<enumeration>>
+     grid-value-is-center
+     grid-value-is-area
+     grid-value-is-corner
+   }
+   class TiledGriddedCoverage {
+     dataType = tiles
+   }
+   
+   CoverageAncillary ..> TileMatrixSet: tileMatrixSet
+   TileAncillary ..> Tile: tile
+   TiledGriddedCoverage --|> TilePyramid
+   TiledGriddedCoverage o-- CoverageAncillary
+   TilePyramid o-- "1..*" Tile: tiles
+   TiledGriddedCoverage o-- "1..*" TileAncillary
+   TilePyramid o-- TileMatrixSet
