@@ -9,24 +9,37 @@
 |Dependency |urn:iso:ts:iso:19139:clause:6
 |*Requirement 5* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/core/value_types +
 2+| The Encoding Standard SHALL describe the encoding of values as per the ValueType enumeration. {set:cellbgcolor:#FFFFFF}
-|A| Boolean values SHALL be encoded as a boolean value representing true or false.
-|B| TinyInteger values SHALL be encoded as 8-bit signed two’s complement integer in the range [-128, 127].
-|C| SmallInteger values SHALL be encoded as 16-bit signed two’s complement integer in the range [-32768, 32767].
-|D| MediumInteger values SHALL be encoded as 32-bit signed two’s complement integer in the range [-2147483648, 2147483647].
-|E| Integer values SHALL be encoded as 64-bit signed two’s complement integer in the range [-9223372036854775808, 9223372036854775807].
-|F| Float values SHALL be encoded as 32-bit IEEE floating point number.
-|G| Real values SHALL be encoded as 64-bit IEEE floating point number.
-|H| String values SHALL be encoded as variable length string encoded in either UTF-8 or UTF-16.
-|I| Blob values SHALL be encoded as variable length binary data.
-|J| Geometry values are described in the <<rc_features,Features Requirements Class>>.
-|K| Date values SHALL be encoded as ISO-8601 date strings in the form `YYYY-MM-DD` encoded in either UTF-8 or UTF-16.
-|L| DateTime values SHALL be encoded as ISO-8601 date/time strings in the form `YYYY-MM-DDTHH:MM:SS.SSSZ` with T separator character and Z suffix for coordinated universal time (UTC) encoded in either UTF-8 or UTF-16.
+|A | Boolean values SHALL be encoded as a boolean value representing true or false.
+|B | TinyInteger values SHALL be encoded as 8-bit signed two’s complement integer in the range [-128, 127].
+|C | SmallInteger values SHALL be encoded as 16-bit signed two’s complement integer in the range [-32768, 32767].
+|D | MediumInteger values SHALL be encoded as 32-bit signed two’s complement integer in the range [-2147483648, 2147483647].
+|E | Integer values SHALL be encoded as 64-bit signed two’s complement integer in the range [-9223372036854775808, 9223372036854775807].
+|F | Float values SHALL be encoded as 32-bit IEEE floating point number.
+|G | Real values SHALL be encoded as 64-bit IEEE floating point number.
+|H | String values SHALL be encoded as variable length string encoded in either UTF-8 or UTF-16.
+|I | Blob values SHALL be encoded as variable length binary data.
+|J | Geometry values are described in the <<rc_features,Features Requirements Class>>.
+|K | Date values SHALL be encoded as ISO-8601 date strings in the form `YYYY-MM-DD` encoded in either UTF-8 or UTF-16.
+|L | DateTime values SHALL be encoded as ISO-8601 date/time strings in the form `YYYY-MM-DDTHH:MM:SS.SSSZ` with T separator character and Z suffix for coordinated universal time (UTC) encoded in either UTF-8 or UTF-16.
 |*Requirement 10* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/core/srs +
 2+|The Encoding Standard SHALL describe the encoding spatial reference systems as per the SpatialReferenceSystem class. {set:cellbgcolor:#FFFFFF}
-|A| The `definition` SHALL be encoded as Well-Known Text as per <<OGC_01_009,OGC 01-009>>.
-|B| The `definition_12_063` SHALL be encoded as Well-Known Text as per <<OGC-18-010r7,OGC 18-010r7>>.
-|C| At least one of `definition` and `definition_12_063` SHALL be populated. If both are populated, the latter takes priority.
+|A | The `definition` SHALL be encoded as Well-Known Text as per <<OGC_01_009,OGC 01-009>>.
+|B | The `definition_12_063` SHALL be encoded as Well-Known Text as per <<OGC-18-010r7,OGC 18-010r7>>.
+|C | At least one of `definition` and `definition_12_063` SHALL be populated. If both are populated, the latter takes priority.
+|*Requirement 11* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/core/srs_default +
+2+|The Encoding Standard SHALL describe the encoding of the three required spatial reference systems listed in <<gpkg_spatial_ref_sys_records>> below. {set:cellbgcolor:#FFFFFF}
 |*Requirement 13* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/core/contents +
 2+| The Encoding Standard SHALL describe the encoding of GeoPackage contents as per the EntityStore and EntityType classes. {set:cellbgcolor:#FFFFFF}
 |A| Each EntityStore object SHALL refer to the SpatialReferenceSystem object that describes its spatial reference system.
 |===
+
+[#gpkg_spatial_ref_sys_records,reftext='{table-caption} {counter:table-num}']
+.Spatial Refeference System Required Records
+[cols=",,,,,",options="header",]
+|=======================================================================
+|`name`|`id`|`organization`|`organization_coordsys_id`|`definition`|`description`
+|_any_|4326|`EPSG` or `epsg`|4326|_any_|_any_
+|_any_|-1|`NONE`|-1|`undefined`|_any_
+|_any_|0|`NONE`|0|`undefined`|_any_
+|=======================================================================
+
