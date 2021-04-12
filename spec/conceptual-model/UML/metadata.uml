@@ -47,4 +47,6 @@ classDiagram
    MetadataReference o-- "0..1" Value
    Metadata --> "1..n" MetadataReference: references
    Metadata --> "0..1" Metadata: parentMetadata
+   GeoPackage o-- "*" Metadata
+   GeoPackage o-- "*" MetadataReference
    
