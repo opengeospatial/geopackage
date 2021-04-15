@@ -8,7 +8,8 @@ The conventions used are as follows:
 
 ==== Relationships
 .A solid arrow indicates an association.
-[#uml_association, plantuml, format="png", reftext='Figure {counter:figure-num}']
+[#uml_association]
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
 ----
 Class AnyClass {
   +id: integer
@@ -23,8 +24,9 @@ Class AssociatedClass {
 AnyClass --> AssociatedClass : association
 ----
 
+[#uml_aggregation]
 .A diamond-based arrow indicates an aggregation.
-[#uml_aggregation, plantuml, format="png", reftext='Figure {counter:figure-num}']
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
 ----
 Class GeoPackage {
 }
@@ -34,8 +36,9 @@ Class EntityStore{
 GeoPackage o-- "*" EntityStore : contents
 ----
 
+[#uml_inheritance]
 .A solid line with a solid arrowhead indicates an inheritance.
-[#uml_inheritance, plantuml, format="png", reftext='Figure {counter:figure-num}']
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
 ----
 Class BaseClass {
 }
@@ -45,8 +48,9 @@ Class ChildClass {
 BaseClass <|-- ChildClass
 ----
 
+[#uml_realization]
 .A dotted line with a solid arrowhead indicates a realization.
-[#uml_inheritance, plantuml, format="png", reftext='Figure {counter:figure-num}']
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
 ----
 Class BaseClass {
 }
@@ -62,8 +66,9 @@ BaseClass <|.. RealizedClass
 * For attributes, see <<uml_null>>.
 * Other relationship multiplicities are explicitly specified.
 
+[#uml_null]
 .A Question Mark `?` after a type name indicates a nullable attribute type
-[#uml_null, plantuml, format="png", reftext='Figure {counter:figure-num}']
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
 ----
 Class AnyClass{
   mandatory_attribute: String
