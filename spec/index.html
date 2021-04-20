@@ -9761,7 +9761,7 @@ There is no GeoPackage requirement that such metadata be provided or that define
 <div class="title">Requirement 93</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage MAY contain a table named <code>gpkg_metadata</code>. If present it SHALL be defined per clauses <a href="#metadata_table_table_definition">Metadata Table</a>, <a href="#gpkg_metadata_cols">Table 12</a>, and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
+<p>A GeoPackage A GeoPackage MAY contain a table named <code>gpkg_metadata</code>. If present it SHALL be defined per clauses <a href="#metadata_table_table_definition">Metadata Table</a>, <a href="#gpkg_metadata_cols">Table 12</a>, and <a href="#gpkg_metadata_sql">gpkg_metadata Table Definition SQL</a>.</p>
 </div>
 </div>
 </div>
@@ -12518,7 +12518,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that for each <code>gpkg_data_columns</code> row, if the <code>constraint_name</code> value is NOT NULL then the <code>constraint_type</code> column value contains a <code>constraint_type</code> column value from the <code>gpkg_data_column_constraints</code> table for a row with a matching <code>constraint_name</code> value.</p>
+<p>Verify that for each <code>gpkg_data_columns</code> row, if the <code>constraint_name</code> value is NOT NULL then the <code>gpkg_data_column_constraints</code> table contains at least a row with a matching <code>constraint_name</code> value.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -12526,7 +12526,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>SELECT constraint_name AS cn, constraint_type AS ct FROM gpkg_data_columns</p>
+<p>SELECT constraint_name AS cn FROM gpkg_data_columns</p>
 </li>
 <li>
 <p>Not testable if returns an empty result set</p>
@@ -12536,10 +12536,7 @@ If it contains rows with <code>constraint_type</code> column values of "range", 
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if ct is NULL</p>
-</li>
-<li>
-<p>If ct NOT NULL, SELECT constraint_type FROM gpkg_data_column_constraints WHERE constraint_name = cn AND constraint_type = ct</p>
+<p>SELECT 1 FROM gpkg_data_column_constraints WHERE constraint_name = cn</p>
 </li>
 <li>
 <p>Fail if returns an empty result set</p>
@@ -14150,7 +14147,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-12 17:39:10 UTC
+Last updated 2021-04-20 15:41:21 UTC
 </div>
 </div>
 </body>
