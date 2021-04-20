@@ -338,13 +338,12 @@ If the `gpkg_data_column_constraints` table contains rows with `constraint_type`
 [cols="1,5a"]
 |========================================
 |*Test Case ID* |+/extensions/schema/data_columns/constraint_name+
-|*Test Purpose* |Verify that for each `gpkg_data_columns` row, if the `constraint_name` value is NOT NULL then the `constraint_type` column value contains a `constraint_type` column value from the `gpkg_data_column_constraints` table for a row with a matching `constraint_name` value.
+|*Test Purpose* |Verify that for each `gpkg_data_columns` row, if the `constraint_name` value is NOT NULL then the `gpkg_data_column_constraints` table contains at least a row with a matching `constraint_name` value.
 |*Test Method* |
-. SELECT constraint_name AS cn, constraint_type AS ct FROM gpkg_data_columns
+. SELECT constraint_name AS cn FROM gpkg_data_columns
 . Not testable if returns an empty result set
 . For each NOT NULL cn value from step 1
-.. Fail if ct is NULL
-.. If ct NOT NULL, SELECT constraint_type FROM gpkg_data_column_constraints WHERE constraint_name = cn AND constraint_type = ct
+.. SELECT 1 FROM gpkg_data_column_constraints WHERE constraint_name = cn
 .. Fail if returns an empty result set
 . Pass if no fails
 |*Reference* |Annex F.9 Req 106
