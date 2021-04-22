@@ -302,6 +302,23 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 |========================================
 
 [float]
+====== gpkg_metadata
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |[line-through]#+/extensions/metadata/metadata/data_values_md_scope+#
+|*Test Purpose* |[line-through]#Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from <<metadata_scopes>>.#
+|*Test Method* |
+[line-through]#. SELECT md_scope FROM gpkg_metadata#
+[line-through]#. Not testable if returns an empty result set#
+[line-through]#. For each row returned from step 1#
+[line-through]#.. Fail if md_scope value not one of the name column values from <<metadata_scopes>>.#
+[line-through]#. Pass if no fails#
+|*Reference* |[line-through]#Annex F.8 Req 94#
+|*Test Type:* |[line-through]#Capabilities#
+|========================================
+
+[float]
 ====== gpkg_metadata_reference
 
 [cols="1,5a"]
