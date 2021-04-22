@@ -449,20 +449,6 @@ Previous statements that the media type is <span class="line-through"><code>appl
 </div>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>SQLite support for view data types is not robust enough to allow this requirement to be enforced for views.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <table id="table_column_data_types" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. GeoPackage Data Types</caption>
 <colgroup>
@@ -10409,6 +10395,49 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tr>
 </tbody>
 </table>
+<h6 id="_gpkg_metadata_2" class="float">gpkg_metadata</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 16.6666%;">
+<col style="width: 83.3334%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">/extensions/metadata/metadata/data_values_md_scope</span></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">Verify that each of the md_scope column values in a gpkg_metadata table is one of the name column values from <a href="#metadata_scopes">Table 15</a>.</span></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">. SELECT md_scope FROM gpkg_metadata</span>
+<span class="line-through">. Not testable if returns an empty result set</span>
+<span class="line-through">. For each row returned from step 1</span>
+<span class="line-through">.. Fail if md_scope value not one of the name column values from <a href="#metadata_scopes">Table 15</a>.</span>
+<span class="line-through">. Pass if no fails</span></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">Annex F.8 Req 94</span></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type:</strong></p></td>
+<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
+<p><span class="line-through">Capabilities</span></p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 <h6 id="_gpkg_metadata_reference_2" class="float">gpkg_metadata_reference</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -10840,7 +10869,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 </tbody>
 </table>
 <h4 id="_table_definition_sql" class="float">Table Definition SQL</h4>
-<h5 id="_gpkg_metadata_2" class="float">gpkg_metadata</h5>
+<h5 id="_gpkg_metadata_3" class="float">gpkg_metadata</h5>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -14102,7 +14131,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-21 01:11:39 UTC
+Last updated 2021-04-22 18:09:46 UTC
 </div>
 </div>
 </body>
