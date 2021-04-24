@@ -54,3 +54,5 @@ classDiagram
    EntityStore o-- EntityType: entityType
    EntityType o-- "*" AttributeType: attributeTypes
    Entity ..> EntityType: entityType
+   Entity o-- "*" Attribute: attributes
+   Attribute ..> AttributeType

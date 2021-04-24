@@ -1,8 +1,9 @@
 classDiagram
 
-   class CoverageAncillary {
+   class TiledGriddedCoverage {
      id: Integer
-     dataType: TGCEDatatype
+     dataType = tiles
+     coverageDataType: TGCEDatatype
      scale: Real
      offset: Real
      precision: Real?
@@ -12,8 +13,7 @@ classDiagram
      fieldName: String?
      quantityDefinition: String?
    }
-   class TileAncillary {
-     id: Integer
+   class CoverageTile {
      scale: Real
      offset: Real
      min: Real?
@@ -32,14 +32,10 @@ classDiagram
      grid-value-is-area
      grid-value-is-corner
    }
-   class TiledGriddedCoverage {
-     dataType = tiles
-   }
    
-   CoverageAncillary ..> TileMatrixSet: tileMatrixSet
-   TileAncillary ..> Tile: tile
+   TiledGriddedCoverage ..> TileMatrixSet: tileMatrixSet
    TiledGriddedCoverage --|> TilePyramid
-   TiledGriddedCoverage o-- CoverageAncillary
-   TilePyramid o-- "1..*" Tile: tiles
-   TiledGriddedCoverage o-- "1..*" TileAncillary
+   TiledGriddedCoverage o-- "1..*" CoverageTile: tiles
    TilePyramid o-- TileMatrixSet
+   CoverageTile --|> Tile
+   TilePyramid o-- "1..*" Tile: tiles

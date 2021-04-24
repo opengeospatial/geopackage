@@ -1,0 +1,192 @@
+== GeoPackage Conceptual Model (Normative)
+This section presents the normative definition of the GeoPackage Conceptual Model (CM).
+It consists of a set of terms and their definitions.
+_Since most readers will be familiar with the GES, an indication of how GeoPackage concepts are realized in the GES is presented in italics._
+
+=== Core
+All GeoPackages conform to Core.
+
+Attribute::
+  a value for a particular attribute type for a particular entity.
+  _In the GES, an attribute is realized through a column value of a user-defined table._
+
+Attribute Type::
+  a characteristic of an entity.
+  Has a name, a data type, and a value domain associated to it.
+  No restrictions are implied here as to the type of attributes a user-defined type may have.
+  Not all entity types have attributes. (SOURCE: Adapted from ISO19101)
+  _In the GES, an attribute is realized through a column of a user-defined table._
+  
+Entity::
+  For the purposes of this standard, an entity is simply a unit of content contained in a GeoPackage.
+  This is deliberately open-ended so as not to prejudice the content that a GeoPackage may contain.
+  _In the GES, an entity is realized through a row of a user-defined table._
+
+Entity Store::
+  a container for entities.
+  _In the GES, an entity store is realized through a user-defined table and a row in `gpkg_contents`._
+
+Entity Type::
+  the characteristics of an entity, including attribute types (if any).
+  _In the GES, an entity type is realized through the schema of a user-defined table._
+  
+GeoPackage::
+  an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information.
+  _In the GES, a GeoPackage is realized through a GeoPackage file._
+
+Spatial Reference System::
+  A spatial reference system, or coordinate reference system, is a set of mathematical rules for specifying how coordinates are to be assigned to points that is related to an object by a datum. (SOURCE: ISO 19111:2019)
+  _In the GES, a spatial reference system is realized through a `gpkg_spatial_ref_sys` row._
+
+=== Features
+
+GeoPackages that conform to the Features Requirements Class contain the content represented here.
+The Features Requirements Class implements Simple Features as per OGC 06-103r4.
+The definitions of the concepts below are from that document unless otherwise indicated.
+
+Feature::
+  abstraction of real world phenomena (SOURCE: ISO 19101).
+  For the purposes of this document, it refers to an individual realization thereof.
+  _In the GES, a feature is realized through a row of a user-defined features table._
+
+Feature Store::
+   a container for features.
+   _In the GES, an attributes store is realized through a user-defined features table._  
+
+Feature Type::
+    the attributes that comprise a class of a feature.
+    _In the GES, a feature type is realized through the schema of a user-defined features table._
+
+Geometry::
+  spatial object representing a geometric set (SOURCE: ISO19107)
+  _In the GES, a geometry is realized through a Well Known Binary value for a geometry attribute for a feature in a user-defined features table._
+
+Geometry Attribute::
+   a specialization of attribute for geometry values.
+   _In the GES, a geometry attribute is realized through a column of a user-defined features table._
+
+Geometry Attribute Type::
+   a specialization of attribute types for a geometry data type.
+   _In the GES, a geometry attribute type is realized through a row of `gpkg_geometry_columns`._
+
+=== Tiles
+
+GeoPackages that conform to the Tiles Requirements Class contain the content represented here.
+The Tiles Requirements Class implements Tile Matrix Sets as per OGC 17-083r2.
+The definitions of the concepts below are from that document unless otherwise indicated.
+
+Tile::
+  a small rectangular representation of geographic data, often part of a set of such elements, covering a tiling scheme and sharing similar information content and graphical styling. A tile can be uniquely defined in a tile matrix by one integer index in each dimension. Tiles are mainly used for fast transfer (particularly in the web) and easy display at the resolution of a rendering device. Tiles can be grid based pictorial representations, coverage subsets, or feature based representations (e.g., vector tiles).
+  _In the GES, a tile is realized through a row of a user-defined tiles table._
+
+Tile Matrix::
+  a grid tiling scheme that defines how space is partitioned into a set of conterminous tiles at a fixed scale.
+  _In the GES, a tile matrix is realized through a row of `gpkg_tile_matrix`._
+
+[NOTE]
+====
+A tile matrix constitutes a tessellation of the space that resembles a matrix in a 2D space characterized by a matrix width (columns) and a matrix height (rows).
+====
+
+Tile Matrix Set::
+  a tiling scheme composed by collection of tile matrices defined at different scales covering approximately the same area and has a common coordinate reference system.
+  _In the GES, a tile matrix set is realized through a row of `gpkg_tile_matrix_set`._
+
+Tile Pyramid::
+  a tile set organized in pyramid structure of tiles of different spatial extent and resolution at different zoom levels.
+  _In the GES, a tile pyramid is realized through a user-defined tiles table and a row of `gpkg_contents`._
+  
+Tile Set::
+  a series of actual tiles containing data and following a common tiling scheme.
+
+Tiling Scheme::
+  a scheme that defines how space is partitioned into individual tiled units.
+  A tiling scheme defines the spatial reference system, the geometric properties of a tile, which space a uniquely identified tile occupies, and reversely, which unique identifier corresponds to a space satisfying the geometric properties to be a tile.
+
+[NOTE]
+====
+A tiling scheme is not restricted to a coordinate reference system or a tile matrix set and allows for other spatial reference systems such as DGGS and other organizations including irregular ones.
+====
+
+=== Attributes
+
+GeoPackages that conform to the Attributes Requirements Class contain the content represented in <<Attributes_Classes>>.
+
+Attributes Set::
+  a user-defined type with one or attributes, none of which is a geometry.
+  _In the GES, an attributes set is realized through a row of a user-defined attributes table._
+
+[NOTE]
+====
+OGC 12-128 defined this concept as "attributes".
+However, this conflicts with the standard definition of an attribute as a member of a class.
+====
+
+Attributes Set Type::
+   the characteristics (attribute types) of an attributes set.
+   _In the GES, an attributes set type is realized through the schema of a user-defined attributes table._
+
+Attributes Store::
+   a container for attributes sets.
+   _In the GES, an attributes store is realized through a user-defined attributes table._  
+
+=== Extensions
+
+GeoPackages that conform to the Extensions Requirements Class contain the content represented here.
+
+Extension::
+  a set of one or more requirements clauses that either profiles / extends existing requirements clauses in the GeoPackage standard or adds new requirements clauses.
+  _In the GES, extensions are realized through rows of `gpkg_extensions`._
+  
+=== Metadata
+
+GeoPackages that conform to the Metadata Requirements Class contain the content represented here.
+
+Metadata::
+  for the purposes of this document, a discrete unit of data about data. (SOURCE: ISO 19115)
+  _In the GES, metadata is realized through rows of `gpkg_metadata`._
+  
+Metadata Reference::
+  a reference indicating the element(s) that particular metadata pertains to.
+  _In the GES, a metadata reference is realized through a row of `gpkg_metadata_reference`._
+
+=== Schema
+
+GeoPackages that conform to the Schema Requirements Class contain the content represented here.
+
+Attribute Descriptor::
+  an extended description of an attribute type.
+  _In the GES, an attribute descriptor is realized through a row of `gpkg_data_columns`._
+  
+Constraint::
+  a restriction on the range of an attribute value.
+  _In the GES, a constraint is realized through a row of `gpkg_data_column_constraints`._
+
+=== Tiled Gridded Coverages
+
+GeoPackages that conform to the Tiled Gridded Coverage Requirements Class contain the content represented in here.
+
+Coverage::
+  a function that describe characteristics of real-world phenomena that vary over space and/or time.
+  Typical examples are temperature, elevation and precipitation.
+  A coverage is typically represented as a data structure containing a set of such values, each associated with one of the elements in a spatial, temporal or spatiotemporal domain.
+  Typical spatial domains are point sets (e.g. sensor locations), curve sets (e.g. contour lines), grids (e.g. orthoimages, elevation models), etc.
+  A property whose value varies as a function of time may be represented as a temporal coverage or time-series [SOURCE: ISO-19109].
+
+Coverage Tile::
+  a tile containing coverage data.
+  _In the GES, a coverage tile is realized through a row in a user-defined tiles table and a row in `gpkg_2d_gridded_tile_ancillary`._
+
+Tiled Gridded Coverage::
+  a tile pyramid containing coverage data encoded as coverage tiles.
+  _In the GES, a tiled gridded coverage is realized through a user-defined tiles table, a row in `gpkg_2d_gridded_coverage_ancillary`, and a row in `gpkg_contents`._
+
+=== Related Tables
+
+GeoPackages that conform to the Related Tables Requirements Class contain the content represented here.
+The purpose of this requirements class is to support a many-to-many relationship between two entities, defined as the "base" entity and the "related" entity.
+In the CM there is no semantic difference between these concepts, but profiles may be used to provide those semantics.
+
+Extended Relation::
+  a descriptor for the relationship between the base entity and the related entity.
+  _In the GES, an extended relation is realized through a row in `gpkgext_relations`._
