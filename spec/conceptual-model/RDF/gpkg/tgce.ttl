@@ -1,0 +1,218 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/tgce
+# imports: http://ogc.org/spec/gpkg/1.3.0/extensions
+# imports: http://ogc.org/spec/gpkg/1.3.0/tiles
+# prefix: tgce
+
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix extensions: <http://ogc.org/spec/gpkg/1.3.0/extensions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tgce: <http://ogc.org/spec/gpkg/1.3.0/tgce#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+core:GeoPackage
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "4"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/crs#crs> ;
+    ] ;
+.
+<http://ogc.org/spec/gpkg/1.3.0/tgce>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/extensions> ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/tiles> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+tgce:CoverageDataType
+  a owl:Class ;
+  rdfs:label "TGCEData type" ;
+.
+tgce:CoverageTile
+  a owl:Class ;
+  rdfs:label "Coverage tile" ;
+  rdfs:subClassOf <http://ogc.org/spec/gpkg/1.3.0/tiles#Tile> ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:offset ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:scale ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:max ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:mean ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:min ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:standardDeviation ;
+    ] ;
+.
+tgce:FLOAT
+  a tgce:CoverageDataType ;
+  rdfs:label "FLOAT" ;
+.
+tgce:GRIDDED_COVERAGE_2D
+  a core:DataType ;
+  rdfs:label "2D GRIDDED COVERAGE" ;
+.
+tgce:GRID_VALUE_IS_AREA
+  a tgce:GridCellEncoding ;
+  rdfs:label "GRID VALUE IS AREA" ;
+.
+tgce:GRID_VALUE_IS_CENTER
+  a tgce:GridCellEncoding ;
+  rdfs:label "GRID VALUE IS CENTER" ;
+.
+tgce:GRID_VALUE_IS_CORNER
+  a tgce:GridCellEncoding ;
+  rdfs:label "GRID VALUE IS CORNER" ;
+.
+tgce:GridCellEncoding
+  a owl:Class ;
+  rdfs:label "Grid cell encoding" ;
+  rdfs:subClassOf owl:Thing ;
+.
+tgce:INTEGER
+  a tgce:CoverageDataType ;
+  rdfs:label "INTEGER" ;
+.
+tgce:TiledGriddedCoverage
+  a owl:Class ;
+  rdfs:label "Tiled gridded coverage" ;
+  rdfs:subClassOf <http://ogc.org/spec/gpkg/1.3.0/tiles#TilePyramid> ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:allValuesFrom tgce:CoverageTile ;
+      owl:onProperty <http://ogc.org/spec/gpkg/1.3.0/tiles#tiles> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:coverageDataType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:offset ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:scale ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue tgce:GRIDDED_COVERAGE_2D ;
+      owl:onProperty core:dataType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:fieldName ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:gridCellEncoding ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:nullValue ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:precision ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tgce:quantityDefinition ;
+    ] ;
+.
+tgce:TiledGriddedCoverageExtension
+  a extensions:Extension ;
+  extensions:definition "http://docs.opengeospatial.org/is/17-066r1/17-066r1.html"^^xsd:anyURI ;
+  extensions:scope extensions:READ-WRITE ;
+  dcterms:title "2d-gridded-coverage" ;
+  rdfs:label "Tiled gridded coverage extension" ;
+.
+tgce:coverageDataType
+  a rdf:Property ;
+  rdfs:label "coverage data type" ;
+  rdfs:range tgce:CoverageDataType ;
+.
+tgce:fieldName
+  a rdf:Property ;
+  rdfs:label "field name" ;
+  rdfs:range xsd:string ;
+.
+tgce:gridCellEncoding
+  a rdf:Property ;
+  rdfs:label "grid cell encoding" ;
+  rdfs:range tgce:GridCellEncoding ;
+.
+tgce:max
+  a rdf:Property ;
+  rdfs:label "max" ;
+.
+tgce:mean
+  a rdf:Property ;
+  rdfs:label "mean" ;
+.
+tgce:min
+  a rdf:Property ;
+  rdfs:label "min" ;
+.
+tgce:nullValue
+  a rdf:Property ;
+  rdfs:label "null value" ;
+  rdfs:range xsd:double ;
+.
+tgce:offset
+  a rdf:Property ;
+  rdfs:label "offset" ;
+  rdfs:range xsd:decimal ;
+.
+tgce:precision
+  a rdf:Property ;
+  rdfs:label "precision" ;
+  rdfs:range xsd:decimal ;
+.
+tgce:quantityDefinition
+  a rdf:Property ;
+  rdfs:label "quantity definition" ;
+  rdfs:range xsd:string ;
+.
+tgce:scale
+  a rdf:Property ;
+  rdfs:label "scale" ;
+  rdfs:range xsd:decimal ;
+.
+tgce:standardDeviation
+  a rdf:Property ;
+  rdfs:label "standard deviation" ;
+.
+tgce:unitOfMeasure
+  a rdf:Property ;
+  rdfs:label "unit of measure" ;
+  rdfs:range xsd:string ;
+.

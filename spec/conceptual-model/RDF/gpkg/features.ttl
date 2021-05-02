@@ -1,0 +1,264 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/features
+# imports: http://ogc.org/spec/gpkg/1.3.0/core
+# imports: http://www.opengis.net/ont/sf
+# prefix: features
+
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix features: <http://ogc.org/spec/gpkg/1.3.0/features#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+core:GeoPackage
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:featureStore ;
+    ] ;
+.
+core:SpatialReferenceSystem
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/identifier> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/title> ;
+    ] ;
+.
+core:value
+  rdfs:range owl:Thing ;
+.
+<http://ogc.org/spec/gpkg/1.3.0/features>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/core> ;
+  owl:imports <http://www.opengis.net/ont/sf> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+features:CIRCULARSTRING
+  a features:GeometryType ;
+  rdfs:label "CIRCULARSTRING" ;
+.
+features:COMPOUNDCURVE
+  a features:GeometryType ;
+  rdfs:label "COMPOUNDCURVE" ;
+.
+features:CURVE
+  a features:GeometryType ;
+  rdfs:label "CURVE" ;
+.
+features:CURVEPOLYGON
+  a features:GeometryType ;
+  rdfs:label "CURVEPOLYGON" ;
+.
+features:DimensionSupport
+  a owl:Class ;
+  rdfs:label "Dimension support" ;
+  rdfs:subClassOf owl:Thing ;
+.
+features:FEATURES
+  a core:DataType ;
+  rdfs:label "FEATURES" ;
+.
+features:FeatureStore
+  a owl:Class ;
+  rdfs:label "Feature store" ;
+  rdfs:subClassOf core:EntityStore ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:featureType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue features:FEATURES ;
+      owl:onProperty core:dataType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:feature ;
+    ] ;
+.
+features:FeatureType
+  a owl:Class ;
+  rdfs:label "Feature type" ;
+  rdfs:subClassOf core:EntityType ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:geometryAttributeType ;
+    ] ;
+.
+features:GEOMETRY
+  a features:GeometryType ;
+  rdfs:label "GEOMETRY" ;
+.
+features:GEOMETRYCOLLECTION
+  a features:GeometryType ;
+  rdfs:label "GEOMETRYCOLLECTION" ;
+.
+features:GeometryAttribute
+  a owl:Class ;
+  rdfs:label "Geometry attribute" ;
+  rdfs:subClassOf core:Attribute ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:geometry ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:geometryAttributeType ;
+    ] ;
+.
+features:GeometryAttributeType
+  a owl:Class ;
+  rdfs:label "Geometry attribute type" ;
+  rdfs:subClassOf core:AttributeType ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:geometryType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:m ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:z ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/crs#crs> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue features:GEOMETRY ;
+      owl:onProperty core:valueType ;
+    ] ;
+.
+features:GeometryType
+  a owl:Class ;
+.
+features:LINESTRING
+  a features:GeometryType ;
+  rdfs:label "LINESTRING" ;
+.
+features:MANDATORY
+  a features:DimensionSupport ;
+  rdfs:label "MANDATORY" ;
+.
+features:MULTICURVE
+  a features:GeometryType ;
+  rdfs:label "MULTICURVE" ;
+.
+features:MULTILINESTRING
+  a features:GeometryType ;
+  rdfs:label "MULTILINESTRING" ;
+.
+features:MULTIPOINT
+  a features:GeometryType ;
+  rdfs:label "MULTIPOINT" ;
+.
+features:MULTIPOLYGON
+  a features:GeometryType ;
+  rdfs:label "MULTIPOLYGON" ;
+.
+features:MULTISURFACE
+  a features:GeometryType ;
+  rdfs:label "SURFACE" ;
+.
+features:OPTIONAL
+  a features:DimensionSupport ;
+  rdfs:label "OPTIONAL" ;
+.
+features:POINT
+  a features:GeometryType ;
+  rdfs:label "POINT" ;
+.
+features:POLYGON
+  a features:GeometryType ;
+  rdfs:label "POLYGON" ;
+.
+features:PROHIBITED
+  a features:DimensionSupport ;
+  rdfs:label "PROHIBITED" ;
+.
+features:SURFACE
+  a features:GeometryType ;
+  rdfs:label "SURFACE" ;
+.
+features:feature
+  a rdf:Property ;
+  rdfs:label "feature" ;
+  rdfs:range <http://www.opengis.net/ont/geosparql#Feature> ;
+.
+features:featureStore
+  a rdf:Property ;
+  rdfs:label "feature store" ;
+  rdfs:range features:FeatureStore ;
+.
+features:featureType
+  a rdf:Property ;
+  rdfs:label "feature type" ;
+  rdfs:range features:FeatureType ;
+.
+features:geometry
+  a rdf:Property ;
+  rdfs:label "geometry" ;
+  rdfs:range <http://www.opengis.net/ont/sf#Geometry> ;
+.
+features:geometryAttribute
+  a rdf:Property ;
+  rdfs:label "geometry attribute" ;
+  rdfs:range features:GeometryAttribute ;
+.
+features:geometryAttributeType
+  a rdf:Property ;
+  rdfs:label "geometry attribute type" ;
+  rdfs:range features:GeometryAttributeType ;
+.
+features:geometryType
+  a rdf:Property ;
+  rdfs:label "geometry type" ;
+  rdfs:range features:GeometryType ;
+.
+features:m
+  a rdf:Property ;
+  rdfs:label "m" ;
+  rdfs:range features:DimensionSupport ;
+.
+features:z
+  a rdf:Property ;
+  rdfs:label "z" ;
+  rdfs:range features:DimensionSupport ;
+.
+<http://www.opengis.net/ont/geosparql#Feature>
+  rdfs:subClassOf core:Entity ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:featureType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:geometryAttribute ;
+    ] ;
+.
+<http://www.opengis.net/ont/sf#Geometry>
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty features:geometryType ;
+    ] ;
+.

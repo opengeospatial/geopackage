@@ -1,0 +1,105 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/rte
+# imports: http://ogc.org/spec/gpkg/1.3.0/core
+# imports: http://ogc.org/spec/gpkg/1.3.0/extensions
+# prefix: rte
+
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix extensions: <http://ogc.org/spec/gpkg/1.3.0/extensions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rte: <http://ogc.org/spec/gpkg/1.3.0/rte#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+core:GeoPackage
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty rte:relationStore ;
+    ] ;
+.
+<http://ogc.org/spec/gpkg/1.3.0/rte>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/core> ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/extensions> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+rte:RelatedTablesExtension
+  a extensions:Extension ;
+  core:entityStore rte:RelationStore ;
+  extensions:definition "http://docs.opengeospatial.org/is/18-000/18-000.html"^^xsd:anyURI ;
+  extensions:scope extensions:READ-WRITE ;
+  dcterms:title "related_tables" ;
+  rdfs:label "Related tables extension" ;
+.
+rte:Relation
+  a owl:Class ;
+  rdfs:label "Relation" ;
+  rdfs:subClassOf core:Entity ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty rte:baseEntity ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty rte:relatedEntity ;
+    ] ;
+.
+rte:RelationStore
+  a owl:Class ;
+  rdfs:label "Relation Store" ;
+  rdfs:subClassOf core:EntityStore ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty rte:baseEntityStore ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty rte:relatedEntityStore ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:type ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty rte:relation ;
+    ] ;
+.
+rte:baseEntity
+  a rdf:Property ;
+  rdfs:label "base entity" ;
+  rdfs:range core:Entity ;
+.
+rte:baseEntityStore
+  a rdf:Property ;
+  rdfs:label "base entity store" ;
+  rdfs:range core:EntityStore ;
+.
+rte:relatedEntity
+  a rdf:Property ;
+  rdfs:label "related entity" ;
+  rdfs:range core:Entity ;
+.
+rte:relatedEntityStore
+  a rdf:Property ;
+  rdfs:label "related entity store" ;
+  rdfs:range core:EntityStore ;
+.
+rte:relation
+  a rdf:Property ;
+  rdfs:label "relation" ;
+  rdfs:range rte:Relation ;
+.
+rte:relationStore
+  a rdf:Property ;
+  rdfs:label "extended relation" ;
+  rdfs:range rte:RelationStore ;
+.

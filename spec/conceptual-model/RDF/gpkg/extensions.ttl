@@ -1,0 +1,78 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/extensions
+# imports: http://ogc.org/spec/gpkg/1.3.0/core
+# prefix: extensions
+
+@prefix extensions: <http://ogc.org/spec/gpkg/1.3.0/extensions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ogc.org/spec/gpkg/1.3.0/core#GeoPackage>
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty extensions:extension ;
+    ] ;
+.
+<http://ogc.org/spec/gpkg/1.3.0/extensions>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+extensions:Extension
+  a owl:Class ;
+  rdfs:label "Extension" ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty extensions:definition ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty extensions:scope ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/title> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/gpkg/1.3.0/core#attributeType> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/gpkg/1.3.0/core#entityStore> ;
+    ] ;
+.
+extensions:ExtensionScope
+  a owl:Class ;
+  rdfs:label "Extension" ;
+.
+extensions:READ-WRITE
+  a extensions:ExtensionScope ;
+  rdfs:label "READ-WRITE" ;
+.
+extensions:WRITE-ONLY
+  a extensions:ExtensionScope ;
+  rdfs:label "WRITE-ONLY" ;
+.
+extensions:definition
+  a rdf:Property ;
+  rdfs:label "definition" ;
+  rdfs:range xsd:anyURI ;
+.
+extensions:extension
+  a rdf:Property ;
+  rdfs:label "extension" ;
+  rdfs:range extensions:Extension ;
+.
+extensions:scope
+  a rdf:Property ;
+  rdfs:label "scope" ;
+  rdfs:range extensions:ExtensionScope ;
+.

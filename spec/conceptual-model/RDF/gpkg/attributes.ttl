@@ -1,0 +1,30 @@
+# baseURI: http://ogc.org/spec/oapi-common/0.1/attributes
+# imports: http://ogc.org/spec/gpkg/1.3.0/core
+# prefix: attributes
+
+@prefix attributes: <http://ogc.org/spec/oapi-common/0.1/attributes#> .
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ogc.org/spec/oapi-common/0.1/attributes>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/core> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+attributes:ATTRIBUTES
+  a core:DataType ;
+  rdfs:label "ATTRIBUTES" ;
+.
+attributes:AttributesStore
+  a owl:Class ;
+  rdfs:label "Attributes store" ;
+  rdfs:subClassOf core:EntityStore ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue attributes:ATTRIBUTES ;
+      owl:onProperty core:dataType ;
+    ] ;
+.
