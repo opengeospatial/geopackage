@@ -4,13 +4,11 @@ classDiagram
      id: Integer
      row: Integer
      column: Integer
-     data: Blob
+   }
+   class TileAttribute {
+     data: BLOB
    }
    class TileMatrixSet {
-     min_x: Double
-     min_y: Double
-     max_x: Double
-     max_y: Double
    }
    class TileMatrix {
      zoomLevel: Integer
@@ -24,10 +22,23 @@ classDiagram
    class TilePyramid {
      dataType = tiles
    }
-   TileMatrixSet ..> SpatialReferenceSystem: srs
-   TilePyramid ..|> EntityStore
-   TilePyramid o-- TileMatrixSet: tileMatrixSet
-   TileMatrixSet o-- "1..n" TileMatrix: tileMatrix
-   Tile --|> Entity
-   TilePyramid o-- "*" Tile: tiles
+   class TileAttributeType {
+     title = "data"
+     valueType = BLOB
+   }
+   Entity <|-- Tile
+   Attribute <|-- TileAttribute
+   AttributeType <|-- TileAttributeType
+   EntityStore <|-- TilePyramid
+   EntityType <|-- TileType
+   TileMatrixSet ..> CoordinateReferenceSystem
+   TileMatrixSet ..> BoundingBox
+   TilePyramid o-- TileMatrixSet
+   TileMatrixSet o-- "1..n" TileMatrix
+   TilePyramid o-- "*" Tile
    Tile ..> TileMatrix: zoomLevel
+   TileType ..> TileAttributeType
+   EntityStore ..> EntityType
+   Entity o-- "1..*" Attribute
+   TileAttributeType <.. TileAttribute
+   Tile --> TileAttribute

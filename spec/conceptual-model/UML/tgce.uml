@@ -33,9 +33,7 @@ classDiagram
      grid-value-is-corner
    }
    
-   TiledGriddedCoverage ..> TileMatrixSet: tileMatrixSet
-   TiledGriddedCoverage --|> TilePyramid
-   TiledGriddedCoverage o-- "1..*" CoverageTile: tiles
-   TilePyramid o-- TileMatrixSet
-   CoverageTile --|> Tile
-   TilePyramid o-- "1..*" Tile: tiles
+   TilePyramid <|-- TiledGriddedCoverage
+   Tile <|-- CoverageTile
+   TiledGriddedCoverage o-- "*" CoverageTile
+   TilePyramid o-- "*" Tile

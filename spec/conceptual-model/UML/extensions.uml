@@ -1,7 +1,7 @@
 classDiagram
 
    class Extension {
-     name: String
+     title: String
      definition: String
      scope: ExtensionScope
    }
@@ -10,7 +10,7 @@ classDiagram
      READ-WRITE
      WRITE-ONLY
    }
-   GeoPackage o-- "*" Extension: extensions
+   GeoPackage o-- "*" Extension
    Extension --> "*" EntityStore
-   Extension --> "0..1" AttributeType
+   Extension --> "*" AttributeType
    EntityStore o-- "*" AttributeType

@@ -1,5 +1,10 @@
 classDiagram
 
+   class MetadataEntityStore {
+   }
+   class MetadataAttributeType {
+     valueType = String
+   }
    class Metadata {
      scope: MetadataScope
      uri: String
@@ -45,8 +50,17 @@ classDiagram
    MetadataReference o-- "0..1" AttributeType
    MetadataReference o-- "0..1" Entity
    MetadataReference o-- "0..1" Value
-   Metadata --> "1..n" MetadataReference: references
+   Metadata --> "1..n" MetadataReference
    Metadata --> "0..1" Metadata: parentMetadata
-   GeoPackage o-- "*" Metadata
-   GeoPackage o-- "*" MetadataReference
-   
+   MetadataEntityStore o-- "*" Metadata
+   MetadataEntityStore o-- "*" MetadataReference
+   MetadataEntityStore --|> EntityStore
+   Attribute <|-- MetadataAttribute
+   Metadata ..> MetadataAttribute
+   MetadataAttributeType --|> AttributeType
+   Metadata --|> Entity
+   MetadataAttribute ..> MetadataAttributeType
+   MetadataAttribute *-- MetadataDocument
+   EntityType <|-- MetadataEntityType
+   Metadata ..> MetadataEntityType
+   MetadataEntityType ..> MetadataAttributeType

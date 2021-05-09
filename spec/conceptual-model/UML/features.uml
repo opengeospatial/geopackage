@@ -45,16 +45,15 @@ classDiagram
    }
    EntityStore <|.. FeatureStore
    EntityType <|.. FeatureType
+   Entity <|.. Feature
    FeatureStore o-- FeatureType
    AttributeType <|-- GeometryAttributeType
-   FeatureStore o-- Feature: features
+   FeatureStore o-- "*" Feature: features
    GeometryAttributeType --o FeatureType
-   GeometryAttributeType ..> SpatialReferenceSystem  : srs
-   Feature o-- "*" Attribute: attributes
+   GeometryAttributeType ..> CoordinateReferenceSystem  : crs
    Feature ..> FeatureType
    Attribute ..> AttributeType
    GeometryAttribute ..> GeometryAttributeType
-   FeatureType o-- "1..n" AttributeType: attributeTypes
    Feature o-- GeometryAttribute: geometry
    Attribute <|-- GeometryAttribute
    

@@ -1,22 +1,24 @@
 classDiagram
 
-   class SpatialReferenceSystem {
-     name: String
+   class CoordinateReferenceSystem {
+     title: String
      id: Integer
      organization: String
      organization_coordsys_id: Integer
      definition: WKT2
      description: String?
    }
+   class BoundingBox {
+     min_x: Double
+     min_y: Double
+     max_x: Double
+     max_y: Double
+   }
    class EntityStore {
-     name: String
+     title: String
      identifier: String?
      description: String?
      last_change: DateTime
-     min_x: Double?
-     min_y: Double?
-     max_x: Double?
-     max_y: Double?
    }
    class DataType {
      <<enumeration>>
@@ -47,12 +49,14 @@ classDiagram
      name: String
      valueType: ValueType
    }
-   GeoPackage o-- "3..n" SpatialReferenceSystem: srss
-   EntityStore ..> SpatialReferenceSystem: srs
+   GeoPackage o-- "3..n" CoordinateReferenceSystem
+   EntityStore ..> CoordinateReferenceSystem
+   EntityStore ..> "0..1" BoundingBox
+   BoundingBox ..> CoordinateReferenceSystem
    GeoPackage o-- "*" EntityStore: contents
-   EntityStore o-- "*" Entity: entities
-   EntityStore o-- EntityType: entityType
-   EntityType o-- "*" AttributeType: attributeTypes
-   Entity ..> EntityType: entityType
-   Entity o-- "*" Attribute: attributes
+   EntityStore o-- "*" Entity
+   EntityStore o-- EntityType
+   EntityType o-- "*" AttributeType
+   Entity ..> EntityType
+   Entity o-- "*" Attribute
    Attribute ..> AttributeType

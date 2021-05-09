@@ -1,6 +1,7 @@
 classDiagram
-
-   class AttributeDescriptor {
+   class SchemaStore {
+   }
+   class AttributeType {
      name: String?
      title: String?
      description: String?
@@ -22,13 +23,13 @@ classDiagram
    class EnumConstraint {
      value: String
    }
-   Constraint --> AttributeDescriptor: constraintName
    Constraint <|-- RangeConstraint
    Constraint <|-- GlobConstraint
    Constraint <|-- EnumConstraint
-   AttributeDescriptor --> EntityStore: entityStore
-   AttributeDescriptor --> AttributeType: attributeType
-   GeoPackage o-- "*" Constraint
-   GeoPackage o-- "*" AttributeDescriptor
-   EntityStore o-- "*" AttributeType
-   
+   GeoPackage o-- "*" SchemaStore
+   EntityStore <|-- SchemaStore
+   SchemaStore o-- "*" Constraint
+   Constraint ..> AttributeType
+   Constraint ..> EntityStore
+   SchemaStore o-- "*" EntityStore
+   SchemaStore o-- "*" AttributeType
