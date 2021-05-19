@@ -449,27 +449,6 @@ Previous statements that the media type is <span class="line-through"><code>appl
 </div>
 </div>
 </div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
-</td>
-<td class="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SQLite is designed to be flexible with regards to the range of a value. Therefore GeoPackage writers SHOULD validate the data as it is being inserted and GeoPackage readers SHOULD allow for the possibility that unexpected values are present. While data type mismatches could theoretically be checked for, such tests would scale poorly for large GeoPackages so they are not present in the GeoPackage Executable Test Suite at the time of writing.</p>
-</li>
-<li>
-<p>SQLite&#8217;s design prevents this requirement from being enforced for views.</p>
-</li>
-</ol>
-</div>
-</td>
-</tr>
-</table>
-</div>
 <table id="table_column_data_types" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. GeoPackage Data Types</caption>
 <colgroup>
@@ -13142,6 +13121,13 @@ OGC later adopted "18-010r7 OGC Well known text representation of Coordinate Ref
 <td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>epoch</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TEXT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Coordinate epoch as per <a href="https://docs.opengeospatial.org/as/18-005r4/18-005r4.html#68" class="bare">https://docs.opengeospatial.org/as/18-005r4/18-005r4.html#68</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
 </tbody>
 </table>
 <div class="admonitionblock note">
@@ -13267,8 +13253,15 @@ Additional WKT values in 18-010r7 can be used when required in the CRS definitio
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-<div class="paragraph">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
 <p>If, for a particular row, both the <code>definition</code> and <code>definition_12_063</code> columns are populated, the value in the <code>definition_12_063</code> column takes priority.</p>
+</li>
+<li>
+<p>The coordinate epoch SHOULD be provided if available. It is therefore possible that a GeoPackage will have multiple SRSs with the same <code>organization</code> and <code>organization_coordsys_id</code> but different epochs. While the epoch should theoretically go in dataset metadata (per ISO 19111 / OGC Topic 2 as approved by OGC in March 2021), there is not currently a standard metadata profile that would be suitable.</p>
+</li>
+</ol>
 </div>
 </td>
 </tr>
@@ -14152,7 +14145,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-05-19 02:29:18 UTC
+Last updated 2021-05-19 02:57:45 UTC
 </div>
 </div>
 </body>
