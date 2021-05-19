@@ -449,6 +449,27 @@ Previous statements that the media type is <span class="line-through"><code>appl
 </div>
 </div>
 </div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>SQLite is designed to be flexible with regards to the range of a value. Therefore GeoPackage writers SHOULD validate the data as it is being inserted and GeoPackage readers SHOULD allow for the possibility that unexpected values are present. While data type mismatches could theoretically be checked for, such tests would scale poorly for large GeoPackages so they are not present in the GeoPackage Executable Test Suite at the time of writing.</p>
+</li>
+<li>
+<p>SQLite&#8217;s design prevents this requirement from being enforced for views.</p>
+</li>
+</ol>
+</div>
+</td>
+</tr>
+</table>
+</div>
 <table id="table_column_data_types" class="tableblock frame-all grid-all stretch">
 <caption class="title">Table 1. GeoPackage Data Types</caption>
 <colgroup>
@@ -14131,7 +14152,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-04-22 18:17:09 UTC
+Last updated 2021-05-19 02:29:18 UTC
 </div>
 </div>
 </body>
