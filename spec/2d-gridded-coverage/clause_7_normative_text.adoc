@@ -230,18 +230,14 @@ include::requirements/REQ016.adoc[]
 
 By setting TIFF TAG 277 (SamplesPerPixel) to be 1, the GeoPackage producer indicates that there is a single sample per grid cell.
 
-include::requirements/REQ017.adoc[]
-
-By setting TAG 339 (SampleFormat) to be 3, the producer indicates that the Sample Value is IEEE floating point as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF. By setting TAG 258 (BitsPerSample) to be 32, the producer indicates that there are 32 bits per sample.
-
 NOTE: Tag 277 is described in Section 6: RGB Full Color Images, sub-clause _Differences from Palette Color Images_ and in Section 8: Baseline Field Reference Guide sub-clause _The Fields_. The Type is  SHORT and defines the number of components per pixel. SamplesPerPixel is usually 1 for bilevel, grayscale, and palette-color images. See the TIFF ExtraSamples field for further information.
 
 include::requirements/REQ017.adoc[]
 
 By setting TAG 339 (SampleFormat, Type SHORT), the producer indicates that the Sample Value is one of the following as defined in Part 2 (TIFF Extensions) Section 19: Data Sample Format TIFF:
 
-1 = unsigned integer data
-2 = two’s complement signed integer data
+1 = unsigned integer data +
+2 = two’s complement signed integer data +
 3 = IEEE floating point data [IEEE]
 
 The value specifies how to interpret each data sample in a pixel
