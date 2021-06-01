@@ -91,6 +91,12 @@ The *GeoPackage* designation is designed to provide maximum interoperability bet
 The columns of tables in a GeoPackage SHALL only be declared using one of the data types specified in table <<table_column_data_types>>. Extended GeoPackages MAY contain additional data types as specified through the <<extension_mechanism>>.
 ====
 
+[WARNING]
+====
+. SQLite is designed to be flexible with regards to the range of a value. Therefore GeoPackage writers SHOULD validate the data as it is being inserted and GeoPackage readers SHOULD allow for the possibility that unexpected values are present. While data type mismatches could theoretically be checked for, such tests would scale poorly for large GeoPackages so they are not present in the GeoPackage Executable Test Suite at the time of writing.
+. SQLite's design prevents this requirement from being enforced for views.
+====
+
 [#table_column_data_types,reftext='{table-caption} {counter:table-num}']
 .GeoPackage Data Types
 [cols=",",options="header"]
