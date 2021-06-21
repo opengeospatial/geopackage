@@ -57,6 +57,7 @@ For GeoPackages conforming to this extension, the `gpkg_spatial_ref_sys` table S
 |`definition` |TEXT |Well-known Text <<I32>> Representation of the Spatial Reference System |true|
 |`description` |TEXT |Human readable description of this SRS |false|
 |`definition_12_063` |TEXT |Well-known Text <<I34>> or <<I36>> Representation of the Spatial Reference System |true|
+|`epoch` |DOUBLE |Coordinate epoch as per https://docs.opengeospatial.org/as/18-005r4/18-005r4.html#68 |false|
 |====
 
 [NOTE]
@@ -123,7 +124,8 @@ At least one definition column SHALL be defined with a valid definition unless t
 
 [NOTE]
 ====
-If, for a particular row, both the `definition` and `definition_12_063` columns are populated, the value in the `definition_12_063` column takes priority.
+. If, for a particular row, both the `definition` and `definition_12_063` columns are populated, the value in the `definition_12_063` column takes priority.
+. The coordinate epoch SHOULD be provided if available. It is therefore possible that a GeoPackage will have multiple SRSs with the same `organization` and `organization_coordsys_id` but different epochs. While the epoch should theoretically go in dataset metadata (per ISO 19111 / OGC Topic 2 as approved by OGC in March 2021), there is not currently a standard metadata profile that would be suitable.
 ====
 
 [float]
