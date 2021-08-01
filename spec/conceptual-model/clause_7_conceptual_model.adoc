@@ -16,6 +16,10 @@ Attribute Type::
   No restrictions are implied here as to the type of attributes a user-defined type may have.
   Not all entity types have attributes. (SOURCE: Adapted from ISO19101)
   _In the GES, an attribute is realized through a column of a user-defined table._
+
+Coordinate Reference System::
+A coordinate reference system, or spatial reference system, is a set of mathematical rules for specifying how coordinates are to be assigned to points that is related to an object by a datum. (SOURCE: ISO 19111:2019)
+_The GES uses the term "spatial reference system." In the GES, a spatial reference system is realized through a `gpkg_spatial_ref_sys` row._
   
 Entity::
   For the purposes of this standard, an entity is simply a unit of content contained in a GeoPackage.
@@ -35,8 +39,7 @@ GeoPackage::
   _In the GES, a GeoPackage is realized through a GeoPackage file._
 
 Spatial Reference System::
-  A spatial reference system, or coordinate reference system, is a set of mathematical rules for specifying how coordinates are to be assigned to points that is related to an object by a datum. (SOURCE: ISO 19111:2019)
-  _In the GES, a spatial reference system is realized through a `gpkg_spatial_ref_sys` row._
+  see "Coordinate Reference System".
 
 === Features
 
@@ -130,6 +133,7 @@ Attributes Store::
    a container for attributes sets.
    _In the GES, an attributes store is realized through a user-defined attributes table._  
 
+[[extensions]]
 === Extensions
 
 GeoPackages that conform to the Extensions Requirements Class contain the content represented here.
