@@ -202,7 +202,7 @@ Each TIFF encoded tile is a baseline TIFF as defined in the Part 1 of the TIFF s
 * IEEE floating point or a binary data type where the SampleFormat has a value of either 1 (unsigned integer) or 2 (signed integer) AND the BitsPerSample is either 8, 16, or 32 (see Requirement 17 below)
 * LZW compression (see Requirement 18 below)
 
-Tiles are encoded as a single-band image using either one 32-bit floating point component per pixel. This implies a number of constraints which are listed below.
+Tiles are encoded as a single-band image using either one 32-bit floating point component or binary data type per pixel. This implies a number of constraints which are listed below.
 
 * There is only one band per TIFF tile. In other words, for any pixel in the TIFF tile, there SHALL be only one component (see Requirement 16 below).
 * All pixels in the tile SHALL be set with a valid component value (see Requirement 21 below).
