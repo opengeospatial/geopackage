@@ -1,0 +1,25 @@
+[[rc_features]]
+
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/GeoPackage/1.3/req/features {set:cellbgcolor:#FFFFFF}
+|Target type |Encoding Standard
+|Dependency |http://www.opengis.net/spec/GeoPackage/1.3/req/core
+|*Requirement 18* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/features/data_type +
+2+| The Encoding Standard SHALL describe the encoding of features as an EntityStore instance with a _dataType_ of `features`. {set:cellbgcolor:#FFFFFF}
+|*Requirement 19* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/features/wkb +
+2+| The Encoding Standard SHALL describe the encoding of geometry values as attribute values containing the GeoPackageBinary format specified in link:http://www.geopackage.org/spec130/#gpb_format[OGC 12-128]. {set:cellbgcolor:#FFFFFF}
+|*Requirement 20* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/features/geometry_attribute_type +
+2+| The Encoding Standard SHALL describe the encoding of a geometry attribute type as per the GeometryAttributeType class. {set:cellbgcolor:#FFFFFF}
+|A | The `valueType` SHALL be `Geometry`.
+|B | The `geometryType` SHALL be encoded as per the GeometryType enumeration.
+|C | The coordinate reference system SHALL reference a CoordinateReferenceSystem object.
+|D | The `z` SHALL be encoded as per the DimensionSupport enumeration.  
+|E | The `m` SHALL be encoded as per the DimensionSupport enumeration.  
+|*Requirement 29* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/features/feature_store +
+2+| The Encoding Standard SHALL describe the encoding of features as per the FeatureStore, FeatureType, AttributeType, Feature, and Attribute classes. {set:cellbgcolor:#FFFFFF}
+|A | A Feature SHALL conform to the FeatureType of the FeatureStore. 
+|B | A FeatureType SHALL have an AttributeType that specifies a unique integer identifier. 
+|C | A FeatureType SHALL have exactly one geometry column as described by the GeometryAttributeType of the FeatureType.
+|===

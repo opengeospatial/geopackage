@@ -1,0 +1,81 @@
+# baseURI: http://ogc.org/spec/oapi-common/0.1/bbox
+# imports: http://ogc.org/spec/oapi-common/0.1/crs
+# imports: http://www.w3.org/2003/01/geo/wgs84_pos
+# prefix: bbox
+
+@prefix bbox: <http://ogc.org/spec/oapi-common/0.1/bbox#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ogc.org/spec/oapi-common/0.1/bbox>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/oapi-common/0.1/crs> ;
+  owl:imports <http://www.w3.org/2003/01/geo/wgs84_pos> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+bbox:AxisLabel
+  a owl:Class ;
+  rdfs:label "Axis label" ;
+.
+bbox:AxisLabel_X
+  a bbox:AxisLabel ;
+  rdfs:label "X" ;
+.
+bbox:AxisLabel_Y
+  a bbox:AxisLabel ;
+  rdfs:label "Y" ;
+.
+bbox:AxisLabel_lat
+  a bbox:AxisLabel ;
+  rdfs:label "lat" ;
+.
+bbox:AxisLabel_lon
+  a bbox:AxisLabel ;
+  rdfs:label "lon" ;
+.
+bbox:BoundingBox
+  a owl:Class ;
+  rdfs:label "Bounding box" ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty bbox:lowerLeft ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty bbox:upperRight ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/crs#crs> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onProperty bbox:axisLabel ;
+    ] ;
+.
+bbox:axisLabel
+  a rdf:Property ;
+  rdfs:label "axis label" ;
+  rdfs:range bbox:AxisLabel ;
+.
+bbox:bbox
+  a rdf:Property ;
+  rdfs:label "bbox" ;
+  rdfs:range bbox:BoundingBox ;
+.
+bbox:lowerLeft
+  a rdf:Property ;
+  rdfs:label "lower left" ;
+  rdfs:range <http://www.w3.org/2003/01/geo/wgs84_pos#Point> ;
+.
+bbox:upperRight
+  a rdf:Property ;
+  rdfs:label "upper right" ;
+  rdfs:range <http://www.w3.org/2003/01/geo/wgs84_pos#Point> ;
+.

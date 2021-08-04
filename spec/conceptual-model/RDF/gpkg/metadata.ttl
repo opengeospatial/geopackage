@@ -1,0 +1,210 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/metadata
+# imports: http://ogc.org/spec/gpkg/1.3.0/core
+# imports: http://ogc.org/spec/gpkg/1.3.0/extensions
+# prefix: metadata
+
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix extensions: <http://ogc.org/spec/gpkg/1.3.0/extensions#> .
+@prefix metadata: <http://ogc.org/spec/gpkg/1.3.0/metadata#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ogc.org/spec/gpkg/1.3.0/metadata>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/core> ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/extensions> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+metadata:ATTRIBUTE_TYPE
+  a metadata:ReferenceScope ;
+  rdfs:label "ATTRIBUTE_TYPE" ;
+.
+metadata:ENTITY
+  a metadata:ReferenceScope ;
+  rdfs:label "ENTITY" ;
+.
+metadata:ENTITY_STORE
+  a metadata:ReferenceScope ;
+  rdfs:label "ENTITY_STORE" ;
+.
+metadata:GEOPACKAGE
+  a metadata:ReferenceScope ;
+  rdfs:label "GEOPACKAGE" ;
+.
+metadata:Metadata
+  a owl:Class ;
+  rdfs:label "Metadata" ;
+  rdfs:subClassOf core:Entity ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty metadata:metadataScope ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:format ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:identifier ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue metadata:MetadataAttribute ;
+      owl:onProperty core:attribute ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue metadata:MetadataEntityType ;
+      owl:onProperty core:entityType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty metadata:parent ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty metadata:metadataReference ;
+    ] ;
+.
+metadata:MetadataAttribute
+  a owl:Class ;
+  rdfs:label "Metadata attribute" ;
+  rdfs:subClassOf core:Attribute ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue metadata:MetadataAttributeType ;
+      owl:onProperty core:attributeType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue metadata:MetadataDocument ;
+      owl:onProperty core:value ;
+    ] ;
+.
+metadata:MetadataAttributeType
+  a owl:Class ;
+  rdfs:label "Metadata attribute type" ;
+  rdfs:subClassOf core:AttributeType ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue core:String ;
+      owl:onProperty core:valueType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue "metadata" ;
+      owl:onProperty dcterms:title ;
+    ] ;
+.
+metadata:MetadataDocument
+  a owl:Class ;
+  rdfs:label "Metadata document" ;
+.
+metadata:MetadataEntityStore
+  a owl:Class ;
+  rdfs:label "Metadata entity store" ;
+  rdfs:subClassOf core:EntityStore ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty metadata:metadata ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty metadata:metadataReference ;
+    ] ;
+.
+metadata:MetadataEntityType
+  a owl:Class ;
+  rdfs:label "Metadata attributes set type" ;
+  rdfs:subClassOf core:EntityType ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue metadata:MetadataAttributeType ;
+      owl:onProperty core:attributeType ;
+    ] ;
+.
+metadata:MetadataExtension
+  a extensions:Extension ;
+  core:entityStore metadata:MetadataEntityStore ;
+  extensions:definition "http://www.geopackage.org/spec130/#extension_metadata"^^xsd:anyURI ;
+  extensions:scope extensions:READ-WRITE ;
+  dcterms:title "gpkg_metadata" ;
+  rdfs:label "Metadata extension" ;
+.
+metadata:MetadataReference
+  a owl:Class ;
+  rdfs:label "Metadata" ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty metadata:referenceScope ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:dateSubmitted ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:attributeType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:entity ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:entityStore ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:value ;
+    ] ;
+.
+metadata:ReferenceScope
+  a owl:Class ;
+  rdfs:label "Reference scope" ;
+  rdfs:subClassOf owl:Thing ;
+.
+metadata:VALUE
+  a metadata:ReferenceScope ;
+  rdfs:label "VALUE" ;
+.
+metadata:metadata
+  a rdf:Property ;
+  rdfs:label "metadata" ;
+  rdfs:range metadata:Metadata ;
+.
+metadata:metadataReference
+  a rdf:Property ;
+  rdfs:label "metadataReference" ;
+  rdfs:range metadata:MetadataReference ;
+.
+metadata:metadataScope
+  a rdf:Property ;
+  rdfs:label "metadata scope" ;
+  rdfs:range xsd:string ;
+.
+metadata:parent
+  a rdf:Property ;
+  rdfs:label "parent" ;
+  rdfs:range metadata:Metadata ;
+.
+metadata:referenceScope
+  a rdf:Property ;
+  rdfs:label "reference scope" ;
+.

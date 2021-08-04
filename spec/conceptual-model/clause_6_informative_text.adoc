@@ -1,0 +1,36 @@
+== Standardization Targets (Informative)
+
+This standard defines a Conceptual Model which is independent of any encoding or formatting techniques.
+The Standardization Targets for this standard are:
+
+. Conceptual Models (extended versions of this conceptual model)
+. Encoding Standards (encodings of this conceptual model)
+
+The CM is defined by a UML model.
+This standard is a representation of that UML model in document form.
+In the case of a discrepancy between the UML model and this document, the UML model takes precedence.
+
+=== Encoding Standards
+Encoding Standards define how a Conceptual Model should be implemented using a specific technology.
+Conformant Encoding Standards provide evidence that they are an accurate representation of the Conceptual Model.
+This evidence should include implementations of the abstract tests specified in Annex A (normative) of this document.
+Since this standard is agnostic to the implementing technologies, the specific techniques to be used for conformance testing cannot be specified.
+Encoding Standards need to provide evidence of conformance which is appropriate for the implementing technologies.
+This evidence should be provided as an annex to the Encoding Standard document.
+
+The GeoPackage Encoding Standard (OGC 12-128) is the canonical example of an encoding standard for GeoPackage.
+This standard implements the CM while describing all of the requirements needed to meet the particulars of the SQLite format.
+
+=== Conceptual Models
+A Conceptual Model standardization target is a version of the GeoPackage Conceptual Model (CM) tailored for a specific user community.
+This tailoring can include:
+
+. Omission of one or more of the optional UML packages
+. Reduction of the multiplicity for an attribute or association
+. Restriction on the valid values for an attribute
+. Additional concepts documented through extensions.
+
+Of these options, actions #1, #2, and #3 can be performed when creating an Encoding Standard.
+Only action #4 requires an extension of the CM.
+These extensions are accomplished using the extension mechanism described in <<extensions>>.
+Extensions of the CM conform with the Extension Conformance Class.

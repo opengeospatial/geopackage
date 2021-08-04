@@ -1,0 +1,82 @@
+== Conventions
+This section provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+
+=== Conceptual Model
+The CM is comprised of definitions of relevant concepts.
+Since the CM was reverse-engineered from the GES, this CM provides references _in italics_ indicating how the concepts are realized in the GES. 
+
+=== Logical Model
+The LM uses a modified form of Unified Modeling Language (UML) to describe GeoPackage classes.
+Classes are represented as UML classes and columns are represented as UML attributes.
+The conventions used are as follows:
+
+==== Relationships
+.A solid arrow indicates an association.
+[#uml_association]
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class AnyClass {
+  +id: integer
+  ...
+}
+Class AssociatedClass {
+  +id: integer
+  +parent_id: integer
+  ...
+}
+
+AnyClass --> AssociatedClass : association
+----
+
+[#uml_aggregation]
+.A diamond-based arrow indicates an aggregation.
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class GeoPackage {
+}
+Class EntityStore{
+}
+
+GeoPackage o-- "*" EntityStore : contents
+----
+
+[#uml_inheritance]
+.A solid line with a solid arrowhead indicates an inheritance.
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class BaseClass {
+}
+Class ChildClass {
+}
+
+BaseClass <|-- ChildClass
+----
+
+[#uml_realization]
+.A dotted line with a solid arrowhead indicates a realization.
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class BaseClass {
+}
+Class RealizedClass {
+}
+
+BaseClass <|.. RealizedClass
+----
+
+==== Multiplicity
+* Multiplicity is assumed to be `1` unless otherwise specified.
+* An unbounded multiplicity (0..n) is represented as `*`.
+* For attributes, see <<uml_null>>.
+* Other relationship multiplicities are explicitly specified.
+
+[#uml_null]
+.A Question Mark `?` after a type name indicates a nullable attribute type
+[plantuml, format="png", reftext='Figure {counter:figure-num}']
+----
+Class AnyClass{
+  mandatory_attribute: String
+  optional_attribute: String?
+  ...
+}
+----

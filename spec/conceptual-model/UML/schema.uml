@@ -1,0 +1,35 @@
+classDiagram
+   class SchemaStore {
+   }
+   class AttributeType {
+     name: String?
+     title: String?
+     description: String?
+     mimeType: String?
+     constraintName: String?
+   }
+   class Constraint {
+     description: String?
+   }
+   class RangeConstraint {
+     min: Numeric
+     minIsInclusive: Boolean
+     max: Numeric
+     maxIsInclusive: Boolean
+   }
+   class GlobConstraint {
+     glob: String
+   }
+   class EnumConstraint {
+     value: String
+   }
+   Constraint <|-- RangeConstraint
+   Constraint <|-- GlobConstraint
+   Constraint <|-- EnumConstraint
+   GeoPackage o-- "*" SchemaStore
+   EntityStore <|-- SchemaStore
+   SchemaStore o-- "*" Constraint
+   Constraint ..> AttributeType
+   Constraint ..> EntityStore
+   SchemaStore o-- "*" EntityStore
+   SchemaStore o-- "*" AttributeType

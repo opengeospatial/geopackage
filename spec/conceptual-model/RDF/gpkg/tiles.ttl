@@ -1,0 +1,163 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/tiles
+# imports: http://ogc.org/spec/gpkg/1.3.0/core
+# imports: http://ogc.org/spec/tms/2.0/tms
+# prefix: tiles
+
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tiles: <http://ogc.org/spec/gpkg/1.3.0/tiles#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+core:EntityStore
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/bbox#bbox> ;
+    ] ;
+.
+core:GeoPackage
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty tiles:tilePyramid ;
+    ] ;
+.
+<http://ogc.org/spec/gpkg/1.3.0/tiles>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/core> ;
+  owl:imports <http://ogc.org/spec/tms/2.0/tms> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+tiles:TILES
+  a core:DataType ;
+  rdfs:label "TILES" ;
+.
+tiles:Tile
+  a owl:Class ;
+  rdfs:label "Tile" ;
+  rdfs:subClassOf core:Entity ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tiles:column ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tiles:row ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/tms/2.0/tms#tileMatrix> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/identifier> ;
+    ] ;
+.
+tiles:TileAttribute
+  a owl:Class ;
+  rdfs:label "Tile attribute" ;
+  rdfs:subClassOf core:Attribute ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue tiles:TileAttributeType ;
+      owl:onProperty core:attributeType ;
+    ] ;
+.
+tiles:TileAttributeType
+  a owl:Class ;
+  rdfs:label "Tile attribute type" ;
+  rdfs:subClassOf core:AttributeType ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue core:BLOB ;
+      owl:onProperty core:valueType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue "data" ;
+      owl:onProperty <http://purl.org/dc/terms/title> ;
+    ] ;
+.
+tiles:TilePyramid
+  a owl:Class ;
+  rdfs:label "Tile pyramid" ;
+  rdfs:subClassOf core:EntityStore ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/tms/2.0/tms#tileMatrixSet> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue tiles:TILES ;
+      owl:onProperty core:dataType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty tiles:tiles ;
+    ] ;
+.
+tiles:TileType
+  a owl:Class ;
+  rdfs:label "Tile type" ;
+  rdfs:subClassOf core:EntityType ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:hasValue tiles:TileAttributeType ;
+      owl:onProperty core:attributeType ;
+    ] ;
+.
+tiles:column
+  a rdf:Property ;
+  rdfs:label "column" ;
+  rdfs:range xsd:integer ;
+.
+tiles:pixelXSize
+  a rdf:Property ;
+  rdfs:label "pixel XSize" ;
+  rdfs:range xsd:double ;
+.
+tiles:pixelYSize
+  a rdf:Property ;
+  rdfs:label "pixel YSize" ;
+  rdfs:range xsd:double ;
+.
+tiles:row
+  a rdf:Property ;
+  rdfs:label "row" ;
+  rdfs:range xsd:integer ;
+.
+tiles:tilePyramid
+  a rdf:Property ;
+  rdfs:label "tile pyramid" ;
+  rdfs:range tiles:TilePyramid ;
+.
+tiles:tiles
+  a rdf:Property ;
+  rdfs:label "tiles" ;
+  rdfs:range tiles:Tile ;
+.
+tiles:zoomLevel
+  a rdf:Property ;
+  rdfs:label "zoom level" ;
+  rdfs:range xsd:integer ;
+.
+<http://ogc.org/spec/tms/2.0/tms#TileMatrix>
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tiles:pixelXSize ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tiles:pixelYSize ;
+    ] ;
+.

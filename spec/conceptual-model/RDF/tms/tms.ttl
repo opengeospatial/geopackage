@@ -1,0 +1,239 @@
+# baseURI: http://ogc.org/spec/tms/2.0/tms
+# imports: http://ogc.org/spec/oapi-common/0.1/bbox
+# imports: http://www.w3.org/2003/01/geo/wgs84_pos
+# prefix: tms
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tms: <http://ogc.org/spec/tms/2.0/tms#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ogc.org/spec/tms/2.0/crs#CoordinateReferenceSystem>
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/description> ;
+    ] ;
+.
+<http://ogc.org/spec/tms/2.0/tms>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/oapi-common/0.1/bbox> ;
+  owl:imports <http://www.w3.org/2003/01/geo/wgs84_pos> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+tms:CDBGlobalGrid
+  a tms:WellKnownScaleSet ;
+  rdfs:label "CDBGlobal grid" ;
+.
+tms:GoogleCRS84Quad
+  a tms:WellKnownScaleSet ;
+  rdfs:label "Google CRS84Quad" ;
+.
+tms:GoogleMapsCompatible
+  a tms:WellKnownScaleSet ;
+  rdfs:label "Google maps compatible" ;
+.
+tms:MatrixWidth
+  a owl:Class ;
+  rdfs:label "Matrix width" ;
+.
+tms:TileMatrix
+  a owl:Class ;
+  rdfs:label "Tile matrix" ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:matrixHeight ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:matrixWidth ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:pointOfOrigin ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:scaleDenominator ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:tileHeight ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:tileWidth ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/identifier> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:variableMatrixWidth ;
+    ] ;
+.
+tms:TileMatrixSet
+  a owl:Class ;
+  rdfs:label "Tile matrix set" ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/bbox#bbox> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/crs#crs> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:supportedCRS ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/identifier> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/title> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:cellSize ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:wellKnownScaleSet ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "2"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:axisLabel ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty tms:tileMatrix ;
+    ] ;
+.
+tms:WellKnownScaleSet
+  a owl:Class ;
+  rdfs:label "Well known scale set" ;
+.
+tms:WorldMercatorWGS84
+  a tms:WellKnownScaleSet ;
+  rdfs:label "World mercator WGS84" ;
+.
+tms:axisLabel
+  a rdf:Property ;
+  rdfs:label "axis label" ;
+  rdfs:range xsd:string ;
+.
+tms:cellSize
+  a rdf:Property ;
+  rdfs:label "cell size" ;
+  rdfs:range xsd:decimal ;
+.
+tms:coalesce
+  a rdf:Property ;
+  rdfs:label "coalesce" ;
+  rdfs:range xsd:integer ;
+.
+tms:crs
+  a rdf:Property ;
+  rdfs:label "crs" ;
+  rdfs:range <http://ogc.org/spec/tms/2.0/crs#CoordinateReferenceSystem> ;
+.
+tms:lowerLeft
+  a rdf:Property ;
+  rdfs:label "lower left" ;
+  rdfs:range <http://www.w3.org/2003/01/geo/wgs84_pos#Point> ;
+.
+tms:matrixHeight
+  a rdf:Property ;
+  rdfs:label "matrix height" ;
+.
+tms:matrixWidth
+  a rdf:Property ;
+  rdfs:label "matrix width" ;
+.
+tms:maxTileRow
+  a rdf:Property ;
+  rdfs:label "max tile row" ;
+  rdfs:range xsd:integer ;
+.
+tms:minTileRow
+  a rdf:Property ;
+  rdfs:label "min tile row" ;
+  rdfs:range xsd:integer ;
+.
+tms:orderedAxes
+  a rdf:Property ;
+  rdfs:label "ordered axes" ;
+  rdfs:range <http://ogc.org/spec/oapi-common/0.1/bbox#AxisLabel> ;
+.
+tms:pointOfOrigin
+  a rdf:Property ;
+  rdfs:label "point of origin" ;
+  rdfs:range <http://www.w3.org/2003/01/geo/wgs84_pos#Point> ;
+.
+tms:scaleDenominator
+  a rdf:Property ;
+  rdfs:label "scale denominator" ;
+  rdfs:range xsd:decimal ;
+.
+tms:supportedCRS
+  a rdf:Property ;
+  rdfs:label "supported CRS" ;
+  rdfs:range <http://ogc.org/spec/tms/2.0/crs#CoordinateReferenceSystem> ;
+.
+tms:tileHeight
+  a rdf:Property ;
+  rdfs:label "tile height" ;
+  rdfs:range xsd:integer ;
+.
+tms:tileMatrix
+  a rdf:Property ;
+  rdfs:label "tile matrix" ;
+  rdfs:range tms:TileMatrix ;
+.
+tms:tileMatrixSet
+  a rdf:Property ;
+  rdfs:label "tile matrix set" ;
+  rdfs:range tms:TileMatrixSet ;
+.
+tms:tileWidth
+  a rdf:Property ;
+  rdfs:label "tile width" ;
+  rdfs:range xsd:integer ;
+.
+tms:upperRight
+  a rdf:Property ;
+  rdfs:label "upper right" ;
+  rdfs:range <http://www.w3.org/2003/01/geo/wgs84_pos#Point> ;
+.
+tms:variableMatrixWidth
+  a rdf:Property ;
+  rdfs:label "variable matrix width" ;
+  rdfs:range tms:MatrixWidth ;
+.
+tms:wellKnownScaleSet
+  a rdf:Property ;
+  rdfs:label "well known scale set" ;
+  rdfs:range tms:WellKnownScaleSet ;
+.

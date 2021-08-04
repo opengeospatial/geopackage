@@ -1,0 +1,66 @@
+classDiagram
+
+   class MetadataEntityStore {
+   }
+   class MetadataAttributeType {
+     valueType = String
+   }
+   class Metadata {
+     scope: MetadataScope
+     uri: String
+     mimeType: String
+     content: String
+   }
+   class MetadataReference {
+     scope: ReferenceScope
+     timestamp: DateTime
+   }
+   class ReferenceScope {
+     <<enumeration>>
+     geopackage
+     entityStore
+     attributeType
+     entity
+     value
+   }
+   class MetadataScope {
+     <<enumeration>>
+     undefined
+     fieldSession
+     collectionSession
+     series
+     dataset
+     featureType
+     feature
+     attributeType
+     attribute
+     tile
+     model
+     catalog
+     schema
+     taxonomy
+     software
+     service
+     collectionHardware
+     nonGeographicDataset
+     dimensionGroup
+     style
+   }
+   MetadataReference o-- "0..1" EntityStore
+   MetadataReference o-- "0..1" AttributeType
+   MetadataReference o-- "0..1" Entity
+   MetadataReference o-- "0..1" Value
+   Metadata --> "1..n" MetadataReference
+   Metadata --> "0..1" Metadata: parentMetadata
+   MetadataEntityStore o-- "*" Metadata
+   MetadataEntityStore o-- "*" MetadataReference
+   MetadataEntityStore --|> EntityStore
+   Attribute <|-- MetadataAttribute
+   Metadata ..> MetadataAttribute
+   MetadataAttributeType --|> AttributeType
+   Metadata --|> Entity
+   MetadataAttribute ..> MetadataAttributeType
+   MetadataAttribute *-- MetadataDocument
+   EntityType <|-- MetadataEntityType
+   Metadata ..> MetadataEntityType
+   MetadataEntityType ..> MetadataAttributeType

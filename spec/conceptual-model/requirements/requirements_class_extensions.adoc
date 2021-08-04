@@ -1,0 +1,17 @@
+[[rc_extensions]]
+
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/GeoPackage/1.3/req/extensions {set:cellbgcolor:#FFFFFF}
+|Target type |Encoding Standard
+|Dependency |http://www.opengis.net/spec/GeoPackage/1.3/req/core
+|*Requirement 58* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/extensions/def +
+2+| The Encoding Standard SHALL describe the encoding of extensions as per the Extension class. {set:cellbgcolor:#FFFFFF}
+|A | An extension MAY apply to the whole GeoPackage or to specific EntityStore instances. The Encoding Standard SHALL describe the encoding of relevant EntityStore instances.
+|B | The Encoding Standard SHALL describe the encoding of extensions that pertain to a particular AttributeType of a particular EntityStore.
+|C | Extensions SHALL have a unique `extension_name` which SHALL be a unique case sensitive value of the form `<author>_<extension_name>` where `<author>` indicates the person or organization that developed and maintains the extension. The valid character set for `<author>` SHALL be `[a-zA-Z0-9]`. The valid character set for `<extension_name>` SHALL be `[a-zA-Z0-9_]`.
+|D | An `extension_name` with the "gpkg" author name SHALL be reserved for extensions defined in an OGC document (e.g., Best Practices Document or Encoding Standard).
+|E | A `definition` value SHALL contain a permalink, URI, or reference to a document defining the extension.
+|F | A `scope` value SHALL conform to the ExtensionScope enumeration.
+|===

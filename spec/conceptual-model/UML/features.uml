@@ -1,0 +1,59 @@
+classDiagram
+
+   class GeometryAttributeType {
+     valueType = Geometry
+     geometryType: GeometryType
+     z: DimensionSupport
+     m: DimensionSupport
+   }
+   class DimensionSupport {
+     <<enumeration>>
+     PROHIBITED
+     MANDATORY
+     OPTIONAL
+   }
+   class GeometryType {
+     <<enumeration>>
+     GEOMETRY
+     POINT
+     LINESTRING
+     POLYGON
+     MULTIPOINT
+     MULTILINESTRING
+     MULTIPOLYGON
+     GEOMETRYCOLLECTION
+     CIRCULARSTRING
+     COMPOUNDCURVE
+     CURVEPOLYGON
+     MULTICURVE
+     MULTISURFACE
+     CURVE
+     SURFACE
+   }
+   class GeometryAttribute {
+     geometry: GeoPackageBinary?
+   }
+   class AttributeType {
+     name: String
+     valueType: ValueType
+   }
+   class Attribute {
+     value: Any?
+   }
+   class FeatureStore {
+     dataType = features
+   }
+   EntityStore <|.. FeatureStore
+   EntityType <|.. FeatureType
+   Entity <|.. Feature
+   FeatureStore o-- FeatureType
+   AttributeType <|-- GeometryAttributeType
+   FeatureStore o-- "*" Feature: features
+   GeometryAttributeType --o FeatureType
+   GeometryAttributeType ..> CoordinateReferenceSystem  : crs
+   Feature ..> FeatureType
+   Attribute ..> AttributeType
+   GeometryAttribute ..> GeometryAttributeType
+   Feature o-- GeometryAttribute: geometry
+   Attribute <|-- GeometryAttribute
+   

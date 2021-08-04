@@ -1,0 +1,16 @@
+classDiagram
+
+   class Extension {
+     title: String
+     definition: String
+     scope: ExtensionScope
+   }
+   class ExtensionScope {
+     <<enumeration>>
+     READ-WRITE
+     WRITE-ONLY
+   }
+   GeoPackage o-- "*" Extension
+   Extension --> "*" EntityStore
+   Extension --> "*" AttributeType
+   EntityStore o-- "*" AttributeType

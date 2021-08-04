@@ -1,0 +1,24 @@
+[[rc_tiles]]
+
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/GeoPackage/1.3/req/tiles {set:cellbgcolor:#FFFFFF}
+|Target type |Encoding Standard
+|Dependency |http://www.opengis.net/spec/GeoPackage/1.3/req/core
+|*Requirement 34* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/tiles/data_type +
+2+| The Encoding Standard SHALL describe the encoding of tiles as an EntityStore instance with a _dataType_ of `tiles`. {set:cellbgcolor:#FFFFFF}
+|*Requirement 38* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/tiles/tms +
+2+| The Encoding Standard SHALL describe the encoding of tile matrix sets as per the TileMatrixSet class. {set:cellbgcolor:#FFFFFF}
+|A | The `min_x`, `max_x`, `min_y`, and `max_y` values SHALL be exact so that the bounding box coordinates for individual tiles in a tile pyramid may be calculated from those values. All tiles present in the tile pyramid SHALL fall within this bounding box.
+|B | The coordinate reference system SHALL be encoded as per the CoordinateReferenceSystem class.
+|*Requirement 42* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/tiles/tm +
+2+| The Encoding Standard SHALL describe the encoding of tile matrixes as per the TileMatrix class. {set:cellbgcolor:#FFFFFF}
+|A | A TileMatrixSet SHALL have one TileMatrix per zoom level.
+|B | The width of a TileMatrix (the difference between `min_x` and `max_x` of the TileMatrixSet) SHALL equal the product of `matrixWidth`, `tileWidth`, and `pixelXSize` for that zoom level. Similarly, height of a TileMatrix (the difference between `min_y` and `max_y` of the TileMatrixSet) SHALL equal the product of `matrixHeight`, `tileHeight`, and `pixelYSize` for that zoom level.
+|C | The `zoomLevel` for a TileMatrix SHALL not be negative.
+|D | The `matrixWidth`, `matrixHeight`, `tileWidth`, `tileHeight`, `pixelXSize`, and `pixelYSize` for a TileMatrix SHALL be greater than 0.
+|*Requirement 54* {set:cellbgcolor:#CACCCE} |http://www.opengis.net/spec/GeoPackage/1.3/req/tiles/user_defined +
+2+| The Encoding Standard SHALL describe the encoding of user-defined tile pyramids as per the TilePyramid and Tile classses. {set:cellbgcolor:#FFFFFF}
+|A | A tile pyramid MAY be sparsely populated.
+|===

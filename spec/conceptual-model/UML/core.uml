@@ -1,0 +1,62 @@
+classDiagram
+
+   class CoordinateReferenceSystem {
+     title: String
+     id: Integer
+     organization: String
+     organization_coordsys_id: Integer
+     definition: WKT2
+     description: String?
+   }
+   class BoundingBox {
+     min_x: Double
+     min_y: Double
+     max_x: Double
+     max_y: Double
+   }
+   class EntityStore {
+     title: String
+     identifier: String?
+     description: String?
+     last_change: DateTime
+   }
+   class DataType {
+     <<enumeration>>
+     features
+     tiles
+     attributes
+     2d-gridded-coverage
+   }
+   class ValueType {
+     <<enumeration>>
+     Boolean
+     TinyInteger
+     SmallInteger
+     MediumInteger
+     Integer
+     Float
+     Real
+     String
+     Blob
+     Geometry
+     Date
+     DateTime
+   }
+   class EntityType {
+     dataType: DataType
+   }
+   class AttributeType {
+     name: String
+     valueType: ValueType
+   }
+   GeoPackage o-- "3..n" CoordinateReferenceSystem
+   EntityStore ..> CoordinateReferenceSystem
+   EntityStore ..> "0..1" BoundingBox
+   BoundingBox ..> CoordinateReferenceSystem
+   GeoPackage o-- "*" EntityStore: contents
+   EntityStore o-- "*" Entity
+   EntityStore o-- EntityType
+   EntityType o-- "*" AttributeType
+   Entity ..> EntityType
+   Entity o-- "*" Attribute
+   Attribute ..> AttributeType

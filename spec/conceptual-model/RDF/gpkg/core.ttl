@@ -1,0 +1,238 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/core
+# imports: http://ogc.org/spec/oapi-common/0.1/bbox
+# imports: http://ogc.org/spec/oapi-common/0.1/crs
+# imports: http://purl.org/dc/terms/
+# imports: http://www.w3.org/2003/01/geo/wgs84_pos
+# prefix: core
+
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://ogc.org/spec/gpkg/1.3.0/core>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/oapi-common/0.1/bbox> ;
+  owl:imports <http://ogc.org/spec/oapi-common/0.1/crs> ;
+  owl:imports <http://purl.org/dc/terms/> ;
+  owl:imports <http://www.w3.org/2003/01/geo/wgs84_pos> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+core:Attribute
+  a owl:Class ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:attributeType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:value ;
+    ] ;
+.
+core:AttributeType
+  a owl:Class ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:valueType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/title> ;
+    ] ;
+.
+core:BLOB
+  a core:ValueType ;
+  rdfs:label "BLOB" ;
+.
+core:Boolean
+  a core:ValueType ;
+  rdfs:label "Boolean" ;
+.
+core:DataType
+  a owl:Class ;
+.
+core:Date
+  a core:ValueType ;
+  rdfs:label "Date" ;
+.
+core:DateTime
+  a core:ValueType ;
+  rdfs:label "DateTime" ;
+.
+core:Entity
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:dataType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:entityType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:attribute ;
+    ] ;
+.
+core:EntityStore
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:entityType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/crs#crs> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/modified> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/title> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/bbox#bbox> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/alternative> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://purl.org/dc/terms/description> ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:entity ;
+    ] ;
+.
+core:EntityType
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:dataType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:attributeType ;
+    ] ;
+.
+core:Float
+  a core:ValueType ;
+  rdfs:label "Float" ;
+.
+core:GeoPackage
+  a owl:Class ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:entityStore ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "3"^^xsd:nonNegativeInteger ;
+      owl:onProperty <http://ogc.org/spec/oapi-common/0.1/crs#crs> ;
+    ] ;
+.
+core:Geometry
+  a core:ValueType ;
+  rdfs:label "Geometry" ;
+.
+core:Integer
+  a core:ValueType ;
+  rdfs:label "Integer" ;
+.
+core:MediumInteger
+  a core:ValueType ;
+  rdfs:label "MediumInteger" ;
+.
+core:Real
+  a core:ValueType ;
+  rdfs:label "Real" ;
+.
+core:SmallInteger
+  a core:ValueType ;
+  rdfs:label "SmallInteger" ;
+.
+core:String
+  a core:ValueType ;
+  rdfs:label "String" ;
+.
+core:TinyInteger
+  a core:ValueType ;
+  rdfs:label "TinyInteger" ;
+.
+core:ValueType
+  a owl:Class ;
+.
+core:attribute
+  a rdf:Property ;
+  rdfs:label "attribute" ;
+.
+core:attributeType
+  a rdf:Property ;
+  rdfs:label "attribute type" ;
+  rdfs:range core:AttributeType ;
+.
+core:attributes
+  rdfs:range core:Attribute ;
+.
+core:dataType
+  a rdf:Property ;
+  rdfs:label "data type" ;
+  rdfs:range core:DataType ;
+.
+core:entity
+  a owl:ObjectProperty ;
+  rdfs:label "entity" ;
+  rdfs:range core:Entity ;
+.
+core:entityStore
+  a owl:ObjectProperty ;
+  rdfs:domain core:GeoPackage ;
+  rdfs:label "entityStore" ;
+  rdfs:range core:EntityStore ;
+.
+core:entityType
+  a owl:ObjectProperty ;
+  rdfs:label "entity type" ;
+  rdfs:range core:EntityType ;
+.
+core:value
+  a rdf:Property ;
+  rdfs:label "value" ;
+.
+core:valueType
+  a rdf:Property ;
+  rdfs:label "value type" ;
+  rdfs:range core:ValueType ;
+.
+<http://ogc.org/spec/oapi-common/0.1/attributes#attribute>
+  rdfs:range core:Attribute ;
+.
+<http://ogc.org/spec/oapi-common/0.1/attributes#attributeType>
+  rdfs:range core:AttributeType ;
+.

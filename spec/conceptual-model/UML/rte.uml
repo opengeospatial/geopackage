@@ -1,0 +1,19 @@
+classDiagram
+
+   class RelationStore {
+     type: RelationName
+   }
+   class RelationName {
+     <<enumeration>>
+     media
+     simple_attributes
+     features
+     attributes
+     tiles
+   }
+   GeoPackage o-- "*" RelationStore
+   
+   EntityStore <|-- RelationStore
+   RelationStore ..> "2" EntityStore
+   RelationStore o-- Relation
+   Relation ..> "2" Entity

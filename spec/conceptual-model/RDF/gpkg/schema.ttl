@@ -1,0 +1,155 @@
+# baseURI: http://ogc.org/spec/gpkg/1.3.0/schema
+# imports: http://ogc.org/spec/gpkg/1.3.0/core
+# imports: http://ogc.org/spec/gpkg/1.3.0/extensions
+# prefix: schema
+
+@prefix core: <http://ogc.org/spec/gpkg/1.3.0/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix extensions: <http://ogc.org/spec/gpkg/1.3.0/extensions#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://ogc.org/spec/gpkg/1.3.0/schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+core:AttributeType
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:alternative ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:format ;
+    ] ;
+.
+<http://ogc.org/spec/gpkg/1.3.0/schema>
+  a owl:Ontology ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/core> ;
+  owl:imports <http://ogc.org/spec/gpkg/1.3.0/extensions> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+schema:Constraint
+  a owl:Class ;
+  rdfs:label "Constraint" ;
+  rdfs:subClassOf owl:Thing ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:attributeType ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty core:entityStore ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty dcterms:description ;
+    ] ;
+.
+schema:EnumConstraint
+  a owl:Class ;
+  rdfs:label "Enumeration constraint" ;
+  rdfs:subClassOf schema:Constraint ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:value ;
+    ] ;
+.
+schema:GlobConstraint
+  a owl:Class ;
+  rdfs:label "GLOB constraint" ;
+  rdfs:subClassOf schema:Constraint ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:glob ;
+    ] ;
+.
+schema:RangeConstraint
+  a owl:Class ;
+  rdfs:label "Range constraint" ;
+  rdfs:subClassOf schema:Constraint ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:max ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:maxIsInclusive ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:min ;
+    ] ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:cardinality "1"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:minIsInclusive ;
+    ] ;
+.
+schema:SchemaExtension
+  a extensions:Extension ;
+  core:entityStore schema:SchemaStore ;
+  extensions:definition "http://www.geopackage.org/spec130/#extension_schema" ;
+  extensions:scope extensions:READ-WRITE ;
+  dcterms:title "gpkg_schema" ;
+  rdfs:label "Schema extension" ;
+.
+schema:SchemaStore
+  a owl:Class ;
+  rdfs:label "Schema store" ;
+  rdfs:subClassOf core:EntityStore ;
+  rdfs:subClassOf [
+      a owl:Restriction ;
+      owl:minCardinality "0"^^xsd:nonNegativeInteger ;
+      owl:onProperty schema:constraint ;
+    ] ;
+.
+schema:constraint
+  a rdf:Property ;
+  rdfs:label "constraint" ;
+  rdfs:range schema:Constraint ;
+.
+schema:glob
+  a rdf:Property ;
+  rdfs:label "glob" ;
+  rdfs:range xsd:string ;
+.
+schema:max
+  a rdf:Property ;
+  rdfs:label "max" ;
+  rdfs:range xsd:decimal ;
+.
+schema:maxIsInclusive
+  a rdf:Property ;
+  rdfs:label "max is inclusive" ;
+  rdfs:range xsd:boolean ;
+.
+schema:min
+  a rdf:Property ;
+  rdfs:label "min" ;
+  rdfs:range xsd:decimal ;
+.
+schema:minIsInclusive
+  a rdf:Property ;
+  rdfs:label "min is inclusive" ;
+  rdfs:range xsd:boolean ;
+.
+schema:value
+  a rdf:Property ;
+  rdfs:label "value" ;
+  rdfs:range xsd:string ;
+.

@@ -1,0 +1,44 @@
+classDiagram
+
+   class Tile {
+     id: Integer
+     row: Integer
+     column: Integer
+   }
+   class TileAttribute {
+     data: BLOB
+   }
+   class TileMatrixSet {
+   }
+   class TileMatrix {
+     zoomLevel: Integer
+     matrixWidth: Integer
+     matrixHeight: Integer
+     tileWidth: Integer
+     tileHeight: Integer
+     pixelXSize: Double
+     pixelYSize: Double
+   }
+   class TilePyramid {
+     dataType = tiles
+   }
+   class TileAttributeType {
+     title = "data"
+     valueType = BLOB
+   }
+   Entity <|-- Tile
+   Attribute <|-- TileAttribute
+   AttributeType <|-- TileAttributeType
+   EntityStore <|-- TilePyramid
+   EntityType <|-- TileType
+   TileMatrixSet ..> CoordinateReferenceSystem
+   TileMatrixSet ..> BoundingBox
+   TilePyramid o-- TileMatrixSet
+   TileMatrixSet o-- "1..n" TileMatrix
+   TilePyramid o-- "*" Tile
+   Tile ..> TileMatrix: zoomLevel
+   TileType ..> TileAttributeType
+   EntityStore ..> EntityType
+   Entity o-- "1..*" Attribute
+   TileAttributeType <.. TileAttribute
+   Tile --> TileAttribute
