@@ -16,16 +16,6 @@ The CDB SWG is considering the use of GeoPackage to store coverage data as compo
 
 Therefore there is benefit to allowing the use of GeoPackage coverages beyond a few narrow use cases that the existing formats allow.
 
-=== https://github.com/opengeospatial/geopackage/issues/553[Issue 553]: Request enabling the use of multiple channels in a GeoPackage Coverage
-
-A synopsis of the issue and related suggested changes is: 
-
-Using a single channel coverage can cover many data types and use cases, but not all. In particular, there are data coverages that are comprised of multiple data values per grid cell, and designed such that all the data elements to make use of this type of data are needed. For example, a layer that describes current wind conditions would be defined by both wind cardinal direction and velocity. In this example, using either coverage without the other would be very difficult.
-
-In the CDB Standard, there are coverages that represent the physical material of a grid on the ground or on a model. These coverages consist of the material index and a percentage of that material. Another use case is encoding elevation data based on a point elevation (not an average), where at lower resolutions we want to adjust the point's position (in latitude/longitude) as offsets from the grid cell corner.
-
-If coverages were more flexible in this manner, then imagery could just become another coverage, and possibly also contain non-visual bands (like Near Infrared (NIR) or Short-Wave Infrared (SWIR) data).
-
 === https://github.com/opengeospatial/geopackage/issues/576[Issue 576]: Clarify existing requirements classes
 
 A synopsis of the issue is and related changes are: 
