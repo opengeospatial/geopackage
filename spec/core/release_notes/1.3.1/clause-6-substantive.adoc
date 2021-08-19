@@ -1,14 +1,4 @@
 [[Clause_Substantive]]
 == Description of Substantive Changes
 
-=== Add Coordinate Epoch to `gpkg_spatial_ref_sys`
-The OGC Abstract Specification Topic 2 (OGC 18-005r4) says "To be unambiguous the coordinates must always be qualified with the epoch at which they are valid."
-The SWG has chosen to implement this request at the spatial reference system level.
-Now spatial reference systems include an optional coordinate epoch (a DOUBLE).
-This approach supports coordinate reference systems that are identical other than the coordinate epoch.
-The SWG considered an alternative approach of putting the epoch in dataset metadata, but this approach was discarded because there is no concurrence on a metadata profile that would be suitable.
-
-This change imposes minimal interoperability risks.
-The change only applies to GeoPackages that implement the "link:http://www.geopackage.org/spec130/#extension_crs_wkt[WKT for Coordinate Reference Systems]" extension (F.10).
-The paradigm of adding a column to `gpkg_spatial_ref_sys` has already been established in this extension.
-It is unlikely that a GeoPackage client would fail if encountering this column unexpectedly.
+There are no critical changes in this release.
