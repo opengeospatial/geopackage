@@ -1,0 +1,87 @@
+[appendix]
+:appendix-caption: Annex
+== Conformance Class Abstract Test Suite (Normative)
+
+=== Table Definition
+*Table Definition*
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extension_crs_wkt/table_def+
+|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table exists and has the correct definition. Extends `/base/core/gpkg_spatial_ref_sys/data/table_def`.
+|*Test Method* |
+. `PRAGMA table_info('gpkg_spatial_ref_sys')`
+. Fail if returns an empty result set
+. Fail if result set does not include a column named 'definition_12_063' or if the column is not of `type` 'TEXT', `notnull` 1, and `dflt_value` 'undefined'.
+. Fail if result set does not include a column named 'epoch' or if the column is not of `type` 'DOUBLE' and `notnull` 0.
+. Pass if no failures.
+|*Reference* |Req 115
+|*Test Type* |Basic
+|========================================
+
+[float]
+=== Table Data Values
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/crs_wkt/extensions/data_values+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required rows.
+|*Test Method* |
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_crs_wkt';
+. Not testable if returns an empty result set
+. Fail if there is not exactly one row
+. Fail if scope is not "read-write"
+. Fail if column_name is not "definition_12_063"
+. Fail if table_name is not "gpkg_spatial_ref_sys"
+. Pass if no fails
+|*Reference* |Req 145
+|*Test Type:* |Capabilities
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extensions/crs_wkt/extensions/data_values_1_1+
+|*Test Purpose* |Verify that the gpkg_extensions table has the required rows for the revised extension.
+|*Test Method* |
+. SELECT table_name, column_name, scope FROM gpkg_extensions WHERE extension_name = 'gpkg_crs_wkt_1_1';
+. Not testable if returns an empty result set
+. Fail if there is not exactly two rows
+. Fail if scope for both rows is not "read-write"
+. Fail if column_name is not "definition_12_063" or "epoch"
+. Fail if table_name for both rows is not "gpkg_spatial_ref_sys"
+. Pass if no fails
+|*Reference* |Req 145
+|*Test Type:* |Capabilities
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extension_crs_wkt/data_values_default+
+|*Test Purpose* |Verify that the gpkg_spatial_ref_sys table contains the required default contents. Extends `/base/core/gpkg_spatial_ref_sys/data_values_default`.
+|*Test Method* |
+. `SELECT organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = -1`
+.. Confirm that this returns "NONE" -1 "undefined" "undefined"
+. `SELECT srs_id, organization, organization_coordsys_id, definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id = 0`
+.. Confirm that this returns "NONE" 0 "undefined" "undefined"
+. `SELECT definition FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326`
+.. Confirm that this is a valid CRS
+. `SELECT definition_12_063 FROM gpkg_spatial_ref_sys WHERE organization IN ("epsg","EPSG") AND organization_coordsys_id 4326`
+.. Confirm that this is a valid 12-063/18-010 CRS
+. Pass if tests 1-4 are met
+. Fail otherwise
+|*Reference* |Req 116
+|*Test Type* |Capability
+|========================================
+
+[cols="1,5a"]
+|========================================
+|*Test Case ID* |+/extension_crs_wkt/data_values_required+
+|*Test Purpose* |Verify that the spatial_ref_sys table contains rows to define all srs_id values used by features and tiles in a GeoPackage. Extends `/base/core/gpkg_spatial_ref_sys/data_values_required`.
+|*Test Method* |
+. `SELECT definition, definition_12_063 FROM gpkg_spatial_ref_sys WHERE srs_id NOT IN (0, -1)`
+. For each result
+.. Fail if both definition values are 'undefined'
+. Pass if no failures
+|*Reference* |Req 117
+|*Test Type* |Capability
+|========================================
