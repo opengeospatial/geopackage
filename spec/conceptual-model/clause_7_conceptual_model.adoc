@@ -1,6 +1,6 @@
 == GeoPackage Conceptual Model (Normative)
 This section presents the normative definition of the GeoPackage Conceptual Model (CM).
-It consists of a set of terms and their definitions.
+The CM consists of a set of terms and their definitions.
 _Since most readers will be familiar with the GES, an indication of how GeoPackage concepts are realized in the GES is presented in italics._
 
 === Core
@@ -12,12 +12,12 @@ Attribute::
 
 Attribute Type::
   a characteristic of an entity.
-  Has a name, a data type, and a value domain associated to it.
-  No restrictions are implied here as to the type of attributes a user-defined type may have.
+  An attribute type has a name, a data type, and a value domain associated to it.
+  No restrictions are implied as to the type of attributes a user-defined type may have.
   Not all entity types have attributes. (SOURCE: Adapted from ISO19101)
   _In the GES, an attribute is realized through a column of a user-defined table._
 
-Coordinate Reference System::
+Coordinate Reference System (CRS)::
 A coordinate reference system, or spatial reference system, is a set of mathematical rules for specifying how coordinates are to be assigned to points that is related to an object by a datum. (SOURCE: ISO 19111:2019)
 _The GES uses the term "spatial reference system." In the GES, a spatial reference system is realized through a `gpkg_spatial_ref_sys` row._
   
@@ -38,7 +38,7 @@ GeoPackage::
   an open, standards-based, platform-independent, portable, self-describing, compact format for transferring geospatial information.
   _In the GES, a GeoPackage is realized through a GeoPackage file._
 
-Spatial Reference System::
+Spatial Reference System (SRS)::
   see "Coordinate Reference System".
 
 === Features
@@ -79,7 +79,12 @@ The Tiles Requirements Class implements Tile Matrix Sets as per OGC 17-083r2.
 The definitions of the concepts below are from that document unless otherwise indicated.
 
 Tile::
-  a small rectangular representation of geographic data, often part of a set of such elements, covering a tiling scheme and sharing similar information content and graphical styling. A tile can be uniquely defined in a tile matrix by one integer index in each dimension. Tiles are mainly used for fast transfer (particularly in the web) and easy display at the resolution of a rendering device. Tiles can be grid based pictorial representations, coverage subsets, or feature based representations (e.g., vector tiles).
+  a geometric shape with known properties that may or may not be the result of a tiling (tessellation) process.
+  A tile consists of a single connected "piece" (topological disc) without "holes" or "lines".
+  In this CM, a tile is restricted to a small rectangular representation of geographic data, often part of a set of such elements, covering a tiling scheme and sharing similar information content and graphical styling.
+  A tile can be uniquely defined in a tile matrix by one integer index in each dimension. 
+  Tiles are mainly used for fast transfer (particularly in the web) and easy display at the resolution of a rendering device.
+  Tiles can be grid based pictorial representations, coverage subsets, or feature based representations (e.g., vector tiles).
   _In the GES, a tile is realized through a row of a user-defined tiles table._
 
 Tile Matrix::
@@ -100,11 +105,12 @@ Tile Pyramid::
   _In the GES, a tile pyramid is realized through a user-defined tiles table and a row of `gpkg_contents`._
   
 Tile Set::
-  a series of actual tiles containing data and following a common tiling scheme.
+  a set of tiles – a collection of subsets of the space being partitioned [OGC 19-014r3].
+  In this standard, In this CM, a tile set is a series of actual tiles containing data and following a common tiling scheme.
 
 Tiling Scheme::
   a scheme that defines how space is partitioned into individual tiled units.
-  A tiling scheme defines the spatial reference system, the geometric properties of a tile, which space a uniquely identified tile occupies, and reversely, which unique identifier corresponds to a space satisfying the geometric properties to be a tile.
+  A tiling scheme defines the spatial reference system, the geometric properties of a tile, which space a uniquely identified tile occupies, and reversely, which unique identifier corresponds to a space satisfying the geometric properties to be a tile. [OGC 19-014r3]
 
 [NOTE]
 ====
