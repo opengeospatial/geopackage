@@ -2,7 +2,6 @@
 
 GeoPackage Standard
 ==========
-==========
 
 GeoPackage is an open, standards-based, platform-independent, portable, self-describing, 
 compact format for transferring geospatial information. The GeoPackage standard 
