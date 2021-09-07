@@ -1,10 +1,9 @@
 [big]*i.     Abstract*
 
-The GeoPackage CRS WKT Extension defines how to encode coordinate reference systems in GeoPackage using the CRS WKT2 standard. 
-The core (unextended) GeoPackage Encoding Standard supports the older CRS WKT standard.
-Through this extension, both encodings may be used.
-However, use of the newer encoding is strongly encouraged.
-GeoPackage clients are expected to use the newer encoding if both encodings are present.
+This document is a revision to the GeoPackage WKT for Coordinate Reference Systems Extension that is currently published as Annex F.10 of GeoPackage Encoding Standard 1.3.0 (OGC 12-128r17).
+This document is designed to replace that annex.
+The extension defines how to encode coordinate reference systems in GeoPackage using the CRS WKT2 standard.
+This revision adds coordinate epochs to the encoding of coordinate reference systems in a GeoPackage.
 
 [big]*ii.    Keywords*
 
@@ -18,6 +17,10 @@ The OGC GeoPackage Encoding Standard was adopted prior to the adoption of "12-06
 As a result, the OGC GeoPackage Encoding Standard references an older document (link:http://portal.opengeospatial.org/files/?artifact_id=999[OpenGIS® 01-009 Implementation Specification: Coordinate Transformation Services Revision 1.0]) which has known ambiguities that are being encountered in the field.
 This extension establishes a new column in `gpkg_spatial_ref_sys` to contain values that conform to the new standard.
 In 2019, OGC adopted "18-010r7 OGC Well known text representation of Coordinate Reference Systems" as a revision to 12-063r5.
+The core (unextended) GeoPackage Encoding Standard supports the older CRS WKT standard.
+Through this extension, both encodings may be used.
+However, use of the newer encoding is strongly encouraged.
+GeoPackage clients are expected to use the newer encoding if both encodings are present.
 
 In a dynamic CRS, coordinates of a point on the surface of the Earth may change with time.
 To be unambiguous, the coordinates must always be qualified with the epoch at which they are valid.
