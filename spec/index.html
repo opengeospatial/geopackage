@@ -769,7 +769,7 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 <div class="sect3">
 <h4 id="_contents">1.1.3. Contents</h4>
 <div class="paragraph">
-<p>The <code>gpkg_contents</code> table is intended to provide a list of all geospatial contents in a GeoPackage. It provides identifying and descriptive information that an application can display to a user as a menu of geospatial data that is available for access and/or update.</p>
+<p>The <code>gpkg_contents</code> table is intended to provide a list of all geospatial contents (i.e., entity stores) in a GeoPackage. It provides identifying and descriptive information that an application can display to a user as a menu of geospatial data that is available for access and/or update.</p>
 </div>
 <div class="sect4">
 <h5 id="_data_3">1.1.3.1. Data</h5>
@@ -901,7 +901,7 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>data_type</code> specifies the type of content contained in the table, for example "features" per clause <a href="#features">Features</a>, "attributes" per clause <a href="#attributes">Attributes</a>, "tiles" per clause <a href="#tiles">Tiles</a>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.</p>
+<p>The <code>data_type</code> specifies the entity type of the table content, for example "features" per clause <a href="#features">Features</a>, "attributes" per clause <a href="#attributes">Attributes</a>, "tiles" per clause <a href="#tiles">Tiles</a>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.</p>
 </div>
 <div class="paragraph">
 <p>The <code>last_change</code> SHOULD contain the timestamp of when the content in the referenced table was last updated, in ISO8601 format. Note that since it is not practical to ensure that this value is maintained properly in all cases, this value should be treated as informative.</p>
@@ -2502,7 +2502,7 @@ This is indicated by a gpkg_extensions.scope column value of "write-only".</p>
 <div class="sect3">
 <h4 id="_introduction_3">2.4.1. Introduction</h4>
 <div class="paragraph">
-<p>Non-spatial attribute data are sets (or tuples or rows) of observations that may not have an explicit geometry property. In GeoPackage, this data is stored in user-defined attribute tables. These tables may contain properties such as an ID or geo-locatable address that allow them to be relationally linkable to rows in other attribute, feature or tile tables.</p>
+<p>Non-spatial attribute data are entities (e.g., tuples or rows) of observations that may not have an explicit geometry property. In GeoPackage, this data is stored in user-defined attribute tables. These tables may contain properties such as an ID or geo-locatable address that allow them to be relationally linkable to rows in other attribute, feature or tile tables.</p>
 </div>
 <div class="paragraph">
 <p>Examples of attribute data include:</p>
@@ -9751,7 +9751,7 @@ Requirements 36 and 37 allow a tile pyramid user data table to contain PNG or JP
 <h3 id="extension_metadata">F.8. Metadata</h3>
 <h4 id="_introduction_9" class="float">Introduction</h4>
 <div class="paragraph">
-<p>Two tables in a GeoPackage provide a means of storing metadata in MIME <a href="#I21">[I21]</a> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the features, rasters, and tiles data in a GeoPackage.
+<p>Two tables in a GeoPackage provide a means of storing metadata in MIME <a href="#I21">[I21]</a> encodings that are defined in accordance with any authoritative metadata specifications, and relating it to the entity stores (i.e., features, rasters, and tiles data) in a GeoPackage.
 These tables are intended to provide the support necessary to implement the hierarchical metadata models as defined in ISO 19115 <a href="#I28">[I28]</a> and illustrated in <a href="#metadata_example_appendix">Hierarchical Metadata Example One - ISO19115.</a> and <a href="#raster_or_tile_metadata_example_appendix">Raster or Tile Metadata Example</a>. As GeoPackage data is captured and updated, the most local and specific detailed metadata changes associated with the new or modified data MAY be captured separately, and referenced to existing global and general metadata.</p>
 </div>
 <div class="paragraph">
@@ -14155,7 +14155,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-09-07 16:23:25 UTC
+Last updated 2021-09-07 17:06:49 UTC
 </div>
 </div>
 </body>
