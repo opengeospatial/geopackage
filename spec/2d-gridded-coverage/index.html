@@ -33,7 +33,7 @@
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Submission Date: 2021-07-06</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date:   2021-xx-xx</p></td>
+<td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Approval Date:   2021-11-24</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-right valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Publication Date:   2021-xx-xx</p></td>
@@ -106,7 +106,7 @@
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document subtype:   	Extension</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Approved for public release</p></td>
+<td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document stage:   	Approved</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top" style="background-color: #FFFFFF;"><p class="tableblock">Document language: 	English</p></td>
@@ -445,7 +445,10 @@
 <h2 id="_terms_and_definitions"><a class="anchor" href="#_terms_and_definitions"></a>4. Terms and Definitions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard.</p>
+<p>This document uses the terms defined in OGC Policy Directive 49, which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.</p>
+</div>
+<div class="paragraph">
+<p>This document also uses terms defined in the OGC Standard for Modular specifications [OGC 08-131r3], also known as the ‘ModSpec’. The definitions of terms such as standard, specification, requirement, and conformance test are provided in the ModSpec.</p>
 </div>
 <div class="paragraph">
 <p>For the purposes of this document, the following additional terms and definitions apply <sup class="footnote">[<a id="_footnoteref_6" class="footnote" href="#_footnotedef_6" title="View footnote.">6</a>]</sup>.</p>
@@ -579,7 +582,7 @@ Note 2: A depth above the vertical reference surface will have a negative value.
 <h2 id="_short_introduction_to_coverages_and_cis"><a class="anchor" href="#_short_introduction_to_coverages_and_cis"></a>6. Short introduction to coverages and CIS</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section is extracted from the OGC Coverage Implementation Schema (CIS) standard. <sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup></p>
+<p>This section is extracted from the OGC Coverage Implementation Schema (CIS) standard. <sup class="footnote">[<a id="_footnoteref_7" class="footnote" href="#_footnotedef_7" title="View footnote.">7</a>]</sup>. Please note that This GeoPackage extension references CIS 1.1 and not CIS 1.0.]</p>
 </div>
 <div class="paragraph">
 <p>The GeoPackage tile grid extension is conceptually grounded in the OGC Coverage Implementation Schema (CIS). CIS specifies the OGC coverage model by establishing a concrete, interoperable, conformance-testable coverage structure. CIS is based on the abstract concepts of OGC Abstract Topic 6 (which is identical to ISO 19123:2005). ISO 19123 specifies an abstract model for coverages which is not per se interoperable. In other words, many different and incompatible implementations of the abstract model are possible. CIS, on the other hand, is interoperable in the sense that coverages can be conformance tested, regardless of their data format encoding, down to the level of single grid cell.</p>
@@ -1010,13 +1013,13 @@ Note 2: A depth above the vertical reference surface will have a negative value.
 <div class="sect4">
 <h5 id="_quantity_definition"><a class="anchor" href="#_quantity_definition"></a>quantity definition</h5>
 <div class="paragraph">
-<p>Associated with the field name is a definition of that field/attribute. In SWE Common this is defined in the Quantity class. In the above example, navigating to <a href="http://mmisw.org/ont/cf/parameter/air_temperature" class="bare">http://mmisw.org/ont/cf/parameter/air_temperature</a> provides a very specific definition of what is meant by “temperature”.</p>
+<p>Associated with the field name is a definition of that field/attribute. In SWE Common this is defined in the Quantity class. In the above example, navigating to <a href="http://mmisw.org/ont/cf/parameter/air_temperature" class="bare">http://mmisw.org/ont/cf/parameter/air_temperature</a> provides a very specific definition of what is meant by “temperature.”</p>
 </div>
 <div class="paragraph">
-<p>Please note that in a disconnected environment, the use of URNs and URIs is discouraged. Instead, use the text field to provide the quantity definition for the UoM being used. For example, for the above example the Marine Metadata registry provides the following: “Air temperature is the bulk temperature of the air, not the surface (skin) temperature”.</p>
+<p>Please note that in a disconnected environment, the use of URNs and URIs is discouraged. Instead, use the text field to provide the quantity definition for the UoM being used. For example, for the above example the Marine Metadata registry provides the following: “Air temperature is the bulk temperature of the air, not the surface (skin) temperature.”</p>
 </div>
 <div class="paragraph">
-<p>This metadata element/column is required if the values contained in a grid coverage are anything other than height (elevation). This is a text string that describes the field (type). This could be an http uri to an ontology or enumeration, such as “http://sweet.jpl.nasa.gov/2.0/spaceExtent.owl#Height"</p>
+<p>This metadata element/column is required if the values contained in a grid coverage are anything other than height (elevation). This is a text string that describes the field (type). This could be an http uri to an ontology or enumeration, such as “http://sweet.jpl.nasa.gov/2.0/spaceExtent.owl#Height."</p>
 </div>
 </div>
 </div>
@@ -2484,7 +2487,7 @@ A general description of TAG 258 is in Section 8: Baseline Field Reference Guide
 <a href="#_footnoteref_6">6</a>. The definitions for “height” and “depth” are meant to be general and are derived from ISO 19111. However, the reader should note that there are domain specific variations or enhancements of the definitions used in this standard.
 </div>
 <div class="footnote" id="_footnotedef_7">
-<a href="#_footnoteref_7">7</a>. The text in this section is extracted/summarized from the OGC Coverage Implementation Schema 1.1 (CIS) standard (OGC 09-146r6). Please note that This GeoPackage extension references CIS 1.1 and not CIS 1.0.
+<a href="#_footnoteref_7">7</a>. The text in this section is extracted/summarized from the OGC Coverage Implementation Schema 1.1 (CIS) standard [OGC 09-146r6
 </div>
 <div class="footnote" id="_footnotedef_8">
 <a href="#_footnoteref_8">8</a>. This GeoPackage extension uses the CIS 1.1. CIS 1.1 provides a definition for Rectified Grid Coverage for backwards compatibility with CIS 1.0. Please see CIS 1.1 sections 7.1 and 7.2 for discussion of compatibility.
@@ -2522,7 +2525,7 @@ A general description of TAG 258 is in Section 8: Baseline Field Reference Guide
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-11-17 15:49:27 UTC
+Last updated 2022-01-12 15:38:48 UTC
 </div>
 </div>
 </body>
