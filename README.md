@@ -1,6 +1,7 @@
-![OGC Logo](http://portal.opengeospatial.org/files/?artifact_id=11976&format=gif "OGC Logo")
+![OGC Logo](https://static.ogc.org/assets/ogc/2021/ogc_logo_2021-flat_hr_blue_wh-157x80.png "OGC Logo")
 
 GeoPackage Standard
+==========
 ==========
 
 GeoPackage is an open, standards-based, platform-independent, portable, self-describing, 

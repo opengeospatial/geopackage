@@ -231,7 +231,7 @@ The `gpkg_spatial_ref_sys` table in a GeoPackage SHALL contain records to define
 
 ==== Contents
 
-The `gpkg_contents` table is intended to provide a list of all geospatial contents in a GeoPackage. It provides identifying and descriptive information that an application can display to a user as a menu of geospatial data that is available for access and/or update.
+The `gpkg_contents` table is intended to provide a list of all geospatial contents (i.e., entity stores) in a GeoPackage. It provides identifying and descriptive information that an application can display to a user as a menu of geospatial data that is available for access and/or update.
 
 ===== Data
 
@@ -272,7 +272,7 @@ See <<gpkg_contents_sql>>.
 The `table_name` column value in a `gpkg_contents` table row SHALL contain the name of a SQLite table or view.
 ====
 
-The `data_type` specifies the type of content contained in the table, for example "features" per clause <<features>>, "attributes" per clause <<attributes>>, "tiles" per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.
+The `data_type` specifies the entity type of the table content, for example "features" per clause <<features>>, "attributes" per clause <<attributes>>, "tiles" per clause <<tiles>>, or an implementer-defined value for other data tables per clause in an Extended GeoPackage.
 
 The `last_change` SHOULD contain the timestamp of when the content in the referenced table was last updated, in ISO8601 format. Note that since it is not practical to ensure that this value is maintained properly in all cases, this value should be treated as informative.
 
