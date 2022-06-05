@@ -1,4 +1,4 @@
-classDiagram
+@startuml
 
    class CoordinateReferenceSystem {
      title: String
@@ -50,13 +50,15 @@ classDiagram
      valueType: ValueType
    }
    GeoPackage o-- "3..n" CoordinateReferenceSystem
-   EntityStore ..> CoordinateReferenceSystem
-   EntityStore ..> "0..1" BoundingBox
-   BoundingBox ..> CoordinateReferenceSystem
+   EntityStore --> CoordinateReferenceSystem
+   EntityStore --> "0..1" BoundingBox
+   BoundingBox --> CoordinateReferenceSystem
    GeoPackage o-- "*" EntityStore: contents
    EntityStore o-- "*" Entity
    EntityStore o-- EntityType
    EntityType o-- "*" AttributeType
-   Entity ..> EntityType
+   Entity --> EntityType
    Entity o-- "*" Attribute
-   Attribute ..> AttributeType
+   Attribute --> AttributeType
+
+@enduml

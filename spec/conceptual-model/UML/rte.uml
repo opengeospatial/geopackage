@@ -1,4 +1,4 @@
-classDiagram
+@startuml
 
    class RelationStore {
      type: RelationName
@@ -14,6 +14,7 @@ classDiagram
    GeoPackage o-- "*" RelationStore
    
    EntityStore <|-- RelationStore
-   RelationStore ..> "2" EntityStore
+   RelationStore --> "2" EntityStore
    RelationStore o-- Relation
-   Relation ..> "2" Entity
+   Relation --> "2" Entity
+@enduml

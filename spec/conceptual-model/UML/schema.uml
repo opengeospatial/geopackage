@@ -1,4 +1,5 @@
-classDiagram
+@startuml
+
    class SchemaStore {
    }
    class AttributeType {
@@ -29,7 +30,9 @@ classDiagram
    GeoPackage o-- "*" SchemaStore
    EntityStore <|-- SchemaStore
    SchemaStore o-- "*" Constraint
-   Constraint ..> AttributeType
-   Constraint ..> EntityStore
+   Constraint --> AttributeType
+   Constraint --> EntityStore
    SchemaStore o-- "*" EntityStore
    SchemaStore o-- "*" AttributeType
+
+@enduml

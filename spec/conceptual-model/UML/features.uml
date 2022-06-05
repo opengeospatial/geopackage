@@ -1,4 +1,4 @@
-classDiagram
+@startuml
 
    class GeometryAttributeType {
      valueType = Geometry
@@ -43,17 +43,18 @@ classDiagram
    class FeatureStore {
      dataType = features
    }
-   EntityStore <|.. FeatureStore
-   EntityType <|.. FeatureType
-   Entity <|.. Feature
+   EntityStore <|-- FeatureStore
+   EntityType <|-- FeatureType
+   Entity <|-- Feature
    FeatureStore o-- FeatureType
    AttributeType <|-- GeometryAttributeType
    FeatureStore o-- "*" Feature: features
    GeometryAttributeType --o FeatureType
-   GeometryAttributeType ..> CoordinateReferenceSystem  : crs
-   Feature ..> FeatureType
-   Attribute ..> AttributeType
-   GeometryAttribute ..> GeometryAttributeType
+   GeometryAttributeType --> CoordinateReferenceSystem  : crs
+   Feature --> FeatureType
+   Attribute --> AttributeType
+   GeometryAttribute --> GeometryAttributeType
    Feature o-- GeometryAttribute: geometry
    Attribute <|-- GeometryAttribute
    
+@enduml
