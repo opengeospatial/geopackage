@@ -56,27 +56,33 @@ The definitions of the concepts below are from that document unless otherwise in
 Feature::
   An abstraction of real world phenomena. (SOURCE: ISO 19101)
   For the purposes of this document, it refers to an individual realization thereof.
-  _In the GES, a feature is realized through a row of a user-defined features table._
+  Features can be classified as _geographic_ and _non-geographic_.
+  _In the GES, the Features Requirements Class is for geographic features._
+  _For non-geographic features, see <<Attributes>> below._
 
 Feature Store::
   A container for features.
-  _In the GES, a feature store is realized through a user-defined features table._  
+  _In the GES, a feature store is realized through a user-defined features table (for geographic features) or attributes table (for non-geographic features; see below)._
 
 Feature Type::
-   A class of features having common characteristics. (SOURCE: Adapted from ISO 19101)
-    _In the GES, a feature type is realized through the schema of a user-defined features table._
+  A class of features having common characteristics. (SOURCE: Adapted from ISO 19101)
+  _In the GES, a feature type is realized through the schema of a user-defined features table (for geographic features) or attributes table (for non-geographic features; see below)._
+
+Geographic Feature::
+  A representation of real world phenomenon associatied with a location relative to the Earth. (SOURCE: ISO 19125-2:2004)
+  _In the GES, a geographic feature is realized through a row of a user-defined features table._
 
 Geometry::
-  spatial object representing a geometric set (SOURCE: ISO 19107)
+  A spatial object representing a geometric set. (SOURCE: ISO 19107)
   _In the GES, a geometry is realized through a Well Known Binary value for a geometry attribute for a feature in a user-defined features table._
 
 Geometry Attribute::
-   a specialization of attribute for geometry values.
-   _In the GES, a geometry attribute is realized through a column of a user-defined features table._
+  A specialization of attribute for geometry values.
+  _In the GES, a geometry attribute is realized through a column of a user-defined features table._
 
 Geometry Attribute Type::
-   a specialization of attribute types for a geometry data type.
-   _In the GES, a geometry attribute type is realized through a row of `gpkg_geometry_columns`._
+  A specialization of attribute types for a geometry data type.
+  _In the GES, a geometry attribute type is realized through a row of `gpkg_geometry_columns`._
 
 === Tiles
 
@@ -123,13 +129,18 @@ Tiling Scheme::
 A tiling scheme is not restricted to a coordinate reference system or a tile matrix set and allows for other spatial reference systems such as DGGS and other organizations including irregular ones.
 ====
 
+[[attributes]]
 === Attributes
 
 GeoPackages that conform to the Attributes Requirements Class contain the content represented in <<Attributes_Classes>>.
 
-Attributes Set::
+Attributes Store::
+  a container for attributes sets.
+  _In the GES, an attributes store is realized through a user-defined attributes table._
+
+Non-Geographic Feature Set::
   a user-defined type with one or attributes, none of which is a geometry.
-  _In the GES, an attributes set is realized through a row of a user-defined attributes table._
+  _In the GES, a non-geographic feature set is realized through a row of a user-defined attributes table._
 
 [NOTE]
 ====
@@ -137,13 +148,9 @@ OGC 12-128 defined this concept as "attributes".
 However, this conflicts with the standard definition of an attribute as a member of a class.
 ====
 
-Attributes Set Type::
-   the characteristics (attribute types) of an attributes set.
-   _In the GES, an attributes set type is realized through the schema of a user-defined attributes table._
-
-Attributes Store::
-   a container for attributes sets.
-   _In the GES, an attributes store is realized through a user-defined attributes table._  
+Non-Geograpic Feature Set Type::
+  A class of features having common characteristics. (SOURCE: Adapted from ISO 19101)
+  _In the GES, an non-geographic feature set type is realized through the schema of a user-defined attributes table._
 
 [[extensions]]
 === Extensions
