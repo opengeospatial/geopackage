@@ -7,14 +7,14 @@ _Since most readers will be familiar with the GES, an indication of how GeoPacka
 All GeoPackages conform to Core.
 
 Attribute::
-  a value for a particular attribute type for a particular entity.
+  A characteristic of an entity. (SOURCE: Adapted from ISO 19101-1:2014)
   _In the GES, an attribute is realized through a column value of a user-defined table._
 
 Attribute Type::
-  a characteristic of an entity.
+  A characteristic of an entity type.
   An attribute type has a name, a data type, and a value domain associated to it.
   No restrictions are implied as to the type of attributes a user-defined type may have.
-  Not all entity types have attributes. (SOURCE: Adapted from ISO19101)
+  Not all entity types have attributes. (SOURCE: Adapted from ISO 19101-1:2014)
   _In the GES, an attribute is realized through a column of a user-defined table._
 
 Coordinate Reference System (CRS)::
@@ -22,16 +22,22 @@ A coordinate reference system, or spatial reference system, is a set of mathemat
 _The GES uses the term "spatial reference system." In the GES, a spatial reference system is realized through a `gpkg_spatial_ref_sys` row._
   
 Entity::
-  For the purposes of this standard, an entity is simply a unit of content contained in a GeoPackage.
-  This is deliberately open-ended so as not to prejudice the content that a GeoPackage may contain.
+  An individual item that is perceivable or conceivable. (SOURCE: ISO/IEC 21838-1:2021)
   _In the GES, an entity is realized through a row of a user-defined table._
+  
+[NOTE]
+====
+In this standard, "entity" is used to denote the concept that is denoted "particular" in ISO/IEC 21838-1:2021).
+For the purposes of this standard, an entity is simply a unit of content contained in a GeoPackage.
+This is deliberately open-ended so as not to prejudice the content that a GeoPackage may contain.
+====
 
 Entity Store::
   a container for entities.
   _In the GES, an entity store is realized through a user-defined table and a row in `gpkg_contents`._
 
 Entity Type::
-  the characteristics of an entity, including attribute types (if any).
+  A class of entities having common characteristics. (SOURCE: Adapted from 19156:2011)
   _In the GES, an entity type is realized through the schema of a user-defined table._
   
 GeoPackage::
@@ -48,20 +54,20 @@ The Features Requirements Class implements Simple Features as per OGC 06-103r4.
 The definitions of the concepts below are from that document unless otherwise indicated.
 
 Feature::
-  abstraction of real world phenomena (SOURCE: ISO 19101).
+  An abstraction of real world phenomena. (SOURCE: ISO 19101)
   For the purposes of this document, it refers to an individual realization thereof.
   _In the GES, a feature is realized through a row of a user-defined features table._
 
 Feature Store::
-   a container for features.
-   _In the GES, an attributes store is realized through a user-defined features table._  
+  A container for features.
+  _In the GES, a feature store is realized through a user-defined features table._  
 
 Feature Type::
-    the attributes that comprise a class of a feature.
+   A class of features having common characteristics. (SOURCE: Adapted from ISO 19101)
     _In the GES, a feature type is realized through the schema of a user-defined features table._
 
 Geometry::
-  spatial object representing a geometric set (SOURCE: ISO19107)
+  spatial object representing a geometric set (SOURCE: ISO 19107)
   _In the GES, a geometry is realized through a Well Known Binary value for a geometry attribute for a feature in a user-defined features table._
 
 Geometry Attribute::
