@@ -5,7 +5,7 @@
 [caption=""]
 .Requirement 115
 ====
-For GeoPackages conforming to this extension, the `gpkg_spatial_ref_sys` table SHALL have an additional columns called `definition_12_063` and `epoch` as per <<gpkg_spatial_ref_sys_cols_crs_wkt>> and <<gpkg_spatial_ref_sys_crs_wkt_sql>>.
+For GeoPackages conforming to this extension, the `gpkg_spatial_ref_sys` table SHALL have additional columns called `definition_12_063` and `epoch` as per <<gpkg_spatial_ref_sys_cols_crs_wkt>> and <<gpkg_spatial_ref_sys_crs_wkt_sql>>.
 ====
 
 [#gpkg_spatial_ref_sys_cols_crs_wkt,reftext='{table-caption} {counter:table-num}']
@@ -35,7 +35,7 @@ Previous versions of this extension specified default values for `definition` an
 [caption=""]
 .Requirement 145
 ====
-GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_crs_wkt" SHALL comply with this extension.
+GeoPackages with a row in the `gpkg_extensions` table with an `extension_name` of "gpkg_crs_wkt" SHALL comply with the extension defined in this Standard.
 GeoPackages complying with this extension SHALL have a row in the `gpkg_extensions` table as described in <<CRSWKTExtensionTableRecord>> (below).
 ====
 
@@ -43,7 +43,7 @@ GeoPackages complying with this extension SHALL have a row in the `gpkg_extensio
 =====
 Requirement 145 has been updated as part of GeoPackage 1.2.1.
 In 1.1.0 and 1.2.0, the `table_name` and `column_name` column values of the required `gpkg_extensions` row were inadvertently left unspecified.
-While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` column values, it is recommended to update these values to comply with the updated requirement on older versions as well.
+While the executable test suite running on an older GeoPackage version will not generate a failure due to missing `gpkg_extensions` column values, implementers are encouraged to update these values to comply with the updated requirement on older versions as well.
 =====
 
 [#CRSWKTExtensionTableRecord,reftext='{table-caption} {counter:table-num}']
@@ -59,7 +59,7 @@ While the executable test suite running on an older GeoPackage version will not 
 [NOTE]
 =====
 For the `definition` column, use a hyperlink that describes the current implementation of this extension.
-While a URL like http://www.geopackage.org/spec/#extension_crs_wkt is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_crs_wkt where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_crs_wkt is the permalink for this extension for GeoPackage 1.2.1.
+While a URL such as http://www.geopackage.org/spec/#extension_crs_wkt is acceptable, permalinks to specific versions are provided upon publication using the URL pattern http://www.geopackage.org/specMmP/#extension_crs_wkt where `M` is the major version, `m` is the minor version, and `P` is the patch. For example http://www.geopackage.org/spec121/#extension_crs_wkt is the permalink for this extension for GeoPackage 1.2.1.
 =====
 
 ==== gpkg_spatial_ref_sys
@@ -67,13 +67,13 @@ While a URL like http://www.geopackage.org/spec/#extension_crs_wkt is acceptable
 [caption=""]
 .Requirement 116
 ====
-Values of the `definition_12_063` column SHALL be constructed per the WKT syntax in <<I34>> and <<I36>>.
+Values of the `definition_12_063` column SHALL be constructed per the WKT syntax as defined in <<I34>> and <<I36>>.
 ====
 
 [NOTE]
 ====
-For backwards compatibility, only use common WKT values between 12-063 and 18-010.
-Additional WKT values in 18-010r7 can be used when required in the CRS definition.
+For backwards compatibility, only use WKT values that are common to both 12-063 and 18-010.
+Additional WKT values specified in 18-010r7 can be used when required in the CRS definition.
 ====
 
 
@@ -87,5 +87,5 @@ At least one definition column SHALL be defined with a valid definition unless t
 [NOTE]
 ====
 . If, for a particular row, both the `definition` and `definition_12_063` columns are populated, the value in the `definition_12_063` column takes priority.
-. The coordinate epoch SHOULD be provided if available. It is therefore possible that a GeoPackage will have multiple SRSs with the same `organization` and `organization_coordsys_id` but different epochs. While the epoch should theoretically go in dataset metadata (per ISO 19111 / OGC Topic 2 as approved by OGC in March 2021), there is not currently a standard metadata profile that would be suitable.
+. The coordinate epoch SHOULD be provided if available. As such, a GeoPackage could have multiple SRSs with the same `organization` and `organization_coordsys_id` but with different epochs. While the epoch should theoretically go in the dataset metadata (per ISO 19111 / OGC Topic 2 as approved by the OGC in March 2021), there is not currently a standard metadata profile that would be suitable.
 ====
