@@ -12,57 +12,24 @@ The conventions used are as follows:
 
 ==== Relationships
 .A solid arrow indicates an association.
-[#uml_association]
-[plantuml, format="png", reftext='Figure {counter:figure-num}']
-----
-Class AnyClass {
-  +id: integer
-  ...
-}
-Class AssociatedClass {
-  +id: integer
-  +parent_id: integer
-  ...
-}
+[#uml_association,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention1.png[]
 
-AnyClass --> AssociatedClass : association
-----
+.A dotted arrow indicates a dependency.
+[#uml_dependency,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention6.png[]
 
-[#uml_aggregation]
-.A diamond-based arrow indicates an aggregation.
-[plantuml, format="png", reftext='Figure {counter:figure-num}']
-----
-Class GeoPackage {
-}
-Class EntityStore{
-}
+.A diamond-based line indicates an aggregation.
+[#uml_aggregation,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention2.png[]
 
-GeoPackage o-- "*" EntityStore : contents
-----
-
-[#uml_inheritance]
 .A solid line with a solid arrowhead indicates an inheritance.
-[plantuml, format="png", reftext='Figure {counter:figure-num}']
-----
-Class BaseClass {
-}
-Class ChildClass {
-}
+[#uml_inheritance,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention3.png[]
 
-BaseClass <|-- ChildClass
-----
-
-[#uml_realization]
 .A dotted line with a solid arrowhead indicates a realization.
-[plantuml, format="png", reftext='Figure {counter:figure-num}']
-----
-Class BaseClass {
-}
-Class RealizedClass {
-}
-
-BaseClass <|.. RealizedClass
-----
+[#uml_realization,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention4.png[]
 
 ==== Multiplicity
 * Multiplicity is assumed to be `1` unless otherwise specified.
@@ -70,13 +37,6 @@ BaseClass <|.. RealizedClass
 * For attributes, see <<uml_null>>.
 * Other relationship multiplicities are explicitly specified.
 
-[#uml_null]
-.A Question Mark `?` after a type name indicates a nullable attribute type
-[plantuml, format="png", reftext='Figure {counter:figure-num}']
-----
-Class AnyClass{
-  mandatory_attribute: String
-  optional_attribute: String?
-  ...
-}
-----
+.A Question Mark `?` after a type name indicates a nullable or optional attribute type
+[#uml_null,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention5.png[]

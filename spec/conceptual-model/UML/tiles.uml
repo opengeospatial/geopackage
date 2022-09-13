@@ -1,4 +1,4 @@
-classDiagram
+@startuml
 
    class Tile {
      id: Integer
@@ -26,13 +26,13 @@ classDiagram
      title = "data"
      valueType = BLOB
    }
-   Entity <|-- Tile
+   Entity <|.. Tile
    Attribute <|-- TileAttribute
    AttributeType <|-- TileAttributeType
-   EntityStore <|-- TilePyramid
-   EntityType <|-- TileType
-   TileMatrixSet ..> CoordinateReferenceSystem
-   TileMatrixSet ..> BoundingBox
+   EntityStore <|.. TilePyramid
+   EntityType <|.. TileType
+   TileMatrixSet o-- CoordinateReferenceSystem
+   TileMatrixSet o-- BoundingBox
    TilePyramid o-- TileMatrixSet
    TileMatrixSet o-- "1..n" TileMatrix
    TilePyramid o-- "*" Tile
@@ -42,3 +42,5 @@ classDiagram
    Entity o-- "1..*" Attribute
    TileAttributeType <.. TileAttribute
    Tile --> TileAttribute
+
+@enduml
