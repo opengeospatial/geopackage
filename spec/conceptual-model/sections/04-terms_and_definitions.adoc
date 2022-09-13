@@ -1,0 +1,76 @@
+
+== Terms and Definitions
+This document used the terms defined in https://portal.ogc.org/public_ogc/directives/directives.php[OGC Policy Directive 49], which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word “shall” (not “must”) is the verb form used to indicate a requirement to be strictly followed to conform to this standard and OGC documents do not use the equivalent phrases in the ISO/IEC Directives, Part 2.
+
+This document also uses terms defined in the OGC Standard for Modular specifications (https://portal.opengeospatial.org/files/?artifact_id=34762[OGC 08-131r3]), also known as the 'ModSpec'. The definitions of terms such as standard, specification, requirement, and conformance test are provided in the ModSpec.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+=== Aggregation
+
+An aggregation represents a part-whole relationship between two model elements.
+In the context of this document, it indicates _containment_.
+In the GES, an aggregation is used to describe how a GeoPackage contains tables or a table contains columns or rows.
+
+=== Association
+
+An association represents a generic relationship between two model elements.
+In the GES, an association is used to represent a foreign key - primary key relationship between two tables.
+
+=== Conceptual Model
+
+model that defines concepts of a universe of discourse
+
+[.source]
+<<ISO_19101-1:2014>>
+
+=== Dependency
+
+A dependency represents a need of one model element for another for specification.
+
+=== GeoPackage Encoding Standard
+
+The original encoding standard for GeoPackage adopted by OGC as 12-128. **GES** for short.
+
+[.source]
+<<OGC_12-128r18>>
+
+=== GeoPackage SQLite Configuration
+
+consists of the SQLite 3 software library and a set of compile- and runtime configurations options.
+
+=== GES
+
+GeoPackage Encoding Standard (see above).
+
+[.source]
+<<OGC_12-128r18>>
+
+=== Implementation Specification
+
+Specified on the OGC Document Types Register at http://www.opengis.net/def/doc-type/is.
+
+=== Inheritance
+An inheritance relationship represents the ability of one model element to implement the properties and behaviors of another model element (the _supplier_).
+In the context of this document, the supplier is a concrete element with a real-world implementation.
+
+=== Logical Model
+
+a data model of a specific problem domain expressed independently of a particular database management product or storage technology (physical data model) but in terms of data structures such as relational tables and columns, object-oriented classes, or XML tags
+
+[.source]
+<<OGC_19-014r3>> 
+
+=== Platform Independent Model
+
+a model that is independent of a specific platform
+    [Object Management Group, Model Driven Architecture Guide rev. 2.0].
+
+=== Platform Specific Model
+
+a model of a system that is defined in terms of a specific platform [Object Management Group, Model Driven Architecture Guide rev. 2.0].
+
+=== Realization
+A realization relationship represents the ability of one model element to implement the behavior of another.
+In the context of this document, the supplier is an abstract element with no real-world implementation.
+

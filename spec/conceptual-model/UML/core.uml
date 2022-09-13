@@ -1,6 +1,6 @@
-classDiagram
+@startuml
 
-   class CoordinateReferenceSystem {
+   struct CoordinateReferenceSystem {
      title: String
      id: Integer
      organization: String
@@ -8,27 +8,25 @@ classDiagram
      definition: WKT2
      description: String?
    }
-   class BoundingBox {
+   struct BoundingBox {
      min_x: Double
      min_y: Double
      max_x: Double
      max_y: Double
    }
-   class EntityStore {
+   entity EntityStore {
      title: String
      identifier: String?
      description: String?
      last_change: DateTime
    }
-   class DataType {
-     <<enumeration>>
+   enum DataType {
      features
      tiles
      attributes
      2d-gridded-coverage
    }
-   class ValueType {
-     <<enumeration>>
+   enum ValueType {
      Boolean
      TinyInteger
      SmallInteger
@@ -49,10 +47,14 @@ classDiagram
      name: String
      valueType: ValueType
    }
+   entity GeoPackage {
+   }
+   class Entity << (O,lightblue) Object >> {
+   }
    GeoPackage o-- "3..n" CoordinateReferenceSystem
-   EntityStore ..> CoordinateReferenceSystem
-   EntityStore ..> "0..1" BoundingBox
-   BoundingBox ..> CoordinateReferenceSystem
+   EntityStore --> CoordinateReferenceSystem
+   EntityStore o-- "0..1" BoundingBox
+   BoundingBox --> CoordinateReferenceSystem
    GeoPackage o-- "*" EntityStore: contents
    EntityStore o-- "*" Entity
    EntityStore o-- EntityType
@@ -60,3 +62,5 @@ classDiagram
    Entity ..> EntityType
    Entity o-- "*" Attribute
    Attribute ..> AttributeType
+
+@enduml

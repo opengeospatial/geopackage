@@ -1,0 +1,21 @@
+
+== Scope
+
+The GeoPackage Conceptual Model Standard (this document) describes the model for encoding the following:
+
+* Vector features;
+
+* Tile matrix sets of imagery and raster maps at various scales;
+
+* Attributes (non-spatial data); and
+
+* Extensions.
+
+The CM and LM are Platform Independent Models (PIMs).
+The CM is a high level description of the concepts involved in the GeoPackage standard.
+The LM is an abstract representation of an interface or data model that can be _executed_ to produce physical artifacts.
+As such, neither the GeoPackage CM nor the LM can be implemented directly.
+Rather, they serve as the base for Platform Specific Models (PSM).
+A PSM adds to the PIM the technology-specific details needed to fully define the model for use with a specific technology.
+The PSM can then be used to generate artifacts such as schemas needed to build GeoPackage implementations.
+These artifacts include table definitions, integrity assertions, format limitations, and content constraints.
