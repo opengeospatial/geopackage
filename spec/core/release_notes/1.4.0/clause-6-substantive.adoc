@@ -1,0 +1,12 @@
+[[Clause_Substantive]]
+== Description of Substantive Changes
+
+=== Make DATETIME format more flexible
+In GeoPackage 1.3.1 and prior, Requirement 5 specified that DATETIME formats must conform to the template `YYYY-MM-DDTHH:MM:SS.SSSZ`.
+This is unnecessarily restrictive and can cause problems in the following ways:
+
+* Requiring unnecessary precision may add bloat to the GeoPackage.
+* Requiring a very specific precision may cause problems when converting other data to GeoPackage, including loss of data and the necessity of an additional agent to artificially modify the existing data so that it conforms to the template.
+
+In fact, https://sqlite.org/lang_datefunc.html#time_values[SQLite documentation] offers a number of legal formats and allows fractional seconds to have fewer or more than three digits.
+In response, the SWG agreed to relax the definition, while retaining compatibility with ISO-8601.
