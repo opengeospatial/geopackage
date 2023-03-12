@@ -11,7 +11,7 @@
 - [[[K6]]] New applications should use the latest available SQLite version software <<I8>>
 - [[[K6a]]] The use of the AUTOINCREMENT keyword is optional but recommended. Implementers MAY omit the AUTOINCREMENT keyword for performance reasons, with the understanding that doing so has the potential to allow primary key identifiers to be reused.
 - [[[K6b]]] When a table has a primary key that is backed by a ROWID, the "null" flag is ignored.
-- [[[K7]]] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
+- [[[K7]]] The following statement selects an ISO 8601 timestamp value with millisecond precision using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
 - [[[K8]]] GeometryCollection is a generic term for the ST_GeomCollection type defined in <<I12>>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMETRYCOLLECTION defined in <<I10>> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.
 - [[[K9]]] OGC WKB simple feature geometry types specified in <<I9>> are a subset of the ISO WKB geometry types specified in <<I12>>
 - [[[K10]]] WKB geometry types are are restricted to 0, 1 and 2-dimensional geometric objects that exist in 2, 3 or 4-dimensional coordinate space; they are not geographic or geodesic geometry types.
@@ -41,6 +41,6 @@
 - [[[K34]]] The "catalog" md_scope MAY be used for Feature Catalog (B40) information stored as XML metadata that is linked to features stored in a GeoPackage.
 - [[[K35]]] The "schema" md_scope MAY be used for Application Schema (B37)(B38)(B39)(B44) information stored as XML metadata that is linked to features stored in a GeoPackage.
 - [[[K36]]] The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.
-- [[[K37]]] The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
+- [[[K37]]] The following statement selects an ISO 8601 timestamp value with millisecond precision using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).
 - [[[K38]]] A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.
 - [[[K39]]] GeoPackages MAY contain MIME types other than the raster image types specified in clauses 2.2.4, 2.2.5, and 3.2.2 as feature attributes, but they are not required to do so.
