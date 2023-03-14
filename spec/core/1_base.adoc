@@ -116,6 +116,11 @@ The columns of tables in a GeoPackage SHALL only be declared using one of the da
 |DATETIME             | ISO-8601 date/time string in the form YYYY-MM-DDTHH:MM[:SS.SSS]Z with T separator character, Z suffix for coordinated universal time (UTC), and encoded in either UTF-8 or UTF-16. Seconds and fractional seconds are OPTIONAL. Fractional seconds MAY have fewer or more than three digits. Stored as SQLite TEXT (see TEXT above).
 |=======================================================================
 
+[WARNING]
+====
+The SQLite https://sqlite.org/lang_datefunc.html[Date And Time Functions] internally store a timestamp in a way that makes the maximum precision 1 millisecond. Therefore, those functions are unsuitable for dealing with timestamps having a higher precision than one millisecond.
+====
+
 ====== File Integrity
 
 [[r6]]
