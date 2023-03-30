@@ -10,3 +10,12 @@ This is unnecessarily restrictive and can cause problems in the following ways:
 
 In fact, https://sqlite.org/lang_datefunc.html#time_values[SQLite documentation] offers a number of legal formats and allows fractional seconds to have fewer or more than three digits.
 In response, the SWG agreed to relax the definition, while retaining compatibility with ISO-8601.
+
+=== Relax Requirement #4
+The *GeoPackage* designation was originally designed to indicate a schema with maximum interoperability.
+However, as the standard has evolved, it has become increasingly important for GeoPackages to contain certain extensions.
+In light of this evolution, the difference between a GeoPackage and an Extended GeoPackage is no longer relevant.
+If anything, this requirement was just causing confusion.
+The presence of extensions would cause the Executable Test Suite (ETS) to skip Requirement 4, which has implications in how ETS results are interpreted.
+
+This change has no significant operational impact.

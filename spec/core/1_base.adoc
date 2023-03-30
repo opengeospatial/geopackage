@@ -81,14 +81,24 @@ Previous statements that the media type is [line-through]#`application/geopackag
 [caption=""]
 .Requirement 4
 ====
-A GeoPackage SHALL only contain the data elements (tables, columns, or values) and SQL constructs (views, constraints, or triggers) specified in the core of this encoding standard (<<features>>, <<tiles>>, and <<attributes>>). Extended GeoPackages MAY contain additional data elements and SQL constructs as specified through the <<extension_mechanism>>.
+A GeoPackage SHALL [line-through]#only# contain the data elements (tables, columns, or values) and SQL constructs (views, constraints, or triggers) specified in the core of this encoding standard. 
 ====
 
-The *GeoPackage* designation is designed to provide maximum interoperability between applications. In an *Extended GeoPackage*, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. Developers are encouraged to consider the implications of extensions when designing their applications. Best practices include the following:
+A *GeoPackage* is expected to have content in at least one of the core options (<<features>>, <<tiles>>, and <<attributes>>).
 
-* Designing in a way that anticipates the presence of unexpected extensions, e.g., gracefully handling unexpected columns, values, or encodings.
-* Using the <<extension_rtree>> extension for GeoPackages containing a non-trivial amount of vector data.
-* Using the <<extension_crs_wkt>> extension, which is strongly recommended due to inherent weaknesses in the original standard for encoding coordinate reference systems.
+*Extended GeoPackages* MAY contain additional data elements and SQL constructs as specified through the <<extension_mechanism>>.
+In an Extended GeoPackage, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. Developers are encouraged to consider the implications of extensions when designing their applications. Best practices include the following designing extensions in a way that anticipates the presence of unexpected extensions, e.g., gracefully handling unexpected columns, values, or encodings.
+
+[NOTE]
+====
+The *GeoPackage* designation was originally designed to indicate a schema with maximum interoperability.
+However, as the standard has evolved, it has become increasingly important for GeoPackages to contain certain extensions such as the following:
+
+* the <<extension_rtree>> extension for GeoPackages containing a non-trivial amount of vector data, and
+* the <<extension_crs_wkt>> extension, which is strongly recommended due to inherent weaknesses in the original standard for encoding coordinate reference systems.
+
+In light of this evolution, the difference between a GeoPackage and an Extended GeoPackage is no longer relevant.
+====
 
 [[r5]]
 [caption=""]
