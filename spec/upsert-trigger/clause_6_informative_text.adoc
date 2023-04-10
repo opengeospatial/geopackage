@@ -1,0 +1,69 @@
+[[informative_text]]
+== Informative Text
+The tables below contain SQL templates with variables.
+Replace the following template variables with the specified values to create the required SQL statements: +
+<t>: The name of the feature table containing the geometry column +
+<c>: The name of the geometry column in <t> that is being indexed +
+<i>: The name of the integer primary key column in <t>
+
+=== Original Trigger
+The original trigger looks like as described below.
+(This is copied from the original Annex F.3.)
+
+[source,sql]
+----
+/* Conditions: Update of geometry column to non-empty geometry
+               No row ID change
+   Actions   : Update record in rtree */
+CREATE TRIGGER rtree_<t>_<c>_update1 AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
+BEGIN
+  INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
+    NEW.<i>,
+    ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
+    ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
+  );
+END;
+----
+
+When using this extension, remove the trigger described above.
+
+=== Trigger 1
+When using this extension, add the trigger described below.
+This does an update of the rtree when both the old and new geoms are not null/empty.
+
+[source,sql]
+----
+CREATE TRIGGER rtree_<t>_update1_old_geom_notnull AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
+       OLD.<c> NOTNULL AND NOT ST_IsEmpty(OLD.<c>)
+BEGIN
+  UPDATE <t> SET
+    minx == ST_MinX(NEW.<c>),
+    maxx == ST_MaxX(NEW.<c>),
+    mint == ST_MinY(NEW.<c>),
+    maxy == ST_MaxY(NEW.<c>)
+  WHERE id = NEW.<i>;
+END;
+----
+
+=== Trigger 2
+When using this extension, add the trigger described below.
+This does an insert in the rtree when the old geom is null/empty and the new one is not.
+
+[source,sql]
+----
+CREATE TRIGGER rtree_<t>_update1_old_geom_null AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
+       (OLD.<c> ISNULL OR ST_IsEmpty(OLD.<c>)))
+BEGIN
+  INSERT INTO rtree_<t>_<c> VALUES (
+    NEW.<i>,
+    ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
+    ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
+  );
+END;
+----

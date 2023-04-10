@@ -1,0 +1,15 @@
+[cols=",",options="header",]
+|=============================================================================================================================================================================================================================================================================
+|*Test Case ID* |`/extensions/coverage/table_ref/tpudt/gpkg_2d_gridded_tile_ancillary`
+|*Test Purpose:* |Verify that all required rows are present in gpkg_2d_gridded_tile_ancillary
+|*Test Method:* a|
+1.  `SELECT table_name FROM gpkg_contents WHERE data_type = _2d-gridded-coverage_;`
+2.  For each table_name
+a.  `SELECT \{table_name}.id as tid, gpkg_2d_gridded_tile_ancillary.tpudt_id as taid from elev_png LEFT OUTER JOIN gpkg_2d_gridded_tile_ancillary ON \{table_name}.id = gpkg_2d_gridded_tile_ancillary.tpudt_id AND gpkg_2d_gridded_tile_ancillary.tpudt_name = _\{table_name}_`
+b.  For each row
+c.  Fail if taid is null
+3.  Pass if no fails
+
+|*Reference:* |Annex F.11 Req 10, 12
+|*Test Type* |Capability
+|=============================================================================================================================================================================================================================================================================

@@ -1,0 +1,85 @@
+[appendix]
+:appendix-caption: Annex
+== Informative - GML example showing domainSet, rangeType, and rangetSet
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+<gmlcov:RectifiedGridCoverage gml:id="DTM001" xmlns:gml="http://www.opengis.net/gml/3.2" xmlns:gmlcov="http://www.opengis.net/gmlcov/1.0" xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/gmlcov/1.0 file:///D:/Documents/OGC/Coverage/GMLCOV/Schemas/gmlcov/1.0.2/coverage.xsd">
+
+<gml:domainSet>
+
+<gml:RectifiedGrid gml:id="rg0001_C0002" dimension="2" srsName="http://www.opengis.net/def/crs/EPSG/0/32633">
+
+<gml:limits>
+
+<gml:GridEnvelope>
+
+<gml:low>0 0</gml:low>
+
+<gml:high>3327 2946</gml:high>
+
+</gml:GridEnvelope>
+
+</gml:limits>
+
+<gml:axisName>x</gml:axisName>
+
+<gml:axisName>y</gml:axisName>
+
+<gml:origin>
+
+<gml:Point gml:id="P0001" srsName="http://www.opengis.net/def/crs/EPSG/0/32633">
+
+<gml:pos>291355.903287358 4640962.87782889</gml:pos>
+
+</gml:Point>
+
+</gml:origin>
+
+<gml:offsetVector srsName="http://www.opengis.net/def/crs/EPSG/0/32633">0.298582141738734 0</gml:offsetVector>
+
+<gml:offsetVector  srsName="http://www.opengis.net/def/crs/EPSG/0/32633">0 -0.298582141738591</gml:offsetVector>
+
+</gml:RectifiedGrid>
+
+</gml:domainSet>
+
+<gml:rangeSet>
+
+<gml:File>
+
+<gml:rangeParameters/>
+
+<gml:fileName>D:\Documents\Data\DTM001.tiff</gml:fileName>
+
+<gml:fileStructure>Not interleaved</gml:fileStructure>
+
+</gml:File>
+
+</gml:rangeSet>
+
+<gmlcov:rangeType>
+
+<swe:DataRecord>
+
+<swe:field name="Height">
+
+<swe:Quantity definition="http://sweet.jpl.nasa.gov/2.0/spaceExtent.owl#Height" referenceFrame="http://www.opengis.net/def/crs/EPSG/0/9001">
+
+<swe:description>Height above mean sea level</swe:description>
+
+<swe:uom code="m"/>
+
+</swe:Quantity>
+
+</swe:field>
+
+</swe:DataRecord>
+
+</gmlcov:rangeType>
+
+</gmlcov:RectifiedGridCoverage>
+
+----
