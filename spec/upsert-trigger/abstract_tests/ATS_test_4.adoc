@@ -1,0 +1,21 @@
+[[ats_req_4]]
+[abstract_test]
+====
+[%metadata]
+label:: /conf/core/http
+subject:: /req/req-class-a/req-name-4
+test-purpose:: Confirm that the RTree Extension is in use.
+
+[.component,class=test method]
+=====
+[.component,class=step]
+--
+SELECT COUNT(*) FROM gpkg_extensions WHERE extension_name = 'gpkg_upsert_compatible_triggers';
+--
+
+[.component,class=step]
+--
+Extension not testable if count = 0
+--
+=====
+====

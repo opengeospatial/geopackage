@@ -1,0 +1,73 @@
+.Preface
+
+The "GeoPackage RTree Extension” has been part of the GeoPackage Encoding Standard since Version 1.0.
+In 2022, a problem was identified where the triggers provided to maintain RTree indexes would fail with a unique constraint violation if an upsert statement is used.
+The following is an example of an upsert:
+
+  INSERT INTO foo (fid, geom) VALUES (1, put_here_some_gpkg_geometry_blob) on conflict (fid) DO UPDATE SET geom=excluded.geom;
+
+The resolution to this problem is to replace the existing `_update1` trigger with two separate triggers.
+This extension is designed to advertise to clients that the upsert-compatible triggers are in place.
+
+The following information is provided in compliance with the GeoPackage Extension template as defined in Annex E: GeoPackage Extension Template of the GeoPackage Standard. These additional introductory clauses are not elements in the standard OGC document template.
+
+* Extension Author: GeoPackage SWG, author_name of `gpkg` will be assigned if this extension is adopted by OGC.
+* Extension Name or Template: `upsert_compatible_triggers`, alias of `gpkg_upsert_compatible_triggers` will be assigned if this extension is adopted by OGC.
+* Extension Type: This extension has a dependency on http://www.geopackage.org/spec/#extension_rtree[_Annex F.3_]footnote:[The GeoPackage RTree Extension (Clause F.3)The RTree Spatial Indexes extension provides a means to encode an RTree index for geometry values in a GeoPackage.].
+* Applicability: This GeoPackage Extension for Upsert Compatible Triggers can be used on any GeoPackage where feature data is indexed in accordance with the RTree Extension.
+This extension specifies requirements and optional clauses for new triggers.
+* Scope: write-only
+
+Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
+
+Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
+
+
+[abstract]
+== Abstract
+
+The "GeoPackage Extension for Upsert Compatible Triggers” (UCTE) extension defines how to encode GeoPackage triggers that are compatible with the SQLite upsert operation.
+The original triggers were written without this consideration and will fail .
+This extension allows upsert-compatible triggers to be used without negatively affecting GeoPackage clients that are not aware of the extension.
+
+== Keywords
+
+//Keywords inserted here by Metanorma
+
+== Preface
+
+
+== Security considerations
+
+//If no security considerations have been made for this Standard, use the following text.
+
+No security considerations have been made for this Standard.
+
+////
+If security considerations have been made for this Standard, follow the examples found in IANA or IETF documents. Please see the following example.
+“VRRP is designed for a range of internetworking environments that may employ different security policies. The protocol includes several authentication methods ranging from no authentication, simple clear text passwords, and strong authentication using IP Authentication with MD5 HMAC. The details on each approach including possible attacks and recommended environments follows.
+Independent of any authentication type VRRP includes a mechanism (setting TTL=255, checking on receipt) that protects against VRRP packets being injected from another remote network. This limits most vulnerabilities to local attacks.
+NOTE: The security measures discussed in the following sections only provide various kinds of authentication. No confidentiality is provided at all. This should be explicitly described as outside the scope....”
+////
+
+== Submitting organizations
+
+// Submitting organizations inserted here by Metanorma
+
+== Submitters
+
+All questions regarding this submission should be directed to the editor or the submitters:
+
+|===
+|*Name* |*Affiliation*
+|Even Rouault |Spatialys
+|Jeff Yutzler |Image Matters LLC
+|===
+
+== Contributors
+
+//This clause is optional.
+
+Additional contributors to this Standard include the following:
+
+Individual name(s), Organization

@@ -1,0 +1,18 @@
+== Terms and definitions
+
+This document uses the terms defined in Sub-clause 5.3 of <<OGC06-121r9>>, which is based on the ISO/IEC Directives, Part 2, Rules for the structure and drafting of International Standards. In particular, the word "`shall`" (not "`must`") is the verb form used to indicate a requirement to be strictly followed to conform to this standard.
+
+For the purposes of this document, the following additional terms and definitions apply.
+
+UPSERT ::
+
+  "UPSERT" is a DBMS feature that allows a DML statement's author to atomically either insert a row, or on the basis of the row already existing, UPDATE that existing row instead, while safely giving little to no further thought to concurrency. One of those two outcomes must be guaranteed, regardless of concurrent activity, which has been called "the essential property of UPSERT."
+
+[NOTE]
+====
+UPSERT in SQLite follows the syntax established by PostgreSQL.
+UPSERT syntax was added to SQLite with version 3.24.0 (2018-06-04).
+====
+
+[.source]
+<<UPSERT>>
