@@ -35,13 +35,13 @@ This does an update of the rtree when both the old and new geoms are not null/em
 CREATE TRIGGER rtree_<t>_update1_old_geom_notnull AFTER UPDATE OF <c> ON <t>
   WHEN OLD.<i> = NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
-       OLD.<c> NOTNULL AND NOT ST_IsEmpty(OLD.<c>)
+       (OLD.<c> NOTNULL AND NOT ST_IsEmpty(OLD.<c>))
 BEGIN
   UPDATE <t> SET
-    minx == ST_MinX(NEW.<c>),
-    maxx == ST_MaxX(NEW.<c>),
-    mint == ST_MinY(NEW.<c>),
-    maxy == ST_MaxY(NEW.<c>)
+    minx = ST_MinX(NEW.<c>),
+    maxx = ST_MaxX(NEW.<c>),
+    miny = ST_MinY(NEW.<c>),
+    maxy = ST_MaxY(NEW.<c>)
   WHERE id = NEW.<i>;
 END;
 ----
@@ -55,7 +55,7 @@ This does an insert in the rtree when the old geom is null/empty and the new one
 CREATE TRIGGER rtree_<t>_update1_old_geom_null AFTER UPDATE OF <c> ON <t>
   WHEN OLD.<i> = NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
-       (OLD.<c> ISNULL OR ST_IsEmpty(OLD.<c>)))
+       (OLD.<c> ISNULL OR ST_IsEmpty(OLD.<c>))
 BEGIN
   INSERT INTO rtree_<t>_<c> VALUES (
     NEW.<i>,
