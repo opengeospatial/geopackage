@@ -10,7 +10,7 @@ test-purpose:: Confirm that the required triggers are present.
 =====
 [.component,class=step]
 --
-SELECT table_name FROM gpkg_extensions WHERE extension_name = "gpkg_upsert_compatible_triggers";
+SELECT table_name FROM gpkg_extensions WHERE extension_name = 'gpkg_upsert_compatible_triggers';
 --
 
 [.component,class=step]
@@ -19,7 +19,7 @@ For every table_name,
 
 SELECT COUNT(*) FROM sqlite_master WHERE type = 'trigger' AND name = 'rtree_{table_name}_update1_old_geom_notnull';
 
-and fail if count = 0
+and fail if count = 0.
 --
 
 [.component,class=step]
@@ -28,7 +28,7 @@ For every table_name,
 
 SELECT COUNT(*) FROM sqlite_master WHERE type = 'trigger' AND name = 'rtree_{table_name}_update1_old_geom_null';
 
-and fail if count = 0
+and fail if count = 0.
 --
 =====
 ====
