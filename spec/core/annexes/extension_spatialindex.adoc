@@ -64,6 +64,31 @@ Replace the following template variables with the specified values to create the
 <i>: The name of the integer primary key column in <t> as specified in <<r29>>
 ====
 
+[[r154]]
+[caption=""]
+.Requirement 154
+====
+====
+
+[[r155]]
+[caption=""]
+.Requirement 155
+====
+====
+
+[[r156]]
+[caption=""]
+.Requirement 156
+====
+====
+
+[[r157]]
+[caption=""]
+.Requirement 157
+====
+
+====
+
 [float]
 ====== Create Virtual Table
 
@@ -114,13 +139,30 @@ BEGIN
 END;
 
 /* Conditions: Update of geometry column to non-empty geometry
-               No row ID change
+               when the old geom is neither null nor empty
    Actions   : Update record in rtree */
-CREATE TRIGGER rtree_<t>_<c>_update1 AFTER UPDATE OF <c> ON <t>
+CREATE TRIGGER rtree_<t>_update1_old_geom_notnull AFTER UPDATE OF <c> ON <t>
   WHEN OLD.<i> = NEW.<i> AND
-       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
+       (OLD.<c> NOTNULL AND NOT ST_IsEmpty(OLD.<c>))
 BEGIN
-  INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
+  UPDATE <t> SET
+    minx = ST_MinX(NEW.<c>),
+    maxx = ST_MaxX(NEW.<c>),
+    miny = ST_MinY(NEW.<c>),
+    maxy = ST_MaxY(NEW.<c>)
+  WHERE id = NEW.<i>;
+END;
+
+/* Conditions: Update of geometry column to non-empty geometry
+               when the old geom is null/empty
+   Actions   : Update record in rtree */
+CREATE TRIGGER rtree_<t>_update1_old_geom_null AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
+       (OLD.<c> ISNULL OR ST_IsEmpty(OLD.<c>))
+BEGIN
+  INSERT INTO rtree_<t>_<c> VALUES (
     NEW.<i>,
     ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
     ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
@@ -177,11 +219,19 @@ END;
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
 [WARNING]
-=====
-GeoPackage Versions 1.2.0 and prior have an incorrect update3 trigger that will fail in certain circumstances. 
-It is strongly recommended to update older GeoPackages with the correct trigger presented here. 
+====
+GeoPackage Versions 1.2.0 and prior have an incorrect update3 trigger that will fail in certain circumstances.
+GeoPackage Version 1.3.0 fixes this issue.
+It is strongly recommended to update older GeoPackages with the correct trigger presented here.
 The GeoPackage Executable Test Suite has been updated to accept either version of the trigger in older versions and to mandate the corrected version in versions after 1.2.0.
-=====
+====
+
+[WARNING]
+====
+GeoPackage Versions 1.3.1 and prior have a single update1 trigger that is incompatible with upsert statements.
+GeoPackage Version 1.4.0 fixes this issue.
+For older GeoPackages where upsert compatibility is desired, a new extension is being established that mimics the 1.4.0 behavior.
+====
 
 [float]
 ===== GeoPackage SQLite Configuration
