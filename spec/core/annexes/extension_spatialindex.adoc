@@ -1,10 +1,11 @@
 [[extension_rtree]]
-=== RTree Spatial Indexes
+=== R-tree Spatial Indexes
 
 [float]
 ==== Introduction
 
-The RTree Spatial Indexes extension provides a means to encode an RTree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.^<<K26>>^
+The R-tree Spatial Indexes extension provides a means to encode an R-tree index for geometry values in a GeoPackage.
+An R-tree index <<B28>> provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.^<<K26>>^
 
 [float]
 ==== Extension Author
@@ -34,7 +35,7 @@ Write-only, because it does not change the result of reads, although it may impr
 [float]
 ==== Requirements
 
-This extension uses the rtree implementation provided by the SQLite R*Tree Module extension documented at <http://www.sqlite.org/rtree.html>.
+This extension uses the R-tree implementation provided by the SQLite R*Tree Module extension documented at <http://www.sqlite.org/rtree.html>.
 
 [float]
 ===== GeoPackage
@@ -56,7 +57,7 @@ A GeoPackage that implements spatial indexes SHALL have a `gpkg_extensions` tabl
 [caption=""]
 .Requirement 77
 ====
-A GeoPackage SHALL implement spatial indexes on feature table geometry columns using the SQLite Virtual Table RTrees and triggers specified below.
+A GeoPackage SHALL implement spatial indexes on feature table geometry columns using the SQLite Virtual Table R-trees and triggers specified below.
 The tables below contain SQL templates with variables.
 Replace the following template variables with the specified values to create the required SQL statements: +
 <t>: The name of the feature table containing the geometry column +
@@ -67,7 +68,7 @@ Replace the following template variables with the specified values to create the
 [float]
 ====== Create Virtual Table
 
-RTree spatial indexes on geometry columns SHALL be created using the SQLite Virtual Table RTree extension.
+R-tree spatial indexes on geometry columns SHALL be created using the SQLite Virtual Table R-tree extension.
 An application that creates a spatial index SHALL create it using the following SQL statement template:
 
 [source,sql]
@@ -76,12 +77,12 @@ CREATE VIRTUAL TABLE rtree_<t>_<c> USING rtree(id, minx, maxx, miny, maxy)
 ----
 
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed.
-The rtree function id parameter becomes the virtual table 64-bit signed integer primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored as 32-bit floating point numbers) for each dimension that become the virtual table data columns that are populated to create the spatial rtree index.
+The R-tree function id parameter becomes the virtual table 64-bit signed integer primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored as 32-bit floating point numbers) for each dimension that become the virtual table data columns that are populated to create the spatial R-tree index.
 
 [float]
 ====== Load Spatial Index Values
 
-The indexes provided by the SQLite Virtual Table RTree extension are not automatic indexes.
+The indexes provided by the SQLite Virtual Table R-tree extension are not automatic indexes.
 This means the index data structure needs to be manually populated, updated and queried.
 Each newly created spatial index SHALL be populated using the following SQL statement
 
@@ -102,7 +103,7 @@ These spatial index triggers SHALL be defined as follows:
 [source,sql]
 ----
 /* Conditions: Insertion of non-empty geometry
-   Actions   : Insert record into rtree */
+   Actions   : Insert record into R-tree */
 CREATE TRIGGER rtree_<t>_<c>_insert AFTER INSERT ON <t>
   WHEN (new.<c> NOT NULL AND NOT ST_IsEmpty(NEW.<c>))
 BEGIN
@@ -113,23 +114,12 @@ BEGIN
   );
 END;
 
-/* Conditions: Update of geometry column to non-empty geometry
-               No row ID change
-   Actions   : Update record in rtree */
-CREATE TRIGGER rtree_<t>_<c>_update1 AFTER UPDATE OF <c> ON <t>
-  WHEN OLD.<i> = NEW.<i> AND
-       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
-BEGIN
-  INSERT OR REPLACE INTO rtree_<t>_<c> VALUES (
-    NEW.<i>,
-    ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
-    ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
-  );
-END;
+/* rtree_<t>_<c>_update1 is deprecated and is replaced by
+    rtree_<t>_<c>_update6 and rtree_<t>_<c>_update7 */
 
 /* Conditions: Update of geometry column to empty geometry
                No row ID change
-   Actions   : Remove record from rtree */
+   Actions   : Remove record from R-tree */
 CREATE TRIGGER rtree_<t>_<c>_update2 AFTER UPDATE OF <c> ON <t>
   WHEN OLD.<i> = NEW.<i> AND
        (NEW.<c> ISNULL OR ST_IsEmpty(NEW.<c>))
@@ -137,12 +127,26 @@ BEGIN
   DELETE FROM rtree_<t>_<c> WHERE id = OLD.<i>;
 END;
 
+/* rtree_<t>_<c>_update3 is deprecated and is replaced by
+    rtree_<t>_<c>_update5 */
+
+/* Conditions: Update of any column
+               Row ID change
+               Empty geometry
+   Actions   : Remove record from R-tree for old and new <i> */
+CREATE TRIGGER rtree_<t>_<c>_update4 AFTER UPDATE ON <t>
+  WHEN OLD.<i> != NEW.<i> AND
+       (NEW.<c> ISNULL OR ST_IsEmpty(NEW.<c>))
+BEGIN
+  DELETE FROM rtree_<t>_<c> WHERE id IN (OLD.<i>, NEW.<i>);
+END;
+
 /* Conditions: Update of any column
                Row ID change
                Non-empty geometry
-   Actions   : Remove record from rtree for old <i>
-               Insert record into rtree for new <i> */
-CREATE TRIGGER rtree_<t>_<c>_update3 AFTER UPDATE ON <t>
+   Actions   : Remove record from R-tree for old <i>
+               Insert record into R-tree for new <i> */
+CREATE TRIGGER rtree_<t>_<c>_update5 AFTER UPDATE ON <t>
   WHEN OLD.<i> != NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>))
 BEGIN
@@ -154,19 +158,37 @@ BEGIN
   );
 END;
 
-/* Conditions: Update of any column
-               Row ID change
-               Empty geometry
-   Actions   : Remove record from rtree for old and new <i> */
-CREATE TRIGGER rtree_<t>_<c>_update4 AFTER UPDATE ON <t>
-  WHEN OLD.<i> != NEW.<i> AND
-       (NEW.<c> ISNULL OR ST_IsEmpty(NEW.<c>))
+/* Conditions: Update a non-empty geometry with another non-empty geometry
+   Actions   : Replace record from R-tree for <i> */
+CREATE TRIGGER rtree_<t>_<c>_update6_old_geom_notnull AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
+       (OLD.<c> NOTNULL AND NOT ST_IsEmpty(OLD.<c>))
 BEGIN
-  DELETE FROM rtree_<t>_<c> WHERE id IN (OLD.<i>, NEW.<i>);
+  UPDATE <t> SET
+    minx = ST_MinX(NEW.<c>),
+    maxx = ST_MaxX(NEW.<c>),
+    miny = ST_MinY(NEW.<c>),
+    maxy = ST_MaxY(NEW.<c>)
+  WHERE id = NEW.<i>;
+END;
+
+/* Conditions: Update a null/empty geometry with a non-empty geometry
+   Actions   : Insert record into R-tree for new <i> */
+CREATE TRIGGER rtree_<t>_<c>_update7_old_geom_null AFTER UPDATE OF <c> ON <t>
+  WHEN OLD.<i> = NEW.<i> AND
+       (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
+       (OLD.<c> ISNULL OR ST_IsEmpty(OLD.<c>))
+BEGIN
+  INSERT INTO rtree_<t>_<c> VALUES (
+    NEW.<i>,
+    ST_MinX(NEW.<c>), ST_MaxX(NEW.<c>),
+    ST_MinY(NEW.<c>), ST_MaxY(NEW.<c>)
+  );
 END;
 
 /* Conditions: Row deleted
-   Actions   : Remove record from rtree for old <i> */
+   Actions   : Remove record from R-tree for old <i> */
 CREATE TRIGGER rtree_<t>_<c>_delete AFTER DELETE ON <t>
   WHEN old.<c> NOT NULL
 BEGIN
@@ -177,11 +199,28 @@ END;
 where <t> and <c> are replaced with the names of the feature table and geometry column being indexed and <i> is replaced with the name of the feature table integer primary key column.
 
 [WARNING]
-=====
-GeoPackage Versions 1.2.0 and prior have an incorrect update3 trigger that will fail in certain circumstances. 
-It is strongly recommended to update older GeoPackages with the correct trigger presented here. 
+====
+GeoPackage Versions 1.2.0 and prior have an incorrect update3 trigger that will fail in certain circumstances.
+GeoPackage Version 1.2.1 fixes this issue by replacing the update3 trigger.
+In GeoPackage 1.4.0, the decision was made to deprecate the update3 trigger and replace it with the new update5 trigger.
+This will allow clients to easily detect whether the correct trigger is in place.
+It is strongly recommended to update older GeoPackages by dropping the update3 trigger and adding the update5 trigger.
 The GeoPackage Executable Test Suite has been updated to accept either version of the trigger in older versions and to mandate the corrected version in versions after 1.2.0.
-=====
+
+In addition, GeoPackage Versions 1.3.1 and prior have a single update1 trigger that is incompatible with upsert statements.
+GeoPackage Version 1.4.0 fixes this issue by replacing the update1 trigger with the new update6 and update7 triggers.
+It is strongly recommended to update older GeoPackages by dropping the update1 trigger and adding the update6 and update7 triggers.
+The GeoPackage Executable Test Suite will be updated to accept either version of the trigger in older versions and to mandate the corrected version in versions after 1.3.1.
+
+If present, the deprecated triggers can be dropped with a `DROP TRIGGER` command.
+
+[source,sql]
+----
+DROP TRIGGER rtree_<t>_<c>_update1;
+DROP TRIGGER rtree_<t>_<c>_update3;
+----
+
+====
 
 [float]
 ===== GeoPackage SQLite Configuration
@@ -191,8 +230,8 @@ Definition of SQLite configuration settings
 [cols=",,,",options="header"]
 |======
 |Setting compile or runtime |Option |Shall / Not (Value) | Discussion
-|compile |SQLITE_ENABLE_RTREE |Shall |RTrees ares used for GeoPackage Spatial Indexes
-|compile |SQLITE_RTREE_INT_ONLY |Not |RTrees with floating point values are used for GeoPackage spatial indexes
+|compile |SQLITE_ENABLE_RTREE |Shall |R-trees are used for GeoPackage Spatial Indexes
+|compile |SQLITE_RTREE_INT_ONLY |Not |R-trees with floating point values are used for GeoPackage spatial indexes
 |======
 
 [float]
@@ -219,9 +258,9 @@ Definition of SQL functions
 
 [NOTE]
 ====
-The minimum bounding indexes created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature.
+The minimum bounding indexes created within the R-tree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature.
 However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test.
-Clients should exercise care when using these indexes during queries because the SQLite RTree module might link:https://www.sqlite.org/rtree.html#roundoff_error[round bounding boxes slightly outward] (up to 0.000012%).
+Clients should exercise care when using these indexes during queries because the SQLite R-tree module might link:https://www.sqlite.org/rtree.html#roundoff_error[round bounding boxes slightly outward] (up to 0.000012%).
 Queries using spatial indexes should contain slightly expanded bounding boxes to guard against this.
 ====
 
@@ -273,9 +312,10 @@ Queries using spatial indexes should contain slightly expanded bounding boxes to
 .. SELECT sql FROM sqlite_master WHERE tbl_name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name
 ... Fail if returned sql != 'CREATE VIRTUAL TABLE "rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\|'" USING rtree(id, minx, maxx, miny, maxy)'
 .. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_insert'
-... Fail if returned sql != result of populating insert triggers template using result_set_table_name for <t> and result_set_column_name for <c>
+... Fail if returned sql != result of populating insert trigger template using result_set_table_name for <t> and result_set_column_name for <c>
 .. SELECT sql FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_update%' ORDER BY name ASC
-... Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for <t> and result_set_column_name for <c>
+... Fail if returned sql != result of populating [.line-through]#4# 5 update triggers templates using result_set_table_name for <t> and result_set_column_name for <c>
+... Fail if the result set contains the deprecated `update1` and/or `update3` triggers.
 .. SELECT sql FROM sqlite_master WHERE type='trigger' AND name = 'rtree_' \|\| result_set_table_name \|\| '_' \|\| result_set_column_name \|\| '_delete'
 ... Fail if returned sql != result of populating delete trigger template using result_set_table_name for <t> and result_set_column_name for <c>
 . Pass if no fails

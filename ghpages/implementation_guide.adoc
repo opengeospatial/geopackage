@@ -9,11 +9,11 @@
 [preface]
 
 ## Introduction
-The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software. 
+The purpose of this guide is present a set of capabilities that could be implemented through GeoPackage software.
 While the GeoPackage Encoding Standard does not specify software requirements, there are certain expectations that GeoPackage creators had when the standard was developed, as well as expectations that have emerged from the user community as GeoPackage has been more broadly adopted.
-This guide attempts to articulate those expectations so that developers produce consistent software. 
+This guide attempts to articulate those expectations so that developers produce consistent software.
 
-[WARNING] 
+[WARNING]
 ====
 This document is not an OGC Standard and may not be referred to as such. This document is an implementation guide and is not an official position of the OGC membership. It is distributed for informational purposes only and is subject to change without notice.
 ====
@@ -33,10 +33,10 @@ Where appropriate, the roles of GeoPackage-writing software (producers and edito
 
 [preface]
 ## Capability Levels
-Where possible, the guidelines are presented in a __tiered__ approach using multiple _capability levels_. 
+Where possible, the guidelines are presented in a __tiered__ approach using multiple _capability levels_.
 
-* **Capability Level 0** indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant. 
-* **Capability Level 1** indicates the minimum level of interoperability. 
+* **Capability Level 0** indicates a fair and reasonable use of GeoPackage for closed scenarios but that will not provide interoperability with other use cases or applications and therefore falls short of what can be considered compliant.
+* **Capability Level 1** indicates the minimum level of interoperability.
 * **Capability Level 2** indicates an increased level of capability and compliance.
 * **Capability Level 3** generally indicates the long-term vision for GeoPackage support.
 
@@ -53,7 +53,7 @@ Consider this more of a catalog or taxonomy for GeoPackage support capabilities,
 This approach also gives guidance back to the SWG – some capability levels are not achievable today and these will be considered by the SWG for higher priority in  future activities.
 ====
 
-# Core 
+# Core
 ## Contents
 GeoPackages are self-describing and GeoPackage software should use this feature of the format to express (for GeoPackage-writing software) and determine (for clients) what content to load.
 
@@ -65,7 +65,7 @@ GeoPackage client loads and utilizes a single set of contents (tiles or features
 
 [TIP]
 ====
-Example (tiles): 
+Example (tiles):
 Open https://portal.opengeospatial.org/files/?artifact_id=74983.
 Client loads the tiles without interaction with the user.
 ====
@@ -141,7 +141,7 @@ The client should be able to handle all of the 2D features (point2d, linestring2
 ====
 
 ### Level 2
-GeoPackage software supports geometry collections (of arbitrary size and complexity) and generic geometries. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage-writing software also supports the link:extensions/rtree_spatial_indexes.md[RTree Spatial Index Extension] and uses this extension to improve spatial querying performance for clients.
+GeoPackage software supports geometry collections (of arbitrary size and complexity) and generic geometries. It also supports 3D and 4D geometries using the Z and M coordinates. GeoPackage-writing software also supports the link:extensions/rtree_spatial_indexes.md[R-tree Spatial Index Extension] and uses this extension to improve spatial querying performance for clients.
 
 [TIP]
 ====
@@ -193,7 +193,7 @@ The client then renders the features using hard-coded styling rules.
 ====
 
 ## Level 2
-Feature geometries and/or attributes are styled through the GeoPackage client using styling rules that are provided by the client or defined by the user through the client. 
+Feature geometries and/or attributes are styled through the GeoPackage client using styling rules that are provided by the client or defined by the user through the client.
 
 [TIP]
 ====
@@ -220,7 +220,7 @@ GeoPackage software exclusively supports the Google Maps-compatible Tile Matrix 
 
 [TIP]
 ====
-Load the "rivers_tiles" tile pyramid from http://geopackage.org/data/rivers.gpkg. 
+Load the "rivers_tiles" tile pyramid from http://geopackage.org/data/rivers.gpkg.
 Zoom levels 0-6 should be available.
 ====
 
@@ -338,7 +338,7 @@ Any compliant GeoPackage could be used to demonstrate the desired behavior.
 ====
 
 ##### Level 2
-GeoPackage software supports the link:extensions/metadata.md[Metadata Extension]. GeoPackage-writing software populates the two metadata tables with information regarding each dataset and GeoPackage clients make this metadata available to the user upon request. 
+GeoPackage software supports the link:extensions/metadata.md[Metadata Extension]. GeoPackage-writing software populates the two metadata tables with information regarding each dataset and GeoPackage clients make this metadata available to the user upon request.
 
 [TIP]
 ====
@@ -386,7 +386,7 @@ There is not currently a consensus on the specification for the metadata documen
 ## Change Management
 ### Level 0
 By default, GeoPackage has no capabilities for change management.
-However, in conjunction with Level 3 of Data Provenance (see above), 
+However, in conjunction with Level 3 of Data Provenance (see above),
 
 ### Level 1
 For each table that is modified, a GeoPackage Producer adds a row to `gpkg_metadata_reference` with a `reference_scope` of "table".
@@ -432,7 +432,7 @@ There is currently no example available at this time.
 ====
 
 #### Level 2
-GeoPackage software uses the `attributes_table_name` column of `gpkgext_vt_layers` to indicate the name of an attributes table that contains attributes for the features in that layer. 
+GeoPackage software uses the `attributes_table_name` column of `gpkgext_vt_layers` to indicate the name of an attributes table that contains attributes for the features in that layer.
 This allows the attributes to be encoded more efficiently, without being duplicated across each vector tile that contains the feature.
 
 [NOTE]
