@@ -160,7 +160,7 @@ END;
 
 /* Conditions: Update a non-empty geometry with another non-empty geometry
    Actions   : Replace record from R-tree for <i> */
-CREATE TRIGGER rtree_<t>_<c>_update6_old_geom_notnull AFTER UPDATE OF <c> ON <t>
+CREATE TRIGGER rtree_<t>_<c>_update6 AFTER UPDATE OF <c> ON <t>
   WHEN OLD.<i> = NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
        (OLD.<c> NOTNULL AND NOT ST_IsEmpty(OLD.<c>))
@@ -175,7 +175,7 @@ END;
 
 /* Conditions: Update a null/empty geometry with a non-empty geometry
    Actions   : Insert record into R-tree for new <i> */
-CREATE TRIGGER rtree_<t>_<c>_update7_old_geom_null AFTER UPDATE OF <c> ON <t>
+CREATE TRIGGER rtree_<t>_<c>_update7 AFTER UPDATE OF <c> ON <t>
   WHEN OLD.<i> = NEW.<i> AND
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
        (OLD.<c> ISNULL OR ST_IsEmpty(OLD.<c>))
