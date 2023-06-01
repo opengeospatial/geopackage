@@ -2,15 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.8">
+<meta name="generator" content="Asciidoctor 2.0.10">
 <link rel="icon" type="image/x-icon" href="../img/favicon.ico">
 <title>OGC® GeoPackage Encoding Standard</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <link rel="stylesheet" href="./asciidoctor.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./coderay-asciidoctor.css">
 </head>
 <body class="book">
 <div id="header">
@@ -22,14 +20,14 @@
 <p>Open Geospatial Consortium<br></p>
 </div>
 <div id="ogcheading" class="paragraph">
-<p>External identifier of this OGC® document: <a href="http://www.opengis.net/doc/IS/geopackage/1.3" class="bare">http://www.opengis.net/doc/IS/geopackage/1.3</a><br>
+<p>External identifier of this OGC® document: <a href="http://www.opengis.net/doc/IS/geopackage/1.4" class="bare">http://www.opengis.net/doc/IS/geopackage/1.4</a><br>
 URL for this OGC® document: <a href="http://www.geopackage.org/spec" class="bare">http://www.geopackage.org/spec</a><br>
-Internal reference number of this OGC® document: OGC 12-128r18<br>
-Version: 1.3.1<br>
+Internal reference number of this OGC® document: OGC 12-128r19<br>
+Version: 1.4<br>
 Category: OGC® Encoding Standard<br>
 Editor:   Jeff Yutzler<br>
 Editor Emeritus: Paul Daisey<br>
-<em>Previous Version: <a href="http://www.geopackage.org/spec130/" class="bare">http://www.geopackage.org/spec130/</a></em><br>
+<em>Previous Version: <a href="http://www.geopackage.org/spec131/" class="bare">http://www.geopackage.org/spec131/</a></em><br>
 <em>Publication Date: TBD</em><br>
 <em>Approval Date:   TBD</em><br>
 <em>Submission Date: TBD</em><br>
@@ -41,7 +39,7 @@ Editor Emeritus: Paul Daisey<br>
 <h2 id="_ogc_geopackage_encoding_standard">OGC® GeoPackage Encoding Standard</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Copyright © 2021 Open Geospatial Consortium.<br>
+<p>Copyright © 2023 Open Geospatial Consortium.<br>
 To obtain additional rights of use, visit <a href="http://www.opengeospatial.org/legal/" class="bare">http://www.opengeospatial.org/legal/</a><br></p>
 </div>
 <div class="admonitionblock warning">
@@ -64,7 +62,7 @@ To obtain additional rights of use, visit <a href="http://www.opengeospatial.org
 <div class="paragraph">
 <p>Document type:   	OGC® Standard<br>
 Document subtype:   	Encoding Standard <br>
-Document stage:   	Approved<br>
+Document stage:   	Request for Comment<br>
 Document language: 	English<br></p>
 </div>
 </div>
@@ -223,7 +221,7 @@ Document language: 	English<br></p>
 <ul class="sectlevel2">
 <li><a href="#extension_geometry_types">F.1. GeoPackage Non-Linear Geometry Types</a></li>
 <li><a href="#extension_geometry_encoding">F.2. User Defined Geometry Types Extension of GeoPackageBinary Geometry Encoding</a></li>
-<li><a href="#extension_rtree">F.3. RTree Spatial Indexes</a></li>
+<li><a href="#extension_rtree">F.3. R-tree Spatial Indexes</a></li>
 <li><a href="#extension_geometry_type_triggers">F.4. Geometry Type Triggers</a></li>
 <li><a href="#extension_geometry_srsid_triggers">F.5. Geometry SRS ID Triggers</a></li>
 <li><a href="#extension_zoom_other_intervals">F.6. Zoom Other Intervals</a></li>
@@ -379,7 +377,7 @@ The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#
 <div class="title">Requirement 2</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. <sup><a href="#K3">[K3]</a></sup> A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be in integer with a major version, two-digit minor version, and two-digit bug-fix. For GeoPackage Version 1.3.0 this value is 0x0000283C (the hexadecimal value for 10300). <sup><a href="#K4">[K4]</a></sup></p>
+<p>A GeoPackage SHALL contain a value of 0x47504B47 ("GPKG" in ASCII) in the "application_id" field of the SQLite database header to indicate that it is a GeoPackage. <sup><a href="#K3">[K3]</a></sup> A GeoPackage SHALL contain an appropriate value in "user_version" field of the SQLite database header to indicate its version. The value SHALL be a five-digit integer with a major version, two-digit minor version, and two-digit bug-fix. <sup><a href="#K4">[K4]</a></sup></p>
 </div>
 </div>
 </div>
@@ -387,6 +385,21 @@ The first 16 bytes of a GeoPackage SHALL be the null-terminated ASCII <a href="#
 <p>The maximum size of a GeoPackage file is about 140TB <sup><a href="#K4a">[K4a]</a></sup>.
 In practice a lower size limit MAY be imposed by the filesystem to which the file is written.
 Many mobile devices require external memory cards to be formatted using the FAT32 file system which imposes a maximum size limit of 4GB.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>For example, for GeoPackage Version 1.3.0 this value is 0x0000283C (the hexadecimal value for 10300).
+The version can be retrieved using the SQLite command <code>PRAGMA user_version</code>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect5">
@@ -424,25 +437,44 @@ Previous statements that the media type is <span class="line-through"><code>appl
 <div class="title">Requirement 4</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL only contain the data elements (tables, columns, or values) and SQL constructs (views, constraints, or triggers) specified in the core of this encoding standard (<a href="#features">Features</a>, <a href="#tiles">Tiles</a>, and <a href="#attributes">Attributes</a>). Extended GeoPackages MAY contain additional data elements and SQL constructs as specified through the <a href="#extension_mechanism">Extension Mechanism</a>.</p>
+<p>A GeoPackage SHALL <span class="line-through">only</span> contain the data elements (tables, columns, or values) and SQL constructs (views, constraints, or triggers) specified in the core of this encoding standard.</p>
 </div>
 </div>
 </div>
 <div class="paragraph">
-<p>The <strong>GeoPackage</strong> designation is designed to provide maximum interoperability between applications. In an <strong>Extended GeoPackage</strong>, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. Developers are encouraged to consider the implications of extensions when designing their applications. Best practices include the following:</p>
+<p>A <strong>GeoPackage</strong> is expected to have content in at least one of the core options (<a href="#features">Features</a>, <a href="#tiles">Tiles</a>, and <a href="#attributes">Attributes</a>).</p>
+</div>
+<div class="paragraph">
+<p><strong>Extended GeoPackages</strong> MAY contain additional data elements and SQL constructs as specified through the <a href="#extension_mechanism">Extension Mechanism</a>.
+In an Extended GeoPackage, the extension mechanism is used to provide additional capabilities in a way that maintains interoperability as much as possible. Developers are encouraged to consider the implications of extensions when designing their applications. Best practices include the following designing extensions in a way that anticipates the presence of unexpected extensions, e.g., gracefully handling unexpected columns, values, or encodings.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <strong>GeoPackage</strong> designation was originally designed to indicate a schema with maximum interoperability.
+However, as the standard has evolved, it has become increasingly important for GeoPackages to contain certain extensions such as the following:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Designing in a way that anticipates the presence of unexpected extensions, e.g., gracefully handling unexpected columns, values, or encodings.</p>
+<p>the <a href="#extension_rtree">R-tree Spatial Indexes</a> extension for GeoPackages containing a non-trivial amount of vector data, and</p>
 </li>
 <li>
-<p>Using the <a href="#extension_rtree">RTree Spatial Indexes</a> extension for GeoPackages containing a non-trivial amount of vector data.</p>
-</li>
-<li>
-<p>Using the <a href="#extension_crs_wkt">WKT for Coordinate Reference Systems</a> extension, which is strongly recommended due to inherent weaknesses in the original standard for encoding coordinate reference systems.</p>
+<p>the <a href="#extension_crs_wkt">WKT for Coordinate Reference Systems</a> extension, which is strongly recommended due to inherent weaknesses in the original standard for encoding coordinate reference systems.</p>
 </li>
 </ul>
+</div>
+<div class="paragraph">
+<p>In light of this evolution, the difference between a GeoPackage and an Extended GeoPackage is no longer relevant.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div id="r5" class="exampleblock">
 <div class="title">Requirement 5</div>
@@ -528,14 +560,28 @@ Previous statements that the media type is <span class="line-through"><code>appl
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATE</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISO-8601 date string in the form YYYY-MM-DD encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> <a href="#I29">[I29]</a> date string in the form YYYY-MM-DD encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT (see TEXT above).</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">DATETIME</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISO-8601 date/time string in the form YYYY-MM-DDTHH:MM:SS.SSSZ with T separator character and Z suffix for coordinated universal time (UTC) encoded in either UTF-8 or UTF-16. See TEXT. Stored as SQLite TEXT.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISO-8601 date/time string in the form YYYY-MM-DDTHH:MM[:SS.SSS]Z with T separator character, Z suffix for coordinated universal time (UTC), and encoded in either UTF-8 or UTF-16. Seconds and fractional seconds are OPTIONAL. Fractional seconds MAY have fewer or more than three digits. Stored as SQLite TEXT (see TEXT above).</p></td>
 </tr>
 </tbody>
 </table>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The SQLite <a href="https://sqlite.org/lang_datefunc.html">Date And Time Functions</a> internally store a timestamp in a way that makes the maximum precision 1 millisecond. Therefore, those functions are unsuitable for dealing with timestamps having a higher precision than one millisecond.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 <div class="sect5">
 <h6 id="_file_integrity">1.1.1.1.4. File Integrity</h6>
@@ -910,7 +956,7 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 <div class="title">Requirement 15</div>
 <div class="content">
 <div class="paragraph">
-<p>Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in <a href="http://www.iso.org/iso/catalogue_detail?csnumber=40874">ISO 8601</a> <a href="#I29">[I29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC. The ISO8601 format is as defined by the strftime function '%Y-%m-%dT%H:%M:%fZ' format string applied to the current time. <sup><a href="#K7">[K7]</a></sup></p>
+<p>Values of the <code>gpkg_contents</code> table <code>last_change</code> column SHALL be in a DATETIME format as per <a href="#r5">Requirement 5</a>.<sup><a href="#K7">[K7]</a></sup></p>
 </div>
 </div>
 </div>
@@ -2848,70 +2894,6 @@ The GeoPackage standard does not place any constraints on application, platform,
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>/base/core/container/data/file_contents</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that the GeoPackage only contains specified contents</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Method</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>SELECT COUNT(*) from gpkg_extensions;</p>
-</li>
-<li>
-<p>Not testable if table exists and count &gt; 0</p>
-</li>
-<li>
-<p>For each gpkg_* table_name</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>PRAGMA table_info(table_name)</p>
-</li>
-<li>
-<p>Continue if returns an empty result set</p>
-</li>
-<li>
-<p>Fail if column definitions returned by "PRAGMA table_info" do not match column definitions for the table in Annex C.</p>
-</li>
-</ol>
-</div>
-</li>
-<li>
-<p>Pass if no fails</p>
-</li>
-</ol>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Reference</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Clause 1.1.1.1.3 Req 4:</p>
-</div></div></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Type</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Basic</p>
-</div></div></td>
-</tr>
-</tbody>
-</table>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 16.6666%;">
-<col style="width: 83.3334%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Case ID</strong></p></td>
-<td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
 <p>/base/core/container/data/table_data_types</p>
 </div></div></td>
 </tr>
@@ -3402,7 +3384,7 @@ The GeoPackage standard does not place any constraints on application, platform,
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Test Purpose</strong></p></td>
 <td class="tableblock halign-left valign-top"><div class="content"><div class="paragraph">
-<p>Verify that the <code>gpkg_contents</code> table <code>last_change</code> column values are in ISO 8601 [29]format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ("zulu") suffix indicating UTC.</p>
+<p>Verify that the <code>gpkg_contents</code> table <code>last_change</code> column values are in ISO 8601 [29] format as per <a href="#r5">Requirement 5</a>.</p>
 </div></div></td>
 </tr>
 <tr>
@@ -8225,7 +8207,7 @@ Definitions of those extensions are in the form specified by the template in <a 
 <td class="tableblock halign-left valign-top"><p class="tableblock">features</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_rtree">RTree Spatial Indexes</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#extension_rtree">R-tree Spatial Indexes</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">features</p></td>
 </tr>
 <tr>
@@ -8644,10 +8626,11 @@ viii. Otherwise log pass</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="extension_rtree">F.3. RTree Spatial Indexes</h3>
+<h3 id="extension_rtree">F.3. R-tree Spatial Indexes</h3>
 <h4 id="_introduction_6" class="float">Introduction</h4>
 <div class="paragraph">
-<p>The RTree Spatial Indexes extension provides a means to encode an RTree index for geometry values in a GeoPackage. An RTree index provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.<sup><a href="#K26">[K26]</a></sup></p>
+<p>The R-tree Spatial Indexes extension provides a means to encode an R-tree index for geometry values in a GeoPackage.
+An R-tree index <a href="#B28">[B28]</a> provides a significant performance advantage for searches with basic envelope spatial criteria that return subsets of the rows in a feature table with a non-trivial number (thousands or more) of rows.<sup><a href="#K26">[K26]</a></sup></p>
 </div>
 <h4 id="_extension_author_3" class="float">Extension Author</h4>
 <div class="paragraph">
@@ -8671,7 +8654,7 @@ viii. Otherwise log pass</p>
 </div>
 <h4 id="_requirements_3" class="float">Requirements</h4>
 <div class="paragraph">
-<p>This extension uses the rtree implementation provided by the SQLite R*Tree Module extension documented at <a href="http://www.sqlite.org/rtree.html" class="bare">http://www.sqlite.org/rtree.html</a>.</p>
+<p>This extension uses the R-tree implementation provided by the SQLite R*Tree Module extension documented at <a href="http://www.sqlite.org/rtree.html" class="bare">http://www.sqlite.org/rtree.html</a>.</p>
 </div>
 <h5 id="_geopackage_3" class="float">GeoPackage</h5>
 <div id="r75" class="exampleblock">
@@ -8694,7 +8677,7 @@ viii. Otherwise log pass</p>
 <div class="title">Requirement 77</div>
 <div class="content">
 <div class="paragraph">
-<p>A GeoPackage SHALL implement spatial indexes on feature table geometry columns using the SQLite Virtual Table RTrees and triggers specified below.
+<p>A GeoPackage SHALL implement spatial indexes on feature table geometry columns using the SQLite Virtual Table R-trees and triggers specified below.
 The tables below contain SQL templates with variables.
 Replace the following template variables with the specified values to create the required SQL statements:<br>
 &lt;t&gt;: The name of the feature table containing the geometry column<br>
@@ -8705,7 +8688,7 @@ Replace the following template variables with the specified values to create the
 </div>
 <h6 id="_create_virtual_table" class="float">Create Virtual Table</h6>
 <div class="paragraph">
-<p>RTree spatial indexes on geometry columns SHALL be created using the SQLite Virtual Table RTree extension.
+<p>R-tree spatial indexes on geometry columns SHALL be created using the SQLite Virtual Table R-tree extension.
 An application that creates a spatial index SHALL create it using the following SQL statement template:</p>
 </div>
 <div class="listingblock">
@@ -8715,11 +8698,11 @@ An application that creates a spatial index SHALL create it using the following 
 </div>
 <div class="paragraph">
 <p>where &lt;t&gt; and &lt;c&gt; are replaced with the names of the feature table and geometry column being indexed.
-The rtree function id parameter becomes the virtual table 64-bit signed integer primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored as 32-bit floating point numbers) for each dimension that become the virtual table data columns that are populated to create the spatial rtree index.</p>
+The R-tree function id parameter becomes the virtual table 64-bit signed integer primary key id column, and the min/max x/y parameters are min- and max-value pairs (stored as 32-bit floating point numbers) for each dimension that become the virtual table data columns that are populated to create the spatial R-tree index.</p>
 </div>
 <h6 id="_load_spatial_index_values" class="float">Load Spatial Index Values</h6>
 <div class="paragraph">
-<p>The indexes provided by the SQLite Virtual Table RTree extension are not automatic indexes.
+<p>The indexes provided by the SQLite Virtual Table R-tree extension are not automatic indexes.
 This means the index data structure needs to be manually populated, updated and queried.
 Each newly created spatial index SHALL be populated using the following SQL statement</p>
 </div>
@@ -8740,7 +8723,7 @@ These spatial index triggers SHALL be defined as follows:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="sql"><span class="comment">/* Conditions: Insertion of non-empty geometry
-   Actions   : Insert record into rtree */</span>
+   Actions   : Insert record into R-tree */</span>
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_insert <span class="directive">AFTER</span> <span class="class">INSERT</span> <span class="keyword">ON</span> &lt;t&gt;
   <span class="keyword">WHEN</span> (new.&lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span> <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;))
 <span class="class">BEGIN</span>
@@ -8751,23 +8734,12 @@ These spatial index triggers SHALL be defined as follows:</p>
   );
 <span class="keyword">END</span>;
 
-<span class="comment">/* Conditions: Update of geometry column to non-empty geometry
-               No row ID change
-   Actions   : Update record in rtree */</span>
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update1 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
-  <span class="keyword">WHEN</span> OLD.&lt;i&gt; = NEW.&lt;i&gt; <span class="keyword">AND</span>
-       (NEW.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;))
-<span class="class">BEGIN</span>
-  <span class="class">INSERT</span> <span class="keyword">OR</span> <span class="class">REPLACE</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">VALUES</span> (
-    NEW.&lt;i&gt;,
-    ST_MinX(NEW.&lt;c&gt;), ST_MaxX(NEW.&lt;c&gt;),
-    ST_MinY(NEW.&lt;c&gt;), ST_MaxY(NEW.&lt;c&gt;)
-  );
-<span class="keyword">END</span>;
+<span class="comment">/* rtree_&lt;t&gt;_&lt;c&gt;_update1 is deprecated and is replaced by
+    rtree_&lt;t&gt;_&lt;c&gt;_update6 and rtree_&lt;t&gt;_&lt;c&gt;_update7 */</span>
 
 <span class="comment">/* Conditions: Update of geometry column to empty geometry
                No row ID change
-   Actions   : Remove record from rtree */</span>
+   Actions   : Remove record from R-tree */</span>
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update2 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
   <span class="keyword">WHEN</span> OLD.&lt;i&gt; = NEW.&lt;i&gt; <span class="keyword">AND</span>
        (NEW.&lt;c&gt; ISNULL <span class="keyword">OR</span> ST_IsEmpty(NEW.&lt;c&gt;))
@@ -8775,12 +8747,26 @@ These spatial index triggers SHALL be defined as follows:</p>
   <span class="class">DELETE</span> <span class="keyword">FROM</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">WHERE</span> id = OLD.&lt;i&gt;;
 <span class="keyword">END</span>;
 
+<span class="comment">/* rtree_&lt;t&gt;_&lt;c&gt;_update3 is deprecated and is replaced by
+    rtree_&lt;t&gt;_&lt;c&gt;_update5 */</span>
+
+<span class="comment">/* Conditions: Update of any column
+               Row ID change
+               Empty geometry
+   Actions   : Remove record from R-tree for old and new &lt;i&gt; */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update4 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> OLD.&lt;i&gt; != NEW.&lt;i&gt; <span class="keyword">AND</span>
+       (NEW.&lt;c&gt; ISNULL <span class="keyword">OR</span> ST_IsEmpty(NEW.&lt;c&gt;))
+<span class="class">BEGIN</span>
+  <span class="class">DELETE</span> <span class="keyword">FROM</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">WHERE</span> id <span class="keyword">IN</span> (OLD.&lt;i&gt;, NEW.&lt;i&gt;);
+<span class="keyword">END</span>;
+
 <span class="comment">/* Conditions: Update of any column
                Row ID change
                Non-empty geometry
-   Actions   : Remove record from rtree for old &lt;i&gt;
-               Insert record into rtree for new &lt;i&gt; */</span>
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update3 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">ON</span> &lt;t&gt;
+   Actions   : Remove record from R-tree for old &lt;i&gt;
+               Insert record into R-tree for new &lt;i&gt; */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update5 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">ON</span> &lt;t&gt;
   <span class="keyword">WHEN</span> OLD.&lt;i&gt; != NEW.&lt;i&gt; <span class="keyword">AND</span>
        (NEW.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;))
 <span class="class">BEGIN</span>
@@ -8792,19 +8778,37 @@ These spatial index triggers SHALL be defined as follows:</p>
   );
 <span class="keyword">END</span>;
 
-<span class="comment">/* Conditions: Update of any column
-               Row ID change
-               Empty geometry
-   Actions   : Remove record from rtree for old and new &lt;i&gt; */</span>
-<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update4 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">ON</span> &lt;t&gt;
-  <span class="keyword">WHEN</span> OLD.&lt;i&gt; != NEW.&lt;i&gt; <span class="keyword">AND</span>
-       (NEW.&lt;c&gt; ISNULL <span class="keyword">OR</span> ST_IsEmpty(NEW.&lt;c&gt;))
+<span class="comment">/* Conditions: Update a non-empty geometry with another non-empty geometry
+   Actions   : Replace record from R-tree for &lt;i&gt; */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update6 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> OLD.&lt;i&gt; = NEW.&lt;i&gt; <span class="keyword">AND</span>
+       (NEW.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;)) <span class="keyword">AND</span>
+       (OLD.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(OLD.&lt;c&gt;))
 <span class="class">BEGIN</span>
-  <span class="class">DELETE</span> <span class="keyword">FROM</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">WHERE</span> id <span class="keyword">IN</span> (OLD.&lt;i&gt;, NEW.&lt;i&gt;);
+  <span class="class">UPDATE</span> &lt;t&gt; <span class="class">SET</span>
+    minx = ST_MinX(NEW.&lt;c&gt;),
+    maxx = ST_MaxX(NEW.&lt;c&gt;),
+    miny = ST_MinY(NEW.&lt;c&gt;),
+    maxy = ST_MaxY(NEW.&lt;c&gt;)
+  <span class="keyword">WHERE</span> id = NEW.&lt;i&gt;;
+<span class="keyword">END</span>;
+
+<span class="comment">/* Conditions: Update a null/empty geometry with a non-empty geometry
+   Actions   : Insert record into R-tree for new &lt;i&gt; */</span>
+<span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update7 <span class="directive">AFTER</span> <span class="class">UPDATE</span> <span class="keyword">OF</span> &lt;c&gt; <span class="keyword">ON</span> &lt;t&gt;
+  <span class="keyword">WHEN</span> OLD.&lt;i&gt; = NEW.&lt;i&gt; <span class="keyword">AND</span>
+       (NEW.&lt;c&gt; NOTNULL <span class="keyword">AND</span> <span class="keyword">NOT</span> ST_IsEmpty(NEW.&lt;c&gt;)) <span class="keyword">AND</span>
+       (OLD.&lt;c&gt; ISNULL <span class="keyword">OR</span> ST_IsEmpty(OLD.&lt;c&gt;))
+<span class="class">BEGIN</span>
+  <span class="class">INSERT</span> <span class="class">INTO</span> rtree_&lt;t&gt;_&lt;c&gt; <span class="keyword">VALUES</span> (
+    NEW.&lt;i&gt;,
+    ST_MinX(NEW.&lt;c&gt;), ST_MaxX(NEW.&lt;c&gt;),
+    ST_MinY(NEW.&lt;c&gt;), ST_MaxY(NEW.&lt;c&gt;)
+  );
 <span class="keyword">END</span>;
 
 <span class="comment">/* Conditions: Row deleted
-   Actions   : Remove record from rtree for old &lt;i&gt; */</span>
+   Actions   : Remove record from R-tree for old &lt;i&gt; */</span>
 <span class="class">CREATE</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_delete <span class="directive">AFTER</span> <span class="class">DELETE</span> <span class="keyword">ON</span> &lt;t&gt;
   <span class="keyword">WHEN</span> old.&lt;c&gt; <span class="keyword">NOT</span> <span class="predefined-constant">NULL</span>
 <span class="class">BEGIN</span>
@@ -8824,8 +8828,26 @@ These spatial index triggers SHALL be defined as follows:</p>
 <td class="content">
 <div class="paragraph">
 <p>GeoPackage Versions 1.2.0 and prior have an incorrect update3 trigger that will fail in certain circumstances.
-It is strongly recommended to update older GeoPackages with the correct trigger presented here.
+GeoPackage Version 1.2.1 fixes this issue by replacing the update3 trigger.
+In GeoPackage 1.4.0, the decision was made to deprecate the update3 trigger and replace it with the new update5 trigger.
+This will allow clients to easily detect whether the correct trigger is in place.
+It is strongly recommended to update older GeoPackages by dropping the update3 trigger and adding the update5 trigger.
 The GeoPackage Executable Test Suite has been updated to accept either version of the trigger in older versions and to mandate the corrected version in versions after 1.2.0.</p>
+</div>
+<div class="paragraph">
+<p>In addition, GeoPackage Versions 1.3.1 and prior have a single update1 trigger that is incompatible with upsert statements.
+GeoPackage Version 1.4.0 fixes this issue by replacing the update1 trigger with the new update6 and update7 triggers.
+It is strongly recommended to update older GeoPackages by dropping the update1 trigger and adding the update6 and update7 triggers.
+The GeoPackage Executable Test Suite will be updated to accept either version of the trigger in older versions and to mandate the corrected version in versions after 1.3.1.</p>
+</div>
+<div class="paragraph">
+<p>If present, the deprecated triggers can be dropped with a <code>DROP TRIGGER</code> command.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">DROP</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update1;
+<span class="class">DROP</span> <span class="type">TRIGGER</span> rtree_&lt;t&gt;_&lt;c&gt;_update3;</code></pre>
+</div>
 </div>
 </td>
 </tr>
@@ -8855,13 +8877,13 @@ The GeoPackage Executable Test Suite has been updated to accept either version o
 <td class="tableblock halign-left valign-top"><p class="tableblock">compile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SQLITE_ENABLE_RTREE</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Shall</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RTrees ares used for GeoPackage Spatial Indexes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R-trees are used for GeoPackage Spatial Indexes</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">compile</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">SQLITE_RTREE_INT_ONLY</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Not</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">RTrees with floating point values are used for GeoPackage spatial indexes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">R-trees with floating point values are used for GeoPackage spatial indexes</p></td>
 </tr>
 </tbody>
 </table>
@@ -8926,9 +8948,9 @@ The GeoPackage Executable Test Suite has been updated to accept either version o
 </td>
 <td class="content">
 <div class="paragraph">
-<p>The minimum bounding indexes created within the RTree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature.
+<p>The minimum bounding indexes created within the R-tree Extension for GeoPackage should reflect the appropriate bounding area for the indexed feature.
 However, due to varying precision implementations, it is not practical to assert this practice through a requirement or test.
-Clients should exercise care when using these indexes during queries because the SQLite RTree module might <a href="https://www.sqlite.org/rtree.html#roundoff_error">round bounding boxes slightly outward</a> (up to 0.000012%).
+Clients should exercise care when using these indexes during queries because the SQLite R-tree module might <a href="https://www.sqlite.org/rtree.html#roundoff_error">round bounding boxes slightly outward</a> (up to 0.000012%).
 Queries using spatial indexes should contain slightly expanded bounding boxes to guard against this.</p>
 </div>
 </td>
@@ -9092,7 +9114,7 @@ Queries using spatial indexes should contain slightly expanded bounding boxes to
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>Fail if returned sql != result of populating insert triggers template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+<p>Fail if returned sql != result of populating insert trigger template using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
 </li>
 </ol>
 </div>
@@ -9102,7 +9124,10 @@ Queries using spatial indexes should contain slightly expanded bounding boxes to
 <div class="olist lowerroman">
 <ol class="lowerroman" type="i">
 <li>
-<p>Fail if returned sql != result of populating 4 update triggers templates using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+<p>Fail if returned sql != result of populating <span class="line-through">4</span> 5 update triggers templates using result_set_table_name for &lt;t&gt; and result_set_column_name for &lt;c&gt;</p>
+</li>
+<li>
+<p>Fail if the result set contains the deprecated <code>update1</code> and/or <code>update3</code> triggers.</p>
 </li>
 </ol>
 </div>
@@ -9218,7 +9243,7 @@ Queries using spatial indexes should contain slightly expanded bounding boxes to
 </td>
 <td class="content">
 <div class="paragraph">
-<p>On August 15, 2016 the GeoPackage SWG voted to remote this extension from the standard due to interoperability concerns. For more information see the release notes. The original extension may be found in <a href="http://www.geopackage.org/spec110/#extension_geometry_type_triggers" class="bare">http://www.geopackage.org/spec110/#extension_geometry_type_triggers</a>.</p>
+<p>On August 15, 2016 the GeoPackage SWG voted to remove this extension from the standard due to interoperability concerns. For more information see the release notes. The original extension may be found in <a href="http://www.geopackage.org/spec110/#extension_geometry_type_triggers" class="bare">http://www.geopackage.org/spec110/#extension_geometry_type_triggers</a>.</p>
 </div>
 </td>
 </tr>
@@ -9235,7 +9260,7 @@ Queries using spatial indexes should contain slightly expanded bounding boxes to
 </td>
 <td class="content">
 <div class="paragraph">
-<p>On August 15, 2016 the GeoPackage SWG voted to remote this extension from the standard due to interoperability concerns. For more information see the release notes. The original extension may be found in <a href="http://www.geopackage.org/spec110/#extension_geometry_srsid_triggers" class="bare">http://www.geopackage.org/spec110/#extension_geometry_srsid_triggers</a>.</p>
+<p>On August 15, 2016 the GeoPackage SWG voted to remove this extension from the standard due to interoperability concerns. For more information see the release notes. The original extension may be found in <a href="http://www.geopackage.org/spec110/#extension_geometry_srsid_triggers" class="bare">http://www.geopackage.org/spec110/#extension_geometry_srsid_triggers</a>.</p>
 </div>
 </td>
 </tr>
@@ -10224,7 +10249,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <div class="title">Requirement 100</div>
 <div class="content">
 <div class="paragraph">
-<p>Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in ISO 8601 <a href="#I29">[I29]</a> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC.<sup><a href="#K37">[K37]</a></sup></p>
+<p>Every <code>gpkg_metadata_reference</code> table row timestamp column value SHALL be in a DATETIME format as per <a href="#r5">Requirement 5</a>.<sup><a href="#K37">[K37]</a></sup></p>
 </div>
 </div>
 </div>
@@ -10759,7 +10784,7 @@ Every other <code>gpkg_metadata_reference</code> table row SHALL have a <code>ro
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>Fail if format of returned value does not match yyyy-mm-ddThh:mm:ss.hhhZ</p>
+<p>Fail if format of returned value does not match the format as per <a href="#r5">Requirement 5</a></p>
 </li>
 <li>
 <p>Log pass otherwise</p>
@@ -14013,6 +14038,9 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 <li>
 <p><a id="B27"></a>[B27] Media Types <a href="https://www.iana.org/assignments/media-types/media-types.xhtml" class="bare">https://www.iana.org/assignments/media-types/media-types.xhtml</a></p>
 </li>
+<li>
+<p><a id="B28"></a>[B28]  Guttman, A. (1984). "R-Trees: A Dynamic Index Structure for Spatial Searching" <a href="http://www-db.deis.unibo.it/courses/SI-LS/papers/Gut84.pdf" class="bare">http://www-db.deis.unibo.it/courses/SI-LS/papers/Gut84.pdf</a>. Proceedings of the 1984 ACM SIGMOD international conference on Management of data – SIGMOD '84. p. 47.</p>
+</li>
 </ul>
 </div>
 </div>
@@ -14050,7 +14078,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 <p><a id="K6b"></a>[K6b] When a table has a primary key that is backed by a ROWID, the "null" flag is ignored.</p>
 </li>
 <li>
-<p><a id="K7"></a>[K7] The following statement selects an ISO 8601 timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).</p>
+<p><a id="K7"></a>[K7] The following statement selects an ISO 8601 timestamp value with millisecond precision using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).</p>
 </li>
 <li>
 <p><a id="K8"></a>[K8] GeometryCollection is a generic term for the ST_GeomCollection type defined in <a href="#I12">[I12]</a>, which uses it for the definition of Well Known Text (WKT) and Well Known Binary (WKB) encodings. The SQL type name GEOMETRYCOLLECTION defined in <a href="#I10">[I10]</a> and used in Clause 1.1.2.1.1 and Annex G below refers to the SQL BLOB encoding of a GeometryCollection.</p>
@@ -14140,7 +14168,7 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 <p><a id="K36"></a>[K36] The "taxonomy" md_scope MAY be used for taxonomy or knowledge system (B41)(B42) "linked data" information stored as XML metadata that is linked to features stored in a GeoPackage.</p>
 </li>
 <li>
-<p><a id="K37"></a>[K37] The following statement selects an ISO 8601timestamp value using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).</p>
+<p><a id="K37"></a>[K37] The following statement selects an ISO 8601 timestamp value with millisecond precision using the SQLite strftime function: SELECT (strftime('%Y-%m-%dT%H:%M:%fZ','now')).</p>
 </li>
 <li>
 <p><a id="K38"></a>[K38] A GeoPackage is not required to contain a gpkg_data_columns table. The gpkg_data_columns table in a GeoPackage MAY be empty.</p>
@@ -14155,8 +14183,9 @@ information - Simple feature access - Part 2: SQL option Version 1.1.0 2005-11-2
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2022-10-14 16:38:39 UTC
+Last updated 2023-06-01 15:46:55 -0400
 </div>
 </div>
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
 </body>
 </html>
