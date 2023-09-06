@@ -1,16 +1,6 @@
 [[Clause_Substantive]]
 == Description of Substantive Changes
 
-=== Make DATETIME format more flexible
-In GeoPackage 1.3.1 and prior, Requirement 5 specified that DATETIME formats must conform to the template `YYYY-MM-DDTHH:MM:SS.SSSZ`.
-This is unnecessarily restrictive and can cause problems in the following ways:
-
-* Requiring unnecessary precision may add bloat to the GeoPackage.
-* Requiring a very specific precision may cause problems when converting other data to GeoPackage, including loss of data and the necessity of an additional agent to artificially modify the existing data so that it conforms to the template.
-
-In fact, https://sqlite.org/lang_datefunc.html#time_values[SQLite documentation] offers a number of legal formats and allows fractional seconds to have fewer or more than three digits.
-In response, the SWG agreed to relax the definition, while retaining compatibility with ISO-8601.
-
 === Relax Requirement #4
 The *GeoPackage* designation was originally designed to indicate a schema with maximum interoperability.
 However, as the standard has evolved, it has become increasingly important for GeoPackages to contain certain extensions.
@@ -38,3 +28,18 @@ These changes are designed to prevent interoperability problems and
 do not introduce any new interoperability risks.
 Clients are encouraged to apply these fixes to older versions of GeoPackage as well.
 The Executable Test Suite will be updated to ensure that either set of triggers is treated as compliant.
+
+=== [line-through]#Make DATETIME format more flexible#
+[line-through]#In GeoPackage 1.3.1 and prior, Requirement 5 specified that DATETIME formats must conform to the template `YYYY-MM-DDTHH:MM:SS.SSSZ`.
+This is unnecessarily restrictive and can cause problems in the following ways:#
+
+* [line-through]#Requiring unnecessary precision may add bloat to the GeoPackage.#
+* [line-through]#Requiring a very specific precision may cause problems when converting other data to GeoPackage, including loss of data and the necessity of an additional agent to artificially modify the existing data so that it conforms to the template.#
+
+[line-through]#In fact, https://sqlite.org/lang_datefunc.html#time_values[SQLite documentation] offers a number of legal formats and allows fractional seconds to have fewer or more than three digits.
+In response, the SWG agreed to relax the definition, while retaining compatibility with ISO-8601.#
+
+[NOTE]
+====
+After reviewing the potential impact on GeoPackage clients, changes regarding date-time formats have been deferred until further notice.
+====
