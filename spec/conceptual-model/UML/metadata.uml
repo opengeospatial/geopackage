@@ -1,4 +1,4 @@
-classDiagram
+@startuml
 
    class MetadataEntityStore {
    }
@@ -54,13 +54,14 @@ classDiagram
    Metadata --> "0..1" Metadata: parentMetadata
    MetadataEntityStore o-- "*" Metadata
    MetadataEntityStore o-- "*" MetadataReference
-   MetadataEntityStore --|> EntityStore
+   MetadataEntityStore ..|> EntityStore
    Attribute <|-- MetadataAttribute
-   Metadata ..> MetadataAttribute
+   Metadata --> MetadataAttribute
    MetadataAttributeType --|> AttributeType
-   Metadata --|> Entity
+   Metadata ..|> Entity
    MetadataAttribute ..> MetadataAttributeType
    MetadataAttribute *-- MetadataDocument
    EntityType <|-- MetadataEntityType
-   Metadata ..> MetadataEntityType
-   MetadataEntityType ..> MetadataAttributeType
+   Metadata --> MetadataEntityType
+   MetadataEntityType o-- MetadataAttributeType
+@enduml

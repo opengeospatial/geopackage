@@ -1,0 +1,42 @@
+== Conventions
+This section provides details and examples for any conventions used in the document. Examples of conventions are symbols, abbreviations, use of XML schema, or special notes regarding how to read the document.
+
+=== Conceptual Model
+The CM is comprised of definitions of relevant concepts.
+Since the CM was reverse-engineered from the GES, this CM provides references _in italics_ indicating how the concepts are realized in the GES. 
+
+=== Logical Model
+The LM uses a modified form of Unified Modeling Language (UML) to describe GeoPackage classes.
+Classes are represented as UML classes and columns are represented as UML attributes.
+The conventions used are as follows:
+
+==== Relationships
+.A solid arrow indicates an association.
+[#uml_association,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention1.png[]
+
+.A dotted arrow indicates a dependency.
+[#uml_dependency,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention6.png[]
+
+.A diamond-based line indicates an aggregation.
+[#uml_aggregation,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention2.png[]
+
+.A solid line with a solid arrowhead indicates an inheritance.
+[#uml_inheritance,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention3.png[]
+
+.A dotted line with a solid arrowhead indicates a realization.
+[#uml_realization,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention4.png[]
+
+==== Multiplicity
+* Multiplicity is assumed to be `1` unless otherwise specified.
+* An unbounded multiplicity (0..n) is represented as `*`.
+* For attributes, see <<uml_null>>.
+* Other relationship multiplicities are explicitly specified.
+
+.A Question Mark `?` after a type name indicates a nullable or optional attribute type
+[#uml_null,reftext='{figure-caption} {counter:figure-num}']
+image::figures/convention5.png[]

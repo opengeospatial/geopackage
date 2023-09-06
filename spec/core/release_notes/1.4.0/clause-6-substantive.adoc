@@ -1,0 +1,40 @@
+[[Clause_Substantive]]
+== Description of Substantive Changes
+
+=== Make DATETIME format more flexible
+In GeoPackage 1.3.1 and prior, Requirement 5 specified that DATETIME formats must conform to the template `YYYY-MM-DDTHH:MM:SS.SSSZ`.
+This is unnecessarily restrictive and can cause problems in the following ways:
+
+* Requiring unnecessary precision may add bloat to the GeoPackage.
+* Requiring a very specific precision may cause problems when converting other data to GeoPackage, including loss of data and the necessity of an additional agent to artificially modify the existing data so that it conforms to the template.
+
+In fact, https://sqlite.org/lang_datefunc.html#time_values[SQLite documentation] offers a number of legal formats and allows fractional seconds to have fewer or more than three digits.
+In response, the SWG agreed to relax the definition, while retaining compatibility with ISO-8601.
+
+=== Relax Requirement #4
+The *GeoPackage* designation was originally designed to indicate a schema with maximum interoperability.
+However, as the standard has evolved, it has become increasingly important for GeoPackages to contain certain extensions.
+In light of this evolution, the difference between a GeoPackage and an Extended GeoPackage is no longer relevant.
+If anything, this requirement was just causing confusion.
+The presence of extensions would cause the Executable Test Suite (ETS) to skip Requirement 4, which has implications in how ETS results are interpreted.
+
+This change has no significant operational impact.
+
+=== Update R-tree Index Triggers
+Two changes have been made to the R-tree Spatial Index Triggers,
+which are part of the https://www.geopackage.org/spec/#extension_rtree[R-tree Spatial Indexes Extension].
+
+. In GeoPackage 1.2.1, the _update3_ trigger was link:https://portal.ogc.org/files/18-024r1#_removing_erroneous_part_of_trigger_annex_f_3[fixed].
+However, to simplify the process for a client to detect whether the faulty trigger has been repaired,
+the trigger has now been renamed to _update5_.
+. In GeoPackage 1.4.0, the _update1_ trigger has been fixed to correct a flaw that
+prevented it from working properly during `UPSERT` statements.
+The _update1_ trigger has been deprecated and replaced
+by the new _update6_ and _update7_ triggers.
+As with the _update3_ and _update5_ triggers, this simplifies the process for a client
+to detect whether the faulty trigger has been repaired.
+
+These changes are designed to prevent interoperability problems and
+do not introduce any new interoperability risks.
+Clients are encouraged to apply these fixes to older versions of GeoPackage as well.
+The Executable Test Suite will be updated to ensure that either set of triggers is treated as compliant.

@@ -1,6 +1,6 @@
 [big]*i.     Abstract*
 
-This document is a revision to the GeoPackage WKT for Coordinate Reference Systems Extension that is currently published as Annex F.10 of the GeoPackage Encoding Standard 1.3.0 (OGC 12-128r17).
+This document is a revision to the GeoPackage WKT for Coordinate Reference Systems Extension that previously was published as Annex F.10 of the GeoPackage Encoding Standard 1.3.0 (OGC 12-128r17).
 This document replaces Annex F.10.
 The extension defines how to encode coordinate reference systems (CRS) in GeoPackages using the ISO/OGC Well-known text representation of coordinate reference systems [2019] (CRS WKT2) Standard.
 Specifically, this revision adds coordinate epochs to the encoding of coordinate reference systems in a GeoPackage.
@@ -14,7 +14,7 @@ ogcdoc, OGC document, geopackage, crs, srs, wkt, crs_wkt, crs_wkt2
 [big]*iii.   Preface*
 
 Version 1 of the OGC GeoPackage Encoding Standard was adopted prior to the adoption of "12-063r5 OGC Well known text representation of Coordinate Reference Systems" [2014] (so-called WKT2).
-As a result, the OGC GeoPackage Encoding Standard references an older CRS WKT document (link:http://portal.opengeospatial.org/files/?artifact_id=999[OpenGIS® 01-009 Implementation Specification: Coordinate Transformation Services Revision 1.0], so-called WKT1) which has known ambiguities that are being encountered by the implementation community.
+As a result, the OGC GeoPackage Encoding Standard references an older CRS WKT document (link:http://portal.opengeospatial.org/files/?artifact_id=999[OpenGIS® 01-009 Implementation Specification: Coordinate Transformation Services Revision 1.0], so-called WKT1), which has known ambiguities that are being encountered by the implementation community.
 The CRS extension establishes a new column in the `gpkg_spatial_ref_sys` table to contain values that conform to the WKT2 Standard.
 In 2019, OGC adopted "18-010r7 OGC Well known text representation of Coordinate Reference Systems" as a revision to 12-063r5.
 The core (unextended) GeoPackage Encoding Standard supports the older CRS WKT [12-063r5] standard (WKT1).
@@ -23,8 +23,7 @@ However, use of the newer WKT2 encoding is strongly encouraged.
 GeoPackage clients are expected to use the newer encoding if both encodings are present.
 
 In a dynamic CRS, coordinates of a point on the surface of the Earth may change with time.
-To be unambiguous, the coordinates must always be qualified with the epoch at which they are valid.
-(The coordinate epoch is not necessarily the epoch at which the observation was collected.)
+To be unambiguous, the coordinates must always be qualified with the epoch at which they are valid (the coordinate epoch is not necessarily the epoch at which the observation was collected).
 In 2021, the GeoPackage SWG added coordinate epochs to `gpkg_spatial_ref_sys`.
 As this was the only substantive change to the GeoPackage Encoding Standard being considered at the time, the decision was made to split this extension into a separate document so that it could be considered separately.
 

@@ -223,7 +223,7 @@ Every other `gpkg_metadata_reference` table row SHALL have a `row_id_value` colu
 [caption=""]
 .Requirement 100
 ====
-Every `gpkg_metadata_reference` table row timestamp column value SHALL be in ISO 8601 <<I29>> format containing a complete date plus UTC hours, minutes, seconds and a decimal fraction of a second, with a 'Z' ('zulu') suffix indicating UTC.^<<K37>>^
+Every `gpkg_metadata_reference` table row timestamp column value SHALL be in a DATETIME format as per <<r5>>.^<<K37>>^
 ====
 
 [[r101]]
@@ -398,7 +398,7 @@ Every `gpkg_metadata_reference` table row `md_parent_id` column value that is NO
 . SELECT timestamp from gpkg_metadata_reference.
 .  Not testable if returns an empty result set
 . For each row from step 1
-.. Fail if format of returned value does not match yyyy-mm-ddThh:mm:ss.hhhZ
+.. Fail if format of returned value does not match the format as per <<r5>>
 .. Log pass otherwise
 . Pass if logged pass and no fails.
 |*Reference* |Annex F.8 Req 100
