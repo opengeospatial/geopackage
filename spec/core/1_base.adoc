@@ -219,13 +219,13 @@ However, there is no guarantee that SRS IDs will be globally unique across organ
 GeoPackage clients should not make assumptions regarding the organization or definition of any SRS ID other than those defined in <<r11>>.
 ====
 
-Definition column WKT values in the `gpkg_spatial_ref_sys` table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <<r11>>. Values are constructed per the EBNF syntax in <<I32>> clause 7. EBNF name and number values may be obtained from any specified authority, e.g. <<I13>><<I14>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<r11>>:
+Definition column WKT values in the `gpkg_spatial_ref_sys` table define the Spatial Reference Systems used by feature geometries and tile images, unless these SRSs are unknown and therefore undefined as specified in <<r11>>. Values are constructed per the EBNF syntax in <<I32>> clause 7. EBNF name and number values may be obtained from any specified authority, e.g., EPSG <<I13>>. For example, see the return value in <<spatial_ref_sys_data_values_default>> Test Method step (3) used to test the definition for WGS-84 per <<r11>>:
 
 [[r11]]
 [caption=""]
 .Requirement 11
 ====
-The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed in <<gpkg_spatial_ref_sys_records>>. The record with an `srs_id` of 4326 SHALL correspond to http://www.google.com/search?as_q=WGS-84[WGS-84] <<I15>> as defined by  http://www.epsg.org/Geodetic.html[EPSG] <<B3>> in http://www.epsg-registry.org/report.htm?type=selection&entity=urn:ogc:def:crs:EPSG::4326&reportDetail=long&title=WGS%2084&style=urn:uuid:report-style:default-with-code&style_name=OGP%20Default%20With%20Code[4326] <<I13>><<I14>>. The record with an `srs_id` of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an `srs_id` of 0 SHALL be used for undefined geographic coordinate reference systems.
+The `gpkg_spatial_ref_sys` table SHALL contain at a minimum the records listed in <<gpkg_spatial_ref_sys_records>>. The record with an `srs_id` of 4326 SHALL correspond to http://www.google.com/search?as_q=WGS-84[WGS-84] <<I15>> as defined by https://epsg.org/home.html[EPSG] in https://epsg.org/crs_4326/WGS-84.html[4326] <<I13>>. The record with an `srs_id` of -1 SHALL be used for undefined Cartesian coordinate reference systems. The record with an `srs_id` of 0 SHALL be used for undefined geographic coordinate reference systems.
 ====
 
 [#gpkg_spatial_ref_sys_records,reftext='{table-caption} {counter:table-num}']
