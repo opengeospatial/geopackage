@@ -165,7 +165,7 @@ CREATE TRIGGER rtree_<t>_<c>_update6 AFTER UPDATE OF <c> ON <t>
        (NEW.<c> NOTNULL AND NOT ST_IsEmpty(NEW.<c>)) AND
        (OLD.<c> NOTNULL AND NOT ST_IsEmpty(OLD.<c>))
 BEGIN
-  UPDATE <t> SET
+  UPDATE rtree_<t>_<c> SET
     minx = ST_MinX(NEW.<c>),
     maxx = ST_MaxX(NEW.<c>),
     miny = ST_MinY(NEW.<c>),
