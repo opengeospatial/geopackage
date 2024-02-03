@@ -203,7 +203,7 @@ Pass if results match required content from <<gpkg_extensions_records>>, else Fa
 |Requirement: |/req/table-defs/ger_relname
 |Test purpose: | Verify that the relation_name entries listed in `gpkgext_relations` table are valid.
 |Test method: |
-1. `SELECT base_table_name, relation_name FROM gpkgext_relations WHERE (relation_name NOT IN ('features', 'simple_attributes', 'media') AND relation_name NOT LIKE 'x-_%\__%' ESCAPE '\')`
+1. `SELECT base_table_name, relation_name FROM gpkgext_relations WHERE (relation_name NOT IN ('features', 'simple_attributes', 'media', 'attributes', 'tiles') AND relation_name NOT LIKE 'x-_%\__%' ESCAPE '\')`
 
 2. Fail if returns any rows
 |===
