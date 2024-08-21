@@ -1,0 +1,351 @@
+[[VectorTilesClause]]
+== Vector Tiles
+
+[[VectorTilesRequirementClass]]
+=== Vector Tiles Requirements
+
+==== Introduction
+
+These requirements define how to encode tiled feature data (commonly known as _vector tiles_) in a GeoPackage data store.
+
+For vector tilesets, all of the http://www.geopackage.org/guidance/getting-started.html#tiles[Tiles Option] applies.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/vector-tiles
+description:: For defining how vector tiles are encoded
+part:: Vector tilesets SHALL be stored in a GeoPackage with individual tiles stored in the `tile_data` blob of a tile pyramid user data table.
+part:: The `data_type` of a vector tileset entry in the `gpkg_contents` table SHALL be `vector-tiles`.
+part:: The Coordinate Reference System (SRS) specified for a vector tileset in the `gpkg_spatial_ref_sys` (see clause 1.1.2 in the core GeoPackage standard) SHALL be https://docs.ogc.org/is/17-083r4/17-083r4.html#toc15[compatible (see 2DTMS _6.2.1.1. TileMatrixSet CRS Compatibility_)] with the Coordinate Reference System of the 2D Tile Matrix Set definition for that tileset.
+====
+
+.Example SQL statement for creating a user-defined table storing vector tiles
+[source,sql]
+----
+CREATE TABLE tiles_physical(
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   zoom_level INTEGER NOT NULL,
+   tile_column INTEGER NOT NULL,
+   tile_row INTEGER NOT NULL,
+   tile_data BLOB NOT NULL,
+   UNIQUE (zoom_level, tile_column, tile_row)
+)
+----
+
+See <<compusult-gpkg_tiles>> for an implementation example of a user-defined vector tiles table.
+
+There are two additional required metadata tables for vector tiles, `gpkgext_vt_layers` and `gpkgext_vt_fields`, that mirror the https://github.com/mapbox/mbtiles-spec/blob/master/1.3/spec.md#vector_layers[vector_layers key from the JSON object from the metadata from MBTiles].
+This allows client software to understand the feature schemas without having to open individual tiles.
+As with other GeoPackage tables, this extension takes no position on how either of these tables are to be used by a client.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/vector-tiles-layers
+description:: For describing the layers contained in vector tilesets
+part:: GeoPackage containing vector tiles SHALL include a `gpkgext_vt_layers` table describing the layers in a vector tile set. The columns in this table are:
+* `id`, the primary key
+* `table_name`, which matches the entry in `gpkg_contents`
+* `name`, the layer name
+* `description`, an optional text description
+* `minzoom` and `maxzoom`, the optional integer minimum and maximum zoom levels
+* `attributes_table_name`, the optional name of an attributes table containing the attributes (when encoding attributes into a separate attributes tables rather than embedding them in the vector tiles -- should be NULL for this RBT extension)
+* `geometry_dimension`, the dimension of the geometry found in the layer (NULL: unknown/mixed, 0: Point/MultiPoint, 1: LineString/MultiLineString, 2: Polygon/MultiPolygon)
+====
+
+.Example SQL statement for creating the `gpkgext_vt_layers` table
+[source,sql]
+----
+CREATE TABLE gpkgext_vt_layers (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   table_name TEXT NOT NULL REFERENCES gpkg_contents (table_name),
+   name TEXT NOT NULL,
+   description TEXT,
+   minzoom INTEGER,
+   maxzoom INTEGER,
+   attributes_table_name TEXT,
+   geometry_dimension INTEGER
+)
+----
+
+See <<compusult-gpkgext_vt_layers>> for an implementation example of the `gpkgext_vt_layers` table.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/vector-tiles-fields
+description:: For describing the fields contained in vector tilesets
+part:: GeoPackage containing vector tiles SHALL include a `gpkgext_vt_fields` table describing the fields (attributes) for a tiled feature data layer. The columns in this table are:
+* `id`, the primary key
+* `layer_id`, a foreign key to `id` in `gpkgext_vt_layers`
+* `name`, the field name
+* `type`, either "String", "Number", or "Boolean"
+====
+
+.Example SQL statement for creating the `gpkgext_vt_fields` table
+[source,sql]
+----
+CREATE TABLE gpkgext_vt_fields (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   layer_id INTEGER REFERENCES gpkgext_vt_layers,
+   name TEXT NOT NULL,
+   type TEXT
+)
+----
+
+See <<compusult-gpkgext_vt_fields>> for an implementation example of the `gpkgext_vt_fields` table.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/content-types
+description:: For specifying the media types and content encoding of user data tables
+part:: The GeoPackage SHALL include a `gpkgext_content_types` table identifying the media type containing the following columns:
+* `content_id`, a foreign key to the corresponding entry in the `gpkg_contents`
+* `media_type`, text indicating a media type used in the `tile_data` blobs of the corresponding tile pyramid user data table (e.g., `image/png` or `application/vnd.mapbox-vector-tile`)
+* `encoding`, the https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding[content encoding] (e.g., `deflate` or `gzip` compression), _NULL_ if no additional encoding is used for the same `tile_data` blobs
+====
+
+.Example SQL statement for creating the `gpkgext_content_types` table
+[source,sql]
+----
+CREATE TABLE gpkgext_content_types (
+   content_id INTEGER REFERENCES gpkg_contents,
+   media_type TEXT,
+   encoding TEXT
+)
+----
+
+NOTE: Multiple entries for the same `content_id` indicate that multiple data media types can be found in the corresponding tiles table (e.g., JPEG and PNG).
+
+[[AttributeTablesRequirementClass]]
+=== Attribute Tables Requirements
+
+These requirements allow to store attributes of vector tiles in features tables, which is more compact compared to duplicating the same attribute informaiton in multiple vector tiles.
+Use of this requirement class is agnostic of the vector tiles encoding, but requires that the encoded vector tiles have a unique feature identifier referencing a row of their associated attributes table.
+
+[[gpkg-attributes-vt-layers]]
+[float]
+==== `gpkgext_vt_layers`
+Set the `attributes_table_name` column to the appropriate table for each vector tiles layer with attributes in an attributes table.
+
+Use the primary key of the attributes table as the feature ID in the encoded vector tiles.
+
+It is recommended to use the http://www.geopackage.org/spec120/#extension_rtree[RTree Extension] to optimize spatial look up of features, as well as to store the spatial extent of each feature
+which will allow to list tiles within the extent.
+
+For a more direct mapping of features and tiles, the Tiles / Features Mapping requirement class can also be used.
+
+[[TilesFeaturesMappingRequirementClass]]
+=== Tiles / Features Mapping Requirements
+
+These requirements define how to associate features with the tiles in which they are located, and vice-versa (many to many association).
+The use of the Attributes Table requirement class as well as the R-Tree extension is technically sufficient to look up the extent of a particular feature, which can then be used to list
+all possible tiles within that extent where geometry for that feature could exist. Use of feature IDs inside tiles also enable to look up features while iterating through geometry found within loaded tiles.
+
+Use of this requirements class, based on the https://www.geopackage.org/spec/related-tables/[Related Table Extension], provides the ability to perform these lookup operations in a more direct manner.
+
+This requirements class defines a relationship between features of a vector tiles layer and vector tiles (or tiled feature data) containing those features.
+When this requirements class is used, it is possible to perform a relational query and isolate only the vector tiles containing relevant features.
+In some circumstances this has the potential to greatly improve application performance.
+This extension is agnostic to the underlying _format_ of the vector tiles.
+
+[float]
+==== Background
+The http://docs.opengeospatial.org/is/18-000/18-000.html[GeoPackage Related Tables Extension] (RTE) defines the rules and requirements for creating relationships in a GeoPackage data store between geospatial data tables and other tables that contain or reference related content such as attributes or media.
+As an example, this can be used to establish a many-to-many relationship between features (e.g., points, lines, or areas) and multimedia files.
+By definition, the "left" side of the relationship is the "base" data and the "right" side of the relationship is the "related" data.
+The mapping table links related rows in those tables of those types by reference to their primary keys.
+
+When relating vector tiles with the attributes of the features in those tiles, the base data is the vector tiles and the related data is the attributes as illustrated below.
+
+// by <<img-model>>.
+
+The "GeoPackage Extension for Related Tables" allows a GeoPackage to contain additional data that is related to geospatial (e.g., features) or attributes data.
+When relating tiled feature data with attributes, the tiled feature data is the "base" data and the attributes are the "related" data.
+
+////
+.Table Diagram
+[#img-model]
+image::images/vt+attributes_basic.png[]
+////
+
+////
+REVIEW: gpkg_extensions for each req. class
+[float]
+==== `gpkg_extensions`
+To use this extension, add the following rows to this table as described in http://www.geopackage.org/guidance/getting-started.html#gpkg_extensions[`gpkg_extensions`].
+
+[[gpkg_vector_tiles_attributes_ger_table]]
+.gpkg_extensions Table Rows
+[cols=",,,,",options="header",]
+|========================================================================================================================================================================
+| table_name | column_name | extension_name | definition | scope
+|`gpkgext_relations`|null|`related_tables`|https://github.com/opengeospatial/geopackage-related-tables | `read-write`
+|_name of actual <<gpkg-attributes-udmt>>_|null|`related_tables`|https://github.com/opengeospatial/geopackage-related-tables|`read-write`
+|========================================================================================================================================================================
+
+[NOTE]
+==========
+The values in the `definition` column SHOULD refer in some human-readable way to this extension specification. If the extension is adopted by the OGC, it will gain the "gpkg_" prefix and get a different definition permalink.
+==========
+
+////
+
+[float]
+==== `gpkgext_relations`
+This table describes extended relationships.
+The table requires the following columns:
+
+.gpkgext_relations Table Rows
+[cols=",",options="header",]
+|========================================================================================================================================================================
+| Column        | Description
+| `id`  | primary key
+| `base_table_name` | Name of the vector tiles table
+| `base_primary_column` | `id` (all user-defined tiles tables have this column)
+| `related_table_name` | Name of the user-defined attributes table
+| `related_primary_column` | Name of the primary key column in `related_table_name`
+| `relation_name` | `vector_tiles_attributes`
+| `mapping_table_name` | Name of a <<gpkg-attributes-udmt>>
+|========================================================================================================================================================================
+
+Add a row to this table for each vector tiles layer with attributes in an attributes table.
+
+[[gpkg-attributes-udmt]]
+[float]
+==== User-defined Mapping Table
+A link:http://www.geopackage.org/guidance/extensions/related_tables.html#user-defined-mapping-table[user-defined mapping table] describes the many-to-many relationships between base data (tiles) and related data (features).
+A user-defined mapping table requires at least the following columns:
+
+.gpkgext_relations Table Rows
+[cols=",",options="header",]
+|====
+| Column        | Description
+| `base_id`  | tile ID (the primary key value of the base data table)
+| `related_id` | feature ID (the primary key value of the related data table)
+|====
+
+[[WKBCollectionEncodingRequirementClass]]
+=== WKB Collection Encoding Requirements
+
+These requirements define how to encode vector tiles in a GeoPackage data store using an extension of the Well-Known Binary (WKB) specification as defined in
+https://portal.ogc.org/files/?artifact_id=25355[OGC Simple Feature Access] Section 8 "Well-known Binary Representation for Geometry". WKB is also used to encode
+non-tiled vector data in GeoPackage feature tables. This extension allows to encode the geometry of multiple features in a single blob, while including an identifier
+which can be mapped to an attributes table, as well as the ability to mark artificial segments.
+
+.WKB Collection Layout
+[options="header"]
+|===
+| Field | Type | Size
+| Endianness | 0: big, 1: little | 1 byte
+| Coordinate Type | 1: Z, 2: M (bits) | 1 byte
+| Geometry Type | 1: (multi)point, 2: (multi)linestring, 3: (multi)polygon | 2 bytes
+| Feature Count | uint32 | 4 bytes
+| **Feature Table** (one entry per feature) |  |
+| Feature ID | uint64    | 8 bytes
+| Offset from start | uint64    | 8 bytes
+| **# Features with artificial segments** | uint32 | 4 bytes
+| **Artificial Segments Table** (for each feature with artificial segment) |  |
+| # Artificial segments | uint32 | 4 bytes
+| (Multi)Polygon: _**For Each artificial segment**_ |  |
+| Polygon index | uint32 | 4 bytes
+| Contour index | uint32 | 4 bytes
+| Artificial **_From_** Point index | uint32 | 4 bytes
+| Artificial **_To_** Point index | uint32 | 4 bytes
+| (Multi)LineString : _**For Each artificial segment**_ |  |
+| LineString index | uint32 | 4 bytes
+| Artificial **_From_** Point index | uint32 | 4 bytes
+| Artificial **_To_** Point index | uint32 | 4 bytes
+| **Feature Geometry** (for each feature) |  |
+| Encoded geometry | https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary[Well-known binary] (https://portal.ogc.org/files/?artifact_id=25355[Simple Feature Access] / Section 8)|
+|===
+
+NOTE: A client that does not understand or care about artificial segments information will simply skip over it with the feature table offsets.
+
+////
+
+[[GeoJSONEncodingRequirementClass]]
+=== GeoJSON Encoding Requirements
+
+These requirements define how to encode vector tiles in a GeoPackage data store using the https://datatracker.ietf.org/doc/html/rfc7946[GeoJSON specification].
+
+The content of the vector tiles SHALL be feature collections encoded as GeoJSON.
+
+
+REVIEW: Extension definition
+
+==== Extension Title
+
+GeoJSON Vector Tiles
+
+[float]
+==== Extension Name or Template
+
+`im_vector_tiles_geojson` (If this extension is adopted by the OGC, then `gpkg_geojson_vector_tiles` will be named as an alias.)
+
+[float]
+==== Extension Type
+
+This extension defines an encoding for the <<VectorTilesExtensionClause>>.
+
+[float]
+==== Applicability
+
+This extension defines a specific encoding for GeoJSON Vector Tiles in a GeoPackage.
+
+[float]
+==== Specification
+
+If this extension is in use, then all of the <<VectorTilesExtensionClause>> applies.
+
+
+[float]
+===== User Data Tables
+Like other tile-based content, the physical data is stored in a https://tools.ietf.org/html/rfc7946#section-3.3[GeoJSON Feature Collection].
+
+[float]
+===== `gpkg_extensions`
+To use this extension, add a row to this table for each tile pyramid user data table.
+
+[[im_vector_tiles_geojson_ger_table]]
+.gpkg_extensions Table Rows
+[cols=",,,,",options="header",]
+|========================================================================================================================================================================
+| table_name | column_name | extension_name | definition | scope
+| _tile pyramid user data table name_   | `tile_data`  | `im_vector_tiles_geojson`   | _a reference to this file_ | _read-write_
+|========================================================================================================================================================================
+
+[NOTE]
+==========
+The values in the `definition` column SHOULD refer in some human-readable way to this extension specification. If the extension is adopted by the OGC, it will gain the "gpkg_" prefix and get a different definition permalink.
+==========
+////
+
+
+[[MapboxVectorTilesRequirementClass]]
+=== Mapbox Vector Tiles Encoding Requirements
+
+These requirements define how to encode vector tiles in a GeoPackage data store using the https://github.com/mapbox/vector-tile-spec/tree/master/2.1[Mapbox Vector Tiles (MVT) specification version 2.1],
+based on https://github.com/google/protobuf[Google Protocol Buffers] for encoding the data of each tile.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/mapbox-vector-tiles
+description:: For describing how tiles are encoded using Mapbox Vector Tiles
+part:: Tilesets encoded using Mapbox Vector Tiles SHALL be stored as blobs in the `tile_data` fields of http://www.geopackage.org/guidance/getting-started.html#user-data-tables[user-defined tiles tables].
+part:: The `tile_data` blobs SHALL be encoded Google Protocol Buffers (PBF) using the schema https://github.com/mapbox/vector-tile-spec/blob/master/2.1/vector_tile.proto[defined for MVT].
+part:: If an encoding such as `gzip` or `deflate` is specified in the `gpkgext_content_types` table, the PBF blob SHALL have this additional encoding applied.
+====
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/rbt/mvt-id
+description:: For specifying a unique feature ID
+part:: Features contained in Mapbox Vector Tiles contained in a GeoPackage vector tileset SHOULD make use of the MVT `id` field to store a persistent numeric identifier
+uniquely identifying a particular feature of the parent layer. This enables client to recognize features across tile boundaries (for example, to reconstruct the original features)
+without resorting to attribute comparison, which might not be accurate.
+====

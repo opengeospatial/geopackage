@@ -1,0 +1,234 @@
+[[StylingClause]]
+== Styling
+
+=== Styling Requirements
+
+These requirements provide a mechanism to include the style sheets, symbols and fonts needed to portray the data stored in a GeoPackage in one or more style, as intended by the producer.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/styles
+description:: For defining styles
+part:: Styles to portray the data in a GeoPackage SHALL be defined as entries in the `gpkgext_styles` table containing the following column:
+* `id`, a primary key
+* `style`, text naming a specific style
+* `description`, an optional text description
+* `uri`, a resolvable URI
+====
+
+.Example SQL statement for creating the `gpkgext_styles` table
+[source,sql]
+----
+CREATE TABLE gpkgext_styles (
+   id INTEGER PRIMARY KEY,
+   style TEXT NOT NULL,
+   description TEXT,
+   uri TEXT,
+   UNIQUE(uri)
+)
+----
+
+See <<compusult-gpkgext_styles>> for an implementation example of the `gpkgext_styles` table.
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/rbt/styles-uris
+description:: Guidance on style URIs
+part:: Where possible, style URIs SHOULD resolve to a network-accessible resource.
+part:: When that is not possible, style URIs SHOULD be unique.
+part:: If no existing URI scheme is available, a style URI SHOULD take the form of: `gpkgstyle::[geodataclass]::[org]::[style]`
+====
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/style-sheets
+description:: For encoding style sheets
+part:: Style sheets, a list of styling rules encoded in a particular styling language, corresponding to a particular style SHALL be defined as entries in the `gpkgext_stylesheets` table containing the following column:
+* `id`, a primary key
+* `style_id`, a foreign key to `gpkgext_styles`
+* `format`, the format of the stylesheet (e.g., `mbstyle` or `sld`)
+* `stylesheet`, the actual stylesheet BLOB (since some stylesheets are binary)
+====
+
+.Example SQL statement for creating the `gpkgext_stylesheets` table
+[source,sql]
+----
+CREATE TABLE gpkgext_stylesheets (
+   id INTEGER PRIMARY KEY,
+   style_id INTEGER REFERENCES gpkgext_styles,
+   format TEXT NOT NULL,
+   stylesheet BLOB NOT NULL,
+   UNIQUE(style_id, format)
+)
+----
+
+See <<compusult-gpkgext_stylesheets>> for an implementation example of the `gpkgext_stylesheets` table.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/symbols
+description:: For defining symbols
+part:: Symbols SHALL be defined in a `gpkgext_symbols` table contains containing the following columns:
+* `id`, a primary key
+* `symbol`, text naming a specific symbol
+* `description`, an optional text description
+* `uri`, a resolvable URI
+====
+
+.Example SQL statement for creating the `gpkgext_symbols` table
+[source,sql]
+----
+CREATE TABLE gpkgext_symbols (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   uri TEXT,
+   symbol TEXT NOT NULL,
+   title TEXT NOT NULL,
+   description TEXT
+)
+----
+
+See <<compusult-gpkgext_symbols>> for an implementation example of the `gpkgext_symbols` table.
+
+[recommendation]
+====
+[%metadata]
+identifier:: /rec/rbt/symbol-uris
+description:: Guidance on symbol URIs
+part:: Where possible, symbol URIs SHOULD resolve to a network-accessible resource.
+part:: When that is not possible, symbol URIs SHOULD be unique.
+part:: If no existing URI scheme is available, a symbol URI SHOULD take the form of: `gpkgsym::[geodataclass]::[org]::[style]::[symbol]`
+(`[style]` could be replaced by e.g., `multiple` if the symbol applies to multiple styles)
+====
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/symbol-images
+description:: For defining symbols
+part:: Images representing symbols SHALL be defined in a `gpkgext_symbol_images` table contains containing the following columns:
+* `id`, a primary key
+* `symbol_id`, a foreign key to `gpkgext_symbols`
+* `content_id`, a foreign key to `gpkgext_symbol_content`
+* `width`, `height`, optional parameters that are required for sprites or for when there are multiple versions of the same image with different sizes
+* `offset_x`, `offset_y`, `pixel_ratio`, optional parameters for sprite information (NULL if the entire image is used)
+====
+
+.Example SQL statement for creating the `gpkgext_symbol_images` table
+[source,sql]
+----
+CREATE TABLE gpkgext_symbol_images (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   symbol_id INTEGER NOT NULL REFERENCES gpkgext_symbols,
+   content_id INTEGER NOT NULL REFERENCES gpkgext_symbol_content,
+   width INTEGER,
+   height INTEGER,
+   offset_x INTEGER,
+   offset_y INTEGER,
+   pixel_ratio INTEGER
+)
+----
+
+See <<compusult-gpkgext_symbol_images>> for an implementation example of the `gpkgext_symbol_images` table.
+
+NOTE: If a symbol sprite sheet is included as a single image containing multiple symbols, multiple entries of this table will reference the same sprite sheet symbol content entry.
+
+NOTE: Multiple images may be defined for the same symbol so as to offer different resolutions, differerent styles and/or for both an individual and sprite sheet version of the same symbol.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/symbol-content
+description:: For defining symbols
+part:: The actual data for an image SHALL be encoded in a `gpkgext_symbol_content` table containing the following column:
+* `id`, a primary key
+* `format`, the media type (formerly MIME type, e.g., `image/svg+xml` or `image/png`) of the symbol
+* `content`, the actual symbol BLOB
+* `uri`, a resolvable name to uniquely reference a specific content entry e.g., for use in Mapbox GL styles `sprite` property to reference a particular sprite sheet
+====
+
+.Example SQL statement for creating the `gpkgext_symbol_content` table
+[source,sql]
+----
+CREATE TABLE gpkgext_symbol_content (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   format TEXT NOT NULL,
+   content BLOB NOT NULL,
+   uri TEXT NOT NULL
+)
+----
+
+See <<compusult-gpkgext_symbol_content>> for an implementation example of the `gpkgext_symbol_content` table.
+
+NOTE: Multiple versions of the same image may be included (e.g., both SVG and PNG).
+
+[[FontsClause]]
+=== Fonts Requirements
+
+These requirements define how fonts required by styles can be included in the GeoPackage.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/fonts
+description:: For optionally including fonts
+part:: If included, fonts required by styles SHALL be encoded in a `gpkgext_fonts` table containing the following column:
+* `id`, a primary key
+* `name`, the name of the font
+* `font`, the TrueType or OpenType font as a BLOB,
+* `glyphs`, a BLOB consisting of a zipped protobuf ranges of signed distanced field glyphs (as returned by the https://docs.mapbox.com/api/maps/font[Mapbox Fonts API]) with `{rangeLo-rangeHi}.pbf` filenames within the zip
+part:: At least `font` or `glyphs` SHALL be included in every entry
+====
+
+.Example SQL statement for creating the `gpkgext_fonts` table
+[source,sql]
+----
+CREATE TABLE gpkgext_fonts(
+   id INTEGER PRIMARY KEY,
+   name TEXT UNIQUE,
+   font BLOB,
+   glyphs BLOB
+)
+----
+
+See <<compusult-gpkgext_fonts>> for an implementation example of the `gpkgext_fonts` table.
+
+[[CartoSymCSSStyleClause]]
+=== CartoSym-CSS Style Encoding Requirements
+
+These requirements define how to include style sheets specified using the https://docs.ogc.org/DRAFTS/18-067r4.html#rc-cscss[CartoSym-CSS style encoding] within a GeoPackage.
+
+[[CartoSymJSONStyleClause]]
+=== CartoSym-JSON Style Encoding Requirements
+
+These requirements define how to include style sheets specified using the https://docs.ogc.org/DRAFTS/18-067r4.html#rc-json[CartoSym-JSON style encoding] within a GeoPackage.
+
+[[SLDSEStyleClause]]
+=== SLD/SE Style Encoding Requirements
+
+These requirements define how to include style sheets specified using the https://www.ogc.org/standard/sld/[Stylable Layer Descriptior] / https://www.ogc.org/standard/se/[Symbology Encoding] (SLD/SE) style encoding within a GeoPackage.
+
+[[CartoSymJSONLStyleClause]]
+=== Mapbox GL Styling Specification Requirements
+
+These requirements define how to include style sheets specified in the https://docs.mapbox.com/style-spec[Mapbox GL Styling Specification] within a GeoPackage.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/mapboxgl-style
+description:: For including MapboxGL style sheets
+part:: Styling rules encode according to the MapboxGL style sheets SHALL be included in the `gpkgext_stylesheets` table.
+part:: The MapboxGL style sheet SHALL refer to a particular tileset by setting the `url` field of a `source` to the GeoDataClass of that tileset, as associated using a `GeoDataClass` type of semantic annotations (`/req/rbt/semantic-annotations`).
+====
+
+NOTE: By supporting a TileJSON representation of the schemas associated with a GeoDataClass, it would be possible for the `url` field to both function as a representative data source for the style,
+while also corresponding to a GeoDataClass. However, it does not however limit the use of this style strictly with that representative data source. The style should be suitable to portray
+any RBT data source conforming to the same schemas associated with the GeoDataClass.
+
+NOTE: An alternative was considered to specify the GeoDataClasses for the style in a separate `geoDataClass` property of the source, instead the `url` field.
+A final decision on this approach should consider the possibility of the GeoDataClass registry on the OGC definition server to return a TileJSON representation of the schemas,
+and would benefit from additional implementation testing, as detailed in the Future Work section of this Engineering Report.

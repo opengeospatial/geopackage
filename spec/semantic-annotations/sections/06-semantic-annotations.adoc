@@ -1,0 +1,63 @@
+[[SemanticAnnotationsClause]]
+== Semantic Annotations
+
+=== Semantic Annotations Requirements
+
+A semantic annotation is a semantically grounded term that can be applied to another concept.
+These requirements define how semantic annotations can be applied to any business object in the current GeoPackage (layers, features, tiles, styles, etc.).
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/semantic-annotations
+description:: For defining semantic annotations
+part:: A semantic annotation SHALL be defined as an entry in a `gpkgext_semantic_annotations` table with the following columns
+* `id`, the a primary key
+* `type`, a semantically grounded type (category) for the annotation
+* `title`, a human-readable title for the annotation
+* `description`, an optional human-readable text description for the annotation
+* `uri`, the resolvable URI for the semantic concept
+====
+
+.Example SQL statement for creating the `gpkgext_semantic_annotations` table
+[source,sql]
+----
+CREATE TABLE gpkgext_semantic_annotations (
+   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+   type TEXT NOT NULL, title TEXT NOT NULL,
+   description TEXT,
+   uri TEXT
+)
+----
+
+See <<compusult-gpkg_semantic_annotations>> for an implementation example of the `gpkgext_semantic_annotations` table.
+
+NOTE: This RBT extension relies on semantic annotations for the association of both tilesets and styles to a `GeoDataClass` `type` of semantic annotation.
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/rbt/sa-reference
+description:: For associating semantic annotations
+part:: Associating a particular business object with a semantic annotation SHALL be done by adding an entry to a `gpkgext_sa_reference` table with the following columns:
+* `table_name`, the name of the table containing the business object
+* `key_column_name`, the name of the integer column in the specified table that acts as a key; if no such column exists, `rowid` can be used
+* `key_value`, the value of the key column that uniquely identifies the row
+* `sa_id`, a foreign key to `gpkgext_semantic_annotations`
+====
+
+.Example SQL statement for creating the `gpkgext_sa_reference` table
+[source,sql]
+----
+CREATE TABLE gpkgext_sa_reference (
+   table_name TEXT NOT NULL,
+   key_column_name TEXT NOT NULL,
+   key_value INTEGER NOT NULL,
+   sa_id INTEGER NOT NULL REFERENCES gpkgext_semantic_annotations,
+   UNIQUE(table_name, key_column_name, key_value, sa_id)
+)
+----
+
+See <<compusult-gpkgext_sa_references>> for an implementation example of the `gpkgext_sa_reference` table.
+
+NOTE: There can be a many-to-many mapping between business object rows and semantic annotations.

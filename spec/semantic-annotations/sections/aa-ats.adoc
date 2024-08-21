@@ -1,0 +1,186 @@
+[appendix,obligation="normative"]
+[[annex-ats]]
+== Conformance Class Abstract Test Suite
+
+=== Conformance Class Semantic Annotations GeoPackage Extension
+
+////
+
+[[conf_rbt,/conf/rbt]]
+[conformance_class]
+====
+[%metadata]
+identifier:: https://fgs-dps.gs.mil/#rbt/conf
+target:: https://fgs-dps.gs.mil/#rbt/req
+classification:: Target Type:Data Product
+abstract-test:: /conf/rbt/extensions
+abstract-test:: /conf/rbt/geodataclasses
+abstract-test:: /conf/rbt/world-mercator
+abstract-test:: /conf/rbt/map-tiles
+abstract-test:: /conf/rbt/physical-cultural-features
+abstract-test:: /conf/rbt/hillshade
+abstract-test:: /conf/rbt/included-styles
+abstract-test:: /conf/rbt/vector-tiles
+abstract-test:: /conf/rbt/vector-tiles-layers
+abstract-test:: /conf/rbt/vector-tiles-fields
+abstract-test:: /conf/rbt/content-types
+abstract-test:: /conf/rbt/mapbox-vector-tiles
+abstract-test:: /conf/rbt/semantic-annotations
+abstract-test:: /conf/rbt/sa-reference
+abstract-test:: /conf/rbt/styles
+abstract-test:: /conf/rbt/style-sheets
+abstract-test:: /conf/rbt/symbol-images
+abstract-test:: /conf/rbt/symbol-content
+abstract-test:: /conf/rbt/fonts
+abstract-test:: /conf/rbt/mapboxgl-style
+====
+
+==== Abstract Test for Requirement RBT Extensions
+
+[[conf_rbt_extensions,/conf/rbt/extensions]]
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/rbt/extensions
+target:: /req/rbt/extensions
+test-purpose:: Verify that the RBT GeoPackage properly declare extended tables
+test-method::
++
+--
+*Given:* a GeoPackage conforming to the core GeoPackage standard +
+*When:* querying the content of the `gpkg_extensions` table +
+*Then:* +
+- assert that all entries listed in <<extension_table>> are present, including an entry for every user data table making use of these extensions.
+--
+====
+
+==== Abstract Test for Requirement GeoDataClasses
+
+[[conf_rbt_geodataclasses,/conf/rbt/geodataclasses]]
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/rbt/geodataclasses
+target:: /req/rbt/geodataclasses
+test-purpose:: Verify that the RBT GeoPackage properly identify RBT tilesets using GeoDataClass semantic annotations
+test-method::
++
+--
+*Given:* a GeoPackage conforming to the core GeoPackage standard passing the `/conf/rbt/semantic-annotations` and `/conf/rbt/sa-reference` tests +
+*When:* querying the semantic annotations +
+*Then:* +
+- assert that corresponding entries exist annotating the `gpkg_contents` table for the mandatory _cultural_ and _physical_ tilesets, as well as for the optional imagery, COCOM and digital elevation model tilesets (if present) +
+- assert that corresponding entries exist annotating the `gpkgext_vt_layers` table for the mandatory _cultural_ and _physical_ tilesets
+--
+====
+
+
+==== Abstract Test for Requirement World Mercator 2DTMS
+
+[[conf_rbt_world-mercator,/conf/rbt/world-mercator]]
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/rbt/world-mercator
+target:: /req/rbt/world-mercator
+test-purpose:: Verify that the RBT GeoPackage tile sets use the World Mercator 2D Tile Matrix Set
+test-method::
++
+--
+*Given:* a GeoPackage conforming to the core GeoPackage standard passing the `/conf/rbt/geodataclasses` test +
+*When:* inspecting the gpkg_tile_matrix and gpkg_tile_matrix_sets tables associated with the identified cultural, physical, imagery COCOM, and elevation model RBT tilesets +
+*Then:* +
+- assert that the entries correspond to those expected for the `http://www.opengis.net/def/tilematrixset/OGC/1.0/WorldMercatorWGS84Quad` 2D Tile Matrix Set using the EPSG:3395 world Mercator coordinate reference system.
+--
+====
+
+==== Abstract Test for Requirement Map Tiles
+
+[[conf_rbt_map-tiles,/conf/rbt/map-tiles]]
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/rbt/map-tiles
+target:: /req/rbt/map-tiles
+test-purpose:: Verify that the RBT GeoPackage tile sets includes the mandatory hillshade tileset, and encodes all mandatory and optional imagery tilesets as expected
+test-method::
++
+--
+*Given:* a GeoPackage conforming to the core GeoPackage standard passing the `/conf/rbt/geodataclasses` and `/conf/rbt/content-types` tests +
+*When:* inspecting the available user defined tiles tables and `gpkg_contents` table +
+*Then:* +
+- assert that the `data_type` of the `gpkg_contents` table for these tilesets is `tiles` +
+- assert that the `tile_data` of the the user defined tiles table contains PNG for the _hillshade_ tileset, and PNG and/or JPEG for the optional imagery tilesets, without any additional encoding applied +
+- assert that the `gpkgext_content_types` table declares these tilesets as using JPEG (except for _hillshade_) or PNG using the `image/jpeg` and/or `image/png` media type and a NULL encoding
+--
+====
+
+==== Abstract Test for Requirement Physical and Cultural Features
+
+[[conf_rbt_physical-cultural-features,/conf/rbt/physical-cultural-features]]
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/rbt/physical-cultural-features
+target:: /req/rbt/physical-cultural-features
+test-purpose:: Verify that the RBT GeoPackage tile sets includes and encodes the mandatory physical and cultural vector features tile sets as expected
+test-method::
++
+--
+*Given:* a GeoPackage conforming to the core GeoPackage standard passing the `/conf/rbt/geodataclasses`, `/conf/rbt/vector-tiles`, `/conf/rbt/vector-tiles-layers` and `/conf/rbt/content-types` tests +
+*When:* inspecting the available user defined tiles tables, `gpkgext_vt_layers`, `gpkg_contents` and their associated semantic annotations tables +
+*Then:* +
+- assert that a physical features tileset with the GeoDataClass `http://www.opengis.net/def/geodataclass/NSG/0/rbt-physical` is included +
+- assert that a cultural features tileset with the GeoDataClass `http://www.opengis.net/def/geodataclass/NSG/0/rbt-cultural` is included +
+- assert that the `data_type` of the `gpkg_contents` table for these tilesets is `vector-tiles` and that the `tile_data` of the the user defined tiles table contains gzip'ed Mapbox Vector Tiles +
+- assert that the `gpkgext_content_types` table declares these tilesets as using Mapbox Vector Tile using the `application/vnd.mapbox-vector-tile` and the `gzip` encoding +
+- assert that the Mapbox Vector Tiles for these tilesets contain embedded attributes
+--
+====
+
+==== Abstract Test for Requirement Hillshade
+
+[[conf_rbt_hillshade,/conf/rbt/hillshade]]
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/rbt/hillshade
+target:: /req/rbt/hillshade
+test-purpose:: Verify that the RBT GeoPackage tile sets includes and encodes the mandatory hillshaded digital elevation model as expected
+test-method::
++
+--
+*Given:* a GeoPackage conforming to the core GeoPackage standard passing the `/conf/rbt/map-tiles` test +
+*When:* inspecting the content of the user defined tiles table for the hillshaded tileset +
+*Then:* +
+- assert that a hillshade tileset with the GeoDataClass `http://www.opengis.net/def/geodataclass/NSG/0/rbt-hillshade` is included +
+- assert that the content of the hillshade tileset is pre-rendered map tileset, in a monochrome translucent hillshaded style encoded as PNG images
+--
+====
+
+==== Abstract Test for Requirement Included Styles
+
+[[conf_rbt_included-styles,/conf/rbt/included-styles]]
+[abstract_test]
+====
+[%metadata]
+identifier:: /conf/rbt/included-styles
+target:: /req/rbt/included-styles
+test-purpose:: Verify that the RBT GeoPackage tile sets includes at least one style in a MapboxGL representation
+test-method::
++
+--
+*Given:* a GeoPackage conforming to the core GeoPackage standard passing the `/conf/rbt/geodataclasses`, `/conf/rbt/styles`, `/conf/rbt/style-sheets`, `/conf/rbt/symbol-images`, `/conf/rbt/symbol-content` and `/conf/rbt/mapboxgl-style` tests +
+*When:* inspecting the content of the `gpkgext_styles` table for styles associated to the _physical_, _cultural_ and _hillshade_ RBT tilesets using the `GeoDataClass` annotation +
+*Then:* +
+- assert that at least one style in a MapboxGL representation is available for styling the physical and cultural and hillshade RBT tilesets +
+- assert that all style sheets applicable to any of the RBT tilesets include styling rules for at least the physical and cutural tilesets +
+- assert that all symbols referenced by MapboxGL style sheets are at least available as a sprite sheet where the `sprite` property of the MapboxGL style corresponds to a `uri` of an entry in the `gpkgext_symbol_content` table whose `content` blob contains all symbols +
+- assert that individual entries in the `gpkgext_symbol_images` table, with offsets and dimensions of individual symbols, exist for all symbols referencing the sprite sheets in the `gpkgext_symbol_content` table for each Mapbox GL style
+--
+====
+
+NOTE: The Abstract Test Suites corresponding to the requirements in the Vector Tiles, Semantic Annotations and Styling sections will be elaborated in the corresponding
+OGC GeoPackage extensions to be developed as separate documents, as documented in the Future Work section.
+
+////
