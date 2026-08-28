@@ -103,6 +103,7 @@ The `constraint_name` column is referenced by the `constraint_name` column in th
 |`max` |NUMERIC |Maximum value for 'range' or NULL for 'enum' or 'glob' constraint_type |yes |
 |`max_is_inclusive` |BOOLEAN | 0 (false) if max value is exclusive, or 1 (true) if max value is inclusive |yes |
 |`description` |TEXT |For ranges and globs, describes the constraint; for enums, describes the enum value.| yes|
+|`title` |TEXT |A human-readable title for the 'enum' value or NULL for 'range' or 'glob' constraint types.| yes|
 |=======================================================================
 _The `min` and `max` columns are defined as NUMERIC to be able to contain range values for any numeric data column defined with a data type from Table 1. These are the only exceptions to the data type rule stated in Req 5._
 
@@ -500,6 +501,8 @@ CREATE TABLE gpkg_data_column_constraints (
   max NUMERIC,
   max_is_inclusive BOOLEAN, // 0 = false, 1 = true
   description TEXT,
+  title TEXT,
   CONSTRAINT gdcc_ntv UNIQUE (constraint_name, constraint_type, value)
+  CONSTRAINT gdcc_ntt UNIQUE (constraint_name, constraint_type, title)
 )
 ----
