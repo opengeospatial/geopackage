@@ -43,7 +43,8 @@ https://www.opengis.net/is/geopackage-2dtms/1.0
 
 === SQL Create statements
 
-```SQL
+[source,sql]
+----
 CREATE TABLE gpkgext_hierarchical_gpkg_index(
    table_name REFERENCES gpkg_contents(table_name) NOT NULL,
    package_id REFERENCES gpkgext_hierarchical_gpkg_packages(id) NOT NULL,
@@ -57,7 +58,7 @@ CREATE TABLE gpkgext_hierarchical_gpkg_packages(
    max_grouping_level INTEGER,
    tms_id INTEGER REFERENCES gpkgext_tile_matrix_set(id)
 )
-```
+----
 
 ////
    geodataclass_uri TEXT,
