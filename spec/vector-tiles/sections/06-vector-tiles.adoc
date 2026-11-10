@@ -102,7 +102,7 @@ See <<compusult-gpkgext_vt_fields>> for an implementation example of the `gpkgex
 identifier:: /req/geopackage-vt/content-types
 description:: For specifying the media types and content encoding of user data tables
 part:: The GeoPackage SHALL include a `gpkgext_content_types` table identifying the media type containing the following columns:
-* `content_id`, a foreign key to the corresponding entry in the `gpkg_contents`
+* `table_name`, a foreign key to the corresponding entry in the `gpkg_contents`
 * `media_type`, text indicating a media type used in the `tile_data` blobs of the corresponding tile pyramid user data table (e.g., `image/png` or `application/vnd.mapbox-vector-tile`)
 * `encoding`, the https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding[content encoding] (e.g., `deflate` or `gzip` compression), _NULL_ if no additional encoding is used for the same `tile_data` blobs
 ====
@@ -111,7 +111,7 @@ part:: The GeoPackage SHALL include a `gpkgext_content_types` table identifying 
 [source,sql]
 ----
 CREATE TABLE gpkgext_content_types (
-   content_id INTEGER REFERENCES gpkg_contents,
+   table_name TEXT REFERENCES gpkg_contents(table_name),
    media_type TEXT,
    encoding TEXT
 )
