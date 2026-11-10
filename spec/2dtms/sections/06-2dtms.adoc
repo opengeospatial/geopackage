@@ -1,86 +1,70 @@
-[[gpkg_tms_extension]]
-=== GeoPackage Tile Matrix Set Extension
 
-////
+[[gpkg_tms_extension]]
+== GeoPackage Tile Matrix Set Extension
+
+[[rc_gpkg-2dtms]]
+[requirements_class]
+====
+[%metadata]
+identifier:: https://www.opengis.net/spec/geopackage-2dtms/1.0/req/core
+subject:: Data Product
+inherit:: https://www.geopackage.org/spec140/#tiles
+inherit:: https://www.geopackage.org/spec140/#extension_mechanism
+requirement:: /req/core/extension-declaration
+requirement:: /req/core/tile-matrix-set
+requirement:: /req/core/tile-matrix
+requirement:: /req/core/tile-matrix-tables
+requirement:: /req/core/variable-widths
+requirement:: /req/core/view-tile-matrix-set
+requirement:: /req/core/view-tile-matrix
+====
+
+**Scope:** read-write
+
+=== Declaring use of the extension
+
 [requirement]
 ====
 [%metadata]
-identifier:: /req/gpkg/2DTMS
-description:: For defining 2D Tile Matrix Set
-part:: A 2DTMS SHALL be defined as an entry in a `gpkgext_...` table with the following columns
-* `id`, the a primary key
-* `type`, ...
-====
-////
-
-[WARNING]
-====
-This subsection is under discussion and may change radically.
-====
-
-[float]
-==== Extension Title
-Tile Matrix Set Extension
-
-[float]
-==== Introduction
-This extension provides alignment with link:http://docs.opengeospatial.org/is/17-083r2/17-083r2.html[OGC Two Dimensional Tile Matrix Set] (OGC 17-083r2).
-
-[float]
-==== Extension Author
-Ecere, in collaboration with the Image Matters and other participants of OGC Vector Tiles Pilot Phase 2.
-
-[float]
-==== Extension Name or Template
-`gpkg_tms`
-
-[float]
-==== Extension Type
-New requirement dependent on the link:http://www.geopackage.org/spec121/#tiles[GeoPackage Tiles Option].
-
-[float]
-==== Applicability
-This extension allows description and sharing of tile matrix sets,
-including those with variable extents and row widths.
-
-[float]
-==== Scope
-read-write
-
-[float]
-==== Specification
-[float]
-===== `gpkg_extensions`
-To use this extension, add the following rows to this table.
+identifier:: /req/core/extension-declaration
+description:: For declaring use of the 2DTMS extension
+part::
++
+--
+The GeoPackage SHALL include the following rows in the table `gpkg_extensions`.
 
 [[gpkg_tms_ger_table]]
 .gpkg_extensions table row
 [cols=",,,,",options="header",]
 |====
-| table_name | column_name | extension_name | definition | scope
-|`gpkgext_tile_matrix_set` |null |`gpkg_tms` |`https://www.opengis.net/is/gpkg-2dtms/1.0` |`read-write`
-|`gpkgext_tile_matrix` |null |`gpkg_tms` |`https://www.opengis.net/is/gpkg-2dtms/1.0` |`read-write`
-|`gpkgext_tile_matrix_tables` |null |`gpkg_tms` |`https://www.opengis.net/is/gpkg-2dtms/1.0` |`read-write`
-|`gpkgext_tile_matrix_variable_widths` |null |`gpkg_tms` |`https://www.opengis.net/is/gpkg-2dtms/1.0` |`read-write`
-|`gpkg_tile_matrix_set` |null |`gpkg_tms` |`https://www.opengis.net/is/gpkg-2dtms/1.0` |`write-only`
-|`gpkg_tile_matrix` |null |`gpkg_tms` |`https://www.opengis.net/is/gpkg-2dtms/1.0` |`write-only`
+| table_name                           | column_name | extension_name | definition                                                  | scope
+|`gpkgext_tile_matrix_set`             |null         |`gpkg_tms`      |`https://www.opengis.net/spec/geopackage-2dtms/1.0/req/core` |`read-write`
+|`gpkgext_tile_matrix`                 |null         |`gpkg_tms`      |`https://www.opengis.net/spec/geopackage-2dtms/1.0/req/core` |`read-write`
+|`gpkgext_tile_matrix_tables`          |null         |`gpkg_tms`      |`https://www.opengis.net/spec/geopackage-2dtms/1.0/req/core` |`read-write`
+|`gpkgext_tile_matrix_variable_widths` |null         |`gpkg_tms`      |`https://www.opengis.net/spec/geopackage-2dtms/1.0/req/core` |`read-write`
+|`gpkg_tile_matrix_set`                |null         |`gpkg_tms`      |`https://www.opengis.net/spec/geopackage-2dtms/1.0/req/core` |`write-only`
+|`gpkg_tile_matrix`                    |null         |`gpkg_tms`      |`https://www.opengis.net/spec/geopackage-2dtms/1.0/req/core` |`write-only`
 |====
+--
+====
 
-[NOTE]
-==========
-The values in the `definition` column SHOULD refer in some human-readable way to this extension specification.
-If the extension is adopted by OGC, it will gain the "gpkg_" prefix and get a different definition permalink.
-==========
+=== Tables definition
 
-[float]
-===== Table Definitions
 Following are definitions of the tables for this extension.
 As with other GeoPackage tables, this extension takes no position on how either of these tables are to be used by a client.
 
 [[gpkgext_tile_matrix_set]]
-[float]
-====== `gpkgext_tile_matrix_set`
-When this extension is in use, add a table with this name and the following columns:
+==== Definition of the `gpkgext_tile_matrix_set` table
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/tile-matrix-set
+description:: For describing all 2DTMS
+part::
++
+--
+The GeoPackage SHALL contain a table with the name `gpkgext_tile_matrix_set` and the following columns:
 
 * `id` is a primary key
 * `tms` is a human-readable title for the tile matrix set
@@ -89,10 +73,37 @@ When this extension is in use, add a table with this name and the following colu
 * `srs_id` is the SRS for the tile matrix set and is a foreign key to `gpkg_spatial_ref_sys.srs_id`
 * `min_x`, `min_y`, `max_x`, and `max_y` represent the bounding box of the tile matrix set
 
+as created by the SQL statement:
+
+[source,sql]
+----
+CREATE TABLE gpkgext_tile_matrix_set (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tms TEXT NOT NULL,
+    description TEXT,
+    uri TEXT NOT NULL UNIQUE,
+    srs_id INTEGER NOT NULL REFERENCES gpkg_spatial_ref_sys(srs_id),
+    min_x REAL NOT NULL,
+    min_y REAL NOT NULL,
+    max_x REAL NOT NULL,
+    max_y REAL NOT NULL
+);
+----
+--
+====
+
 [[gpkgext_tile_matrix]]
-[float]
-====== `gpkgext_tile_matrix`
-When this extension is in use, add a table with this name and the following columns:
+==== Definition of the `gpkgext_tile_matrix` table
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/tile-matrix
+description:: For describing the tile matrices of all 2DTMS
+part::
++
+--
+The GeoPackage SHALL contain a table with the name `gpkgext_tile_matrix` and the following columns:
 
 * `id` is a primary key
 * `tms_id` is a foreign key to `gpkgext_tile_matrix_set.id`
@@ -103,67 +114,259 @@ When this extension is in use, add a table with this name and the following colu
 * `left` and `top` are the top left corner of the tile matrix, which can potentially be different than the tile matrix set
 * `scale_denominator` is an optional double representing scale denominator with respect to a "standardized rendering pixel size" of 0.28 mm × 0.28 mm
 
+as created by the SQL statement:
+
+[source,sql]
+----
+CREATE TABLE gpkgext_tile_matrix (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tms_id INTEGER NOT NULL REFERENCES gpkgext_tile_matrix_set(id),
+    zoom_level INTEGER NOT NULL,
+    matrix_width INTEGER NOT NULL,
+    matrix_height INTEGER NOT NULL,
+    tile_width INTEGER NOT NULL,
+    tile_height INTEGER NOT NULL,
+    pixel_x_size REAL NOT NULL,
+    pixel_y_size REAL NOT NULL,
+    left REAL NOT NULL,
+    top REAL NOT NULL,
+    scale_denominator REAL,
+    UNIQUE (tms_id, zoom_level)
+);
+----
+--
+====
+
 [[gpkgext_tile_matrix_tables]]
-[float]
-====== `gpkgext_tile_matrix_tables`
-When this extension is in use, add a table with this name and the following columns:
+==== Definition of the `gpkgext_tile_matrix_tables` table
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/tile-matrix-tables
+description:: For associating the tile matrix set tables with entries in the GeoPackage contents
+part::
++
+--
+The GeoPackage SHALL contain a table with the name `gpkgext_tile_matrix_tables` and the following columns: +
 
 * `table_name` is a primary key and also a foreign key to `gpkg_contents.table_name`
 * `tms_id` is a foreign key to `gpkgext_tile_matrix_set.id`
 * `min_level` and `max_level` are the minimum and maximum zoom levels
 
+as created by the SQL statement:
+
+[source,sql]
+----
+CREATE TABLE gpkgext_tile_matrix_tables (
+    table_name TEXT PRIMARY KEY REFERENCES gpkg_contents(table_name),
+    tms_id INTEGER NOT NULL REFERENCES gpkgext_tile_matrix_set(id),
+    min_level INTEGER NOT NULL,
+    max_level INTEGER NOT NULL
+);
+----
+--
+====
+
 [[gpkgext_tile_matrix_variable_widths]]
-[float]
-====== `gpkgext_tile_matrix_variable_widths`
-When this extension is in use, add a table with this name and the following columns:
+==== Definition of the `gpkgext_tile_matrix_variable_widths` table
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/variable-widths
+description:: For supporting variable widths tile matrix sets
+part::
++
+--
+The GeoPackage SHALL contain a table with the name `gpkgext_tile_matrix_variable_widths` and the following columns: +
 
 * `id` is a primary key
 * `tm_id` is a foreign key to `gpkgext_tile_matrix.id`
 * `min_row` and `max_row` describe the minimum and maximum tile row index where the given coalescence coefficient applies
 * `coalesce` is an integer coalescence coefficient
 
-[float]
-===== View Definitions
-To maintain compatibility with clients that are not aware of this extension,
-the following views are created.
+as created by the SQL statement:
 
-[float]
-====== `gpkg_tile_matrix_set`
-When using this extension, replace this table with a view to maintain compatibility with GeoPackge clients that are not aware of this extension.
+[source,sql]
+----
+CREATE TABLE gpkgext_tile_matrix_variable_widths (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    tm_id INTEGER NOT NULL REFERENCES gpkgext_tile_matrix(id),
+    min_row INTEGER NOT NULL,
+    max_row INTEGER NOT NULL,
+    coalesce INTEGER NOT NULL
+);
+----
+--
+====
 
-1. Copy all rows of `gpkg_tile_matrix_set` into `gpkgext_tile_matrix_set`.
-Where possible, use an existing or well-known tile matrix set.
+=== Views definition
+
+To maintain compatibility with clients that are not aware of this extension, the following views are created.
+
+==== Definition of the `gpkg_tile_matrix_set` view
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/view-tile-matrix-set
+description:: For maintaining compatibility with clients reading the `gpkg_tile_matrix_set` table
+part::
++
+--
+The GeoPackage SHALL contain a view named `gpkg_tile_matrix_set` defined as follows, as a replacement of the table with the same name from the
+https://www.geopackage.org/spec/#_gpkg_tile_matrix_set[GeoPackage Core]:
+
+[source,sql]
+----
+CREATE VIEW gpkg_tile_matrix_set AS
+   SELECT a.table_name, b.srs_id, b.min_x, b.min_y, b.max_x, b.max_y
+   FROM gpkgext_tile_matrix_tables a, gpkgext_tile_matrix_set b
+   WHERE a.tms_id = b.id`
+----
+--
+====
+
+This view can be added to an existing GeoPackage using the following method:
+
+1. Copy all rows of `gpkg_tile_matrix_set` into `gpkgext_tile_matrix_set`. Where possible, use an existing or well-known tile matrix set.
 If the tile matrix set URI cannot be determined, use the table_name as the URI.
 2. For each row copied, add a row to `gpkgext_tile_matrix_tables`.
 3. `DROP gpkg_tile_matrix_set`.
-4. `CREATE VIEW gpkg_tile_matrix_set AS SELECT a.table_name, b.srs_id, b.min_x, b.min_y, b.max_x, b.max_y FROM gpkgext_tile_matrix_tables a, gpkgext_tile_matrix_set b WHERE a.tms_id = b.id`.
+4. Create the `gpkg_tile_matrix_set` view as described above.
 
-[WARNING]
+[NOTE]
 ====
-When this view is in place, clients that are not aware of this extension will not be able to add new tile pyramids to the GeoPackage.
-The development of triggers to turn this view into an updateable view (TBD)
-would eliminate this restriction.
+When this view is in place, clients that are not aware of this extension will not be able to add new tile pyramids to the GeoPackage by default.
 ====
 
-[float]
-====== `gpkg_tile_matrix`
+[permission]
+====
+[%metadata]
+identifier:: /per/core/trigger-tile-matrix-set
+description:: For maintaining compatibility with clients writing to the `gpkg_tile_matrix_set` table
+part::
++
+--
+The GeoPackage MAY contain a trigger named `gpkg_tile_matrix_set_insert_trigger` defined as follows, to allow clients not supporting this extension to write to the
+https://www.geopackage.org/spec/#_gpkg_tile_matrix_set[GeoPackage Core `gpkg_tile_matrix_set`] table:
+
+[source,sql]
+----
+CREATE TRIGGER gpkg_tile_matrix_set_insert_trigger
+INSTEAD OF INSERT ON gpkg_tile_matrix_set
+FOR EACH ROW
+BEGIN
+    INSERT INTO gpkgext_tile_matrix_set (tms, description, uri, srs_id, min_x, min_y, max_x, max_y)
+    VALUES (
+        'TMS for ' || NEW.table_name,
+        'Auto-generated legacy compatibility fallback set',
+        'local:tms:generated:' || NEW.table_name,
+        NEW.srs_id,
+        NEW.min_x,
+        NEW.min_y,
+        NEW.max_x,
+        NEW.max_y
+    );
+
+    INSERT INTO gpkgext_tile_matrix_tables (table_name, tms_id, min_level, max_level)
+    VALUES (NEW.table_name, last_insert_rowid(), 999, -1);
+END;
+----
+--
+====
+
+==== Definition of the `gpkg_tile_matrix` view
+
+[requirement]
+====
+[%metadata]
+identifier:: /req/core/view-tile-matrix
+description:: For maintaining compatibility with clients reading the `gpkg_tile_matrix` table
+part::
++
+--
+The GeoPackage SHALL contain a view named `gpkg_tile_matrix` defined as follows, as a replacement of the table with the same name from the
+https://www.geopackage.org/spec/#_gpkg_tile_matrix[GeoPackage Core]:
+
+[source,sql]
+----
+CREATE VIEW gpkg_tile_matrix AS
+   SELECT a.table_name, b.zoom_level, b.matrix_width, b.matrix_height, b.tile_width, b.tile_height, b.pixel_x_size, b.pixel_y_size
+   FROM gpkgext_tile_matrix_tables a, gpkgext_tile_matrix b
+   WHERE a.tms_id = b.tms_id
+      AND b.zoom_level >= a.min_level
+      AND b.zoom_level <= a.max_level
+      AND b.id NOT IN ( SELECT DISTINCT tm_id FROM gpkgext_tile_matrix_variable_widths WHERE coalesce > 1 );
+----
+--
+====
+
 When using this extension, replace this table with a view to maintain compatibility with GeoPackge clients that are not aware of this extension.
+
+This view can be added to an existing GeoPackage using the following method:
 
 1. Copy all rows of `gpkg_tile_matrix` into `gpkgext_tile_matrix`.
 Where possible, use an existing or well-known tile matrix set.
 If the tile matrix set URI cannot be determined, use the table_name as the URI.
 2. `DROP gpkg_tile_matrix`.
-3. `CREATE VIEW gpkg_tile_matrix AS SELECT a.table_name, b.zoom_level, b.matrix_width, b.matrix_height, b.tile_width, b.tile_height, b.pixel_x_size, b.pixel_y_size FROM gpkgext_tile_matrix_tables a, gpkgext_tile_matrix b WHERE a.tms_id = b.tms_id AND b.zoom_level >= a.min_level AND b.zoom_level <= a.max_level AND b.id NOT IN ( SELECT DISTINCT tm_id FROM gpkgext_tile_matrix_variable_widths);`.
+3. Create the `gpkg_tile_matrix` view as described above.
 
-[WARNING]
+[NOTE]
 ====
-When this view is in place, clients that are not aware of this extension will not be able to add new tile pyramids to the GeoPackage.
-The development of triggers to turn this view into an updateable view (TBD)
-would eliminate this restriction.
+This view excludes any tile matrices (zoom level) that contains variable-width rows (where coalesce > 1).
 ====
 
 [NOTE]
 ====
-This approach hides tables that have variable-width tile matrix sets from the compatibility view.
-An alternate approach (TBD) would create a shadow tile matrix set that excludes all variable-width tile matrix rows.
+When this view is in place, clients that are not aware of this extension will not be able to add new tile pyramids to the GeoPackage by default.
+====
+
+[permission]
+====
+[%metadata]
+identifier:: /per/core/trigger-tile-matrix
+description:: For maintaining compatibility with clients writing to the `gpkg_tile_matrix` table
+part::
++
+--
+The GeoPackage MAY contain a trigger named `gpkg_tile_matrix_insert_trigger` defined as follows, to allow clients not supporting this extension to write to the
+https://www.geopackage.org/spec/#_gpkg_tile_matrix[GeoPackage Core `gpkg_tile_matrix`] table:
+
+[source,sql]
+----
+CREATE TRIGGER gpkg_tile_matrix_insert_trigger
+INSTEAD OF INSERT ON gpkg_tile_matrix
+FOR EACH ROW
+BEGIN
+    INSERT INTO gpkgext_tile_matrix (
+        tms_id, zoom_level, matrix_width, matrix_height,
+        tile_width, tile_height, pixel_x_size, pixel_y_size,
+        "left", "top", scale_denominator
+    )
+    SELECT
+        m.tms_id,
+        NEW.zoom_level,
+        NEW.matrix_width,
+        NEW.matrix_height,
+        NEW.tile_width,
+        NEW.tile_height,
+        NEW.pixel_x_size,
+        NEW.pixel_y_size,
+        s.min_x,
+        s.max_y,
+        NULL
+    FROM gpkgext_tile_matrix_tables m, gpkgext_tile_matrix_set s
+    WHERE m.table_name = NEW.table_name
+      AND m.tms_id = s.id;
+
+    UPDATE gpkgext_tile_matrix_tables
+    SET
+        min_level = (SELECT MIN(zoom_level) FROM gpkgext_tile_matrix, gpkgext_tile_matrix_tables WHERE gpkgext_tile_matrix.tms_id = gpkgext_tile_matrix_tables.tms_id AND gpkgext_tile_matrix_tables.table_name = NEW.table_name),
+        max_level = (SELECT MAX(zoom_level) FROM gpkgext_tile_matrix, gpkgext_tile_matrix_tables WHERE gpkgext_tile_matrix.tms_id = gpkgext_tile_matrix_tables.tms_id AND gpkgext_tile_matrix_tables.table_name = NEW.table_name)
+    WHERE table_name = NEW.table_name;
+END;
+----
+--
 ====
