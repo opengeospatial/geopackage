@@ -72,7 +72,7 @@ CREATE TABLE gpkgext_hierarchical_gpkg_packages(
 [requirement]
 ====
 [%metadata]
-identifier:: /req/geopackage-gi/package-index
+identifier:: /req/core/package-index
 description:: For mapping data layers to packages in a primary GeoPackage
 part:: The primary GeoPackage SHALL map all data layers to the packages containing them as an entry in a `gpkgext_hierarchical_gpkg_index` table with the following columns:
 * `table_name`, entry in the `gpkg_contents` table of the data layers of each; The `gpkgext_contents` will exist in the primary GeoPackage, but the individual tiles table will be dummy tables with no actual entry if the data is stored externally in the GeoPackages grouping tiles
@@ -107,7 +107,7 @@ perform better, so we need to consider this.
 [requirement]
 ====
 [%metadata]
-identifier:: /req/geopackage-gi/packages-table
+identifier:: /req/core/packages-table
 description:: For describing each package in the primary GeoPackage
 part:: The primary GeoPackage SHALL describe each package as an entry in a `gpkgext_hierarchical_gpkg_packages` table with the following columns:
 * `id`, an integer primary key for this package entry referenced by the `gpkgext_hierarchical_gpkg_index` table
@@ -147,7 +147,7 @@ An example based on the GNOSIS Global Grid: **Imagery_L12_R2607_C2858_L18.gpkg**
 [requirement]
 ====
 [%metadata]
-identifier:: /req/geopackage-gi/filenames
+identifier:: /req/core/file-names
 description:: For naming GeoPackage files grouping tiled content referenced by the primary GeoPackage
 part:: The file names of GeoPackage files grouping tiled content referenced by the primary GeoPackage SHALL follow the template
 `{packageName}_L{gpkgMinLevel}_R{gpkgTileRow}_C{gpkgTileCol}_L{gpkgMaxLevel}.gpkg` where:
@@ -174,7 +174,7 @@ grouping count, follows the template:
 [requirement]
 ====
 [%metadata]
-identifier:: /req/geopackage-gi/directories
+identifier:: /req/core/directory-structure
 description:: For naming organize GeoPackage files grouping tiled content into directories
 part::
 +
